@@ -1,0 +1,22 @@
+name: Snap
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: ${{false}} # TODO: add snap config
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: snapcore/action-build@v1
+      id: snapcraft
+    - uses: actions/upload-artifact@v2
+      if: github.event_name == 'workflow_dispatch'
+      with:
+        name: 'snap'
+        path: ${{steps.snapcraft.outputs.snap}}

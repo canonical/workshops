@@ -32,6 +32,7 @@
 build/
 coverage/
 pubspec.lock
+pubspec_overrides.yaml
 generated_plugins.cmake
 generated_plugin_registrant.*
 
