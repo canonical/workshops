@@ -1,0 +1,9 @@
+name: async_value
+description: Riverpod's AsyncValue.
+publish_to: 'none'
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dependencies:
+  riverpod: ^2.0.0-0

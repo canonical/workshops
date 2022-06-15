@@ -1,0 +1,26 @@
+name: lxd-toolbox
+
+packages:
+  - packages/**
+
+ignore:
+  - synthetic_package
+
+scripts:
+  analyze: >
+    melos exec -c 1 -- \
+      flutter analyze --fatal-infos .
+
+  format: >
+    find . -name '*.dart' \
+      ! -name '*.g.dart' \
+      ! -path '*/.*/*' \
+      | xargs flutter format --set-exit-if-changed
+
+  generate: >
+    melos exec -c 1 --fail-fast --depends-on=build_runner -- \
+      flutter pub run build_runner build --delete-conflicting-outputs
+
+  test: >
+    melos exec -c 1 --fail-fast --dir-exists=test -- \
+      flutter test

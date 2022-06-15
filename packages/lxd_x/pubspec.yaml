@@ -1,0 +1,14 @@
+name: lxd_x
+publish_to: 'none'
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dependencies:
+  lxd:
+    git:
+      url: https://github.com/jpnurmi/lxd.dart
+      ref: dev
+
+dev_dependencies:
+  lints: ^2.0.0

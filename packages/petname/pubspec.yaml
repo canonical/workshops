@@ -1,0 +1,16 @@
+name: petname
+description: |
+  An RFC1178 implementation to generate pronounceable, sometimes even memorable,
+  "pet names", consisting of a random combination of adverbs, an adjective, and
+  an animal name.
+homepage: https://github.com/dustinkirkland/petname
+publish_to: 'none'
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dependencies:
+  meta: ^1.7.0
+
+dev_dependencies:
+  test: ^1.21.1
