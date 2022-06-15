@@ -9,7 +9,6 @@ on:
 
 jobs:
   build:
-    if: ${{false}} # TODO: add snap config
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
