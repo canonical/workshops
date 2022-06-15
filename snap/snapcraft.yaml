@@ -1,0 +1,56 @@
+name: lxd-toolbox
+version: git
+summary: LXD Toolbox
+description: |
+  LXD Toolbox provides a user friend interface to create and manage LXD containers as well as provides a full featured terminal.
+confinement: strict
+base: core22
+grade: stable
+license: GPL-3.0+
+architectures:
+  - build-on: amd64
+
+parts:
+  flutter-git:
+    source: https://github.com/flutter/flutter.git
+    source-branch: master
+    plugin: nil
+    override-build: |
+      mkdir -p $CRAFT_PART_INSTALL/usr/bin
+      mkdir -p $CRAFT_PART_INSTALL/usr/libexec
+      cp -r $CRAFT_PART_SRC $CRAFT_PART_INSTALL/usr/libexec/flutter
+      ln -s $CRAFT_PART_INSTALL/usr/libexec/flutter/bin/flutter $CRAFT_PART_INSTALL/usr/bin/flutter
+    build-packages:
+      - clang
+      - cmake
+      - curl
+      - ninja-build
+      - unzip
+      - xz-utils
+      - zip
+    override-prime:
+      rm -r $CRAFT_PART_INSTALL
+
+  lxd-toolbox:
+    after: [ flutter-git ]
+    plugin: nil
+    source: .
+    override-build: |
+      set -eux
+      cd packages/lxd_toolbox
+      flutter channel master
+      flutter upgrade
+      flutter doctor
+      flutter pub get
+      flutter build linux --release -v
+      mkdir -p $CRAFT_PART_INSTALL/bin/
+      cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/
+
+apps:
+  lxd-toolbox:
+    command: bin/lxd-toolbox
+    desktop: bin/data/flutter_assets/assets/lxd-toolbox.desktop
+    extensions: [gnome]
+    plugs:
+      - lxd
+      - network
