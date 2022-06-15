@@ -13,7 +13,8 @@ import '../launcher/launcher_dialog.dart';
 import '../operations/operation_view.dart';
 import '../preferences/preferences_dialog.dart';
 import '../terminal/terminal_settings.dart';
-import 'context_menu.dart';
+import '../widgets/context_menu.dart';
+import 'home_menu.dart';
 import 'home_model.dart';
 
 class HomePage extends StatelessWidget {
@@ -95,10 +96,13 @@ class HomePage extends StatelessWidget {
                   preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
                 ),
           body: ContextMenuArea(
-            current: model.currentRunning,
-            terminals: model.terminals,
-            onNewTab: model.add,
-            onCloseTab: model.close,
+            builder: (context, position) => buildContextMenu(
+              context: context,
+              current: model.currentRunning,
+              terminals: model.terminals,
+              onNewTab: model.add,
+              onCloseTab: model.close,
+            ),
             child: current.when(
               none: () => Scaffold(
                 body: InstanceView(
