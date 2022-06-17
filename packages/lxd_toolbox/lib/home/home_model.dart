@@ -4,6 +4,7 @@ import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:terminal_view/terminal_view.dart';
 
+import '../remotes/remote.dart';
 import '../terminal/terminal_state.dart';
 
 class HomeModel extends ChangeNotifier {
@@ -61,11 +62,11 @@ class HomeModel extends ChangeNotifier {
     currentIndex = index < 0 ? _terminals.length - 1 : index;
   }
 
-  Future<void> create(LxdImage image, {String? name, String? server}) async {
+  Future<void> create(LxdImage image, {String? name, Remote? remote}) async {
     final create = await _service.client.createInstance(
       source: image,
       name: name,
-      server: server,
+      server: remote?.isLocal == false ? remote!.address : null,
     );
     _setState(_currentIndex, TerminalState.loading(create));
 

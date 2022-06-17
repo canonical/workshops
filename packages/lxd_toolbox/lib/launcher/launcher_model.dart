@@ -5,7 +5,7 @@ class LauncherModel extends SafeChangeNotifier {
   String? _selectedOs;
   LxdImage? _selectedImage;
 
-  bool get hasSelection => _selectedOs != null && _selectedImage != null;
+  bool get hasSelection => _selectedImage != null;
 
   String? get selectedOs => _selectedOs;
   void selectOs(String? value) {

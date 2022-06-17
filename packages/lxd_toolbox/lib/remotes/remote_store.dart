@@ -11,9 +11,10 @@ const _kDefaultRemote = 'images';
 const _kDefaultRemotes = [
   Remote(
     name: 'local',
-    address: 'unix://',
+    address: 'unix://localhost',
     isStatic: true,
     isPublic: false,
+    protocol: 'lxd',
   ),
   // community image server (over simplestreams)
   Remote(

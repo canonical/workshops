@@ -4,12 +4,12 @@ import 'package:lxd/lxd.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 
-import 'image_form.dart';
-import 'os_selector.dart';
-import 'simple_stream_model.dart';
+import '../widgets/os_selector.dart';
+import 'remote_image_form.dart';
+import 'remote_image_model.dart';
 
-class SimpleStreamView extends StatelessWidget {
-  const SimpleStreamView({
+class RemoteImageView extends StatelessWidget {
+  const RemoteImageView({
     super.key,
     this.selectedOs,
     this.onOsSelected,
@@ -24,7 +24,7 @@ class SimpleStreamView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<SimpleStreamModel>();
+    final model = context.watch<RemoteImageModel>();
     return RoundedContainer(
       child: SizedBox.expand(
         child: model.images?.when(
@@ -39,7 +39,7 @@ class SimpleStreamView extends StatelessWidget {
               ),
               if (selectedOs != null)
                 MaterialPage(
-                  child: ImageForm(
+                  child: RemoteImageForm(
                     os: selectedOs!,
                     images: images[selectedOs] ?? [],
                     initialValue: selectedImage,
@@ -47,7 +47,6 @@ class SimpleStreamView extends StatelessWidget {
                   ),
                 ),
             ],
-            observers: [HeroController()],
             onPopPage: (route, result) => route.didPop(result),
           ),
           error: (error, stackTrace) => ErrorWidget(error),

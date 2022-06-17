@@ -12,6 +12,9 @@ class Remote with _$Remote {
     @Default(true) isPublic,
     String? protocol,
   }) = _Remote;
+  const Remote._();
+
+  bool get isLocal => protocol == 'lxd';
 
   factory Remote.fromJson(Map<String, dynamic> json) => _$RemoteFromJson(json);
 }
