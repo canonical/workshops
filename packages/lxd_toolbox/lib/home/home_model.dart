@@ -61,9 +61,12 @@ class HomeModel extends ChangeNotifier {
     currentIndex = index < 0 ? _terminals.length - 1 : index;
   }
 
-  Future<void> create(LxdRemoteImage image, [String? name]) async {
-    final create =
-        await _service.client.createInstance(image: image, name: name);
+  Future<void> create(LxdImage image, {String? name, String? server}) async {
+    final create = await _service.client.createInstance(
+      source: image,
+      name: name,
+      server: server,
+    );
     _setState(_currentIndex, TerminalState.loading(create));
 
     final wait = await _service.client.waitOperation(create.id);

@@ -114,7 +114,11 @@ class HomePage extends StatelessWidget {
                   onPressed: () async {
                     final options = await showLauncherDialog(context);
                     if (options != null) {
-                      unawaited(model.create(options.image, options.name));
+                      unawaited(model.create(
+                        options.image,
+                        name: options.name,
+                        server: options.url,
+                      ));
                     }
                   },
                   child: const Icon(Icons.add),

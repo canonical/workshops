@@ -18,7 +18,6 @@ import 'package:lxd/src/api/resource.dart' as _i4;
 import 'package:lxd/src/api/storage_pool.dart' as _i13;
 import 'package:lxd/src/event.dart' as _i16;
 import 'package:lxd/src/lxd_client.dart' as _i14;
-import 'package:lxd/src/remote_image.dart' as _i17;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -135,18 +134,6 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
               returnValue: Future<_i6.LxdImage>.value(_FakeLxdImage_4()))
           as _i15.Future<_i6.LxdImage>);
   @override
-  _i15.Future<List<_i17.LxdRemoteImage>> getRemoteImages(String? url) =>
-      (super.noSuchMethod(Invocation.method(#getRemoteImages, [url]),
-              returnValue: Future<List<_i17.LxdRemoteImage>>.value(
-                  <_i17.LxdRemoteImage>[]))
-          as _i15.Future<List<_i17.LxdRemoteImage>>);
-  @override
-  _i15.Future<_i17.LxdRemoteImage?> findRemoteImage(
-          String? url, String? name) =>
-      (super.noSuchMethod(Invocation.method(#findRemoteImage, [url, name]),
-              returnValue: Future<_i17.LxdRemoteImage?>.value())
-          as _i15.Future<_i17.LxdRemoteImage?>);
-  @override
   _i15.Future<List<String>> getInstances() =>
       (super.noSuchMethod(Invocation.method(#getInstances, []),
               returnValue: Future<List<String>>.value(<String>[]))
@@ -165,15 +152,33 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
   @override
   _i15.Future<_i2.LxdOperation> createInstance(
           {String? architecture,
+          Map<String, String>? config,
+          Map<String, Map<String, String>>? devices,
+          bool? ephemeral,
+          List<String>? profiles,
+          String? restore,
+          bool? stateful,
           String? description,
           String? name,
-          _i17.LxdRemoteImage? image}) =>
+          _i6.LxdImage? source,
+          String? server,
+          String? instanceType,
+          _i6.LxdImageType? type}) =>
       (super.noSuchMethod(
               Invocation.method(#createInstance, [], {
                 #architecture: architecture,
+                #config: config,
+                #devices: devices,
+                #ephemeral: ephemeral,
+                #profiles: profiles,
+                #restore: restore,
+                #stateful: stateful,
                 #description: description,
                 #name: name,
-                #image: image
+                #source: source,
+                #server: server,
+                #instanceType: instanceType,
+                #type: type
               }),
               returnValue:
                   Future<_i2.LxdOperation>.value(_FakeLxdOperation_0()))

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
-import 'package:lxd_x/lxd_x.dart';
 import 'package:provider/provider.dart';
 
 import '../remotes/remote_selector.dart';
@@ -11,9 +10,10 @@ import 'launcher_model.dart';
 import 'simple_stream_view.dart';
 
 class LaunchOptions {
-  const LaunchOptions({required this.name, required this.image});
+  const LaunchOptions({required this.name, required this.image, this.url});
   final String? name;
-  final LxdRemoteImage image;
+  final LxdImage image;
+  final String? url;
 }
 
 Future<LaunchOptions?> showLauncherDialog(BuildContext context) {
@@ -36,7 +36,8 @@ class LauncherDialog extends StatelessWidget {
     final remote = context.read<RemoteStore>().current!;
     final options = LaunchOptions(
       name: image.properties['name'],
-      image: image.toRemoteImage(remote.address),
+      image: image,
+      url: remote.address,
     );
     Navigator.of(context).pop(options);
   }

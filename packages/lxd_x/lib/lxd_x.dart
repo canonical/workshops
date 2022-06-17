@@ -9,20 +9,6 @@ extension LxdEventX on LxdEvent {
   }
 }
 
-extension LxdImageX on LxdImage {
-  LxdRemoteImage toRemoteImage(String url) {
-    return LxdRemoteImage(
-      aliases: {},
-      architecture: architecture,
-      description: properties['description'] ?? '',
-      fingerprint: fingerprint,
-      size: size,
-      type: type,
-      url: url,
-    );
-  }
-}
-
 extension LxdInstanceX on LxdInstance {
   bool get isStarted => statusCode == LxdStatusCode.started.value;
   bool get isRunning => statusCode == LxdStatusCode.running.value;
