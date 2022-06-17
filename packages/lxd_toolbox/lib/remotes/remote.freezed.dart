@@ -135,13 +135,14 @@ class __$$_RemoteCopyWithImpl<$Res> extends _$RemoteCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Remote implements _Remote {
+class _$_Remote extends _Remote {
   const _$_Remote(
       {required this.name,
       required this.address,
       this.isStatic = false,
       this.isPublic = true,
-      this.protocol});
+      this.protocol})
+      : super._();
 
   factory _$_Remote.fromJson(Map<String, dynamic> json) =>
       _$$_RemoteFromJson(json);
@@ -197,13 +198,14 @@ class _$_Remote implements _Remote {
   }
 }
 
-abstract class _Remote implements Remote {
+abstract class _Remote extends Remote {
   const factory _Remote(
       {required final String name,
       required final String address,
       final dynamic isStatic,
       final dynamic isPublic,
       final String? protocol}) = _$_Remote;
+  const _Remote._() : super._();
 
   factory _Remote.fromJson(Map<String, dynamic> json) = _$_Remote.fromJson;
 

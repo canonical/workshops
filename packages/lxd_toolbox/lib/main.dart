@@ -9,7 +9,8 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'app.dart';
 import 'instances/instance_model.dart';
-import 'launcher/simple_stream_model.dart';
+import 'launcher/local_image_model.dart';
+import 'launcher/remote_image_model.dart';
 import 'remotes/remote_store.dart';
 
 Future<void> main() async {
@@ -21,6 +22,10 @@ Future<void> main() async {
 
   final preferences = await SharedPreferences.getInstance();
   registerServiceInstance<SharedPreferences>(preferences);
+
+  registerServiceFactory<LxdClient>(
+    (url) => LxdClient.remote(url: Uri.parse(url as String)),
+  );
 
   registerServiceFactory<SimpleStreamClient>(
     (url) => SimpleStreamClient(url as String),
@@ -35,14 +40,28 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (_) => RemoteStore(preferences)..init(),
         ),
-        ChangeNotifierProxyProvider<RemoteStore, SimpleStreamModel>(
-          create: (_) => SimpleStreamModel(),
+        ChangeNotifierProxyProvider<RemoteStore, RemoteImageModel>(
+          create: (_) => RemoteImageModel(),
           update: (_, store, model) {
             final url = store.current?.address;
-            model ??= SimpleStreamModel();
+            model ??= RemoteImageModel();
             if (model.client?.url != url) {
               final client = url?.isNotEmpty == true
                   ? createService<SimpleStreamClient>(url)
+                  : null;
+              model.init(client);
+            }
+            return model;
+          },
+        ),
+        ChangeNotifierProxyProvider<RemoteStore, LocalImageModel>(
+          create: (_) => LocalImageModel(),
+          update: (_, store, model) {
+            final url = store.current?.address;
+            model ??= LocalImageModel();
+            if (model.client?.url.toString() != url) {
+              final client = url?.isNotEmpty == true
+                  ? createService<LxdClient>(url)
                   : null;
               model.init(client);
             }

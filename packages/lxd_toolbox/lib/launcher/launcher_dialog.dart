@@ -4,16 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
 import 'package:provider/provider.dart';
 
+import '../remotes/remote.dart';
 import '../remotes/remote_selector.dart';
 import '../remotes/remote_store.dart';
 import 'launcher_model.dart';
-import 'simple_stream_view.dart';
+import 'local_image_view.dart';
+import 'remote_image_view.dart';
 
 class LaunchOptions {
-  const LaunchOptions({required this.name, required this.image, this.url});
+  const LaunchOptions({
+    required this.name,
+    required this.image,
+    required this.remote,
+  });
   final String? name;
   final LxdImage image;
-  final String? url;
+  final Remote? remote;
 }
 
 Future<LaunchOptions?> showLauncherDialog(BuildContext context) {
@@ -37,7 +43,7 @@ class LauncherDialog extends StatelessWidget {
     final options = LaunchOptions(
       name: image.properties['name'],
       image: image,
-      url: remote.address,
+      remote: remote,
     );
     Navigator.of(context).pop(options);
   }
@@ -51,6 +57,7 @@ class LauncherDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<LauncherModel>();
+    final remote = context.watch<RemoteStore>().current;
     return AlertDialog(
       title: Row(
         children: [
@@ -65,8 +72,9 @@ class LauncherDialog extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 24),
-              child:
-                  Text(model.selectedOs == null ? 'Select OS' : 'Select image'),
+              child: Text(remote?.isLocal == true || model.selectedOs != null
+                  ? 'Select image'
+                  : 'Select OS'),
             ),
           ),
           Padding(
@@ -85,12 +93,17 @@ class LauncherDialog extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: SimpleStreamView(
-                selectedOs: model.selectedOs,
-                onOsSelected: model.selectOs,
-                selectedImage: model.selectedImage,
-                onImageSelected: model.selectImage,
-              ),
+              child: remote?.isLocal == true
+                  ? LocalImageView(
+                      selected: model.selectedImage,
+                      onSelected: model.selectImage,
+                    )
+                  : RemoteImageView(
+                      selectedOs: model.selectedOs,
+                      onOsSelected: model.selectOs,
+                      selectedImage: model.selectedImage,
+                      onImageSelected: model.selectImage,
+                    ),
             ),
             const SizedBox(height: 24),
             Row(

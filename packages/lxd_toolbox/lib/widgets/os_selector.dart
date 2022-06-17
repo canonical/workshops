@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/product_logo.dart';
+import 'product_logo.dart';
 
 class OsSelector extends StatelessWidget {
   const OsSelector({

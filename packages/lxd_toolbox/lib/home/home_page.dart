@@ -117,7 +117,7 @@ class HomePage extends StatelessWidget {
                       unawaited(model.create(
                         options.image,
                         name: options.name,
-                        server: options.url,
+                        remote: options.remote,
                       ));
                     }
                   },

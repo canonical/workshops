@@ -8,8 +8,8 @@ import 'package:simplestreams/simplestreams.dart';
 
 typedef AsyncLxdImageMap = AsyncValue<Map<String, List<LxdImage>>>;
 
-class SimpleStreamModel extends SafeChangeNotifier {
-  SimpleStreamModel();
+class RemoteImageModel extends SafeChangeNotifier {
+  RemoteImageModel();
 
   SimpleStreamClient? _client;
 
