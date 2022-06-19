@@ -53,7 +53,7 @@ class RemoteImageModel extends SafeChangeNotifier {
 // Ported from lxd/shared/simplestreams/products.go
 
 // Converts the products data into a list of LXD images and associated downloadable files
-extension LxdProducts on SimpleProducts {
+extension _LxdProducts on SimpleProducts {
   Map<String, List<LxdImage>> toLxd() {
     final images = <String, List<LxdImage>>{};
 
