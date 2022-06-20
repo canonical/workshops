@@ -9,7 +9,7 @@ import 'package:terminal_view/terminal_view.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../instances/instance_view.dart';
-import '../launcher/launcher_dialog.dart';
+import '../launcher/launcher_wizard.dart';
 import '../operations/operation_view.dart';
 import '../preferences/preferences_dialog.dart';
 import '../terminal/terminal_settings.dart';
@@ -112,11 +112,10 @@ class HomePage extends StatelessWidget {
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () async {
-                    final options = await showLauncherDialog(context);
+                    final options = await showLauncherWizard(context);
                     if (options != null) {
                       unawaited(model.create(
                         options.image,
-                        name: options.name,
                         remote: options.remote,
                       ));
                     }

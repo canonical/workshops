@@ -6,12 +6,10 @@ class OsSelector extends StatelessWidget {
   const OsSelector({
     super.key,
     required this.items,
-    this.selected,
     this.onSelected,
   });
 
   final List<String> items;
-  final String? selected;
   final ValueChanged<String>? onSelected;
 
   @override
@@ -35,23 +33,20 @@ class OsSelector extends StatelessWidget {
               surfaceTintColor: Colors.transparent,
               elevation: 1,
             ),
-            child: Hero(
-              tag: os,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ProductLogo.asset(
-                    key: ValueKey(os),
-                    name: os,
-                    size: 48,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    os,
-                    style: const TextStyle(overflow: TextOverflow.ellipsis),
-                  ),
-                ],
-              ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ProductLogo.asset(
+                  key: ValueKey(os),
+                  name: os,
+                  size: 48,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  os,
+                  style: const TextStyle(overflow: TextOverflow.ellipsis),
+                ),
+              ],
             ),
             onPressed: () => onSelected?.call(os),
           );
