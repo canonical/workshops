@@ -70,9 +70,8 @@ class HomeModel extends ChangeNotifier {
       reset();
     } else {
       final name = create.instances!.single.split('/').last;
+      await _service.initInstance(name, image);
       await start(name);
-
-      return _service.initInstance(name, image);
     }
   }
 
