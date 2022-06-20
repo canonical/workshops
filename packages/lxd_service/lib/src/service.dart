@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'remote.dart';
+
+const _kSudoersPath = '/etc/sudoers.d/90-lxd-toolbox';
 
 abstract class LxdService {
   factory LxdService(LxdClient client) => _LxdService(client);
@@ -24,6 +27,7 @@ abstract class LxdService {
   Future<LxdInstance> getInstance(String name);
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote});
   Future<LxdOperation> startInstance(String name, {bool force = false});
+  Future<void> initInstance(String name, LxdImage image);
   Future<LxdOperation> stopInstance(String name, {bool force = false});
   Future<LxdOperation> deleteInstance(String name);
 
@@ -89,6 +93,30 @@ class _LxdService implements LxdService {
   }
 
   @override
+  Future<void> initInstance(String name, LxdImage image) async {
+    final username = Platform.environment['USERNAME'];
+    if (username != null) {
+      final shell = Platform.environment['SHELL'];
+      final useradd = await _client.execInstance(name, command: [
+        'useradd',
+        '--create-home',
+        '--groups=sudo',
+        if (shell != null) '--shell=$shell',
+        username,
+      ]);
+      final sudoers = await _client.execInstance(name, command: [
+        'sh',
+        '-c',
+        'echo "${_formatSudoers(username)}" > $_kSudoersPath',
+      ]);
+      await Future.wait([
+        _client.waitOperation(useradd.id),
+        _client.waitOperation(sudoers.id),
+      ]);
+    }
+  }
+
+  @override
   Future<LxdOperation> stopInstance(String name, {bool force = false}) {
     return _client.stopInstance(name, force: force);
   }
@@ -144,4 +172,12 @@ class _LxdService implements LxdService {
 
     _instances.add(newInstances);
   }
+}
+
+String _formatSudoers(String username) {
+  return '''
+# Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
+
+$username ALL=(ALL) NOPASSWD:ALL
+Defaults:$username env_keep += \"LXD_DIR\"''';
 }
