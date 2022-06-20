@@ -8,10 +8,14 @@ class LxdApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: YaruTheme(
-        child: HomePage.create(context),
-      ),
-    );
+    return YaruTheme(builder: (context, yaru, child) {
+      return MaterialApp(
+        theme: yaru.variant?.theme ?? yaruLight,
+        darkTheme: yaru.variant?.darkTheme ?? yaruDark,
+        highContrastTheme: yaruHighContrastLight,
+        highContrastDarkTheme: yaruHighContrastDark,
+        home: HomePage.create(context),
+      );
+    });
   }
 }

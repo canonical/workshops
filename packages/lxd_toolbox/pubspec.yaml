@@ -49,7 +49,7 @@ dependencies:
       url: https://github.com/canonical/ubuntu-flutter-plugins.git
       path: packages/ubuntu_widgets
   wizard_router: ^0.8.0
-  yaru: ^0.3.0
+  yaru: ^0.3.3
   yaru_icons: ^0.2.1
 
 dev_dependencies:
