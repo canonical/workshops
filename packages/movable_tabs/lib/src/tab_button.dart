@@ -73,7 +73,7 @@ class MovableTabButton extends StatelessWidget {
                       child: IconButton(
                         padding: EdgeInsets.zero,
                         icon: const Icon(Icons.close),
-                        color: Theme.of(context).colorScheme.onPrimary,
+                        color: Theme.of(context).colorScheme.onSurface,
                         iconSize: 16,
                         splashRadius: 16,
                         onPressed: onClosed,
