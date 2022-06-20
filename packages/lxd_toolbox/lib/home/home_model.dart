@@ -61,7 +61,7 @@ class HomeModel extends ChangeNotifier {
     currentIndex = index < 0 ? _terminals.length - 1 : index;
   }
 
-  Future<void> create(LxdImage image, {String? name, LxdRemote? remote}) async {
+  Future<void> create(LxdImage image, {LxdRemote? remote}) async {
     final create = await _service.createInstance(image, remote: remote);
     _setState(_currentIndex, TerminalState.loading(create));
 
@@ -69,8 +69,10 @@ class HomeModel extends ChangeNotifier {
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
       reset();
     } else {
-      name = create.instances!.single.split('/').last;
-      return start(name);
+      final name = create.instances!.single.split('/').last;
+      await start(name);
+
+      return _service.initInstance(name, image);
     }
   }
 
