@@ -34,6 +34,7 @@ class Terminal extends ChangeNotifier {
         maxLines ?? 10000, // TODO
         theme?.palette.toXtermTheme() ?? xterm.TerminalThemes.defaultTheme,
       );
+      _xterm!.setBracketedPasteMode(false);
     }
     return _xterm!;
   }
@@ -72,6 +73,18 @@ class Terminal extends ChangeNotifier {
   }
 
   void selectAll() => _xterm?.selectAll();
+
+  int get _bufferHeight => _xterm?.bufferHeight ?? 0;
+  int get _pageHeight => _xterm?.viewHeight ?? 0;
+  int get _scrollOffset => _xterm?.scrollOffsetFromBottom ?? 0;
+  void _scrollTo(int offset) => _xterm?.setScrollOffsetFromBottom(offset);
+
+  void scrollUp() => _scrollTo(_scrollOffset + 1);
+  void scrollDown() => _scrollTo(_scrollOffset - 1);
+  void scrollPageUp() => _scrollTo(_scrollOffset + _pageHeight);
+  void scrollPageDown() => _scrollTo(_scrollOffset - _pageHeight);
+  void scrollToTop() => _scrollTo(_bufferHeight - _pageHeight);
+  void scrollToBottom() => _scrollTo(0);
 }
 
 extension _XtermTheme on TerminalPalette {
