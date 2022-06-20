@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 
-import 'remote.dart';
 import 'remote_store.dart';
 
 class RemoteSelector extends StatefulWidget {
@@ -25,13 +25,13 @@ class _RemoteSelectorState extends State<RemoteSelector> {
   Widget build(BuildContext context) {
     final store = context.watch<RemoteStore>();
     final remotes = store.remotes.value ?? [];
-    return DropdownButtonFormField<Remote>(
+    return DropdownButtonFormField<LxdRemote>(
       decoration: const InputDecoration(
         labelText: 'Remote',
       ),
       value: store.current,
       items: remotes.map((remote) {
-        return DropdownMenuItem<Remote>(
+        return DropdownMenuItem<LxdRemote>(
           value: remote,
           child: Text(remote.name),
         );

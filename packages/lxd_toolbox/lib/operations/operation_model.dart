@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:async_value/async_value.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
-import 'package:lxd_x/lxd_x.dart';
 import 'package:meta/meta.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
@@ -30,17 +29,15 @@ class OperationModel extends SafeChangeNotifier {
     operation = const OperationValue.loading().copyWithPrevious(operation);
 
     operation = await OperationValue.guard(() {
-      return _service.client.getOperation(_id);
+      return _service.getOperation(_id);
     });
 
-    _sub = _service.client
-        .getEvents()
-        .where((event) => event.isOperation && event.metadata?['id'] == _id)
-        .map((event) => LxdOperation.fromJson(event.metadata!))
+    _sub = _service
+        .getOperations(_id)
         .listen((event) => operation = OperationValue.data(event));
   }
 
-  Future<void> cancel() => _service.client.cancelOperation(_id);
+  Future<void> cancel() => _service.cancelOperation(_id);
 
   @override
   void dispose() {

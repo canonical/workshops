@@ -1,15 +1,14 @@
 import 'package:async_value/async_value.dart';
 import 'package:collection/collection.dart';
+import 'package:lxd_service/lxd_service.dart';
 import 'package:meta/meta.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'remote.dart';
-
 const _kDefaultRemote = 'images';
 
 const _kDefaultRemotes = [
-  Remote(
+  LxdRemote(
     name: 'local',
     address: 'unix://localhost',
     isStatic: true,
@@ -17,14 +16,14 @@ const _kDefaultRemotes = [
     protocol: 'lxd',
   ),
   // community image server (over simplestreams)
-  Remote(
+  LxdRemote(
     name: 'images',
     address: 'https://images.linuxcontainers.org',
     isPublic: true,
     protocol: 'simplestreams',
   ),
   // Ubuntu image server (over simplestreams)
-  Remote(
+  LxdRemote(
     name: 'ubuntu',
     address: 'https://cloud-images.ubuntu.com/releases',
     isPublic: true,
@@ -32,7 +31,7 @@ const _kDefaultRemotes = [
     protocol: 'simplestreams',
   ),
   // Ubuntu daily image server (over simplestreams)
-  Remote(
+  LxdRemote(
     name: 'daily',
     address: 'https://cloud-images.ubuntu.com/daily',
     isPublic: true,
@@ -41,14 +40,14 @@ const _kDefaultRemotes = [
   ),
 ];
 
-typedef AsyncRemoteList = AsyncValue<List<Remote>>;
+typedef AsyncRemoteList = AsyncValue<List<LxdRemote>>;
 
 class RemoteStore extends SafeChangeNotifier {
   RemoteStore(this._preferences);
 
   final SharedPreferences _preferences;
 
-  Remote? _current;
+  LxdRemote? _current;
   AsyncRemoteList _remotes = const AsyncRemoteList.loading();
 
   AsyncRemoteList get remotes => _remotes;
@@ -60,8 +59,8 @@ class RemoteStore extends SafeChangeNotifier {
     notifyListeners();
   }
 
-  Remote? get current => _current;
-  void setCurrent(Remote? current) {
+  LxdRemote? get current => _current;
+  void setCurrent(LxdRemote? current) {
     if (_current == current) return;
     _current = current;
     if (current != null) {
@@ -76,7 +75,7 @@ class RemoteStore extends SafeChangeNotifier {
     remotes = const AsyncRemoteList.loading().copyWithPrevious(remotes);
     remotes = await AsyncRemoteList.guard(() async {
       final remotes =
-          _preferences.get('remotes') as List<Remote>? ?? _kDefaultRemotes;
+          _preferences.get('remotes') as List<LxdRemote>? ?? _kDefaultRemotes;
       final current = _preferences.get('remote') as String? ?? _kDefaultRemote;
       _current = remotes.firstWhereOrNull((remote) => remote.name == current);
       return remotes;

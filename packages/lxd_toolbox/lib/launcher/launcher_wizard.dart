@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
+import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 import 'package:wizard_router/wizard_router.dart';
 
-import '../remotes/remote.dart';
 import '../remotes/remote_store.dart';
 import '../widgets/wizard_transition.dart';
 import 'launcher_page.dart';
@@ -19,7 +19,7 @@ class LaunchOptions {
     required this.remote,
   });
   final LxdImage image;
-  final Remote remote;
+  final LxdRemote remote;
 }
 
 Future<LaunchOptions?> showLauncherWizard(BuildContext context) {
@@ -48,7 +48,7 @@ class LauncherWizard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final remote = context.select<RemoteStore, Remote?>((s) => s.current);
+    final remote = context.select<RemoteStore, LxdRemote?>((s) => s.current);
     return Dialog(
       clipBehavior: Clip.hardEdge,
       child: SizedBox.fromSize(

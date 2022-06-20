@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Remote _$RemoteFromJson(Map<String, dynamic> json) {
-  return _Remote.fromJson(json);
+LxdRemote _$LxdRemoteFromJson(Map<String, dynamic> json) {
+  return _LxdRemote.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Remote {
+mixin _$LxdRemote {
   String get name => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   dynamic get isStatic => throw _privateConstructorUsedError;
@@ -28,13 +28,14 @@ mixin _$Remote {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $RemoteCopyWith<Remote> get copyWith => throw _privateConstructorUsedError;
+  $LxdRemoteCopyWith<LxdRemote> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RemoteCopyWith<$Res> {
-  factory $RemoteCopyWith(Remote value, $Res Function(Remote) then) =
-      _$RemoteCopyWithImpl<$Res>;
+abstract class $LxdRemoteCopyWith<$Res> {
+  factory $LxdRemoteCopyWith(LxdRemote value, $Res Function(LxdRemote) then) =
+      _$LxdRemoteCopyWithImpl<$Res>;
   $Res call(
       {String name,
       String address,
@@ -44,12 +45,12 @@ abstract class $RemoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RemoteCopyWithImpl<$Res> implements $RemoteCopyWith<$Res> {
-  _$RemoteCopyWithImpl(this._value, this._then);
+class _$LxdRemoteCopyWithImpl<$Res> implements $LxdRemoteCopyWith<$Res> {
+  _$LxdRemoteCopyWithImpl(this._value, this._then);
 
-  final Remote _value;
+  final LxdRemote _value;
   // ignore: unused_field
-  final $Res Function(Remote) _then;
+  final $Res Function(LxdRemote) _then;
 
   @override
   $Res call({
@@ -85,9 +86,10 @@ class _$RemoteCopyWithImpl<$Res> implements $RemoteCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_RemoteCopyWith<$Res> implements $RemoteCopyWith<$Res> {
-  factory _$$_RemoteCopyWith(_$_Remote value, $Res Function(_$_Remote) then) =
-      __$$_RemoteCopyWithImpl<$Res>;
+abstract class _$$_LxdRemoteCopyWith<$Res> implements $LxdRemoteCopyWith<$Res> {
+  factory _$$_LxdRemoteCopyWith(
+          _$_LxdRemote value, $Res Function(_$_LxdRemote) then) =
+      __$$_LxdRemoteCopyWithImpl<$Res>;
   @override
   $Res call(
       {String name,
@@ -98,13 +100,14 @@ abstract class _$$_RemoteCopyWith<$Res> implements $RemoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RemoteCopyWithImpl<$Res> extends _$RemoteCopyWithImpl<$Res>
-    implements _$$_RemoteCopyWith<$Res> {
-  __$$_RemoteCopyWithImpl(_$_Remote _value, $Res Function(_$_Remote) _then)
-      : super(_value, (v) => _then(v as _$_Remote));
+class __$$_LxdRemoteCopyWithImpl<$Res> extends _$LxdRemoteCopyWithImpl<$Res>
+    implements _$$_LxdRemoteCopyWith<$Res> {
+  __$$_LxdRemoteCopyWithImpl(
+      _$_LxdRemote _value, $Res Function(_$_LxdRemote) _then)
+      : super(_value, (v) => _then(v as _$_LxdRemote));
 
   @override
-  _$_Remote get _value => super._value as _$_Remote;
+  _$_LxdRemote get _value => super._value as _$_LxdRemote;
 
   @override
   $Res call({
@@ -114,7 +117,7 @@ class __$$_RemoteCopyWithImpl<$Res> extends _$RemoteCopyWithImpl<$Res>
     Object? isPublic = freezed,
     Object? protocol = freezed,
   }) {
-    return _then(_$_Remote(
+    return _then(_$_LxdRemote(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -135,8 +138,8 @@ class __$$_RemoteCopyWithImpl<$Res> extends _$RemoteCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Remote extends _Remote {
-  const _$_Remote(
+class _$_LxdRemote extends _LxdRemote {
+  const _$_LxdRemote(
       {required this.name,
       required this.address,
       this.isStatic = false,
@@ -144,8 +147,8 @@ class _$_Remote extends _Remote {
       this.protocol})
       : super._();
 
-  factory _$_Remote.fromJson(Map<String, dynamic> json) =>
-      _$$_RemoteFromJson(json);
+  factory _$_LxdRemote.fromJson(Map<String, dynamic> json) =>
+      _$$_LxdRemoteFromJson(json);
 
   @override
   final String name;
@@ -162,14 +165,14 @@ class _$_Remote extends _Remote {
 
   @override
   String toString() {
-    return 'Remote(name: $name, address: $address, isStatic: $isStatic, isPublic: $isPublic, protocol: $protocol)';
+    return 'LxdRemote(name: $name, address: $address, isStatic: $isStatic, isPublic: $isPublic, protocol: $protocol)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Remote &&
+            other is _$_LxdRemote &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.address, address) &&
             const DeepCollectionEquality().equals(other.isStatic, isStatic) &&
@@ -189,25 +192,26 @@ class _$_Remote extends _Remote {
 
   @JsonKey(ignore: true)
   @override
-  _$$_RemoteCopyWith<_$_Remote> get copyWith =>
-      __$$_RemoteCopyWithImpl<_$_Remote>(this, _$identity);
+  _$$_LxdRemoteCopyWith<_$_LxdRemote> get copyWith =>
+      __$$_LxdRemoteCopyWithImpl<_$_LxdRemote>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RemoteToJson(this);
+    return _$$_LxdRemoteToJson(this);
   }
 }
 
-abstract class _Remote extends Remote {
-  const factory _Remote(
+abstract class _LxdRemote extends LxdRemote {
+  const factory _LxdRemote(
       {required final String name,
       required final String address,
       final dynamic isStatic,
       final dynamic isPublic,
-      final String? protocol}) = _$_Remote;
-  const _Remote._() : super._();
+      final String? protocol}) = _$_LxdRemote;
+  const _LxdRemote._() : super._();
 
-  factory _Remote.fromJson(Map<String, dynamic> json) = _$_Remote.fromJson;
+  factory _LxdRemote.fromJson(Map<String, dynamic> json) =
+      _$_LxdRemote.fromJson;
 
   @override
   String get name => throw _privateConstructorUsedError;
@@ -221,6 +225,6 @@ abstract class _Remote extends Remote {
   String? get protocol => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteCopyWith<_$_Remote> get copyWith =>
+  _$$_LxdRemoteCopyWith<_$_LxdRemote> get copyWith =>
       throw _privateConstructorUsedError;
 }

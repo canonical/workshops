@@ -4,17 +4,18 @@ part 'remote.freezed.dart';
 part 'remote.g.dart';
 
 @freezed
-class Remote with _$Remote {
-  const factory Remote({
+class LxdRemote with _$LxdRemote {
+  const factory LxdRemote({
     required String name,
     required String address,
     @Default(false) isStatic,
     @Default(true) isPublic,
     String? protocol,
-  }) = _Remote;
-  const Remote._();
+  }) = _LxdRemote;
+  const LxdRemote._();
 
   bool get isLocal => protocol == 'lxd';
 
-  factory Remote.fromJson(Map<String, dynamic> json) => _$RemoteFromJson(json);
+  factory LxdRemote.fromJson(Map<String, dynamic> json) =>
+      _$LxdRemoteFromJson(json);
 }

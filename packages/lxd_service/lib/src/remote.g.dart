@@ -6,7 +6,7 @@ part of 'remote.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Remote _$$_RemoteFromJson(Map<String, dynamic> json) => _$_Remote(
+_$_LxdRemote _$$_LxdRemoteFromJson(Map<String, dynamic> json) => _$_LxdRemote(
       name: json['name'] as String,
       address: json['address'] as String,
       isStatic: json['isStatic'] ?? false,
@@ -14,7 +14,8 @@ _$_Remote _$$_RemoteFromJson(Map<String, dynamic> json) => _$_Remote(
       protocol: json['protocol'] as String?,
     );
 
-Map<String, dynamic> _$$_RemoteToJson(_$_Remote instance) => <String, dynamic>{
+Map<String, dynamic> _$$_LxdRemoteToJson(_$_LxdRemote instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'address': instance.address,
       'isStatic': instance.isStatic,
