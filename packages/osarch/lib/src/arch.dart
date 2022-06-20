@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:libc/libc.dart';
+import 'package:stdlibc/stdlibc.dart';
 
 enum Arch {
   /// ARCH_32BIT_INTEL_X86
