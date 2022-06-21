@@ -14,6 +14,7 @@ dependencies:
   lxd_x:
     path: ../lxd_x
   rxdart: ^0.27.3
+  stdlibc: ^0.0.1
 
 dev_dependencies:
   build_runner: ^2.1.11

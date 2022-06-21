@@ -228,6 +228,12 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
                   Future<_i2.LxdOperation>.value(_FakeLxdOperation_1()))
           as _i15.Future<_i2.LxdOperation>);
   @override
+  _i15.Future<_i2.LxdOperation> updateInstance(_i7.LxdInstance? instance) =>
+      (super.noSuchMethod(Invocation.method(#updateInstance, [instance]),
+              returnValue:
+                  Future<_i2.LxdOperation>.value(_FakeLxdOperation_1()))
+          as _i15.Future<_i2.LxdOperation>);
+  @override
   _i15.Future<_i2.LxdOperation> stopInstance(String? name,
           {bool? force = false}) =>
       (super.noSuchMethod(
@@ -249,6 +255,31 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
               returnValue:
                   Future<_i2.LxdOperation>.value(_FakeLxdOperation_1()))
           as _i15.Future<_i2.LxdOperation>);
+  @override
+  _i15.Future<String> getFile(String? instance,
+          {String? path, String? project}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #getFile, [instance], {#path: path, #project: project}),
+          returnValue: Future<String>.value('')) as _i15.Future<String>);
+  @override
+  _i15.Future<void> deleteFile(String? instance,
+          {String? path, String? project}) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #deleteFile, [instance], {#path: path, #project: project}),
+              returnValue: Future<void>.value(),
+              returnValueForMissingStub: Future<void>.value())
+          as _i15.Future<void>);
+  @override
+  _i15.Future<void> createFile(String? instance,
+          {String? path, String? project, String? data}) =>
+      (super.noSuchMethod(
+              Invocation.method(#createFile, [instance],
+                  {#path: path, #project: project, #data: data}),
+              returnValue: Future<void>.value(),
+              returnValueForMissingStub: Future<void>.value())
+          as _i15.Future<void>);
   @override
   _i15.Future<List<String>> getNetworks() =>
       (super.noSuchMethod(Invocation.method(#getNetworks, []),

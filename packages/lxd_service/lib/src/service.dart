@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:stdlibc/stdlibc.dart';
 
 import 'remote.dart';
 
@@ -96,6 +98,9 @@ class _LxdService implements LxdService {
   Future<void> initInstance(String name, LxdImage image) async {
     final username = Platform.environment['USERNAME'];
     if (username != null) {
+      final start = await _client.startInstance(name);
+      await _client.waitOperation(start.id);
+
       final shell = Platform.environment['SHELL'];
       final useradd = await _client.execInstance(name, command: [
         'useradd',
@@ -104,15 +109,28 @@ class _LxdService implements LxdService {
         if (shell != null) '--shell=$shell',
         username,
       ]);
+      await _client.waitOperation(useradd.id);
+
       final sudoers = await _client.execInstance(name, command: [
         'sh',
         '-c',
         'echo "${_formatSudoers(username)}" > $_kSudoersPath',
       ]);
-      await Future.wait([
-        _client.waitOperation(useradd.id),
-        _client.waitOperation(sudoers.id),
-      ]);
+      await _client.waitOperation(sudoers.id);
+
+      final instance = await _client.getInstance(name);
+      final uid = await _runCommand(name, ['id', '-u', username]);
+      final gid = await _runCommand(name, ['id', '-g', username]);
+      final config = <String, dynamic>{
+        ...instance.config,
+        'raw.idmap': 'uid ${getuid()} $uid\ngid ${getgid()} $gid',
+      };
+      final idmap =
+          await _client.updateInstance(instance.copyWith(config: config));
+      await _client.waitOperation(idmap.id);
+
+      final stop = await _client.stopInstance(name);
+      await _client.waitOperation(stop.id);
     }
   }
 
@@ -171,6 +189,35 @@ class _LxdService implements LxdService {
     }
 
     _instances.add(newInstances);
+  }
+
+  Future<String> _runCommand(String instance, List<String> command) async {
+    final exec = await _client.execInstance(
+      instance,
+      command: command,
+      interactive: true,
+      waitForWebSocket: true,
+    );
+
+    final fdc = exec.metadata!['fds']['control'] as String;
+    final wsc = await _client.getOperationWebSocket(exec.id, fdc);
+
+    final fd0 = exec.metadata!['fds']['0'] as String;
+    final ws0 = await _client.getOperationWebSocket(exec.id, fd0);
+
+    final controller = StreamController<String>();
+    ws0.listen((data) {
+      if (data is List<int>) {
+        controller.add(utf8.decode(data));
+      } else if (data == '') {
+        ws0.close();
+        wsc.close();
+        controller.close();
+      }
+    });
+
+    await waitOperation(exec.id);
+    return controller.stream.join();
   }
 }
 
