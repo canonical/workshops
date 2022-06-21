@@ -9,8 +9,6 @@ import 'package:stdlibc/stdlibc.dart';
 
 import 'remote.dart';
 
-const _kSudoersPath = '/etc/sudoers.d/90-lxd-toolbox';
-
 abstract class LxdService {
   factory LxdService(LxdClient client) => _LxdService(client);
 
@@ -111,12 +109,13 @@ class _LxdService implements LxdService {
       ]);
       await _client.waitOperation(useradd.id);
 
-      final sudoers = await _client.execInstance(name, command: [
-        'sh',
-        '-c',
-        'echo "${_formatSudoers(username)}" > $_kSudoersPath',
-      ]);
-      await _client.waitOperation(sudoers.id);
+      await _client
+          .createFile(name, path: '/etc/sudoers.d/90-lxd-toolbox', data: '''
+# Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
+
+$username ALL=(ALL) NOPASSWD:ALL
+Defaults:$username env_keep += \"LXD_DIR\"
+''');
 
       final instance = await _client.getInstance(name);
       final uid = await _runCommand(name, ['id', '-u', username]);
@@ -219,12 +218,4 @@ class _LxdService implements LxdService {
     await waitOperation(exec.id);
     return controller.stream.join();
   }
-}
-
-String _formatSudoers(String username) {
-  return '''
-# Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
-
-$username ALL=(ALL) NOPASSWD:ALL
-Defaults:$username env_keep += \"LXD_DIR\"''';
 }
