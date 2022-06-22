@@ -59,7 +59,9 @@ class LxdTerminalBackend implements TerminalBackend {
       command: [command ?? Platform.environment['SHELL'] ?? '/bin/bash'],
       environment: {
         'TERM': 'xterm-256color',
-        'HOME': Platform.environment['HOME'] ?? '/root',
+        'HOME': Platform.environment['SNAP_REAL_HOME'] ??
+            Platform.environment['HOME'] ??
+            '/root',
         'USER': Platform.environment['USER'] ?? 'root',
         'USERNAME': Platform.environment['USERNAME'] ?? 'root',
       },
