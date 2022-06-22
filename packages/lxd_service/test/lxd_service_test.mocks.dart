@@ -256,11 +256,11 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
                   Future<_i2.LxdOperation>.value(_FakeLxdOperation_1()))
           as _i15.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<String> getFile(String? instance,
+  _i15.Future<String> pullFile(String? instance,
           {String? path, String? project}) =>
       (super.noSuchMethod(
           Invocation.method(
-              #getFile, [instance], {#path: path, #project: project}),
+              #pullFile, [instance], {#path: path, #project: project}),
           returnValue: Future<String>.value('')) as _i15.Future<String>);
   @override
   _i15.Future<void> deleteFile(String? instance,
@@ -272,10 +272,10 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
               returnValueForMissingStub: Future<void>.value())
           as _i15.Future<void>);
   @override
-  _i15.Future<void> createFile(String? instance,
+  _i15.Future<void> pushFile(String? instance,
           {String? path, String? project, String? data}) =>
       (super.noSuchMethod(
-              Invocation.method(#createFile, [instance],
+              Invocation.method(#pushFile, [instance],
                   {#path: path, #project: project, #data: data}),
               returnValue: Future<void>.value(),
               returnValueForMissingStub: Future<void>.value())
