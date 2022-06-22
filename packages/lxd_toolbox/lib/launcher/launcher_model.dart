@@ -8,11 +8,16 @@ import 'package:safe_change_notifier/safe_change_notifier.dart';
 final _validName = RegExp(r'^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*$');
 
 class LauncherModel extends SafeChangeNotifier {
-  LxdImage? _image;
+  void load(LxdImage image) {
+    _image = image;
+    _name = _image.properties['name'] ?? generateName();
+  }
+
+  late final LxdImage _image;
   String _name = '';
 
-  String get os => _image?.properties['os'] ?? '';
-  String get release => _image?.properties['release'] ?? '';
+  String get os => _image.properties['os'] ?? '';
+  String get release => _image.properties['release'] ?? '';
 
   String get name => _name;
   set name(String name) {
@@ -22,15 +27,10 @@ class LauncherModel extends SafeChangeNotifier {
   }
 
   LxdImage? get image {
-    return _image?.copyWith(properties: {
+    return _image.copyWith(properties: {
+      ..._image.properties,
       'name': _name,
-      ...?_image?.properties,
     });
-  }
-
-  void init(LxdImage? image) {
-    _image = image;
-    _name = image?.properties['name'] ?? generateName();
   }
 
   static String generateName() => petname.generate(2, separator: '-');

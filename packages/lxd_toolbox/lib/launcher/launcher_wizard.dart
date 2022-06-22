@@ -8,6 +8,7 @@ import 'package:wizard_router/wizard_router.dart';
 
 import '../remotes/remote_store.dart';
 import '../widgets/wizard_transition.dart';
+import 'disk_config_page.dart';
 import 'launcher_page.dart';
 import 'local_image_page.dart';
 import 'remote_image_page.dart';
@@ -94,15 +95,19 @@ class RemoteImageWizard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wizard(
       routes: {
-        '/select-os': WizardRoute(
+        '/os': WizardRoute(
           builder: (_) => const RemoteOsPage(),
           onDone: onDone,
         ),
-        '/select-image': WizardRoute(
+        '/image': WizardRoute(
           builder: RemoteImagePage.create,
           onDone: onDone,
         ),
-        '/configure': WizardRoute(
+        '/disks': WizardRoute(
+          builder: DiskConfigPage.create,
+          onDone: onDone,
+        ),
+        '/launch': WizardRoute(
           builder: LauncherPage.create,
           onDone: onDone,
         ),
@@ -124,7 +129,11 @@ class LocalImageWizard extends StatelessWidget {
           builder: LocalImagePage.create,
           onDone: onDone,
         ),
-        '/configure': WizardRoute(
+        '/disks': WizardRoute(
+          builder: DiskConfigPage.create,
+          onDone: onDone,
+        ),
+        '/launch': WizardRoute(
           builder: LauncherPage.create,
           onDone: onDone,
         ),
