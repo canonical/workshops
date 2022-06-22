@@ -9,6 +9,8 @@ grade: stable
 license: GPL-3.0+
 architectures:
   - build-on: amd64
+assumes:
+  - snapd2.46
 
 parts:
   flutter-git:
