@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:rxdart/rxdart.dart';
@@ -99,35 +100,60 @@ class _LxdService implements LxdService {
       final start = await _client.startInstance(name);
       await _client.waitOperation(start.id);
 
+      // sudo vs. wheel
+      final group =
+          await _client.pullFile(name, path: '/etc/group').then((data) {
+        return data
+            .split('\n')
+            .firstWhereOrNull(
+                (line) => line.startsWith('sudo:') || line.startsWith('wheel:'))
+            ?.split(':')
+            .firstOrNull;
+      });
+
+      // useradd
       final shell = Platform.environment['SHELL'];
       final useradd = await _client.execInstance(name, command: [
         'useradd',
         '--create-home',
-        '--groups=sudo',
+        if (group != null) '--groups=$group',
         if (shell != null) '--shell=$shell',
         username,
       ]);
       await _client.waitOperation(useradd.id);
 
+      // sudoers
       await _client
-          .createFile(name, path: '/etc/sudoers.d/90-lxd-toolbox', data: '''
+          .pushFile(name, path: '/etc/sudoers.d/90-lxd-toolbox', data: '''
 # Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
 
 $username ALL=(ALL) NOPASSWD:ALL
 Defaults:$username env_keep += \"LXD_DIR\"
 ''');
 
+      // idmap
       final instance = await _client.getInstance(name);
       final uid = await _runCommand(name, ['id', '-u', username]);
       final gid = await _runCommand(name, ['id', '-g', username]);
       final config = <String, dynamic>{
         ...instance.config,
-        'raw.idmap': 'uid ${getuid()} $uid\ngid ${getgid()} $gid',
+        'raw.idmap': '''
+uid ${getuid()} $uid
+gid ${getgid()} $gid
+''',
       };
-      final idmap =
-          await _client.updateInstance(instance.copyWith(config: config));
-      await _client.waitOperation(idmap.id);
 
+      // devices
+      final devices = <String, dynamic>{
+        ...instance.devices,
+        ...jsonDecode(image.properties['devices'] as String)
+            as Map<String, dynamic>,
+      };
+      final update = await _client
+          .updateInstance(instance.copyWith(config: config, devices: devices));
+      await _client.waitOperation(update.id);
+
+      // restart
       final stop = await _client.stopInstance(name);
       await _client.waitOperation(stop.id);
     }
@@ -216,6 +242,6 @@ Defaults:$username env_keep += \"LXD_DIR\"
     });
 
     await waitOperation(exec.id);
-    return controller.stream.join();
+    return controller.stream.join().then((value) => value.trim());
   }
 }

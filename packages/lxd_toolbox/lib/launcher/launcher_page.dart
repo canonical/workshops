@@ -30,7 +30,7 @@ class _LauncherPageState extends State<LauncherPage> {
     super.initState();
 
     final model = context.read<LauncherModel>();
-    model.init(Wizard.of(context).arguments as LxdImage);
+    model.load(Wizard.of(context).arguments as LxdImage);
 
     _nameController = TextEditingController(text: model.name);
     _nameController.addListener(() => model.name = _nameController.text);
