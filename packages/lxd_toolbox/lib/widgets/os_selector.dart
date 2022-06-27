@@ -28,7 +28,8 @@ class OsSelector extends StatelessWidget {
               mainAxisCellCount: 2,
               child: _OsTile(
                 os: items.first,
-                size: 192,
+                fontSize: 22,
+                logoSize: 192,
                 onSelected: onSelected,
               ),
             ),
@@ -38,7 +39,7 @@ class OsSelector extends StatelessWidget {
                 mainAxisCellCount: 1,
                 child: _OsTile(
                   os: item,
-                  size: 48,
+                  logoSize: 48,
                   onSelected: onSelected,
                 ),
               ),
@@ -52,12 +53,14 @@ class OsSelector extends StatelessWidget {
 class _OsTile extends StatelessWidget {
   const _OsTile({
     required this.os,
-    required this.size,
+    this.fontSize,
+    required this.logoSize,
     required this.onSelected,
   });
 
   final String os;
-  final double size;
+  final double? fontSize;
+  final double logoSize;
   final ValueChanged<String>? onSelected;
 
   @override
@@ -77,12 +80,15 @@ class _OsTile extends StatelessWidget {
           ProductLogo.asset(
             key: ValueKey(os),
             name: os,
-            size: size,
+            size: logoSize,
           ),
           const SizedBox(height: 8),
           Text(
             os,
-            style: const TextStyle(overflow: TextOverflow.ellipsis),
+            style: TextStyle(
+              fontSize: fontSize,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),
