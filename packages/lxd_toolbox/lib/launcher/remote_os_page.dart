@@ -14,14 +14,13 @@ class RemoteOsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final images =
-        context.select<RemoteImageModel, AsyncLxdImageMap?>((m) => m.images);
+    final model = context.watch<RemoteImageModel>();
     return WizardPage(
       title: const Text('Select OS'),
       content: RoundedContainer(
-        child: images?.when(
+        child: model.images?.when(
           data: (images) => OsSelector(
-            items: images.keys.toList(),
+            items: model.oses,
             onSelected: (os) => Wizard.of(context).next(arguments: os),
           ),
           error: (error, stackTrace) => ErrorWidget(error),

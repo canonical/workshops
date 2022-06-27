@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'product_logo.dart';
 
@@ -14,45 +15,78 @@ class OsSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.custom(
-      padding: const EdgeInsets.all(20),
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 192,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-      ),
-      childrenDelegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final os = items[index];
-          final theme = Theme.of(context);
-          return ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.all(8),
-              primary: theme.cardColor,
-              onPrimary: theme.colorScheme.onSurface,
-              surfaceTintColor: Colors.transparent,
-              elevation: 1,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: StaggeredGrid.extent(
+          maxCrossAxisExtent: 192,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+          children: [
+            StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 2,
+              child: _OsTile(
+                os: items.first,
+                size: 192,
+                onSelected: onSelected,
+              ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ProductLogo.asset(
-                  key: ValueKey(os),
-                  name: os,
+            for (final item in items.skip(1))
+              StaggeredGridTile.count(
+                crossAxisCellCount: 1,
+                mainAxisCellCount: 1,
+                child: _OsTile(
+                  os: item,
                   size: 48,
+                  onSelected: onSelected,
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  os,
-                  style: const TextStyle(overflow: TextOverflow.ellipsis),
-                ),
-              ],
-            ),
-            onPressed: () => onSelected?.call(os),
-          );
-        },
-        childCount: items.length,
+              ),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _OsTile extends StatelessWidget {
+  const _OsTile({
+    required this.os,
+    required this.size,
+    required this.onSelected,
+  });
+
+  final String os;
+  final double size;
+  final ValueChanged<String>? onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.all(8),
+        primary: theme.cardColor,
+        onPrimary: theme.colorScheme.onSurface,
+        surfaceTintColor: Colors.transparent,
+        elevation: 1,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ProductLogo.asset(
+            key: ValueKey(os),
+            name: os,
+            size: size,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            os,
+            style: const TextStyle(overflow: TextOverflow.ellipsis),
+          ),
+        ],
+      ),
+      onPressed: () => onSelected?.call(os),
     );
   }
 }

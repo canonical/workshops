@@ -15,8 +15,10 @@ class RemoteImageModel extends SafeChangeNotifier {
 
   SimpleStreamClient? get client => _client;
 
+  List<String>? _oses;
   AsyncLxdImageMap? _images;
 
+  List<String> get oses => _oses ?? [];
   AsyncLxdImageMap? get images => _images;
 
   @protected
@@ -39,6 +41,10 @@ class RemoteImageModel extends SafeChangeNotifier {
         // TODO: merge & isolate
         images.addAll(products.toLxd());
       }
+      _oses = [
+        'Ubuntu',
+        ...images.keys.where((os) => os != 'Ubuntu'),
+      ];
       return images;
     });
   }
