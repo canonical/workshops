@@ -18,7 +18,7 @@ class LxdGraphicsFeature extends LxdFeatureFactory {
     final gid = await client.runCommand(instance.name, ['id', '-u', username]);
 
     await client.runCommand(instance.name, ['mkdir', '-p', '/tmp/.X11-unix/']);
-    await client.runCommand(instance.name, ['mkdir', '-p', '/run/user/$uid']);
+    // await client.runCommand(instance.name, ['mkdir', '-p', '/run/user/$uid']);
 
     await client.pushFile(
       instance.name,
@@ -27,7 +27,7 @@ class LxdGraphicsFeature extends LxdFeatureFactory {
 # Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
 
 export DISPLAY=$x11
-export WAYLAND_DISPLAY=$wayland
+# export WAYLAND_DISPLAY=$wayland
 ''',
     );
 
@@ -48,16 +48,16 @@ export WAYLAND_DISPLAY=$wayland
           'security.gid': '${getgid()}',
           'security.uid': '${getuid()}',
         },
-        'wayland': {
-          'type': 'proxy',
-          'bind': 'instance',
-          'listen': 'unix:/run/user/$uid/$wayland',
-          'connect': 'unix:/run/user/${getuid()}/$wayland',
-          'gid': gid,
-          'uid': uid,
-          'security.gid': '${getgid()}',
-          'security.uid': '${getuid()}',
-        },
+        // 'wayland': {
+        //   'type': 'proxy',
+        //   'bind': 'instance',
+        //   'listen': 'unix:/run/user/$uid/$wayland',
+        //   'connect': 'unix:/run/user/${getuid()}/$wayland',
+        //   'gid': gid,
+        //   'uid': uid,
+        //   'security.gid': '${getgid()}',
+        //   'security.uid': '${getuid()}',
+        // },
       },
     ));
     await client.waitOperation(op.id);
