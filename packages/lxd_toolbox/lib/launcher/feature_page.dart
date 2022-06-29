@@ -69,9 +69,16 @@ class _FeaturePageState extends State<FeaturePage> {
                   'Make the host GPU available and forward display connections for running UI apps.'),
               controlAffinity: ListTileControlAffinity.leading,
               value: model.hasFeature(LxdFeature.display),
-              onChanged: model.user != null
-                  ? (value) => model.setFeature(LxdFeature.display, value!)
-                  : null,
+              onChanged: (value) =>
+                  model.setFeature(LxdFeature.display, value!),
+            ),
+            CheckboxListTile(
+              title: const Text('Audio'),
+              subtitle: const Text(
+                  'Make the host sound card available and forward audio connections for running audio apps.'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: model.hasFeature(LxdFeature.audio),
+              onChanged: (value) => model.setFeature(LxdFeature.audio, value!),
             ),
             CheckboxListTile(
               title: const Text('LXD'),
