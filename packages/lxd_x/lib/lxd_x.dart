@@ -1,6 +1,53 @@
 library lxd_x;
 
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:collection/collection.dart';
 import 'package:lxd/lxd.dart';
+
+String resolveLxdSocketPath([String? socketPath]) {
+  final lxdDir = Platform.environment['LXD_DIR'];
+  final paths = [
+    if (socketPath != null) socketPath,
+    if (lxdDir != null) '$lxdDir/unix.socket',
+    '/var/snap/lxd/common/lxd/unix.socket',
+  ];
+  return paths.firstWhereOrNull((path) => File(path).existsSync()) ??
+      '/var/lib/lxd/unix.socket';
+}
+
+extension LxdClientX on LxdClient {
+  Future<String> runCommand(String instance, List<String> command) async {
+    final exec = await execInstance(
+      instance,
+      command: command,
+      interactive: true,
+      waitForWebSocket: true,
+    );
+
+    final fdc = exec.metadata!['fds']['control'] as String;
+    final wsc = await getOperationWebSocket(exec.id, fdc);
+
+    final fd0 = exec.metadata!['fds']['0'] as String;
+    final ws0 = await getOperationWebSocket(exec.id, fd0);
+
+    final controller = StreamController<String>();
+    ws0.listen((data) {
+      if (data is List<int>) {
+        controller.add(utf8.decode(data));
+      } else if (data == '') {
+        ws0.close();
+        wsc.close();
+        controller.close();
+      }
+    });
+
+    await waitOperation(exec.id);
+    return controller.stream.join().then((value) => value.trim());
+  }
+}
 
 extension LxdEventX on LxdEvent {
   bool get isOperation => type == LxdEventType.operation;
@@ -34,8 +81,6 @@ extension LxdNetworkStateX on LxdNetworkState {
 }
 
 extension LxdOperationX on LxdOperation {
-  List<String>? get instances => (resources?['instances'] as List?)
-      ?.cast<String>()
-      .map((path) => path.split('/').last)
-      .toList();
+  List<String>? get instances =>
+      resources?['instances']?.map((path) => path.split('/').last).toList();
 }

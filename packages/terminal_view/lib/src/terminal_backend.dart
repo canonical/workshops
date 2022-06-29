@@ -10,13 +10,11 @@ class LxdTerminalBackend implements TerminalBackend {
   LxdTerminalBackend({
     required this.client,
     required this.instance,
-    this.command,
     this.onExit,
   });
 
   final LxdClient client;
-  final String instance;
-  final String? command;
+  final LxdInstance instance;
   final VoidCallback? onExit;
 
   final _exitCode = Completer<int>();
@@ -53,21 +51,12 @@ class LxdTerminalBackend implements TerminalBackend {
     _wsc = null;
   }
 
-  Future<void> execute(String name) async {
+  Future<void> execute(LxdInstance instance) async {
+    final user = instance.config['user.name'] ?? 'root';
     final op = await client.execInstance(
-      name,
-      command: [command ?? Platform.environment['SHELL'] ?? '/bin/bash'],
-      environment: {
-        'TERM': 'xterm-256color',
-        'HOME': Platform.environment['SNAP_REAL_HOME'] ??
-            Platform.environment['HOME'] ??
-            '/root',
-        'USER': Platform.environment['USER'] ?? 'root',
-        'USERNAME': Platform.environment['USERNAME'] ?? 'root',
-      },
-      // TODO: map IDs
-      group: 1000,
-      user: 1000,
+      instance.name,
+      command: ['login', '-f', user],
+      environment: {'TERM': 'xterm-256color'},
       interactive: true,
       waitForWebSocket: true,
     );
