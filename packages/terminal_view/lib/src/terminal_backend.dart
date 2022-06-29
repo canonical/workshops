@@ -24,6 +24,9 @@ class LxdTerminalBackend implements TerminalBackend {
   WebSocket? _wsc;
 
   @override
+  bool get isReady => _ws0 != null && _wsc != null;
+
+  @override
   Stream<String> get out => _out.stream;
 
   @override
