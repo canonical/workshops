@@ -69,7 +69,7 @@ class HomeModel extends ChangeNotifier {
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
       reset();
     } else {
-      final name = create.instances!.single.split('/').last;
+      final name = create.instances!.single;
       await _service.initInstance(name, image);
       await start(name);
     }
@@ -94,7 +94,7 @@ class HomeModel extends ChangeNotifier {
       TerminalState.running(
         Terminal(
           client: _service.client,
-          instance: instance.name,
+          instance: instance,
           onExit: reset,
         ),
       ),

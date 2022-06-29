@@ -139,13 +139,8 @@ class _InstanceListTileState extends State<_InstanceListTile> {
 }
 
 extension _LxdInstanceImage on LxdInstance {
-  String? get imageName {
-    return (config['image.os'] as String?)?.toLowerCase();
-  }
-
-  String? get imageDescription {
-    return config['image.description'] as String?;
-  }
+  String? get imageName => config['image.os']?.toLowerCase();
+  String? get imageDescription => config['image.description'];
 }
 
 class _IconButton extends IconButton {

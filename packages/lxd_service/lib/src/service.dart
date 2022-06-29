@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 
-import 'package:collection/collection.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:stdlibc/stdlibc.dart';
 
+import 'features.dart';
 import 'remote.dart';
 
 abstract class LxdService {
@@ -95,67 +92,17 @@ class _LxdService implements LxdService {
 
   @override
   Future<void> initInstance(String name, LxdImage image) async {
-    final username = Platform.environment['USERNAME'];
-    if (username != null) {
-      final start = await _client.startInstance(name);
-      await _client.waitOperation(start.id);
+    final start = await _client.startInstance(name);
+    await _client.waitOperation(start.id);
 
-      // sudo vs. wheel
-      final group =
-          await _client.pullFile(name, path: '/etc/group').then((data) {
-        return data
-            .split('\n')
-            .firstWhereOrNull(
-                (line) => line.startsWith('sudo:') || line.startsWith('wheel:'))
-            ?.split(':')
-            .firstOrNull;
-      });
+    final enabledFeatures = image.properties['features']?.split(',').toSet();
+    bool hasFeature(LxdFeature feature) {
+      return enabledFeatures?.contains(feature.name) == true;
+    }
 
-      // useradd
-      final shell = Platform.environment['SHELL'];
-      final useradd = await _client.execInstance(name, command: [
-        'useradd',
-        '--create-home',
-        if (group != null) '--groups=$group',
-        if (shell != null) '--shell=$shell',
-        username,
-      ]);
-      await _client.waitOperation(useradd.id);
-
-      // sudoers
-      await _client
-          .pushFile(name, path: '/etc/sudoers.d/90-lxd-toolbox', data: '''
-# Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
-
-$username ALL=(ALL) NOPASSWD:ALL
-Defaults:$username env_keep += \"LXD_DIR\"
-''');
-
-      // idmap
+    for (final feature in LxdFeature.values.where(hasFeature)) {
       final instance = await _client.getInstance(name);
-      final uid = await _runCommand(name, ['id', '-u', username]);
-      final gid = await _runCommand(name, ['id', '-g', username]);
-      final config = <String, dynamic>{
-        ...instance.config,
-        'raw.idmap': '''
-uid ${getuid()} $uid
-gid ${getgid()} $gid
-''',
-      };
-
-      // devices
-      final devices = <String, dynamic>{
-        ...instance.devices,
-        ...jsonDecode(image.properties['devices'] as String)
-            as Map<String, dynamic>,
-      };
-      final update = await _client
-          .updateInstance(instance.copyWith(config: config, devices: devices));
-      await _client.waitOperation(update.id);
-
-      // restart
-      final stop = await _client.stopInstance(name);
-      await _client.waitOperation(stop.id);
+      await LxdFeature.create(feature, image).initInstance(client, instance);
     }
   }
 
@@ -214,34 +161,5 @@ gid ${getgid()} $gid
     }
 
     _instances.add(newInstances);
-  }
-
-  Future<String> _runCommand(String instance, List<String> command) async {
-    final exec = await _client.execInstance(
-      instance,
-      command: command,
-      interactive: true,
-      waitForWebSocket: true,
-    );
-
-    final fdc = exec.metadata!['fds']['control'] as String;
-    final wsc = await _client.getOperationWebSocket(exec.id, fdc);
-
-    final fd0 = exec.metadata!['fds']['0'] as String;
-    final ws0 = await _client.getOperationWebSocket(exec.id, fd0);
-
-    final controller = StreamController<String>();
-    ws0.listen((data) {
-      if (data is List<int>) {
-        controller.add(utf8.decode(data));
-      } else if (data == '') {
-        ws0.close();
-        wsc.close();
-        controller.close();
-      }
-    });
-
-    await waitOperation(exec.id);
-    return controller.stream.join().then((value) => value.trim());
   }
 }

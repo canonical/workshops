@@ -19,7 +19,7 @@ class Terminal extends ChangeNotifier {
         _theme = theme;
 
   final LxdClient client;
-  final String instance;
+  final LxdInstance instance;
   final VoidCallback? onExit;
 
   int? _maxLines;

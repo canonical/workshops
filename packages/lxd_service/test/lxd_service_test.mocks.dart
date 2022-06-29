@@ -6,6 +6,7 @@ import 'dart:async' as _i15;
 import 'dart:io' as _i3;
 
 import 'package:lxd/src/api/certificate.dart' as _i5;
+import 'package:lxd/src/api/event.dart' as _i16;
 import 'package:lxd/src/api/image.dart' as _i6;
 import 'package:lxd/src/api/instance.dart' as _i7;
 import 'package:lxd/src/api/instance_state.dart' as _i8;
@@ -16,7 +17,6 @@ import 'package:lxd/src/api/profile.dart' as _i11;
 import 'package:lxd/src/api/project.dart' as _i12;
 import 'package:lxd/src/api/resource.dart' as _i4;
 import 'package:lxd/src/api/storage_pool.dart' as _i13;
-import 'package:lxd/src/event.dart' as _i16;
 import 'package:lxd/src/lxd_client.dart' as _i14;
 import 'package:mockito/mockito.dart' as _i1;
 
