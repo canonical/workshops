@@ -1,8 +1,8 @@
 import 'package:lxd/lxd.dart';
 
 import 'features/audio.dart';
-import 'features/display.dart';
 import 'features/factory.dart';
+import 'features/graphics.dart';
 import 'features/home.dart';
 import 'features/server.dart';
 import 'features/user.dart';
@@ -10,7 +10,7 @@ import 'features/user.dart';
 enum LxdFeature {
   user(LxdUserFeature.new),
   home(LxdHomeFeature.new),
-  display(LxdDisplayFeature.new),
+  graphics(LxdGraphicsFeature.new),
   audio(LxdAudioFeature.new),
   lxd(LxdServerFeature.new);
 

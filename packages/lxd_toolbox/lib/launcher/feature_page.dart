@@ -64,18 +64,18 @@ class _FeaturePageState extends State<FeaturePage> {
                   : null,
             ),
             CheckboxListTile(
-              title: const Text('Display'),
+              title: const Text('Graphics'),
               subtitle: const Text(
-                  'Make the host GPU available and forward display connections for running UI apps.'),
+                  'Make the host GPU available and forward display connections.'),
               controlAffinity: ListTileControlAffinity.leading,
-              value: model.hasFeature(LxdFeature.display),
+              value: model.hasFeature(LxdFeature.graphics),
               onChanged: (value) =>
-                  model.setFeature(LxdFeature.display, value!),
+                  model.setFeature(LxdFeature.graphics, value!),
             ),
             CheckboxListTile(
               title: const Text('Audio'),
               subtitle: const Text(
-                  'Make the host sound card available and forward audio connections for running audio apps.'),
+                  'Make the host sound card available and forward audio connections.'),
               controlAffinity: ListTileControlAffinity.leading,
               value: model.hasFeature(LxdFeature.audio),
               onChanged: (value) => model.setFeature(LxdFeature.audio, value!),

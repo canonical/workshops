@@ -4,8 +4,8 @@ import 'package:stdlibc/stdlibc.dart';
 
 import 'factory.dart';
 
-class LxdDisplayFeature extends LxdFeatureFactory {
-  const LxdDisplayFeature(super.image);
+class LxdGraphicsFeature extends LxdFeatureFactory {
+  const LxdGraphicsFeature(super.image);
 
   @override
   Future<void> initInstance(LxdClient client, LxdInstance instance) async {
@@ -22,7 +22,7 @@ class LxdDisplayFeature extends LxdFeatureFactory {
 
     await client.pushFile(
       instance.name,
-      path: '/etc/profile.d/lxd-toolbox-display.sh',
+      path: '/etc/profile.d/lxd-toolbox-graphics.sh',
       data: '''
 # Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
 
