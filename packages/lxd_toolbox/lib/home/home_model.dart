@@ -53,7 +53,7 @@ class HomeModel extends ChangeNotifier {
   }
 
   void next() {
-    currentIndex = _currentIndex % _terminals.length;
+    currentIndex = (_currentIndex + 1) % _terminals.length;
   }
 
   void prev() {
