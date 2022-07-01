@@ -44,6 +44,7 @@ class _LxdService implements LxdService {
   final _added = StreamController<String>.broadcast();
   final _removed = StreamController<String>.broadcast();
   final _updated = StreamController<String>.broadcast();
+  final _statuses = <String, LxdStatusCode>{};
 
   List<String>? get instances => _instances.valueOrNull;
   Stream<List<String>> get instanceStream => _instances.stream;
@@ -58,6 +59,17 @@ class _LxdService implements LxdService {
   @override
   Future<void> init() async {
     _instances.add(await _client.getInstances());
+
+    // process ongoing operations to see if instances being started or stopped
+    final allIds = await _client.getOperations();
+    for (final ids in allIds.values) {
+      for (final id in ids) {
+        final operation = await _client.getOperation(id);
+        _handleOperation(operation);
+      }
+    }
+
+    // listen to all operation events that affect instances
     _events ??= _client.getEvents(types: {LxdEventType.operation}).where((ev) {
       return ev.toOperation().instances?.isNotEmpty == true;
     }).listen(_updateInstances);
@@ -75,7 +87,15 @@ class _LxdService implements LxdService {
   }
 
   @override
-  Future<LxdInstance> getInstance(String name) => _client.getInstance(name);
+  Future<LxdInstance> getInstance(String name) async {
+    final instance = await _client.getInstance(name);
+
+    // check for status override from pending/running operations
+    final statusCode = _statuses[name]?.value;
+    return statusCode != null
+        ? instance.copyWith(statusCode: statusCode)
+        : instance;
+  }
 
   @override
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote}) {
@@ -148,8 +168,10 @@ class _LxdService implements LxdService {
       _removed.add(instance);
     }
 
-    if (event != null) {
-      final updated = event.toOperation().instances ?? [];
+    if (event?.type == LxdEventType.operation) {
+      final operation = event!.toOperation();
+      _handleOperation(operation);
+      final updated = operation.instances ?? [];
       for (final instance in updated) {
         final name = instance.split('/').last;
         if (!added.contains(name) &&
@@ -161,5 +183,32 @@ class _LxdService implements LxdService {
     }
 
     _instances.add(newInstances);
+  }
+
+  void _handleOperation(LxdOperation operation) {
+    void updateInstanceStatus(LxdStatusCode statusCode) {
+      for (final instance in operation.instances!) {
+        // override the status while an operation is pending/running
+        if (operation.isPending || operation.isRunning) {
+          _statuses[instance] = statusCode;
+        } else {
+          _statuses.remove(instance);
+        }
+      }
+    }
+
+    // see https://github.com/lxc/lxd/issues/10625
+    switch (operation.description) {
+      case 'Starting instance':
+        updateInstanceStatus(LxdStatusCode.starting);
+        break;
+      case 'Restarting instance':
+        // TODO: no such status code as "restarting"
+        updateInstanceStatus(LxdStatusCode.starting);
+        break;
+      case 'Stopping instance':
+        updateInstanceStatus(LxdStatusCode.stopping);
+        break;
+    }
   }
 }
