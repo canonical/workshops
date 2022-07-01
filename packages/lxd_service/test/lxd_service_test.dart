@@ -16,6 +16,11 @@ void main() {
     when(client.getEvents(types: {LxdEventType.operation}))
         .thenAnswer((_) => events.stream);
     when(client.getInstances()).thenAnswer((_) async => ['foo']);
+    when(client.getOperations()).thenAnswer((_) async => {
+          'running': ['op']
+        });
+    when(client.getOperation('op')).thenAnswer((_) async =>
+        testOperation(id: 'op', statusCode: LxdStatusCode.running.value));
 
     final service = LxdService(client);
     expect(service.instances, isNull);
@@ -23,6 +28,8 @@ void main() {
     await service.init();
     verify(client.getEvents(types: {LxdEventType.operation})).called(1);
     verify(client.getInstances()).called(1);
+    verify(client.getOperations()).called(1);
+    verify(client.getOperation('op')).called(1);
 
     expect(service.instances, ['foo']);
     expect(service.instanceStream, emits(['foo']));
@@ -40,6 +47,7 @@ void main() {
     when(client.getEvents(types: {LxdEventType.operation}))
         .thenAnswer((_) => events.stream);
     when(client.getInstances()).thenAnswer((_) async => ['foo']);
+    when(client.getOperations()).thenAnswer((_) async => {});
 
     final service = LxdService(client);
     await service.init();
@@ -68,6 +76,7 @@ void main() {
     when(client.getEvents(types: {LxdEventType.operation}))
         .thenAnswer((_) => events.stream);
     when(client.getInstances()).thenAnswer((_) async => ['foo', 'bar']);
+    when(client.getOperations()).thenAnswer((_) async => {});
 
     final service = LxdService(client);
     await service.init();
@@ -96,6 +105,7 @@ void main() {
     when(client.getEvents(types: {LxdEventType.operation}))
         .thenAnswer((_) => events.stream);
     when(client.getInstances()).thenAnswer((_) async => ['foo', 'bar', 'baz']);
+    when(client.getOperations()).thenAnswer((_) async => {});
 
     final service = LxdService(client);
     await service.init();
@@ -117,21 +127,111 @@ void main() {
 
     await service.dispose();
   });
+
+  test('status', () async {
+    final foo = testInstance(name: 'foo');
+    final bar = testInstance(name: 'bar');
+    final baz = testInstance(name: 'baz');
+
+    final starting = testOperation(
+      id: 'p',
+      description: 'Starting instance',
+      statusCode: LxdStatusCode.pending.value,
+      instances: ['foo'],
+    );
+    final stopping = testOperation(
+      id: 'r',
+      description: 'Stopping instance',
+      statusCode: LxdStatusCode.running.value,
+      instances: ['bar'],
+    );
+    final restarting = testOperation(
+      id: 's',
+      description: 'Restarting instance',
+      statusCode: LxdStatusCode.success.value,
+      instances: ['baz'],
+    );
+
+    final client = MockLxdClient();
+    final events = StreamController<LxdEvent>();
+    when(client.getEvents(types: {LxdEventType.operation}))
+        .thenAnswer((_) => events.stream);
+    when(client.getInstances()).thenAnswer((_) async => ['foo', 'bar', 'baz']);
+    when(client.getInstance('foo')).thenAnswer((_) async => foo);
+    when(client.getInstance('bar')).thenAnswer((_) async => bar);
+    when(client.getInstance('baz')).thenAnswer((_) async => baz);
+    when(client.getOperations()).thenAnswer((_) async => {
+          'pending': ['p'],
+          'running': ['r'],
+          'success': ['s'],
+        });
+    when(client.getOperation('p')).thenAnswer((_) async => starting);
+    when(client.getOperation('r')).thenAnswer((_) async => stopping);
+    when(client.getOperation('s')).thenAnswer((_) async => restarting);
+
+    final service = LxdService(client);
+    await service.init();
+
+    events.add(LxdEvent(
+      type: LxdEventType.operation,
+      metadata: starting.toJson(),
+      timestamp: DateTime.now(),
+    ));
+
+    await expectLater(service.instanceUpdated, emits('foo'));
+
+    expect(await service.getInstance('foo'),
+        foo.copyWith(statusCode: LxdStatusCode.starting.value));
+    expect(await service.getInstance('bar'),
+        bar.copyWith(statusCode: LxdStatusCode.stopping.value));
+    expect(await service.getInstance('baz'),
+        baz.copyWith(statusCode: LxdStatusCode.stopped.value));
+
+    await service.dispose();
+  });
 }
 
-LxdOperation testOperation({List<String>? instances}) {
+LxdOperation testOperation({
+  String? description,
+  String? id,
+  List<String>? instances,
+  int? statusCode,
+}) {
   return LxdOperation(
     createdAt: DateTime.now(),
-    description: '',
+    description: description ?? '',
     error: '',
-    id: '',
+    id: id ?? '',
     location: '',
     mayCancel: false,
     metadata: null,
     resources: {'instances': instances ?? []},
     status: '',
-    statusCode: 200,
+    statusCode: statusCode ?? 200,
     type: LxdOperationType.task,
     updatedAt: DateTime.now(),
+  );
+}
+
+LxdInstance testInstance({required String name, int? statusCode}) {
+  return LxdInstance(
+    architecture: 'amd64',
+    config: {},
+    createdAt: DateTime.now(),
+    description: '',
+    devices: {},
+    ephemeral: false,
+    expandedConfig: {},
+    expandedDevices: {},
+    lastUsedAt: DateTime.now(),
+    location: '',
+    name: name,
+    profiles: [],
+    project: '',
+    restore: '',
+    stateful: false,
+    status: '',
+    statusCode: statusCode ?? LxdStatusCode.stopped.value,
+    type: LxdInstanceType.container,
   );
 }

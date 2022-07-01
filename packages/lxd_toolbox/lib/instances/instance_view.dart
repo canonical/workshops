@@ -128,11 +128,13 @@ class _InstanceListTileState extends State<_InstanceListTile> {
       leading: ProductLogo.asset(name: instance?.imageName, size: 48),
       title: Text(instance?.name ?? ''),
       subtitle: Text(instance?.imageDescription ?? ''),
-      trailing: canStop
-          ? _StopButton(widget.onStop!)
-          : canDelete
-              ? _DeleteButton(widget.onDelete!)
-              : null,
+      trailing: instance?.isBusy == true
+          ? _BusyButton()
+          : canStop
+              ? _StopButton(widget.onStop!)
+              : canDelete
+                  ? _DeleteButton(widget.onDelete!)
+                  : null,
       onTap: widget.onSelect,
     );
   }
@@ -156,4 +158,17 @@ class _StopButton extends _IconButton {
 class _DeleteButton extends _IconButton {
   const _DeleteButton(VoidCallback onPressed)
       : super(icon: const Icon(Icons.close), onPressed: onPressed);
+}
+
+class _BusyButton extends IconButton {
+  _BusyButton()
+      : super(
+          icon: const SizedBox.square(
+            dimension: 16,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+          splashColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          onPressed: () {}, // block
+        );
 }
