@@ -4,7 +4,7 @@ import 'package:terminal_view/terminal_view.dart';
 
 // TODO: configurable
 const terminalTheme = TerminalThemeData(
-  fontSize: 18,
+  fontSize: 16,
   fontFamily: 'Ubuntu Mono',
   palette: TerminalPalette(
     cursor: Color(0xffffffff),
