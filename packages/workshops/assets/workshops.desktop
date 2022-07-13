@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
 Version=1.0
-Name=LXD Toolbox
+Name=Workshops
 Comment=Use LXD
 Keywords=lxd;shell;prompt;command;commandline;cmd;
-Exec=lxd-toolbox
+Exec=workshops
 Icon=terminal
 Terminal=false
 Categories=GTK;System;TerminalEmulator;

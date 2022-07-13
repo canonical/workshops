@@ -41,9 +41,9 @@ class LxdUserFeature extends LxdFeatureFactory {
     await client.runCommand(instance.name, ['mkdir', '-p', '/etc/sudoers.d']);
     await client.pushFile(
       instance.name,
-      path: '/etc/sudoers.d/90-lxd-toolbox',
+      path: '/etc/sudoers.d/90-workshops',
       data: '''
-# Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
+# Created by Workshops on ${DateTime.now().toIso8601String()}
 
 $username ALL=(ALL) NOPASSWD:ALL
 Defaults:$username env_keep += \"LXD_DIR\"

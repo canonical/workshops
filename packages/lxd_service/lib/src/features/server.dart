@@ -18,9 +18,9 @@ class LxdServerFeature extends LxdFeatureFactory {
 
     await client.pushFile(
       instance.name,
-      path: '/etc/profile.d/lxd-toolbox-lxd.sh',
+      path: '/etc/profile.d/workshops-lxd.sh',
       data: '''
-# Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
+# Created by Workshops on ${DateTime.now().toIso8601String()}
 
 export LXD_DIR=/srv/lxd
 ''',

@@ -1,5 +1,5 @@
-name: lxd_toolbox
-description: LXD Toolbox
+name: workshops
+description: Workshops
 publish_to: 'none'
 
 environment:

@@ -18,16 +18,16 @@ class LxdAudioFeature extends LxdFeatureFactory {
         .runCommand(instance.name, ['mkdir', '-p', '/etc/pulse/client.conf.d']);
     await client.pushFile(
       instance.name,
-      path: '/etc/pulse/client.conf.d/lxd-toolbox-no-shm.conf',
+      path: '/etc/pulse/client.conf.d/workshops-no-shm.conf',
       data: 'enable-shm=no',
     );
 
     await client.runCommand(instance.name, ['mkdir', '-p', '/etc/profile.d']);
     await client.pushFile(
       instance.name,
-      path: '/etc/profile.d/lxd-toolbox-audio.sh',
+      path: '/etc/profile.d/workshops-audio.sh',
       data: '''
-# Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
+# Created by Workshops on ${DateTime.now().toIso8601String()}
 
 export PULSE_SERVER=unix:/srv/pulse/native
 ''',
