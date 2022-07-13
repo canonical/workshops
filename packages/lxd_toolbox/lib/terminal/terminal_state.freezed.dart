@@ -342,7 +342,7 @@ class _$TerminalError implements TerminalError {
 abstract class TerminalError implements TerminalState {
   const factory TerminalError([final String? message]) = _$TerminalError;
 
-  String? get message => throw _privateConstructorUsedError;
+  String? get message;
   @JsonKey(ignore: true)
   _$$TerminalErrorCopyWith<_$TerminalError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -498,7 +498,7 @@ abstract class TerminalLoading implements TerminalState {
   const factory TerminalLoading(final LxdOperation operation) =
       _$TerminalLoading;
 
-  LxdOperation get operation => throw _privateConstructorUsedError;
+  LxdOperation get operation;
   @JsonKey(ignore: true)
   _$$TerminalLoadingCopyWith<_$TerminalLoading> get copyWith =>
       throw _privateConstructorUsedError;
@@ -644,7 +644,7 @@ class _$TerminalRunning implements TerminalRunning {
 abstract class TerminalRunning implements TerminalState {
   const factory TerminalRunning(final Terminal terminal) = _$TerminalRunning;
 
-  Terminal get terminal => throw _privateConstructorUsedError;
+  Terminal get terminal;
   @JsonKey(ignore: true)
   _$$TerminalRunningCopyWith<_$TerminalRunning> get copyWith =>
       throw _privateConstructorUsedError;

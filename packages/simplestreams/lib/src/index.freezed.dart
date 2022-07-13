@@ -190,13 +190,12 @@ abstract class _SimpleStream implements SimpleStream {
       _$_SimpleStream.fromJson;
 
   @override
-  String get format => throw _privateConstructorUsedError;
+  String get format;
   @override
-  Map<String, SimpleStreamIndex> get index =>
-      throw _privateConstructorUsedError;
+  Map<String, SimpleStreamIndex> get index;
   @override
   @DateTimeConverter()
-  DateTime? get updated => throw _privateConstructorUsedError;
+  DateTime? get updated;
   @override
   @JsonKey(ignore: true)
   _$$_SimpleStreamCopyWith<_$_SimpleStream> get copyWith =>
@@ -418,16 +417,16 @@ abstract class _SimpleStreamIndex implements SimpleStreamIndex {
       _$_SimpleStreamIndex.fromJson;
 
   @override
-  String get datatype => throw _privateConstructorUsedError;
+  String get datatype;
   @override
-  String? get format => throw _privateConstructorUsedError;
+  String? get format;
   @override
-  String get path => throw _privateConstructorUsedError;
+  String get path;
   @override
-  List<String> get products => throw _privateConstructorUsedError;
+  List<String> get products;
   @override
   @DateTimeConverter()
-  DateTime? get updated => throw _privateConstructorUsedError;
+  DateTime? get updated;
   @override
   @JsonKey(ignore: true)
   _$$_SimpleStreamIndexCopyWith<_$_SimpleStreamIndex> get copyWith =>

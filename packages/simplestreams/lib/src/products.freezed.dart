@@ -247,18 +247,18 @@ abstract class _SimpleProducts implements SimpleProducts {
       _$_SimpleProducts.fromJson;
 
   @override
-  String? get contentId => throw _privateConstructorUsedError;
+  String? get contentId;
   @override
-  String? get datatype => throw _privateConstructorUsedError;
+  String? get datatype;
   @override
-  String? get format => throw _privateConstructorUsedError;
+  String? get format;
   @override
-  String? get license => throw _privateConstructorUsedError;
+  String? get license;
   @override
-  Map<String, SimpleProduct> get products => throw _privateConstructorUsedError;
+  Map<String, SimpleProduct> get products;
   @override
   @DateTimeConverter()
-  DateTime? get updated => throw _privateConstructorUsedError;
+  DateTime? get updated;
   @override
   @JsonKey(ignore: true)
   _$$_SimpleProductsCopyWith<_$_SimpleProducts> get copyWith =>
@@ -607,28 +607,28 @@ abstract class _SimpleProduct implements SimpleProduct {
 
   @override
   @AliasConverter()
-  List<String>? get aliases => throw _privateConstructorUsedError;
+  List<String>? get aliases;
   @override
-  String get arch => throw _privateConstructorUsedError;
+  String get arch;
   @override
-  String? get os => throw _privateConstructorUsedError;
+  String? get os;
   @override
-  String? get release => throw _privateConstructorUsedError;
+  String? get release;
   @override
-  String? get releaseCodename => throw _privateConstructorUsedError;
+  String? get releaseCodename;
   @override
-  String? get releaseTitle => throw _privateConstructorUsedError;
+  String? get releaseTitle;
   @override
-  bool get supported => throw _privateConstructorUsedError;
+  bool get supported;
   @override
   @DateTimeConverter()
-  DateTime? get supportEol => throw _privateConstructorUsedError;
+  DateTime? get supportEol;
   @override
-  String? get variant => throw _privateConstructorUsedError;
+  String? get variant;
   @override
-  String? get version => throw _privateConstructorUsedError;
+  String? get version;
   @override
-  Map<String, SimpleVersion> get versions => throw _privateConstructorUsedError;
+  Map<String, SimpleVersion> get versions;
   @override
   @JsonKey(ignore: true)
   _$$_SimpleProductCopyWith<_$_SimpleProduct> get copyWith =>
@@ -813,11 +813,11 @@ abstract class _SimpleVersion implements SimpleVersion {
 
   @override
   @SimpleItemConverter()
-  Map<String, SimpleItem> get items => throw _privateConstructorUsedError;
+  Map<String, SimpleItem> get items;
   @override
-  String? get label => throw _privateConstructorUsedError;
+  String? get label;
   @override
-  String? get pubname => throw _privateConstructorUsedError;
+  String? get pubname;
   @override
   @JsonKey(ignore: true)
   _$$_SimpleVersionCopyWith<_$_SimpleVersion> get copyWith =>
@@ -1336,20 +1336,20 @@ abstract class SimpleDownload implements SimpleItem {
       _$SimpleDownload.fromJson;
 
   @JsonKey(name: 'combined_disk1-img_sha256')
-  String? get combinedDisk1ImgSha256 => throw _privateConstructorUsedError;
+  String? get combinedDisk1ImgSha256;
   @JsonKey(name: 'combined_disk-kvm-img_sha256')
-  String? get combinedDiskKvmImgSha256 => throw _privateConstructorUsedError;
+  String? get combinedDiskKvmImgSha256;
   @JsonKey(name: 'combined_uefi1-img_sha256')
-  String? get combinedUefi1ImgSha256 => throw _privateConstructorUsedError;
-  String? get combinedRootxzSha256 => throw _privateConstructorUsedError;
-  String? get combinedSha256 => throw _privateConstructorUsedError;
-  String? get combinedSquashfsSha256 => throw _privateConstructorUsedError;
-  String get ftype => throw _privateConstructorUsedError;
-  String? get deltaBase => throw _privateConstructorUsedError;
-  String? get md5 => throw _privateConstructorUsedError;
-  String get path => throw _privateConstructorUsedError;
-  String? get sha256 => throw _privateConstructorUsedError;
-  int get size => throw _privateConstructorUsedError;
+  String? get combinedUefi1ImgSha256;
+  String? get combinedRootxzSha256;
+  String? get combinedSha256;
+  String? get combinedSquashfsSha256;
+  String get ftype;
+  String? get deltaBase;
+  String? get md5;
+  String get path;
+  String? get sha256;
+  int get size;
   @JsonKey(ignore: true)
   _$$SimpleDownloadCopyWith<_$SimpleDownload> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1585,10 +1585,10 @@ abstract class SimpleId implements SimpleItem {
 
   factory SimpleId.fromJson(Map<String, dynamic> json) = _$SimpleId.fromJson;
 
-  String? get crsn => throw _privateConstructorUsedError;
-  String? get id => throw _privateConstructorUsedError;
-  String? get rootStore => throw _privateConstructorUsedError;
-  String? get virt => throw _privateConstructorUsedError;
+  String? get crsn;
+  String? get id;
+  String? get rootStore;
+  String? get virt;
   @JsonKey(ignore: true)
   _$$SimpleIdCopyWith<_$SimpleId> get copyWith =>
       throw _privateConstructorUsedError;
