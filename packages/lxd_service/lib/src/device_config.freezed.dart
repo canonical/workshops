@@ -744,8 +744,8 @@ abstract class LxdDiskConfig implements LxdDeviceConfig {
   factory LxdDiskConfig.fromJson(Map<String, dynamic> json) =
       _$LxdDiskConfig.fromJson;
 
-  String get source => throw _privateConstructorUsedError;
-  String get path => throw _privateConstructorUsedError;
+  String get source;
+  String get path;
   @JsonKey(ignore: true)
   _$$LxdDiskConfigCopyWith<_$LxdDiskConfig> get copyWith =>
       throw _privateConstructorUsedError;

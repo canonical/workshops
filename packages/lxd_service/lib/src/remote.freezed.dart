@@ -214,15 +214,15 @@ abstract class _LxdRemote extends LxdRemote {
       _$_LxdRemote.fromJson;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get address => throw _privateConstructorUsedError;
+  String get address;
   @override
-  dynamic get isStatic => throw _privateConstructorUsedError;
+  dynamic get isStatic;
   @override
-  dynamic get isPublic => throw _privateConstructorUsedError;
+  dynamic get isPublic;
   @override
-  String? get protocol => throw _privateConstructorUsedError;
+  String? get protocol;
   @override
   @JsonKey(ignore: true)
   _$$_LxdRemoteCopyWith<_$_LxdRemote> get copyWith =>

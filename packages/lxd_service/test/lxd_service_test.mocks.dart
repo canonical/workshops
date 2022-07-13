@@ -17,6 +17,7 @@ import 'package:lxd/src/api/profile.dart' as _i11;
 import 'package:lxd/src/api/project.dart' as _i12;
 import 'package:lxd/src/api/resource.dart' as _i4;
 import 'package:lxd/src/api/storage_pool.dart' as _i13;
+import 'package:lxd/src/enums.dart' as _i17;
 import 'package:lxd/src/lxd_client.dart' as _i14;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -273,10 +274,27 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
           as _i15.Future<void>);
   @override
   _i15.Future<void> pushFile(String? instance,
-          {String? path, String? project, String? data}) =>
+          {String? path,
+          String? project,
+          String? data,
+          int? uid,
+          int? gid,
+          String? mode,
+          _i17.LxdFileType? type,
+          _i17.LxdWriteMode? write}) =>
       (super.noSuchMethod(
-              Invocation.method(#pushFile, [instance],
-                  {#path: path, #project: project, #data: data}),
+              Invocation.method(#pushFile, [
+                instance
+              ], {
+                #path: path,
+                #project: project,
+                #data: data,
+                #uid: uid,
+                #gid: gid,
+                #mode: mode,
+                #type: type,
+                #write: write
+              }),
               returnValue: Future<void>.value(),
               returnValueForMissingStub: Future<void>.value())
           as _i15.Future<void>);
