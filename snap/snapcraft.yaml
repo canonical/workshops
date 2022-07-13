@@ -1,8 +1,8 @@
-name: lxd-toolbox
+name: workshops
 version: git
-summary: LXD Toolbox
+summary: Workshops
 description: |
-  LXD Toolbox provides a user friend interface to create and manage LXD containers as well as provides a full featured terminal.
+  Workshops provides a user friend interface to create and manage LXD containers as well as provides a full featured terminal.
 confinement: strict
 base: core22
 grade: stable
@@ -33,13 +33,13 @@ parts:
     override-prime:
       rm -r $CRAFT_PART_INSTALL
 
-  lxd-toolbox:
+  workshops:
     after: [ flutter-git ]
     plugin: nil
     source: .
     override-build: |
       set -eux
-      cd packages/lxd_toolbox
+      cd packages/workshops
       flutter channel master
       flutter upgrade
       flutter doctor
@@ -49,9 +49,9 @@ parts:
       cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin/
 
 apps:
-  lxd-toolbox:
-    command: bin/lxd-toolbox
-    desktop: bin/data/flutter_assets/assets/lxd-toolbox.desktop
+  workshops:
+    command: bin/workshops
+    desktop: bin/data/flutter_assets/assets/workshops.desktop
     extensions: [gnome]
     plugs:
       - lxd

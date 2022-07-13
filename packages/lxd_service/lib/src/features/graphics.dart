@@ -22,9 +22,9 @@ class LxdGraphicsFeature extends LxdFeatureFactory {
 
     await client.pushFile(
       instance.name,
-      path: '/etc/profile.d/lxd-toolbox-graphics.sh',
+      path: '/etc/profile.d/workshops-graphics.sh',
       data: '''
-# Created by LXD Toolbox on ${DateTime.now().toIso8601String()}
+# Created by Workshops on ${DateTime.now().toIso8601String()}
 
 export DISPLAY=$x11
 # export WAYLAND_DISPLAY=$wayland
