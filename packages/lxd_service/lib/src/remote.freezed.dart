@@ -197,7 +197,9 @@ class _$_LxdRemote extends _LxdRemote {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdRemoteToJson(this);
+    return _$$_LxdRemoteToJson(
+      this,
+    );
   }
 }
 
