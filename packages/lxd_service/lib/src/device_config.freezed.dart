@@ -336,7 +336,9 @@ class _$LxdNoConfig implements LxdNoConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdNoConfigToJson(this);
+    return _$$LxdNoConfigToJson(
+      this,
+    );
   }
 }
 
@@ -516,7 +518,9 @@ class _$LxdNicConfig implements LxdNicConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdNicConfigToJson(this);
+    return _$$LxdNicConfigToJson(
+      this,
+    );
   }
 }
 
@@ -732,7 +736,9 @@ class _$LxdDiskConfig implements LxdDiskConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdDiskConfigToJson(this);
+    return _$$LxdDiskConfigToJson(
+      this,
+    );
   }
 }
 
@@ -921,7 +927,9 @@ class _$LxdUnixCharConfig implements LxdUnixCharConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdUnixCharConfigToJson(this);
+    return _$$LxdUnixCharConfigToJson(
+      this,
+    );
   }
 }
 
@@ -1102,7 +1110,9 @@ class _$LxdUnixBlockConfig implements LxdUnixBlockConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdUnixBlockConfigToJson(this);
+    return _$$LxdUnixBlockConfigToJson(
+      this,
+    );
   }
 }
 
@@ -1282,7 +1292,9 @@ class _$LxdUsbConfig implements LxdUsbConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdUsbConfigToJson(this);
+    return _$$LxdUsbConfigToJson(
+      this,
+    );
   }
 }
 
@@ -1462,7 +1474,9 @@ class _$LxdGpuConfig implements LxdGpuConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdGpuConfigToJson(this);
+    return _$$LxdGpuConfigToJson(
+      this,
+    );
   }
 }
 
@@ -1643,7 +1657,9 @@ class _$LxdInfinibandConfig implements LxdInfinibandConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdInfinibandConfigToJson(this);
+    return _$$LxdInfinibandConfigToJson(
+      this,
+    );
   }
 }
 
@@ -1823,7 +1839,9 @@ class _$LxdProxyConfig implements LxdProxyConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdProxyConfigToJson(this);
+    return _$$LxdProxyConfigToJson(
+      this,
+    );
   }
 }
 
@@ -2004,7 +2022,9 @@ class _$LxdUnixHotplugConfig implements LxdUnixHotplugConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdUnixHotplugConfigToJson(this);
+    return _$$LxdUnixHotplugConfigToJson(
+      this,
+    );
   }
 }
 
@@ -2184,7 +2204,9 @@ class _$LxdTpmConfig implements LxdTpmConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdTpmConfigToJson(this);
+    return _$$LxdTpmConfigToJson(
+      this,
+    );
   }
 }
 
@@ -2364,7 +2386,9 @@ class _$LxdPciConfig implements LxdPciConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdPciConfigToJson(this);
+    return _$$LxdPciConfigToJson(
+      this,
+    );
   }
 }
 

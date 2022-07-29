@@ -230,7 +230,9 @@ class _$_SimpleProducts implements _SimpleProducts {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SimpleProductsToJson(this);
+    return _$$_SimpleProductsToJson(
+      this,
+    );
   }
 }
 
@@ -584,7 +586,9 @@ class _$_SimpleProduct implements _SimpleProduct {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SimpleProductToJson(this);
+    return _$$_SimpleProductToJson(
+      this,
+    );
   }
 }
 
@@ -798,7 +802,9 @@ class _$_SimpleVersion implements _SimpleVersion {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SimpleVersionToJson(this);
+    return _$$_SimpleVersionToJson(
+      this,
+    );
   }
 }
 
@@ -1310,7 +1316,9 @@ class _$SimpleDownload implements SimpleDownload {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SimpleDownloadToJson(this);
+    return _$$SimpleDownloadToJson(
+      this,
+    );
   }
 }
 
@@ -1572,7 +1580,9 @@ class _$SimpleId implements SimpleId {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SimpleIdToJson(this);
+    return _$$SimpleIdToJson(
+      this,
+    );
   }
 }
 

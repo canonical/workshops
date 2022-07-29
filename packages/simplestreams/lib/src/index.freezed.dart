@@ -176,7 +176,9 @@ class _$_SimpleStream implements _SimpleStream {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SimpleStreamToJson(this);
+    return _$$_SimpleStreamToJson(
+      this,
+    );
   }
 }
 
@@ -401,7 +403,9 @@ class _$_SimpleStreamIndex implements _SimpleStreamIndex {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SimpleStreamIndexToJson(this);
+    return _$$_SimpleStreamIndexToJson(
+      this,
+    );
   }
 }
 
