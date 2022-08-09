@@ -1,6 +1,7 @@
 name: workshops
 
 packages:
+  - .
   - packages/**
 
 ignore:
