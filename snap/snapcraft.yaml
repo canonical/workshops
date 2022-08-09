@@ -39,7 +39,6 @@ parts:
     source: .
     override-build: |
       set -eux
-      cd packages/workshops
       flutter channel stable
       flutter upgrade
       flutter doctor

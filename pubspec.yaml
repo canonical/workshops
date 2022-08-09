@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   async_value:
-    path: ../async_value
+    path: packages/async_value
   collection: ^1.15.0
   data_size: ^0.2.0
   flutter:
@@ -19,29 +19,29 @@ dependencies:
   handy_window: ^0.1.4+1
   json_annotation: ^4.5.0
   lxc_config:
-    path: ../lxc_config
+    path: packages/lxc_config
   lxd:
     git:
       url: https://github.com/jpnurmi/lxd.dart
       ref: dev
   lxd_service:
-    path: ../lxd_service
+    path: packages/lxd_service
   lxd_x:
-    path: ../lxd_x
+    path: packages/lxd_x
   meta: ^1.7.0
   movable_tabs:
-    path: ../movable_tabs
+    path: packages/movable_tabs
   osarch:
-    path: ../osarch
+    path: packages/osarch
   petname:
-    path: ../petname
+    path: packages/petname
   provider: ^6.0.3
   safe_change_notifier: ^0.1.0+1
   shared_preferences: ^2.0.15
   simplestreams:
-    path: ../simplestreams
+    path: packages/simplestreams
   terminal_view:
-    path: ../terminal_view
+    path: packages/terminal_view
   ubuntu_service:
     git:
       url: https://github.com/ubuntu-flutter-community/ubuntu_service.git
