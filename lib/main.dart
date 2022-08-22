@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:lxc_config/lxc_config.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
@@ -16,9 +15,6 @@ import 'remotes/remote_store.dart';
 Future<void> main() async {
   final service = LxdService(LxdClient());
   registerServiceInstance<LxdService>(service);
-
-  final config = await loadLxcConfig();
-  registerServiceInstance<LxcConfig>(config);
 
   final preferences = await SharedPreferences.getInstance();
   registerServiceInstance<SharedPreferences>(preferences);

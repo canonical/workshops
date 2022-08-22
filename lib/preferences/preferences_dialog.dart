@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lxc_config/lxc_config.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -11,10 +10,7 @@ Future<void> showPreferencesDialog({required BuildContext context}) async {
     context: context,
     builder: (context) {
       return ChangeNotifierProvider(
-        create: (_) => PreferencesModel(
-          config: getService<LxcConfig>(),
-          preferences: getService<SharedPreferences>(),
-        ),
+        create: (_) => PreferencesModel(getService<SharedPreferences>()),
         child: const PreferencesDialog(),
       );
     },
