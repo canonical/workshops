@@ -2,7 +2,7 @@ name: workshops
 version: git
 summary: Workshops
 description: |
-  Workshops provides a user friend interface to create and manage LXD containers as well as provides a full featured terminal.
+  Workshops provides a user friendly interface to create and manage LXD containers as well as provides a full featured terminal.
 confinement: strict
 base: core22
 grade: stable
