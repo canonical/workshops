@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
                             return Text(running.title ?? 'Terminal');
                           },
                         ),
-                        orElse: () => const Text('Terminal'),
+                        orElse: () => const Text('Home'),
                       ),
                     );
                   },
