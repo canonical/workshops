@@ -7,10 +7,6 @@ packages:
 ignore:
   - synthetic_package
 
-command:
-  bootstrap:
-    usePubspecOverrides: true
-
 scripts:
   # analyze all packages
   analyze: >
