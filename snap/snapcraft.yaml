@@ -17,9 +17,6 @@ assumes:
 plugs:
   foo-install-lxd:
     default-provider: lxd
-    interface: content
-    content: foo
-    target: $SNAP_DATA/foo
 
 parts:
   flutter-git:
