@@ -12,12 +12,6 @@ architectures:
 assumes:
   - snapd2.46
 
-# this is not used or needed for anything other than to trigger automatic
-# installation of the lxd snap via "default-provider: lxd"
-plugs:
-  foo-install-lxd:
-    default-provider: lxd
-
 parts:
   flutter-git:
     source: https://github.com/flutter/flutter.git
