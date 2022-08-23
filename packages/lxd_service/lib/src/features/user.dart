@@ -10,8 +10,8 @@ class LxdUserFeature extends LxdFeatureFactory {
 
   @override
   Future<void> initInstance(LxdClient client, LxdInstance instance) async {
-    final username = image.properties['user']!;
-    final shell = image.properties['shell'];
+    final username = image.properties['user.username']!;
+    final shell = image.properties['user.shell'];
 
     // sudo vs. wheel
     final group =

@@ -7,7 +7,7 @@ class LxdHomeFeature extends LxdFeatureFactory {
 
   @override
   Future<void> initInstance(LxdClient client, LxdInstance instance) async {
-    final home = image.properties['home']!;
+    final home = image.properties['user.home']!;
     final op = await client.updateInstance(instance.copyWith(
       devices: {
         ...instance.devices,
