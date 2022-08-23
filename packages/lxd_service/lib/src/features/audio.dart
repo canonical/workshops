@@ -12,7 +12,7 @@ class LxdAudioFeature extends LxdFeatureFactory {
     final username = image.properties['user.username']!;
 
     final uid = await client.runCommand(instance.name, ['id', '-u', username]);
-    final gid = await client.runCommand(instance.name, ['id', '-u', username]);
+    final gid = await client.runCommand(instance.name, ['id', '-g', username]);
 
     await client
         .runCommand(instance.name, ['mkdir', '-p', '/etc/pulse/client.conf.d']);
