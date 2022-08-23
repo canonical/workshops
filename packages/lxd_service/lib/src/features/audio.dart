@@ -9,7 +9,7 @@ class LxdAudioFeature extends LxdFeatureFactory {
 
   @override
   Future<void> initInstance(LxdClient client, LxdInstance instance) async {
-    final username = image.properties['user']!;
+    final username = image.properties['user.username']!;
 
     final uid = await client.runCommand(instance.name, ['id', '-u', username]);
     final gid = await client.runCommand(instance.name, ['id', '-u', username]);

@@ -116,7 +116,8 @@ class _LxdService implements LxdService {
     final start = await _client.startInstance(name);
     await _client.waitOperation(start.id);
 
-    final enabledFeatures = image.properties['features']?.split(',').toSet();
+    final enabledFeatures =
+        image.properties['user.features']?.split(',').toSet();
     bool hasFeature(LxdFeature feature) {
       return enabledFeatures?.contains(feature.name) == true;
     }

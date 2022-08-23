@@ -41,14 +41,14 @@ class FeatureModel extends SafeChangeNotifier {
     return _image.copyWith(
       properties: {
         ..._image.properties,
-        'features': _features.map((f) => f.name).join(','),
-        'user': user ?? 'root',
-        'shell': Platform.environment['SHELL'] ?? '',
-        'home': home ?? '/root',
-        'gpu': 'physical',
-        'x11': Platform.environment['DISPLAY'] ?? ':0',
-        'wayland': Platform.environment['WAYLAND_DISPLAY'] ?? 'wayland-0',
-        'lxd': resolveLxdSocketPath(),
+        'user.features': _features.map((f) => f.name).join(','),
+        'user.username': user ?? 'root',
+        'user.shell': Platform.environment['SHELL'] ?? '',
+        'user.home': home ?? '/root',
+        'user.gpu': 'physical',
+        'user.x11': Platform.environment['DISPLAY'] ?? ':0',
+        'user.wayland': Platform.environment['WAYLAND_DISPLAY'] ?? 'wayland-0',
+        'user.lxd': resolveLxdSocketPath(),
       },
     );
   }

@@ -9,10 +9,10 @@ class LxdGraphicsFeature extends LxdFeatureFactory {
 
   @override
   Future<void> initInstance(LxdClient client, LxdInstance instance) async {
-    final gpu = image.properties['gpu']!;
-    final x11 = image.properties['x11']!;
-    final wayland = image.properties['wayland']!;
-    final username = image.properties['user']!;
+    final gpu = image.properties['user.gpu']!;
+    final x11 = image.properties['user.x11']!;
+    final wayland = image.properties['user.wayland']!;
+    final username = image.properties['user.username']!;
 
     final uid = await client.runCommand(instance.name, ['id', '-u', username]);
     final gid = await client.runCommand(instance.name, ['id', '-u', username]);
