@@ -144,10 +144,14 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
                   Invocation.method(#getOperationWebSocket, [id, secret]))))
           as _i15.Future<_i3.WebSocket>);
   @override
-  _i15.Future<_i2.LxdOperation> waitOperation(String? id) =>
-      (super.noSuchMethod(Invocation.method(#waitOperation, [id]),
+  _i15.Future<_i2.LxdOperation> waitOperation(String? id,
+          {Duration? timeout}) =>
+      (super.noSuchMethod(
+          Invocation.method(#waitOperation, [id], {#timeout: timeout}),
           returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
-              this, Invocation.method(#waitOperation, [id])))) as _i15
+              this,
+              Invocation.method(
+                  #waitOperation, [id], {#timeout: timeout})))) as _i15
           .Future<_i2.LxdOperation>);
   @override
   _i15.Future<void> cancelOperation(String? id) =>
