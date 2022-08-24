@@ -51,8 +51,8 @@ Defaults:$username env_keep += \"LXD_DIR\"
     );
 
     // idmap
-    final uid = await client.runCommand(instance.name, ['id', '-u', username]);
-    final gid = await client.runCommand(instance.name, ['id', '-g', username]);
+    final uid = await client.uid(instance.name, username);
+    final gid = await client.gid(instance.name, username);
     final idmap = await client.updateInstance(instance.copyWith(
       config: {
         ...instance.config,
