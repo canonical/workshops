@@ -17,8 +17,8 @@ class LxdGraphicsFeature extends LxdFeatureFactory {
     final uid = await client.runCommand(instance.name, ['id', '-u', username]);
     final gid = await client.runCommand(instance.name, ['id', '-u', username]);
 
-    await client.runCommand(instance.name, ['mkdir', '-p', '/tmp/.X11-unix/']);
-    // await client.runCommand(instance.name, ['mkdir', '-p', '/run/user/$uid']);
+    await client.mkdir(instance.name, '/tmp/.X11-unix/');
+    // await client.mkdir(instance.name, '/run/user/$uid');
 
     await client.pushFile(
       instance.name,

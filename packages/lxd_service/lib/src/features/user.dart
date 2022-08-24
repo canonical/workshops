@@ -38,7 +38,7 @@ class LxdUserFeature extends LxdFeatureFactory {
     await client.waitOperation(useradd.id);
 
     // sudoers
-    await client.runCommand(instance.name, ['mkdir', '-p', '/etc/sudoers.d']);
+    await client.mkdir(instance.name, '/etc/sudoers.d');
     await client.pushFile(
       instance.name,
       path: '/etc/sudoers.d/90-workshops',

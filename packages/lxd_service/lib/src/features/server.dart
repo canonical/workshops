@@ -14,7 +14,7 @@ class LxdServerFeature extends LxdFeatureFactory {
     final uid = await client.runCommand(instance.name, ['id', '-u', username]);
     final gid = await client.runCommand(instance.name, ['id', '-u', username]);
 
-    await client.runCommand(instance.name, ['mkdir', '-p', '/srv/lxd']);
+    await client.mkdir(instance.name, '/srv/lxd');
 
     await client.pushFile(
       instance.name,
