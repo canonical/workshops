@@ -8,6 +8,8 @@ part 'terminal_state.freezed.dart';
 class TerminalState with _$TerminalState {
   const factory TerminalState.none() = TerminalNone;
   const factory TerminalState.error([String? message]) = TerminalError;
-  const factory TerminalState.loading(LxdOperation operation) = TerminalLoading;
+  const factory TerminalState.create(LxdOperation op) = TerminalCreate;
+  const factory TerminalState.config(String name) = TerminalConfig;
+  const factory TerminalState.start(LxdOperation op) = TerminalStart;
   const factory TerminalState.running(Terminal terminal) = TerminalRunning;
 }

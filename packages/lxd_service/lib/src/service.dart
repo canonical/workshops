@@ -28,9 +28,10 @@ abstract class LxdService {
   Future<void> initInstance(String name, LxdImage image);
   Future<LxdOperation> stopInstance(String name, {bool force = false});
   Future<LxdOperation> deleteInstance(String name);
+  Stream<LxdOperation> watchInstance(String instance);
 
   Future<LxdOperation> getOperation(String id);
-  Stream<LxdOperation> getOperations(String id);
+  Stream<LxdOperation> watchOperation(String id);
   Future<LxdOperation> waitOperation(String id);
   Future<void> cancelOperation(String id);
 }
@@ -139,10 +140,19 @@ class _LxdService implements LxdService {
   }
 
   @override
+  Stream<LxdOperation> watchInstance(String instance) {
+    return _client
+        .getEvents()
+        .where((event) => event.isOperation)
+        .map((event) => LxdOperation.fromJson(event.metadata!))
+        .where((op) => op.instances?.contains(instance) == true);
+  }
+
+  @override
   Future<LxdOperation> getOperation(String id) => _client.getOperation(id);
 
   @override
-  Stream<LxdOperation> getOperations(String id) {
+  Stream<LxdOperation> watchOperation(String id) {
     return _client
         .getEvents()
         .where((event) => event.isOperation && event.metadata?['id'] == id)
