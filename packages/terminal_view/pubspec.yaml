@@ -11,7 +11,7 @@ dependencies:
   lxd:
     git:
       url: https://github.com/jpnurmi/lxd.dart
-      ref: 40c6c4b4d6575850ac27b7ab789c01043d5e59f8
+      ref: c86bdab6774515c7fc7eb39bd6efbcffb86f4bef
   xterm: #^2.6.0
     git:
       url: https://github.com/jpnurmi/xterm.dart
