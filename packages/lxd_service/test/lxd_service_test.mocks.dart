@@ -266,14 +266,14 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
               })))) as _i15.Future<_i2.LxdOperation>);
   @override
   _i15.Future<_i2.LxdOperation> startInstance(String? name,
-          {bool? force = false}) =>
+          {bool? force = false, Duration? timeout}) =>
       (super.noSuchMethod(
-          Invocation.method(#startInstance, [name], {#force: force}),
-          returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
-              this,
               Invocation.method(
-                  #startInstance, [name], {#force: force})))) as _i15
-          .Future<_i2.LxdOperation>);
+                  #startInstance, [name], {#force: force, #timeout: timeout}),
+              returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+                  this,
+                  Invocation.method(#startInstance, [name], {#force: force, #timeout: timeout}))))
+          as _i15.Future<_i2.LxdOperation>);
   @override
   _i15.Future<_i2.LxdOperation> execInstance(String? name,
           {List<String>? command,
@@ -325,24 +325,24 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
           .Future<_i2.LxdOperation>);
   @override
   _i15.Future<_i2.LxdOperation> stopInstance(String? name,
-          {bool? force = false}) =>
+          {bool? force = false, Duration? timeout}) =>
       (super.noSuchMethod(
-          Invocation.method(#stopInstance, [name], {#force: force}),
-          returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
-              this,
               Invocation.method(
-                  #stopInstance, [name], {#force: force})))) as _i15
-          .Future<_i2.LxdOperation>);
+                  #stopInstance, [name], {#force: force, #timeout: timeout}),
+              returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+                  this,
+                  Invocation.method(#stopInstance, [name], {#force: force, #timeout: timeout}))))
+          as _i15.Future<_i2.LxdOperation>);
   @override
   _i15.Future<_i2.LxdOperation> restartInstance(String? name,
-          {bool? force = false}) =>
+          {bool? force = false, Duration? timeout}) =>
       (super.noSuchMethod(
-          Invocation.method(#restartInstance, [name], {#force: force}),
-          returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
-              this,
               Invocation.method(
-                  #restartInstance, [name], {#force: force})))) as _i15
-          .Future<_i2.LxdOperation>);
+                  #restartInstance, [name], {#force: force, #timeout: timeout}),
+              returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+                  this,
+                  Invocation.method(#restartInstance, [name], {#force: force, #timeout: timeout}))))
+          as _i15.Future<_i2.LxdOperation>);
   @override
   _i15.Future<_i2.LxdOperation> deleteInstance(String? name) =>
       (super.noSuchMethod(Invocation.method(#deleteInstance, [name]),
