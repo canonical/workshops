@@ -1,19 +1,18 @@
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 
-import 'factory.dart';
+import 'context.dart';
+import 'mixin.dart';
 
-class LxdServerFeature extends LxdFeatureFactory {
-  const LxdServerFeature(super.image);
+class LxdServerFeature with LxdFeatureMixin {
+  const LxdServerFeature();
 
   @override
-  Future<void> initInstance(LxdClient client, LxdInstance instance) async {
-    final socketPath = image.properties['user.lxd']!;
-
-    final username = image.properties['user.username']!;
-    final uid = await client.uid(instance.name, username);
-    final gid = await client.gid(instance.name, username);
-
+  Future<void> configureInstance(
+    LxdClient client,
+    LxdInstance instance,
+    LxdFeatureContext context,
+  ) async {
     await client.mkdir(instance.name, '/srv/lxd');
 
     await client.pushFile(
@@ -25,6 +24,15 @@ class LxdServerFeature extends LxdFeatureFactory {
 export LXD_DIR=/srv/lxd
 ''',
     );
+  }
+
+  @override
+  Future<void> updateInstance(
+    LxdClient client,
+    LxdInstance instance,
+    LxdFeatureContext context,
+  ) async {
+    final socketPath = context.image.properties['user.lxd']!;
 
     final op = await client.updateInstance(instance.copyWith(
       devices: {
@@ -34,8 +42,8 @@ export LXD_DIR=/srv/lxd
           'bind': 'instance',
           'listen': 'unix:/srv/lxd/unix.socket',
           'connect': 'unix:$socketPath',
-          'gid': gid.toString(),
-          'uid': uid.toString(),
+          'gid': context.gid.toString(),
+          'uid': context.uid.toString(),
         },
       },
     ));

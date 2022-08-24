@@ -1,13 +1,18 @@
 import 'package:lxd/lxd.dart';
 
-import 'factory.dart';
+import 'context.dart';
+import 'mixin.dart';
 
-class LxdHomeFeature extends LxdFeatureFactory {
-  const LxdHomeFeature(super.image);
+class LxdHomeFeature with LxdFeatureMixin {
+  const LxdHomeFeature();
 
   @override
-  Future<void> initInstance(LxdClient client, LxdInstance instance) async {
-    final home = image.properties['user.home']!;
+  Future<void> updateInstance(
+    LxdClient client,
+    LxdInstance instance,
+    LxdFeatureContext context,
+  ) async {
+    final home = context.image.properties['user.home']!;
     final op = await client.updateInstance(instance.copyWith(
       devices: {
         ...instance.devices,

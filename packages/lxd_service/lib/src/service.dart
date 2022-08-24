@@ -117,15 +117,40 @@ class _LxdService implements LxdService {
     final start = await _client.startInstance(name);
     await _client.waitOperation(start.id);
 
-    final enabledFeatures =
-        image.properties['user.features']?.split(',').toSet();
-    bool hasFeature(LxdFeature feature) {
-      return enabledFeatures?.contains(feature.name) == true;
+    final featureNames = image.properties['user.features']?.split(',').toSet();
+    final features = LxdFeature.values
+        .where((feature) => featureNames?.contains(feature.name) == true)
+        .map(LxdFeature.create);
+
+    final init = LxdFeatureContext(
+      image: image,
+      username: image.properties['user.username']!,
+    );
+
+    for (final feature in features) {
+      final instance = await _client.getInstance(name);
+      await feature.initInstance(client, instance, init);
     }
 
-    for (final feature in LxdFeature.values.where(hasFeature)) {
+    final restart = await client.restartInstance(name);
+    await client.waitOperation(restart.id);
+
+    final config = init.copyWith(
+      uid: await client.uid(name, init.username),
+      gid: await client.gid(name, init.username),
+    );
+
+    for (final feature in features) {
       final instance = await _client.getInstance(name);
-      await LxdFeature.create(feature, image).initInstance(client, instance);
+      await feature.configureInstance(client, instance, config);
+    }
+
+    final stop = await client.stopInstance(name);
+    await client.waitOperation(stop.id);
+
+    for (final feature in features) {
+      final instance = await _client.getInstance(name);
+      await feature.updateInstance(client, instance, config);
     }
   }
 
