@@ -9,7 +9,7 @@ dependencies:
   lxd:
     git:
       url: https://github.com/jpnurmi/lxd.dart
-      ref: c86bdab6774515c7fc7eb39bd6efbcffb86f4bef
+      ref: 62c4f59bdb19b8166a0b2402eb41b675edd53418
 
 dev_dependencies:
   lints: ^2.0.0
