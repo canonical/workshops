@@ -2,23 +2,23 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:stdlibc/stdlibc.dart';
 
-import 'factory.dart';
+import 'context.dart';
+import 'mixin.dart';
 
-class LxdGraphicsFeature extends LxdFeatureFactory {
-  const LxdGraphicsFeature(super.image);
+class LxdGraphicsFeature with LxdFeatureMixin {
+  const LxdGraphicsFeature();
 
   @override
-  Future<void> initInstance(LxdClient client, LxdInstance instance) async {
-    final gpu = image.properties['user.gpu']!;
-    final x11 = image.properties['user.x11']!;
-    final wayland = image.properties['user.wayland']!;
-    final username = image.properties['user.username']!;
-
-    final uid = await client.uid(instance.name, username);
-    final gid = await client.gid(instance.name, username);
+  Future<void> configureInstance(
+    LxdClient client,
+    LxdInstance instance,
+    LxdFeatureContext context,
+  ) async {
+    final x11 = context.image.properties['user.x11']!;
+    final wayland = context.image.properties['user.wayland']!;
 
     await client.mkdir(instance.name, '/tmp/.X11-unix/');
-    // await client.mkdir(instance.name, '/run/user/$uid');
+    // await client.mkdir(instance.name, '/run/user/${context.uid}');
 
     await client.pushFile(
       instance.name,
@@ -30,6 +30,16 @@ export DISPLAY=$x11
 # export WAYLAND_DISPLAY=$wayland
 ''',
     );
+  }
+
+  @override
+  Future<void> updateInstance(
+    LxdClient client,
+    LxdInstance instance,
+    LxdFeatureContext context,
+  ) async {
+    final gpu = context.image.properties['user.gpu']!;
+    final x11 = context.image.properties['user.x11']!;
 
     final op = await client.updateInstance(instance.copyWith(
       devices: {
@@ -43,8 +53,8 @@ export DISPLAY=$x11
           'bind': 'instance',
           'listen': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
           'connect': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
-          'gid': gid.toString(),
-          'uid': uid.toString(),
+          'gid': '${context.gid}',
+          'uid': '${context.uid}',
           'security.gid': '${getgid()}',
           'security.uid': '${getuid()}',
         },

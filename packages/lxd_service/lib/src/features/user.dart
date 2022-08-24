@@ -3,15 +3,20 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:stdlibc/stdlibc.dart';
 
-import 'factory.dart';
+import 'context.dart';
+import 'mixin.dart';
 
-class LxdUserFeature extends LxdFeatureFactory {
-  const LxdUserFeature(super.image);
+class LxdUserFeature with LxdFeatureMixin {
+  const LxdUserFeature();
 
   @override
-  Future<void> initInstance(LxdClient client, LxdInstance instance) async {
-    final username = image.properties['user.username']!;
-    final shell = image.properties['user.shell'];
+  Future<void> initInstance(
+    LxdClient client,
+    LxdInstance instance,
+    LxdFeatureContext context,
+  ) async {
+    final username = context.image.properties['user.username']!;
+    final shell = context.image.properties['user.shell'];
 
     // sudo vs. wheel
     final group =
@@ -49,23 +54,24 @@ $username ALL=(ALL) NOPASSWD:ALL
 Defaults:$username env_keep += \"LXD_DIR\"
 ''',
     );
+  }
 
-    // idmap
-    final uid = await client.uid(instance.name, username);
-    final gid = await client.gid(instance.name, username);
+  @override
+  Future<void> updateInstance(
+    LxdClient client,
+    LxdInstance instance,
+    LxdFeatureContext context,
+  ) async {
     final idmap = await client.updateInstance(instance.copyWith(
       config: {
         ...instance.config,
-        'user.name': username,
+        'user.name': context.username,
         'raw.idmap': '''
-uid ${getuid()} $uid
-gid ${getgid()} $gid
+uid ${getuid()} ${context.uid}
+gid ${getgid()} ${context.gid}
 ''',
       },
     ));
     await client.waitOperation(idmap.id);
-
-    final restart = await client.restartInstance(instance.name);
-    await client.waitOperation(restart.id);
   }
 }
