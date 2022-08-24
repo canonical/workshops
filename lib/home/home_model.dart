@@ -63,13 +63,14 @@ class HomeModel extends ChangeNotifier {
 
   Future<void> create(LxdImage image, {LxdRemote? remote}) async {
     final create = await _service.createInstance(image, remote: remote);
-    _setState(_currentIndex, TerminalState.loading(create));
+    _setState(_currentIndex, TerminalState.create(create));
 
     final wait = await _service.waitOperation(create.id);
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
       reset();
     } else {
       final name = create.instances!.single;
+      _setState(_currentIndex, TerminalState.config(name));
       await _service.initInstance(name, image);
       await start(name);
     }
@@ -77,7 +78,7 @@ class HomeModel extends ChangeNotifier {
 
   Future<void> start(String name) async {
     final start = await _service.startInstance(name);
-    _setState(_currentIndex, TerminalState.loading(start));
+    _setState(_currentIndex, TerminalState.start(start));
 
     final wait = await _service.waitOperation(start.id);
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
