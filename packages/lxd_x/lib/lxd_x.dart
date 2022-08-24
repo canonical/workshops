@@ -19,6 +19,11 @@ String resolveLxdSocketPath([String? socketPath]) {
 }
 
 extension LxdClientX on LxdClient {
+  Future<void> mkdir(String instance, String path) async {
+    final op = await execInstance(instance, command: ['mkdir', '-p', path]);
+    await waitOperation(op.id);
+  }
+
   Future<String> runCommand(String instance, List<String> command) async {
     final exec = await execInstance(
       instance,

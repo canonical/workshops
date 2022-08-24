@@ -14,15 +14,14 @@ class LxdAudioFeature extends LxdFeatureFactory {
     final uid = await client.runCommand(instance.name, ['id', '-u', username]);
     final gid = await client.runCommand(instance.name, ['id', '-g', username]);
 
-    await client
-        .runCommand(instance.name, ['mkdir', '-p', '/etc/pulse/client.conf.d']);
+    await client.mkdir(instance.name, '/etc/pulse/client.conf.d');
     await client.pushFile(
       instance.name,
       path: '/etc/pulse/client.conf.d/workshops-no-shm.conf',
       data: 'enable-shm=no',
     );
 
-    await client.runCommand(instance.name, ['mkdir', '-p', '/etc/profile.d']);
+    await client.mkdir(instance.name, '/etc/profile.d');
     await client.pushFile(
       instance.name,
       path: '/etc/profile.d/workshops-audio.sh',
@@ -33,7 +32,7 @@ export PULSE_SERVER=unix:/srv/pulse/native
 ''',
     );
 
-    await client.runCommand(instance.name, ['mkdir', '-p', '/srv/pulse']);
+    await client.mkdir(instance.name, '/srv/pulse');
     final op = await client.updateInstance(instance.copyWith(
       devices: {
         ...instance.devices,
