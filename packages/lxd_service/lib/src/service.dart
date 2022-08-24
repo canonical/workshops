@@ -129,29 +129,46 @@ class _LxdService implements LxdService {
 
     for (final feature in features) {
       final instance = await _client.getInstance(name);
-      await feature.initInstance(client, instance, init);
+      await feature.init(client, instance, init);
     }
 
     final restart = await client.restartInstance(name);
     await client.waitOperation(restart.id);
 
-    final config = init.copyWith(
+    final context = init.copyWith(
       uid: await client.uid(name, init.username),
       gid: await client.gid(name, init.username),
     );
 
     for (final feature in features) {
-      final instance = await _client.getInstance(name);
-      await feature.configureInstance(client, instance, config);
+      final dirs = feature.getDirectories(context);
+      for (final dir in dirs) {
+        await client.mkdir(name, dir);
+      }
+
+      final files = feature.getFiles(context);
+      for (final file in files.entries) {
+        await client.pushFile(name, path: file.key, data: file.value);
+      }
     }
 
     final stop = await client.stopInstance(name);
     await client.waitOperation(stop.id);
 
-    for (final feature in features) {
-      final instance = await _client.getInstance(name);
-      await feature.updateInstance(client, instance, config);
-    }
+    final instance = await _client.getInstance(name);
+    final update = await _client.updateInstance(
+      instance.copyWith(
+        config: {
+          ...instance.config,
+          for (final feature in features) ...feature.getConfig(context),
+        },
+        devices: {
+          ...instance.devices,
+          for (final feature in features) ...feature.getDevices(context),
+        },
+      ),
+    );
+    await _client.waitOperation(update.id);
   }
 
   @override

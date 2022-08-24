@@ -1,28 +1,18 @@
-import 'package:lxd/lxd.dart';
-
 import 'context.dart';
-import 'mixin.dart';
+import 'feature.dart';
 
-class LxdHomeFeature with LxdFeatureMixin {
+class LxdHomeFeature extends LxdImageFeature {
   const LxdHomeFeature();
 
   @override
-  Future<void> updateInstance(
-    LxdClient client,
-    LxdInstance instance,
-    LxdFeatureContext context,
-  ) async {
+  Map<String, Map<String, String>> getDevices(LxdFeatureContext context) {
     final home = context.image.properties['user.home']!;
-    final op = await client.updateInstance(instance.copyWith(
-      devices: {
-        ...instance.devices,
-        'home': {
-          'type': 'disk',
-          'source': home,
-          'path': home,
-        },
+    return {
+      'home': {
+        'type': 'disk',
+        'source': home,
+        'path': home,
       },
-    ));
-    await client.waitOperation(op.id);
+    };
   }
 }
