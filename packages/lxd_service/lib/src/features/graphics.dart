@@ -1,75 +1,58 @@
-import 'package:lxd/lxd.dart';
-import 'package:lxd_x/lxd_x.dart';
 import 'package:stdlibc/stdlibc.dart';
 
 import 'context.dart';
-import 'mixin.dart';
+import 'feature.dart';
 
-class LxdGraphicsFeature with LxdFeatureMixin {
+class LxdGraphicsFeature extends LxdImageFeature {
   const LxdGraphicsFeature();
 
   @override
-  Future<void> configureInstance(
-    LxdClient client,
-    LxdInstance instance,
-    LxdFeatureContext context,
-  ) async {
+  List<String> getDirectories(LxdFeatureContext context) =>
+      const ['/tmp/.X11-unix', '/etc/profile.d'];
+
+  @override
+  Map<String, String> getFiles(LxdFeatureContext context) {
     final x11 = context.image.properties['user.x11']!;
     final wayland = context.image.properties['user.wayland']!;
-
-    await client.mkdir(instance.name, '/tmp/.X11-unix/');
-    // await client.mkdir(instance.name, '/run/user/${context.uid}');
-
-    await client.pushFile(
-      instance.name,
-      path: '/etc/profile.d/workshops-graphics.sh',
-      data: '''
-# Created by Workshops on ${DateTime.now().toIso8601String()}
-
-export DISPLAY=$x11
-# export WAYLAND_DISPLAY=$wayland
-''',
-    );
+    return {
+      '/etc/profile.d/workshops-graphics.sh': '''
+  # Created by Workshops on ${DateTime.now().toIso8601String()}
+  
+  export DISPLAY=$x11
+  # export WAYLAND_DISPLAY=$wayland
+  '''
+    };
   }
 
   @override
-  Future<void> updateInstance(
-    LxdClient client,
-    LxdInstance instance,
-    LxdFeatureContext context,
-  ) async {
+  Map<String, Map<String, String>> getDevices(LxdFeatureContext context) {
     final gpu = context.image.properties['user.gpu']!;
     final x11 = context.image.properties['user.x11']!;
-
-    final op = await client.updateInstance(instance.copyWith(
-      devices: {
-        ...instance.devices,
-        'gpu': {
-          'type': 'gpu',
-          'gputype': gpu,
-        },
-        'x11': {
-          'type': 'proxy',
-          'bind': 'instance',
-          'listen': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
-          'connect': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
-          'gid': '${context.gid}',
-          'uid': '${context.uid}',
-          'security.gid': '${getgid()}',
-          'security.uid': '${getuid()}',
-        },
-        // 'wayland': {
-        //   'type': 'proxy',
-        //   'bind': 'instance',
-        //   'listen': 'unix:/run/user/$uid/$wayland',
-        //   'connect': 'unix:/run/user/${getuid()}/$wayland',
-        //   'gid': gid.toString(),
-        //   'uid': uid.toString(),
-        //   'security.gid': '${getgid()}',
-        //   'security.uid': '${getuid()}',
-        // },
+    return {
+      'gpu': {
+        'type': 'gpu',
+        'gputype': gpu,
       },
-    ));
-    await client.waitOperation(op.id);
+      'x11': {
+        'type': 'proxy',
+        'bind': 'instance',
+        'listen': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
+        'connect': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
+        'gid': '${context.gid}',
+        'uid': '${context.uid}',
+        'security.gid': '${getgid()}',
+        'security.uid': '${getuid()}',
+      },
+      // 'wayland': {
+      //   'type': 'proxy',
+      //   'bind': 'instance',
+      //   'listen': 'unix:/run/user/$uid/$wayland',
+      //   'connect': 'unix:/run/user/${getuid()}/$wayland',
+      //   'gid': '${context.gid}',
+      //   'uid': '${context.uid}',
+      //   'security.gid': '${getgid()}',
+      //   'security.uid': '${getuid()}',
+      // },
+    };
   }
 }
