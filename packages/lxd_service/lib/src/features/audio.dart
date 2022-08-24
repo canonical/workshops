@@ -11,8 +11,8 @@ class LxdAudioFeature extends LxdFeatureFactory {
   Future<void> initInstance(LxdClient client, LxdInstance instance) async {
     final username = image.properties['user.username']!;
 
-    final uid = await client.runCommand(instance.name, ['id', '-u', username]);
-    final gid = await client.runCommand(instance.name, ['id', '-g', username]);
+    final uid = await client.uid(instance.name, username);
+    final gid = await client.gid(instance.name, username);
 
     await client.mkdir(instance.name, '/etc/pulse/client.conf.d');
     await client.pushFile(
@@ -41,8 +41,8 @@ export PULSE_SERVER=unix:/srv/pulse/native
           'bind': 'instance',
           'listen': 'unix:/srv/pulse/native',
           'connect': 'unix:/run/user/${getuid()}/pulse/native',
-          'gid': gid,
-          'uid': uid,
+          'gid': gid.toString(),
+          'uid': uid.toString(),
           'mode': '0777',
           'security.gid': '${getgid()}',
           'security.uid': '${getuid()}',

@@ -24,7 +24,17 @@ extension LxdClientX on LxdClient {
     await waitOperation(op.id);
   }
 
-  Future<String> runCommand(String instance, List<String> command) async {
+  Future<int> uid(String instance, String username) async {
+    final id = await _exec(instance, ['id', '-u', username]);
+    return int.parse(id);
+  }
+
+  Future<int> gid(String instance, String username) async {
+    final id = await _exec(instance, ['id', '-g', username]);
+    return int.parse(id);
+  }
+
+  Future<String> _exec(String instance, List<String> command) async {
     final exec = await execInstance(
       instance,
       command: command,

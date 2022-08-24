@@ -11,8 +11,8 @@ class LxdServerFeature extends LxdFeatureFactory {
     final socketPath = image.properties['user.lxd']!;
 
     final username = image.properties['user.username']!;
-    final uid = await client.runCommand(instance.name, ['id', '-u', username]);
-    final gid = await client.runCommand(instance.name, ['id', '-u', username]);
+    final uid = await client.uid(instance.name, username);
+    final gid = await client.gid(instance.name, username);
 
     await client.mkdir(instance.name, '/srv/lxd');
 
@@ -34,8 +34,8 @@ export LXD_DIR=/srv/lxd
           'bind': 'instance',
           'listen': 'unix:/srv/lxd/unix.socket',
           'connect': 'unix:$socketPath',
-          'gid': gid,
-          'uid': uid,
+          'gid': gid.toString(),
+          'uid': uid.toString(),
         },
       },
     ));

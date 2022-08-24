@@ -14,8 +14,8 @@ class LxdGraphicsFeature extends LxdFeatureFactory {
     final wayland = image.properties['user.wayland']!;
     final username = image.properties['user.username']!;
 
-    final uid = await client.runCommand(instance.name, ['id', '-u', username]);
-    final gid = await client.runCommand(instance.name, ['id', '-u', username]);
+    final uid = await client.uid(instance.name, username);
+    final gid = await client.gid(instance.name, username);
 
     await client.mkdir(instance.name, '/tmp/.X11-unix/');
     // await client.mkdir(instance.name, '/run/user/$uid');
@@ -43,8 +43,8 @@ export DISPLAY=$x11
           'bind': 'instance',
           'listen': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
           'connect': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
-          'gid': gid,
-          'uid': uid,
+          'gid': gid.toString(),
+          'uid': uid.toString(),
           'security.gid': '${getgid()}',
           'security.uid': '${getuid()}',
         },
@@ -53,8 +53,8 @@ export DISPLAY=$x11
         //   'bind': 'instance',
         //   'listen': 'unix:/run/user/$uid/$wayland',
         //   'connect': 'unix:/run/user/${getuid()}/$wayland',
-        //   'gid': gid,
-        //   'uid': uid,
+        //   'gid': gid.toString(),
+        //   'uid': uid.toString(),
         //   'security.gid': '${getgid()}',
         //   'security.uid': '${getuid()}',
         // },
