@@ -266,14 +266,14 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
               })))) as _i15.Future<_i2.LxdOperation>);
   @override
   _i15.Future<_i2.LxdOperation> startInstance(String? name,
-          {bool? force = false, Duration? timeout}) =>
+          {bool? force = false}) =>
       (super.noSuchMethod(
+          Invocation.method(#startInstance, [name], {#force: force}),
+          returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+              this,
               Invocation.method(
-                  #startInstance, [name], {#force: force, #timeout: timeout}),
-              returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
-                  this,
-                  Invocation.method(#startInstance, [name], {#force: force, #timeout: timeout}))))
-          as _i15.Future<_i2.LxdOperation>);
+                  #startInstance, [name], {#force: force})))) as _i15
+          .Future<_i2.LxdOperation>);
   @override
   _i15.Future<_i2.LxdOperation> execInstance(String? name,
           {List<String>? command,
