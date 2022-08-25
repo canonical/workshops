@@ -94,7 +94,7 @@ class HomeModel extends ChangeNotifier {
       _currentIndex,
       TerminalState.running(
         Terminal(
-          client: _service.client,
+          client: _service.getClient(),
           instance: instance,
           onExit: reset,
         ),
