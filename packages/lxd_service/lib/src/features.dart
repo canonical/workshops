@@ -1,24 +1,29 @@
+import 'package:lxd/lxd.dart';
+
 import 'features/audio.dart';
-import 'features/feature.dart';
 import 'features/graphics.dart';
 import 'features/home.dart';
+import 'features/provider.dart';
 import 'features/server.dart';
 import 'features/user.dart';
 
 export 'features/context.dart';
-export 'features/feature.dart';
+export 'features/provider.dart';
 
 enum LxdFeature {
-  user(LxdUserFeature.new),
-  home(LxdHomeFeature.new),
-  graphics(LxdGraphicsFeature.new),
-  audio(LxdAudioFeature.new),
-  lxd(LxdServerFeature.new);
+  user(const LxdUserFeature()),
+  home(const LxdHomeFeature()),
+  graphics(const LxdGraphicsFeature()),
+  audio(const LxdAudioFeature()),
+  lxd(const LxdServerFeature());
 
-  const LxdFeature(this._factory);
-  final LxdImageFeature Function() _factory;
+  const LxdFeature(this._provider);
+  final LxdFeatureProvider _provider;
 
-  static LxdImageFeature create(LxdFeature feature) {
-    return feature._factory();
+  bool isSupported(LxdImageType type) =>
+      _provider.supportedTypes.contains(type);
+
+  static LxdFeatureProvider get(LxdFeature feature) {
+    return feature._provider;
   }
 }

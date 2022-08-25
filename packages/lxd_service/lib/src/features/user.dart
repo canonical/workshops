@@ -3,9 +3,9 @@ import 'package:lxd/lxd.dart';
 import 'package:stdlibc/stdlibc.dart';
 
 import 'context.dart';
-import 'feature.dart';
+import 'provider.dart';
 
-class LxdUserFeature extends LxdImageFeature {
+class LxdUserFeature extends LxdFeatureProvider {
   const LxdUserFeature();
 
   @override

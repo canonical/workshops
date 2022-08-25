@@ -1,7 +1,7 @@
 import 'context.dart';
-import 'feature.dart';
+import 'provider.dart';
 
-class LxdHomeFeature extends LxdImageFeature {
+class LxdHomeFeature extends LxdFeatureProvider {
   const LxdHomeFeature();
 
   @override

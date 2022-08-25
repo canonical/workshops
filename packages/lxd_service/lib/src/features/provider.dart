@@ -2,8 +2,10 @@ import 'package:lxd/lxd.dart';
 
 import 'context.dart';
 
-abstract class LxdImageFeature {
-  const LxdImageFeature();
+abstract class LxdFeatureProvider {
+  const LxdFeatureProvider();
+
+  Set<LxdImageType> get supportedTypes => Set.of(LxdImageType.values);
 
   List<String> getDirectories(LxdFeatureContext context) => const [];
   Map<String, String> getFiles(LxdFeatureContext context) => const {};
