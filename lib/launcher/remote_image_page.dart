@@ -44,19 +44,21 @@ class RemoteImagePage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _DropdownField(
+                        _DropdownField<String>(
                           label: 'Release',
                           value: filter.selectedRelease,
                           allValues: filter.allReleases,
                           availableValues: filter.availableReleases,
+                          itemBuilder: (context, value, child) => Text(value),
                           onChanged: filter.selectRelease,
                         ),
                         const SizedBox(height: 24),
-                        _DropdownField(
+                        _DropdownField<String>(
                           label: 'Variant',
                           value: filter.selectedVariant,
                           allValues: filter.allVariants,
                           availableValues: filter.availableVariants,
+                          itemBuilder: (context, value, child) => Text(value),
                           onChanged: filter.selectVariant,
                         ),
                       ],
@@ -105,36 +107,38 @@ class RemoteImagePage extends StatelessWidget {
   }
 }
 
-class _DropdownField extends StatelessWidget {
+class _DropdownField<T> extends StatelessWidget {
   const _DropdownField({
     required this.label,
     required this.value,
     required this.allValues,
     required this.availableValues,
     required this.onChanged,
+    required this.itemBuilder,
   });
 
   final String label;
-  final String? value;
-  final List<String> allValues;
-  final Set<String> availableValues;
-  final ValueChanged<String?> onChanged;
+  final T? value;
+  final List<T> allValues;
+  final Set<T> availableValues;
+  final ValueChanged<T?> onChanged;
+  final ValueWidgetBuilder<T> itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField<T>(
       decoration: InputDecoration(labelText: label),
       value: value,
-      items: allValues.map((variant) {
-        return DropdownMenuItem<String>(
-          value: variant,
-          child: Text(
-            variant,
+      items: allValues.map((v) {
+        return DropdownMenuItem<T>(
+          value: v,
+          child: DefaultTextStyle(
             style: TextStyle(
-              color: availableValues.contains(variant)
+              color: availableValues.contains(v)
                   ? null
                   : Theme.of(context).disabledColor,
             ),
+            child: itemBuilder(context, v, null),
           ),
         );
       }).toList(),
