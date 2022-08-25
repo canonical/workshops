@@ -1,10 +1,16 @@
+import 'package:lxd/lxd.dart';
 import 'package:stdlibc/stdlibc.dart';
 
 import 'context.dart';
-import 'feature.dart';
+import 'provider.dart';
 
-class LxdAudioFeature extends LxdImageFeature {
+class LxdAudioFeature extends LxdFeatureProvider {
   const LxdAudioFeature();
+
+  // only containers can proxy unix domain sockets
+  // https://linuxcontainers.org/lxd/docs/master/instances/#type-proxy
+  @override
+  Set<LxdImageType> get supportedTypes => const {LxdImageType.container};
 
   @override
   List<String> getDirectories(LxdFeatureContext context) {

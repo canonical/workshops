@@ -117,17 +117,17 @@ class _LxdService implements LxdService {
     final start = await _client.startInstance(name);
     await _client.waitOperation(start.id);
 
-    final featureNames = image.properties['user.features']?.split(',').toSet();
-    final features = LxdFeature.values
-        .where((feature) => featureNames?.contains(feature.name) == true)
-        .map(LxdFeature.create);
+    final features = image.properties['user.features']?.split(',').toSet();
+    final providers = LxdFeature.values
+        .where((feature) => features?.contains(feature.name) == true)
+        .map(LxdFeature.get);
 
     final init = LxdFeatureContext(
       image: image,
       username: image.properties['user.username']!,
     );
 
-    for (final feature in features) {
+    for (final feature in providers) {
       final instance = await _client.getInstance(name);
       await feature.init(client, instance, init);
     }
@@ -140,7 +140,7 @@ class _LxdService implements LxdService {
       gid: await client.gid(name, init.username),
     );
 
-    for (final feature in features) {
+    for (final feature in providers) {
       final dirs = feature.getDirectories(context);
       for (final dir in dirs) {
         await client.mkdir(name, dir);
@@ -160,11 +160,11 @@ class _LxdService implements LxdService {
       instance.copyWith(
         config: {
           ...instance.config,
-          for (final feature in features) ...feature.getConfig(context),
+          for (final feature in providers) ...feature.getConfig(context),
         },
         devices: {
           ...instance.devices,
-          for (final feature in features) ...feature.getDevices(context),
+          for (final feature in providers) ...feature.getDevices(context),
         },
       ),
     );

@@ -14,7 +14,7 @@ class FeatureModel extends SafeChangeNotifier {
 
   bool hasFeature(LxdFeature feature) => _features.contains(feature);
   bool hasFeatures(Set<LxdFeature> features) => _features.containsAll(features);
-  final _features = Set.of(LxdFeature.values);
+  var _features = <LxdFeature>{};
   void setFeature(LxdFeature feature, bool value) {
     if (value) {
       _features.add(feature);
@@ -29,8 +29,13 @@ class FeatureModel extends SafeChangeNotifier {
   String? get user =>
       Platform.environment['USERNAME'] ?? Platform.environment['USER'];
 
-  Future<void> load() async {
-    // TODO: remember the last used features?
+  Future<void> init() async {
+    final features =
+        Set.of(LxdFeature.values.where((f) => f.isSupported(type)));
+    if (_features != features) {
+      _features = features;
+      notifyListeners();
+    }
   }
 
   LxdImage save() {

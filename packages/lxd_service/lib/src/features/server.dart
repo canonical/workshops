@@ -1,8 +1,15 @@
-import 'context.dart';
-import 'feature.dart';
+import 'package:lxd/lxd.dart';
 
-class LxdServerFeature extends LxdImageFeature {
+import 'context.dart';
+import 'provider.dart';
+
+class LxdServerFeature extends LxdFeatureProvider {
   const LxdServerFeature();
+
+  // only containers can proxy unix domain sockets
+  // https://linuxcontainers.org/lxd/docs/master/instances/#type-proxy
+  @override
+  Set<LxdImageType> get supportedTypes => const {LxdImageType.container};
 
   @override
   List<String> getDirectories(LxdFeatureContext context) {
