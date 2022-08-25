@@ -10,10 +10,10 @@ import 'remote.dart';
 abstract class LxdService {
   factory LxdService(LxdClient client) => _LxdService(client);
 
-  LxdClient get client;
-
   Future<void> init();
   Future<void> dispose();
+
+  LxdClient getClient();
 
   List<String>? get instances;
   Stream<List<String>> get instanceStream;
@@ -47,15 +47,14 @@ class _LxdService implements LxdService {
   final _updated = StreamController<String>.broadcast();
   final _statuses = <String, LxdStatusCode>{};
 
+  LxdClient getClient() => _client;
+
   List<String>? get instances => _instances.valueOrNull;
   Stream<List<String>> get instanceStream => _instances.stream;
 
   Stream<String> get instanceAdded => _added.stream;
   Stream<String> get instanceRemoved => _removed.stream;
   Stream<String> get instanceUpdated => _updated.stream;
-
-  @override
-  LxdClient get client => _client;
 
   @override
   Future<void> init() async {
@@ -129,31 +128,31 @@ class _LxdService implements LxdService {
 
     for (final feature in providers) {
       final instance = await _client.getInstance(name);
-      await feature.init(client, instance, init);
+      await feature.init(_client, instance, init);
     }
 
-    final restart = await client.restartInstance(name);
-    await client.waitOperation(restart.id);
+    final restart = await _client.restartInstance(name);
+    await _client.waitOperation(restart.id);
 
     final context = init.copyWith(
-      uid: await client.uid(name, init.username),
-      gid: await client.gid(name, init.username),
+      uid: await _client.uid(name, init.username),
+      gid: await _client.gid(name, init.username),
     );
 
     for (final feature in providers) {
       final dirs = feature.getDirectories(context);
       for (final dir in dirs) {
-        await client.mkdir(name, dir);
+        await _client.mkdir(name, dir);
       }
 
       final files = feature.getFiles(context);
       for (final file in files.entries) {
-        await client.pushFile(name, path: file.key, data: file.value);
+        await _client.pushFile(name, path: file.key, data: file.value);
       }
     }
 
-    final stop = await client.stopInstance(name);
-    await client.waitOperation(stop.id);
+    final stop = await _client.stopInstance(name);
+    await _client.waitOperation(stop.id);
 
     final instance = await _client.getInstance(name);
     final update = await _client.updateInstance(
