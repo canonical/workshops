@@ -47,7 +47,7 @@ class FeatureModel extends SafeChangeNotifier {
       properties: {
         ..._image.properties,
         'user.features': _features.map((f) => f.name).join(','),
-        'user.username': user ?? 'root',
+        'user.name': user ?? 'root',
         'user.shell': Platform.environment['SHELL'] ?? '',
         'user.home': home ?? '/root',
         'user.gpu': 'physical',

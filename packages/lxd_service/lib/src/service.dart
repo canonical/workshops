@@ -124,7 +124,7 @@ class _LxdService implements LxdService {
 
     final init = LxdFeatureContext(
       image: image,
-      username: image.properties['user.username']!,
+      username: image.properties['user.name']!,
     );
 
     for (final feature in providers) {
