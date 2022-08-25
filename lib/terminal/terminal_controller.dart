@@ -93,6 +93,9 @@ class TerminalController extends SafeChangeNotifier {
       final force = await _service.restartInstance(name, force: true);
       await _service.waitOperation(force.id);
     }
+
+    await _service.waitVmAgent(name);
+
     return true;
   }
 
@@ -105,6 +108,9 @@ class TerminalController extends SafeChangeNotifier {
       reset();
       return false;
     }
+
+    await _service.waitVmAgent(name);
+
     return true;
   }
 
