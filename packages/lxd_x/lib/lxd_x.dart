@@ -38,6 +38,7 @@ extension LxdClientX on LxdClient {
     final exec = await execInstance(
       instance,
       command: command,
+      interactive: true,
       waitForWebSocket: true,
     );
 
@@ -46,23 +47,24 @@ extension LxdClientX on LxdClient {
       return getOperationWebSocket(exec.id, fd);
     }
 
-    final webSockets = [
-      await getWebSocket('0'),
-      await getWebSocket('1'),
-      await getWebSocket('2'),
-      await getWebSocket('control'),
-    ];
+    final wsc = await getWebSocket('control');
+    final ws0 = await getWebSocket('0');
 
     final out = <String>[];
-    final sub = webSockets[1].listen((data) {
+    final sub = ws0.listen((data) async {
       if (data is List<int>) {
         out.add(utf8.decode(data).trim());
+      } else if (data == '') {
+        await ws0.close();
+        await wsc.close();
       }
     });
 
     await waitOperation(exec.id);
     await sub.cancel();
-    await Future.wait(webSockets.map((ws) => ws.close()));
+    await ws0.close();
+    await wsc.close();
+
     return out.join();
   }
 }
