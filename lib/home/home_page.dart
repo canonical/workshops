@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                         running: (name, running) => AnimatedBuilder(
                           animation: running,
                           builder: (context, child) {
-                            return Text(running.title ?? 'Terminal');
+                            return Text(running.title ?? name);
                           },
                         ),
                         orElse: () => const Text('Home'),
