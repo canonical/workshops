@@ -1,28 +1,33 @@
 import 'package:flutter/foundation.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
-import 'package:lxd_x/lxd_x.dart';
 import 'package:terminal_view/terminal_view.dart';
 
+import '../terminal/terminal_controller.dart';
 import '../terminal/terminal_state.dart';
 
 class HomeModel extends ChangeNotifier {
-  HomeModel(this._service);
+  HomeModel(this._service) {
+    addTab();
+  }
 
   final LxdService _service;
 
-  var _currentIndex = 0;
-  final _terminals = <TerminalState>[const TerminalState.none()];
+  var _currentIndex = -1;
+  final _controllers = <TerminalController>[];
 
-  int get length => _terminals.length;
-  List<TerminalState> get terminals => _terminals;
+  int get tabCount => _controllers.length;
 
-  TerminalState? terminal(int index) => _terminals.elementAtOrNull(index);
-  TerminalState get currentTerminal => terminal(_currentIndex)!;
+  TerminalState? state(int index) => controller(index)?.state;
+  TerminalState get currentState => state(_currentIndex)!;
 
-  Terminal? running(int index) =>
-      terminal(index)?.whenOrNull(running: (terminal) => terminal);
-  Terminal? get currentRunning => running(_currentIndex);
+  Terminal? terminal(int index) =>
+      state(index)?.whenOrNull(running: (terminal) => terminal);
+  Terminal? get currentTerminal => terminal(_currentIndex);
+
+  TerminalController? controller(int index) =>
+      _controllers.elementAtOrNull(index);
+  TerminalController get currentController => controller(_currentIndex)!;
 
   int get currentIndex => _currentIndex;
   set currentIndex(int index) {
@@ -31,20 +36,22 @@ class HomeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void add([TerminalState terminal = const TerminalState.none()]) {
-    _terminals.add(terminal);
-    currentIndex = _terminals.length - 1;
+  void addTab() {
+    final controller = TerminalController(_service);
+    controller.addListener(notifyListeners);
+    _controllers.add(controller);
+    currentIndex = _controllers.length - 1;
   }
 
-  void close() => closeAt(_currentIndex);
-
-  void closeAt(int index) {
-    _terminals.removeAt(index);
-    currentIndex = _currentIndex.clamp(0, _terminals.length - 1);
+  void closeTab([int? index]) {
+    final controller = _controllers.removeAt(index ?? _currentIndex);
+    controller.removeListener(notifyListeners);
+    controller.dispose();
+    currentIndex = _currentIndex.clamp(0, _controllers.length - 1);
   }
 
-  void move(int from, int to) {
-    _terminals.move(from, to);
+  void moveTab(int from, int to) {
+    _controllers.move(from, to);
     if (_currentIndex == to) {
       currentIndex = from;
     } else if (_currentIndex == from) {
@@ -52,66 +59,31 @@ class HomeModel extends ChangeNotifier {
     }
   }
 
-  void next() {
-    currentIndex = (_currentIndex + 1) % _terminals.length;
+  void nextTab() {
+    currentIndex = (_currentIndex + 1) % _controllers.length;
   }
 
-  void prev() {
+  void previousTab() {
     final index = currentIndex - 1;
-    currentIndex = index < 0 ? _terminals.length - 1 : index;
+    currentIndex = index < 0 ? _controllers.length - 1 : index;
   }
 
-  Future<void> create(LxdImage image, {LxdRemote? remote}) async {
-    final create = await _service.createInstance(image, remote: remote);
-    _setState(_currentIndex, TerminalState.create(create));
+  Future<void> createInstance(LxdImage image, {LxdRemote? remote}) {
+    return currentController.create(image, remote: remote);
+  }
 
-    final wait = await _service.waitOperation(create.id);
-    if (wait.statusCode == LxdStatusCode.cancelled.value) {
-      reset();
-    } else {
-      final name = create.instances!.single;
-      _setState(_currentIndex, TerminalState.config(name));
-      await _service.initInstance(name, image);
-      await start(name);
+  Future<void> startInstance(String name) => currentController.start(name);
+  Future<void> runInstance(String name) => currentController.run(name);
+  Future<void> stopInstance(String name) => currentController.stop(name);
+  Future<void> deleteInstance(String name) => currentController.delete(name);
+
+  @override
+  void dispose() {
+    for (final controller in _controllers) {
+      controller.removeListener(notifyListeners);
+      controller.dispose();
     }
-  }
-
-  Future<void> start(String name) async {
-    final start = await _service.startInstance(name);
-    _setState(_currentIndex, TerminalState.start(start));
-
-    final wait = await _service.waitOperation(start.id);
-    if (wait.statusCode == LxdStatusCode.cancelled.value) {
-      reset();
-    } else {
-      return run(name);
-    }
-  }
-
-  Future<void> run(String name) async {
-    final instance = await _service.getInstance(name);
-    _setState(
-      _currentIndex,
-      TerminalState.running(
-        Terminal(
-          client: _service.getClient(),
-          instance: instance,
-          onExit: reset,
-        ),
-      ),
-    );
-  }
-
-  Future<void> stop(String name) => _service.stopInstance(name);
-
-  Future<void> delete(String name) => _service.deleteInstance(name);
-
-  void reset() => _setState(_currentIndex, const TerminalState.none());
-
-  void _setState(int index, TerminalState terminal) {
-    if (_terminals[index] == terminal) return;
-    _terminals[index] = terminal;
-    notifyListeners();
+    super.dispose();
   }
 }
 

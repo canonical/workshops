@@ -30,8 +30,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<HomeModel>();
-    final current = model.currentTerminal;
-
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(
@@ -39,36 +37,36 @@ class HomePage extends StatelessWidget {
           control: true,
           shift: true,
           includeRepeats: false,
-        ): model.add,
-        if (model.length > 1)
+        ): model.addTab,
+        if (model.tabCount > 1)
           const SingleActivator(
             LogicalKeyboardKey.keyW,
             control: true,
             shift: true,
             includeRepeats: false,
-          ): model.close,
+          ): model.closeTab,
         const SingleActivator(
           LogicalKeyboardKey.pageUp,
           control: true,
-        ): model.prev,
+        ): model.previousTab,
         const SingleActivator(
           LogicalKeyboardKey.pageDown,
           control: true,
-        ): model.next,
+        ): model.nextTab,
       },
       child: Focus(
         autofocus: true,
         child: Scaffold(
-          appBar: model.length <= 1
+          appBar: model.tabCount <= 1
               ? null
               : MovableTabBar(
-                  count: model.length,
+                  count: model.tabCount,
                   builder: (context, index) {
-                    final terminal = model.terminal(index)!;
+                    final terminal = model.state(index)!;
                     return MovableTabButton(
                       selected: index == model.currentIndex,
                       onPressed: () => model.currentIndex = index,
-                      onClosed: () => model.closeAt(index),
+                      onClosed: () => model.closeTab(index),
                       label: terminal.maybeWhen(
                         running: (running) => AnimatedBuilder(
                           animation: running,
@@ -92,29 +90,29 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  onMoved: model.move,
+                  onMoved: model.moveTab,
                   preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
                 ),
           body: ContextMenuArea(
             builder: (context, position) => buildContextMenu(
               context: context,
-              current: model.currentRunning,
-              terminals: model.terminals,
-              onNewTab: model.add,
-              onCloseTab: model.close,
+              current: model.currentTerminal,
+              tabCount: model.tabCount,
+              onNewTab: model.addTab,
+              onCloseTab: model.closeTab,
             ),
-            child: current.when(
+            child: model.currentState.when(
               none: () => Scaffold(
                 body: InstanceView(
-                  onSelect: model.start,
-                  onDelete: model.delete,
-                  onStop: model.stop,
+                  onSelect: model.startInstance,
+                  onDelete: model.deleteInstance,
+                  onStop: model.stopInstance,
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () async {
                     final options = await showLauncherWizard(context);
                     if (options != null) {
-                      unawaited(model.create(
+                      unawaited(model.createInstance(
                         options.image,
                         remote: options.remote,
                       ));
