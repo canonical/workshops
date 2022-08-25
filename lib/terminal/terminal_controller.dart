@@ -6,6 +6,8 @@ import 'package:terminal_view/terminal_view.dart';
 
 import '../terminal/terminal_state.dart';
 
+const kTimeout = Duration(seconds: 10);
+
 class TerminalController extends SafeChangeNotifier {
   TerminalController(this._service);
 
@@ -80,13 +82,16 @@ class TerminalController extends SafeChangeNotifier {
   }
 
   Future<bool> restart(String name) async {
-    final restart = await _service.restartInstance(name);
+    final restart = await _service.restartInstance(name, timeout: kTimeout);
     _setState(TerminalState.restart(name, restart));
 
     final wait = await _service.waitOperation(restart.id);
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
       reset();
       return false;
+    } else if (wait.statusCode != LxdStatusCode.success.value) {
+      final force = await _service.restartInstance(name, force: true);
+      await _service.waitOperation(force.id);
     }
     return true;
   }
@@ -118,13 +123,16 @@ class TerminalController extends SafeChangeNotifier {
   }
 
   Future<bool> stop(String name) async {
-    final stop = await _service.stopInstance(name);
+    final stop = await _service.stopInstance(name, timeout: kTimeout);
     _setState(TerminalState.stop(name, stop));
 
     final wait = await _service.waitOperation(stop.id);
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
       reset();
       return false;
+    } else if (wait.statusCode != LxdStatusCode.success.value) {
+      final force = await _service.stopInstance(name, force: true);
+      await _service.waitOperation(force.id);
     }
     return true;
   }
