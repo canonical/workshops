@@ -1,7 +1,6 @@
 import 'package:lxd/lxd.dart';
 import 'package:stdlibc/stdlibc.dart';
 
-import 'context.dart';
 import 'provider.dart';
 
 class LxdGraphicsFeature extends LxdFeatureProvider {
@@ -13,13 +12,14 @@ class LxdGraphicsFeature extends LxdFeatureProvider {
   Set<LxdImageType> get supportedTypes => const {LxdImageType.container};
 
   @override
-  List<String> getDirectories(LxdFeatureContext context) =>
+  List<String> getDirectories(LxdImage image) =>
       const ['/tmp/.X11-unix', '/etc/profile.d'];
 
   @override
-  Map<String, String> getFiles(LxdFeatureContext context) {
-    final x11 = context.image.properties['user.x11']!;
-    final wayland = context.image.properties['user.wayland']!;
+  Map<String, String> getFiles(LxdImage image) {
+    final x11 = image.properties['user.x11']!;
+    final wayland = image.properties['user.wayland']!;
+
     return {
       '/etc/profile.d/workshops-graphics.sh': '''
   # Created by Workshops on ${DateTime.now().toIso8601String()}
@@ -31,9 +31,12 @@ class LxdGraphicsFeature extends LxdFeatureProvider {
   }
 
   @override
-  Map<String, Map<String, String>> getDevices(LxdFeatureContext context) {
-    final gpu = context.image.properties['user.gpu']!;
-    final x11 = context.image.properties['user.x11']!;
+  Map<String, Map<String, String>> getDevices(LxdImage image) {
+    final gpu = image.properties['user.gpu']!;
+    final x11 = image.properties['user.x11']!;
+    final uid = image.properties['user.uid']!;
+    final gid = image.properties['user.gid']!;
+
     return {
       'gpu': {
         'type': 'gpu',
@@ -44,8 +47,8 @@ class LxdGraphicsFeature extends LxdFeatureProvider {
         'bind': 'instance',
         'listen': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
         'connect': 'unix:/tmp/.X11-unix/X${x11.split(':').last}',
-        'gid': '${context.gid}',
-        'uid': '${context.uid}',
+        'gid': '$gid',
+        'uid': '$uid',
         'security.gid': '${getgid()}',
         'security.uid': '${getuid()}',
       },
@@ -54,8 +57,8 @@ class LxdGraphicsFeature extends LxdFeatureProvider {
       //   'bind': 'instance',
       //   'listen': 'unix:/run/user/$uid/$wayland',
       //   'connect': 'unix:/run/user/${getuid()}/$wayland',
-      //   'gid': '${context.gid}',
-      //   'uid': '${context.uid}',
+      //   'gid': '$gid',
+      //   'uid': '$uid',
       //   'security.gid': '${getgid()}',
       //   'security.uid': '${getuid()}',
       // },

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terminal_view/terminal_view.dart';
 
-import '../operations/operation_view.dart';
 import 'terminal_controller.dart';
+import 'terminal_progress.dart';
 import 'terminal_settings.dart';
 
 class TerminalPage extends StatelessWidget {
@@ -21,14 +21,17 @@ class TerminalPage extends StatelessWidget {
     final controller = context.watch<TerminalController>();
     return controller.state.when(
       none: () => const SizedBox.shrink(),
-      create: (op) => OperationView.create(context, op.id),
-      config: (name) => OperationView.config(context, name),
-      start: (op) => OperationView.start(context, op.id),
-      restart: (op) => OperationView.restart(context, op.id),
-      running: (terminal) => TerminalTheme(
+      create: (_, __) => TerminalProgress.create(context, controller.state),
+      init: (_, __) => TerminalProgress.create(context, controller.state),
+      config: (_, __) => TerminalProgress.create(context, controller.state),
+      stage: (_, __) => TerminalProgress.create(context, controller.state),
+      start: (_, __) => TerminalProgress.create(context, controller.state),
+      restart: (_, __) => TerminalProgress.create(context, controller.state),
+      running: (name, terminal) => TerminalTheme(
         data: terminalTheme,
         child: TerminalView(terminal: terminal),
       ),
+      stop: (_, __) => TerminalProgress.create(context, controller.state),
       error: (error) => Text('TODO: $error'),
     );
   }

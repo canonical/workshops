@@ -25,11 +25,19 @@ abstract class LxdService {
   Future<LxdInstance> getInstance(String name);
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote});
   Future<LxdOperation> startInstance(String name, {bool force = false});
-  Future<void> initInstance(String name, LxdImage image);
   Future<LxdOperation> restartInstance(String name, {bool force = false});
   Future<LxdOperation> stopInstance(String name, {bool force = false});
   Future<LxdOperation> deleteInstance(String name);
   Stream<LxdOperation> watchInstance(String instance);
+
+  Future<LxdOperation?> initFeature(
+      String name, LxdFeatureProvider feature, LxdImage image);
+  Future<LxdImage> configureImage(String instance, LxdImage image);
+  Future<void> configureFeature(
+      String name, LxdFeatureProvider feature, LxdImage image);
+  Future<LxdOperation> stageFeatures(
+      String name, List<LxdFeatureProvider> features, LxdImage image);
+
   Future<void> waitVmAgent(String name, {Duration? timeout});
 
   Future<LxdOperation> getOperation(String id);
@@ -119,62 +127,54 @@ class _LxdService implements LxdService {
   }
 
   @override
-  Future<void> initInstance(String name, LxdImage image) async {
-    final start = await _client.startInstance(name);
-    await _client.waitOperation(start.id);
-
-    final features = image.properties['user.features']?.split(',').toSet();
-    final providers = LxdFeature.values
-        .where((feature) => features?.contains(feature.name) == true)
-        .map(LxdFeature.get);
-
-    final init = LxdFeatureContext(
-      image: image,
-      username: image.properties['user.name']!,
-    );
-
-    for (final feature in providers) {
-      final instance = await _client.getInstance(name);
-      await feature.init(_client, instance, init);
-    }
-
-    final restart = await _client.restartInstance(name);
-    await _client.waitOperation(restart.id);
-
-    final context = init.copyWith(
-      uid: await _client.uid(name, init.username),
-      gid: await _client.gid(name, init.username),
-    );
-
-    for (final feature in providers) {
-      final dirs = feature.getDirectories(context);
-      for (final dir in dirs) {
-        await _client.mkdir(name, dir);
-      }
-
-      final files = feature.getFiles(context);
-      for (final file in files.entries) {
-        await _client.pushFile(name, path: file.key, data: file.value);
-      }
-    }
-
-    final stop = await _client.stopInstance(name);
-    await _client.waitOperation(stop.id);
-
+  Future<LxdOperation?> initFeature(
+      String name, LxdFeatureProvider feature, LxdImage image) async {
     final instance = await _client.getInstance(name);
-    final update = await _client.updateInstance(
+    return feature.init(_client, instance, image);
+  }
+
+  @override
+  Future<LxdImage> configureImage(String instance, LxdImage image) async {
+    final username = image.properties['user.name']!;
+    return image.copyWith(
+      properties: {
+        ...image.properties,
+        'user.uid': await _client.uid(instance, username),
+        'user.gid': await _client.gid(instance, username),
+      },
+    );
+  }
+
+  @override
+  Future<void> configureFeature(
+      String name, LxdFeatureProvider feature, LxdImage image) async {
+    final dirs = feature.getDirectories(image);
+    for (final dir in dirs) {
+      await _client.mkdir(name, dir);
+    }
+
+    final files = feature.getFiles(image);
+    for (final file in files.entries) {
+      await _client.pushFile(name, path: file.key, data: file.value);
+    }
+  }
+
+  @override
+  Future<LxdOperation> stageFeatures(
+      String name, List<LxdFeatureProvider> features, LxdImage image) async {
+    final instance = await _client.getInstance(name);
+    return _client.updateInstance(
       instance.copyWith(
         config: {
           ...instance.config,
-          for (final feature in providers) ...feature.getConfig(context),
+          for (final feature in features) ...feature.getConfig(image),
         },
         devices: {
           ...instance.devices,
-          for (final feature in providers) ...feature.getDevices(context),
+          for (final feature in features) ...feature.getDevices(image),
         },
       ),
     );
-    await _client.waitOperation(update.id);
   }
 
   @override

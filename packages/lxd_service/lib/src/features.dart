@@ -7,7 +7,6 @@ import 'features/provider.dart';
 import 'features/server.dart';
 import 'features/user.dart';
 
-export 'features/context.dart';
 export 'features/provider.dart';
 
 enum LxdFeature {

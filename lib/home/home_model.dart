@@ -22,7 +22,7 @@ class HomeModel extends ChangeNotifier {
   TerminalState get currentState => state(_currentIndex)!;
 
   Terminal? terminal(int index) =>
-      state(index)?.whenOrNull(running: (terminal) => terminal);
+      state(index)?.whenOrNull(running: (name, terminal) => terminal);
   Terminal? get currentTerminal => terminal(_currentIndex);
 
   TerminalController? controller(int index) =>
@@ -88,8 +88,9 @@ class HomeModel extends ChangeNotifier {
   }
 
   Future<void> runInstance(String name) => currentController.run(name);
-  Future<void> stopInstance(String name) => currentController.stop(name);
-  Future<void> deleteInstance(String name) => currentController.delete(name);
+
+  Future<void> stopInstance(String name) => _service.stopInstance(name);
+  Future<void> deleteInstance(String name) => _service.deleteInstance(name);
 
   @override
   void dispose() {
