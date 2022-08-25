@@ -5,14 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:movable_tabs/movable_tabs.dart';
 import 'package:provider/provider.dart';
-import 'package:terminal_view/terminal_view.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../instances/instance_view.dart';
 import '../launcher/launcher_wizard.dart';
-import '../operations/operation_view.dart';
 import '../preferences/preferences_dialog.dart';
-import '../terminal/terminal_settings.dart';
+import '../terminal/terminal_page.dart';
 import '../widgets/context_menu.dart';
 import 'home_menu.dart';
 import 'home_model.dart';
@@ -101,7 +99,7 @@ class HomePage extends StatelessWidget {
               onNewTab: model.addTab,
               onCloseTab: model.closeTab,
             ),
-            child: model.currentState.when(
+            child: model.currentState.maybeWhen(
               none: () => Scaffold(
                 body: InstanceView(
                   onSelect: model.startInstance,
@@ -121,15 +119,8 @@ class HomePage extends StatelessWidget {
                   child: const Icon(Icons.add),
                 ),
               ),
-              create: (op) => OperationView.create(context, op.id),
-              config: (name) => OperationView.config(context, name),
-              start: (op) => OperationView.start(context, op.id),
-              restart: (op) => OperationView.restart(context, op.id),
-              running: (terminal) => TerminalTheme(
-                data: terminalTheme,
-                child: TerminalView(terminal: terminal),
-              ),
-              error: (error) => Text('TODO: $error'),
+              orElse: () =>
+                  TerminalPage.create(context, model.currentController),
             ),
           ),
         ),
