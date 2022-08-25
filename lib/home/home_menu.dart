@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:terminal_view/terminal_view.dart';
 
-import '../terminal/terminal_state.dart';
-
 List<PopupMenuEntry> buildContextMenu({
   required BuildContext context,
   required Terminal? current,
-  required List<TerminalState> terminals,
+  required int tabCount,
   required VoidCallback? onNewTab,
   required VoidCallback? onCloseTab,
 }) {
@@ -17,7 +15,7 @@ List<PopupMenuEntry> buildContextMenu({
     ),
     PopupMenuItem(
       onTap: onCloseTab,
-      enabled: terminals.length > 1,
+      enabled: tabCount > 1,
       child: const Text('Close Tab'),
     ),
     const PopupMenuDivider(),
