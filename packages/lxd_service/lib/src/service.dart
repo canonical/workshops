@@ -25,8 +25,10 @@ abstract class LxdService {
   Future<LxdInstance> getInstance(String name);
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote});
   Future<LxdOperation> startInstance(String name, {bool force = false});
-  Future<LxdOperation> restartInstance(String name, {bool force = false});
-  Future<LxdOperation> stopInstance(String name, {bool force = false});
+  Future<LxdOperation> restartInstance(String name,
+      {bool force = false, Duration? timeout});
+  Future<LxdOperation> stopInstance(String name,
+      {bool force = false, Duration? timeout});
   Future<LxdOperation> deleteInstance(String name);
   Stream<LxdOperation> watchInstance(String instance);
 
@@ -122,8 +124,12 @@ class _LxdService implements LxdService {
   }
 
   @override
-  Future<LxdOperation> restartInstance(String name, {bool force = false}) {
-    return _client.restartInstance(name, force: force);
+  Future<LxdOperation> restartInstance(
+    String name, {
+    bool force = false,
+    Duration? timeout,
+  }) {
+    return _client.restartInstance(name, force: force, timeout: timeout);
   }
 
   @override
@@ -178,8 +184,12 @@ class _LxdService implements LxdService {
   }
 
   @override
-  Future<LxdOperation> stopInstance(String name, {bool force = false}) {
-    return _client.stopInstance(name, force: force);
+  Future<LxdOperation> stopInstance(
+    String name, {
+    bool force = false,
+    Duration? timeout,
+  }) {
+    return _client.stopInstance(name, force: force, timeout: timeout);
   }
 
   @override
