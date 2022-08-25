@@ -1,6 +1,7 @@
 import 'package:async_value/async_value.dart';
 import 'package:data_size/data_size.dart';
 import 'package:flutter/material.dart';
+import 'package:lxd/lxd.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
@@ -60,6 +61,17 @@ class RemoteImagePage extends StatelessWidget {
                           availableValues: filter.availableVariants,
                           itemBuilder: (context, value, child) => Text(value),
                           onChanged: filter.selectVariant,
+                        ),
+                        const SizedBox(height: 24),
+                        _DropdownField<LxdImageType>(
+                          label: 'Type',
+                          value: filter.selectedType,
+                          allValues: LxdImageType.values,
+                          availableValues: filter.availableTypes,
+                          itemBuilder: (context, value, child) => Text(
+                            value.localize(context),
+                          ),
+                          onChanged: filter.selectType,
                         ),
                       ],
                     ),
@@ -144,5 +156,16 @@ class _DropdownField<T> extends StatelessWidget {
       }).toList(),
       onChanged: onChanged,
     );
+  }
+}
+
+extension LxdImageTypeL10n on LxdImageType {
+  String localize(BuildContext context) {
+    switch (this) {
+      case LxdImageType.container:
+        return 'container';
+      case LxdImageType.virtualMachine:
+        return 'virtual machine';
+    }
   }
 }
