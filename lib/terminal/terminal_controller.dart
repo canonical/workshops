@@ -56,9 +56,6 @@ class TerminalController extends SafeChangeNotifier {
           reset();
           return false;
         }
-        if (!await restart(name)) {
-          return false;
-        }
       }
     }
 
