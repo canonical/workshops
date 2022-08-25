@@ -4,81 +4,71 @@ import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
-import 'operation_watcher.dart';
-import 'operation_x.dart';
+import 'terminal_state.dart';
+import 'terminal_watcher.dart';
 
-class OperationView extends StatelessWidget {
-  const OperationView({super.key, required this.title});
+class TerminalProgress extends StatelessWidget {
+  const TerminalProgress(this.state, {super.key});
 
-  final String title;
+  final TerminalState state;
 
-  static Widget create(BuildContext context, String id) {
-    return ChangeNotifierProvider(
-      key: Key(id),
-      create: (_) => OperationWatcher(id, getService<LxdService>()),
-      child: const OperationView(title: 'Creating instance'),
-    );
-  }
-
-  static Widget config(BuildContext context, String instance) {
-    return ChangeNotifierProvider<OperationWatcher>(
-      key: Key(instance),
-      create: (_) => InstanceWatcher(instance, getService<LxdService>()),
-      child: const OperationView(title: 'Configuring instance'),
-    );
-  }
-
-  static Widget restart(BuildContext context, String id) {
-    return ChangeNotifierProvider<OperationWatcher>(
-      key: Key(id),
-      create: (_) => OperationWatcher(id, getService<LxdService>()),
-      child: const OperationView(title: 'Restarting instance'),
-    );
-  }
-
-  static Widget start(BuildContext context, String id) {
-    return ChangeNotifierProvider<OperationWatcher>(
-      key: Key(id),
-      create: (_) => OperationWatcher(id, getService<LxdService>()),
-      child: const OperationView(title: 'Starting instance'),
+  static Widget create(BuildContext context, TerminalState state) {
+    return ChangeNotifierProvider<TerminalWatcher>(
+      key: ObjectKey(state),
+      create: (_) => TerminalWatcher(state, getService<LxdService>()),
+      child: TerminalProgress(state),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final watcher = context.watch<OperationWatcher>();
+    final watcher = context.watch<TerminalWatcher>();
+    final title = state.when(
+      none: () => '',
+      create: (name, op) => 'Creating instance',
+      init: (name, feature) => 'Creating ${feature.name}',
+      config: (name, feature) => 'Configuring ${feature.name}',
+      stage: (name, op) => 'Finalizing features',
+      start: (name, op) => 'Starting instance',
+      restart: (name, op) => 'Restarting instance',
+      running: (name, op) => 'Running instance',
+      stop: (name, op) => 'Stopping instance',
+      error: (message) => message ?? '',
+    );
     return Scaffold(
       body: Center(
         child: watcher.operation.map(
-          data: (data) => _OperationView(
+          data: (data) => _TerminalProgress(
             title: title,
             op: data.value,
             onCancel: watcher.cancel,
           ),
           error: (error) => Text('TODO: ${error.error}'),
-          loading: (loading) => _OperationView(title: title, op: loading.value),
+          loading: (loading) =>
+              _TerminalProgress(title: title, op: loading.value),
         ),
       ),
     );
   }
 }
 
-class _OperationView extends StatefulWidget {
-  const _OperationView({required this.title, required this.op, this.onCancel});
+class _TerminalProgress extends StatefulWidget {
+  const _TerminalProgress(
+      {required this.title, required this.op, this.onCancel});
 
   final String title;
   final LxdOperation? op;
   final VoidCallback? onCancel;
 
   @override
-  State<_OperationView> createState() => _OperationViewState();
+  State<_TerminalProgress> createState() => _TerminalProgressState();
 }
 
-class _OperationViewState extends State<_OperationView> {
+class _TerminalProgressState extends State<_TerminalProgress> {
   @override
   void initState() {
     super.initState();
-    final watcher = context.read<OperationWatcher>();
+    final watcher = context.read<TerminalWatcher>();
     WidgetsBinding.instance.addPostFrameCallback((_) => watcher.init());
   }
 
@@ -138,3 +128,15 @@ class _OperationViewState extends State<_OperationView> {
     );
   }
 }
+
+extension _LxdOperationX on LxdOperation {
+  // double? get progressValue =>
+  //     (metadata?['progress']?['percentage'] as int?).asProgressValue;
+  String? get downloadProgress => metadata?['download_progress'] as String?;
+  String? get unpackProgress =>
+      metadata?['create_instance_from_image_unpack_progress'] as String?;
+}
+
+// extension _Percentage on int? {
+//   double? get asProgressValue => this != null ? this! / 100.0 : null;
+// }

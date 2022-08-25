@@ -24,14 +24,12 @@ extension LxdClientX on LxdClient {
     await waitOperation(op.id);
   }
 
-  Future<int> uid(String instance, String username) async {
-    final id = await _exec(instance, ['id', '-u', username]);
-    return int.parse(id);
+  Future<String> uid(String instance, String username) {
+    return _exec(instance, ['id', '-u', username]);
   }
 
-  Future<int> gid(String instance, String username) async {
-    final id = await _exec(instance, ['id', '-g', username]);
-    return int.parse(id);
+  Future<String> gid(String instance, String username) {
+    return _exec(instance, ['id', '-g', username]);
   }
 
   Future<String> _exec(String instance, List<String> command) async {

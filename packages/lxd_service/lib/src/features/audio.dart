@@ -1,7 +1,6 @@
 import 'package:lxd/lxd.dart';
 import 'package:stdlibc/stdlibc.dart';
 
-import 'context.dart';
 import 'provider.dart';
 
 class LxdAudioFeature extends LxdFeatureProvider {
@@ -13,7 +12,7 @@ class LxdAudioFeature extends LxdFeatureProvider {
   Set<LxdImageType> get supportedTypes => const {LxdImageType.container};
 
   @override
-  List<String> getDirectories(LxdFeatureContext context) {
+  List<String> getDirectories(LxdImage image) {
     return const [
       '/etc/pulse/client.conf.d',
       '/etc/profile.d',
@@ -22,7 +21,7 @@ class LxdAudioFeature extends LxdFeatureProvider {
   }
 
   @override
-  Map<String, String> getFiles(LxdFeatureContext context) {
+  Map<String, String> getFiles(LxdImage image) {
     return {
       '/etc/pulse/client.conf.d/workshops-no-shm.conf': 'enable-shm=no',
       '/etc/profile.d/workshops-audio.sh': '''
@@ -34,15 +33,18 @@ class LxdAudioFeature extends LxdFeatureProvider {
   }
 
   @override
-  Map<String, Map<String, String>> getDevices(LxdFeatureContext context) {
+  Map<String, Map<String, String>> getDevices(LxdImage image) {
+    final uid = image.properties['user.uid']!;
+    final gid = image.properties['user.gid']!;
+
     return {
       'pulse': {
         'type': 'proxy',
         'bind': 'instance',
         'listen': 'unix:/srv/pulse/native',
         'connect': 'unix:/run/user/${getuid()}/pulse/native',
-        'gid': '${context.gid}',
-        'uid': '${context.uid}',
+        'gid': '$gid',
+        'uid': '$uid',
         'mode': '0777',
         'security.gid': '${getgid()}',
         'security.uid': '${getuid()}',

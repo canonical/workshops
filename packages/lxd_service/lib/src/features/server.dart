@@ -1,6 +1,5 @@
 import 'package:lxd/lxd.dart';
 
-import 'context.dart';
 import 'provider.dart';
 
 class LxdServerFeature extends LxdFeatureProvider {
@@ -12,12 +11,12 @@ class LxdServerFeature extends LxdFeatureProvider {
   Set<LxdImageType> get supportedTypes => const {LxdImageType.container};
 
   @override
-  List<String> getDirectories(LxdFeatureContext context) {
+  List<String> getDirectories(LxdImage image) {
     return const ['/srv/lxd', '/etc/profile.d'];
   }
 
   @override
-  Map<String, String> getFiles(LxdFeatureContext context) {
+  Map<String, String> getFiles(LxdImage image) {
     return {
       '/etc/profile.d/workshops-lxd.sh': '''
   # Created by Workshops on ${DateTime.now().toIso8601String()}
@@ -28,16 +27,19 @@ class LxdServerFeature extends LxdFeatureProvider {
   }
 
   @override
-  Map<String, Map<String, String>> getDevices(LxdFeatureContext context) {
-    final lxd = context.image.properties['user.lxd']!;
+  Map<String, Map<String, String>> getDevices(LxdImage image) {
+    final lxd = image.properties['user.lxd']!;
+    final uid = image.properties['user.uid']!;
+    final gid = image.properties['user.gid']!;
+
     return {
       'lxd': {
         'type': 'proxy',
         'bind': 'instance',
         'listen': 'unix:/srv/lxd/unix.socket',
         'connect': 'unix:$lxd',
-        'gid': '${context.gid}',
-        'uid': '${context.uid}',
+        'gid': '$gid',
+        'uid': '$uid',
       },
     };
   }

@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                       onPressed: () => model.currentIndex = index,
                       onClosed: () => model.closeTab(index),
                       label: terminal.maybeWhen(
-                        running: (running) => AnimatedBuilder(
+                        running: (name, running) => AnimatedBuilder(
                           animation: running,
                           builder: (context, child) {
                             return Text(running.title ?? 'Terminal');

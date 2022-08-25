@@ -2,43 +2,48 @@ import 'package:collection/collection.dart';
 import 'package:lxd/lxd.dart';
 import 'package:stdlibc/stdlibc.dart';
 
-import 'context.dart';
 import 'provider.dart';
 
 class LxdUserFeature extends LxdFeatureProvider {
   const LxdUserFeature();
 
   @override
-  List<String> getDirectories(LxdFeatureContext context) =>
-      const ['/etc/sudoers.d'];
+  List<String> getDirectories(LxdImage image) => const ['/etc/sudoers.d'];
 
   @override
-  Map<String, String> getFiles(LxdFeatureContext context) {
+  Map<String, String> getFiles(LxdImage image) {
+    final username = image.properties['user.name']!;
+
     return {
       '/etc/sudoers.d/90-workshops': '''
   # Created by Workshops on ${DateTime.now().toIso8601String()}
   
-  ${context.username} ALL=(ALL) NOPASSWD:ALL
-  Defaults:${context.username} env_keep += \"LXD_DIR\"
+  $username ALL=(ALL) NOPASSWD:ALL
+  Defaults:$username env_keep += \"LXD_DIR\"
   '''
     };
   }
 
   @override
-  Map<String, String> getConfig(LxdFeatureContext context) {
+  Map<String, String> getConfig(LxdImage image) {
+    final username = image.properties['user.name']!;
+    final uid = image.properties['user.uid']!;
+    final gid = image.properties['user.gid']!;
+
     return {
-      'user.name': context.username,
+      'user.name': username,
       'raw.idmap': '''
-uid ${getuid()} ${context.uid}
-gid ${getgid()} ${context.gid}
+uid ${getuid()} $uid
+gid ${getgid()} $gid
 ''',
     };
   }
 
   @override
-  Future<void> init(
-      LxdClient client, LxdInstance instance, LxdFeatureContext context) async {
-    final shell = context.image.properties['user.shell'];
+  Future<LxdOperation?> init(
+      LxdClient client, LxdInstance instance, LxdImage image) async {
+    final username = image.properties['user.name']!;
+    final shell = image.properties['user.shell'];
 
     // sudo vs. wheel
     final group =
@@ -52,16 +57,15 @@ gid ${getgid()} ${context.gid}
     });
 
     // useradd
-    final useradd = await client.execInstance(
+    return client.execInstance(
       instance.name,
       command: [
         'useradd',
         '--create-home',
         if (group != null) '--groups=$group',
         if (shell != null) '--shell=$shell',
-        context.username,
+        username,
       ],
     );
-    await client.waitOperation(useradd.id);
   }
 }

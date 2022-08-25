@@ -22,25 +22,66 @@ class TerminalController extends SafeChangeNotifier {
 
   Future<String?> create(LxdImage image, {LxdRemote? remote}) async {
     final create = await _service.createInstance(image, remote: remote);
-    _setState(TerminalState.create(create));
+    final name = create.instances!.single;
+    _setState(TerminalState.create(name, create));
 
     final wait = await _service.waitOperation(create.id);
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
       reset();
       return null;
     }
-    return create.instances!.single;
+    return name;
   }
 
   Future<bool> configure(String name, LxdImage image) async {
-    _setState(TerminalState.config(name));
-    await _service.initInstance(name, image);
+    if (!await start(name)) {
+      return false;
+    }
+
+    final features = image.properties['user.features']
+            ?.split(',')
+            .map((name) => LxdFeature.values.byName(name)) ??
+        {};
+
+    for (final feature in features) {
+      final provider = LxdFeature.get(feature);
+      _setState(TerminalState.init(name, feature));
+
+      final init = await _service.initFeature(name, provider, image);
+      if (init != null) {
+        final wait = await _service.waitOperation(init.id);
+        if (wait.statusCode == LxdStatusCode.cancelled.value) {
+          reset();
+          return false;
+        }
+        if (!await restart(name)) {
+          return false;
+        }
+      }
+    }
+
+    final context = await _service.configureImage(name, image);
+    for (final feature in features) {
+      final provider = LxdFeature.get(feature);
+      _setState(TerminalState.config(name, feature));
+      await _service.configureFeature(name, provider, context);
+    }
+
+    if (!await stop(name)) {
+      return false;
+    }
+
+    final providers = features.map(LxdFeature.get).toList();
+    final stage = await _service.stageFeatures(name, providers, context);
+    _setState(TerminalState.stage(name, stage));
+    await _service.waitOperation(stage.id);
+
     return true;
   }
 
   Future<bool> restart(String name) async {
     final restart = await _service.restartInstance(name);
-    _setState(TerminalState.restart(restart));
+    _setState(TerminalState.restart(name, restart));
 
     final wait = await _service.waitOperation(restart.id);
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
@@ -52,7 +93,7 @@ class TerminalController extends SafeChangeNotifier {
 
   Future<bool> start(String name) async {
     final start = await _service.startInstance(name);
-    _setState(TerminalState.start(start));
+    _setState(TerminalState.start(name, start));
 
     final wait = await _service.waitOperation(start.id);
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
@@ -66,6 +107,7 @@ class TerminalController extends SafeChangeNotifier {
     final instance = await _service.getInstance(name);
     _setState(
       TerminalState.running(
+        name,
         Terminal(
           client: _service.getClient(),
           instance: instance,
@@ -75,9 +117,17 @@ class TerminalController extends SafeChangeNotifier {
     );
   }
 
-  Future<void> stop(String name) => _service.stopInstance(name);
+  Future<bool> stop(String name) async {
+    final stop = await _service.stopInstance(name);
+    _setState(TerminalState.stop(name, stop));
 
-  Future<void> delete(String name) => _service.deleteInstance(name);
+    final wait = await _service.waitOperation(stop.id);
+    if (wait.statusCode == LxdStatusCode.cancelled.value) {
+      reset();
+      return false;
+    }
+    return true;
+  }
 
   void reset() => _setState(const TerminalState.none());
 }

@@ -20,33 +20,42 @@ mixin _$TerminalState {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function(String? message) error,
-    required TResult Function(LxdOperation op) create,
-    required TResult Function(String name) config,
-    required TResult Function(LxdOperation op) start,
-    required TResult Function(LxdOperation op) restart,
-    required TResult Function(Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,10 +64,13 @@ mixin _$TerminalState {
     required TResult Function(TerminalNone value) none,
     required TResult Function(TerminalError value) error,
     required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
     required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
     required TResult Function(TerminalStart value) start,
     required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,10 +78,13 @@ mixin _$TerminalState {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,10 +92,13 @@ mixin _$TerminalState {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,11 +164,14 @@ class _$TerminalNone implements TerminalNone {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function(String? message) error,
-    required TResult Function(LxdOperation op) create,
-    required TResult Function(String name) config,
-    required TResult Function(LxdOperation op) start,
-    required TResult Function(LxdOperation op) restart,
-    required TResult Function(Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
   }) {
     return none();
   }
@@ -160,11 +181,14 @@ class _$TerminalNone implements TerminalNone {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
   }) {
     return none?.call();
   }
@@ -174,11 +198,14 @@ class _$TerminalNone implements TerminalNone {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
     if (none != null) {
@@ -193,10 +220,13 @@ class _$TerminalNone implements TerminalNone {
     required TResult Function(TerminalNone value) none,
     required TResult Function(TerminalError value) error,
     required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
     required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
     required TResult Function(TerminalStart value) start,
     required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
   }) {
     return none(this);
   }
@@ -207,10 +237,13 @@ class _$TerminalNone implements TerminalNone {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
   }) {
     return none?.call(this);
   }
@@ -221,10 +254,13 @@ class _$TerminalNone implements TerminalNone {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
     required TResult orElse(),
   }) {
     if (none != null) {
@@ -305,11 +341,14 @@ class _$TerminalError implements TerminalError {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function(String? message) error,
-    required TResult Function(LxdOperation op) create,
-    required TResult Function(String name) config,
-    required TResult Function(LxdOperation op) start,
-    required TResult Function(LxdOperation op) restart,
-    required TResult Function(Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
   }) {
     return error(message);
   }
@@ -319,11 +358,14 @@ class _$TerminalError implements TerminalError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
   }) {
     return error?.call(message);
   }
@@ -333,11 +375,14 @@ class _$TerminalError implements TerminalError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -352,10 +397,13 @@ class _$TerminalError implements TerminalError {
     required TResult Function(TerminalNone value) none,
     required TResult Function(TerminalError value) error,
     required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
     required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
     required TResult Function(TerminalStart value) start,
     required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
   }) {
     return error(this);
   }
@@ -366,10 +414,13 @@ class _$TerminalError implements TerminalError {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
   }) {
     return error?.call(this);
   }
@@ -380,10 +431,13 @@ class _$TerminalError implements TerminalError {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -407,7 +461,7 @@ abstract class _$$TerminalCreateCopyWith<$Res> {
   factory _$$TerminalCreateCopyWith(
           _$TerminalCreate value, $Res Function(_$TerminalCreate) then) =
       __$$TerminalCreateCopyWithImpl<$Res>;
-  $Res call({LxdOperation op});
+  $Res call({String name, LxdOperation op});
 
   $LxdOperationCopyWith<$Res> get op;
 }
@@ -425,9 +479,14 @@ class __$$TerminalCreateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? name = freezed,
     Object? op = freezed,
   }) {
     return _then(_$TerminalCreate(
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       op == freezed
           ? _value.op
           : op // ignore: cast_nullable_to_non_nullable
@@ -446,14 +505,16 @@ class __$$TerminalCreateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TerminalCreate implements TerminalCreate {
-  const _$TerminalCreate(this.op);
+  const _$TerminalCreate(this.name, this.op);
 
+  @override
+  final String name;
   @override
   final LxdOperation op;
 
   @override
   String toString() {
-    return 'TerminalState.create(op: $op)';
+    return 'TerminalState.create(name: $name, op: $op)';
   }
 
   @override
@@ -461,12 +522,15 @@ class _$TerminalCreate implements TerminalCreate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TerminalCreate &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.op, op));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(op));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(op));
 
   @JsonKey(ignore: true)
   @override
@@ -478,13 +542,16 @@ class _$TerminalCreate implements TerminalCreate {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function(String? message) error,
-    required TResult Function(LxdOperation op) create,
-    required TResult Function(String name) config,
-    required TResult Function(LxdOperation op) start,
-    required TResult Function(LxdOperation op) restart,
-    required TResult Function(Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
   }) {
-    return create(op);
+    return create(name, op);
   }
 
   @override
@@ -492,13 +559,16 @@ class _$TerminalCreate implements TerminalCreate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
   }) {
-    return create?.call(op);
+    return create?.call(name, op);
   }
 
   @override
@@ -506,15 +576,18 @@ class _$TerminalCreate implements TerminalCreate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
     if (create != null) {
-      return create(op);
+      return create(name, op);
     }
     return orElse();
   }
@@ -525,10 +598,13 @@ class _$TerminalCreate implements TerminalCreate {
     required TResult Function(TerminalNone value) none,
     required TResult Function(TerminalError value) error,
     required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
     required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
     required TResult Function(TerminalStart value) start,
     required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
   }) {
     return create(this);
   }
@@ -539,10 +615,13 @@ class _$TerminalCreate implements TerminalCreate {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
   }) {
     return create?.call(this);
   }
@@ -553,10 +632,13 @@ class _$TerminalCreate implements TerminalCreate {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
     required TResult orElse(),
   }) {
     if (create != null) {
@@ -567,11 +649,207 @@ class _$TerminalCreate implements TerminalCreate {
 }
 
 abstract class TerminalCreate implements TerminalState {
-  const factory TerminalCreate(final LxdOperation op) = _$TerminalCreate;
+  const factory TerminalCreate(final String name, final LxdOperation op) =
+      _$TerminalCreate;
 
+  String get name;
   LxdOperation get op;
   @JsonKey(ignore: true)
   _$$TerminalCreateCopyWith<_$TerminalCreate> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TerminalInitCopyWith<$Res> {
+  factory _$$TerminalInitCopyWith(
+          _$TerminalInit value, $Res Function(_$TerminalInit) then) =
+      __$$TerminalInitCopyWithImpl<$Res>;
+  $Res call({String name, LxdFeature feature});
+}
+
+/// @nodoc
+class __$$TerminalInitCopyWithImpl<$Res>
+    extends _$TerminalStateCopyWithImpl<$Res>
+    implements _$$TerminalInitCopyWith<$Res> {
+  __$$TerminalInitCopyWithImpl(
+      _$TerminalInit _value, $Res Function(_$TerminalInit) _then)
+      : super(_value, (v) => _then(v as _$TerminalInit));
+
+  @override
+  _$TerminalInit get _value => super._value as _$TerminalInit;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? feature = freezed,
+  }) {
+    return _then(_$TerminalInit(
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      feature == freezed
+          ? _value.feature
+          : feature // ignore: cast_nullable_to_non_nullable
+              as LxdFeature,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TerminalInit implements TerminalInit {
+  const _$TerminalInit(this.name, this.feature);
+
+  @override
+  final String name;
+  @override
+  final LxdFeature feature;
+
+  @override
+  String toString() {
+    return 'TerminalState.init(name: $name, feature: $feature)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TerminalInit &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.feature, feature));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(feature));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TerminalInitCopyWith<_$TerminalInit> get copyWith =>
+      __$$TerminalInitCopyWithImpl<_$TerminalInit>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() none,
+    required TResult Function(String? message) error,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
+  }) {
+    return init(name, feature);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(String? message)? error,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
+  }) {
+    return init?.call(name, feature);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(String? message)? error,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init(name, feature);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TerminalNone value) none,
+    required TResult Function(TerminalError value) error,
+    required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
+    required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
+    required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
+    required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
+  }) {
+    return init(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TerminalNone value)? none,
+    TResult Function(TerminalError value)? error,
+    TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
+    TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
+    TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
+    TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
+  }) {
+    return init?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TerminalNone value)? none,
+    TResult Function(TerminalError value)? error,
+    TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
+    TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
+    TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
+    TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TerminalInit implements TerminalState {
+  const factory TerminalInit(final String name, final LxdFeature feature) =
+      _$TerminalInit;
+
+  String get name;
+  LxdFeature get feature;
+  @JsonKey(ignore: true)
+  _$$TerminalInitCopyWith<_$TerminalInit> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -580,7 +858,7 @@ abstract class _$$TerminalConfigCopyWith<$Res> {
   factory _$$TerminalConfigCopyWith(
           _$TerminalConfig value, $Res Function(_$TerminalConfig) then) =
       __$$TerminalConfigCopyWithImpl<$Res>;
-  $Res call({String name});
+  $Res call({String name, LxdFeature feature});
 }
 
 /// @nodoc
@@ -597,12 +875,17 @@ class __$$TerminalConfigCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
+    Object? feature = freezed,
   }) {
     return _then(_$TerminalConfig(
       name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      feature == freezed
+          ? _value.feature
+          : feature // ignore: cast_nullable_to_non_nullable
+              as LxdFeature,
     ));
   }
 }
@@ -610,14 +893,16 @@ class __$$TerminalConfigCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TerminalConfig implements TerminalConfig {
-  const _$TerminalConfig(this.name);
+  const _$TerminalConfig(this.name, this.feature);
 
   @override
   final String name;
+  @override
+  final LxdFeature feature;
 
   @override
   String toString() {
-    return 'TerminalState.config(name: $name)';
+    return 'TerminalState.config(name: $name, feature: $feature)';
   }
 
   @override
@@ -625,12 +910,15 @@ class _$TerminalConfig implements TerminalConfig {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TerminalConfig &&
-            const DeepCollectionEquality().equals(other.name, name));
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.feature, feature));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(feature));
 
   @JsonKey(ignore: true)
   @override
@@ -642,13 +930,16 @@ class _$TerminalConfig implements TerminalConfig {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function(String? message) error,
-    required TResult Function(LxdOperation op) create,
-    required TResult Function(String name) config,
-    required TResult Function(LxdOperation op) start,
-    required TResult Function(LxdOperation op) restart,
-    required TResult Function(Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
   }) {
-    return config(name);
+    return config(name, feature);
   }
 
   @override
@@ -656,13 +947,16 @@ class _$TerminalConfig implements TerminalConfig {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
   }) {
-    return config?.call(name);
+    return config?.call(name, feature);
   }
 
   @override
@@ -670,15 +964,18 @@ class _$TerminalConfig implements TerminalConfig {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
     if (config != null) {
-      return config(name);
+      return config(name, feature);
     }
     return orElse();
   }
@@ -689,10 +986,13 @@ class _$TerminalConfig implements TerminalConfig {
     required TResult Function(TerminalNone value) none,
     required TResult Function(TerminalError value) error,
     required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
     required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
     required TResult Function(TerminalStart value) start,
     required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
   }) {
     return config(this);
   }
@@ -703,10 +1003,13 @@ class _$TerminalConfig implements TerminalConfig {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
   }) {
     return config?.call(this);
   }
@@ -717,10 +1020,13 @@ class _$TerminalConfig implements TerminalConfig {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
     required TResult orElse(),
   }) {
     if (config != null) {
@@ -731,11 +1037,216 @@ class _$TerminalConfig implements TerminalConfig {
 }
 
 abstract class TerminalConfig implements TerminalState {
-  const factory TerminalConfig(final String name) = _$TerminalConfig;
+  const factory TerminalConfig(final String name, final LxdFeature feature) =
+      _$TerminalConfig;
 
   String get name;
+  LxdFeature get feature;
   @JsonKey(ignore: true)
   _$$TerminalConfigCopyWith<_$TerminalConfig> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TerminalStageCopyWith<$Res> {
+  factory _$$TerminalStageCopyWith(
+          _$TerminalStage value, $Res Function(_$TerminalStage) then) =
+      __$$TerminalStageCopyWithImpl<$Res>;
+  $Res call({String name, LxdOperation op});
+
+  $LxdOperationCopyWith<$Res> get op;
+}
+
+/// @nodoc
+class __$$TerminalStageCopyWithImpl<$Res>
+    extends _$TerminalStateCopyWithImpl<$Res>
+    implements _$$TerminalStageCopyWith<$Res> {
+  __$$TerminalStageCopyWithImpl(
+      _$TerminalStage _value, $Res Function(_$TerminalStage) _then)
+      : super(_value, (v) => _then(v as _$TerminalStage));
+
+  @override
+  _$TerminalStage get _value => super._value as _$TerminalStage;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? op = freezed,
+  }) {
+    return _then(_$TerminalStage(
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      op == freezed
+          ? _value.op
+          : op // ignore: cast_nullable_to_non_nullable
+              as LxdOperation,
+    ));
+  }
+
+  @override
+  $LxdOperationCopyWith<$Res> get op {
+    return $LxdOperationCopyWith<$Res>(_value.op, (value) {
+      return _then(_value.copyWith(op: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$TerminalStage implements TerminalStage {
+  const _$TerminalStage(this.name, this.op);
+
+  @override
+  final String name;
+  @override
+  final LxdOperation op;
+
+  @override
+  String toString() {
+    return 'TerminalState.stage(name: $name, op: $op)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TerminalStage &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.op, op));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(op));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TerminalStageCopyWith<_$TerminalStage> get copyWith =>
+      __$$TerminalStageCopyWithImpl<_$TerminalStage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() none,
+    required TResult Function(String? message) error,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
+  }) {
+    return stage(name, op);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(String? message)? error,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
+  }) {
+    return stage?.call(name, op);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(String? message)? error,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
+    required TResult orElse(),
+  }) {
+    if (stage != null) {
+      return stage(name, op);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TerminalNone value) none,
+    required TResult Function(TerminalError value) error,
+    required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
+    required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
+    required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
+    required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
+  }) {
+    return stage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TerminalNone value)? none,
+    TResult Function(TerminalError value)? error,
+    TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
+    TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
+    TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
+    TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
+  }) {
+    return stage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TerminalNone value)? none,
+    TResult Function(TerminalError value)? error,
+    TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
+    TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
+    TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
+    TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
+    required TResult orElse(),
+  }) {
+    if (stage != null) {
+      return stage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TerminalStage implements TerminalState {
+  const factory TerminalStage(final String name, final LxdOperation op) =
+      _$TerminalStage;
+
+  String get name;
+  LxdOperation get op;
+  @JsonKey(ignore: true)
+  _$$TerminalStageCopyWith<_$TerminalStage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -744,7 +1255,7 @@ abstract class _$$TerminalStartCopyWith<$Res> {
   factory _$$TerminalStartCopyWith(
           _$TerminalStart value, $Res Function(_$TerminalStart) then) =
       __$$TerminalStartCopyWithImpl<$Res>;
-  $Res call({LxdOperation op});
+  $Res call({String name, LxdOperation op});
 
   $LxdOperationCopyWith<$Res> get op;
 }
@@ -762,9 +1273,14 @@ class __$$TerminalStartCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? name = freezed,
     Object? op = freezed,
   }) {
     return _then(_$TerminalStart(
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       op == freezed
           ? _value.op
           : op // ignore: cast_nullable_to_non_nullable
@@ -783,14 +1299,16 @@ class __$$TerminalStartCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TerminalStart implements TerminalStart {
-  const _$TerminalStart(this.op);
+  const _$TerminalStart(this.name, this.op);
 
+  @override
+  final String name;
   @override
   final LxdOperation op;
 
   @override
   String toString() {
-    return 'TerminalState.start(op: $op)';
+    return 'TerminalState.start(name: $name, op: $op)';
   }
 
   @override
@@ -798,12 +1316,15 @@ class _$TerminalStart implements TerminalStart {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TerminalStart &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.op, op));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(op));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(op));
 
   @JsonKey(ignore: true)
   @override
@@ -815,13 +1336,16 @@ class _$TerminalStart implements TerminalStart {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function(String? message) error,
-    required TResult Function(LxdOperation op) create,
-    required TResult Function(String name) config,
-    required TResult Function(LxdOperation op) start,
-    required TResult Function(LxdOperation op) restart,
-    required TResult Function(Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
   }) {
-    return start(op);
+    return start(name, op);
   }
 
   @override
@@ -829,13 +1353,16 @@ class _$TerminalStart implements TerminalStart {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
   }) {
-    return start?.call(op);
+    return start?.call(name, op);
   }
 
   @override
@@ -843,15 +1370,18 @@ class _$TerminalStart implements TerminalStart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
     if (start != null) {
-      return start(op);
+      return start(name, op);
     }
     return orElse();
   }
@@ -862,10 +1392,13 @@ class _$TerminalStart implements TerminalStart {
     required TResult Function(TerminalNone value) none,
     required TResult Function(TerminalError value) error,
     required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
     required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
     required TResult Function(TerminalStart value) start,
     required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
   }) {
     return start(this);
   }
@@ -876,10 +1409,13 @@ class _$TerminalStart implements TerminalStart {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
   }) {
     return start?.call(this);
   }
@@ -890,10 +1426,13 @@ class _$TerminalStart implements TerminalStart {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
     required TResult orElse(),
   }) {
     if (start != null) {
@@ -904,8 +1443,10 @@ class _$TerminalStart implements TerminalStart {
 }
 
 abstract class TerminalStart implements TerminalState {
-  const factory TerminalStart(final LxdOperation op) = _$TerminalStart;
+  const factory TerminalStart(final String name, final LxdOperation op) =
+      _$TerminalStart;
 
+  String get name;
   LxdOperation get op;
   @JsonKey(ignore: true)
   _$$TerminalStartCopyWith<_$TerminalStart> get copyWith =>
@@ -917,7 +1458,7 @@ abstract class _$$TerminalRestartCopyWith<$Res> {
   factory _$$TerminalRestartCopyWith(
           _$TerminalRestart value, $Res Function(_$TerminalRestart) then) =
       __$$TerminalRestartCopyWithImpl<$Res>;
-  $Res call({LxdOperation op});
+  $Res call({String name, LxdOperation op});
 
   $LxdOperationCopyWith<$Res> get op;
 }
@@ -935,9 +1476,14 @@ class __$$TerminalRestartCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? name = freezed,
     Object? op = freezed,
   }) {
     return _then(_$TerminalRestart(
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       op == freezed
           ? _value.op
           : op // ignore: cast_nullable_to_non_nullable
@@ -956,14 +1502,16 @@ class __$$TerminalRestartCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TerminalRestart implements TerminalRestart {
-  const _$TerminalRestart(this.op);
+  const _$TerminalRestart(this.name, this.op);
 
+  @override
+  final String name;
   @override
   final LxdOperation op;
 
   @override
   String toString() {
-    return 'TerminalState.restart(op: $op)';
+    return 'TerminalState.restart(name: $name, op: $op)';
   }
 
   @override
@@ -971,12 +1519,15 @@ class _$TerminalRestart implements TerminalRestart {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TerminalRestart &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.op, op));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(op));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(op));
 
   @JsonKey(ignore: true)
   @override
@@ -988,13 +1539,16 @@ class _$TerminalRestart implements TerminalRestart {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function(String? message) error,
-    required TResult Function(LxdOperation op) create,
-    required TResult Function(String name) config,
-    required TResult Function(LxdOperation op) start,
-    required TResult Function(LxdOperation op) restart,
-    required TResult Function(Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
   }) {
-    return restart(op);
+    return restart(name, op);
   }
 
   @override
@@ -1002,13 +1556,16 @@ class _$TerminalRestart implements TerminalRestart {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
   }) {
-    return restart?.call(op);
+    return restart?.call(name, op);
   }
 
   @override
@@ -1016,15 +1573,18 @@ class _$TerminalRestart implements TerminalRestart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
     if (restart != null) {
-      return restart(op);
+      return restart(name, op);
     }
     return orElse();
   }
@@ -1035,10 +1595,13 @@ class _$TerminalRestart implements TerminalRestart {
     required TResult Function(TerminalNone value) none,
     required TResult Function(TerminalError value) error,
     required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
     required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
     required TResult Function(TerminalStart value) start,
     required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
   }) {
     return restart(this);
   }
@@ -1049,10 +1612,13 @@ class _$TerminalRestart implements TerminalRestart {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
   }) {
     return restart?.call(this);
   }
@@ -1063,10 +1629,13 @@ class _$TerminalRestart implements TerminalRestart {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
     required TResult orElse(),
   }) {
     if (restart != null) {
@@ -1077,8 +1646,10 @@ class _$TerminalRestart implements TerminalRestart {
 }
 
 abstract class TerminalRestart implements TerminalState {
-  const factory TerminalRestart(final LxdOperation op) = _$TerminalRestart;
+  const factory TerminalRestart(final String name, final LxdOperation op) =
+      _$TerminalRestart;
 
+  String get name;
   LxdOperation get op;
   @JsonKey(ignore: true)
   _$$TerminalRestartCopyWith<_$TerminalRestart> get copyWith =>
@@ -1090,7 +1661,7 @@ abstract class _$$TerminalRunningCopyWith<$Res> {
   factory _$$TerminalRunningCopyWith(
           _$TerminalRunning value, $Res Function(_$TerminalRunning) then) =
       __$$TerminalRunningCopyWithImpl<$Res>;
-  $Res call({Terminal terminal});
+  $Res call({String name, Terminal terminal});
 }
 
 /// @nodoc
@@ -1106,9 +1677,14 @@ class __$$TerminalRunningCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? name = freezed,
     Object? terminal = freezed,
   }) {
     return _then(_$TerminalRunning(
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       terminal == freezed
           ? _value.terminal
           : terminal // ignore: cast_nullable_to_non_nullable
@@ -1120,14 +1696,16 @@ class __$$TerminalRunningCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TerminalRunning implements TerminalRunning {
-  const _$TerminalRunning(this.terminal);
+  const _$TerminalRunning(this.name, this.terminal);
 
+  @override
+  final String name;
   @override
   final Terminal terminal;
 
   @override
   String toString() {
-    return 'TerminalState.running(terminal: $terminal)';
+    return 'TerminalState.running(name: $name, terminal: $terminal)';
   }
 
   @override
@@ -1135,12 +1713,15 @@ class _$TerminalRunning implements TerminalRunning {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TerminalRunning &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.terminal, terminal));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(terminal));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(terminal));
 
   @JsonKey(ignore: true)
   @override
@@ -1152,13 +1733,16 @@ class _$TerminalRunning implements TerminalRunning {
   TResult when<TResult extends Object?>({
     required TResult Function() none,
     required TResult Function(String? message) error,
-    required TResult Function(LxdOperation op) create,
-    required TResult Function(String name) config,
-    required TResult Function(LxdOperation op) start,
-    required TResult Function(LxdOperation op) restart,
-    required TResult Function(Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
   }) {
-    return running(terminal);
+    return running(name, terminal);
   }
 
   @override
@@ -1166,13 +1750,16 @@ class _$TerminalRunning implements TerminalRunning {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
   }) {
-    return running?.call(terminal);
+    return running?.call(name, terminal);
   }
 
   @override
@@ -1180,15 +1767,18 @@ class _$TerminalRunning implements TerminalRunning {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? none,
     TResult Function(String? message)? error,
-    TResult Function(LxdOperation op)? create,
-    TResult Function(String name)? config,
-    TResult Function(LxdOperation op)? start,
-    TResult Function(LxdOperation op)? restart,
-    TResult Function(Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
     if (running != null) {
-      return running(terminal);
+      return running(name, terminal);
     }
     return orElse();
   }
@@ -1199,10 +1789,13 @@ class _$TerminalRunning implements TerminalRunning {
     required TResult Function(TerminalNone value) none,
     required TResult Function(TerminalError value) error,
     required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
     required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
     required TResult Function(TerminalStart value) start,
     required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
   }) {
     return running(this);
   }
@@ -1213,10 +1806,13 @@ class _$TerminalRunning implements TerminalRunning {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
   }) {
     return running?.call(this);
   }
@@ -1227,10 +1823,13 @@ class _$TerminalRunning implements TerminalRunning {
     TResult Function(TerminalNone value)? none,
     TResult Function(TerminalError value)? error,
     TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
     TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
     TResult Function(TerminalStart value)? start,
     TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
     required TResult orElse(),
   }) {
     if (running != null) {
@@ -1241,10 +1840,215 @@ class _$TerminalRunning implements TerminalRunning {
 }
 
 abstract class TerminalRunning implements TerminalState {
-  const factory TerminalRunning(final Terminal terminal) = _$TerminalRunning;
+  const factory TerminalRunning(final String name, final Terminal terminal) =
+      _$TerminalRunning;
 
+  String get name;
   Terminal get terminal;
   @JsonKey(ignore: true)
   _$$TerminalRunningCopyWith<_$TerminalRunning> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TerminalStopCopyWith<$Res> {
+  factory _$$TerminalStopCopyWith(
+          _$TerminalStop value, $Res Function(_$TerminalStop) then) =
+      __$$TerminalStopCopyWithImpl<$Res>;
+  $Res call({String name, LxdOperation op});
+
+  $LxdOperationCopyWith<$Res> get op;
+}
+
+/// @nodoc
+class __$$TerminalStopCopyWithImpl<$Res>
+    extends _$TerminalStateCopyWithImpl<$Res>
+    implements _$$TerminalStopCopyWith<$Res> {
+  __$$TerminalStopCopyWithImpl(
+      _$TerminalStop _value, $Res Function(_$TerminalStop) _then)
+      : super(_value, (v) => _then(v as _$TerminalStop));
+
+  @override
+  _$TerminalStop get _value => super._value as _$TerminalStop;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? op = freezed,
+  }) {
+    return _then(_$TerminalStop(
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      op == freezed
+          ? _value.op
+          : op // ignore: cast_nullable_to_non_nullable
+              as LxdOperation,
+    ));
+  }
+
+  @override
+  $LxdOperationCopyWith<$Res> get op {
+    return $LxdOperationCopyWith<$Res>(_value.op, (value) {
+      return _then(_value.copyWith(op: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$TerminalStop implements TerminalStop {
+  const _$TerminalStop(this.name, this.op);
+
+  @override
+  final String name;
+  @override
+  final LxdOperation op;
+
+  @override
+  String toString() {
+    return 'TerminalState.stop(name: $name, op: $op)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TerminalStop &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.op, op));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(op));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TerminalStopCopyWith<_$TerminalStop> get copyWith =>
+      __$$TerminalStopCopyWithImpl<_$TerminalStop>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() none,
+    required TResult Function(String? message) error,
+    required TResult Function(String name, LxdOperation op) create,
+    required TResult Function(String name, LxdFeature feature) init,
+    required TResult Function(String name, LxdFeature feature) config,
+    required TResult Function(String name, LxdOperation op) stage,
+    required TResult Function(String name, LxdOperation op) start,
+    required TResult Function(String name, LxdOperation op) restart,
+    required TResult Function(String name, Terminal terminal) running,
+    required TResult Function(String name, LxdOperation op) stop,
+  }) {
+    return stop(name, op);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(String? message)? error,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
+  }) {
+    return stop?.call(name, op);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(String? message)? error,
+    TResult Function(String name, LxdOperation op)? create,
+    TResult Function(String name, LxdFeature feature)? init,
+    TResult Function(String name, LxdFeature feature)? config,
+    TResult Function(String name, LxdOperation op)? stage,
+    TResult Function(String name, LxdOperation op)? start,
+    TResult Function(String name, LxdOperation op)? restart,
+    TResult Function(String name, Terminal terminal)? running,
+    TResult Function(String name, LxdOperation op)? stop,
+    required TResult orElse(),
+  }) {
+    if (stop != null) {
+      return stop(name, op);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TerminalNone value) none,
+    required TResult Function(TerminalError value) error,
+    required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalInit value) init,
+    required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStage value) stage,
+    required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
+    required TResult Function(TerminalRunning value) running,
+    required TResult Function(TerminalStop value) stop,
+  }) {
+    return stop(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TerminalNone value)? none,
+    TResult Function(TerminalError value)? error,
+    TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
+    TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
+    TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
+    TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
+  }) {
+    return stop?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TerminalNone value)? none,
+    TResult Function(TerminalError value)? error,
+    TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalInit value)? init,
+    TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStage value)? stage,
+    TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
+    TResult Function(TerminalRunning value)? running,
+    TResult Function(TerminalStop value)? stop,
+    required TResult orElse(),
+  }) {
+    if (stop != null) {
+      return stop(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TerminalStop implements TerminalState {
+  const factory TerminalStop(final String name, final LxdOperation op) =
+      _$TerminalStop;
+
+  String get name;
+  LxdOperation get op;
+  @JsonKey(ignore: true)
+  _$$TerminalStopCopyWith<_$TerminalStop> get copyWith =>
       throw _privateConstructorUsedError;
 }
