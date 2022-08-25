@@ -29,6 +29,7 @@ abstract class LxdService {
   Future<LxdOperation> stopInstance(String name, {bool force = false});
   Future<LxdOperation> deleteInstance(String name);
   Stream<LxdOperation> watchInstance(String instance);
+  Future<void> waitVmAgent(String name, {Duration? timeout});
 
   Future<LxdOperation> getOperation(String id);
   Stream<LxdOperation> watchOperation(String id);
@@ -187,6 +188,10 @@ class _LxdService implements LxdService {
         .where((event) => event.isOperation)
         .map((event) => LxdOperation.fromJson(event.metadata!))
         .where((op) => op.instances?.contains(instance) == true);
+  }
+
+  Future<void> waitVmAgent(String name, {Duration? timeout}) {
+    return _client.waitVmAgent(name, timeout: timeout);
   }
 
   @override

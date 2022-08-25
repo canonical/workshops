@@ -67,6 +67,26 @@ extension LxdClientX on LxdClient {
 
     return out.join();
   }
+
+  /// Waits for the VM agent to be ready, which is a pre-requisite for executing
+  /// commands on the VM. The VM agent is up and running when the instance state
+  /// reports that there are any running processes.
+  Future<bool> waitVmAgent(
+    String name, {
+    Duration? timeout,
+    Duration interval = const Duration(seconds: 1),
+  }) async {
+    var future = Future.doWhile(() async {
+      final state = await getInstanceState(name);
+      if (state.processes > 0) return false;
+      return Future.delayed(interval, () => true);
+    });
+    if (timeout != null) {
+      future = future.timeout(timeout, onTimeout: () => false);
+    }
+    final result = await future;
+    return result is bool ? result : true;
+  }
 }
 
 extension LxdEventX on LxdEvent {
