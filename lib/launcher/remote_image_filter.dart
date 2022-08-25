@@ -14,13 +14,16 @@ class RemoteImageFilter extends SafeChangeNotifier {
   List<LxdImage>? _availableImages;
   Set<String>? _availableReleases;
   Set<String>? _availableVariants;
+  Set<LxdImageType>? _availableTypes;
 
   List<LxdImage> get availableImages => _availableImages ?? [];
   Set<String> get availableReleases => _availableReleases ?? {};
   Set<String> get availableVariants => _availableVariants ?? {};
+  Set<LxdImageType> get availableTypes => _availableTypes ?? {};
 
   String? _selectedRelease;
   String? _selectedVariant;
+  LxdImageType? _selectedType;
 
   LxdImage? get selectedImage => _availableImages?.firstOrNull;
   String? get selectedRelease =>
@@ -29,6 +32,7 @@ class RemoteImageFilter extends SafeChangeNotifier {
       _selectedVariant ?? _defaultVariant ?? _availableVariants?.firstOrNull;
   String? get _defaultVariant =>
       _availableVariants?.contains('default') == true ? 'default' : null;
+  LxdImageType? get selectedType => _selectedType ?? LxdImageType.container;
 
   void init(List<LxdImage> images) {
     _allImages = images;
@@ -49,11 +53,18 @@ class RemoteImageFilter extends SafeChangeNotifier {
     select(variant: variant);
   }
 
-  void select({String? release, String? variant}) {
+  void selectType(LxdImageType? type) {
+    if (_selectedType == type) return;
+    _selectedType = type;
+    select(type: type);
+  }
+
+  void select({String? release, String? variant, LxdImageType? type}) {
     final availableImages = _allImages
         .where((image) =>
             (_selectedRelease == null || image.release == _selectedRelease) &&
-            (_selectedVariant == null || image.variant == _selectedVariant))
+            (_selectedVariant == null || image.variant == _selectedVariant) &&
+            (_selectedType == null || image.type == _selectedType))
         .toList();
     availableImages.sort((a, b) => a.compareTo(b));
     if (_availableImages == availableImages) return;
@@ -61,31 +72,46 @@ class RemoteImageFilter extends SafeChangeNotifier {
 
     _availableReleases = _allImages
         .where((image) =>
-            _selectedVariant == null || image.variant == _selectedVariant)
+            (_selectedVariant == null || image.variant == _selectedVariant) &&
+            (_selectedType == null || image.type == _selectedType))
         .map((image) => image.release)
         .toSet();
 
-    if (variant != null &&
-        _selectedRelease != null &&
-        !_availableReleases!.contains(_selectedRelease)) {
-      selectRelease(null);
-      return;
-    }
-
     _availableVariants = _allImages
         .where((image) =>
-            _selectedRelease == null || image.release == _selectedRelease)
+            (_selectedRelease == null || image.release == _selectedRelease) &&
+            (_selectedType == null || image.type == _selectedType))
         .map((image) => image.variant)
         .toSet();
 
-    if (release != null &&
-        _selectedVariant != null &&
-        !_availableVariants!.contains(_selectedVariant)) {
-      selectVariant(null);
-      return;
+    _availableTypes = _allImages
+        .where((image) =>
+            (_selectedRelease == null || image.release == _selectedRelease) &&
+            (_selectedVariant == null || image.variant == _selectedVariant))
+        .map((image) => image.type)
+        .toSet();
+
+    if (_selectedRelease != null &&
+        !_availableReleases!.contains(_selectedRelease)) {
+      if (variant != null || type != null) {
+        _selectedRelease = null;
+      }
     }
 
-    if (release != null || variant != null) {
+    if (_selectedVariant != null &&
+        !_availableVariants!.contains(_selectedVariant)) {
+      if (release != null || type != null) {
+        _selectedVariant = null;
+      }
+    }
+
+    if (_selectedType != null && !_availableTypes!.contains(_selectedType)) {
+      if (release != null || variant != null) {
+        _selectedType = null;
+      }
+    }
+
+    if (release != null || variant != null || type != null) {
       notifyListeners();
     }
   }
