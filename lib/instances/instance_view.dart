@@ -147,7 +147,7 @@ extension _LxdInstanceImage on LxdInstance {
 
 class _IconButton extends IconButton {
   const _IconButton({required super.icon, super.onPressed})
-      : super(splashRadius: 16, iconSize: 16);
+      : super(splashRadius: 24, iconSize: 16);
 }
 
 class _StopButton extends _IconButton {
