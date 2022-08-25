@@ -20,31 +20,34 @@ class TerminalController extends SafeChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> create(LxdImage image, {LxdRemote? remote}) async {
+  Future<String?> create(LxdImage image, {LxdRemote? remote}) async {
     final create = await _service.createInstance(image, remote: remote);
     _setState(TerminalState.create(create));
 
     final wait = await _service.waitOperation(create.id);
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
       reset();
-    } else {
-      final name = create.instances!.single;
-      _setState(TerminalState.config(name));
-      await _service.initInstance(name, image);
-      await start(name);
+      return null;
     }
+    return create.instances!.single;
   }
 
-  Future<void> start(String name) async {
+  Future<bool> configure(String name, LxdImage image) async {
+    _setState(TerminalState.config(name));
+    await _service.initInstance(name, image);
+    return true;
+  }
+
+  Future<bool> start(String name) async {
     final start = await _service.startInstance(name);
     _setState(TerminalState.start(start));
 
     final wait = await _service.waitOperation(start.id);
     if (wait.statusCode == LxdStatusCode.cancelled.value) {
       reset();
-    } else {
-      return run(name);
+      return false;
     }
+    return true;
   }
 
   Future<void> run(String name) async {

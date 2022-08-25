@@ -68,11 +68,25 @@ class HomeModel extends ChangeNotifier {
     currentIndex = index < 0 ? _controllers.length - 1 : index;
   }
 
-  Future<void> createInstance(LxdImage image, {LxdRemote? remote}) {
-    return currentController.create(image, remote: remote);
+  Future<void> createInstance(LxdImage image, {LxdRemote? remote}) async {
+    final name = await currentController.create(image, remote: remote);
+    if (name != null) {
+      return configureInstance(name, image);
+    }
   }
 
-  Future<void> startInstance(String name) => currentController.start(name);
+  Future<void> configureInstance(String name, LxdImage image) async {
+    if (await currentController.configure(name, image)) {
+      return startInstance(name);
+    }
+  }
+
+  Future<void> startInstance(String name) async {
+    if (await currentController.start(name)) {
+      return runInstance(name);
+    }
+  }
+
   Future<void> runInstance(String name) => currentController.run(name);
   Future<void> stopInstance(String name) => currentController.stop(name);
   Future<void> deleteInstance(String name) => currentController.delete(name);
