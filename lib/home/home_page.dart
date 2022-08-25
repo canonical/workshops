@@ -124,6 +124,7 @@ class HomePage extends StatelessWidget {
               create: (op) => OperationView.create(context, op.id),
               config: (name) => OperationView.config(context, name),
               start: (op) => OperationView.start(context, op.id),
+              restart: (op) => OperationView.restart(context, op.id),
               running: (terminal) => TerminalTheme(
                 data: terminalTheme,
                 child: TerminalView(terminal: terminal),

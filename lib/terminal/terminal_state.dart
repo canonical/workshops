@@ -11,5 +11,6 @@ class TerminalState with _$TerminalState {
   const factory TerminalState.create(LxdOperation op) = TerminalCreate;
   const factory TerminalState.config(String name) = TerminalConfig;
   const factory TerminalState.start(LxdOperation op) = TerminalStart;
+  const factory TerminalState.restart(LxdOperation op) = TerminalRestart;
   const factory TerminalState.running(Terminal terminal) = TerminalRunning;
 }

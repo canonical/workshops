@@ -23,6 +23,7 @@ mixin _$TerminalState {
     required TResult Function(LxdOperation op) create,
     required TResult Function(String name) config,
     required TResult Function(LxdOperation op) start,
+    required TResult Function(LxdOperation op) restart,
     required TResult Function(Terminal terminal) running,
   }) =>
       throw _privateConstructorUsedError;
@@ -33,6 +34,7 @@ mixin _$TerminalState {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +45,7 @@ mixin _$TerminalState {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
     required TResult orElse(),
   }) =>
@@ -54,6 +57,7 @@ mixin _$TerminalState {
     required TResult Function(TerminalCreate value) create,
     required TResult Function(TerminalConfig value) config,
     required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +68,7 @@ mixin _$TerminalState {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,6 +79,7 @@ mixin _$TerminalState {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
     required TResult orElse(),
   }) =>
@@ -143,6 +149,7 @@ class _$TerminalNone implements TerminalNone {
     required TResult Function(LxdOperation op) create,
     required TResult Function(String name) config,
     required TResult Function(LxdOperation op) start,
+    required TResult Function(LxdOperation op) restart,
     required TResult Function(Terminal terminal) running,
   }) {
     return none();
@@ -156,6 +163,7 @@ class _$TerminalNone implements TerminalNone {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
   }) {
     return none?.call();
@@ -169,6 +177,7 @@ class _$TerminalNone implements TerminalNone {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
     required TResult orElse(),
   }) {
@@ -186,6 +195,7 @@ class _$TerminalNone implements TerminalNone {
     required TResult Function(TerminalCreate value) create,
     required TResult Function(TerminalConfig value) config,
     required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
   }) {
     return none(this);
@@ -199,6 +209,7 @@ class _$TerminalNone implements TerminalNone {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
   }) {
     return none?.call(this);
@@ -212,6 +223,7 @@ class _$TerminalNone implements TerminalNone {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
     required TResult orElse(),
   }) {
@@ -296,6 +308,7 @@ class _$TerminalError implements TerminalError {
     required TResult Function(LxdOperation op) create,
     required TResult Function(String name) config,
     required TResult Function(LxdOperation op) start,
+    required TResult Function(LxdOperation op) restart,
     required TResult Function(Terminal terminal) running,
   }) {
     return error(message);
@@ -309,6 +322,7 @@ class _$TerminalError implements TerminalError {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
   }) {
     return error?.call(message);
@@ -322,6 +336,7 @@ class _$TerminalError implements TerminalError {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
     required TResult orElse(),
   }) {
@@ -339,6 +354,7 @@ class _$TerminalError implements TerminalError {
     required TResult Function(TerminalCreate value) create,
     required TResult Function(TerminalConfig value) config,
     required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
   }) {
     return error(this);
@@ -352,6 +368,7 @@ class _$TerminalError implements TerminalError {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
   }) {
     return error?.call(this);
@@ -365,6 +382,7 @@ class _$TerminalError implements TerminalError {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
     required TResult orElse(),
   }) {
@@ -463,6 +481,7 @@ class _$TerminalCreate implements TerminalCreate {
     required TResult Function(LxdOperation op) create,
     required TResult Function(String name) config,
     required TResult Function(LxdOperation op) start,
+    required TResult Function(LxdOperation op) restart,
     required TResult Function(Terminal terminal) running,
   }) {
     return create(op);
@@ -476,6 +495,7 @@ class _$TerminalCreate implements TerminalCreate {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
   }) {
     return create?.call(op);
@@ -489,6 +509,7 @@ class _$TerminalCreate implements TerminalCreate {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
     required TResult orElse(),
   }) {
@@ -506,6 +527,7 @@ class _$TerminalCreate implements TerminalCreate {
     required TResult Function(TerminalCreate value) create,
     required TResult Function(TerminalConfig value) config,
     required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
   }) {
     return create(this);
@@ -519,6 +541,7 @@ class _$TerminalCreate implements TerminalCreate {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
   }) {
     return create?.call(this);
@@ -532,6 +555,7 @@ class _$TerminalCreate implements TerminalCreate {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
     required TResult orElse(),
   }) {
@@ -621,6 +645,7 @@ class _$TerminalConfig implements TerminalConfig {
     required TResult Function(LxdOperation op) create,
     required TResult Function(String name) config,
     required TResult Function(LxdOperation op) start,
+    required TResult Function(LxdOperation op) restart,
     required TResult Function(Terminal terminal) running,
   }) {
     return config(name);
@@ -634,6 +659,7 @@ class _$TerminalConfig implements TerminalConfig {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
   }) {
     return config?.call(name);
@@ -647,6 +673,7 @@ class _$TerminalConfig implements TerminalConfig {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
     required TResult orElse(),
   }) {
@@ -664,6 +691,7 @@ class _$TerminalConfig implements TerminalConfig {
     required TResult Function(TerminalCreate value) create,
     required TResult Function(TerminalConfig value) config,
     required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
   }) {
     return config(this);
@@ -677,6 +705,7 @@ class _$TerminalConfig implements TerminalConfig {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
   }) {
     return config?.call(this);
@@ -690,6 +719,7 @@ class _$TerminalConfig implements TerminalConfig {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
     required TResult orElse(),
   }) {
@@ -788,6 +818,7 @@ class _$TerminalStart implements TerminalStart {
     required TResult Function(LxdOperation op) create,
     required TResult Function(String name) config,
     required TResult Function(LxdOperation op) start,
+    required TResult Function(LxdOperation op) restart,
     required TResult Function(Terminal terminal) running,
   }) {
     return start(op);
@@ -801,6 +832,7 @@ class _$TerminalStart implements TerminalStart {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
   }) {
     return start?.call(op);
@@ -814,6 +846,7 @@ class _$TerminalStart implements TerminalStart {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
     required TResult orElse(),
   }) {
@@ -831,6 +864,7 @@ class _$TerminalStart implements TerminalStart {
     required TResult Function(TerminalCreate value) create,
     required TResult Function(TerminalConfig value) config,
     required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
   }) {
     return start(this);
@@ -844,6 +878,7 @@ class _$TerminalStart implements TerminalStart {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
   }) {
     return start?.call(this);
@@ -857,6 +892,7 @@ class _$TerminalStart implements TerminalStart {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
     required TResult orElse(),
   }) {
@@ -873,6 +909,179 @@ abstract class TerminalStart implements TerminalState {
   LxdOperation get op;
   @JsonKey(ignore: true)
   _$$TerminalStartCopyWith<_$TerminalStart> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TerminalRestartCopyWith<$Res> {
+  factory _$$TerminalRestartCopyWith(
+          _$TerminalRestart value, $Res Function(_$TerminalRestart) then) =
+      __$$TerminalRestartCopyWithImpl<$Res>;
+  $Res call({LxdOperation op});
+
+  $LxdOperationCopyWith<$Res> get op;
+}
+
+/// @nodoc
+class __$$TerminalRestartCopyWithImpl<$Res>
+    extends _$TerminalStateCopyWithImpl<$Res>
+    implements _$$TerminalRestartCopyWith<$Res> {
+  __$$TerminalRestartCopyWithImpl(
+      _$TerminalRestart _value, $Res Function(_$TerminalRestart) _then)
+      : super(_value, (v) => _then(v as _$TerminalRestart));
+
+  @override
+  _$TerminalRestart get _value => super._value as _$TerminalRestart;
+
+  @override
+  $Res call({
+    Object? op = freezed,
+  }) {
+    return _then(_$TerminalRestart(
+      op == freezed
+          ? _value.op
+          : op // ignore: cast_nullable_to_non_nullable
+              as LxdOperation,
+    ));
+  }
+
+  @override
+  $LxdOperationCopyWith<$Res> get op {
+    return $LxdOperationCopyWith<$Res>(_value.op, (value) {
+      return _then(_value.copyWith(op: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$TerminalRestart implements TerminalRestart {
+  const _$TerminalRestart(this.op);
+
+  @override
+  final LxdOperation op;
+
+  @override
+  String toString() {
+    return 'TerminalState.restart(op: $op)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TerminalRestart &&
+            const DeepCollectionEquality().equals(other.op, op));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(op));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TerminalRestartCopyWith<_$TerminalRestart> get copyWith =>
+      __$$TerminalRestartCopyWithImpl<_$TerminalRestart>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() none,
+    required TResult Function(String? message) error,
+    required TResult Function(LxdOperation op) create,
+    required TResult Function(String name) config,
+    required TResult Function(LxdOperation op) start,
+    required TResult Function(LxdOperation op) restart,
+    required TResult Function(Terminal terminal) running,
+  }) {
+    return restart(op);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(String? message)? error,
+    TResult Function(LxdOperation op)? create,
+    TResult Function(String name)? config,
+    TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
+    TResult Function(Terminal terminal)? running,
+  }) {
+    return restart?.call(op);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? none,
+    TResult Function(String? message)? error,
+    TResult Function(LxdOperation op)? create,
+    TResult Function(String name)? config,
+    TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
+    TResult Function(Terminal terminal)? running,
+    required TResult orElse(),
+  }) {
+    if (restart != null) {
+      return restart(op);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TerminalNone value) none,
+    required TResult Function(TerminalError value) error,
+    required TResult Function(TerminalCreate value) create,
+    required TResult Function(TerminalConfig value) config,
+    required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
+    required TResult Function(TerminalRunning value) running,
+  }) {
+    return restart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TerminalNone value)? none,
+    TResult Function(TerminalError value)? error,
+    TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
+    TResult Function(TerminalRunning value)? running,
+  }) {
+    return restart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TerminalNone value)? none,
+    TResult Function(TerminalError value)? error,
+    TResult Function(TerminalCreate value)? create,
+    TResult Function(TerminalConfig value)? config,
+    TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
+    TResult Function(TerminalRunning value)? running,
+    required TResult orElse(),
+  }) {
+    if (restart != null) {
+      return restart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TerminalRestart implements TerminalState {
+  const factory TerminalRestart(final LxdOperation op) = _$TerminalRestart;
+
+  LxdOperation get op;
+  @JsonKey(ignore: true)
+  _$$TerminalRestartCopyWith<_$TerminalRestart> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -946,6 +1155,7 @@ class _$TerminalRunning implements TerminalRunning {
     required TResult Function(LxdOperation op) create,
     required TResult Function(String name) config,
     required TResult Function(LxdOperation op) start,
+    required TResult Function(LxdOperation op) restart,
     required TResult Function(Terminal terminal) running,
   }) {
     return running(terminal);
@@ -959,6 +1169,7 @@ class _$TerminalRunning implements TerminalRunning {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
   }) {
     return running?.call(terminal);
@@ -972,6 +1183,7 @@ class _$TerminalRunning implements TerminalRunning {
     TResult Function(LxdOperation op)? create,
     TResult Function(String name)? config,
     TResult Function(LxdOperation op)? start,
+    TResult Function(LxdOperation op)? restart,
     TResult Function(Terminal terminal)? running,
     required TResult orElse(),
   }) {
@@ -989,6 +1201,7 @@ class _$TerminalRunning implements TerminalRunning {
     required TResult Function(TerminalCreate value) create,
     required TResult Function(TerminalConfig value) config,
     required TResult Function(TerminalStart value) start,
+    required TResult Function(TerminalRestart value) restart,
     required TResult Function(TerminalRunning value) running,
   }) {
     return running(this);
@@ -1002,6 +1215,7 @@ class _$TerminalRunning implements TerminalRunning {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
   }) {
     return running?.call(this);
@@ -1015,6 +1229,7 @@ class _$TerminalRunning implements TerminalRunning {
     TResult Function(TerminalCreate value)? create,
     TResult Function(TerminalConfig value)? config,
     TResult Function(TerminalStart value)? start,
+    TResult Function(TerminalRestart value)? restart,
     TResult Function(TerminalRunning value)? running,
     required TResult orElse(),
   }) {
