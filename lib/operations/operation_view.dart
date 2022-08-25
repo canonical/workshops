@@ -28,6 +28,14 @@ class OperationView extends StatelessWidget {
     );
   }
 
+  static Widget restart(BuildContext context, String id) {
+    return ChangeNotifierProvider<OperationWatcher>(
+      key: Key(id),
+      create: (_) => OperationWatcher(id, getService<LxdService>()),
+      child: const OperationView(title: 'Restarting instance'),
+    );
+  }
+
   static Widget start(BuildContext context, String id) {
     return ChangeNotifierProvider<OperationWatcher>(
       key: Key(id),

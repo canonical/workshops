@@ -38,6 +38,18 @@ class TerminalController extends SafeChangeNotifier {
     return true;
   }
 
+  Future<bool> restart(String name) async {
+    final restart = await _service.restartInstance(name);
+    _setState(TerminalState.restart(restart));
+
+    final wait = await _service.waitOperation(restart.id);
+    if (wait.statusCode == LxdStatusCode.cancelled.value) {
+      reset();
+      return false;
+    }
+    return true;
+  }
+
   Future<bool> start(String name) async {
     final start = await _service.startInstance(name);
     _setState(TerminalState.start(start));

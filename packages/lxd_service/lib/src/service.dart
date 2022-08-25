@@ -26,6 +26,7 @@ abstract class LxdService {
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote});
   Future<LxdOperation> startInstance(String name, {bool force = false});
   Future<void> initInstance(String name, LxdImage image);
+  Future<LxdOperation> restartInstance(String name, {bool force = false});
   Future<LxdOperation> stopInstance(String name, {bool force = false});
   Future<LxdOperation> deleteInstance(String name);
   Stream<LxdOperation> watchInstance(String instance);
@@ -110,6 +111,11 @@ class _LxdService implements LxdService {
   @override
   Future<LxdOperation> startInstance(String name, {bool force = false}) {
     return _client.startInstance(name, force: force);
+  }
+
+  @override
+  Future<LxdOperation> restartInstance(String name, {bool force = false}) {
+    return _client.restartInstance(name, force: force);
   }
 
   @override
