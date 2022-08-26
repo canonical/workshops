@@ -112,7 +112,7 @@ class _LxdService implements LxdService {
   @override
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote}) {
     return _client.createInstance(
-      name: image.properties['name'],
+      name: image.name,
       source: image,
       server: remote?.isLocal == false ? remote!.address : null,
     );

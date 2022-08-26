@@ -2,6 +2,7 @@ import 'package:async_value/async_value.dart';
 import 'package:data_size/data_size.dart';
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
+import 'package:lxd_x/lxd_x.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
@@ -77,11 +78,11 @@ class _LocalImageView extends StatelessWidget {
       itemBuilder: (context, index) {
         final image = images[index];
         return ListTile(
-          title: Text('${image.properties['description']}'),
+          title: Text(image.description ?? ''),
           // TODO: present more information about the image
           // subtitle: SelectableText('${image.toJson()}'),
           leading: ProductLogo.asset(
-            name: image.properties['os'],
+            name: image.os,
             size: 48,
           ),
           trailing: Text(image.size.formatByteSize()),
