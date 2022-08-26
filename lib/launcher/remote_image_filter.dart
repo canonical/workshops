@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:lxd/lxd.dart';
+import 'package:lxd_x/lxd_x.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
 class RemoteImageFilter extends SafeChangeNotifier {
@@ -36,8 +37,10 @@ class RemoteImageFilter extends SafeChangeNotifier {
 
   void init(List<LxdImage> images) {
     _allImages = images;
-    _allReleases = _allImages.map((i) => i.release).toSet().toList();
-    _allVariants = _allImages.map((i) => i.variant).toSet().toList();
+    _allReleases =
+        _allImages.map((i) => i.release).whereType<String>().toSet().toList();
+    _allVariants =
+        _allImages.map((i) => i.variant).whereType<String>().toSet().toList();
     select();
   }
 
@@ -72,16 +75,18 @@ class RemoteImageFilter extends SafeChangeNotifier {
 
     _availableReleases = _allImages
         .where((image) =>
+            image.release != null &&
             (_selectedVariant == null || image.variant == _selectedVariant) &&
             (_selectedType == null || image.type == _selectedType))
-        .map((image) => image.release)
+        .map((image) => image.release!)
         .toSet();
 
     _availableVariants = _allImages
         .where((image) =>
+            image.variant != null &&
             (_selectedRelease == null || image.release == _selectedRelease) &&
             (_selectedType == null || image.type == _selectedType))
-        .map((image) => image.variant)
+        .map((image) => image.variant!)
         .toSet();
 
     _availableTypes = _allImages
@@ -118,9 +123,6 @@ class RemoteImageFilter extends SafeChangeNotifier {
 }
 
 extension _LxdImageX on LxdImage {
-  String get release => properties['release'] ?? '';
-  String get variant => properties['variant'] ?? '';
-
   int compareTo(LxdImage other) {
     return _compareProperties(other) ?? _compareType(other);
   }

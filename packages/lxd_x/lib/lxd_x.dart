@@ -94,6 +94,14 @@ extension LxdEventX on LxdEvent {
   }
 }
 
+extension LxdImageX on LxdImage {
+  String? get description => properties['description'];
+  String? get name => properties['name'];
+  String? get os => properties['os'];
+  String? get release => properties['release'];
+  String? get variant => properties['variant'];
+}
+
 extension LxdInstanceX on LxdInstance {
   bool get isBusy => isStarting || isStopping;
   bool get isStarting => statusCode == LxdStatusCode.starting.value;
