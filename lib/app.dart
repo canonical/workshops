@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:yaru/yaru.dart';
 
 import 'home/home_page.dart';
@@ -14,6 +15,9 @@ class LxdApp extends StatelessWidget {
         darkTheme: yaru.variant?.darkTheme ?? yaruDark,
         highContrastTheme: yaruHighContrastLight,
         highContrastDarkTheme: yaruHighContrastDark,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
         home: HomePage.create(context),
       );
     });
