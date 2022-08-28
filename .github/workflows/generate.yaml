@@ -16,6 +16,7 @@ jobs:
     - uses: subosito/flutter-action@v2
     - run: flutter pub global activate melos
     - run: melos bootstrap
+    - run: flutter pub get # Bad state: Unable to generate package graph
     - run: melos run generate
     - run: ./.github/scripts/check-outdated-files.sh
 
