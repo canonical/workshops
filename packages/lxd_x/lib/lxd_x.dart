@@ -104,11 +104,11 @@ extension LxdImageX on LxdImage {
 
 extension LxdInstanceX on LxdInstance {
   bool get isBusy => isStarting || isStopping;
-  bool get isStarting => statusCode == LxdStatusCode.starting.value;
-  bool get isStarted => statusCode == LxdStatusCode.started.value;
-  bool get isRunning => statusCode == LxdStatusCode.running.value;
-  bool get isStopping => statusCode == LxdStatusCode.stopping.value;
-  bool get isStopped => statusCode == LxdStatusCode.stopped.value;
+  bool get isStarting => statusCode == LxdStatusCode.starting;
+  bool get isStarted => statusCode == LxdStatusCode.started;
+  bool get isRunning => statusCode == LxdStatusCode.running;
+  bool get isStopping => statusCode == LxdStatusCode.stopping;
+  bool get isStopped => statusCode == LxdStatusCode.stopped;
 }
 
 extension LxdNetworkAddressX on LxdNetworkAddress {
@@ -133,6 +133,6 @@ extension LxdOperationX on LxdOperation {
   List<String>? get instances =>
       resources?['instances']?.map((path) => path.split('/').last).toList();
 
-  bool get isRunning => statusCode == LxdStatusCode.running.value;
-  bool get isPending => statusCode == LxdStatusCode.pending.value;
+  bool get isRunning => statusCode == LxdStatusCode.running;
+  bool get isPending => statusCode == LxdStatusCode.pending;
 }

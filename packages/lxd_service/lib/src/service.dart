@@ -57,7 +57,7 @@ class _LxdService implements LxdService {
   final _added = StreamController<String>.broadcast();
   final _removed = StreamController<String>.broadcast();
   final _updated = StreamController<String>.broadcast();
-  final _statuses = <String, LxdStatusCode>{};
+  final _statuses = <String, int>{};
 
   LxdClient getClient() => _client;
 
@@ -103,7 +103,7 @@ class _LxdService implements LxdService {
     final instance = await _client.getInstance(name);
 
     // check for status override from pending/running operations
-    final statusCode = _statuses[name]?.value;
+    final statusCode = _statuses[name];
     return statusCode != null
         ? instance.copyWith(statusCode: statusCode)
         : instance;
@@ -260,7 +260,7 @@ class _LxdService implements LxdService {
   }
 
   void _handleOperation(LxdOperation operation) {
-    void updateInstanceStatus(LxdStatusCode statusCode) {
+    void updateInstanceStatus(int statusCode) {
       for (final instance in operation.instances!) {
         // override the status while an operation is pending/running
         if (operation.isPending || operation.isRunning) {

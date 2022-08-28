@@ -20,7 +20,7 @@ void main() {
           'running': ['op']
         });
     when(client.getOperation('op')).thenAnswer((_) async =>
-        testOperation(id: 'op', statusCode: LxdStatusCode.running.value));
+        testOperation(id: 'op', statusCode: LxdStatusCode.running));
 
     final service = LxdService(client);
     expect(service.instances, isNull);
@@ -136,19 +136,19 @@ void main() {
     final starting = testOperation(
       id: 'p',
       description: 'Starting instance',
-      statusCode: LxdStatusCode.pending.value,
+      statusCode: LxdStatusCode.pending,
       instances: ['foo'],
     );
     final stopping = testOperation(
       id: 'r',
       description: 'Stopping instance',
-      statusCode: LxdStatusCode.running.value,
+      statusCode: LxdStatusCode.running,
       instances: ['bar'],
     );
     final restarting = testOperation(
       id: 's',
       description: 'Restarting instance',
-      statusCode: LxdStatusCode.success.value,
+      statusCode: LxdStatusCode.success,
       instances: ['baz'],
     );
 
@@ -181,11 +181,11 @@ void main() {
     await expectLater(service.instanceUpdated, emits('foo'));
 
     expect(await service.getInstance('foo'),
-        foo.copyWith(statusCode: LxdStatusCode.starting.value));
+        foo.copyWith(statusCode: LxdStatusCode.starting));
     expect(await service.getInstance('bar'),
-        bar.copyWith(statusCode: LxdStatusCode.stopping.value));
+        bar.copyWith(statusCode: LxdStatusCode.stopping));
     expect(await service.getInstance('baz'),
-        baz.copyWith(statusCode: LxdStatusCode.stopped.value));
+        baz.copyWith(statusCode: LxdStatusCode.stopped));
 
     await service.dispose();
   });
@@ -231,7 +231,7 @@ LxdInstance testInstance({required String name, int? statusCode}) {
     restore: '',
     stateful: false,
     status: '',
-    statusCode: statusCode ?? LxdStatusCode.stopped.value,
+    statusCode: statusCode ?? LxdStatusCode.stopped,
     type: LxdInstanceType.container,
   );
 }

@@ -28,7 +28,7 @@ class TerminalController extends SafeChangeNotifier {
     _setState(TerminalState.create(name, create));
 
     final wait = await _service.waitOperation(create.id);
-    if (wait.statusCode == LxdStatusCode.cancelled.value) {
+    if (wait.statusCode == LxdStatusCode.cancelled) {
       reset();
       return null;
     }
@@ -52,7 +52,7 @@ class TerminalController extends SafeChangeNotifier {
       final init = await _service.initFeature(name, provider, image);
       if (init != null) {
         final wait = await _service.waitOperation(init.id);
-        if (wait.statusCode == LxdStatusCode.cancelled.value) {
+        if (wait.statusCode == LxdStatusCode.cancelled) {
           reset();
           return false;
         }
@@ -83,10 +83,10 @@ class TerminalController extends SafeChangeNotifier {
     _setState(TerminalState.restart(name, restart));
 
     final wait = await _service.waitOperation(restart.id);
-    if (wait.statusCode == LxdStatusCode.cancelled.value) {
+    if (wait.statusCode == LxdStatusCode.cancelled) {
       reset();
       return false;
-    } else if (wait.statusCode != LxdStatusCode.success.value) {
+    } else if (wait.statusCode != LxdStatusCode.success) {
       final force = await _service.restartInstance(name, force: true);
       await _service.waitOperation(force.id);
     }
@@ -101,7 +101,7 @@ class TerminalController extends SafeChangeNotifier {
     _setState(TerminalState.start(name, start));
 
     final wait = await _service.waitOperation(start.id);
-    if (wait.statusCode == LxdStatusCode.cancelled.value) {
+    if (wait.statusCode == LxdStatusCode.cancelled) {
       reset();
       return false;
     }
@@ -130,10 +130,10 @@ class TerminalController extends SafeChangeNotifier {
     _setState(TerminalState.stop(name, stop));
 
     final wait = await _service.waitOperation(stop.id);
-    if (wait.statusCode == LxdStatusCode.cancelled.value) {
+    if (wait.statusCode == LxdStatusCode.cancelled) {
       reset();
       return false;
-    } else if (wait.statusCode != LxdStatusCode.success.value) {
+    } else if (wait.statusCode != LxdStatusCode.success) {
       final force = await _service.stopInstance(name, force: true);
       await _service.waitOperation(force.id);
     }
