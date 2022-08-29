@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simplestreams/simplestreams.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'app.dart';
@@ -13,6 +15,8 @@ import 'launcher/remote_image_model.dart';
 import 'remotes/remote_store.dart';
 
 Future<void> main() async {
+  Logger.setup(level: LogLevel.fromString(kDebugMode ? 'debug' : 'info'));
+
   final service = LxdService(LxdClient());
   registerServiceInstance<LxdService>(service);
 

@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:ubuntu_logger/ubuntu_logger.dart';
 
 import 'features.dart';
 import 'remote.dart';
+
+final log = Logger('lxd_service');
 
 abstract class LxdService {
   factory LxdService(LxdClient client) => _LxdService(client);
@@ -83,6 +86,7 @@ class _LxdService implements LxdService {
 
     // listen to all operation events that affect instances
     _events ??= _client.getEvents(types: {LxdEventType.operation}).where((ev) {
+      log.debug(ev);
       return ev.toOperation().instances?.isNotEmpty == true;
     }).listen(_updateInstances);
   }
