@@ -16,6 +16,10 @@ dependencies:
     path: ../lxd_x
   rxdart: ^0.27.3
   stdlibc: ^0.0.1
+  ubuntu_logger:
+    git:
+      url: https://github.com/canonical/ubuntu-flutter-plugins.git
+      path: packages/ubuntu_logger
 
 dev_dependencies:
   build_runner: ^2.1.11
