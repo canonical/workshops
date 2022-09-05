@@ -14,6 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.0.5'
+        channel: 'stable'
     - run: flutter pub global activate melos
     - run: melos bootstrap
     - run: flutter pub get # Bad state: Unable to generate package graph
@@ -26,6 +29,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.0.5'
+        channel: 'stable'
     - run: flutter pub global activate melos
     - run: melos bootstrap
     - run: melos run gen-l10n
@@ -37,6 +43,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.0.5'
+        channel: 'stable'
     - run: flutter pub global activate melos
     - run: melos bootstrap
     - run: flutter pub get # Bad state: Unable to generate package graph
