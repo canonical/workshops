@@ -15,7 +15,7 @@ assumes:
 parts:
   flutter-git:
     source: https://github.com/flutter/flutter.git
-    source-branch: master
+    source-tag: 3.0.5
     plugin: nil
     override-build: |
       mkdir -p $CRAFT_PART_INSTALL/usr/bin
@@ -39,8 +39,6 @@ parts:
     source: .
     override-build: |
       set -eux
-      flutter channel stable
-      flutter upgrade
       flutter doctor
       flutter pub get
       flutter build linux --release -v
