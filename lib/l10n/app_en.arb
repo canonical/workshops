@@ -1,3 +1,16 @@
 {
-  "appTitle": "Workshops"
+  "appTitle": "Workshops",
+  "cancelLabel": "Cancel",
+  "continueLabel": "Continue",
+  "containerLabel": "container",
+  "launchInstanceTitle": "Launch instance",
+  "nameLabel": "Name",
+  "okLabel": "Ok",
+  "releaseLabel": "Release",
+  "selectFeaturesTitle": "Select features",
+  "selectImageTitle": "Select image",
+  "selectOsTitle": "Select OS",
+  "typeLabel": "Type",
+  "variantLabel": "Variant",
+  "virtualMachineLabel": "virtual machine"
 }
