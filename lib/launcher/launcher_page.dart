@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd/lxd.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
@@ -45,8 +46,9 @@ class _LauncherPageState extends State<LauncherPage> {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<LauncherModel>();
+    final l10n = AppLocalizations.of(context);
     return WizardPage(
-      title: const Text('Launch instance'),
+      title: Text(l10n.launchInstanceTitle),
       content: RoundedContainer(
         child: Padding(
           padding: const EdgeInsets.all(48),
@@ -60,7 +62,7 @@ class _LauncherPageState extends State<LauncherPage> {
                     TextFormField(
                       controller: _nameController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: const InputDecoration(labelText: 'Name'),
+                      decoration: InputDecoration(labelText: l10n.nameLabel),
                       validator: (value) {
                         if (value != null && !model.validateName(value)) {
                           return 'Alphanumeric and hyphen characters allowed';
@@ -92,11 +94,11 @@ class _LauncherPageState extends State<LauncherPage> {
       actions: [
         OutlinedButton(
           onPressed: Wizard.of(context).done,
-          child: const Text('Cancel'),
+          child: Text(l10n.cancelLabel),
         ),
         OutlinedButton(
           onPressed: () => Wizard.of(context).done(result: model.image),
-          child: const Text('Ok'),
+          child: Text(l10n.okLabel),
         ),
       ],
     );

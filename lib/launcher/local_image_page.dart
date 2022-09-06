@@ -1,6 +1,7 @@
 import 'package:async_value/async_value.dart';
 import 'package:data_size/data_size.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +20,9 @@ class LocalImagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return WizardPage(
-      title: const Text('Select image'),
+      title: Text(l10n.selectImageTitle),
       content: LocalImageView(
         onSelected: (image) => Wizard.of(context).next(arguments: image),
       ),
@@ -31,7 +33,7 @@ class LocalImagePage extends StatelessWidget {
         const Spacer(),
         OutlinedButton(
           onPressed: Wizard.of(context).done,
-          child: const Text('Cancel'),
+          child: Text(l10n.cancelLabel),
         ),
       ],
     );

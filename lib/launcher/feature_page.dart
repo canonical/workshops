@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,7 @@ import 'package:wizard_router/wizard_router.dart';
 
 import '../widgets/wizard_page.dart';
 import 'feature_model.dart';
+import 'launcher_l10n.dart';
 
 class FeaturePage extends StatefulWidget {
   const FeaturePage({super.key});
@@ -34,8 +36,9 @@ class _FeaturePageState extends State<FeaturePage> {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<FeatureModel>();
+    final l10n = AppLocalizations.of(context);
     return WizardPage(
-      title: const Text('Select features'),
+      title: Text(l10n.selectFeaturesTitle),
       content: RoundedContainer(
         child: ListView(
           children: [
@@ -101,24 +104,13 @@ class _FeaturePageState extends State<FeaturePage> {
       actions: [
         OutlinedButton(
           onPressed: Wizard.of(context).done,
-          child: const Text('Cancel'),
+          child: Text(l10n.cancelLabel),
         ),
         OutlinedButton(
           onPressed: () => Wizard.of(context).next(arguments: model.save()),
-          child: const Text('Continue'),
+          child: Text(l10n.continueLabel),
         ),
       ],
     );
-  }
-}
-
-extension _LxdImageTypeL10n on LxdImageType {
-  String localize(BuildContext context) {
-    switch (this) {
-      case LxdImageType.container:
-        return 'container';
-      case LxdImageType.virtualMachine:
-        return 'virtual machine';
-    }
   }
 }

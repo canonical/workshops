@@ -1,6 +1,7 @@
 import 'package:async_value/async_value.dart';
 import 'package:data_size/data_size.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd/lxd.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
@@ -8,6 +9,7 @@ import 'package:wizard_router/wizard_router.dart';
 
 import '../widgets/product_logo.dart';
 import '../widgets/wizard_page.dart';
+import 'launcher_l10n.dart';
 import 'remote_image_filter.dart';
 import 'remote_image_model.dart';
 
@@ -29,9 +31,10 @@ class RemoteImagePage extends StatelessWidget {
     final images =
         context.select<RemoteImageModel, AsyncLxdImageMap?>((m) => m.images);
     final filter = context.watch<RemoteImageFilter>();
+    final l10n = AppLocalizations.of(context);
 
     return WizardPage(
-      title: const Text('Select image'),
+      title: Text(l10n.selectImageTitle),
       content: RoundedContainer(
         child: Padding(
           padding: const EdgeInsets.all(48),
@@ -46,7 +49,7 @@ class RemoteImagePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         _DropdownField<String>(
-                          label: 'Release',
+                          label: l10n.releaseLabel,
                           value: filter.selectedRelease,
                           allValues: filter.allReleases,
                           availableValues: filter.availableReleases,
@@ -55,7 +58,7 @@ class RemoteImagePage extends StatelessWidget {
                         ),
                         const SizedBox(height: 24),
                         _DropdownField<String>(
-                          label: 'Variant',
+                          label: l10n.variantLabel,
                           value: filter.selectedVariant,
                           allValues: filter.allVariants,
                           availableValues: filter.availableVariants,
@@ -64,7 +67,7 @@ class RemoteImagePage extends StatelessWidget {
                         ),
                         const SizedBox(height: 24),
                         _DropdownField<LxdImageType>(
-                          label: 'Type',
+                          label: l10n.typeLabel,
                           value: filter.selectedType,
                           allValues: LxdImageType.values,
                           availableValues: filter.availableTypes,
@@ -106,13 +109,13 @@ class RemoteImagePage extends StatelessWidget {
         const Spacer(),
         OutlinedButton(
           onPressed: () => Wizard.of(context).done(result: false),
-          child: const Text('Cancel'),
+          child: Text(l10n.cancelLabel),
         ),
         OutlinedButton(
           onPressed: filter.selectedImage != null
               ? () => Wizard.of(context).next(arguments: filter.selectedImage!)
               : null,
-          child: const Text('Continue'),
+          child: Text(l10n.continueLabel),
         ),
       ],
     );
@@ -156,16 +159,5 @@ class _DropdownField<T> extends StatelessWidget {
       }).toList(),
       onChanged: onChanged,
     );
-  }
-}
-
-extension LxdImageTypeL10n on LxdImageType {
-  String localize(BuildContext context) {
-    switch (this) {
-      case LxdImageType.container:
-        return 'container';
-      case LxdImageType.virtualMachine:
-        return 'virtual machine';
-    }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:async_value/async_value.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
@@ -15,8 +16,9 @@ class RemoteOsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<RemoteImageModel>();
+    final l10n = AppLocalizations.of(context);
     return WizardPage(
-      title: const Text('Select OS'),
+      title: Text(l10n.selectOsTitle),
       content: RoundedContainer(
         child: model.images?.when(
           data: (images) => OsSelector(
@@ -34,7 +36,7 @@ class RemoteOsPage extends StatelessWidget {
         const Spacer(),
         OutlinedButton(
           onPressed: Wizard.of(context).done,
-          child: const Text('Cancel'),
+          child: Text(l10n.cancelLabel),
         ),
       ],
     );
