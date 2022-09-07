@@ -32,7 +32,7 @@ class Terminal extends ChangeNotifier {
       _theme = theme;
       _xterm = _rebuildXterm(
         maxLines ?? 10000, // TODO
-        theme?.palette.toXtermTheme() ?? xterm.TerminalThemes.defaultTheme,
+        theme?.toXterm() ?? xterm.TerminalThemes.defaultTheme,
       );
       _xterm!.setBracketedPasteMode(false);
     }
@@ -87,29 +87,29 @@ class Terminal extends ChangeNotifier {
   void scrollToBottom() => _scrollTo(0);
 }
 
-extension _XtermTheme on TerminalPalette {
-  xterm.TerminalTheme toXtermTheme() {
+extension _XtermTheme on TerminalThemeData {
+  xterm.TerminalTheme toXterm() {
     return xterm.TerminalTheme(
       cursor: cursor.value,
       selection: selection.value,
       foreground: foreground.value,
       background: background.value,
-      black: black.value,
-      red: red.value,
-      green: green.value,
-      yellow: yellow.value,
-      blue: blue.value,
-      magenta: magenta.value,
-      cyan: cyan.value,
-      white: white.value,
-      brightBlack: brightBlack.value,
-      brightRed: brightRed.value,
-      brightGreen: brightGreen.value,
-      brightYellow: brightYellow.value,
-      brightBlue: brightBlack.value,
-      brightMagenta: brightMagenta.value,
-      brightCyan: brightCyan.value,
-      brightWhite: brightWhite.value,
+      black: palette.black.value,
+      red: palette.red.value,
+      green: palette.green.value,
+      yellow: palette.yellow.value,
+      blue: palette.blue.value,
+      magenta: palette.magenta.value,
+      cyan: palette.cyan.value,
+      white: palette.white.value,
+      brightBlack: brightPalette.black.value,
+      brightRed: brightPalette.red.value,
+      brightGreen: brightPalette.green.value,
+      brightYellow: brightPalette.yellow.value,
+      brightBlue: brightPalette.black.value,
+      brightMagenta: brightPalette.magenta.value,
+      brightCyan: brightPalette.cyan.value,
+      brightWhite: brightPalette.white.value,
       searchHitBackground: searchHitBackground.value,
       searchHitBackgroundCurrent: searchHitBackgroundCurrent.value,
       searchHitForeground: searchHitForeground.value,
