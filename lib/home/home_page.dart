@@ -9,7 +9,6 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../instances/instance_view.dart';
 import '../launcher/launcher_wizard.dart';
-import '../preferences/preferences_dialog.dart';
 import '../terminal/terminal_page.dart';
 import '../widgets/context_menu.dart';
 import 'home_menu.dart';
@@ -76,17 +75,11 @@ class HomePage extends StatelessWidget {
                       ),
                     );
                   },
-                  trailing: PopupMenuButton<VoidCallback>(
-                    icon: const Icon(Icons.more_vert),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.add),
                     splashRadius: 16,
                     iconSize: 16,
-                    onSelected: (callback) => callback(),
-                    itemBuilder: (context) => [
-                      PopupMenuItem(
-                        child: const Text('Preferences'),
-                        value: () => showPreferencesDialog(context: context),
-                      ),
-                    ],
+                    onPressed: model.addTab,
                   ),
                   onMoved: model.moveTab,
                   preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
@@ -119,8 +112,31 @@ class HomePage extends StatelessWidget {
                   child: const Icon(Icons.add),
                 ),
               ),
-              orElse: () =>
-                  TerminalPage.create(context, model.currentController),
+              orElse: () => Stack(
+                children: [
+                  Positioned.fill(
+                    child: TerminalPage.create(
+                      context,
+                      model.currentController,
+                    ),
+                  ),
+                  if (model.tabCount == 1)
+                    Positioned.directional(
+                      textDirection: Directionality.of(context),
+                      top: 4,
+                      end: 0,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: IconButton(
+                          icon: const Icon(Icons.add),
+                          splashRadius: 16,
+                          iconSize: 16,
+                          onPressed: model.addTab,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
