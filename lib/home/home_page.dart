@@ -120,7 +120,7 @@ class HomePage extends StatelessWidget {
                       model.currentController,
                     ),
                   ),
-                  if (model.tabCount == 1)
+                  if (model.tabCount == 1 && model.currentTerminal != null)
                     Positioned.directional(
                       textDirection: Directionality.of(context),
                       top: 4,
@@ -129,6 +129,7 @@ class HomePage extends StatelessWidget {
                         color: Colors.transparent,
                         child: IconButton(
                           icon: const Icon(Icons.add),
+                          color: Colors.white,
                           splashRadius: 16,
                           iconSize: 16,
                           onPressed: model.addTab,
