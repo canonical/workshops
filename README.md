@@ -14,3 +14,7 @@ as well as provides a full featured terminal.
 ![launch-instance](.github/launch-instance.png)
 ![downloading-instance](.github/downloading-instance.png)
 ![terminal](.github/terminal.png)
+
+### Translations
+
+Workshops is being translated using [Weblate](https://hosted.weblate.org/engage/workshops/), a web tool designed to ease translating for both developers and translators.
