@@ -150,7 +150,7 @@ class _DropdownField<T> extends StatelessWidget {
           child: DefaultTextStyle(
             style: TextStyle(
               color: availableValues.contains(v)
-                  ? null
+                  ? Theme.of(context).textTheme.bodyText1?.color
                   : Theme.of(context).disabledColor,
             ),
             child: itemBuilder(context, v, null),
