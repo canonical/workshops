@@ -11,8 +11,6 @@ as well as provides a full featured terminal.
 
 ![select-os](.github/select-os.png)
 ![select-features](.github/select-features.png)
-![launch-instance](.github/launch-instance.png)
-![downloading-instance](.github/downloading-instance.png)
 ![terminal](.github/terminal.png)
 
 ### Translations
