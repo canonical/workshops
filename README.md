@@ -9,4 +9,8 @@
 Workshops provides a user friendly interface to create and manage LXD containers
 as well as provides a full featured terminal.
 
-![screenshot](screenshot.png)
+![select-os](.github/select-os.png)
+![select-features](.github/select-features.png)
+![launch-instance](.github/launch-instance.png)
+![downloading-instance](.github/downloading-instance.png)
+![terminal](.github/terminal.png)
