@@ -11,6 +11,7 @@ class LxdApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return YaruTheme(builder: (context, yaru, child) {
       return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: yaru.variant?.theme ?? yaruLight,
         darkTheme: yaru.variant?.darkTheme ?? yaruDark,
         highContrastTheme: yaruHighContrastLight,
