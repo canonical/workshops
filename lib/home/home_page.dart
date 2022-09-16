@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lxd_service/lxd_service.dart';
@@ -10,7 +11,6 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 import '../instances/instance_view.dart';
 import '../launcher/launcher_wizard.dart';
 import '../terminal/terminal_page.dart';
-import '../widgets/context_menu.dart';
 import 'home_menu.dart';
 import 'home_model.dart';
 
