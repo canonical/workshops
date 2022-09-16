@@ -13,9 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.0.5'
-        channel: 'stable'
     - run: flutter pub global activate melos
     - run: sudo apt update
     - run: sudo apt install -y clang cmake curl libgtk-3-dev ninja-build pkg-config unzip xvfb
@@ -25,7 +22,6 @@ jobs:
     - run: melos build
 
   snap:
-    if: ${{false}}
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
