@@ -29,7 +29,7 @@ class MovableTabButton extends StatelessWidget {
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
           shape: const BeveledRectangleBorder(),
-          primary: selected == true
+          foregroundColor: selected == true
               ? theme.tabBarTheme.labelColor
               : theme.tabBarTheme.unselectedLabelColor,
         ),

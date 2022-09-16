@@ -69,8 +69,8 @@ class _OsTile extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(8),
-        primary: theme.cardColor,
-        onPrimary: theme.colorScheme.onSurface,
+        backgroundColor: theme.cardColor,
+        foregroundColor: theme.colorScheme.onSurface,
         surfaceTintColor: Colors.transparent,
         elevation: 1,
       ),
