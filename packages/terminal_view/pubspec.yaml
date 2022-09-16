@@ -15,7 +15,7 @@ dependencies:
   xterm:
     git:
       url: https://github.com/jpnurmi/xterm.dart
-      ref: eb462568e75b7329bb7401095a7f3d1ff1e8c21d
+      ref: 085c9acafcec02bdf2b61aa49e013d6b3cfc1480
 
 dev_dependencies:
   flutter_lints: ^2.0.0
