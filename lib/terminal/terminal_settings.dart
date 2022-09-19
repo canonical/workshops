@@ -2,14 +2,13 @@ import 'dart:ui';
 
 import 'package:terminal_view/terminal_view.dart';
 
+import 'terminal_colors.dart';
+
 // TODO: configurable
 const terminalTheme = TerminalThemeData(
   fontSize: 16,
   fontFamily: 'Ubuntu Mono',
-  scheme: TerminalScheme(
-    foreground: Color(0xffffffff),
-    background: Color(0xff380c2a),
-  ),
+  scheme: TerminalSchemes.ubuntu,
   palette: TerminalPalette(
     black: Color(0XFF000000),
     red: Color(0XFFCD3131),
