@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lxd_x/lxd_x.dart';
 import 'package:provider/provider.dart';
 import 'package:terminal_view/terminal_view.dart';
 
@@ -28,7 +29,7 @@ class TerminalPage extends StatelessWidget {
       start: (_, __) => TerminalProgress.create(context, controller.state),
       restart: (_, __) => TerminalProgress.create(context, controller.state),
       running: (name, terminal) => TerminalTheme(
-        data: terminalTheme,
+        data: getTerminalTheme(terminal.instance.os),
         child: TerminalView(terminal: terminal),
       ),
       stop: (_, __) => TerminalProgress.create(context, controller.state),
