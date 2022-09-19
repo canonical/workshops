@@ -90,10 +90,10 @@ class Terminal extends ChangeNotifier {
 extension _XtermTheme on TerminalThemeData {
   xterm.TerminalTheme toXterm() {
     return xterm.TerminalTheme(
-      cursor: cursor.value,
-      selection: selection.value,
-      foreground: foreground.value,
-      background: background.value,
+      cursor: scheme.foreground.value, // TODO: nullable in xterm.dart
+      selection: scheme.foreground.value, // TODO: nullable in xterm.dart
+      foreground: scheme.foreground.value,
+      background: scheme.background.value,
       black: palette.black.value,
       red: palette.red.value,
       green: palette.green.value,

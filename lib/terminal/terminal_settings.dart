@@ -6,10 +6,10 @@ import 'package:terminal_view/terminal_view.dart';
 const terminalTheme = TerminalThemeData(
   fontSize: 16,
   fontFamily: 'Ubuntu Mono',
-  cursor: Color(0xffffffff),
-  selection: Color(0Xffffffff),
-  foreground: Color(0xffffffff),
-  background: Color(0xff380c2a),
+  scheme: TerminalScheme(
+    foreground: Color(0xffffffff),
+    background: Color(0xff380c2a),
+  ),
   palette: TerminalPalette(
     black: Color(0XFF000000),
     red: Color(0XFFCD3131),
