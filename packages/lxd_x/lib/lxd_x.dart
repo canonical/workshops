@@ -103,6 +103,8 @@ extension LxdImageX on LxdImage {
 }
 
 extension LxdInstanceX on LxdInstance {
+  String? get os => config['image.os'];
+
   bool get isBusy => isStarting || isStopping;
   bool get isStarting => statusCode == LxdStatusCode.starting;
   bool get isStarted => statusCode == LxdStatusCode.started;

@@ -33,10 +33,7 @@ class TerminalThemeData with Diagnosticable {
   const TerminalThemeData({
     required this.fontSize,
     required this.fontFamily,
-    required this.cursor,
-    required this.selection,
-    required this.foreground,
-    required this.background,
+    required this.scheme,
     required this.palette,
     required this.brightPalette,
     required this.searchHitBackground,
@@ -46,10 +43,7 @@ class TerminalThemeData with Diagnosticable {
 
   final double fontSize;
   final String fontFamily;
-  final Color cursor;
-  final Color selection;
-  final Color foreground;
-  final Color background;
+  final TerminalScheme scheme;
   final TerminalPalette palette;
   final TerminalPalette brightPalette;
   final Color searchHitBackground;
@@ -59,10 +53,7 @@ class TerminalThemeData with Diagnosticable {
   TerminalThemeData copyWith({
     double? fontSize,
     String? fontFamily,
-    Color? cursor,
-    Color? selection,
-    Color? foreground,
-    Color? background,
+    TerminalScheme? scheme,
     TerminalPalette? palette,
     TerminalPalette? brightPalette,
     Color? searchHitBackground,
@@ -72,10 +63,7 @@ class TerminalThemeData with Diagnosticable {
     return TerminalThemeData(
       fontSize: fontSize ?? this.fontSize,
       fontFamily: fontFamily ?? this.fontFamily,
-      cursor: cursor ?? this.cursor,
-      selection: selection ?? this.selection,
-      foreground: foreground ?? this.foreground,
-      background: background ?? this.background,
+      scheme: scheme ?? this.scheme,
       palette: palette ?? this.palette,
       brightPalette: brightPalette ?? this.brightPalette,
       searchHitBackground: searchHitBackground ?? this.searchHitBackground,
@@ -91,10 +79,7 @@ class TerminalThemeData with Diagnosticable {
     return other is TerminalThemeData &&
         other.fontSize == fontSize &&
         other.fontFamily == fontFamily &&
-        other.cursor == cursor &&
-        other.selection == selection &&
-        other.foreground == foreground &&
-        other.background == background &&
+        other.scheme == scheme &&
         other.palette == palette &&
         other.brightPalette == brightPalette &&
         other.searchHitBackground == searchHitBackground &&
@@ -107,10 +92,7 @@ class TerminalThemeData with Diagnosticable {
     return Object.hash(
       fontSize,
       fontFamily,
-      cursor,
-      selection,
-      foreground,
-      background,
+      scheme,
       palette,
       brightPalette,
       searchHitBackground,
@@ -118,6 +100,39 @@ class TerminalThemeData with Diagnosticable {
       searchHitForeground,
     );
   }
+}
+
+@immutable
+class TerminalScheme {
+  const TerminalScheme({
+    required this.foreground,
+    required this.background,
+  });
+
+  final Color foreground;
+  final Color background;
+
+  TerminalScheme copyWith({
+    Color? foreground,
+    Color? background,
+  }) {
+    return TerminalScheme(
+      foreground: foreground ?? this.foreground,
+      background: background ?? this.background,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is TerminalScheme &&
+        other.foreground == foreground &&
+        other.background == background;
+  }
+
+  @override
+  int get hashCode => Object.hash(foreground.hashCode, background.hashCode);
 }
 
 @immutable
