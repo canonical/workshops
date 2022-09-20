@@ -4,8 +4,8 @@ import 'package:yaru/yaru.dart';
 
 import 'home/home_page.dart';
 
-class LxdApp extends StatelessWidget {
-  const LxdApp({super.key});
+class Workshops extends StatelessWidget {
+  const Workshops({super.key});
 
   @override
   Widget build(BuildContext context) {

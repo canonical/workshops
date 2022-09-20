@@ -69,7 +69,7 @@ Future<void> main() async {
           },
         ),
       ],
-      child: const LxdApp(),
+      child: const Workshops(),
     ),
   );
 }
