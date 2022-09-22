@@ -17,9 +17,9 @@ class InstanceView extends StatefulWidget {
   });
 
   final String? selected;
-  final ValueChanged<String>? onSelect;
-  final ValueChanged<String>? onStop;
-  final ValueChanged<String>? onDelete;
+  final ValueChanged<LxdInstance>? onSelect;
+  final ValueChanged<LxdInstance>? onStop;
+  final ValueChanged<LxdInstance>? onDelete;
 
   @override
   State<InstanceView> createState() => _InstanceViewState();
@@ -67,9 +67,9 @@ class _InstanceListView extends StatelessWidget {
 
   final List<String>? instances;
   final String? selected;
-  final ValueChanged<String>? onSelect;
-  final ValueChanged<String>? onStop;
-  final ValueChanged<String>? onDelete;
+  final ValueChanged<LxdInstance>? onSelect;
+  final ValueChanged<LxdInstance>? onStop;
+  final ValueChanged<LxdInstance>? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +83,9 @@ class _InstanceListView extends StatelessWidget {
           create: (_) => model.createState(name),
           child: _InstanceListTile(
             name: name,
-            onSelect: onSelect != null ? () => onSelect!(name) : null,
-            onStop: onStop != null ? () => onStop!(name) : null,
-            onDelete: onDelete != null ? () => onDelete!(name) : null,
+            onSelect: onSelect,
+            onStop: onStop,
+            onDelete: onDelete,
           ),
         );
       },
@@ -102,9 +102,9 @@ class _InstanceListTile extends StatefulWidget {
   });
 
   final String name;
-  final VoidCallback? onSelect;
-  final VoidCallback? onStop;
-  final VoidCallback? onDelete;
+  final ValueChanged<LxdInstance>? onSelect;
+  final ValueChanged<LxdInstance>? onStop;
+  final ValueChanged<LxdInstance>? onDelete;
 
   @override
   State<_InstanceListTile> createState() => _InstanceListTileState();
@@ -124,6 +124,7 @@ class _InstanceListTileState extends State<_InstanceListTile> {
     final instance = state.instance.valueOrNull;
     final canStop = widget.onStop != null && instance?.isRunning == true;
     final canDelete = widget.onDelete != null && instance?.isStopped == true;
+    final canSelect = widget.onSelect != null && instance != null;
     return ListTile(
       leading: ProductLogo.asset(name: instance?.imageName, size: 48),
       title: Text(instance?.name ?? ''),
@@ -131,11 +132,11 @@ class _InstanceListTileState extends State<_InstanceListTile> {
       trailing: instance?.isBusy == true
           ? _BusyButton()
           : canStop
-              ? _StopButton(widget.onStop!)
+              ? _StopButton(() => widget.onStop!(instance!))
               : canDelete
-                  ? _DeleteButton(widget.onDelete!)
+                  ? _DeleteButton(() => widget.onDelete!(instance!))
                   : null,
-      onTap: widget.onSelect,
+      onTap: canSelect ? () => widget.onSelect!(instance) : null,
     );
   }
 }

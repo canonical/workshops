@@ -16,8 +16,8 @@ abstract class TerminalWatcher extends SafeChangeNotifier {
     return state.when(
       none: () => throw UnsupportedError('none'),
       create: (_, op) => OperationWatcher(op.id, service),
-      init: (name, _) => InstanceWatcher(name, service),
-      config: (name, _) => InstanceWatcher(name, service),
+      init: (instance, _) => InstanceWatcher(instance.name, service),
+      config: (instance, _) => InstanceWatcher(instance.name, service),
       stage: (_, op) => OperationWatcher(op.id, service),
       start: (_, op) => OperationWatcher(op.id, service),
       restart: (_, op) => OperationWatcher(op.id, service),
