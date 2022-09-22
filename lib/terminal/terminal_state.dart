@@ -11,17 +11,18 @@ class TerminalState with _$TerminalState {
   const factory TerminalState.error([String? message]) = TerminalError;
   const factory TerminalState.create(String name, LxdOperation op) =
       TerminalCreate;
-  const factory TerminalState.init(String name, LxdFeature feature) =
+  const factory TerminalState.init(LxdInstance instance, LxdFeature feature) =
       TerminalInit;
-  const factory TerminalState.config(String name, LxdFeature feature) =
+  const factory TerminalState.config(LxdInstance instance, LxdFeature feature) =
       TerminalConfig;
-  const factory TerminalState.stage(String name, LxdOperation op) =
+  const factory TerminalState.stage(LxdInstance instance, LxdOperation op) =
       TerminalStage;
-  const factory TerminalState.start(String name, LxdOperation op) =
+  const factory TerminalState.start(LxdInstance instance, LxdOperation op) =
       TerminalStart;
-  const factory TerminalState.restart(String name, LxdOperation op) =
+  const factory TerminalState.restart(LxdInstance instance, LxdOperation op) =
       TerminalRestart;
-  const factory TerminalState.running(String name, Terminal terminal) =
+  const factory TerminalState.running(LxdInstance instance, Terminal terminal) =
       TerminalRunning;
-  const factory TerminalState.stop(String name, LxdOperation op) = TerminalStop;
+  const factory TerminalState.stop(LxdInstance instance, LxdOperation op) =
+      TerminalStop;
 }

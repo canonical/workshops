@@ -69,28 +69,35 @@ class HomeModel extends ChangeNotifier {
   }
 
   Future<void> createInstance(LxdImage image, {LxdRemote? remote}) async {
-    final name = await currentController.create(image, remote: remote);
-    if (name != null) {
-      return configureInstance(name, image);
+    final instance = await currentController.create(image, remote: remote);
+    if (instance != null) {
+      return configureInstance(instance, image);
     }
   }
 
-  Future<void> configureInstance(String name, LxdImage image) async {
-    if (await currentController.configure(name, image)) {
-      return startInstance(name);
+  Future<void> configureInstance(LxdInstance instance, LxdImage image) async {
+    if (await currentController.configure(instance, image)) {
+      return startInstance(instance);
     }
   }
 
-  Future<void> startInstance(String name) async {
-    if (await currentController.start(name)) {
-      return runInstance(name);
+  Future<void> startInstance(LxdInstance instance) async {
+    if (await currentController.start(instance)) {
+      return runInstance(instance);
     }
   }
 
-  Future<void> runInstance(String name) => currentController.run(name);
+  Future<void> runInstance(LxdInstance instance) {
+    return currentController.run(instance);
+  }
 
-  Future<void> stopInstance(String name) => _service.stopInstance(name);
-  Future<void> deleteInstance(String name) => _service.deleteInstance(name);
+  Future<void> stopInstance(LxdInstance instance) {
+    return _service.stopInstance(instance.name);
+  }
+
+  Future<void> deleteInstance(LxdInstance instance) {
+    return _service.deleteInstance(instance.name);
+  }
 
   @override
   void dispose() {
