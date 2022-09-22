@@ -4,6 +4,7 @@ import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lxd_service/lxd_service.dart';
+import 'package:lxd_x/lxd_x.dart';
 import 'package:movable_tabs/movable_tabs.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -11,6 +12,7 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 import '../instances/instance_view.dart';
 import '../launcher/launcher_wizard.dart';
 import '../terminal/terminal_page.dart';
+import '../widgets/product_logo.dart';
 import 'home_menu.dart';
 import 'home_model.dart';
 
@@ -64,13 +66,15 @@ class HomePage extends StatelessWidget {
                       selected: index == model.currentIndex,
                       onPressed: () => model.currentIndex = index,
                       onClosed: () => model.closeTab(index),
-                      label: terminal.maybeWhen(
-                        running: (instance, running) => AnimatedBuilder(
-                          animation: running,
-                          builder: (context, child) {
-                            return Text(running.title ?? instance.name);
-                          },
+                      icon: terminal.maybeWhen(
+                        none: () => null,
+                        orElse: () => ProductLogo.asset(
+                          name: terminal.instance?.os,
+                          size: 32,
                         ),
+                      ),
+                      label: terminal.maybeWhen(
+                        running: (instance, running) => Text(instance.name),
                         orElse: () => const Text('Home'),
                       ),
                     );
