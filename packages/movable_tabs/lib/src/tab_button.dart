@@ -51,21 +51,23 @@ class MovableTabButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                if (icon != null)
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: icon!,
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 8,
+                    top: 8,
+                    bottom: 8,
                   ),
-                if (label != null)
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: label!,
-                      ),
+                  child: icon,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: label!,
                     ),
                   ),
+                ),
                 if (onClosed != null)
                   Padding(
                     padding: const EdgeInsets.all(8),
