@@ -142,8 +142,8 @@ class __$$TerminalNoneCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalNone implements TerminalNone {
-  const _$TerminalNone();
+class _$TerminalNone extends TerminalNone {
+  const _$TerminalNone() : super._();
 
   @override
   String toString() {
@@ -270,8 +270,9 @@ class _$TerminalNone implements TerminalNone {
   }
 }
 
-abstract class TerminalNone implements TerminalState {
+abstract class TerminalNone extends TerminalState {
   const factory TerminalNone() = _$TerminalNone;
+  const TerminalNone._() : super._();
 }
 
 /// @nodoc
@@ -308,8 +309,8 @@ class __$$TerminalErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalError implements TerminalError {
-  const _$TerminalError([this.message]);
+class _$TerminalError extends TerminalError {
+  const _$TerminalError([this.message]) : super._();
 
   @override
   final String? message;
@@ -447,8 +448,9 @@ class _$TerminalError implements TerminalError {
   }
 }
 
-abstract class TerminalError implements TerminalState {
+abstract class TerminalError extends TerminalState {
   const factory TerminalError([final String? message]) = _$TerminalError;
+  const TerminalError._() : super._();
 
   String? get message;
   @JsonKey(ignore: true)
@@ -504,8 +506,8 @@ class __$$TerminalCreateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalCreate implements TerminalCreate {
-  const _$TerminalCreate(this.name, this.op);
+class _$TerminalCreate extends TerminalCreate {
+  const _$TerminalCreate(this.name, this.op) : super._();
 
   @override
   final String name;
@@ -648,9 +650,10 @@ class _$TerminalCreate implements TerminalCreate {
   }
 }
 
-abstract class TerminalCreate implements TerminalState {
+abstract class TerminalCreate extends TerminalState {
   const factory TerminalCreate(final String name, final LxdOperation op) =
       _$TerminalCreate;
+  const TerminalCreate._() : super._();
 
   String get name;
   LxdOperation get op;
@@ -707,8 +710,8 @@ class __$$TerminalInitCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalInit implements TerminalInit {
-  const _$TerminalInit(this.instance, this.feature);
+class _$TerminalInit extends TerminalInit {
+  const _$TerminalInit(this.instance, this.feature) : super._();
 
   @override
   final LxdInstance instance;
@@ -851,9 +854,10 @@ class _$TerminalInit implements TerminalInit {
   }
 }
 
-abstract class TerminalInit implements TerminalState {
+abstract class TerminalInit extends TerminalState {
   const factory TerminalInit(
       final LxdInstance instance, final LxdFeature feature) = _$TerminalInit;
+  const TerminalInit._() : super._();
 
   LxdInstance get instance;
   LxdFeature get feature;
@@ -910,8 +914,8 @@ class __$$TerminalConfigCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalConfig implements TerminalConfig {
-  const _$TerminalConfig(this.instance, this.feature);
+class _$TerminalConfig extends TerminalConfig {
+  const _$TerminalConfig(this.instance, this.feature) : super._();
 
   @override
   final LxdInstance instance;
@@ -1054,9 +1058,10 @@ class _$TerminalConfig implements TerminalConfig {
   }
 }
 
-abstract class TerminalConfig implements TerminalState {
+abstract class TerminalConfig extends TerminalState {
   const factory TerminalConfig(
       final LxdInstance instance, final LxdFeature feature) = _$TerminalConfig;
+  const TerminalConfig._() : super._();
 
   LxdInstance get instance;
   LxdFeature get feature;
@@ -1121,8 +1126,8 @@ class __$$TerminalStageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalStage implements TerminalStage {
-  const _$TerminalStage(this.instance, this.op);
+class _$TerminalStage extends TerminalStage {
+  const _$TerminalStage(this.instance, this.op) : super._();
 
   @override
   final LxdInstance instance;
@@ -1265,9 +1270,10 @@ class _$TerminalStage implements TerminalStage {
   }
 }
 
-abstract class TerminalStage implements TerminalState {
+abstract class TerminalStage extends TerminalState {
   const factory TerminalStage(
       final LxdInstance instance, final LxdOperation op) = _$TerminalStage;
+  const TerminalStage._() : super._();
 
   LxdInstance get instance;
   LxdOperation get op;
@@ -1332,8 +1338,8 @@ class __$$TerminalStartCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalStart implements TerminalStart {
-  const _$TerminalStart(this.instance, this.op);
+class _$TerminalStart extends TerminalStart {
+  const _$TerminalStart(this.instance, this.op) : super._();
 
   @override
   final LxdInstance instance;
@@ -1476,9 +1482,10 @@ class _$TerminalStart implements TerminalStart {
   }
 }
 
-abstract class TerminalStart implements TerminalState {
+abstract class TerminalStart extends TerminalState {
   const factory TerminalStart(
       final LxdInstance instance, final LxdOperation op) = _$TerminalStart;
+  const TerminalStart._() : super._();
 
   LxdInstance get instance;
   LxdOperation get op;
@@ -1543,8 +1550,8 @@ class __$$TerminalRestartCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalRestart implements TerminalRestart {
-  const _$TerminalRestart(this.instance, this.op);
+class _$TerminalRestart extends TerminalRestart {
+  const _$TerminalRestart(this.instance, this.op) : super._();
 
   @override
   final LxdInstance instance;
@@ -1687,9 +1694,10 @@ class _$TerminalRestart implements TerminalRestart {
   }
 }
 
-abstract class TerminalRestart implements TerminalState {
+abstract class TerminalRestart extends TerminalState {
   const factory TerminalRestart(
       final LxdInstance instance, final LxdOperation op) = _$TerminalRestart;
+  const TerminalRestart._() : super._();
 
   LxdInstance get instance;
   LxdOperation get op;
@@ -1746,8 +1754,8 @@ class __$$TerminalRunningCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalRunning implements TerminalRunning {
-  const _$TerminalRunning(this.instance, this.terminal);
+class _$TerminalRunning extends TerminalRunning {
+  const _$TerminalRunning(this.instance, this.terminal) : super._();
 
   @override
   final LxdInstance instance;
@@ -1890,9 +1898,10 @@ class _$TerminalRunning implements TerminalRunning {
   }
 }
 
-abstract class TerminalRunning implements TerminalState {
+abstract class TerminalRunning extends TerminalState {
   const factory TerminalRunning(
       final LxdInstance instance, final Terminal terminal) = _$TerminalRunning;
+  const TerminalRunning._() : super._();
 
   LxdInstance get instance;
   Terminal get terminal;
@@ -1957,8 +1966,8 @@ class __$$TerminalStopCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TerminalStop implements TerminalStop {
-  const _$TerminalStop(this.instance, this.op);
+class _$TerminalStop extends TerminalStop {
+  const _$TerminalStop(this.instance, this.op) : super._();
 
   @override
   final LxdInstance instance;
@@ -2101,9 +2110,10 @@ class _$TerminalStop implements TerminalStop {
   }
 }
 
-abstract class TerminalStop implements TerminalState {
+abstract class TerminalStop extends TerminalState {
   const factory TerminalStop(
       final LxdInstance instance, final LxdOperation op) = _$TerminalStop;
+  const TerminalStop._() : super._();
 
   LxdInstance get instance;
   LxdOperation get op;

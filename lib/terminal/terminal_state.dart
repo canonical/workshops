@@ -7,6 +7,7 @@ part 'terminal_state.freezed.dart';
 
 @freezed
 class TerminalState with _$TerminalState {
+  const TerminalState._();
   const factory TerminalState.none() = TerminalNone;
   const factory TerminalState.error([String? message]) = TerminalError;
   const factory TerminalState.create(String name, LxdOperation op) =
@@ -25,4 +26,19 @@ class TerminalState with _$TerminalState {
       TerminalRunning;
   const factory TerminalState.stop(LxdInstance instance, LxdOperation op) =
       TerminalStop;
+
+  LxdInstance? get instance {
+    return when(
+      none: () => null,
+      error: (message) => null,
+      create: (name, op) => null,
+      init: (instance, feature) => instance,
+      config: (instance, feature) => instance,
+      stage: (instance, op) => instance,
+      start: (instance, op) => instance,
+      restart: (instance, op) => instance,
+      running: (instance, terminal) => instance,
+      stop: (instance, op) => instance,
+    );
+  }
 }
