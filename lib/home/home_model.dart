@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
-import 'package:terminal_view/terminal_view.dart';
+import 'package:lxd_terminal/lxd_terminal.dart';
 
 import '../terminal/terminal_controller.dart';
 import '../terminal/terminal_state.dart';
@@ -21,9 +21,9 @@ class HomeModel extends ChangeNotifier {
   TerminalState? state(int index) => controller(index)?.state;
   TerminalState get currentState => state(_currentIndex)!;
 
-  Terminal? terminal(int index) =>
+  LxdTerminal? terminal(int index) =>
       state(index)?.whenOrNull(running: (instance, terminal) => terminal);
-  Terminal? get currentTerminal => terminal(_currentIndex);
+  LxdTerminal? get currentTerminal => terminal(_currentIndex);
 
   TerminalController? controller(int index) =>
       _controllers.elementAtOrNull(index);

@@ -1,10 +1,10 @@
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:terminal_view/terminal_view.dart';
+import 'package:lxd_terminal/lxd_terminal.dart';
 
 List<PopupMenuEntry> buildContextMenu({
   required BuildContext context,
-  required Terminal? current,
+  required LxdTerminal? current,
   required int tabCount,
   required VoidCallback? onNewTab,
   required VoidCallback? onCloseTab,

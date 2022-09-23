@@ -119,9 +119,21 @@ class HomePage extends StatelessWidget {
               orElse: () => Stack(
                 children: [
                   Positioned.fill(
-                    child: TerminalPage.create(
-                      context,
-                      model.currentController,
+                    child: TerminalPage(
+                      controller: model.currentController,
+                      onContextMenu: (position) {
+                        showContextMenu(
+                          context: context,
+                          position: position,
+                          items: buildContextMenu(
+                            context: context,
+                            current: model.currentTerminal,
+                            tabCount: model.tabCount,
+                            onNewTab: model.addTab,
+                            onCloseTab: model.closeTab,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   if (model.tabCount == 1 && model.currentTerminal != null)

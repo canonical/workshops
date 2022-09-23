@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
-import 'package:terminal_view/terminal_view.dart';
+import 'package:lxd_terminal/lxd_terminal.dart';
 
 part 'terminal_state.freezed.dart';
 
@@ -22,8 +22,8 @@ class TerminalState with _$TerminalState {
       TerminalStart;
   const factory TerminalState.restart(LxdInstance instance, LxdOperation op) =
       TerminalRestart;
-  const factory TerminalState.running(LxdInstance instance, Terminal terminal) =
-      TerminalRunning;
+  const factory TerminalState.running(
+      LxdInstance instance, LxdTerminal terminal) = TerminalRunning;
   const factory TerminalState.stop(LxdInstance instance, LxdOperation op) =
       TerminalStop;
 

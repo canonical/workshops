@@ -8,14 +8,24 @@ import 'terminal_progress.dart';
 import 'terminal_settings.dart';
 
 class TerminalPage extends StatelessWidget {
-  const TerminalPage({super.key});
+  const TerminalPage({super.key, required this.controller, this.onContextMenu});
 
-  static Widget create(BuildContext context, TerminalController controller) {
+  final TerminalController controller;
+  final void Function(Offset position)? onContextMenu;
+
+  @override
+  Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: controller,
-      child: const TerminalPage(),
+      child: _TerminalPage(onContextMenu: onContextMenu),
     );
   }
+}
+
+class _TerminalPage extends StatelessWidget {
+  const _TerminalPage({this.onContextMenu});
+
+  final void Function(Offset position)? onContextMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +40,11 @@ class TerminalPage extends StatelessWidget {
       restart: (_, __) => TerminalProgress.create(context, controller.state),
       running: (instance, terminal) => TerminalTheme(
         data: getTerminalTheme(instance.os),
-        child: TerminalView(terminal: terminal),
+        child: TerminalView(
+          terminal: terminal,
+          controller: terminal.controller,
+          onContextMenu: onContextMenu,
+        ),
       ),
       stop: (_, __) => TerminalProgress.create(context, controller.state),
       error: (error) => Text('TODO: $error'),

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:lxd/lxd.dart';
 import 'package:xterm/xterm.dart';
 
@@ -11,10 +12,36 @@ class LxdTerminal extends Terminal {
   LxdTerminal(this.client, {required super.maxLines});
 
   final LxdClient client;
+  final controller = TerminalController();
 
   WebSocket? _ws0;
   WebSocket? _wsc;
   StreamSubscription? _sub;
+
+  String? get selectedText => controller.selection != null
+      ? buffer.getText(controller.selection)
+      : null;
+
+  Future<void> copy() async {
+    final data = ClipboardData(text: selectedText);
+    return Clipboard.setData(data);
+  }
+
+  @override
+  Future<void> paste([String? text]) async {
+    text ??= await Clipboard.getData(Clipboard.kTextPlain)
+        .then((data) => data?.text);
+    super.paste(text ?? '');
+  }
+
+  void selectAll() {
+    controller.setSelection(
+      BufferRangeLine(
+        CellOffset(0, buffer.height - viewHeight),
+        CellOffset(viewWidth, buffer.height - 1),
+      ),
+    );
+  }
 
   Future<void> close() async {
     await _sub?.cancel();

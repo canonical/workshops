@@ -26,7 +26,8 @@ mixin _$TerminalState {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,7 +41,7 @@ mixin _$TerminalState {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +55,7 @@ mixin _$TerminalState {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) =>
@@ -170,7 +171,8 @@ class _$TerminalNone extends TerminalNone {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return none();
@@ -187,7 +189,7 @@ class _$TerminalNone extends TerminalNone {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return none?.call();
@@ -204,7 +206,7 @@ class _$TerminalNone extends TerminalNone {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
@@ -348,7 +350,8 @@ class _$TerminalError extends TerminalError {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return error(message);
@@ -365,7 +368,7 @@ class _$TerminalError extends TerminalError {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return error?.call(message);
@@ -382,7 +385,7 @@ class _$TerminalError extends TerminalError {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
@@ -550,7 +553,8 @@ class _$TerminalCreate extends TerminalCreate {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return create(name, op);
@@ -567,7 +571,7 @@ class _$TerminalCreate extends TerminalCreate {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return create?.call(name, op);
@@ -584,7 +588,7 @@ class _$TerminalCreate extends TerminalCreate {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
@@ -754,7 +758,8 @@ class _$TerminalInit extends TerminalInit {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return init(instance, feature);
@@ -771,7 +776,7 @@ class _$TerminalInit extends TerminalInit {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return init?.call(instance, feature);
@@ -788,7 +793,7 @@ class _$TerminalInit extends TerminalInit {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
@@ -958,7 +963,8 @@ class _$TerminalConfig extends TerminalConfig {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return config(instance, feature);
@@ -975,7 +981,7 @@ class _$TerminalConfig extends TerminalConfig {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return config?.call(instance, feature);
@@ -992,7 +998,7 @@ class _$TerminalConfig extends TerminalConfig {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
@@ -1170,7 +1176,8 @@ class _$TerminalStage extends TerminalStage {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return stage(instance, op);
@@ -1187,7 +1194,7 @@ class _$TerminalStage extends TerminalStage {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return stage?.call(instance, op);
@@ -1204,7 +1211,7 @@ class _$TerminalStage extends TerminalStage {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
@@ -1382,7 +1389,8 @@ class _$TerminalStart extends TerminalStart {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return start(instance, op);
@@ -1399,7 +1407,7 @@ class _$TerminalStart extends TerminalStart {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return start?.call(instance, op);
@@ -1416,7 +1424,7 @@ class _$TerminalStart extends TerminalStart {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
@@ -1594,7 +1602,8 @@ class _$TerminalRestart extends TerminalRestart {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return restart(instance, op);
@@ -1611,7 +1620,7 @@ class _$TerminalRestart extends TerminalRestart {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return restart?.call(instance, op);
@@ -1628,7 +1637,7 @@ class _$TerminalRestart extends TerminalRestart {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
@@ -1711,7 +1720,7 @@ abstract class _$$TerminalRunningCopyWith<$Res> {
   factory _$$TerminalRunningCopyWith(
           _$TerminalRunning value, $Res Function(_$TerminalRunning) then) =
       __$$TerminalRunningCopyWithImpl<$Res>;
-  $Res call({LxdInstance instance, Terminal terminal});
+  $Res call({LxdInstance instance, LxdTerminal terminal});
 
   $LxdInstanceCopyWith<$Res> get instance;
 }
@@ -1740,7 +1749,7 @@ class __$$TerminalRunningCopyWithImpl<$Res>
       terminal == freezed
           ? _value.terminal
           : terminal // ignore: cast_nullable_to_non_nullable
-              as Terminal,
+              as LxdTerminal,
     ));
   }
 
@@ -1760,7 +1769,7 @@ class _$TerminalRunning extends TerminalRunning {
   @override
   final LxdInstance instance;
   @override
-  final Terminal terminal;
+  final LxdTerminal terminal;
 
   @override
   String toString() {
@@ -1798,7 +1807,8 @@ class _$TerminalRunning extends TerminalRunning {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return running(instance, terminal);
@@ -1815,7 +1825,7 @@ class _$TerminalRunning extends TerminalRunning {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return running?.call(instance, terminal);
@@ -1832,7 +1842,7 @@ class _$TerminalRunning extends TerminalRunning {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
@@ -1900,11 +1910,12 @@ class _$TerminalRunning extends TerminalRunning {
 
 abstract class TerminalRunning extends TerminalState {
   const factory TerminalRunning(
-      final LxdInstance instance, final Terminal terminal) = _$TerminalRunning;
+          final LxdInstance instance, final LxdTerminal terminal) =
+      _$TerminalRunning;
   const TerminalRunning._() : super._();
 
   LxdInstance get instance;
-  Terminal get terminal;
+  LxdTerminal get terminal;
   @JsonKey(ignore: true)
   _$$TerminalRunningCopyWith<_$TerminalRunning> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2010,7 +2021,8 @@ class _$TerminalStop extends TerminalStop {
     required TResult Function(LxdInstance instance, LxdOperation op) stage,
     required TResult Function(LxdInstance instance, LxdOperation op) start,
     required TResult Function(LxdInstance instance, LxdOperation op) restart,
-    required TResult Function(LxdInstance instance, Terminal terminal) running,
+    required TResult Function(LxdInstance instance, LxdTerminal terminal)
+        running,
     required TResult Function(LxdInstance instance, LxdOperation op) stop,
   }) {
     return stop(instance, op);
@@ -2027,7 +2039,7 @@ class _$TerminalStop extends TerminalStop {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
   }) {
     return stop?.call(instance, op);
@@ -2044,7 +2056,7 @@ class _$TerminalStop extends TerminalStop {
     TResult Function(LxdInstance instance, LxdOperation op)? stage,
     TResult Function(LxdInstance instance, LxdOperation op)? start,
     TResult Function(LxdInstance instance, LxdOperation op)? restart,
-    TResult Function(LxdInstance instance, Terminal terminal)? running,
+    TResult Function(LxdInstance instance, LxdTerminal terminal)? running,
     TResult Function(LxdInstance instance, LxdOperation op)? stop,
     required TResult orElse(),
   }) {
