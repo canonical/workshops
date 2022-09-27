@@ -1,0 +1,28 @@
+name: lxd_terminal
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  lxd:
+    git:
+      url: https://github.com/jpnurmi/lxd.dart
+      ref: 9799464c4488f52203407169baca963f88f0e349
+  xterm: # ^3.2.7
+    git:
+      ref: actions
+      url: https://github.com/jpnurmi/xterm.dart.git
+
+dev_dependencies:
+  build_runner: ^2.1.11
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+  mockito: 5.3.0
+
+flutter:
+  uses-material-design: true
