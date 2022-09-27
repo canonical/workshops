@@ -22,7 +22,7 @@ class HomeModel extends ChangeNotifier {
   TerminalState get currentState => state(_currentIndex)!;
 
   Terminal? terminal(int index) =>
-      state(index)?.whenOrNull(running: (name, terminal) => terminal);
+      state(index)?.whenOrNull(running: (instance, terminal) => terminal);
   Terminal? get currentTerminal => terminal(_currentIndex);
 
   TerminalController? controller(int index) =>

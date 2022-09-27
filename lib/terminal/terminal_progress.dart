@@ -26,13 +26,13 @@ class TerminalProgress extends StatelessWidget {
     final title = state.when(
       none: () => '',
       create: (name, op) => 'Creating instance',
-      init: (name, feature) => 'Creating ${feature.name}',
-      config: (name, feature) => 'Configuring ${feature.name}',
-      stage: (name, op) => 'Finalizing features',
-      start: (name, op) => 'Starting instance',
-      restart: (name, op) => 'Restarting instance',
-      running: (name, op) => 'Running instance',
-      stop: (name, op) => 'Stopping instance',
+      init: (instance, feature) => 'Creating ${feature.name}',
+      config: (instance, feature) => 'Configuring ${feature.name}',
+      stage: (instance, op) => 'Finalizing features',
+      start: (instance, op) => 'Starting instance',
+      restart: (instance, op) => 'Restarting instance',
+      running: (instance, op) => 'Running instance',
+      stop: (instance, op) => 'Stopping instance',
       error: (message) => message ?? '',
     );
     return Scaffold(
