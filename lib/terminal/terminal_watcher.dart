@@ -21,8 +21,7 @@ abstract class TerminalWatcher extends SafeChangeNotifier {
       stage: (_, op) => OperationWatcher(op.id, service),
       start: (_, op) => OperationWatcher(op.id, service),
       restart: (_, op) => OperationWatcher(op.id, service),
-      running: (_, terminal) =>
-          throw UnsupportedError(terminal.instance.toString()),
+      running: (instance, _) => throw UnsupportedError(instance.toString()),
       stop: (_, op) => OperationWatcher(op.id, service),
       error: (message) => throw UnsupportedError(message ?? 'error'),
     );

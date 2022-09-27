@@ -28,8 +28,8 @@ class TerminalPage extends StatelessWidget {
       stage: (_, __) => TerminalProgress.create(context, controller.state),
       start: (_, __) => TerminalProgress.create(context, controller.state),
       restart: (_, __) => TerminalProgress.create(context, controller.state),
-      running: (name, terminal) => TerminalTheme(
-        data: getTerminalTheme(terminal.instance.os),
+      running: (instance, terminal) => TerminalTheme(
+        data: getTerminalTheme(instance.os),
         child: TerminalView(terminal: terminal),
       ),
       stop: (_, __) => TerminalProgress.create(context, controller.state),
