@@ -9,6 +9,9 @@ grade: stable
 license: GPL-3.0+
 architectures:
   - build-on: amd64
+    build-for: amd64
+  - build-on: amd64
+    build-for: arm64
 assumes:
   - snapd2.46
 
