@@ -120,7 +120,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Positioned.fill(
                     child: TerminalPage(
-                      controller: model.currentController,
+                      model: model.currentModel,
                       onContextMenu: (position) {
                         showContextMenu(
                           context: context,

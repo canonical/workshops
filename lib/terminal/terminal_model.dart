@@ -4,12 +4,12 @@ import 'package:lxd_terminal/lxd_terminal.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
-import '../terminal/terminal_state.dart';
+import 'terminal_state.dart';
 
 const kTimeout = Duration(seconds: 10);
 
-class TerminalController extends SafeChangeNotifier {
-  TerminalController(this._service);
+class TerminalModel extends SafeChangeNotifier {
+  TerminalModel(this._service);
 
   final LxdService _service;
   var _state = const TerminalState.none();

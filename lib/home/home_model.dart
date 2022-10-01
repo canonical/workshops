@@ -3,7 +3,7 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_terminal/lxd_terminal.dart';
 
-import '../terminal/terminal_controller.dart';
+import '../terminal/terminal_model.dart';
 import '../terminal/terminal_state.dart';
 
 class HomeModel extends ChangeNotifier {
@@ -14,20 +14,19 @@ class HomeModel extends ChangeNotifier {
   final LxdService _service;
 
   var _currentIndex = -1;
-  final _controllers = <TerminalController>[];
+  final _models = <TerminalModel>[];
 
-  int get tabCount => _controllers.length;
+  int get tabCount => _models.length;
 
-  TerminalState? state(int index) => controller(index)?.state;
+  TerminalState? state(int index) => model(index)?.state;
   TerminalState get currentState => state(_currentIndex)!;
 
   LxdTerminal? terminal(int index) =>
       state(index)?.whenOrNull(running: (instance, terminal) => terminal);
   LxdTerminal? get currentTerminal => terminal(_currentIndex);
 
-  TerminalController? controller(int index) =>
-      _controllers.elementAtOrNull(index);
-  TerminalController get currentController => controller(_currentIndex)!;
+  TerminalModel? model(int index) => _models.elementAtOrNull(index);
+  TerminalModel get currentModel => model(_currentIndex)!;
 
   int get currentIndex => _currentIndex;
   set currentIndex(int index) {
@@ -37,21 +36,21 @@ class HomeModel extends ChangeNotifier {
   }
 
   void addTab() {
-    final controller = TerminalController(_service);
-    controller.addListener(notifyListeners);
-    _controllers.add(controller);
-    currentIndex = _controllers.length - 1;
+    final model = TerminalModel(_service);
+    model.addListener(notifyListeners);
+    _models.add(model);
+    currentIndex = _models.length - 1;
   }
 
   void closeTab([int? index]) {
-    final controller = _controllers.removeAt(index ?? _currentIndex);
-    controller.removeListener(notifyListeners);
-    controller.dispose();
-    currentIndex = _currentIndex.clamp(0, _controllers.length - 1);
+    final model = _models.removeAt(index ?? _currentIndex);
+    model.removeListener(notifyListeners);
+    model.dispose();
+    currentIndex = _currentIndex.clamp(0, _models.length - 1);
   }
 
   void moveTab(int from, int to) {
-    _controllers.move(from, to);
+    _models.move(from, to);
     if (_currentIndex == to) {
       currentIndex = from;
     } else if (_currentIndex == from) {
@@ -60,35 +59,35 @@ class HomeModel extends ChangeNotifier {
   }
 
   void nextTab() {
-    currentIndex = (_currentIndex + 1) % _controllers.length;
+    currentIndex = (_currentIndex + 1) % _models.length;
   }
 
   void previousTab() {
     final index = currentIndex - 1;
-    currentIndex = index < 0 ? _controllers.length - 1 : index;
+    currentIndex = index < 0 ? _models.length - 1 : index;
   }
 
   Future<void> createInstance(LxdImage image, {LxdRemote? remote}) async {
-    final instance = await currentController.create(image, remote: remote);
+    final instance = await currentModel.create(image, remote: remote);
     if (instance != null) {
       return configureInstance(instance, image);
     }
   }
 
   Future<void> configureInstance(LxdInstance instance, LxdImage image) async {
-    if (await currentController.configure(instance, image)) {
+    if (await currentModel.configure(instance, image)) {
       return startInstance(instance);
     }
   }
 
   Future<void> startInstance(LxdInstance instance) async {
-    if (await currentController.start(instance)) {
+    if (await currentModel.start(instance)) {
       return runInstance(instance);
     }
   }
 
   Future<void> runInstance(LxdInstance instance) {
-    return currentController.run(instance);
+    return currentModel.run(instance);
   }
 
   Future<void> stopInstance(LxdInstance instance) {
@@ -101,9 +100,9 @@ class HomeModel extends ChangeNotifier {
 
   @override
   void dispose() {
-    for (final controller in _controllers) {
-      controller.removeListener(notifyListeners);
-      controller.dispose();
+    for (final model in _models) {
+      model.removeListener(notifyListeners);
+      model.dispose();
     }
     super.dispose();
   }
