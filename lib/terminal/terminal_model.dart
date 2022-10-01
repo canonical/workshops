@@ -4,12 +4,13 @@ import 'package:lxd_x/lxd_x.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 import 'package:terminal_view/terminal_view.dart';
 
-import '../terminal/terminal_state.dart';
+import 'terminal_instance.dart';
+import 'terminal_state.dart';
 
 const kTimeout = Duration(seconds: 10);
 
-class TerminalController extends SafeChangeNotifier {
-  TerminalController(this._service);
+class TerminalModel extends SafeChangeNotifier {
+  TerminalModel(this._service);
 
   final LxdService _service;
   var _state = const TerminalState.none();
@@ -114,16 +115,14 @@ class TerminalController extends SafeChangeNotifier {
   }
 
   Future<void> run(LxdInstance instance) async {
-    _setState(
-      TerminalState.running(
-        instance,
-        Terminal(
-          client: _service.getClient(),
-          instance: instance,
-          onExit: reset,
-        ),
-      ),
+    // TODO: configurable max lines
+    final terminal = TerminalInstance(
+      client: _service.getClient(),
+      controller: TerminalController(),
+      maxLines: 10000,
     );
+    _setState(TerminalState.running(instance, terminal));
+    return terminal.execute(instance).then((_) => reset());
   }
 
   Future<bool> stop(LxdInstance instance) async {

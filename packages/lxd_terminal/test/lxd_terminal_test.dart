@@ -6,6 +6,7 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_terminal/lxd_terminal.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:xterm/xterm.dart';
 
 import 'lxd_terminal_test.mocks.dart';
 
@@ -86,8 +87,11 @@ void main() {
   });
 }
 
-class TestLxdTerminal extends LxdTerminal {
-  TestLxdTerminal(super.client, {required super.maxLines});
+class TestLxdTerminal extends Terminal with LxdTerminal {
+  TestLxdTerminal(this.client, {required super.maxLines});
+
+  @override
+  final LxdClient client;
 
   final written = <String>[];
 

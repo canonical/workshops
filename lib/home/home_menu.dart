@@ -4,7 +4,7 @@ import 'package:terminal_view/terminal_view.dart';
 
 List<PopupMenuEntry> buildContextMenu({
   required BuildContext context,
-  required Terminal? current,
+  required TerminalMixin? terminal,
   required int tabCount,
   required VoidCallback? onNewTab,
   required VoidCallback? onCloseTab,
@@ -21,18 +21,18 @@ List<PopupMenuEntry> buildContextMenu({
     ),
     const PopupMenuDivider(),
     ContextMenuItem(
-      onTap: current?.copy,
-      enabled: current?.selectedText?.isNotEmpty == true,
+      onTap: terminal?.copy,
+      enabled: terminal?.selectedText?.isNotEmpty == true,
       child: const Text('Copy'),
     ),
     ContextMenuItem(
-      onTap: current?.paste,
-      enabled: current != null,
+      onTap: terminal?.paste,
+      enabled: terminal != null,
       child: const Text('Paste'),
     ),
     ContextMenuItem(
-      onTap: current?.selectAll,
-      enabled: current != null,
+      onTap: terminal?.selectAll,
+      enabled: terminal != null,
       child: const Text('Select All'),
     ),
   ];

@@ -7,10 +7,8 @@ import 'dart:io';
 import 'package:lxd/lxd.dart';
 import 'package:xterm/xterm.dart';
 
-class LxdTerminal extends Terminal {
-  LxdTerminal(this.client, {required super.maxLines});
-
-  final LxdClient client;
+mixin LxdTerminal on Terminal {
+  LxdClient get client;
 
   WebSocket? _ws0;
   WebSocket? _wsc;

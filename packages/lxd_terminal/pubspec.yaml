@@ -14,7 +14,7 @@ dependencies:
       ref: 9799464c4488f52203407169baca963f88f0e349
   xterm: # ^3.2.7
     git:
-      ref: actions
+      ref: dev3
       url: https://github.com/jpnurmi/xterm.dart.git
 
 dev_dependencies:
