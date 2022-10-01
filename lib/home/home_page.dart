@@ -91,7 +91,7 @@ class HomePage extends StatelessWidget {
           body: ContextMenuArea(
             builder: (context, position) => buildContextMenu(
               context: context,
-              current: model.currentTerminal,
+              terminal: model.currentTerminal,
               tabCount: model.tabCount,
               onNewTab: model.addTab,
               onCloseTab: model.closeTab,
@@ -127,7 +127,7 @@ class HomePage extends StatelessWidget {
                           position: position,
                           items: buildContextMenu(
                             context: context,
-                            current: model.currentTerminal,
+                            terminal: model.currentTerminal,
                             tabCount: model.tabCount,
                             onNewTab: model.addTab,
                             onCloseTab: model.closeTab,
