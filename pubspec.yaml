@@ -28,8 +28,6 @@ dependencies:
       ref: 9799464c4488f52203407169baca963f88f0e349
   lxd_service:
     path: packages/lxd_service
-  lxd_terminal:
-    path: packages/lxd_terminal
   lxd_x:
     path: packages/lxd_x
   meta: ^1.7.0

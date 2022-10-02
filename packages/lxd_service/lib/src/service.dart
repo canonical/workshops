@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
@@ -15,8 +17,6 @@ abstract class LxdService {
 
   Future<void> init();
   Future<void> dispose();
-
-  LxdClient getClient();
 
   List<String>? get instances;
   Stream<List<String>> get instanceStream;
@@ -45,6 +45,8 @@ abstract class LxdService {
 
   Future<void> waitVmAgent(String name, {Duration? timeout});
 
+  Future<LxdTerminal> execTerminal(LxdInstance instance);
+
   Future<LxdOperation> getOperation(String id);
   Stream<LxdOperation> watchOperation(String id);
   Future<LxdOperation> waitOperation(String id);
@@ -61,8 +63,6 @@ class _LxdService implements LxdService {
   final _removed = StreamController<String>.broadcast();
   final _updated = StreamController<String>.broadcast();
   final _statuses = <String, int>{};
-
-  LxdClient getClient() => _client;
 
   List<String>? get instances => _instances.valueOrNull;
   Stream<List<String>> get instanceStream => _instances.stream;
@@ -214,6 +214,26 @@ class _LxdService implements LxdService {
     return _client.waitVmAgent(name, timeout: timeout);
   }
 
+  Future<LxdTerminal> execTerminal(LxdInstance instance) async {
+    final user = instance.config['user.name'] ?? 'root';
+    final op = await _client.execInstance(
+      instance.name,
+      command: ['login', '-f', user],
+      environment: {'TERM': 'xterm-256color'},
+      interactive: true,
+      waitForWebSocket: true,
+    );
+
+    Future<WebSocket> getWebSocket(String id) {
+      final fd = op.metadata!['fds'][id] as String;
+      return _client.getOperationWebSocket(op.id, fd);
+    }
+
+    final wsc = await getWebSocket('control');
+    final ws0 = await getWebSocket('0');
+    return LxdTerminal._(op, wsc, ws0);
+  }
+
   @override
   Future<LxdOperation> getOperation(String id) => _client.getOperation(id);
 
@@ -288,5 +308,43 @@ class _LxdService implements LxdService {
         updateInstanceStatus(LxdStatusCode.stopping);
         break;
     }
+  }
+}
+
+class LxdTerminal {
+  LxdTerminal._(this._op, this._wsc, this._ws0);
+
+  final LxdOperation _op;
+  final WebSocket? _ws0;
+  final WebSocket? _wsc;
+  StreamSubscription? _sub;
+
+  LxdOperation get operation => _op;
+
+  void write(String data) => _ws0?.add(utf8.encode(data));
+
+  void listen(void Function(String data) onData) {
+    _sub = _ws0!.listen((data) async {
+      if (data is List<int>) {
+        onData(utf8.decode(data));
+      } else if (data is String) {
+        if (data.isEmpty) {
+          // TODO: proper way to detect exit
+          await close();
+        } else {
+          onData('$data\r\n');
+        }
+      } else {
+        throw UnsupportedError('$data');
+      }
+    });
+  }
+
+  void resize(int width, int height) => _wsc?.sendTermSize(width, height);
+
+  Future<void> close() async {
+    await _sub?.cancel();
+    await _ws0?.close();
+    await _wsc?.close();
   }
 }
