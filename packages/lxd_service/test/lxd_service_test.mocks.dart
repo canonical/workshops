@@ -3,7 +3,7 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i15;
+import 'dart:async' as _i14;
 import 'dart:io' as _i3;
 
 import 'package:lxd/src/api/certificate.dart' as _i5;
@@ -19,7 +19,7 @@ import 'package:lxd/src/api/project.dart' as _i12;
 import 'package:lxd/src/api/resource.dart' as _i4;
 import 'package:lxd/src/api/storage_pool.dart' as _i13;
 import 'package:lxd/src/enums.dart' as _i17;
-import 'package:lxd/src/lxd_client.dart' as _i14;
+import 'package:lxd/src/lxd_client.dart' as _i15;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -178,10 +178,21 @@ class _FakeLxdStoragePool_13 extends _i1.SmartFake
         );
 }
 
+class _FakeStreamSubscription_14<T> extends _i1.SmartFake
+    implements _i14.StreamSubscription<T> {
+  _FakeStreamSubscription_14(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [LxdClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
+class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
   MockLxdClient() {
     _i1.throwOnMissingStub(this);
   }
@@ -203,30 +214,30 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
         returnValueForMissingStub: null,
       );
   @override
-  _i15.Future<Map<String, List<String>>> getOperations() => (super.noSuchMethod(
+  _i14.Future<Map<String, List<String>>> getOperations() => (super.noSuchMethod(
         Invocation.method(
           #getOperations,
           [],
         ),
-        returnValue: _i15.Future<Map<String, List<String>>>.value(
+        returnValue: _i14.Future<Map<String, List<String>>>.value(
             <String, List<String>>{}),
-      ) as _i15.Future<Map<String, List<String>>>);
+      ) as _i14.Future<Map<String, List<String>>>);
   @override
-  _i15.Future<_i2.LxdOperation> getOperation(String? id) => (super.noSuchMethod(
+  _i14.Future<_i2.LxdOperation> getOperation(String? id) => (super.noSuchMethod(
         Invocation.method(
           #getOperation,
           [id],
         ),
-        returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #getOperation,
             [id],
           ),
         )),
-      ) as _i15.Future<_i2.LxdOperation>);
+      ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<_i3.WebSocket> getOperationWebSocket(
+  _i14.Future<_i3.WebSocket> getOperationWebSocket(
     String? id,
     String? secret,
   ) =>
@@ -238,7 +249,7 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             secret,
           ],
         ),
-        returnValue: _i15.Future<_i3.WebSocket>.value(_FakeWebSocket_2(
+        returnValue: _i14.Future<_i3.WebSocket>.value(_FakeWebSocket_2(
           this,
           Invocation.method(
             #getOperationWebSocket,
@@ -248,9 +259,9 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             ],
           ),
         )),
-      ) as _i15.Future<_i3.WebSocket>);
+      ) as _i14.Future<_i3.WebSocket>);
   @override
-  _i15.Future<_i2.LxdOperation> waitOperation(
+  _i14.Future<_i2.LxdOperation> waitOperation(
     String? id, {
     Duration? timeout,
   }) =>
@@ -260,7 +271,7 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
           [id],
           {#timeout: timeout},
         ),
-        returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #waitOperation,
@@ -268,56 +279,56 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             {#timeout: timeout},
           ),
         )),
-      ) as _i15.Future<_i2.LxdOperation>);
+      ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<void> cancelOperation(String? id) => (super.noSuchMethod(
+  _i14.Future<void> cancelOperation(String? id) => (super.noSuchMethod(
         Invocation.method(
           #cancelOperation,
           [id],
         ),
-        returnValue: _i15.Future<void>.value(),
-        returnValueForMissingStub: _i15.Future<void>.value(),
-      ) as _i15.Future<void>);
+        returnValue: _i14.Future<void>.value(),
+        returnValueForMissingStub: _i14.Future<void>.value(),
+      ) as _i14.Future<void>);
   @override
-  _i15.Future<_i4.LxdResources> getResources() => (super.noSuchMethod(
+  _i14.Future<_i4.LxdResources> getResources() => (super.noSuchMethod(
         Invocation.method(
           #getResources,
           [],
         ),
-        returnValue: _i15.Future<_i4.LxdResources>.value(_FakeLxdResources_3(
+        returnValue: _i14.Future<_i4.LxdResources>.value(_FakeLxdResources_3(
           this,
           Invocation.method(
             #getResources,
             [],
           ),
         )),
-      ) as _i15.Future<_i4.LxdResources>);
+      ) as _i14.Future<_i4.LxdResources>);
   @override
-  _i15.Future<List<String>> getCertificates() => (super.noSuchMethod(
+  _i14.Future<List<String>> getCertificates() => (super.noSuchMethod(
         Invocation.method(
           #getCertificates,
           [],
         ),
-        returnValue: _i15.Future<List<String>>.value(<String>[]),
-      ) as _i15.Future<List<String>>);
+        returnValue: _i14.Future<List<String>>.value(<String>[]),
+      ) as _i14.Future<List<String>>);
   @override
-  _i15.Future<_i5.LxdCertificate> getCertificate(String? fingerprint) =>
+  _i14.Future<_i5.LxdCertificate> getCertificate(String? fingerprint) =>
       (super.noSuchMethod(
         Invocation.method(
           #getCertificate,
           [fingerprint],
         ),
         returnValue:
-            _i15.Future<_i5.LxdCertificate>.value(_FakeLxdCertificate_4(
+            _i14.Future<_i5.LxdCertificate>.value(_FakeLxdCertificate_4(
           this,
           Invocation.method(
             #getCertificate,
             [fingerprint],
           ),
         )),
-      ) as _i15.Future<_i5.LxdCertificate>);
+      ) as _i14.Future<_i5.LxdCertificate>);
   @override
-  _i15.Stream<_i16.LxdEvent> getEvents({
+  _i14.Stream<_i16.LxdEvent> getEvents({
     String? project = r'',
     Set<_i16.LxdEventType>? types = const {},
   }) =>
@@ -330,10 +341,10 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             #types: types,
           },
         ),
-        returnValue: _i15.Stream<_i16.LxdEvent>.empty(),
-      ) as _i15.Stream<_i16.LxdEvent>);
+        returnValue: _i14.Stream<_i16.LxdEvent>.empty(),
+      ) as _i14.Stream<_i16.LxdEvent>);
   @override
-  _i15.Future<List<String>> getImages({
+  _i14.Future<List<String>> getImages({
     String? project,
     String? filter,
   }) =>
@@ -346,63 +357,63 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             #filter: filter,
           },
         ),
-        returnValue: _i15.Future<List<String>>.value(<String>[]),
-      ) as _i15.Future<List<String>>);
+        returnValue: _i14.Future<List<String>>.value(<String>[]),
+      ) as _i14.Future<List<String>>);
   @override
-  _i15.Future<_i6.LxdImage> getImage(String? fingerprint) =>
+  _i14.Future<_i6.LxdImage> getImage(String? fingerprint) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImage,
           [fingerprint],
         ),
-        returnValue: _i15.Future<_i6.LxdImage>.value(_FakeLxdImage_5(
+        returnValue: _i14.Future<_i6.LxdImage>.value(_FakeLxdImage_5(
           this,
           Invocation.method(
             #getImage,
             [fingerprint],
           ),
         )),
-      ) as _i15.Future<_i6.LxdImage>);
+      ) as _i14.Future<_i6.LxdImage>);
   @override
-  _i15.Future<List<String>> getInstances() => (super.noSuchMethod(
+  _i14.Future<List<String>> getInstances() => (super.noSuchMethod(
         Invocation.method(
           #getInstances,
           [],
         ),
-        returnValue: _i15.Future<List<String>>.value(<String>[]),
-      ) as _i15.Future<List<String>>);
+        returnValue: _i14.Future<List<String>>.value(<String>[]),
+      ) as _i14.Future<List<String>>);
   @override
-  _i15.Future<_i7.LxdInstance> getInstance(String? name) => (super.noSuchMethod(
+  _i14.Future<_i7.LxdInstance> getInstance(String? name) => (super.noSuchMethod(
         Invocation.method(
           #getInstance,
           [name],
         ),
-        returnValue: _i15.Future<_i7.LxdInstance>.value(_FakeLxdInstance_6(
+        returnValue: _i14.Future<_i7.LxdInstance>.value(_FakeLxdInstance_6(
           this,
           Invocation.method(
             #getInstance,
             [name],
           ),
         )),
-      ) as _i15.Future<_i7.LxdInstance>);
+      ) as _i14.Future<_i7.LxdInstance>);
   @override
-  _i15.Future<_i8.LxdInstanceState> getInstanceState(String? name) =>
+  _i14.Future<_i8.LxdInstanceState> getInstanceState(String? name) =>
       (super.noSuchMethod(
         Invocation.method(
           #getInstanceState,
           [name],
         ),
         returnValue:
-            _i15.Future<_i8.LxdInstanceState>.value(_FakeLxdInstanceState_7(
+            _i14.Future<_i8.LxdInstanceState>.value(_FakeLxdInstanceState_7(
           this,
           Invocation.method(
             #getInstanceState,
             [name],
           ),
         )),
-      ) as _i15.Future<_i8.LxdInstanceState>);
+      ) as _i14.Future<_i8.LxdInstanceState>);
   @override
-  _i15.Future<_i2.LxdOperation> createInstance({
+  _i14.Future<_i2.LxdOperation> createInstance({
     String? architecture,
     Map<String, String>? config,
     Map<String, Map<String, String>>? devices,
@@ -437,7 +448,7 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             #type: type,
           },
         ),
-        returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #createInstance,
@@ -459,9 +470,9 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             },
           ),
         )),
-      ) as _i15.Future<_i2.LxdOperation>);
+      ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<_i2.LxdOperation> startInstance(
+  _i14.Future<_i2.LxdOperation> startInstance(
     String? name, {
     bool? force = false,
   }) =>
@@ -471,7 +482,7 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
           [name],
           {#force: force},
         ),
-        returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #startInstance,
@@ -479,9 +490,9 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             {#force: force},
           ),
         )),
-      ) as _i15.Future<_i2.LxdOperation>);
+      ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<_i2.LxdOperation> execInstance(
+  _i14.Future<_i2.LxdOperation> execInstance(
     String? name, {
     List<String>? command,
     String? workingDirectory,
@@ -511,7 +522,7 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             #waitForWebSocket: waitForWebSocket,
           },
         ),
-        returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #execInstance,
@@ -530,24 +541,24 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             },
           ),
         )),
-      ) as _i15.Future<_i2.LxdOperation>);
+      ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<_i2.LxdOperation> updateInstance(_i7.LxdInstance? instance) =>
+  _i14.Future<_i2.LxdOperation> updateInstance(_i7.LxdInstance? instance) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateInstance,
           [instance],
         ),
-        returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #updateInstance,
             [instance],
           ),
         )),
-      ) as _i15.Future<_i2.LxdOperation>);
+      ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<_i2.LxdOperation> stopInstance(
+  _i14.Future<_i2.LxdOperation> stopInstance(
     String? name, {
     bool? force = false,
     Duration? timeout,
@@ -561,7 +572,7 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             #timeout: timeout,
           },
         ),
-        returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #stopInstance,
@@ -572,9 +583,9 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             },
           ),
         )),
-      ) as _i15.Future<_i2.LxdOperation>);
+      ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<_i2.LxdOperation> restartInstance(
+  _i14.Future<_i2.LxdOperation> restartInstance(
     String? name, {
     bool? force = false,
     Duration? timeout,
@@ -588,7 +599,7 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             #timeout: timeout,
           },
         ),
-        returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #restartInstance,
@@ -599,24 +610,24 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             },
           ),
         )),
-      ) as _i15.Future<_i2.LxdOperation>);
+      ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<_i2.LxdOperation> deleteInstance(String? name) =>
+  _i14.Future<_i2.LxdOperation> deleteInstance(String? name) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteInstance,
           [name],
         ),
-        returnValue: _i15.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #deleteInstance,
             [name],
           ),
         )),
-      ) as _i15.Future<_i2.LxdOperation>);
+      ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i15.Future<String> pullFile(
+  _i14.Future<String> pullFile(
     String? instance, {
     String? path,
     String? project,
@@ -630,10 +641,10 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             #project: project,
           },
         ),
-        returnValue: _i15.Future<String>.value(''),
-      ) as _i15.Future<String>);
+        returnValue: _i14.Future<String>.value(''),
+      ) as _i14.Future<String>);
   @override
-  _i15.Future<void> deleteFile(
+  _i14.Future<void> deleteFile(
     String? instance, {
     String? path,
     String? project,
@@ -647,11 +658,11 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             #project: project,
           },
         ),
-        returnValue: _i15.Future<void>.value(),
-        returnValueForMissingStub: _i15.Future<void>.value(),
-      ) as _i15.Future<void>);
+        returnValue: _i14.Future<void>.value(),
+        returnValueForMissingStub: _i14.Future<void>.value(),
+      ) as _i14.Future<void>);
   @override
-  _i15.Future<void> pushFile(
+  _i14.Future<void> pushFile(
     String? instance, {
     String? path,
     String? project,
@@ -677,154 +688,608 @@ class MockLxdClient extends _i1.Mock implements _i14.LxdClient {
             #write: write,
           },
         ),
-        returnValue: _i15.Future<void>.value(),
-        returnValueForMissingStub: _i15.Future<void>.value(),
-      ) as _i15.Future<void>);
+        returnValue: _i14.Future<void>.value(),
+        returnValueForMissingStub: _i14.Future<void>.value(),
+      ) as _i14.Future<void>);
   @override
-  _i15.Future<List<String>> getNetworks() => (super.noSuchMethod(
+  _i14.Future<List<String>> getNetworks() => (super.noSuchMethod(
         Invocation.method(
           #getNetworks,
           [],
         ),
-        returnValue: _i15.Future<List<String>>.value(<String>[]),
-      ) as _i15.Future<List<String>>);
+        returnValue: _i14.Future<List<String>>.value(<String>[]),
+      ) as _i14.Future<List<String>>);
   @override
-  _i15.Future<_i9.LxdNetwork> getNetwork(String? name) => (super.noSuchMethod(
+  _i14.Future<_i9.LxdNetwork> getNetwork(String? name) => (super.noSuchMethod(
         Invocation.method(
           #getNetwork,
           [name],
         ),
-        returnValue: _i15.Future<_i9.LxdNetwork>.value(_FakeLxdNetwork_8(
+        returnValue: _i14.Future<_i9.LxdNetwork>.value(_FakeLxdNetwork_8(
           this,
           Invocation.method(
             #getNetwork,
             [name],
           ),
         )),
-      ) as _i15.Future<_i9.LxdNetwork>);
+      ) as _i14.Future<_i9.LxdNetwork>);
   @override
-  _i15.Future<List<_i9.LxdNetworkLease>> getNetworkLeases(String? name) =>
+  _i14.Future<List<_i9.LxdNetworkLease>> getNetworkLeases(String? name) =>
       (super.noSuchMethod(
         Invocation.method(
           #getNetworkLeases,
           [name],
         ),
-        returnValue: _i15.Future<List<_i9.LxdNetworkLease>>.value(
+        returnValue: _i14.Future<List<_i9.LxdNetworkLease>>.value(
             <_i9.LxdNetworkLease>[]),
-      ) as _i15.Future<List<_i9.LxdNetworkLease>>);
+      ) as _i14.Future<List<_i9.LxdNetworkLease>>);
   @override
-  _i15.Future<_i9.LxdNetworkState> getNetworkState(String? name) =>
+  _i14.Future<_i9.LxdNetworkState> getNetworkState(String? name) =>
       (super.noSuchMethod(
         Invocation.method(
           #getNetworkState,
           [name],
         ),
         returnValue:
-            _i15.Future<_i9.LxdNetworkState>.value(_FakeLxdNetworkState_9(
+            _i14.Future<_i9.LxdNetworkState>.value(_FakeLxdNetworkState_9(
           this,
           Invocation.method(
             #getNetworkState,
             [name],
           ),
         )),
-      ) as _i15.Future<_i9.LxdNetworkState>);
+      ) as _i14.Future<_i9.LxdNetworkState>);
   @override
-  _i15.Future<List<String>> getNetworkAcls() => (super.noSuchMethod(
+  _i14.Future<List<String>> getNetworkAcls() => (super.noSuchMethod(
         Invocation.method(
           #getNetworkAcls,
           [],
         ),
-        returnValue: _i15.Future<List<String>>.value(<String>[]),
-      ) as _i15.Future<List<String>>);
+        returnValue: _i14.Future<List<String>>.value(<String>[]),
+      ) as _i14.Future<List<String>>);
   @override
-  _i15.Future<_i10.LxdNetworkAcl> getNetworkAcl(String? name) =>
+  _i14.Future<_i10.LxdNetworkAcl> getNetworkAcl(String? name) =>
       (super.noSuchMethod(
         Invocation.method(
           #getNetworkAcl,
           [name],
         ),
         returnValue:
-            _i15.Future<_i10.LxdNetworkAcl>.value(_FakeLxdNetworkAcl_10(
+            _i14.Future<_i10.LxdNetworkAcl>.value(_FakeLxdNetworkAcl_10(
           this,
           Invocation.method(
             #getNetworkAcl,
             [name],
           ),
         )),
-      ) as _i15.Future<_i10.LxdNetworkAcl>);
+      ) as _i14.Future<_i10.LxdNetworkAcl>);
   @override
-  _i15.Future<List<String>> getProfiles() => (super.noSuchMethod(
+  _i14.Future<List<String>> getProfiles() => (super.noSuchMethod(
         Invocation.method(
           #getProfiles,
           [],
         ),
-        returnValue: _i15.Future<List<String>>.value(<String>[]),
-      ) as _i15.Future<List<String>>);
+        returnValue: _i14.Future<List<String>>.value(<String>[]),
+      ) as _i14.Future<List<String>>);
   @override
-  _i15.Future<_i11.LxdProfile> getProfile(String? name) => (super.noSuchMethod(
+  _i14.Future<_i11.LxdProfile> getProfile(String? name) => (super.noSuchMethod(
         Invocation.method(
           #getProfile,
           [name],
         ),
-        returnValue: _i15.Future<_i11.LxdProfile>.value(_FakeLxdProfile_11(
+        returnValue: _i14.Future<_i11.LxdProfile>.value(_FakeLxdProfile_11(
           this,
           Invocation.method(
             #getProfile,
             [name],
           ),
         )),
-      ) as _i15.Future<_i11.LxdProfile>);
+      ) as _i14.Future<_i11.LxdProfile>);
   @override
-  _i15.Future<List<String>> getProjects() => (super.noSuchMethod(
+  _i14.Future<List<String>> getProjects() => (super.noSuchMethod(
         Invocation.method(
           #getProjects,
           [],
         ),
-        returnValue: _i15.Future<List<String>>.value(<String>[]),
-      ) as _i15.Future<List<String>>);
+        returnValue: _i14.Future<List<String>>.value(<String>[]),
+      ) as _i14.Future<List<String>>);
   @override
-  _i15.Future<_i12.LxdProject> getProject(String? name) => (super.noSuchMethod(
+  _i14.Future<_i12.LxdProject> getProject(String? name) => (super.noSuchMethod(
         Invocation.method(
           #getProject,
           [name],
         ),
-        returnValue: _i15.Future<_i12.LxdProject>.value(_FakeLxdProject_12(
+        returnValue: _i14.Future<_i12.LxdProject>.value(_FakeLxdProject_12(
           this,
           Invocation.method(
             #getProject,
             [name],
           ),
         )),
-      ) as _i15.Future<_i12.LxdProject>);
+      ) as _i14.Future<_i12.LxdProject>);
   @override
-  _i15.Future<List<String>> getStoragePools() => (super.noSuchMethod(
+  _i14.Future<List<String>> getStoragePools() => (super.noSuchMethod(
         Invocation.method(
           #getStoragePools,
           [],
         ),
-        returnValue: _i15.Future<List<String>>.value(<String>[]),
-      ) as _i15.Future<List<String>>);
+        returnValue: _i14.Future<List<String>>.value(<String>[]),
+      ) as _i14.Future<List<String>>);
   @override
-  _i15.Future<_i13.LxdStoragePool> getStoragePool(String? name) =>
+  _i14.Future<_i13.LxdStoragePool> getStoragePool(String? name) =>
       (super.noSuchMethod(
         Invocation.method(
           #getStoragePool,
           [name],
         ),
         returnValue:
-            _i15.Future<_i13.LxdStoragePool>.value(_FakeLxdStoragePool_13(
+            _i14.Future<_i13.LxdStoragePool>.value(_FakeLxdStoragePool_13(
           this,
           Invocation.method(
             #getStoragePool,
             [name],
           ),
         )),
-      ) as _i15.Future<_i13.LxdStoragePool>);
+      ) as _i14.Future<_i13.LxdStoragePool>);
   @override
   void close() => super.noSuchMethod(
         Invocation.method(
           #close,
           [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [WebSocket].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockWebSocket extends _i1.Mock implements _i3.WebSocket {
+  MockWebSocket() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  set pingInterval(Duration? _pingInterval) => super.noSuchMethod(
+        Invocation.setter(
+          #pingInterval,
+          _pingInterval,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  int get readyState => (super.noSuchMethod(
+        Invocation.getter(#readyState),
+        returnValue: 0,
+      ) as int);
+  @override
+  String get extensions => (super.noSuchMethod(
+        Invocation.getter(#extensions),
+        returnValue: '',
+      ) as String);
+  @override
+  bool get isBroadcast => (super.noSuchMethod(
+        Invocation.getter(#isBroadcast),
+        returnValue: false,
+      ) as bool);
+  @override
+  _i14.Future<int> get length => (super.noSuchMethod(
+        Invocation.getter(#length),
+        returnValue: _i14.Future<int>.value(0),
+      ) as _i14.Future<int>);
+  @override
+  _i14.Future<bool> get isEmpty => (super.noSuchMethod(
+        Invocation.getter(#isEmpty),
+        returnValue: _i14.Future<bool>.value(false),
+      ) as _i14.Future<bool>);
+  @override
+  _i14.Future<dynamic> get first => (super.noSuchMethod(
+        Invocation.getter(#first),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Future<dynamic> get last => (super.noSuchMethod(
+        Invocation.getter(#last),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Future<dynamic> get single => (super.noSuchMethod(
+        Invocation.getter(#single),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Future<dynamic> get done => (super.noSuchMethod(
+        Invocation.getter(#done),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Future<dynamic> close([
+    int? code,
+    String? reason,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [
+            code,
+            reason,
+          ],
+        ),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  void add(dynamic data) => super.noSuchMethod(
+        Invocation.method(
+          #add,
+          [data],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i14.Future<dynamic> addStream(_i14.Stream<dynamic>? stream) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addStream,
+          [stream],
+        ),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  void addUtf8Text(List<int>? bytes) => super.noSuchMethod(
+        Invocation.method(
+          #addUtf8Text,
+          [bytes],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i14.Stream<dynamic> asBroadcastStream({
+    void Function(_i14.StreamSubscription<dynamic>)? onListen,
+    void Function(_i14.StreamSubscription<dynamic>)? onCancel,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #asBroadcastStream,
+          [],
+          {
+            #onListen: onListen,
+            #onCancel: onCancel,
+          },
+        ),
+        returnValue: _i14.Stream<dynamic>.empty(),
+      ) as _i14.Stream<dynamic>);
+  @override
+  _i14.StreamSubscription<dynamic> listen(
+    void Function(dynamic)? onData, {
+    Function? onError,
+    void Function()? onDone,
+    bool? cancelOnError,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #listen,
+          [onData],
+          {
+            #onError: onError,
+            #onDone: onDone,
+            #cancelOnError: cancelOnError,
+          },
+        ),
+        returnValue: _FakeStreamSubscription_14<dynamic>(
+          this,
+          Invocation.method(
+            #listen,
+            [onData],
+            {
+              #onError: onError,
+              #onDone: onDone,
+              #cancelOnError: cancelOnError,
+            },
+          ),
+        ),
+      ) as _i14.StreamSubscription<dynamic>);
+  @override
+  _i14.Stream<dynamic> where(bool Function(dynamic)? test) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #where,
+          [test],
+        ),
+        returnValue: _i14.Stream<dynamic>.empty(),
+      ) as _i14.Stream<dynamic>);
+  @override
+  _i14.Stream<S> map<S>(S Function(dynamic)? convert) => (super.noSuchMethod(
+        Invocation.method(
+          #map,
+          [convert],
+        ),
+        returnValue: _i14.Stream<S>.empty(),
+      ) as _i14.Stream<S>);
+  @override
+  _i14.Stream<E> asyncMap<E>(_i14.FutureOr<E> Function(dynamic)? convert) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #asyncMap,
+          [convert],
+        ),
+        returnValue: _i14.Stream<E>.empty(),
+      ) as _i14.Stream<E>);
+  @override
+  _i14.Stream<E> asyncExpand<E>(_i14.Stream<E>? Function(dynamic)? convert) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #asyncExpand,
+          [convert],
+        ),
+        returnValue: _i14.Stream<E>.empty(),
+      ) as _i14.Stream<E>);
+  @override
+  _i14.Stream<dynamic> handleError(
+    Function? onError, {
+    bool Function(dynamic)? test,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #handleError,
+          [onError],
+          {#test: test},
+        ),
+        returnValue: _i14.Stream<dynamic>.empty(),
+      ) as _i14.Stream<dynamic>);
+  @override
+  _i14.Stream<S> expand<S>(Iterable<S> Function(dynamic)? convert) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #expand,
+          [convert],
+        ),
+        returnValue: _i14.Stream<S>.empty(),
+      ) as _i14.Stream<S>);
+  @override
+  _i14.Future<dynamic> pipe(_i14.StreamConsumer<dynamic>? streamConsumer) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pipe,
+          [streamConsumer],
+        ),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Stream<S> transform<S>(
+          _i14.StreamTransformer<dynamic, S>? streamTransformer) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #transform,
+          [streamTransformer],
+        ),
+        returnValue: _i14.Stream<S>.empty(),
+      ) as _i14.Stream<S>);
+  @override
+  _i14.Future<dynamic> reduce(
+          dynamic Function(
+    dynamic,
+    dynamic,
+  )?
+              combine) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #reduce,
+          [combine],
+        ),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Future<S> fold<S>(
+    S? initialValue,
+    S Function(
+      S,
+      dynamic,
+    )?
+        combine,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fold,
+          [
+            initialValue,
+            combine,
+          ],
+        ),
+        returnValue: _i14.Future<S>.value(null),
+      ) as _i14.Future<S>);
+  @override
+  _i14.Future<String> join([String? separator = r'']) => (super.noSuchMethod(
+        Invocation.method(
+          #join,
+          [separator],
+        ),
+        returnValue: _i14.Future<String>.value(''),
+      ) as _i14.Future<String>);
+  @override
+  _i14.Future<bool> contains(Object? needle) => (super.noSuchMethod(
+        Invocation.method(
+          #contains,
+          [needle],
+        ),
+        returnValue: _i14.Future<bool>.value(false),
+      ) as _i14.Future<bool>);
+  @override
+  _i14.Future<dynamic> forEach(void Function(dynamic)? action) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #forEach,
+          [action],
+        ),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Future<bool> every(bool Function(dynamic)? test) => (super.noSuchMethod(
+        Invocation.method(
+          #every,
+          [test],
+        ),
+        returnValue: _i14.Future<bool>.value(false),
+      ) as _i14.Future<bool>);
+  @override
+  _i14.Future<bool> any(bool Function(dynamic)? test) => (super.noSuchMethod(
+        Invocation.method(
+          #any,
+          [test],
+        ),
+        returnValue: _i14.Future<bool>.value(false),
+      ) as _i14.Future<bool>);
+  @override
+  _i14.Stream<R> cast<R>() => (super.noSuchMethod(
+        Invocation.method(
+          #cast,
+          [],
+        ),
+        returnValue: _i14.Stream<R>.empty(),
+      ) as _i14.Stream<R>);
+  @override
+  _i14.Future<List<dynamic>> toList() => (super.noSuchMethod(
+        Invocation.method(
+          #toList,
+          [],
+        ),
+        returnValue: _i14.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i14.Future<List<dynamic>>);
+  @override
+  _i14.Future<Set<dynamic>> toSet() => (super.noSuchMethod(
+        Invocation.method(
+          #toSet,
+          [],
+        ),
+        returnValue: _i14.Future<Set<dynamic>>.value(<dynamic>{}),
+      ) as _i14.Future<Set<dynamic>>);
+  @override
+  _i14.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
+        Invocation.method(
+          #drain,
+          [futureValue],
+        ),
+        returnValue: _i14.Future<E>.value(null),
+      ) as _i14.Future<E>);
+  @override
+  _i14.Stream<dynamic> take(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #take,
+          [count],
+        ),
+        returnValue: _i14.Stream<dynamic>.empty(),
+      ) as _i14.Stream<dynamic>);
+  @override
+  _i14.Stream<dynamic> takeWhile(bool Function(dynamic)? test) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #takeWhile,
+          [test],
+        ),
+        returnValue: _i14.Stream<dynamic>.empty(),
+      ) as _i14.Stream<dynamic>);
+  @override
+  _i14.Stream<dynamic> skip(int? count) => (super.noSuchMethod(
+        Invocation.method(
+          #skip,
+          [count],
+        ),
+        returnValue: _i14.Stream<dynamic>.empty(),
+      ) as _i14.Stream<dynamic>);
+  @override
+  _i14.Stream<dynamic> skipWhile(bool Function(dynamic)? test) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #skipWhile,
+          [test],
+        ),
+        returnValue: _i14.Stream<dynamic>.empty(),
+      ) as _i14.Stream<dynamic>);
+  @override
+  _i14.Stream<dynamic> distinct(
+          [bool Function(
+            dynamic,
+            dynamic,
+          )?
+              equals]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #distinct,
+          [equals],
+        ),
+        returnValue: _i14.Stream<dynamic>.empty(),
+      ) as _i14.Stream<dynamic>);
+  @override
+  _i14.Future<dynamic> firstWhere(
+    bool Function(dynamic)? test, {
+    dynamic Function()? orElse,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #firstWhere,
+          [test],
+          {#orElse: orElse},
+        ),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Future<dynamic> lastWhere(
+    bool Function(dynamic)? test, {
+    dynamic Function()? orElse,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #lastWhere,
+          [test],
+          {#orElse: orElse},
+        ),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Future<dynamic> singleWhere(
+    bool Function(dynamic)? test, {
+    dynamic Function()? orElse,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #singleWhere,
+          [test],
+          {#orElse: orElse},
+        ),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Future<dynamic> elementAt(int? index) => (super.noSuchMethod(
+        Invocation.method(
+          #elementAt,
+          [index],
+        ),
+        returnValue: _i14.Future<dynamic>.value(),
+      ) as _i14.Future<dynamic>);
+  @override
+  _i14.Stream<dynamic> timeout(
+    Duration? timeLimit, {
+    void Function(_i14.EventSink<dynamic>)? onTimeout,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #timeout,
+          [timeLimit],
+          {#onTimeout: onTimeout},
+        ),
+        returnValue: _i14.Stream<dynamic>.empty(),
+      ) as _i14.Stream<dynamic>);
+  @override
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
         ),
         returnValueForMissingStub: null,
       );

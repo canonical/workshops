@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
@@ -8,7 +10,7 @@ import 'package:test/test.dart';
 
 import 'lxd_service_test.mocks.dart';
 
-@GenerateMocks([LxdClient])
+@GenerateMocks([LxdClient, WebSocket])
 void main() {
   test('init', () async {
     final client = MockLxdClient();
@@ -189,6 +191,81 @@ void main() {
 
     await service.dispose();
   });
+
+  test('terminal', () async {
+    final instance = testInstance(name: 'mine', config: {'user.name': 'me'});
+
+    final exec = testOperation(id: 'x', metadata: {
+      'fds': {
+        '0': 'fd0',
+        'control': 'fdc',
+      }
+    });
+
+    final client = MockLxdClient();
+    when(client.execInstance(
+      'mine',
+      command: ['login', '-f', 'me'],
+      environment: {'TERM': 'xterm-256color'},
+      interactive: true,
+      waitForWebSocket: true,
+    )).thenAnswer((_) async => exec);
+
+    final completer = Completer<LxdOperation>();
+    when(client.waitOperation('x')).thenAnswer((_) => completer.future);
+
+    final controller = StreamController<dynamic>(sync: true);
+
+    final ws0 = MockWebSocket();
+    when(client.getOperationWebSocket('x', 'fd0')).thenAnswer((_) async => ws0);
+    when(ws0.listen(any)).thenAnswer((i) => controller.stream
+        .listen(i.positionalArguments.first as void Function(dynamic)));
+    when(ws0.close()).thenAnswer((_) => controller.close());
+
+    final wsc = MockWebSocket();
+    when(client.getOperationWebSocket('x', 'fdc')).thenAnswer((_) async => wsc);
+    when(wsc.close()).thenAnswer((_) async {});
+
+    final service = LxdService(client);
+
+    final socket = await service.execTerminal(instance);
+    expect(socket.operation, exec);
+
+    socket.resize(123, 456);
+    verify(wsc.add(jsonEncode({
+      'command': 'window-resize',
+      'args': {'width': '123', 'height': '456'},
+    }))).called(1);
+
+    socket.write('data');
+    verify(ws0.add(utf8.encode('data'))).called(1);
+
+    final received = <String>[];
+    socket.listen(received.add);
+
+    verify(client.execInstance(
+      'mine',
+      command: ['login', '-f', 'me'],
+      environment: {'TERM': 'xterm-256color'},
+      interactive: true,
+      waitForWebSocket: true,
+    )).called(1);
+
+    verify(client.getOperationWebSocket('x', 'fd0')).called(1);
+    verify(client.getOperationWebSocket('x', 'fdc')).called(1);
+
+    controller.add('bytes'.codeUnits);
+    expect(received, ['bytes']);
+
+    controller.add('string');
+    expect(received, ['bytes', 'string\r\n']);
+
+    controller.add('');
+    expect(received, ['bytes', 'string\r\n']);
+
+    await untilCalled(ws0.close());
+    await untilCalled(wsc.close());
+  });
 }
 
 LxdOperation testOperation({
@@ -196,6 +273,7 @@ LxdOperation testOperation({
   String? id,
   List<String>? instances,
   int? statusCode,
+  Map<String, dynamic>? metadata,
 }) {
   return LxdOperation(
     createdAt: DateTime.now(),
@@ -204,7 +282,7 @@ LxdOperation testOperation({
     id: id ?? '',
     location: '',
     mayCancel: false,
-    metadata: null,
+    metadata: metadata,
     resources: {'instances': instances ?? []},
     status: '',
     statusCode: statusCode ?? 200,
@@ -213,10 +291,14 @@ LxdOperation testOperation({
   );
 }
 
-LxdInstance testInstance({required String name, int? statusCode}) {
+LxdInstance testInstance({
+  required String name,
+  int? statusCode,
+  Map<String, String>? config,
+}) {
   return LxdInstance(
     architecture: 'amd64',
-    config: {},
+    config: config ?? {},
     createdAt: DateTime.now(),
     description: '',
     devices: {},

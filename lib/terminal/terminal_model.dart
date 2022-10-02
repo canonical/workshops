@@ -117,12 +117,17 @@ class TerminalModel extends SafeChangeNotifier {
   Future<void> run(LxdInstance instance) async {
     // TODO: configurable max lines
     final terminal = TerminalInstance(
-      client: _service.getClient(),
       controller: TerminalController(),
       maxLines: 10000,
     );
     _setState(TerminalState.running(instance, terminal));
-    return terminal.execute(instance).then((_) => reset());
+
+    final socket = await _service.execTerminal(instance);
+    socket.resize(terminal.viewWidth, terminal.viewHeight);
+    socket.listen(terminal.write);
+    terminal.onOutput = socket.write;
+    terminal.onResize = (width, height, _, __) => socket.resize(width, height);
+    return _service.waitOperation(socket.operation.id).then((_) => reset());
   }
 
   Future<bool> stop(LxdInstance instance) async {
