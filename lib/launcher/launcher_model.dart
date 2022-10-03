@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
 class LauncherModel extends SafeChangeNotifier {
-  final _completer = Completer<LxdImage?>();
+  final _completer = Completer<LxdInstance?>();
 
   String? get os => _os;
   String? _os;
@@ -25,11 +25,9 @@ class LauncherModel extends SafeChangeNotifier {
     notifyListeners();
   }
 
-  Future<LxdImage?> run() {
-    return _completer.future;
-  }
+  Future<LxdInstance?> run() => _completer.future;
 
-  void cancel() => _completer.complete(null);
+  void cancel() => done(null);
 
   String? next(Object? arguments) {
     if (arguments is LxdImage) {
@@ -42,6 +40,6 @@ class LauncherModel extends SafeChangeNotifier {
 
   Future<void> done(Object? result) async {
     next(result);
-    _completer.complete(_image);
+    _completer.complete(result is LxdInstance ? result : null);
   }
 }

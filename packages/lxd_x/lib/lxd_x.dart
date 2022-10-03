@@ -137,4 +137,8 @@ extension LxdOperationX on LxdOperation {
 
   bool get isRunning => statusCode == LxdStatusCode.running;
   bool get isPending => statusCode == LxdStatusCode.pending;
+
+  String? get downloadProgress => metadata?['download_progress'] as String?;
+  String? get unpackProgress =>
+      metadata?['create_instance_from_image_unpack_progress'] as String?;
 }

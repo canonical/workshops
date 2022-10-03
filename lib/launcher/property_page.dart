@@ -95,9 +95,9 @@ class _PropertyPageState extends State<PropertyPage> {
           onPressed: Wizard.of(context).done,
           child: Text(l10n.cancelLabel),
         ),
-        OutlinedButton(
-          onPressed: () => Wizard.of(context).done(result: model.save()),
-          child: Text(l10n.okLabel),
+        ElevatedButton(
+          onPressed: () => Wizard.of(context).next(arguments: model.save()),
+          child: Text(l10n.launchLabel),
         ),
       ],
     );

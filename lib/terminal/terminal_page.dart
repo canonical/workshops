@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:terminal_view/terminal_view.dart';
 
 import 'terminal_model.dart';
-import 'terminal_progress.dart';
 import 'terminal_settings.dart';
 
 class TerminalPage extends StatelessWidget {
@@ -32,12 +31,6 @@ class _TerminalPage extends StatelessWidget {
     final model = context.watch<TerminalModel>();
     return model.state.when(
       none: () => const SizedBox.shrink(),
-      create: (_, __) => TerminalProgress.create(context, model.state),
-      init: (_, __) => TerminalProgress.create(context, model.state),
-      config: (_, __) => TerminalProgress.create(context, model.state),
-      stage: (_, __) => TerminalProgress.create(context, model.state),
-      start: (_, __) => TerminalProgress.create(context, model.state),
-      restart: (_, __) => TerminalProgress.create(context, model.state),
       running: (instance, terminal) => TerminalTheme(
         data: getTerminalTheme(instance.os),
         child: TerminalView(
@@ -46,7 +39,6 @@ class _TerminalPage extends StatelessWidget {
           onContextMenu: onContextMenu,
         ),
       ),
-      stop: (_, __) => TerminalProgress.create(context, model.state),
       error: (error) => Text('TODO: $error'),
     );
   }
