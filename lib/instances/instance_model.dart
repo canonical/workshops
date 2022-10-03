@@ -6,49 +6,10 @@ import 'package:lxd_service/lxd_service.dart';
 import 'package:meta/meta.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
-typedef InstanceList = AsyncValue<List<String>>;
 typedef InstanceValue = AsyncValue<LxdInstance?>;
 
 class InstanceModel extends SafeChangeNotifier {
-  InstanceModel(this._service);
-
-  final LxdService _service;
-  StreamSubscription? _sub;
-  var _instances = const InstanceList.data([]);
-
-  InstanceList get instances => _instances;
-
-  @protected
-  set instances(InstanceList instances) {
-    if (_instances == instances) return;
-    _instances = instances;
-    notifyListeners();
-  }
-
-  Future<void> init() async {
-    _sub ??= _service.instanceStream.listen((value) {
-      instances = InstanceList.data(value);
-    });
-
-    instances = const InstanceList.loading().copyWithPrevious(instances);
-
-    instances = await InstanceList.guard(() async {
-      await _service.init();
-      return _service.instances ?? [];
-    });
-  }
-
-  @override
-  void dispose() {
-    _sub?.cancel();
-    super.dispose();
-  }
-
-  InstanceState createState(String name) => InstanceState(name, _service);
-}
-
-class InstanceState extends SafeChangeNotifier {
-  InstanceState(this._name, this._service);
+  InstanceModel(this._name, this._service);
 
   final String _name;
   final LxdService _service;
@@ -67,7 +28,7 @@ class InstanceState extends SafeChangeNotifier {
   Future<void> init() async {
     Future<void> fetch(String name) async {
       instance = const InstanceValue.loading().copyWithPrevious(instance);
-      instance = await InstanceList.guard(() => _service.getInstance(name));
+      instance = await InstanceValue.guard(() => _service.getInstance(name));
     }
 
     _sub ??= _service.instanceUpdated
@@ -82,4 +43,8 @@ class InstanceState extends SafeChangeNotifier {
     _sub?.cancel();
     super.dispose();
   }
+
+  Future<void> stop() => _service.stopInstance(_name);
+
+  Future<void> delete() => _service.deleteInstance(_name);
 }

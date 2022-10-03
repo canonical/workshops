@@ -90,14 +90,6 @@ class HomeModel extends ChangeNotifier {
     return currentModel.run(instance);
   }
 
-  Future<void> stopInstance(LxdInstance instance) {
-    return _service.stopInstance(instance.name);
-  }
-
-  Future<void> deleteInstance(LxdInstance instance) {
-    return _service.deleteInstance(instance.name);
-  }
-
   @override
   void dispose() {
     for (final model in _models) {

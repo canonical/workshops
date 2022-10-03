@@ -99,9 +99,7 @@ class HomePage extends StatelessWidget {
             child: model.currentState.maybeWhen(
               none: () => Scaffold(
                 body: InstanceView(
-                  onSelect: model.startInstance,
-                  onDelete: model.deleteInstance,
-                  onStop: model.stopInstance,
+                  onStart: model.startInstance,
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () async {
