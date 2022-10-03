@@ -9,6 +9,7 @@ import 'package:wizard_router/wizard_router.dart';
 import '../remotes/remote_store.dart';
 import '../widgets/wizard_transition.dart';
 import 'feature_page.dart';
+import 'launcher_model.dart';
 import 'local_image_page.dart';
 import 'property_page.dart';
 import 'remote_image_page.dart';
@@ -26,25 +27,39 @@ class LaunchOptions {
 Future<LaunchOptions?> showLauncherWizard(BuildContext context) {
   return showDialog(
     context: context,
-    builder: (context) => const LauncherWizard(),
+    builder: (context) => ChangeNotifierProvider(
+      create: (_) => LauncherModel(),
+      child: const LauncherWizard(),
+    ),
   );
 }
 
-class LauncherWizard extends StatelessWidget {
+class LauncherWizard extends StatefulWidget {
   const LauncherWizard({super.key});
 
-  void _onDone(BuildContext context, [Object? result]) {
-    if (result is! LxdImage) {
-      Navigator.of(context).pop(null);
-      return;
-    }
+  @override
+  State<LauncherWizard> createState() => _LauncherWizardState();
+}
 
-    final remote = context.read<RemoteStore>().current!;
-    final options = LaunchOptions(
-      image: result,
-      remote: remote,
-    );
-    Navigator.of(context).pop(options);
+class _LauncherWizardState extends State<LauncherWizard> {
+  @override
+  void initState() {
+    super.initState();
+
+    final launcher = context.read<LauncherModel>();
+    launcher.run().then((image) {
+      if (image == null) {
+        Navigator.of(context).pop(null);
+        return;
+      }
+
+      final remote = context.read<RemoteStore>().current!;
+      final options = LaunchOptions(
+        image: image,
+        remote: remote,
+      );
+      Navigator.of(context).pop(options);
+    });
   }
 
   @override
@@ -65,8 +80,8 @@ class LauncherWizard extends StatelessWidget {
           child: Stack(
             children: [
               remote?.isLocal == true
-                  ? LocalImageWizard(onDone: (res) => _onDone(context, res))
-                  : RemoteImageWizard(onDone: (res) => _onDone(context, res)),
+                  ? const LocalImageWizard()
+                  : const RemoteImageWizard(),
               Positioned.directional(
                 top: 12,
                 end: 12,
@@ -75,7 +90,7 @@ class LauncherWizard extends StatelessWidget {
                   splashRadius: 16,
                   padding: EdgeInsets.zero,
                   icon: const Icon(Icons.close),
-                  onPressed: () => _onDone(context),
+                  onPressed: context.read<LauncherModel>().cancel,
                 ),
               ),
             ],
@@ -87,29 +102,31 @@ class LauncherWizard extends StatelessWidget {
 }
 
 class RemoteImageWizard extends StatelessWidget {
-  const RemoteImageWizard({super.key, required this.onDone});
-
-  final ValueChanged<Object?> onDone;
+  const RemoteImageWizard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final launcher = context.read<LauncherModel>();
     return Wizard(
       routes: {
         '/os': WizardRoute(
           builder: (_) => const RemoteOsPage(),
-          onDone: onDone,
+          onNext: (settings) => launcher.next(settings.arguments),
+          onDone: launcher.done,
         ),
         '/image': WizardRoute(
           builder: RemoteImagePage.create,
-          onDone: onDone,
+          onNext: (settings) => launcher.next(settings.arguments),
+          onDone: launcher.done,
         ),
         '/features': WizardRoute(
           builder: FeaturePage.create,
-          onDone: onDone,
+          onNext: (settings) => launcher.next(settings.arguments),
+          onDone: launcher.done,
         ),
         '/properties': WizardRoute(
           builder: PropertyPage.create,
-          onDone: onDone,
+          onDone: launcher.done,
         ),
       },
     );
@@ -117,25 +134,26 @@ class RemoteImageWizard extends StatelessWidget {
 }
 
 class LocalImageWizard extends StatelessWidget {
-  const LocalImageWizard({super.key, required this.onDone});
-
-  final ValueChanged<Object?> onDone;
+  const LocalImageWizard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final launcher = context.read<LauncherModel>();
     return Wizard(
       routes: {
         '/image': WizardRoute(
           builder: LocalImagePage.create,
-          onDone: onDone,
+          onNext: (settings) => launcher.next(settings.arguments),
+          onDone: launcher.done,
         ),
         '/features': WizardRoute(
           builder: FeaturePage.create,
-          onDone: onDone,
+          onNext: (settings) => launcher.next(settings.arguments),
+          onDone: launcher.done,
         ),
         '/properties': WizardRoute(
           builder: PropertyPage.create,
-          onDone: onDone,
+          onDone: launcher.done,
         ),
       },
     );

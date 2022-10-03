@@ -9,10 +9,7 @@ import 'package:safe_change_notifier/safe_change_notifier.dart';
 final _validName = RegExp(r'^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*$');
 
 class PropertyModel extends SafeChangeNotifier {
-  void load(LxdImage image) {
-    _image = image;
-    _name = _image.name ?? generateName();
-  }
+  PropertyModel(this._image) : _name = _image.name ?? generateName();
 
   String get os => _image.os ?? '';
   String get release => _image.release ?? '';

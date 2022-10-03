@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
@@ -9,14 +8,15 @@ import 'package:wizard_router/wizard_router.dart';
 import '../widgets/wizard_page.dart';
 import 'feature_model.dart';
 import 'launcher_l10n.dart';
+import 'launcher_model.dart';
 
 class FeaturePage extends StatefulWidget {
   const FeaturePage({super.key});
 
   static Widget create(BuildContext context) {
-    final image = Wizard.of(context).arguments as LxdImage;
+    final launcher = context.read<LauncherModel>();
     return ChangeNotifierProvider(
-      create: (_) => FeatureModel(image),
+      create: (_) => FeatureModel(launcher.image!),
       child: const FeaturePage(),
     );
   }

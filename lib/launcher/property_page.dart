@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:lxd/lxd.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
 import '../widgets/product_logo.dart';
 import '../widgets/wizard_page.dart';
+import 'launcher_model.dart';
 import 'property_model.dart';
 
 class PropertyPage extends StatefulWidget {
   const PropertyPage({super.key});
 
   static Widget create(BuildContext context) {
+    final launcher = context.read<LauncherModel>();
     return ChangeNotifierProvider(
-      create: (_) => PropertyModel(),
+      create: (_) => PropertyModel(launcher.image!),
       child: const PropertyPage(),
     );
   }
@@ -31,8 +32,6 @@ class _PropertyPageState extends State<PropertyPage> {
     super.initState();
 
     final model = context.read<PropertyModel>();
-    model.load(Wizard.of(context).arguments as LxdImage);
-
     _nameController = TextEditingController(text: model.name);
     _nameController.addListener(() => model.name = _nameController.text);
   }
