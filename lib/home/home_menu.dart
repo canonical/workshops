@@ -6,12 +6,12 @@ List<PopupMenuEntry> buildContextMenu({
   required BuildContext context,
   required TerminalMixin? terminal,
   required int tabCount,
-  required VoidCallback? onNewTab,
+  required VoidCallback? onAddTab,
   required VoidCallback? onCloseTab,
 }) {
   return <PopupMenuEntry>[
     ContextMenuItem(
-      onTap: onNewTab,
+      onTap: onAddTab,
       child: const Text('New Tab'),
     ),
     ContextMenuItem(

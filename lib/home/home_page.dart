@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
               context: context,
               terminal: model.currentTerminal,
               tabCount: model.tabCount,
-              onNewTab: model.addTab,
+              onAddTab: model.addTab,
               onCloseTab: model.closeTab,
             ),
             child: model.currentState.maybeWhen(
@@ -129,7 +129,7 @@ class HomePage extends StatelessWidget {
                             context: context,
                             terminal: model.currentTerminal,
                             tabCount: model.tabCount,
-                            onNewTab: model.addTab,
+                            onAddTab: model.addTab,
                             onCloseTab: model.closeTab,
                           ),
                         );
