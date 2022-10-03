@@ -9,8 +9,8 @@ import 'package:wizard_router/wizard_router.dart';
 import '../remotes/remote_store.dart';
 import '../widgets/wizard_transition.dart';
 import 'feature_page.dart';
-import 'launcher_page.dart';
 import 'local_image_page.dart';
+import 'property_page.dart';
 import 'remote_image_page.dart';
 import 'remote_os_page.dart';
 
@@ -107,8 +107,8 @@ class RemoteImageWizard extends StatelessWidget {
           builder: FeaturePage.create,
           onDone: onDone,
         ),
-        '/launch': WizardRoute(
-          builder: LauncherPage.create,
+        '/properties': WizardRoute(
+          builder: PropertyPage.create,
           onDone: onDone,
         ),
       },
@@ -133,8 +133,8 @@ class LocalImageWizard extends StatelessWidget {
           builder: FeaturePage.create,
           onDone: onDone,
         ),
-        '/launch': WizardRoute(
-          builder: LauncherPage.create,
+        '/properties': WizardRoute(
+          builder: PropertyPage.create,
           onDone: onDone,
         ),
       },

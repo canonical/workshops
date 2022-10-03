@@ -7,30 +7,30 @@ import 'package:wizard_router/wizard_router.dart';
 
 import '../widgets/product_logo.dart';
 import '../widgets/wizard_page.dart';
-import 'launcher_model.dart';
+import 'property_model.dart';
 
-class LauncherPage extends StatefulWidget {
-  const LauncherPage({super.key});
+class PropertyPage extends StatefulWidget {
+  const PropertyPage({super.key});
 
   static Widget create(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => LauncherModel(),
-      child: const LauncherPage(),
+      create: (_) => PropertyModel(),
+      child: const PropertyPage(),
     );
   }
 
   @override
-  State<LauncherPage> createState() => _LauncherPageState();
+  State<PropertyPage> createState() => _PropertyPageState();
 }
 
-class _LauncherPageState extends State<LauncherPage> {
+class _PropertyPageState extends State<PropertyPage> {
   late final TextEditingController _nameController;
 
   @override
   void initState() {
     super.initState();
 
-    final model = context.read<LauncherModel>();
+    final model = context.read<PropertyModel>();
     model.load(Wizard.of(context).arguments as LxdImage);
 
     _nameController = TextEditingController(text: model.name);
@@ -45,7 +45,7 @@ class _LauncherPageState extends State<LauncherPage> {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<LauncherModel>();
+    final model = context.watch<PropertyModel>();
     final l10n = AppLocalizations.of(context);
     return WizardPage(
       title: Text(l10n.launchInstanceTitle),
@@ -97,7 +97,7 @@ class _LauncherPageState extends State<LauncherPage> {
           child: Text(l10n.cancelLabel),
         ),
         OutlinedButton(
-          onPressed: () => Wizard.of(context).done(result: model.image),
+          onPressed: () => Wizard.of(context).done(result: model.save()),
           child: Text(l10n.okLabel),
         ),
       ],

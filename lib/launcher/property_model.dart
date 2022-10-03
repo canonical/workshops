@@ -8,7 +8,7 @@ import 'package:safe_change_notifier/safe_change_notifier.dart';
 /// - may contain letters, digits, and hyphens
 final _validName = RegExp(r'^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*$');
 
-class LauncherModel extends SafeChangeNotifier {
+class PropertyModel extends SafeChangeNotifier {
   void load(LxdImage image) {
     _image = image;
     _name = _image.name ?? generateName();
@@ -27,7 +27,7 @@ class LauncherModel extends SafeChangeNotifier {
     notifyListeners();
   }
 
-  LxdImage? get image {
+  LxdImage? save() {
     return _image.copyWith(
       properties: {
         ..._image.properties,
