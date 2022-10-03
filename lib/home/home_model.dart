@@ -67,23 +67,11 @@ class HomeModel extends ChangeNotifier {
     currentIndex = index < 0 ? _models.length - 1 : index;
   }
 
-  Future<void> createInstance(LxdImage image, {LxdRemote? remote}) async {
-    final instance = await currentModel.create(image, remote: remote);
-    if (instance != null) {
-      return configureInstance(instance, image);
-    }
-  }
-
-  Future<void> configureInstance(LxdInstance instance, LxdImage image) async {
-    if (await currentModel.configure(instance, image)) {
-      return startInstance(instance);
-    }
-  }
-
   Future<void> startInstance(LxdInstance instance) async {
-    if (await currentModel.start(instance)) {
-      return runInstance(instance);
-    }
+    final start = await _service.startInstance(instance.name);
+    await _service.waitOperation(start.id);
+    await _service.waitVmAgent(instance.name);
+    return runInstance(instance);
   }
 
   Future<void> runInstance(LxdInstance instance) {

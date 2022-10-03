@@ -103,12 +103,9 @@ class HomePage extends StatelessWidget {
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () async {
-                    final options = await showLauncherWizard(context);
-                    if (options != null) {
-                      unawaited(model.createInstance(
-                        options.image,
-                        remote: options.remote,
-                      ));
+                    final instance = await showLauncherWizard(context);
+                    if (instance != null) {
+                      unawaited(model.startInstance(instance));
                     }
                   },
                   child: const Icon(Icons.add),

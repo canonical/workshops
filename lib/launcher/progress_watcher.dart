@@ -7,27 +7,26 @@ import 'package:lxd_service/lxd_service.dart';
 import 'package:meta/meta.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
-import 'terminal_state.dart';
+import 'progress_state.dart';
 
 typedef OperationValue = AsyncValue<LxdOperation?>;
 
-abstract class TerminalWatcher extends SafeChangeNotifier {
-  factory TerminalWatcher(TerminalState state, LxdService service) {
+abstract class ProgressWatcher extends SafeChangeNotifier {
+  factory ProgressWatcher(ProgressState state, LxdService service) {
     return state.when(
-      none: () => throw UnsupportedError('none'),
+      none: () => NoneWatcher(service),
+      error: (message) => NoneWatcher(service),
       create: (_, op) => OperationWatcher(op.id, service),
       init: (instance, _) => InstanceWatcher(instance.name, service),
       config: (instance, _) => InstanceWatcher(instance.name, service),
       stage: (_, op) => OperationWatcher(op.id, service),
       start: (_, op) => OperationWatcher(op.id, service),
-      restart: (_, op) => OperationWatcher(op.id, service),
-      running: (instance, _) => throw UnsupportedError(instance.toString()),
       stop: (_, op) => OperationWatcher(op.id, service),
-      error: (message) => throw UnsupportedError(message ?? 'error'),
+      delete: (instance, op) => OperationWatcher(op.id, service),
     );
   }
 
-  TerminalWatcher._(this.service);
+  ProgressWatcher._(this.service);
 
   final LxdService service;
   StreamSubscription? _sub;
@@ -47,24 +46,17 @@ abstract class TerminalWatcher extends SafeChangeNotifier {
     _sub = watch();
   }
 
-  Future<void> cancel() async {
-    final op = operation.valueOrNull;
-    if (op?.mayCancel == true) {
-      return service.cancelOperation(op!.id);
-    }
-  }
-
   Future<OperationValue> load();
-  StreamSubscription<LxdOperation> watch();
+  StreamSubscription<LxdOperation>? watch();
 
   @override
-  void dispose() {
-    _sub?.cancel();
+  void dispose() async {
+    await _sub?.cancel();
     super.dispose();
   }
 }
 
-class OperationWatcher extends TerminalWatcher {
+class OperationWatcher extends ProgressWatcher {
   OperationWatcher(this.id, LxdService service) : super._(service);
 
   final String id;
@@ -83,7 +75,7 @@ class OperationWatcher extends TerminalWatcher {
   }
 }
 
-class InstanceWatcher extends TerminalWatcher {
+class InstanceWatcher extends ProgressWatcher {
   InstanceWatcher(this.name, LxdService service) : super._(service);
 
   final String name;
@@ -101,7 +93,7 @@ class InstanceWatcher extends TerminalWatcher {
   }
 }
 
-class StreamWatcher extends TerminalWatcher {
+class StreamWatcher extends ProgressWatcher {
   StreamWatcher(this.stream, LxdService service) : super._(service);
 
   final Stream<LxdOperation> stream;
@@ -115,4 +107,16 @@ class StreamWatcher extends TerminalWatcher {
   StreamSubscription<LxdOperation> watch() {
     return stream.listen((event) => operation = OperationValue.data(event));
   }
+}
+
+class NoneWatcher extends ProgressWatcher {
+  NoneWatcher(super.service) : super._();
+
+  @override
+  Future<OperationValue> load() async {
+    return const OperationValue.data(null);
+  }
+
+  @override
+  StreamSubscription<LxdOperation>? watch() => null;
 }

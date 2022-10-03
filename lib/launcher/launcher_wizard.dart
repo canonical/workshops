@@ -11,6 +11,7 @@ import '../widgets/wizard_transition.dart';
 import 'feature_page.dart';
 import 'launcher_model.dart';
 import 'local_image_page.dart';
+import 'progress_page.dart';
 import 'property_page.dart';
 import 'remote_image_page.dart';
 import 'remote_os_page.dart';
@@ -24,7 +25,7 @@ class LaunchOptions {
   final LxdRemote remote;
 }
 
-Future<LaunchOptions?> showLauncherWizard(BuildContext context) {
+Future<LxdInstance?> showLauncherWizard(BuildContext context) {
   return showDialog(
     context: context,
     builder: (context) => ChangeNotifierProvider(
@@ -47,19 +48,7 @@ class _LauncherWizardState extends State<LauncherWizard> {
     super.initState();
 
     final launcher = context.read<LauncherModel>();
-    launcher.run().then((image) {
-      if (image == null) {
-        Navigator.of(context).pop(null);
-        return;
-      }
-
-      final remote = context.read<RemoteStore>().current!;
-      final options = LaunchOptions(
-        image: image,
-        remote: remote,
-      );
-      Navigator.of(context).pop(options);
-    });
+    launcher.run().then(Navigator.of(context).pop);
   }
 
   @override
@@ -128,6 +117,10 @@ class RemoteImageWizard extends StatelessWidget {
           builder: PropertyPage.create,
           onDone: launcher.done,
         ),
+        '/progress': WizardRoute(
+          builder: ProgressPage.create,
+          onDone: launcher.done,
+        ),
       },
     );
   }
@@ -153,6 +146,10 @@ class LocalImageWizard extends StatelessWidget {
         ),
         '/properties': WizardRoute(
           builder: PropertyPage.create,
+          onDone: launcher.done,
+        ),
+        '/progress': WizardRoute(
+          builder: ProgressPage.create,
           onDone: launcher.done,
         ),
       },
