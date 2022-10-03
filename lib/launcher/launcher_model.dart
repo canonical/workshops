@@ -1,42 +1,47 @@
+import 'dart:async';
+
 import 'package:lxd/lxd.dart';
-import 'package:lxd_x/lxd_x.dart';
-import 'package:petname/petname.dart' as petname;
+import 'package:meta/meta.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
-/// The regular expression pattern for valid image names:
-/// - must start and end with a letter or digit
-/// - may contain letters, digits, and hyphens
-final _validName = RegExp(r'^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*$');
-
 class LauncherModel extends SafeChangeNotifier {
-  void load(LxdImage image) {
-    _image = image;
-    _name = _image.name ?? generateName();
-  }
+  final _completer = Completer<LxdImage?>();
 
-  String get os => _image.os ?? '';
-  String get release => _image.release ?? '';
-
-  late final LxdImage _image;
-  String _name = '';
-
-  String get name => _name;
-  set name(String name) {
-    if (_name == name) return;
-    _name = name;
+  String? get os => _os;
+  String? _os;
+  @protected
+  set os(String? os) {
+    if (_os == os) return;
+    _os = os;
     notifyListeners();
   }
 
-  LxdImage? get image {
-    return _image.copyWith(
-      properties: {
-        ..._image.properties,
-        'name': _name,
-      },
-    );
+  LxdImage? get image => _image;
+  LxdImage? _image;
+  @protected
+  set image(LxdImage? image) {
+    if (_image == image) return;
+    _image = image;
+    notifyListeners();
   }
 
-  static String generateName() => petname.generate(2, separator: '-');
+  Future<LxdImage?> run() {
+    return _completer.future;
+  }
 
-  bool validateName(String name) => name.isEmpty || _validName.hasMatch(name);
+  void cancel() => _completer.complete(null);
+
+  String? next(Object? arguments) {
+    if (arguments is LxdImage) {
+      image = arguments;
+    } else if (arguments is String) {
+      os = arguments;
+    }
+    return null;
+  }
+
+  Future<void> done(Object? result) async {
+    next(result);
+    _completer.complete(_image);
+  }
 }

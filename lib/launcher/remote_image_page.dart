@@ -10,6 +10,7 @@ import 'package:wizard_router/wizard_router.dart';
 import '../widgets/product_logo.dart';
 import '../widgets/wizard_page.dart';
 import 'launcher_l10n.dart';
+import 'launcher_model.dart';
 import 'remote_image_filter.dart';
 import 'remote_image_model.dart';
 
@@ -19,10 +20,10 @@ class RemoteImagePage extends StatelessWidget {
   final String os;
 
   static Widget create(BuildContext context) {
-    final os = Wizard.of(context).arguments as String;
+    final launcher = context.read<LauncherModel>();
     return ChangeNotifierProvider(
       create: (_) => RemoteImageFilter(),
-      child: RemoteImagePage(os: os),
+      child: RemoteImagePage(os: launcher.os!),
     );
   }
 
