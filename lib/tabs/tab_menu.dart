@@ -1,13 +1,13 @@
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:terminal_view/terminal_view.dart';
 
 List<PopupMenuEntry> buildContextMenu({
   required BuildContext context,
-  required TerminalMixin? terminal,
-  required int tabCount,
   required VoidCallback? onAddTab,
   required VoidCallback? onCloseTab,
+  VoidCallback? onCopy,
+  VoidCallback? onPaste,
+  VoidCallback? onSelectAll,
 }) {
   return <PopupMenuEntry>[
     ContextMenuItem(
@@ -16,23 +16,23 @@ List<PopupMenuEntry> buildContextMenu({
     ),
     ContextMenuItem(
       onTap: onCloseTab,
-      enabled: tabCount > 1,
+      enabled: onCloseTab != null,
       child: const Text('Close Tab'),
     ),
     const PopupMenuDivider(),
     ContextMenuItem(
-      onTap: terminal?.copy,
-      enabled: terminal?.selectedText?.isNotEmpty == true,
+      onTap: onCopy,
+      enabled: onCopy != null,
       child: const Text('Copy'),
     ),
     ContextMenuItem(
-      onTap: terminal?.paste,
-      enabled: terminal != null,
+      onTap: onPaste,
+      enabled: onPaste != null,
       child: const Text('Paste'),
     ),
     ContextMenuItem(
-      onTap: terminal?.selectAll,
-      enabled: terminal != null,
+      onTap: onSelectAll,
+      enabled: onSelectAll != null,
       child: const Text('Select All'),
     ),
   ];

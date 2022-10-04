@@ -8,6 +8,8 @@ mixin TerminalMixin on Terminal {
       ? buffer.getText(controller.selection)
       : null;
 
+  bool get canCopy => selectedText?.isNotEmpty == true;
+
   Future<void> copy() async {
     final data = ClipboardData(text: selectedText);
     return Clipboard.setData(data);
