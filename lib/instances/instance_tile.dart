@@ -55,7 +55,7 @@ class _InstanceTileState extends State<InstanceTile> {
               : canDelete
                   ? _DeleteButton(model.delete)
                   : null,
-      onTap: canStart ? () => widget.onStart!(instance!) : null,
+      onTap: canStart ? () => widget.onStart!(instance) : null,
     );
   }
 }
