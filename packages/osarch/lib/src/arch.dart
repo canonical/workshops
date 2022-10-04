@@ -104,13 +104,13 @@ enum Arch {
   final Set<Arch> supportedPersonalities;
   final List<String> aliases;
 
-  static Arch? byName(String arch) {
+  static Arch? byName(String? arch) {
     try {
-      return Arch.values.byName(arch);
+      return arch != null ? Arch.values.byName(arch) : null;
     } on ArgumentError catch (_) {
       return Arch.values.firstWhereOrNull((v) => v.aliases.contains(arch));
     }
   }
 
-  static Arch? local() => Arch.byName(uname().machine);
+  static Arch? local() => Arch.byName(uname()?.machine);
 }
