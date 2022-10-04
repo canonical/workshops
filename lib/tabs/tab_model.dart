@@ -1,31 +1,16 @@
 import 'package:flutter/foundation.dart';
-import 'package:lxd_service/lxd_service.dart';
+import 'package:lxd/lxd.dart';
 
-import '../terminal/terminal_instance.dart';
-import '../terminal/terminal_model.dart';
-import '../terminal/terminal_state.dart';
+import 'tab_item.dart';
 
 class TabModel extends ChangeNotifier {
-  TabModel(this._service) {
-    addTab();
-  }
+  var _currentIndex = 0;
+  final _tabs = <TabItem>[TabItem()];
 
-  final LxdService _service;
+  int get length => _tabs.length;
+  List<TabItem> get tabs => _tabs;
 
-  var _currentIndex = -1;
-  final _models = <TerminalModel>[];
-
-  int get tabCount => _models.length;
-
-  TerminalState? state(int index) => model(index)?.state;
-  TerminalState get currentState => state(_currentIndex)!;
-
-  TerminalInstance? terminal(int index) =>
-      state(index)?.whenOrNull(running: (instance, terminal) => terminal);
-  TerminalInstance? get currentTerminal => terminal(_currentIndex);
-
-  TerminalModel? model(int index) => _models.elementAtOrNull(index);
-  TerminalModel get currentModel => model(_currentIndex)!;
+  TabItem get currentTab => _tabs[currentIndex];
 
   int get currentIndex => _currentIndex;
   set currentIndex(int index) {
@@ -34,22 +19,20 @@ class TabModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addTab() {
-    final model = TerminalModel(_service);
-    model.addListener(notifyListeners);
-    _models.add(model);
-    currentIndex = _models.length - 1;
+  void addTab([LxdInstance? instance]) {
+    final tab = TabItem(instance);
+    _tabs.add(tab);
+    currentIndex = _tabs.length - 1;
   }
 
   void closeTab([int? index]) {
-    final model = _models.removeAt(index ?? _currentIndex);
-    model.removeListener(notifyListeners);
-    model.dispose();
-    currentIndex = _currentIndex.clamp(0, _models.length - 1);
+    final tab = _tabs.removeAt(index ?? _currentIndex);
+    tab.dispose();
+    currentIndex = _currentIndex.clamp(0, _tabs.length - 1);
   }
 
   void moveTab(int from, int to) {
-    _models.move(from, to);
+    _tabs.move(from, to);
     if (_currentIndex == to) {
       currentIndex = from;
     } else if (_currentIndex == from) {
@@ -58,18 +41,17 @@ class TabModel extends ChangeNotifier {
   }
 
   void nextTab() {
-    currentIndex = (_currentIndex + 1) % _models.length;
+    currentIndex = (_currentIndex + 1) % _tabs.length;
   }
 
   void previousTab() {
     final index = currentIndex - 1;
-    currentIndex = index < 0 ? _models.length - 1 : index;
+    currentIndex = index < 0 ? _tabs.length - 1 : index;
   }
 
   @override
   void dispose() {
-    for (final model in _models) {
-      model.removeListener(notifyListeners);
+    for (final model in _tabs) {
       model.dispose();
     }
     super.dispose();

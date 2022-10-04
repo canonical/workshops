@@ -1,18 +1,14 @@
-import 'dart:async';
-
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:movable_tabs/movable_tabs.dart';
 import 'package:provider/provider.dart';
-import 'package:ubuntu_service/ubuntu_service.dart';
 
-import '../instances/instance_view.dart';
-import '../launcher/launcher_wizard.dart';
+import '../instances/instance_page.dart';
 import '../terminal/terminal_page.dart';
 import '../widgets/product_logo.dart';
+import 'tab_item.dart';
 import 'tab_menu.dart';
 import 'tab_model.dart';
 
@@ -21,7 +17,7 @@ class TabPage extends StatelessWidget {
 
   static Widget create(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => TabModel(getService<LxdService>()),
+      create: (_) => TabModel(),
       child: const TabPage(),
     );
   }
@@ -37,7 +33,7 @@ class TabPage extends StatelessWidget {
           shift: true,
           includeRepeats: false,
         ): model.addTab,
-        if (model.tabCount > 1)
+        if (model.tabs.length > 1)
           const SingleActivator(
             LogicalKeyboardKey.keyW,
             control: true,
@@ -56,27 +52,26 @@ class TabPage extends StatelessWidget {
       child: Focus(
         autofocus: true,
         child: Scaffold(
-          appBar: model.tabCount <= 1
+          appBar: model.tabs.length <= 1
               ? null
               : MovableTabBar(
-                  count: model.tabCount,
+                  count: model.tabs.length,
                   builder: (context, index) {
-                    final terminal = model.state(index)!;
-                    return MovableTabButton(
-                      selected: index == model.currentIndex,
-                      onPressed: () => model.currentIndex = index,
-                      onClosed: () => model.closeTab(index),
-                      icon: terminal.maybeWhen(
-                        none: () => null,
-                        orElse: () => ProductLogo.asset(
-                          name: terminal.instance?.os,
-                          size: 32,
-                        ),
-                      ),
-                      label: terminal.maybeWhen(
-                        running: (instance, running) => Text(instance.name),
-                        orElse: () => const Text('Home'),
-                      ),
+                    return ChangeNotifierProvider.value(
+                      value: model.tabs[index],
+                      builder: (context, child) {
+                        final tab = context.watch<TabItem>();
+                        return MovableTabButton(
+                          selected: index == model.currentIndex,
+                          onPressed: () => model.currentIndex = index,
+                          onClosed: () => model.closeTab(index),
+                          icon: ProductLogo.asset(
+                            name: tab.instance?.os,
+                            size: 32,
+                          ),
+                          label: Text(tab.instance?.name ?? 'Home'),
+                        );
+                      },
                     );
                   },
                   trailing: IconButton(
@@ -91,64 +86,31 @@ class TabPage extends StatelessWidget {
           body: ContextMenuArea(
             builder: (context, position) => buildContextMenu(
               context: context,
-              terminal: model.currentTerminal,
-              tabCount: model.tabCount,
+              terminal: null,
+              tabCount: model.tabs.length,
               onAddTab: model.addTab,
               onCloseTab: model.closeTab,
             ),
-            child: model.currentState.maybeWhen(
-              none: () => Scaffold(
-                body: InstanceView(
-                  onStart: model.currentModel.start,
-                ),
-                floatingActionButton: FloatingActionButton(
-                  onPressed: () async {
-                    final instance = await showLauncherWizard(context);
-                    if (instance != null) {
-                      unawaited(model.currentModel.start(instance));
-                    }
-                  },
-                  child: const Icon(Icons.add),
-                ),
-              ),
-              orElse: () => Stack(
-                children: [
-                  Positioned.fill(
-                    child: TerminalPage(
-                      model: model.currentModel,
-                      onContextMenu: (position) {
-                        showContextMenu(
-                          context: context,
-                          position: position,
-                          items: buildContextMenu(
-                            context: context,
-                            terminal: model.currentTerminal,
-                            tabCount: model.tabCount,
-                            onAddTab: model.addTab,
-                            onCloseTab: model.closeTab,
-                          ),
-                        );
-                      },
-                    ),
+            child: IndexedStack(
+              index: model.currentIndex,
+              children: [
+                for (final tab in model.tabs)
+                  ChangeNotifierProvider.value(
+                    value: tab,
+                    builder: (context, child) {
+                      final tab = context.watch<TabItem>();
+                      return tab.instance == null
+                          ? InstancePage(
+                              onStart: (instance) => tab.instance = instance,
+                              onCreate: (instance) => tab.instance = instance,
+                            )
+                          : TerminalPage(
+                              instance: tab.instance!,
+                              onExit: () => tab.instance = null,
+                            );
+                    },
                   ),
-                  if (model.tabCount == 1 && model.currentTerminal != null)
-                    Positioned.directional(
-                      textDirection: Directionality.of(context),
-                      top: 4,
-                      end: 0,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: IconButton(
-                          icon: const Icon(Icons.add),
-                          color: Colors.white,
-                          splashRadius: 16,
-                          iconSize: 16,
-                          onPressed: model.addTab,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
+              ],
             ),
           ),
         ),
