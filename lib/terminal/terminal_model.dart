@@ -22,6 +22,13 @@ class TerminalModel extends SafeChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> start(LxdInstance instance) async {
+    final start = await _service.startInstance(instance.name);
+    await _service.waitOperation(start.id);
+    await _service.waitVmAgent(instance.name);
+    return run(instance);
+  }
+
   Future<void> run(LxdInstance instance) async {
     // TODO: configurable max lines
     final terminal = TerminalInstance(

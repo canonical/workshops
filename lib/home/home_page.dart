@@ -99,13 +99,13 @@ class HomePage extends StatelessWidget {
             child: model.currentState.maybeWhen(
               none: () => Scaffold(
                 body: InstanceView(
-                  onStart: model.startInstance,
+                  onStart: model.currentModel.start,
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () async {
                     final instance = await showLauncherWizard(context);
                     if (instance != null) {
-                      unawaited(model.startInstance(instance));
+                      unawaited(model.currentModel.start(instance));
                     }
                   },
                   child: const Icon(Icons.add),

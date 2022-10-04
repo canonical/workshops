@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 
 import '../terminal/terminal_instance.dart';
@@ -65,17 +64,6 @@ class HomeModel extends ChangeNotifier {
   void previousTab() {
     final index = currentIndex - 1;
     currentIndex = index < 0 ? _models.length - 1 : index;
-  }
-
-  Future<void> startInstance(LxdInstance instance) async {
-    final start = await _service.startInstance(instance.name);
-    await _service.waitOperation(start.id);
-    await _service.waitVmAgent(instance.name);
-    return runInstance(instance);
-  }
-
-  Future<void> runInstance(LxdInstance instance) {
-    return currentModel.run(instance);
   }
 
   @override
