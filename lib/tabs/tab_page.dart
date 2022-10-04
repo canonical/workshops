@@ -86,10 +86,8 @@ class TabPage extends StatelessWidget {
           body: ContextMenuArea(
             builder: (context, position) => buildContextMenu(
               context: context,
-              terminal: null,
-              tabCount: model.tabs.length,
               onAddTab: model.addTab,
-              onCloseTab: model.closeTab,
+              onCloseTab: model.length > 1 ? model.closeTab : null,
             ),
             child: IndexedStack(
               index: model.currentIndex,

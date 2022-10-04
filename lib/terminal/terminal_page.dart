@@ -69,10 +69,11 @@ class _TerminalPageState extends State<_TerminalPage> {
                 position: position,
                 items: buildContextMenu(
                   context: context,
-                  terminal: model.terminal,
-                  tabCount: tabs.length,
                   onAddTab: tabs.addTab,
                   onCloseTab: tabs.closeTab,
+                  onCopy: model.terminal.canCopy ? model.terminal.copy : null,
+                  onPaste: model.terminal.paste,
+                  onSelectAll: model.terminal.selectAll,
                 ),
               );
             },
