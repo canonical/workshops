@@ -203,6 +203,7 @@ void main() {
     });
 
     final client = MockLxdClient();
+    when(client.getInstance('mine')).thenAnswer((_) async => instance);
     when(client.execInstance(
       'mine',
       command: ['login', '-f', 'me'],
@@ -228,7 +229,7 @@ void main() {
 
     final service = LxdService(client);
 
-    final socket = await service.execTerminal(instance);
+    final socket = await service.execTerminal('mine');
     expect(socket.operation, exec);
 
     socket.resize(123, 456);
@@ -243,6 +244,7 @@ void main() {
     final received = <String>[];
     socket.listen(received.add);
 
+    verify(client.getInstance('mine')).called(1);
     verify(client.execInstance(
       'mine',
       command: ['login', '-f', 'me'],

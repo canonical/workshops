@@ -45,7 +45,7 @@ abstract class LxdService {
 
   Future<void> waitVmAgent(String name, {Duration? timeout});
 
-  Future<LxdTerminal> execTerminal(LxdInstance instance);
+  Future<LxdTerminal> execTerminal(String name);
 
   Future<LxdOperation> getOperation(String id);
   Stream<LxdOperation> watchOperation(String id);
@@ -214,7 +214,8 @@ class _LxdService implements LxdService {
     return _client.waitVmAgent(name, timeout: timeout);
   }
 
-  Future<LxdTerminal> execTerminal(LxdInstance instance) async {
+  Future<LxdTerminal> execTerminal(String name) async {
+    final instance = await _client.getInstance(name);
     final user = instance.config['user.name'] ?? 'root';
     final op = await _client.execInstance(
       instance.name,
