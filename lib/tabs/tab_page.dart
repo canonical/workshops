@@ -13,22 +13,22 @@ import '../instances/instance_view.dart';
 import '../launcher/launcher_wizard.dart';
 import '../terminal/terminal_page.dart';
 import '../widgets/product_logo.dart';
-import 'home_menu.dart';
-import 'home_model.dart';
+import 'tab_menu.dart';
+import 'tab_model.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class TabPage extends StatelessWidget {
+  const TabPage({super.key});
 
   static Widget create(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => HomeModel(getService<LxdService>()),
-      child: const HomePage(),
+      create: (_) => TabModel(getService<LxdService>()),
+      child: const TabPage(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<HomeModel>();
+    final model = context.watch<TabModel>();
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(

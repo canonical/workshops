@@ -5,8 +5,8 @@ import '../terminal/terminal_instance.dart';
 import '../terminal/terminal_model.dart';
 import '../terminal/terminal_state.dart';
 
-class HomeModel extends ChangeNotifier {
-  HomeModel(this._service) {
+class TabModel extends ChangeNotifier {
+  TabModel(this._service) {
     addTab();
   }
 
