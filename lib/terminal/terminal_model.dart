@@ -43,7 +43,7 @@ class TerminalModel extends SafeChangeNotifier {
 
     _setState(TerminalState.running);
 
-    final socket = await _service.execTerminal(instance);
+    final socket = await _service.execTerminal(instance.name);
     socket.resize(terminal.viewWidth, terminal.viewHeight);
     socket.listen(terminal.write);
     terminal.onOutput = socket.write;
