@@ -51,6 +51,16 @@ class NestedSplitNode with DiagnosticableTreeMixin {
   List<NestedSplitNode> get children => _children;
   SplitViewController? get view => _view;
 
+  int get length {
+    switch (type) {
+      case NestedSplitType.horizontal:
+      case NestedSplitType.vertical:
+        return _children.fold<int>(0, (p, c) => p + c.length);
+      case NestedSplitType.view:
+        return 1;
+    }
+  }
+
   bool split(NestedSplitNode node, Axis axis) {
     if (node == this) {
       parent?._splitChild(this, axis.toSplitType());

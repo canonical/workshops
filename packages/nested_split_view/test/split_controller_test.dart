@@ -16,6 +16,7 @@ void main() {
         weights: [1.0],
       ),
     );
+    expect(controller.length, 1);
   });
 
   test('split horizontally', () {
@@ -37,6 +38,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 2);
   });
 
   test('split vertically', () {
@@ -58,6 +60,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 2);
   });
 
   test('unsplit first horizontal', () {
@@ -79,6 +82,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 2);
 
     expect(controller.unsplit(controller.children.first), isTrue);
 
@@ -92,6 +96,7 @@ void main() {
         weights: [1.0],
       ),
     );
+    expect(controller.length, 1);
   });
 
   test('unsplit last vertical', () {
@@ -113,6 +118,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 2);
 
     expect(controller.unsplit(controller.children.last), isTrue);
 
@@ -126,6 +132,7 @@ void main() {
         weights: [1.0],
       ),
     );
+    expect(controller.length, 1);
   });
 
   test('collapse children', () {
@@ -147,6 +154,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 2);
 
     expect(
       controller.split(controller.children.last, Axis.vertical),
@@ -171,6 +179,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 3);
 
     expect(controller.unsplit(controller.children.first), isTrue);
 
@@ -185,6 +194,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 2);
   });
 
   test('collapse parent', () {
@@ -206,6 +216,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 2);
 
     expect(
       controller.split(controller.children.last, Axis.horizontal),
@@ -230,6 +241,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 3);
 
     expect(
       controller.split(controller.children.last.children.last, Axis.vertical),
@@ -261,6 +273,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 4);
 
     expect(
       controller.unsplit(controller.children.last.children.last.children.last),
@@ -285,6 +298,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 3);
   });
 
   test('middle split', () {
@@ -306,6 +320,7 @@ void main() {
         weights: [0.5, 0.5],
       ),
     );
+    expect(controller.length, 2);
 
     expect(
       controller.split(controller.children.first, Axis.horizontal),
@@ -324,6 +339,7 @@ void main() {
         weights: [0.25, 0.25, 0.5],
       ),
     );
+    expect(controller.length, 3);
   });
 
   test('listener', () {
