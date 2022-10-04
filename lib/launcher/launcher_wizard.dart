@@ -5,9 +5,9 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 import 'package:wizard_router/wizard_router.dart';
+import 'package:yaru/yaru.dart';
 
 import '../remotes/remote_store.dart';
-import '../widgets/wizard_transition.dart';
 import 'feature_page.dart';
 import 'launcher_model.dart';
 import 'local_image_page.dart';
@@ -60,11 +60,7 @@ class _LauncherWizardState extends State<LauncherWizard> {
         size: MediaQuery.of(context).size,
         child: Theme(
           data: Theme.of(context).copyWith(
-            pageTransitionsTheme: const PageTransitionsTheme(
-              builders: {
-                TargetPlatform.linux: WizardPageTransitionsBuilder(),
-              },
-            ),
+            pageTransitionsTheme: YaruPageTransitionsTheme.horizontal,
           ),
           child: Stack(
             children: [
