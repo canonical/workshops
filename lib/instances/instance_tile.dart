@@ -20,6 +20,7 @@ class InstanceTile extends StatefulWidget {
     required ValueChanged<LxdInstance>? onStart,
   }) {
     return ChangeNotifierProvider(
+      key: ValueKey(name),
       create: (_) => InstanceModel(name, getService<LxdService>()),
       child: InstanceTile(onStart: onStart),
     );
