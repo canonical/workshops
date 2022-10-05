@@ -28,7 +28,8 @@ class TabModel extends ChangeNotifier {
   void closeTab([int? index]) {
     final tab = _tabs.removeAt(index ?? _currentIndex);
     tab.dispose();
-    currentIndex = _currentIndex.clamp(0, _tabs.length - 1);
+    _currentIndex = _currentIndex.clamp(0, _tabs.length - 1);
+    notifyListeners();
   }
 
   void moveTab(int from, int to) {
