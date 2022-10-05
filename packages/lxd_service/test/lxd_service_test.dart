@@ -229,21 +229,21 @@ void main() {
 
     final service = LxdService(client);
 
-    final socket = await service.execTerminal('mine');
-    expect(socket.operation, exec);
-    expect(socket.id, exec.id);
+    final terminal = await service.execTerminal('mine');
+    expect(terminal.operation, exec);
+    expect(terminal.id, exec.id);
 
-    socket.resize(123, 456);
+    terminal.resize(123, 456);
     verify(wsc.add(jsonEncode({
       'command': 'window-resize',
       'args': {'width': '123', 'height': '456'},
     }))).called(1);
 
-    socket.write('data');
+    terminal.write('data');
     verify(ws0.add(utf8.encode('data'))).called(1);
 
     final received = <String>[];
-    socket.listen(received.add);
+    terminal.listen(received.add);
 
     verify(client.getInstance('mine')).called(1);
     verify(client.execInstance(
