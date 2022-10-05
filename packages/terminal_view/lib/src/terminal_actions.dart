@@ -75,3 +75,5 @@ class ScrollToBottomAction extends Action<ScrollToBottomIntent> {
     return null;
   }
 }
+
+class MoveFocusAction extends DirectionalFocusAction {}

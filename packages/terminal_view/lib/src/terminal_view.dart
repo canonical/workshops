@@ -102,14 +102,21 @@ class _TerminalViewState extends State<TerminalView> {
             widget.onContextMenu?.call(details.globalPosition);
           },
           shortcuts: const {
+            // edit
             TerminalShortcuts.copy: TerminalIntents.copy,
             TerminalShortcuts.paste: TerminalIntents.paste,
+            // scroll
             TerminalShortcuts.scrollUp: TerminalIntents.scrollUp,
             TerminalShortcuts.scrollDown: TerminalIntents.scrollDown,
             TerminalShortcuts.scrollPageUp: TerminalIntents.scrollPageUp,
             TerminalShortcuts.scrollPageDown: TerminalIntents.scrollPageDown,
             TerminalShortcuts.scrollToTop: TerminalIntents.scrollToTop,
             TerminalShortcuts.scrollToBottom: TerminalIntents.scrollToBottom,
+            // focus
+            TerminalShortcuts.moveFocusUp: TerminalIntents.moveFocusUp,
+            TerminalShortcuts.moveFocusDown: TerminalIntents.moveFocusDown,
+            TerminalShortcuts.moveFocusLeft: TerminalIntents.moveFocusLeft,
+            TerminalShortcuts.moveFocusRight: TerminalIntents.moveFocusRight,
           },
           actions: {
             ScrollUpIntent: ScrollUpAction(_scrollController),
@@ -118,6 +125,7 @@ class _TerminalViewState extends State<TerminalView> {
             ScrollPageDownIntent: ScrollPageDownAction(_scrollController),
             ScrollToTopIntent: ScrollToTopAction(_scrollController),
             ScrollToBottomIntent: ScrollToBottomAction(_scrollController),
+            MoveFocusIntent: MoveFocusAction(),
           },
         );
       },
