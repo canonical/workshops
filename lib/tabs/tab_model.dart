@@ -35,10 +35,11 @@ class TabModel extends ChangeNotifier {
   void moveTab(int from, int to) {
     _tabs.move(from, to);
     if (_currentIndex == to) {
-      currentIndex = from;
+      _currentIndex = from;
     } else if (_currentIndex == from) {
-      currentIndex = to;
+      _currentIndex = to;
     }
+    notifyListeners();
   }
 
   void nextTab() {
