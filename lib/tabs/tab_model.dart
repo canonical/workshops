@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:lxd/lxd.dart';
 
 import 'tab_item.dart';
 
@@ -19,8 +18,8 @@ class TabModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addTab([LxdInstance? instance]) {
-    final tab = TabItem(instance);
+  void addTab() {
+    final tab = TabItem();
     _tabs.add(tab);
     currentIndex = _tabs.length - 1;
   }
