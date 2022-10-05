@@ -231,6 +231,7 @@ void main() {
 
     final socket = await service.execTerminal('mine');
     expect(socket.operation, exec);
+    expect(socket.id, exec.id);
 
     socket.resize(123, 456);
     verify(wsc.add(jsonEncode({

@@ -320,6 +320,7 @@ class LxdTerminal {
   final WebSocket? _wsc;
   StreamSubscription? _sub;
 
+  String get id => _op.id;
   LxdOperation get operation => _op;
 
   void write(String data) => _ws0?.add(utf8.encode(data));
