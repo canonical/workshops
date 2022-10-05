@@ -29,8 +29,8 @@ class TerminalView extends StatefulWidget {
 }
 
 class _TerminalViewState extends State<TerminalView> {
-  late final xterm.TerminalController _controller;
-  late final ScrollController _scrollController;
+  late xterm.TerminalController _controller;
+  late ScrollController _scrollController;
 
   @override
   void initState() {
