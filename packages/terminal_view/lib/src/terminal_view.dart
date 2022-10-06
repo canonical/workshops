@@ -31,12 +31,14 @@ class TerminalView extends StatefulWidget {
 class _TerminalViewState extends State<TerminalView> {
   late xterm.TerminalController _controller;
   late ScrollController _scrollController;
+  late FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? xterm.TerminalController();
     _scrollController = widget.scrollController ?? ScrollController();
+    _focusNode = widget.focusNode ?? FocusNode();
   }
 
   @override
@@ -53,6 +55,12 @@ class _TerminalViewState extends State<TerminalView> {
       }
       _scrollController = widget.scrollController ?? ScrollController();
     }
+    if (oldWidget.focusNode != widget.focusNode) {
+      if (oldWidget.focusNode == null) {
+        _focusNode.dispose();
+      }
+      _focusNode = widget.focusNode ?? FocusNode();
+    }
     super.didUpdateWidget(oldWidget);
   }
 
@@ -63,6 +71,9 @@ class _TerminalViewState extends State<TerminalView> {
     }
     if (widget.scrollController == null) {
       _scrollController.dispose();
+    }
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
     }
     super.dispose();
   }
@@ -77,7 +88,7 @@ class _TerminalViewState extends State<TerminalView> {
         scrollController: _scrollController,
         padding: const EdgeInsets.all(2),
         autofocus: widget.autofocus,
-        focusNode: widget.focusNode,
+        focusNode: _focusNode,
         theme: theme?.toXterm() ?? xterm.TerminalThemes.defaultTheme,
         textStyle: xterm.TerminalStyle(
           fontSize: theme?.fontSize ?? 16,
