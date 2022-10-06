@@ -1,11 +1,12 @@
 import 'package:flutter/services.dart';
 import 'package:xterm/xterm.dart';
 
-mixin TerminalMixin on Terminal {
+mixin TerminalMixin {
+  Terminal get terminal;
   TerminalController get controller;
 
   String? get selectedText => controller.selection != null
-      ? buffer.getText(controller.selection)
+      ? terminal.buffer.getText(controller.selection)
       : null;
 
   bool get canCopy => selectedText?.isNotEmpty == true;
@@ -15,18 +16,17 @@ mixin TerminalMixin on Terminal {
     return Clipboard.setData(data);
   }
 
-  @override
-  Future<void> paste([String? text]) async {
-    text ??= await Clipboard.getData(Clipboard.kTextPlain)
+  Future<void> paste() async {
+    final text = await Clipboard.getData(Clipboard.kTextPlain)
         .then((data) => data?.text);
-    super.paste(text ?? '');
+    terminal.paste(text ?? '');
   }
 
   void selectAll() {
     controller.setSelection(
       BufferRangeLine(
-        CellOffset(0, buffer.height - viewHeight),
-        CellOffset(viewWidth, buffer.height - 1),
+        CellOffset(0, terminal.buffer.height - terminal.viewHeight),
+        CellOffset(terminal.viewWidth, terminal.buffer.height - 1),
       ),
     );
   }
