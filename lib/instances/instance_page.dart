@@ -1,7 +1,11 @@
+import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
+import 'package:provider/provider.dart';
 
 import '../launcher/launcher_wizard.dart';
+import '../tabs/tab_model.dart';
+import 'instance_menu.dart';
 import 'instance_view.dart';
 
 class InstancePage extends StatelessWidget {
@@ -16,9 +20,17 @@ class InstancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tabs = context.read<TabModel>();
     return Scaffold(
-      body: InstanceView(
-        onStart: onStart,
+      body: ContextMenuArea(
+        builder: (context, position) => buildInstanceMenu(
+          context: context,
+          onAddTab: tabs.addTab,
+          onCloseTab: tabs.length > 1 ? tabs.closeTab : null,
+        ),
+        child: InstanceView(
+          onStart: onStart,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

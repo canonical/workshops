@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:terminal_view/terminal_view.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
-import '../tabs/tab_menu.dart';
 import '../tabs/tab_model.dart';
+import 'terminal_menu.dart';
 import 'terminal_model.dart';
 import 'terminal_settings.dart';
 
@@ -67,7 +67,7 @@ class _TerminalPageState extends State<_TerminalPage> {
               showContextMenu(
                 context: context,
                 position: position,
-                items: buildContextMenu(
+                items: buildTerminalMenu(
                   context: context,
                   onAddTab: tabs.addTab,
                   onCloseTab: tabs.closeTab,

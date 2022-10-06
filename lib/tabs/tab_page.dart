@@ -1,4 +1,3 @@
-import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lxd_x/lxd_x.dart';
@@ -9,7 +8,6 @@ import '../instances/instance_page.dart';
 import '../terminal/terminal_page.dart';
 import '../widgets/product_logo.dart';
 import 'tab_item.dart';
-import 'tab_menu.dart';
 import 'tab_model.dart';
 
 class TabPage extends StatelessWidget {
@@ -83,33 +81,26 @@ class TabPage extends StatelessWidget {
                   onMoved: model.moveTab,
                   preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
                 ),
-          body: ContextMenuArea(
-            builder: (context, position) => buildContextMenu(
-              context: context,
-              onAddTab: model.addTab,
-              onCloseTab: model.length > 1 ? model.closeTab : null,
-            ),
-            child: IndexedStack(
-              index: model.currentIndex,
-              children: [
-                for (final tab in model.tabs)
-                  ChangeNotifierProvider.value(
-                    value: tab,
-                    builder: (context, child) {
-                      final tab = context.watch<TabItem>();
-                      return tab.instance == null
-                          ? InstancePage(
-                              onStart: (instance) => tab.instance = instance,
-                              onCreate: (instance) => tab.instance = instance,
-                            )
-                          : TerminalPage(
-                              instance: tab.instance!,
-                              onExit: () => tab.instance = null,
-                            );
-                    },
-                  ),
-              ],
-            ),
+          body: IndexedStack(
+            index: model.currentIndex,
+            children: [
+              for (final tab in model.tabs)
+                ChangeNotifierProvider.value(
+                  value: tab,
+                  builder: (context, child) {
+                    final tab = context.watch<TabItem>();
+                    return tab.instance == null
+                        ? InstancePage(
+                            onStart: (instance) => tab.instance = instance,
+                            onCreate: (instance) => tab.instance = instance,
+                          )
+                        : TerminalPage(
+                            instance: tab.instance!,
+                            onExit: () => tab.instance = null,
+                          );
+                  },
+                ),
+            ],
           ),
         ),
       ),
