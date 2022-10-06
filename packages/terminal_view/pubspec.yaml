@@ -10,7 +10,7 @@ dependencies:
     sdk: flutter
   xterm: #^3.2.7
     git:
-      ref: dev3
+      ref: d603acf2f86879ddf0888b0d73d3df5f7f9df587 # dev3
       url: https://github.com/jpnurmi/xterm.dart.git
 
 dev_dependencies:
