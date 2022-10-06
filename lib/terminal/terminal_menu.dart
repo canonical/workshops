@@ -1,7 +1,7 @@
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 
-List<PopupMenuEntry> buildContextMenu({
+List<PopupMenuEntry> buildTerminalMenu({
   required BuildContext context,
   required VoidCallback? onAddTab,
   required VoidCallback? onCloseTab,
