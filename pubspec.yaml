@@ -66,6 +66,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.0.3+1
   json_serializable: ^6.2.0
+  mockito: 5.3.2
 
 flutter:
   generate: true

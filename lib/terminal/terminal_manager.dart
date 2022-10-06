@@ -41,9 +41,9 @@ class TerminalManager extends SafeChangeNotifier {
   }
 
   @override
-  void dispose() {
+  Future<void> dispose() async {
     for (final terminal in _terminals.values) {
-      terminal.dispose();
+      await terminal.dispose();
     }
     _terminals.clear();
     super.dispose();
