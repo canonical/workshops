@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:lxd/lxd.dart';
 
 import 'tab_item.dart';
 
@@ -19,8 +18,8 @@ class TabModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addTab([LxdInstance? instance]) {
-    final tab = TabItem(instance);
+  void addTab() {
+    final tab = TabItem();
     _tabs.add(tab);
     currentIndex = _tabs.length - 1;
   }
@@ -28,16 +27,18 @@ class TabModel extends ChangeNotifier {
   void closeTab([int? index]) {
     final tab = _tabs.removeAt(index ?? _currentIndex);
     tab.dispose();
-    currentIndex = _currentIndex.clamp(0, _tabs.length - 1);
+    _currentIndex = _currentIndex.clamp(0, _tabs.length - 1);
+    notifyListeners();
   }
 
   void moveTab(int from, int to) {
     _tabs.move(from, to);
     if (_currentIndex == to) {
-      currentIndex = from;
+      _currentIndex = from;
     } else if (_currentIndex == from) {
-      currentIndex = to;
+      _currentIndex = to;
     }
+    notifyListeners();
   }
 
   void nextTab() {
