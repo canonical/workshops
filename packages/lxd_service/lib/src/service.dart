@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
+import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 
@@ -232,7 +233,7 @@ class _LxdService implements LxdService {
 
     final wsc = await getWebSocket('control');
     final ws0 = await getWebSocket('0');
-    return LxdTerminal._(op, wsc, ws0);
+    return LxdTerminal(op, wsc, ws0);
   }
 
   @override
@@ -313,11 +314,12 @@ class _LxdService implements LxdService {
 }
 
 class LxdTerminal {
-  LxdTerminal._(this._op, this._wsc, this._ws0);
+  @visibleForTesting
+  LxdTerminal(this._op, this._wsc, this._ws0);
 
   final LxdOperation _op;
-  final WebSocket? _ws0;
-  final WebSocket? _wsc;
+  WebSocket? _ws0;
+  WebSocket? _wsc;
   StreamSubscription? _sub;
 
   String get id => _op.id;
@@ -348,5 +350,8 @@ class LxdTerminal {
     await _sub?.cancel();
     await _ws0?.close();
     await _wsc?.close();
+    _sub = null;
+    _ws0 = null;
+    _wsc = null;
   }
 }

@@ -14,6 +14,7 @@ dependencies:
       ref: 9799464c4488f52203407169baca963f88f0e349
   lxd_x:
     path: ../lxd_x
+  meta: ^1.8.0
   rxdart: ^0.27.3
   stdlibc: ^0.1.0
   ubuntu_logger:
