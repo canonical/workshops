@@ -20,6 +20,7 @@ class TerminalModel extends SafeChangeNotifier with TerminalMixin {
   // TODO: configurable max lines
   final _terminal = Terminal(maxLines: 10000);
   final _controller = TerminalController();
+  LxdTerminal? _op;
 
   TerminalState get state => _state;
 
@@ -44,11 +45,23 @@ class TerminalModel extends SafeChangeNotifier with TerminalMixin {
 
     _setState(TerminalState.running);
 
-    final socket = await _service.execTerminal(instance.name);
-    socket.resize(terminal.viewWidth, terminal.viewHeight);
-    socket.listen(terminal.write);
-    terminal.onOutput = socket.write;
-    terminal.onResize = (width, height, _, __) => socket.resize(width, height);
-    await _service.waitOperation(socket.operation.id);
+    _op = await _service.execTerminal(instance.name);
+    _op!.resize(terminal.viewWidth, terminal.viewHeight);
+    _op!.listen(terminal.write);
+    terminal.onOutput = (data) => _op?.write(data);
+    terminal.onResize = (width, height, _, __) => _op?.resize(width, height);
+    await _service.waitOperation(_op!.id);
+  }
+
+  Future<void> close() async {
+    await _op?.close();
+    _op = null;
+    _setState(TerminalState.none);
+  }
+
+  @override
+  Future<void> dispose() async {
+    await close();
+    super.dispose();
   }
 }
