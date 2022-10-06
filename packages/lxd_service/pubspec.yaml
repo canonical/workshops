@@ -12,6 +12,8 @@ dependencies:
     git:
       url: https://github.com/jpnurmi/lxd.dart
       ref: 9799464c4488f52203407169baca963f88f0e349
+  lxd_test:
+    path: ../lxd_test
   lxd_x:
     path: ../lxd_x
   meta: ^1.8.0
