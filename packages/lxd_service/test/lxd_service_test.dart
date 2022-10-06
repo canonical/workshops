@@ -269,6 +269,24 @@ void main() {
     await untilCalled(ws0.close());
     await untilCalled(wsc.close());
   });
+
+  test('close terminal', () async {
+    final wsc = MockWebSocket();
+    when(wsc.close()).thenAnswer((_) async {});
+
+    final ws0 = MockWebSocket();
+    when(ws0.close()).thenAnswer((_) async {});
+
+    final terminal = await LxdTerminal(testOperation(), wsc, ws0);
+
+    await terminal.close();
+    verify(wsc.close()).called(1);
+    verify(ws0.close()).called(1);
+
+    await expectLater(terminal.close(), completes);
+    verifyNever(wsc.close());
+    verifyNever(ws0.close());
+  });
 }
 
 LxdOperation testOperation({
