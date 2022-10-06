@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
@@ -20,6 +21,7 @@ class TerminalModel extends SafeChangeNotifier with TerminalMixin {
   // TODO: configurable max lines
   final _terminal = Terminal(maxLines: 10000);
   final _controller = TerminalController();
+  final _focusNode = FocusNode();
   LxdTerminal? _op;
 
   TerminalState get state => _state;
@@ -29,6 +31,8 @@ class TerminalModel extends SafeChangeNotifier with TerminalMixin {
 
   @override
   TerminalController get controller => _controller;
+
+  FocusNode get focusNode => _focusNode;
 
   void _setState(TerminalState state) {
     if (_state == state) return;
@@ -62,6 +66,7 @@ class TerminalModel extends SafeChangeNotifier with TerminalMixin {
   @override
   Future<void> dispose() async {
     await close();
+    _focusNode.dispose();
     super.dispose();
   }
 }

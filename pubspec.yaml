@@ -35,6 +35,8 @@ dependencies:
   meta: ^1.7.0
   movable_tabs:
     path: packages/movable_tabs
+  nested_split_view:
+    path: packages/nested_split_view
   osarch:
     path: packages/osarch
   petname:

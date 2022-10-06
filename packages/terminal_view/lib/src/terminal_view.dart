@@ -81,41 +81,54 @@ class _TerminalViewState extends State<TerminalView> {
   @override
   Widget build(BuildContext context) {
     final theme = TerminalTheme.maybeOf(context);
-    return FocusScope(
-      child: xterm.TerminalView(
-        widget.terminal,
-        controller: _controller,
-        scrollController: _scrollController,
-        padding: const EdgeInsets.all(2),
-        autofocus: widget.autofocus,
-        focusNode: _focusNode,
-        theme: theme?.toXterm() ?? xterm.TerminalThemes.defaultTheme,
-        textStyle: xterm.TerminalStyle(
-          fontSize: theme?.fontSize ?? 16,
-          fontFamily: theme?.fontFamily ?? 'Monospace',
-        ),
-        onSecondaryTapDown: (details, offset) {
-          widget.onContextMenu?.call(details.globalPosition);
-        },
-        shortcuts: const {
-          TerminalShortcuts.copy: TerminalIntents.copy,
-          TerminalShortcuts.paste: TerminalIntents.paste,
-          TerminalShortcuts.scrollUp: TerminalIntents.scrollUp,
-          TerminalShortcuts.scrollDown: TerminalIntents.scrollDown,
-          TerminalShortcuts.scrollPageUp: TerminalIntents.scrollPageUp,
-          TerminalShortcuts.scrollPageDown: TerminalIntents.scrollPageDown,
-          TerminalShortcuts.scrollToTop: TerminalIntents.scrollToTop,
-          TerminalShortcuts.scrollToBottom: TerminalIntents.scrollToBottom,
-        },
-        actions: {
-          ScrollUpIntent: ScrollUpAction(_scrollController),
-          ScrollDownIntent: ScrollDownAction(_scrollController),
-          ScrollPageUpIntent: ScrollPageUpAction(_scrollController),
-          ScrollPageDownIntent: ScrollPageDownAction(_scrollController),
-          ScrollToTopIntent: ScrollToTopAction(_scrollController),
-          ScrollToBottomIntent: ScrollToBottomAction(_scrollController),
-        },
-      ),
+    return AnimatedBuilder(
+      animation: _focusNode,
+      builder: (context, child) {
+        return xterm.TerminalView(
+          widget.terminal,
+          controller: _controller,
+          scrollController: _scrollController,
+          padding: const EdgeInsets.all(2),
+          backgroundOpacity:
+              FocusScope.of(context).focusedChild == _focusNode ? 1 : 0.5,
+          autofocus: widget.autofocus,
+          focusNode: _focusNode,
+          theme: theme?.toXterm() ?? xterm.TerminalThemes.defaultTheme,
+          textStyle: xterm.TerminalStyle(
+            fontSize: theme?.fontSize ?? 16,
+            fontFamily: theme?.fontFamily ?? 'Monospace',
+          ),
+          onSecondaryTapDown: (details, offset) {
+            widget.onContextMenu?.call(details.globalPosition);
+          },
+          shortcuts: const {
+            // edit
+            TerminalShortcuts.copy: TerminalIntents.copy,
+            TerminalShortcuts.paste: TerminalIntents.paste,
+            // scroll
+            TerminalShortcuts.scrollUp: TerminalIntents.scrollUp,
+            TerminalShortcuts.scrollDown: TerminalIntents.scrollDown,
+            TerminalShortcuts.scrollPageUp: TerminalIntents.scrollPageUp,
+            TerminalShortcuts.scrollPageDown: TerminalIntents.scrollPageDown,
+            TerminalShortcuts.scrollToTop: TerminalIntents.scrollToTop,
+            TerminalShortcuts.scrollToBottom: TerminalIntents.scrollToBottom,
+            // focus
+            TerminalShortcuts.moveFocusUp: TerminalIntents.moveFocusUp,
+            TerminalShortcuts.moveFocusDown: TerminalIntents.moveFocusDown,
+            TerminalShortcuts.moveFocusLeft: TerminalIntents.moveFocusLeft,
+            TerminalShortcuts.moveFocusRight: TerminalIntents.moveFocusRight,
+          },
+          actions: {
+            ScrollUpIntent: ScrollUpAction(_scrollController),
+            ScrollDownIntent: ScrollDownAction(_scrollController),
+            ScrollPageUpIntent: ScrollPageUpAction(_scrollController),
+            ScrollPageDownIntent: ScrollPageDownAction(_scrollController),
+            ScrollToTopIntent: ScrollToTopAction(_scrollController),
+            ScrollToBottomIntent: ScrollToBottomAction(_scrollController),
+            MoveFocusIntent: MoveFocusAction(),
+          },
+        );
+      },
     );
   }
 }
