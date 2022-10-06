@@ -62,7 +62,7 @@ class _TerminalPageState extends State<_TerminalPage> {
           data: getTerminalTheme(widget.instance.os),
           child: TerminalView(
             terminal: model.terminal,
-            controller: model.terminal.controller,
+            controller: model.controller,
             onContextMenu: (position) {
               showContextMenu(
                 context: context,
@@ -71,9 +71,9 @@ class _TerminalPageState extends State<_TerminalPage> {
                   context: context,
                   onAddTab: tabs.addTab,
                   onCloseTab: tabs.closeTab,
-                  onCopy: model.terminal.canCopy ? model.terminal.copy : null,
-                  onPaste: model.terminal.paste,
-                  onSelectAll: model.terminal.selectAll,
+                  onCopy: model.canCopy ? model.copy : null,
+                  onPaste: model.paste,
+                  onSelectAll: model.selectAll,
                 ),
               );
             },
