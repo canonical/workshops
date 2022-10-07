@@ -50,6 +50,11 @@ scripts:
     melos exec -c 1 --fail-fast --dir-exists=integration_test -- \
       flutter test integration_test
 
+  # run pub get in all packages
+  pub-get: >
+    melos exec -c 1 -- \
+      flutter pub get
+
   # run tests in all packages
   test: >
     melos exec -c 1 --fail-fast --dir-exists=test -- \
