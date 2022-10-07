@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import 'tab_x.dart';
+
 class MovableTabController<T> extends ChangeNotifier {
   MovableTabController({List<T>? tabs, int? currentIndex})
       : _tabs = tabs ?? [],
@@ -49,13 +51,5 @@ class MovableTabController<T> extends ChangeNotifier {
   void previousTab() {
     final index = currentIndex - 1;
     currentIndex = index < 0 ? _tabs.length - 1 : index;
-  }
-}
-
-extension ListX<T> on List<T> {
-  void move(int from, int to) {
-    final tmp = this[from];
-    this[from] = this[to];
-    this[to] = tmp;
   }
 }
