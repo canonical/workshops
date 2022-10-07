@@ -17,12 +17,12 @@ void main() {
     var expectedNotified = 0;
     model.addListener(() => ++wasNotified);
 
-    model.addTab();
+    model.newTab();
     expect(model.length, 2);
     expect(model.currentIndex, 1);
     expect(wasNotified, ++expectedNotified);
 
-    model.addTab();
+    model.newTab();
     expect(model.length, 3);
     expect(model.currentIndex, 2);
     expect(wasNotified, ++expectedNotified);
@@ -35,7 +35,7 @@ void main() {
     expect(model.tabs, [tabs[0], tabs[1]]);
     expect(wasNotified, ++expectedNotified);
 
-    model.closeTab(0);
+    model.removeTab(0);
     expect(model.length, 1);
     expect(model.currentIndex, 0);
     expect(model.tabs, [tabs[1]]);
@@ -45,7 +45,7 @@ void main() {
   test('move', () {
     final model = TabModel();
     for (var i = 0; i < 2; ++i) {
-      model.addTab();
+      model.newTab();
     }
     expect(model.length, 3);
     expect(model.currentIndex, 2);
@@ -75,7 +75,7 @@ void main() {
   test('next', () {
     final model = TabModel();
     for (var i = 0; i < 2; ++i) {
-      model.addTab();
+      model.newTab();
     }
     expect(model.length, 3);
     expect(model.currentIndex, 2);
@@ -100,7 +100,7 @@ void main() {
   test('prev', () {
     final model = TabModel();
     for (var i = 0; i < 2; ++i) {
-      model.addTab();
+      model.newTab();
     }
     expect(model.length, 3);
     expect(model.currentIndex, 2);

@@ -30,7 +30,7 @@ class TabPage extends StatelessWidget {
           control: true,
           shift: true,
           includeRepeats: false,
-        ): model.addTab,
+        ): model.newTab,
         if (model.tabs.length > 1)
           const SingleActivator(
             LogicalKeyboardKey.keyW,
@@ -62,7 +62,7 @@ class TabPage extends StatelessWidget {
                         return MovableTabButton(
                           selected: index == model.currentIndex,
                           onPressed: () => model.currentIndex = index,
-                          onClosed: () => model.closeTab(index),
+                          onClosed: () => model.removeTab(index),
                           icon: ProductLogo.asset(
                             name: tab.instance?.os,
                             size: 32,
@@ -76,7 +76,7 @@ class TabPage extends StatelessWidget {
                     icon: const Icon(Icons.add),
                     splashRadius: 16,
                     iconSize: 16,
-                    onPressed: model.addTab,
+                    onPressed: () => model.addTab,
                   ),
                   onMoved: model.moveTab,
                   preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
