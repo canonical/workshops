@@ -76,7 +76,7 @@ class TabPage extends StatelessWidget {
                     icon: const Icon(Icons.add),
                     splashRadius: 16,
                     iconSize: 16,
-                    onPressed: () => model.addTab,
+                    onPressed: model.newTab,
                   ),
                   onMoved: model.moveTab,
                   preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
