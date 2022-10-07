@@ -33,7 +33,7 @@ class TerminalPane extends StatelessWidget {
               position: position,
               items: buildTerminalMenu(
                 context: context,
-                onAddTab: tabs.addTab,
+                onAddTab: tabs.newTab,
                 onCloseTab: tabs.length > 1 ? tabs.closeTab : null,
                 onSplitTab: onSplit,
                 onCloseSplit: onUnsplit,

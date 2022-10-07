@@ -25,7 +25,7 @@ class InstancePage extends StatelessWidget {
       body: ContextMenuArea(
         builder: (context, position) => buildInstanceMenu(
           context: context,
-          onAddTab: tabs.addTab,
+          onAddTab: tabs.newTab,
           onCloseTab: tabs.length > 1 ? tabs.closeTab : null,
         ),
         child: InstanceView(

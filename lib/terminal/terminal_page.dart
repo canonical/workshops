@@ -108,7 +108,7 @@ class _TerminalPageState extends State<_TerminalPage> {
                   color: Colors.white,
                   splashRadius: 16,
                   iconSize: 16,
-                  onPressed: tabs.addTab,
+                  onPressed: tabs.newTab,
                 ),
               ),
             ),
