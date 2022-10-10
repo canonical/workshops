@@ -5,6 +5,12 @@ import 'tab_item.dart';
 class TabModel extends MovableTabController<TabItem> {
   TabModel() : super(tabs: [TabItem()], currentIndex: 0);
 
+  @override
+  set currentIndex(int index) {
+    super.currentIndex = index;
+    currentTab.focusScope.requestFocus();
+  }
+
   void newTab() => addTab(TabItem());
   void closeTab() => removeTab(currentIndex);
 
