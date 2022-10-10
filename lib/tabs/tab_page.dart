@@ -90,15 +90,18 @@ class TabPage extends StatelessWidget {
                   key: ValueKey(tab),
                   builder: (context, child) {
                     final tab = context.watch<TabItem>();
-                    return tab.instance == null
-                        ? InstancePage(
-                            onStart: (instance) => tab.instance = instance,
-                            onCreate: (instance) => tab.instance = instance,
-                          )
-                        : TerminalPage(
-                            instance: tab.instance!,
-                            onExit: () => tab.instance = null,
-                          );
+                    return FocusScope(
+                      node: tab.focusScope,
+                      child: tab.instance == null
+                          ? InstancePage(
+                              onStart: (instance) => tab.instance = instance,
+                              onCreate: (instance) => tab.instance = instance,
+                            )
+                          : TerminalPage(
+                              instance: tab.instance!,
+                              onExit: () => tab.instance = null,
+                            ),
+                    );
                   },
                 ),
             ],

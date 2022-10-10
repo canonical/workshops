@@ -22,7 +22,10 @@ class TerminalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TerminalManager(getService<LxdService>()),
-      child: _TerminalPage(instance: instance, onExit: onExit),
+      child: _TerminalPage(
+        instance: instance,
+        onExit: onExit,
+      ),
     );
   }
 }
@@ -91,34 +94,32 @@ class _TerminalPageState extends State<_TerminalPage>
   Widget build(BuildContext context) {
     super.build(context);
     final tabs = context.read<TabModel>();
-    return FocusScope(
-      child: Stack(
-        children: [
-          TerminalTheme(
-            data: getTerminalTheme(widget.instance.os),
-            child: NestedSplitView(
-              controller: _splitter,
-              builder: _buildPane,
-            ),
+    return Stack(
+      children: [
+        TerminalTheme(
+          data: getTerminalTheme(widget.instance.os),
+          child: NestedSplitView(
+            controller: _splitter,
+            builder: _buildPane,
           ),
-          if (tabs.length == 1)
-            Positioned.directional(
-              textDirection: Directionality.of(context),
-              top: 8,
-              end: 0,
-              child: Material(
-                color: Colors.transparent,
-                child: IconButton(
-                  icon: const Icon(Icons.add),
-                  color: Colors.white,
-                  splashRadius: 16,
-                  iconSize: 16,
-                  onPressed: tabs.newTab,
-                ),
+        ),
+        if (tabs.length == 1)
+          Positioned.directional(
+            textDirection: Directionality.of(context),
+            top: 8,
+            end: 0,
+            child: Material(
+              color: Colors.transparent,
+              child: IconButton(
+                icon: const Icon(Icons.add),
+                color: Colors.white,
+                splashRadius: 16,
+                iconSize: 16,
+                onPressed: tabs.newTab,
               ),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 }
