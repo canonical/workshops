@@ -74,6 +74,11 @@ void main() {
     expect(controller.currentIndex, 0);
     expect(controller.tabs, [tabs[2], tabs[1], tabs[0]]);
     expect(wasNotified, ++expectedNotified);
+
+    controller.moveTab(0, 2);
+    expect(controller.currentIndex, 2);
+    expect(controller.tabs, [tabs[1], tabs[0], tabs[2]]);
+    expect(wasNotified, ++expectedNotified);
   });
 
   test('next', () {
