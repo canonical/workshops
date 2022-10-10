@@ -87,6 +87,7 @@ class TabPage extends StatelessWidget {
               for (final tab in model.tabs)
                 ChangeNotifierProvider.value(
                   value: tab,
+                  key: ValueKey(tab),
                   builder: (context, child) {
                     final tab = context.watch<TabItem>();
                     return tab.instance == null

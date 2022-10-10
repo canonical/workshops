@@ -40,8 +40,12 @@ class _TerminalPage extends StatefulWidget {
   State<_TerminalPage> createState() => _TerminalPageState();
 }
 
-class _TerminalPageState extends State<_TerminalPage> {
+class _TerminalPageState extends State<_TerminalPage>
+    with AutomaticKeepAliveClientMixin {
   final _splitter = NestedSplitController();
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -65,8 +69,8 @@ class _TerminalPageState extends State<_TerminalPage> {
 
   @override
   void dispose() {
-    super.dispose();
     _splitter.dispose();
+    super.dispose();
   }
 
   Widget _buildPane(BuildContext context, NestedSplitNode node) {
@@ -85,6 +89,7 @@ class _TerminalPageState extends State<_TerminalPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final tabs = context.read<TabModel>();
     return FocusScope(
       child: Stack(
