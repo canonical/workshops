@@ -44,7 +44,103 @@ void main() {
     await service.dispose();
   });
 
-  test('add', () async {
+  test('create instance', () async {
+    final image = testImage(fingerprint: 'f', properties: {'name': 'foo'});
+    const lxd = LxdRemote(name: 'r', address: 'lxd', protocol: 'lxd');
+    const ss = LxdRemote(name: 'r', address: 'ss', protocol: 'simplestreams');
+
+    final op = testOperation();
+    final client = MockLxdClient();
+    when(client.createInstance(
+            name: 'foo', source: image, server: anyNamed('server')))
+        .thenAnswer((_) async => op);
+
+    final service = LxdService(client);
+
+    await service.createInstance(image);
+    verify(client.createInstance(name: 'foo', source: image, server: null))
+        .called(1);
+
+    await service.createInstance(image, remote: lxd);
+    verify(client.createInstance(name: 'foo', source: image, server: null))
+        .called(1);
+
+    await service.createInstance(image, remote: ss);
+    verify(client.createInstance(name: 'foo', source: image, server: 'ss'))
+        .called(1);
+  });
+
+  test('start instance', () async {
+    final op = testOperation();
+    final client = MockLxdClient();
+    when(client.startInstance('foo', force: anyNamed('force')))
+        .thenAnswer((_) async => op);
+
+    final service = LxdService(client);
+
+    await service.startInstance('foo');
+    verify(client.startInstance('foo', force: false)).called(1);
+
+    await service.startInstance('foo', force: false);
+    verify(client.startInstance('foo', force: false)).called(1);
+
+    await service.startInstance('foo', force: true);
+    verify(client.startInstance('foo', force: true)).called(1);
+  });
+
+  test('restart instance', () async {
+    final op = testOperation();
+    final client = MockLxdClient();
+    when(client.restartInstance('foo',
+            force: anyNamed('force'), timeout: anyNamed('timeout')))
+        .thenAnswer((_) async => op);
+
+    final service = LxdService(client);
+
+    await service.restartInstance('foo');
+    verify(client.restartInstance('foo', force: false, timeout: null))
+        .called(1);
+
+    await service.restartInstance('foo', force: true);
+    verify(client.restartInstance('foo', force: true, timeout: null)).called(1);
+
+    await service.restartInstance('foo', force: false, timeout: Duration.zero);
+    verify(client.restartInstance('foo', force: false, timeout: Duration.zero))
+        .called(1);
+  });
+
+  test('stop instance', () async {
+    final op = testOperation();
+    final client = MockLxdClient();
+    when(client.stopInstance('foo',
+            force: anyNamed('force'), timeout: anyNamed('timeout')))
+        .thenAnswer((_) async => op);
+
+    final service = LxdService(client);
+
+    await service.stopInstance('foo');
+    verify(client.stopInstance('foo', force: false, timeout: null)).called(1);
+
+    await service.stopInstance('foo', force: true);
+    verify(client.stopInstance('foo', force: true, timeout: null)).called(1);
+
+    await service.stopInstance('foo', force: false, timeout: Duration.zero);
+    verify(client.stopInstance('foo', force: false, timeout: Duration.zero))
+        .called(1);
+  });
+
+  test('delete instance', () async {
+    final op = testOperation();
+    final client = MockLxdClient();
+    when(client.deleteInstance('foo')).thenAnswer((_) async => op);
+
+    final service = LxdService(client);
+
+    await service.deleteInstance('foo');
+    verify(client.deleteInstance('foo')).called(1);
+  });
+
+  test('instance added', () async {
     final client = MockLxdClient();
     final events = StreamController<LxdEvent>();
     when(client.getEvents(types: {LxdEventType.operation}))
@@ -73,7 +169,7 @@ void main() {
     await service.dispose();
   });
 
-  test('remove', () async {
+  test('instance removed', () async {
     final client = MockLxdClient();
     final events = StreamController<LxdEvent>();
     when(client.getEvents(types: {LxdEventType.operation}))
@@ -102,7 +198,7 @@ void main() {
     await service.dispose();
   });
 
-  test('update', () async {
+  test('intance updated', () async {
     final client = MockLxdClient();
     final events = StreamController<LxdEvent>();
     when(client.getEvents(types: {LxdEventType.operation}))
@@ -131,7 +227,7 @@ void main() {
     await service.dispose();
   });
 
-  test('status', () async {
+  test('instance status', () async {
     final foo = testInstance(name: 'foo');
     final bar = testInstance(name: 'bar');
     final baz = testInstance(name: 'baz');
@@ -193,7 +289,114 @@ void main() {
     await service.dispose();
   });
 
-  test('terminal', () async {
+  test('watch instance', () async {
+    final client = MockLxdClient();
+    final events = StreamController<LxdEvent>();
+    when(client.getEvents()).thenAnswer((_) => events.stream);
+
+    final service = LxdService(client);
+    final stream = service.watchInstance('foo');
+
+    final foo = testOperation(id: 'f', instances: ['foo']);
+    final bar = testOperation(id: 'b', instances: ['bar']);
+
+    stream.listen(
+      expectAsync1((value) => expect(value, foo), count: 1),
+    );
+
+    events.add(LxdEvent(
+      type: LxdEventType.operation,
+      metadata: foo.toJson(),
+      timestamp: DateTime.now(),
+    ));
+
+    events.add(LxdEvent(
+      type: LxdEventType.operation,
+      metadata: bar.toJson(),
+      timestamp: DateTime.now(),
+    ));
+  });
+
+  test('get operation', () async {
+    final op = testOperation();
+    final client = MockLxdClient();
+    when(client.getOperation('foo')).thenAnswer((_) async => op);
+
+    final service = LxdService(client);
+
+    expect(await service.getOperation('foo'), op);
+    verify(client.getOperation('foo')).called(1);
+
+    expect(await service.getOperation('foo'), op);
+  });
+
+  test('watch operation', () async {
+    final client = MockLxdClient();
+    final events = StreamController<LxdEvent>();
+    when(client.getEvents()).thenAnswer((_) => events.stream);
+
+    final service = LxdService(client);
+    final stream = service.watchOperation('foo');
+
+    final foo = testOperation(id: 'foo');
+    final bar = testOperation(id: 'bar');
+
+    stream.listen(
+      expectAsync1((value) => expect(value, foo), count: 1),
+    );
+
+    events.add(LxdEvent(
+      type: LxdEventType.operation,
+      metadata: foo.toJson(),
+      timestamp: DateTime.now(),
+    ));
+
+    events.add(LxdEvent(
+      type: LxdEventType.operation,
+      metadata: bar.toJson(),
+      timestamp: DateTime.now(),
+    ));
+  });
+
+  test('wait operation', () async {
+    final op = testOperation();
+    final client = MockLxdClient();
+    when(client.waitOperation('foo')).thenAnswer((_) async => op);
+
+    final service = LxdService(client);
+
+    expect(await service.waitOperation('foo'), op);
+    verify(client.waitOperation('foo')).called(1);
+  });
+
+  test('cancel operation', () async {
+    final op = testOperation();
+    final client = MockLxdClient();
+    when(client.cancelOperation('foo')).thenAnswer((_) async => op);
+
+    final service = LxdService(client);
+
+    await service.cancelOperation('foo');
+    verify(client.cancelOperation('foo')).called(1);
+  });
+
+  test('wait vm agent', () async {
+    const state0 = LxdInstanceState(
+        status: LxdInstanceStatus.running, statusCode: 0, pid: 0);
+    const state1 = LxdInstanceState(
+        status: LxdInstanceStatus.running, statusCode: 0, pid: 0, processes: 1);
+
+    final client = MockLxdClient();
+    when(client.getInstanceState('foo')).thenAnswer((_) async => state0);
+
+    final service = LxdService(client);
+    expect(await service.waitVmAgent('foo', timeout: Duration.zero), isFalse);
+
+    when(client.getInstanceState('foo')).thenAnswer((_) async => state1);
+    expect(await service.waitVmAgent('foo', timeout: Duration.zero), isTrue);
+  });
+
+  test('exec terminal', () async {
     final instance = testInstance(name: 'mine', config: {'user.name': 'me'});
 
     final exec = testOperation(id: 'x', metadata: {

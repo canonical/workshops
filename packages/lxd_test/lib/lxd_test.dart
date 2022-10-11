@@ -1,5 +1,29 @@
 import 'package:lxd/lxd.dart';
 
+LxdImage testImage({
+  String? architecture,
+  String? filename,
+  required String fingerprint,
+  List<String>? profiles,
+  Map<String, String>? properties,
+  int? size,
+  LxdImageType? type,
+}) {
+  final epoch = DateTime.fromMillisecondsSinceEpoch(0);
+  return LxdImage(
+    architecture: architecture ?? '',
+    createdAt: epoch,
+    expiresAt: epoch,
+    filename: filename ?? '',
+    fingerprint: fingerprint,
+    profiles: profiles ?? [],
+    properties: properties ?? {},
+    size: size ?? 0,
+    type: type ?? LxdImageType.container,
+    uploadedAt: epoch,
+  );
+}
+
 LxdInstance testInstance({
   required String name,
   int? statusCode,

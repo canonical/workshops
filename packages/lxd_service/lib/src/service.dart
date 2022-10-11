@@ -44,7 +44,8 @@ abstract class LxdService {
   Future<LxdOperation> stageFeatures(
       String name, List<LxdFeatureProvider> features, LxdImage image);
 
-  Future<void> waitVmAgent(String name, {Duration? timeout});
+  Future<bool> waitVmAgent(String name,
+      {Duration? timeout, Duration? interval});
 
   Future<LxdTerminal> execTerminal(String name);
 
@@ -211,8 +212,26 @@ class _LxdService implements LxdService {
         .where((op) => op.instances?.contains(instance) == true);
   }
 
-  Future<void> waitVmAgent(String name, {Duration? timeout}) {
-    return _client.waitVmAgent(name, timeout: timeout);
+  /// Waits for the VM agent to be ready, which is a pre-requisite for executing
+  /// commands on the VM. The VM agent is up and running when the instance state
+  /// reports that there are any running processes.
+  @override
+  Future<bool> waitVmAgent(
+    String name, {
+    Duration? timeout,
+    Duration? interval,
+  }) async {
+    interval ??= const Duration(seconds: 1);
+    var future = Future.doWhile(() async {
+      final state = await _client.getInstanceState(name);
+      if (state.processes > 0) return false;
+      return Future.delayed(interval!, () => true);
+    });
+    if (timeout != null) {
+      future = future.timeout(timeout, onTimeout: () => false);
+    }
+    final result = await future;
+    return result is bool ? result : true;
   }
 
   Future<LxdTerminal> execTerminal(String name) async {

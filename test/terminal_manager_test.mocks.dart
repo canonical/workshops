@@ -327,19 +327,22 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         )),
       ) as _i4.Future<_i2.LxdOperation>);
   @override
-  _i4.Future<void> waitVmAgent(
+  _i4.Future<bool> waitVmAgent(
     String? name, {
     Duration? timeout,
+    Duration? interval,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #waitVmAgent,
           [name],
-          {#timeout: timeout},
+          {
+            #timeout: timeout,
+            #interval: interval,
+          },
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
   _i4.Future<_i3.LxdTerminal> execTerminal(String? name) => (super.noSuchMethod(
         Invocation.method(
