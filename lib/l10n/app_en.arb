@@ -1,7 +1,7 @@
 {
   "appTitle": "Workshops",
-  "cancelLabel": "Cancel",
-  "continueLabel": "Continue",
+  "cancelButton": "Cancel",
+  "continueButton": "Continue",
   "containerLabel": "container",
   "configuringFeatureLabel": "Configuring {feature}",
   "@configuringFeatureLabel": {
@@ -23,11 +23,11 @@
   "deletingInstanceLabel": "Deleting instance",
   "downloadingInstanceLabel": "Downloading instance",
   "finalizingFeaturesLabel": "Finalizing features",
-  "launchLabel": "Launch",
+  "launchButton": "Launch",
   "launchingInstanceTitle": "Launching instance",
   "launchInstanceTitle": "Launch instance",
   "nameLabel": "Name",
-  "okLabel": "Ok",
+  "okButton": "Ok",
   "pleaseWaitLabel": "Please wait",
   "releaseLabel": "Release",
   "selectFeaturesTitle": "Select features",

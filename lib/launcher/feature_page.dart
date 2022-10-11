@@ -104,11 +104,11 @@ class _FeaturePageState extends State<FeaturePage> {
       actions: [
         OutlinedButton(
           onPressed: Wizard.of(context).done,
-          child: Text(l10n.cancelLabel),
+          child: Text(l10n.cancelButton),
         ),
         OutlinedButton(
           onPressed: () => Wizard.of(context).next(arguments: model.save()),
-          child: Text(l10n.continueLabel),
+          child: Text(l10n.continueButton),
         ),
       ],
     );

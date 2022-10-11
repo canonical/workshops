@@ -160,7 +160,7 @@ class _ProgressViewState extends State<_ProgressView> {
               const SizedBox(width: 8),
               OutlinedButton(
                 onPressed: Wizard.of(context).done,
-                child: Text(l10n.cancelLabel),
+                child: Text(l10n.cancelButton),
               ),
             ],
           ),

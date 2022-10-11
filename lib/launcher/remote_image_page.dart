@@ -110,13 +110,13 @@ class RemoteImagePage extends StatelessWidget {
         const Spacer(),
         OutlinedButton(
           onPressed: () => Wizard.of(context).done(result: false),
-          child: Text(l10n.cancelLabel),
+          child: Text(l10n.cancelButton),
         ),
         OutlinedButton(
           onPressed: filter.selectedImage != null
               ? () => Wizard.of(context).next(arguments: filter.selectedImage!)
               : null,
-          child: Text(l10n.continueLabel),
+          child: Text(l10n.continueButton),
         ),
       ],
     );
