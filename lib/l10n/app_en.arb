@@ -26,6 +26,7 @@
   "deletingInstanceText": "Deleting instance",
   "downloadingInstanceText": "Downloading instance",
   "finalizingFeaturesText": "Finalizing features",
+  "homeTab": "Home",
   "launchButton": "Launch",
   "launchingInstanceTitle": "Launching instance",
   "launchInstanceTitle": "Launch instance",
