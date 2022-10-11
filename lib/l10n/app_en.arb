@@ -3,40 +3,40 @@
   "cancelButton": "Cancel",
   "continueButton": "Continue",
   "containerItem": "container",
-  "configuringFeatureLabel": "Configuring {feature}",
-  "@configuringFeatureLabel": {
+  "configuringFeatureText": "Configuring {feature}",
+  "@configuringFeatureText": {
     "placeholders": {
       "feature": {
         "type": "String"
       }
     }
   },
-  "creatingFeatureLabel": "Creating {feature}",
-  "@creatingFeatureLabel": {
+  "creatingFeatureText": "Creating {feature}",
+  "@creatingFeatureText": {
     "placeholders": {
       "feature": {
         "type": "String"
       }
     }
   },
-  "creatingInstanceLabel": "Creating instance",
-  "deletingInstanceLabel": "Deleting instance",
-  "downloadingInstanceLabel": "Downloading instance",
-  "finalizingFeaturesLabel": "Finalizing features",
+  "creatingInstanceText": "Creating instance",
+  "deletingInstanceText": "Deleting instance",
+  "downloadingInstanceText": "Downloading instance",
+  "finalizingFeaturesText": "Finalizing features",
   "launchButton": "Launch",
   "launchingInstanceTitle": "Launching instance",
   "launchInstanceTitle": "Launch instance",
   "nameLabel": "Name",
   "okButton": "Ok",
-  "pleaseWaitLabel": "Please wait",
+  "pleaseWaitText": "Please wait",
   "releaseLabel": "Release",
   "selectFeaturesTitle": "Select features",
   "selectImageTitle": "Select image",
   "selectOsTitle": "Select OS",
-  "startingInstanceLabel": "Starting instance",
-  "stoppingInstanceLabel": "Stopping instance",
+  "startingInstanceText": "Starting instance",
+  "stoppingInstanceText": "Stopping instance",
   "typeLabel": "Type",
-  "unpackingInstanceLabel": "Unpacking instance",
+  "unpackingInstanceText": "Unpacking instance",
   "variantLabel": "Variant",
   "virtualMachineItem": "virtual machine"
 }
