@@ -1,6 +1,8 @@
 {
   "appTitle": "Workshops",
   "cancelButton": "Cancel",
+  "closeSplitMenuItem": "Close Split",
+  "closeTabMenuItem": "Close Tab",
   "continueButton": "Continue",
   "containerItem": "container",
   "configuringFeatureText": "Configuring {feature}",
@@ -11,6 +13,7 @@
       }
     }
   },
+  "copyMenuItem": "Copy",
   "creatingFeatureText": "Creating {feature}",
   "@creatingFeatureText": {
     "placeholders": {
@@ -27,12 +30,16 @@
   "launchingInstanceTitle": "Launching instance",
   "launchInstanceTitle": "Launch instance",
   "nameLabel": "Name",
+  "newTabMenuItem": "New Tab",
   "okButton": "Ok",
+  "pasteMenuItem": "Paste",
   "pleaseWaitText": "Please wait",
   "releaseLabel": "Release",
+  "selectAllMenuItem": "Select All",
   "selectFeaturesTitle": "Select features",
   "selectImageTitle": "Select image",
   "selectOsTitle": "Select OS",
+  "splitTabMenuItem": "Split Tab",
   "startingInstanceText": "Starting instance",
   "stoppingInstanceText": "Stopping instance",
   "typeLabel": "Type",

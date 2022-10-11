@@ -1,5 +1,6 @@
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 List<PopupMenuEntry> buildTerminalMenu({
   required BuildContext context,
@@ -11,43 +12,44 @@ List<PopupMenuEntry> buildTerminalMenu({
   VoidCallback? onPaste,
   VoidCallback? onSelectAll,
 }) {
+  final l10n = AppLocalizations.of(context);
   return <PopupMenuEntry>[
     ContextMenuItem(
       onTap: onAddTab,
       enabled: onAddTab != null,
-      child: const Text('New Tab'),
+      child: Text(l10n.newTabMenuItem),
     ),
     ContextMenuItem(
       onTap: onCloseTab,
       enabled: onCloseTab != null,
-      child: const Text('Close Tab'),
+      child: Text(l10n.closeTabMenuItem),
     ),
     const PopupMenuDivider(),
     ContextMenuItem(
       onTap: onSplitTab,
       enabled: onSplitTab != null,
-      child: const Text('Split Tab'),
+      child: Text(l10n.splitTabMenuItem),
     ),
     ContextMenuItem(
       onTap: onCloseSplit,
       enabled: onCloseSplit != null,
-      child: const Text('Close Split'),
+      child: Text(l10n.closeSplitMenuItem),
     ),
     const PopupMenuDivider(),
     ContextMenuItem(
       onTap: onCopy,
       enabled: onCopy != null,
-      child: const Text('Copy'),
+      child: Text(l10n.copyMenuItem),
     ),
     ContextMenuItem(
       onTap: onPaste,
       enabled: onPaste != null,
-      child: const Text('Paste'),
+      child: Text(l10n.pasteMenuItem),
     ),
     ContextMenuItem(
       onTap: onSelectAll,
       enabled: onSelectAll != null,
-      child: const Text('Select All'),
+      child: Text(l10n.selectAllMenuItem),
     ),
   ];
 }
