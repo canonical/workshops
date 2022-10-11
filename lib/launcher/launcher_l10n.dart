@@ -7,9 +7,9 @@ extension LxdImageTypeL10n on LxdImageType {
     final l10n = AppLocalizations.of(context);
     switch (this) {
       case LxdImageType.container:
-        return l10n.containerLabel;
+        return l10n.containerItem;
       case LxdImageType.virtualMachine:
-        return l10n.virtualMachineLabel;
+        return l10n.virtualMachineItem;
     }
   }
 }

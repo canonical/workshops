@@ -2,7 +2,7 @@
   "appTitle": "Workshops",
   "cancelButton": "Cancel",
   "continueButton": "Continue",
-  "containerLabel": "container",
+  "containerItem": "container",
   "configuringFeatureLabel": "Configuring {feature}",
   "@configuringFeatureLabel": {
     "placeholders": {
@@ -38,5 +38,5 @@
   "typeLabel": "Type",
   "unpackingInstanceLabel": "Unpacking instance",
   "variantLabel": "Variant",
-  "virtualMachineLabel": "virtual machine"
+  "virtualMachineItem": "virtual machine"
 }
