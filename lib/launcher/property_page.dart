@@ -93,11 +93,11 @@ class _PropertyPageState extends State<PropertyPage> {
       actions: [
         OutlinedButton(
           onPressed: Wizard.of(context).done,
-          child: Text(l10n.cancelLabel),
+          child: Text(l10n.cancelButton),
         ),
         ElevatedButton(
           onPressed: () => Wizard.of(context).next(arguments: model.save()),
-          child: Text(l10n.launchLabel),
+          child: Text(l10n.launchButton),
         ),
       ],
     );

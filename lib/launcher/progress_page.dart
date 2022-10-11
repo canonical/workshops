@@ -51,13 +51,13 @@ class _ProgressPageState extends State<ProgressPage> {
     final title = model.state.when(
       none: () => '',
       error: (message) => message ?? '',
-      create: (name, op) => l10n.creatingInstanceLabel,
-      init: (instance, feature) => l10n.creatingFeatureLabel(feature.name),
-      config: (instance, feature) => l10n.configuringFeatureLabel(feature.name),
-      stage: (instance, op) => l10n.finalizingFeaturesLabel,
-      start: (instance, op) => l10n.startingInstanceLabel,
-      stop: (instance, op) => l10n.stoppingInstanceLabel,
-      delete: (instance, op) => l10n.deletingInstanceLabel,
+      create: (name, op) => l10n.creatingInstanceText,
+      init: (instance, feature) => l10n.creatingFeatureText(feature.name),
+      config: (instance, feature) => l10n.configuringFeatureText(feature.name),
+      stage: (instance, op) => l10n.finalizingFeaturesText,
+      start: (instance, op) => l10n.startingInstanceText,
+      stop: (instance, op) => l10n.stoppingInstanceText,
+      delete: (instance, op) => l10n.deletingInstanceText,
     );
     return _ProgressView.create(
       context,
@@ -131,9 +131,9 @@ class _ProgressViewState extends State<_ProgressView> {
                   const SizedBox(height: 48),
                   Text(
                     op?.downloadProgress != null
-                        ? l10n.downloadingInstanceLabel
+                        ? l10n.downloadingInstanceText
                         : op?.unpackProgress != null
-                            ? l10n.unpackingInstanceLabel
+                            ? l10n.unpackingInstanceText
                             : widget.title,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
@@ -152,7 +152,7 @@ class _ProgressViewState extends State<_ProgressView> {
                   child: Text(
                     op?.downloadProgress ??
                         op?.unpackProgress ??
-                        l10n.pleaseWaitLabel,
+                        l10n.pleaseWaitText,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -160,7 +160,7 @@ class _ProgressViewState extends State<_ProgressView> {
               const SizedBox(width: 8),
               OutlinedButton(
                 onPressed: Wizard.of(context).done,
-                child: Text(l10n.cancelLabel),
+                child: Text(l10n.cancelButton),
               ),
             ],
           ),

@@ -36,7 +36,7 @@ class RemoteOsPage extends StatelessWidget {
         const Spacer(),
         OutlinedButton(
           onPressed: Wizard.of(context).done,
-          child: Text(l10n.cancelLabel),
+          child: Text(l10n.cancelButton),
         ),
       ],
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:movable_tabs/movable_tabs.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class TabPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final model = context.watch<TabModel>();
     return CallbackShortcuts(
       bindings: {
@@ -67,7 +69,7 @@ class TabPage extends StatelessWidget {
                             name: tab.instance?.os,
                             size: 32,
                           ),
-                          label: Text(tab.instance?.name ?? 'Home'),
+                          label: Text(tab.instance?.name ?? l10n.homeTab),
                         );
                       },
                     );

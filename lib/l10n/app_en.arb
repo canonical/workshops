@@ -1,42 +1,50 @@
 {
   "appTitle": "Workshops",
-  "cancelLabel": "Cancel",
-  "continueLabel": "Continue",
-  "containerLabel": "container",
-  "configuringFeatureLabel": "Configuring {feature}",
-  "@configuringFeatureLabel": {
+  "cancelButton": "Cancel",
+  "closeSplitMenuItem": "Close Split",
+  "closeTabMenuItem": "Close Tab",
+  "continueButton": "Continue",
+  "containerItem": "container",
+  "configuringFeatureText": "Configuring {feature}",
+  "@configuringFeatureText": {
     "placeholders": {
       "feature": {
         "type": "String"
       }
     }
   },
-  "creatingFeatureLabel": "Creating {feature}",
-  "@creatingFeatureLabel": {
+  "copyMenuItem": "Copy",
+  "creatingFeatureText": "Creating {feature}",
+  "@creatingFeatureText": {
     "placeholders": {
       "feature": {
         "type": "String"
       }
     }
   },
-  "creatingInstanceLabel": "Creating instance",
-  "deletingInstanceLabel": "Deleting instance",
-  "downloadingInstanceLabel": "Downloading instance",
-  "finalizingFeaturesLabel": "Finalizing features",
-  "launchLabel": "Launch",
+  "creatingInstanceText": "Creating instance",
+  "deletingInstanceText": "Deleting instance",
+  "downloadingInstanceText": "Downloading instance",
+  "finalizingFeaturesText": "Finalizing features",
+  "homeTab": "Home",
+  "launchButton": "Launch",
   "launchingInstanceTitle": "Launching instance",
   "launchInstanceTitle": "Launch instance",
   "nameLabel": "Name",
-  "okLabel": "Ok",
-  "pleaseWaitLabel": "Please wait",
+  "newTabMenuItem": "New Tab",
+  "okButton": "Ok",
+  "pasteMenuItem": "Paste",
+  "pleaseWaitText": "Please wait",
   "releaseLabel": "Release",
+  "selectAllMenuItem": "Select All",
   "selectFeaturesTitle": "Select features",
   "selectImageTitle": "Select image",
   "selectOsTitle": "Select OS",
-  "startingInstanceLabel": "Starting instance",
-  "stoppingInstanceLabel": "Stopping instance",
+  "splitTabMenuItem": "Split Tab",
+  "startingInstanceText": "Starting instance",
+  "stoppingInstanceText": "Stopping instance",
   "typeLabel": "Type",
-  "unpackingInstanceLabel": "Unpacking instance",
+  "unpackingInstanceText": "Unpacking instance",
   "variantLabel": "Variant",
-  "virtualMachineLabel": "virtual machine"
+  "virtualMachineItem": "virtual machine"
 }
