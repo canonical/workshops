@@ -28,6 +28,7 @@ void main() {
     when(service.waitOperation(start.id)).thenAnswer((_) async => start);
     when(service.execTerminal(instance.name)).thenAnswer((_) async => lxd);
     when(service.waitOperation(exec.id)).thenAnswer((_) => completer.future);
+    when(service.waitVmAgent(instance.name)).thenAnswer((_) async => true);
 
     final manager = TerminalManager(service);
 
