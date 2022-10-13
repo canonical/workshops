@@ -17,6 +17,8 @@ class SettingsStore extends ChangeNotifier {
   Future<void> init() async {
     _sub ??= _gsettings.keysChanged.listen((keys) async {
       for (final key in keys) {
+        // TODO: https: //github.com/canonical/gsettings.dart/issues/48
+        if (key.contains('/')) continue;
         _values[key] = await _getValue(key);
       }
       notifyListeners();

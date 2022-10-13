@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:ubuntu_widgets/ubuntu_widgets.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'preferences_model.dart';
+import 'shortcut_view.dart';
 
 Future<void> showPreferencesDialog({required BuildContext context}) async {
   return showDialog(
@@ -22,22 +27,64 @@ class PreferencesDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final model = context.watch<PreferencesModel>();
-    return AlertDialog(
-      title: const Text('Preferences'),
-      content: const SizedBox(
-        width: 900,
-        height: 600,
-        child: Center(
-          child: Text('TODO'),
+    final l10n = AppLocalizations.of(context);
+    return CallbackShortcuts(
+      bindings: {
+        const SingleActivator(LogicalKeyboardKey.escape):
+            Navigator.of(context).pop,
+      },
+      child: Dialog(
+        insetPadding: const EdgeInsets.all(20),
+        child: SizedBox.fromSize(
+          size: MediaQuery.of(context).size,
+          child: Column(
+            children: [
+              Theme(
+                data: Theme.of(context).copyWith(
+                  appBarTheme: const AppBarTheme(
+                    shape: Border(),
+                    titleSpacing: 24,
+                  ),
+                ),
+                child: YaruTitleBar(
+                  centerTitle: false,
+                  title: Text(l10n.preferencesTitle),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: RoundedContainer(
+                    child: YaruMasterDetailPage(
+                      length: 1,
+                      tileBuilder: (context, index, selected) =>
+                          const YaruMasterTile(
+                        title: Text('Shortcuts'),
+                      ),
+                      pageBuilder: (context, index) => const YaruDetailPage(
+                        body: ShortcutView(),
+                      ),
+                      leftPaneWidth: 240,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    OutlinedButton(
+                      onPressed: Navigator.of(context).pop,
+                      child: const Text('Close'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      actions: [
-        OutlinedButton(
-          onPressed: Navigator.of(context).pop,
-          child: const Text('Close'),
-        )
-      ],
     );
   }
 }
