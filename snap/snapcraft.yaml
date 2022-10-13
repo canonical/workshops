@@ -33,8 +33,8 @@ parts:
       - unzip
       - xz-utils
       - zip
-    override-prime:
-      rm -r $CRAFT_PART_INSTALL
+    prime:
+      - -*
 
   workshops:
     after: [ flutter-git ]
