@@ -1,0 +1,21 @@
+name: LibGtk
+description: GTK+ 3.0
+output: 'lib/src/libgtk.g.dart'
+preamble: // coverage:ignore-file
+headers:
+  entry-points:
+    - '/usr/include/gtk-3.0/gtk/gtk.h'
+compiler-opts:
+  - '-DGTK_COMPILATION'
+  - '-I/usr/include/gtk-3.0'
+  - '-I/usr/include/glib-2.0'
+  - '-I/usr/lib/x86_64-linux-gnu/glib-2.0/include'
+exclude-all-by-default: true
+enums:
+  include:
+    - 'GdkModifierType'
+functions:
+  include:
+    - 'gtk_accelerator_parse'
+    - 'gtk_accelerator_name'
+    - 'g_free'
