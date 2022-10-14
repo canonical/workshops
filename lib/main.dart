@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gsettings/gsettings.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ import 'instances/instance_store.dart';
 import 'launcher/local_image_model.dart';
 import 'launcher/remote_image_model.dart';
 import 'remotes/remote_store.dart';
+import 'settings/shortcut_settings.dart';
 
 Future<void> main() async {
   Logger.setup(level: LogLevel.fromString(kDebugMode ? 'debug' : 'info'));
@@ -29,6 +31,10 @@ Future<void> main() async {
 
   registerServiceFactory<SimpleStreamClient>(
     (url) => SimpleStreamClient(url as String),
+  );
+
+  registerServiceFactory<GSettings>(
+    (schemaId) => GSettings(schemaId as String),
   );
 
   runApp(
@@ -66,6 +72,13 @@ Future<void> main() async {
               model.init(client);
             }
             return model;
+          },
+        ),
+        ChangeNotifierProvider<ShortcutSettings>(
+          create: (_) {
+            final gsettings =
+                createService<GSettings>(ShortcutGSettings.schemaId);
+            return ShortcutGSettings(gsettings)..init();
           },
         ),
       ],

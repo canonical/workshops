@@ -115,3 +115,11 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
   install(FILES "${AOT_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
     COMPONENT Runtime)
 endif()
+
+# GSettings
+set(GSETTINGS_SCHEMA "data/${APPLICATION_ID}.shortcuts.gschema.xml")
+install(FILES "${GSETTINGS_SCHEMA}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}"
+  COMPONENT Runtime)
+install(CODE "
+  execute_process(COMMAND glib-compile-schemas \"${INSTALL_BUNDLE_DATA_DIR}\")
+  " COMPONENT Runtime)

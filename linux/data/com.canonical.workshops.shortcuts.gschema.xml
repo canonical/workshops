@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="com.canonical.workshops.shortcuts" path="/com/canonical/workshops/shortcuts/">
+    <key name="tab-new" type="as">
+      <default><![CDATA[['<Control><Shift>T']]]></default>
+      <summary>Add a new tab</summary>
+    </key>
+    <key name="tab-close" type="as">
+      <default><![CDATA[['<Control><Shift>W']]]></default>
+      <summary>Close the current tab</summary>
+    </key>
+    <key name="tab-next" type="as">
+      <default><![CDATA[['<Control>Page_Down']]]></default>
+      <summary>Switch to next tab</summary>
+    </key>
+    <key name="tab-previous" type="as">
+      <default><![CDATA[['<Control>Page_Up']]]></default>
+      <summary>Switch to previous tab</summary>
+    </key>
+    <key name="terminal-focus-up" type="as">
+      <default><![CDATA[['<Alt>Up']]]></default>
+      <summary>Move focus to a split above</summary>
+    </key>
+    <key name="terminal-focus-down" type="as">
+      <default><![CDATA[['<Alt>Down']]]></default>
+      <summary>Move focus to a split below</summary>
+    </key>
+    <key name="terminal-focus-left" type="as">
+      <default><![CDATA[['<Alt>Left']]]></default>
+      <summary>Move focus to a split on the left</summary>
+    </key>
+    <key name="terminal-focus-right" type="as">
+      <default><![CDATA[['<Alt>Right']]]></default>
+      <summary>Move focus to a split on the right</summary>
+    </key>
+  </schema>
+</schemalist>
