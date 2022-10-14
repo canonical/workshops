@@ -38,7 +38,8 @@ mixin _$SimpleProducts {
 abstract class $SimpleProductsCopyWith<$Res> {
   factory $SimpleProductsCopyWith(
           SimpleProducts value, $Res Function(SimpleProducts) then) =
-      _$SimpleProductsCopyWithImpl<$Res>;
+      _$SimpleProductsCopyWithImpl<$Res, SimpleProducts>;
+  @useResult
   $Res call(
       {String? contentId,
       String? datatype,
@@ -49,49 +50,51 @@ abstract class $SimpleProductsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SimpleProductsCopyWithImpl<$Res>
+class _$SimpleProductsCopyWithImpl<$Res, $Val extends SimpleProducts>
     implements $SimpleProductsCopyWith<$Res> {
   _$SimpleProductsCopyWithImpl(this._value, this._then);
 
-  final SimpleProducts _value;
   // ignore: unused_field
-  final $Res Function(SimpleProducts) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? contentId = freezed,
     Object? datatype = freezed,
     Object? format = freezed,
     Object? license = freezed,
-    Object? products = freezed,
+    Object? products = null,
     Object? updated = freezed,
   }) {
     return _then(_value.copyWith(
-      contentId: contentId == freezed
+      contentId: freezed == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as String?,
-      datatype: datatype == freezed
+      datatype: freezed == datatype
           ? _value.datatype
           : datatype // ignore: cast_nullable_to_non_nullable
               as String?,
-      format: format == freezed
+      format: freezed == format
           ? _value.format
           : format // ignore: cast_nullable_to_non_nullable
               as String?,
-      license: license == freezed
+      license: freezed == license
           ? _value.license
           : license // ignore: cast_nullable_to_non_nullable
               as String?,
-      products: products == freezed
+      products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as Map<String, SimpleProduct>,
-      updated: updated == freezed
+      updated: freezed == updated
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -102,6 +105,7 @@ abstract class _$$_SimpleProductsCopyWith<$Res>
           _$_SimpleProducts value, $Res Function(_$_SimpleProducts) then) =
       __$$_SimpleProductsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? contentId,
       String? datatype,
@@ -113,46 +117,44 @@ abstract class _$$_SimpleProductsCopyWith<$Res>
 
 /// @nodoc
 class __$$_SimpleProductsCopyWithImpl<$Res>
-    extends _$SimpleProductsCopyWithImpl<$Res>
+    extends _$SimpleProductsCopyWithImpl<$Res, _$_SimpleProducts>
     implements _$$_SimpleProductsCopyWith<$Res> {
   __$$_SimpleProductsCopyWithImpl(
       _$_SimpleProducts _value, $Res Function(_$_SimpleProducts) _then)
-      : super(_value, (v) => _then(v as _$_SimpleProducts));
+      : super(_value, _then);
 
-  @override
-  _$_SimpleProducts get _value => super._value as _$_SimpleProducts;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? contentId = freezed,
     Object? datatype = freezed,
     Object? format = freezed,
     Object? license = freezed,
-    Object? products = freezed,
+    Object? products = null,
     Object? updated = freezed,
   }) {
     return _then(_$_SimpleProducts(
-      contentId: contentId == freezed
+      contentId: freezed == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as String?,
-      datatype: datatype == freezed
+      datatype: freezed == datatype
           ? _value.datatype
           : datatype // ignore: cast_nullable_to_non_nullable
               as String?,
-      format: format == freezed
+      format: freezed == format
           ? _value.format
           : format // ignore: cast_nullable_to_non_nullable
               as String?,
-      license: license == freezed
+      license: freezed == license
           ? _value.license
           : license // ignore: cast_nullable_to_non_nullable
               as String?,
-      products: products == freezed
+      products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
               as Map<String, SimpleProduct>,
-      updated: updated == freezed
+      updated: freezed == updated
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -204,27 +206,24 @@ class _$_SimpleProducts implements _SimpleProducts {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SimpleProducts &&
-            const DeepCollectionEquality().equals(other.contentId, contentId) &&
-            const DeepCollectionEquality().equals(other.datatype, datatype) &&
-            const DeepCollectionEquality().equals(other.format, format) &&
-            const DeepCollectionEquality().equals(other.license, license) &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            (identical(other.datatype, datatype) ||
+                other.datatype == datatype) &&
+            (identical(other.format, format) || other.format == format) &&
+            (identical(other.license, license) || other.license == license) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
-            const DeepCollectionEquality().equals(other.updated, updated));
+            (identical(other.updated, updated) || other.updated == updated));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(contentId),
-      const DeepCollectionEquality().hash(datatype),
-      const DeepCollectionEquality().hash(format),
-      const DeepCollectionEquality().hash(license),
-      const DeepCollectionEquality().hash(_products),
-      const DeepCollectionEquality().hash(updated));
+  int get hashCode => Object.hash(runtimeType, contentId, datatype, format,
+      license, const DeepCollectionEquality().hash(_products), updated);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SimpleProductsCopyWith<_$_SimpleProducts> get copyWith =>
       __$$_SimpleProductsCopyWithImpl<_$_SimpleProducts>(this, _$identity);
 
@@ -297,7 +296,8 @@ mixin _$SimpleProduct {
 abstract class $SimpleProductCopyWith<$Res> {
   factory $SimpleProductCopyWith(
           SimpleProduct value, $Res Function(SimpleProduct) then) =
-      _$SimpleProductCopyWithImpl<$Res>;
+      _$SimpleProductCopyWithImpl<$Res, SimpleProduct>;
+  @useResult
   $Res call(
       {@AliasConverter() List<String>? aliases,
       String arch,
@@ -313,74 +313,76 @@ abstract class $SimpleProductCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SimpleProductCopyWithImpl<$Res>
+class _$SimpleProductCopyWithImpl<$Res, $Val extends SimpleProduct>
     implements $SimpleProductCopyWith<$Res> {
   _$SimpleProductCopyWithImpl(this._value, this._then);
 
-  final SimpleProduct _value;
   // ignore: unused_field
-  final $Res Function(SimpleProduct) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? aliases = freezed,
-    Object? arch = freezed,
+    Object? arch = null,
     Object? os = freezed,
     Object? release = freezed,
     Object? releaseCodename = freezed,
     Object? releaseTitle = freezed,
-    Object? supported = freezed,
+    Object? supported = null,
     Object? supportEol = freezed,
     Object? variant = freezed,
     Object? version = freezed,
-    Object? versions = freezed,
+    Object? versions = null,
   }) {
     return _then(_value.copyWith(
-      aliases: aliases == freezed
+      aliases: freezed == aliases
           ? _value.aliases
           : aliases // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      arch: arch == freezed
+      arch: null == arch
           ? _value.arch
           : arch // ignore: cast_nullable_to_non_nullable
               as String,
-      os: os == freezed
+      os: freezed == os
           ? _value.os
           : os // ignore: cast_nullable_to_non_nullable
               as String?,
-      release: release == freezed
+      release: freezed == release
           ? _value.release
           : release // ignore: cast_nullable_to_non_nullable
               as String?,
-      releaseCodename: releaseCodename == freezed
+      releaseCodename: freezed == releaseCodename
           ? _value.releaseCodename
           : releaseCodename // ignore: cast_nullable_to_non_nullable
               as String?,
-      releaseTitle: releaseTitle == freezed
+      releaseTitle: freezed == releaseTitle
           ? _value.releaseTitle
           : releaseTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      supported: supported == freezed
+      supported: null == supported
           ? _value.supported
           : supported // ignore: cast_nullable_to_non_nullable
               as bool,
-      supportEol: supportEol == freezed
+      supportEol: freezed == supportEol
           ? _value.supportEol
           : supportEol // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      variant: variant == freezed
+      variant: freezed == variant
           ? _value.variant
           : variant // ignore: cast_nullable_to_non_nullable
               as String?,
-      version: version == freezed
+      version: freezed == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String?,
-      versions: versions == freezed
+      versions: null == versions
           ? _value.versions
           : versions // ignore: cast_nullable_to_non_nullable
               as Map<String, SimpleVersion>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -391,6 +393,7 @@ abstract class _$$_SimpleProductCopyWith<$Res>
           _$_SimpleProduct value, $Res Function(_$_SimpleProduct) then) =
       __$$_SimpleProductCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@AliasConverter() List<String>? aliases,
       String arch,
@@ -407,71 +410,69 @@ abstract class _$$_SimpleProductCopyWith<$Res>
 
 /// @nodoc
 class __$$_SimpleProductCopyWithImpl<$Res>
-    extends _$SimpleProductCopyWithImpl<$Res>
+    extends _$SimpleProductCopyWithImpl<$Res, _$_SimpleProduct>
     implements _$$_SimpleProductCopyWith<$Res> {
   __$$_SimpleProductCopyWithImpl(
       _$_SimpleProduct _value, $Res Function(_$_SimpleProduct) _then)
-      : super(_value, (v) => _then(v as _$_SimpleProduct));
+      : super(_value, _then);
 
-  @override
-  _$_SimpleProduct get _value => super._value as _$_SimpleProduct;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? aliases = freezed,
-    Object? arch = freezed,
+    Object? arch = null,
     Object? os = freezed,
     Object? release = freezed,
     Object? releaseCodename = freezed,
     Object? releaseTitle = freezed,
-    Object? supported = freezed,
+    Object? supported = null,
     Object? supportEol = freezed,
     Object? variant = freezed,
     Object? version = freezed,
-    Object? versions = freezed,
+    Object? versions = null,
   }) {
     return _then(_$_SimpleProduct(
-      aliases: aliases == freezed
+      aliases: freezed == aliases
           ? _value._aliases
           : aliases // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      arch: arch == freezed
+      arch: null == arch
           ? _value.arch
           : arch // ignore: cast_nullable_to_non_nullable
               as String,
-      os: os == freezed
+      os: freezed == os
           ? _value.os
           : os // ignore: cast_nullable_to_non_nullable
               as String?,
-      release: release == freezed
+      release: freezed == release
           ? _value.release
           : release // ignore: cast_nullable_to_non_nullable
               as String?,
-      releaseCodename: releaseCodename == freezed
+      releaseCodename: freezed == releaseCodename
           ? _value.releaseCodename
           : releaseCodename // ignore: cast_nullable_to_non_nullable
               as String?,
-      releaseTitle: releaseTitle == freezed
+      releaseTitle: freezed == releaseTitle
           ? _value.releaseTitle
           : releaseTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      supported: supported == freezed
+      supported: null == supported
           ? _value.supported
           : supported // ignore: cast_nullable_to_non_nullable
               as bool,
-      supportEol: supportEol == freezed
+      supportEol: freezed == supportEol
           ? _value.supportEol
           : supportEol // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      variant: variant == freezed
+      variant: freezed == variant
           ? _value.variant
           : variant // ignore: cast_nullable_to_non_nullable
               as String?,
-      version: version == freezed
+      version: freezed == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String?,
-      versions: versions == freezed
+      versions: null == versions
           ? _value._versions
           : versions // ignore: cast_nullable_to_non_nullable
               as Map<String, SimpleVersion>,
@@ -548,18 +549,19 @@ class _$_SimpleProduct implements _SimpleProduct {
         (other.runtimeType == runtimeType &&
             other is _$_SimpleProduct &&
             const DeepCollectionEquality().equals(other._aliases, _aliases) &&
-            const DeepCollectionEquality().equals(other.arch, arch) &&
-            const DeepCollectionEquality().equals(other.os, os) &&
-            const DeepCollectionEquality().equals(other.release, release) &&
-            const DeepCollectionEquality()
-                .equals(other.releaseCodename, releaseCodename) &&
-            const DeepCollectionEquality()
-                .equals(other.releaseTitle, releaseTitle) &&
-            const DeepCollectionEquality().equals(other.supported, supported) &&
-            const DeepCollectionEquality()
-                .equals(other.supportEol, supportEol) &&
-            const DeepCollectionEquality().equals(other.variant, variant) &&
-            const DeepCollectionEquality().equals(other.version, version) &&
+            (identical(other.arch, arch) || other.arch == arch) &&
+            (identical(other.os, os) || other.os == os) &&
+            (identical(other.release, release) || other.release == release) &&
+            (identical(other.releaseCodename, releaseCodename) ||
+                other.releaseCodename == releaseCodename) &&
+            (identical(other.releaseTitle, releaseTitle) ||
+                other.releaseTitle == releaseTitle) &&
+            (identical(other.supported, supported) ||
+                other.supported == supported) &&
+            (identical(other.supportEol, supportEol) ||
+                other.supportEol == supportEol) &&
+            (identical(other.variant, variant) || other.variant == variant) &&
+            (identical(other.version, version) || other.version == version) &&
             const DeepCollectionEquality().equals(other._versions, _versions));
   }
 
@@ -568,19 +570,20 @@ class _$_SimpleProduct implements _SimpleProduct {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_aliases),
-      const DeepCollectionEquality().hash(arch),
-      const DeepCollectionEquality().hash(os),
-      const DeepCollectionEquality().hash(release),
-      const DeepCollectionEquality().hash(releaseCodename),
-      const DeepCollectionEquality().hash(releaseTitle),
-      const DeepCollectionEquality().hash(supported),
-      const DeepCollectionEquality().hash(supportEol),
-      const DeepCollectionEquality().hash(variant),
-      const DeepCollectionEquality().hash(version),
+      arch,
+      os,
+      release,
+      releaseCodename,
+      releaseTitle,
+      supported,
+      supportEol,
+      variant,
+      version,
       const DeepCollectionEquality().hash(_versions));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SimpleProductCopyWith<_$_SimpleProduct> get copyWith =>
       __$$_SimpleProductCopyWithImpl<_$_SimpleProduct>(this, _$identity);
 
@@ -660,7 +663,8 @@ mixin _$SimpleVersion {
 abstract class $SimpleVersionCopyWith<$Res> {
   factory $SimpleVersionCopyWith(
           SimpleVersion value, $Res Function(SimpleVersion) then) =
-      _$SimpleVersionCopyWithImpl<$Res>;
+      _$SimpleVersionCopyWithImpl<$Res, SimpleVersion>;
+  @useResult
   $Res call(
       {@SimpleItemConverter() Map<String, SimpleItem> items,
       String? label,
@@ -668,34 +672,36 @@ abstract class $SimpleVersionCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SimpleVersionCopyWithImpl<$Res>
+class _$SimpleVersionCopyWithImpl<$Res, $Val extends SimpleVersion>
     implements $SimpleVersionCopyWith<$Res> {
   _$SimpleVersionCopyWithImpl(this._value, this._then);
 
-  final SimpleVersion _value;
   // ignore: unused_field
-  final $Res Function(SimpleVersion) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? items = freezed,
+    Object? items = null,
     Object? label = freezed,
     Object? pubname = freezed,
   }) {
     return _then(_value.copyWith(
-      items: items == freezed
+      items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
               as Map<String, SimpleItem>,
-      label: label == freezed
+      label: freezed == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String?,
-      pubname: pubname == freezed
+      pubname: freezed == pubname
           ? _value.pubname
           : pubname // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -706,6 +712,7 @@ abstract class _$$_SimpleVersionCopyWith<$Res>
           _$_SimpleVersion value, $Res Function(_$_SimpleVersion) then) =
       __$$_SimpleVersionCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@SimpleItemConverter() Map<String, SimpleItem> items,
       String? label,
@@ -714,31 +721,29 @@ abstract class _$$_SimpleVersionCopyWith<$Res>
 
 /// @nodoc
 class __$$_SimpleVersionCopyWithImpl<$Res>
-    extends _$SimpleVersionCopyWithImpl<$Res>
+    extends _$SimpleVersionCopyWithImpl<$Res, _$_SimpleVersion>
     implements _$$_SimpleVersionCopyWith<$Res> {
   __$$_SimpleVersionCopyWithImpl(
       _$_SimpleVersion _value, $Res Function(_$_SimpleVersion) _then)
-      : super(_value, (v) => _then(v as _$_SimpleVersion));
+      : super(_value, _then);
 
-  @override
-  _$_SimpleVersion get _value => super._value as _$_SimpleVersion;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? items = freezed,
+    Object? items = null,
     Object? label = freezed,
     Object? pubname = freezed,
   }) {
     return _then(_$_SimpleVersion(
-      items: items == freezed
+      items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as Map<String, SimpleItem>,
-      label: label == freezed
+      label: freezed == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
               as String?,
-      pubname: pubname == freezed
+      pubname: freezed == pubname
           ? _value.pubname
           : pubname // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -783,20 +788,18 @@ class _$_SimpleVersion implements _SimpleVersion {
         (other.runtimeType == runtimeType &&
             other is _$_SimpleVersion &&
             const DeepCollectionEquality().equals(other._items, _items) &&
-            const DeepCollectionEquality().equals(other.label, label) &&
-            const DeepCollectionEquality().equals(other.pubname, pubname));
+            (identical(other.label, label) || other.label == label) &&
+            (identical(other.pubname, pubname) || other.pubname == pubname));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_items),
-      const DeepCollectionEquality().hash(label),
-      const DeepCollectionEquality().hash(pubname));
+      runtimeType, const DeepCollectionEquality().hash(_items), label, pubname);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SimpleVersionCopyWith<_$_SimpleVersion> get copyWith =>
       __$$_SimpleVersionCopyWithImpl<_$_SimpleVersion>(this, _$identity);
 
@@ -871,7 +874,7 @@ mixin _$SimpleItem {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             @JsonKey(name: 'combined_disk1-img_sha256')
                 String? combinedDisk1ImgSha256,
             @JsonKey(name: 'combined_disk-kvm-img_sha256')
@@ -888,7 +891,8 @@ mixin _$SimpleItem {
             String? sha256,
             int size)?
         download,
-    TResult Function(String? crsn, String? id, String? rootStore, String? virt)?
+    TResult? Function(
+            String? crsn, String? id, String? rootStore, String? virt)?
         id,
   }) =>
       throw _privateConstructorUsedError;
@@ -924,8 +928,8 @@ mixin _$SimpleItem {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SimpleDownload value)? download,
-    TResult Function(SimpleId value)? id,
+    TResult? Function(SimpleDownload value)? download,
+    TResult? Function(SimpleId value)? id,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -942,16 +946,18 @@ mixin _$SimpleItem {
 abstract class $SimpleItemCopyWith<$Res> {
   factory $SimpleItemCopyWith(
           SimpleItem value, $Res Function(SimpleItem) then) =
-      _$SimpleItemCopyWithImpl<$Res>;
+      _$SimpleItemCopyWithImpl<$Res, SimpleItem>;
 }
 
 /// @nodoc
-class _$SimpleItemCopyWithImpl<$Res> implements $SimpleItemCopyWith<$Res> {
+class _$SimpleItemCopyWithImpl<$Res, $Val extends SimpleItem>
+    implements $SimpleItemCopyWith<$Res> {
   _$SimpleItemCopyWithImpl(this._value, this._then);
 
-  final SimpleItem _value;
   // ignore: unused_field
-  final $Res Function(SimpleItem) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -959,6 +965,7 @@ abstract class _$$SimpleDownloadCopyWith<$Res> {
   factory _$$SimpleDownloadCopyWith(
           _$SimpleDownload value, $Res Function(_$SimpleDownload) then) =
       __$$SimpleDownloadCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'combined_disk1-img_sha256')
           String? combinedDisk1ImgSha256,
@@ -979,15 +986,13 @@ abstract class _$$SimpleDownloadCopyWith<$Res> {
 
 /// @nodoc
 class __$$SimpleDownloadCopyWithImpl<$Res>
-    extends _$SimpleItemCopyWithImpl<$Res>
+    extends _$SimpleItemCopyWithImpl<$Res, _$SimpleDownload>
     implements _$$SimpleDownloadCopyWith<$Res> {
   __$$SimpleDownloadCopyWithImpl(
       _$SimpleDownload _value, $Res Function(_$SimpleDownload) _then)
-      : super(_value, (v) => _then(v as _$SimpleDownload));
+      : super(_value, _then);
 
-  @override
-  _$SimpleDownload get _value => super._value as _$SimpleDownload;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? combinedDisk1ImgSha256 = freezed,
@@ -996,59 +1001,59 @@ class __$$SimpleDownloadCopyWithImpl<$Res>
     Object? combinedRootxzSha256 = freezed,
     Object? combinedSha256 = freezed,
     Object? combinedSquashfsSha256 = freezed,
-    Object? ftype = freezed,
+    Object? ftype = null,
     Object? deltaBase = freezed,
     Object? md5 = freezed,
-    Object? path = freezed,
+    Object? path = null,
     Object? sha256 = freezed,
-    Object? size = freezed,
+    Object? size = null,
   }) {
     return _then(_$SimpleDownload(
-      combinedDisk1ImgSha256: combinedDisk1ImgSha256 == freezed
+      combinedDisk1ImgSha256: freezed == combinedDisk1ImgSha256
           ? _value.combinedDisk1ImgSha256
           : combinedDisk1ImgSha256 // ignore: cast_nullable_to_non_nullable
               as String?,
-      combinedDiskKvmImgSha256: combinedDiskKvmImgSha256 == freezed
+      combinedDiskKvmImgSha256: freezed == combinedDiskKvmImgSha256
           ? _value.combinedDiskKvmImgSha256
           : combinedDiskKvmImgSha256 // ignore: cast_nullable_to_non_nullable
               as String?,
-      combinedUefi1ImgSha256: combinedUefi1ImgSha256 == freezed
+      combinedUefi1ImgSha256: freezed == combinedUefi1ImgSha256
           ? _value.combinedUefi1ImgSha256
           : combinedUefi1ImgSha256 // ignore: cast_nullable_to_non_nullable
               as String?,
-      combinedRootxzSha256: combinedRootxzSha256 == freezed
+      combinedRootxzSha256: freezed == combinedRootxzSha256
           ? _value.combinedRootxzSha256
           : combinedRootxzSha256 // ignore: cast_nullable_to_non_nullable
               as String?,
-      combinedSha256: combinedSha256 == freezed
+      combinedSha256: freezed == combinedSha256
           ? _value.combinedSha256
           : combinedSha256 // ignore: cast_nullable_to_non_nullable
               as String?,
-      combinedSquashfsSha256: combinedSquashfsSha256 == freezed
+      combinedSquashfsSha256: freezed == combinedSquashfsSha256
           ? _value.combinedSquashfsSha256
           : combinedSquashfsSha256 // ignore: cast_nullable_to_non_nullable
               as String?,
-      ftype: ftype == freezed
+      ftype: null == ftype
           ? _value.ftype
           : ftype // ignore: cast_nullable_to_non_nullable
               as String,
-      deltaBase: deltaBase == freezed
+      deltaBase: freezed == deltaBase
           ? _value.deltaBase
           : deltaBase // ignore: cast_nullable_to_non_nullable
               as String?,
-      md5: md5 == freezed
+      md5: freezed == md5
           ? _value.md5
           : md5 // ignore: cast_nullable_to_non_nullable
               as String?,
-      path: path == freezed
+      path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      sha256: sha256 == freezed
+      sha256: freezed == sha256
           ? _value.sha256
           : sha256 // ignore: cast_nullable_to_non_nullable
               as String?,
-      size: size == freezed
+      size: null == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as int,
@@ -1122,45 +1127,48 @@ class _$SimpleDownload implements SimpleDownload {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SimpleDownload &&
-            const DeepCollectionEquality()
-                .equals(other.combinedDisk1ImgSha256, combinedDisk1ImgSha256) &&
-            const DeepCollectionEquality().equals(
-                other.combinedDiskKvmImgSha256, combinedDiskKvmImgSha256) &&
-            const DeepCollectionEquality()
-                .equals(other.combinedUefi1ImgSha256, combinedUefi1ImgSha256) &&
-            const DeepCollectionEquality()
-                .equals(other.combinedRootxzSha256, combinedRootxzSha256) &&
-            const DeepCollectionEquality()
-                .equals(other.combinedSha256, combinedSha256) &&
-            const DeepCollectionEquality()
-                .equals(other.combinedSquashfsSha256, combinedSquashfsSha256) &&
-            const DeepCollectionEquality().equals(other.ftype, ftype) &&
-            const DeepCollectionEquality().equals(other.deltaBase, deltaBase) &&
-            const DeepCollectionEquality().equals(other.md5, md5) &&
-            const DeepCollectionEquality().equals(other.path, path) &&
-            const DeepCollectionEquality().equals(other.sha256, sha256) &&
-            const DeepCollectionEquality().equals(other.size, size));
+            (identical(other.combinedDisk1ImgSha256, combinedDisk1ImgSha256) ||
+                other.combinedDisk1ImgSha256 == combinedDisk1ImgSha256) &&
+            (identical(
+                    other.combinedDiskKvmImgSha256, combinedDiskKvmImgSha256) ||
+                other.combinedDiskKvmImgSha256 == combinedDiskKvmImgSha256) &&
+            (identical(other.combinedUefi1ImgSha256, combinedUefi1ImgSha256) ||
+                other.combinedUefi1ImgSha256 == combinedUefi1ImgSha256) &&
+            (identical(other.combinedRootxzSha256, combinedRootxzSha256) ||
+                other.combinedRootxzSha256 == combinedRootxzSha256) &&
+            (identical(other.combinedSha256, combinedSha256) ||
+                other.combinedSha256 == combinedSha256) &&
+            (identical(other.combinedSquashfsSha256, combinedSquashfsSha256) ||
+                other.combinedSquashfsSha256 == combinedSquashfsSha256) &&
+            (identical(other.ftype, ftype) || other.ftype == ftype) &&
+            (identical(other.deltaBase, deltaBase) ||
+                other.deltaBase == deltaBase) &&
+            (identical(other.md5, md5) || other.md5 == md5) &&
+            (identical(other.path, path) || other.path == path) &&
+            (identical(other.sha256, sha256) || other.sha256 == sha256) &&
+            (identical(other.size, size) || other.size == size));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(combinedDisk1ImgSha256),
-      const DeepCollectionEquality().hash(combinedDiskKvmImgSha256),
-      const DeepCollectionEquality().hash(combinedUefi1ImgSha256),
-      const DeepCollectionEquality().hash(combinedRootxzSha256),
-      const DeepCollectionEquality().hash(combinedSha256),
-      const DeepCollectionEquality().hash(combinedSquashfsSha256),
-      const DeepCollectionEquality().hash(ftype),
-      const DeepCollectionEquality().hash(deltaBase),
-      const DeepCollectionEquality().hash(md5),
-      const DeepCollectionEquality().hash(path),
-      const DeepCollectionEquality().hash(sha256),
-      const DeepCollectionEquality().hash(size));
+      combinedDisk1ImgSha256,
+      combinedDiskKvmImgSha256,
+      combinedUefi1ImgSha256,
+      combinedRootxzSha256,
+      combinedSha256,
+      combinedSquashfsSha256,
+      ftype,
+      deltaBase,
+      md5,
+      path,
+      sha256,
+      size);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SimpleDownloadCopyWith<_$SimpleDownload> get copyWith =>
       __$$SimpleDownloadCopyWithImpl<_$SimpleDownload>(this, _$identity);
 
@@ -1206,7 +1214,7 @@ class _$SimpleDownload implements SimpleDownload {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             @JsonKey(name: 'combined_disk1-img_sha256')
                 String? combinedDisk1ImgSha256,
             @JsonKey(name: 'combined_disk-kvm-img_sha256')
@@ -1223,7 +1231,8 @@ class _$SimpleDownload implements SimpleDownload {
             String? sha256,
             int size)?
         download,
-    TResult Function(String? crsn, String? id, String? rootStore, String? virt)?
+    TResult? Function(
+            String? crsn, String? id, String? rootStore, String? virt)?
         id,
   }) {
     return download?.call(
@@ -1295,8 +1304,8 @@ class _$SimpleDownload implements SimpleDownload {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SimpleDownload value)? download,
-    TResult Function(SimpleId value)? id,
+    TResult? Function(SimpleDownload value)? download,
+    TResult? Function(SimpleId value)? id,
   }) {
     return download?.call(this);
   }
@@ -1368,18 +1377,18 @@ abstract class _$$SimpleIdCopyWith<$Res> {
   factory _$$SimpleIdCopyWith(
           _$SimpleId value, $Res Function(_$SimpleId) then) =
       __$$SimpleIdCopyWithImpl<$Res>;
+  @useResult
   $Res call({String? crsn, String? id, String? rootStore, String? virt});
 }
 
 /// @nodoc
-class __$$SimpleIdCopyWithImpl<$Res> extends _$SimpleItemCopyWithImpl<$Res>
+class __$$SimpleIdCopyWithImpl<$Res>
+    extends _$SimpleItemCopyWithImpl<$Res, _$SimpleId>
     implements _$$SimpleIdCopyWith<$Res> {
   __$$SimpleIdCopyWithImpl(_$SimpleId _value, $Res Function(_$SimpleId) _then)
-      : super(_value, (v) => _then(v as _$SimpleId));
+      : super(_value, _then);
 
-  @override
-  _$SimpleId get _value => super._value as _$SimpleId;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? crsn = freezed,
@@ -1388,19 +1397,19 @@ class __$$SimpleIdCopyWithImpl<$Res> extends _$SimpleItemCopyWithImpl<$Res>
     Object? virt = freezed,
   }) {
     return _then(_$SimpleId(
-      crsn: crsn == freezed
+      crsn: freezed == crsn
           ? _value.crsn
           : crsn // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      rootStore: rootStore == freezed
+      rootStore: freezed == rootStore
           ? _value.rootStore
           : rootStore // ignore: cast_nullable_to_non_nullable
               as String?,
-      virt: virt == freezed
+      virt: freezed == virt
           ? _value.virt
           : virt // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -1444,23 +1453,20 @@ class _$SimpleId implements SimpleId {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SimpleId &&
-            const DeepCollectionEquality().equals(other.crsn, crsn) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.rootStore, rootStore) &&
-            const DeepCollectionEquality().equals(other.virt, virt));
+            (identical(other.crsn, crsn) || other.crsn == crsn) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.rootStore, rootStore) ||
+                other.rootStore == rootStore) &&
+            (identical(other.virt, virt) || other.virt == virt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(crsn),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(rootStore),
-      const DeepCollectionEquality().hash(virt));
+  int get hashCode => Object.hash(runtimeType, crsn, id, rootStore, virt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$SimpleIdCopyWith<_$SimpleId> get copyWith =>
       __$$SimpleIdCopyWithImpl<_$SimpleId>(this, _$identity);
 
@@ -1494,7 +1500,7 @@ class _$SimpleId implements SimpleId {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
+    TResult? Function(
             @JsonKey(name: 'combined_disk1-img_sha256')
                 String? combinedDisk1ImgSha256,
             @JsonKey(name: 'combined_disk-kvm-img_sha256')
@@ -1511,7 +1517,8 @@ class _$SimpleId implements SimpleId {
             String? sha256,
             int size)?
         download,
-    TResult Function(String? crsn, String? id, String? rootStore, String? virt)?
+    TResult? Function(
+            String? crsn, String? id, String? rootStore, String? virt)?
         id,
   }) {
     return id?.call(crsn, this.id, rootStore, virt);
@@ -1559,8 +1566,8 @@ class _$SimpleId implements SimpleId {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(SimpleDownload value)? download,
-    TResult Function(SimpleId value)? id,
+    TResult? Function(SimpleDownload value)? download,
+    TResult? Function(SimpleId value)? id,
   }) {
     return id?.call(this);
   }
