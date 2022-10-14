@@ -36,7 +36,8 @@ mixin _$SimpleStream {
 abstract class $SimpleStreamCopyWith<$Res> {
   factory $SimpleStreamCopyWith(
           SimpleStream value, $Res Function(SimpleStream) then) =
-      _$SimpleStreamCopyWithImpl<$Res>;
+      _$SimpleStreamCopyWithImpl<$Res, SimpleStream>;
+  @useResult
   $Res call(
       {String format,
       Map<String, SimpleStreamIndex> index,
@@ -44,33 +45,36 @@ abstract class $SimpleStreamCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SimpleStreamCopyWithImpl<$Res> implements $SimpleStreamCopyWith<$Res> {
+class _$SimpleStreamCopyWithImpl<$Res, $Val extends SimpleStream>
+    implements $SimpleStreamCopyWith<$Res> {
   _$SimpleStreamCopyWithImpl(this._value, this._then);
 
-  final SimpleStream _value;
   // ignore: unused_field
-  final $Res Function(SimpleStream) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? format = freezed,
-    Object? index = freezed,
+    Object? format = null,
+    Object? index = null,
     Object? updated = freezed,
   }) {
     return _then(_value.copyWith(
-      format: format == freezed
+      format: null == format
           ? _value.format
           : format // ignore: cast_nullable_to_non_nullable
               as String,
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as Map<String, SimpleStreamIndex>,
-      updated: updated == freezed
+      updated: freezed == updated
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -81,6 +85,7 @@ abstract class _$$_SimpleStreamCopyWith<$Res>
           _$_SimpleStream value, $Res Function(_$_SimpleStream) then) =
       __$$_SimpleStreamCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String format,
       Map<String, SimpleStreamIndex> index,
@@ -89,31 +94,29 @@ abstract class _$$_SimpleStreamCopyWith<$Res>
 
 /// @nodoc
 class __$$_SimpleStreamCopyWithImpl<$Res>
-    extends _$SimpleStreamCopyWithImpl<$Res>
+    extends _$SimpleStreamCopyWithImpl<$Res, _$_SimpleStream>
     implements _$$_SimpleStreamCopyWith<$Res> {
   __$$_SimpleStreamCopyWithImpl(
       _$_SimpleStream _value, $Res Function(_$_SimpleStream) _then)
-      : super(_value, (v) => _then(v as _$_SimpleStream));
+      : super(_value, _then);
 
-  @override
-  _$_SimpleStream get _value => super._value as _$_SimpleStream;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? format = freezed,
-    Object? index = freezed,
+    Object? format = null,
+    Object? index = null,
     Object? updated = freezed,
   }) {
     return _then(_$_SimpleStream(
-      format: format == freezed
+      format: null == format
           ? _value.format
           : format // ignore: cast_nullable_to_non_nullable
               as String,
-      index: index == freezed
+      index: null == index
           ? _value._index
           : index // ignore: cast_nullable_to_non_nullable
               as Map<String, SimpleStreamIndex>,
-      updated: updated == freezed
+      updated: freezed == updated
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -156,21 +159,19 @@ class _$_SimpleStream implements _SimpleStream {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SimpleStream &&
-            const DeepCollectionEquality().equals(other.format, format) &&
+            (identical(other.format, format) || other.format == format) &&
             const DeepCollectionEquality().equals(other._index, _index) &&
-            const DeepCollectionEquality().equals(other.updated, updated));
+            (identical(other.updated, updated) || other.updated == updated));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(format),
-      const DeepCollectionEquality().hash(_index),
-      const DeepCollectionEquality().hash(updated));
+  int get hashCode => Object.hash(runtimeType, format,
+      const DeepCollectionEquality().hash(_index), updated);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SimpleStreamCopyWith<_$_SimpleStream> get copyWith =>
       __$$_SimpleStreamCopyWithImpl<_$_SimpleStream>(this, _$identity);
 
@@ -227,7 +228,8 @@ mixin _$SimpleStreamIndex {
 abstract class $SimpleStreamIndexCopyWith<$Res> {
   factory $SimpleStreamIndexCopyWith(
           SimpleStreamIndex value, $Res Function(SimpleStreamIndex) then) =
-      _$SimpleStreamIndexCopyWithImpl<$Res>;
+      _$SimpleStreamIndexCopyWithImpl<$Res, SimpleStreamIndex>;
+  @useResult
   $Res call(
       {String datatype,
       String? format,
@@ -237,44 +239,46 @@ abstract class $SimpleStreamIndexCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SimpleStreamIndexCopyWithImpl<$Res>
+class _$SimpleStreamIndexCopyWithImpl<$Res, $Val extends SimpleStreamIndex>
     implements $SimpleStreamIndexCopyWith<$Res> {
   _$SimpleStreamIndexCopyWithImpl(this._value, this._then);
 
-  final SimpleStreamIndex _value;
   // ignore: unused_field
-  final $Res Function(SimpleStreamIndex) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? datatype = freezed,
+    Object? datatype = null,
     Object? format = freezed,
-    Object? path = freezed,
-    Object? products = freezed,
+    Object? path = null,
+    Object? products = null,
     Object? updated = freezed,
   }) {
     return _then(_value.copyWith(
-      datatype: datatype == freezed
+      datatype: null == datatype
           ? _value.datatype
           : datatype // ignore: cast_nullable_to_non_nullable
               as String,
-      format: format == freezed
+      format: freezed == format
           ? _value.format
           : format // ignore: cast_nullable_to_non_nullable
               as String?,
-      path: path == freezed
+      path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      products: products == freezed
+      products: null == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      updated: updated == freezed
+      updated: freezed == updated
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -285,6 +289,7 @@ abstract class _$$_SimpleStreamIndexCopyWith<$Res>
           $Res Function(_$_SimpleStreamIndex) then) =
       __$$_SimpleStreamIndexCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String datatype,
       String? format,
@@ -295,41 +300,39 @@ abstract class _$$_SimpleStreamIndexCopyWith<$Res>
 
 /// @nodoc
 class __$$_SimpleStreamIndexCopyWithImpl<$Res>
-    extends _$SimpleStreamIndexCopyWithImpl<$Res>
+    extends _$SimpleStreamIndexCopyWithImpl<$Res, _$_SimpleStreamIndex>
     implements _$$_SimpleStreamIndexCopyWith<$Res> {
   __$$_SimpleStreamIndexCopyWithImpl(
       _$_SimpleStreamIndex _value, $Res Function(_$_SimpleStreamIndex) _then)
-      : super(_value, (v) => _then(v as _$_SimpleStreamIndex));
+      : super(_value, _then);
 
-  @override
-  _$_SimpleStreamIndex get _value => super._value as _$_SimpleStreamIndex;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? datatype = freezed,
+    Object? datatype = null,
     Object? format = freezed,
-    Object? path = freezed,
-    Object? products = freezed,
+    Object? path = null,
+    Object? products = null,
     Object? updated = freezed,
   }) {
     return _then(_$_SimpleStreamIndex(
-      datatype: datatype == freezed
+      datatype: null == datatype
           ? _value.datatype
           : datatype // ignore: cast_nullable_to_non_nullable
               as String,
-      format: format == freezed
+      format: freezed == format
           ? _value.format
           : format // ignore: cast_nullable_to_non_nullable
               as String?,
-      path: path == freezed
+      path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      products: products == freezed
+      products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      updated: updated == freezed
+      updated: freezed == updated
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as DateTime?,
@@ -378,25 +381,22 @@ class _$_SimpleStreamIndex implements _SimpleStreamIndex {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SimpleStreamIndex &&
-            const DeepCollectionEquality().equals(other.datatype, datatype) &&
-            const DeepCollectionEquality().equals(other.format, format) &&
-            const DeepCollectionEquality().equals(other.path, path) &&
+            (identical(other.datatype, datatype) ||
+                other.datatype == datatype) &&
+            (identical(other.format, format) || other.format == format) &&
+            (identical(other.path, path) || other.path == path) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
-            const DeepCollectionEquality().equals(other.updated, updated));
+            (identical(other.updated, updated) || other.updated == updated));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(datatype),
-      const DeepCollectionEquality().hash(format),
-      const DeepCollectionEquality().hash(path),
-      const DeepCollectionEquality().hash(_products),
-      const DeepCollectionEquality().hash(updated));
+  int get hashCode => Object.hash(runtimeType, datatype, format, path,
+      const DeepCollectionEquality().hash(_products), updated);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SimpleStreamIndexCopyWith<_$_SimpleStreamIndex> get copyWith =>
       __$$_SimpleStreamIndexCopyWithImpl<_$_SimpleStreamIndex>(
           this, _$identity);

@@ -35,7 +35,8 @@ mixin _$LxdRemote {
 /// @nodoc
 abstract class $LxdRemoteCopyWith<$Res> {
   factory $LxdRemoteCopyWith(LxdRemote value, $Res Function(LxdRemote) then) =
-      _$LxdRemoteCopyWithImpl<$Res>;
+      _$LxdRemoteCopyWithImpl<$Res, LxdRemote>;
+  @useResult
   $Res call(
       {String name,
       String address,
@@ -45,43 +46,46 @@ abstract class $LxdRemoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdRemoteCopyWithImpl<$Res> implements $LxdRemoteCopyWith<$Res> {
+class _$LxdRemoteCopyWithImpl<$Res, $Val extends LxdRemote>
+    implements $LxdRemoteCopyWith<$Res> {
   _$LxdRemoteCopyWithImpl(this._value, this._then);
 
-  final LxdRemote _value;
   // ignore: unused_field
-  final $Res Function(LxdRemote) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? address = freezed,
-    Object? isStatic = freezed,
-    Object? isPublic = freezed,
+    Object? name = null,
+    Object? address = null,
+    Object? isStatic = null,
+    Object? isPublic = null,
     Object? protocol = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      isStatic: isStatic == freezed
+      isStatic: null == isStatic
           ? _value.isStatic
           : isStatic // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      isPublic: isPublic == freezed
+      isPublic: null == isPublic
           ? _value.isPublic
           : isPublic // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      protocol: protocol == freezed
+      protocol: freezed == protocol
           ? _value.protocol
           : protocol // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -91,6 +95,7 @@ abstract class _$$_LxdRemoteCopyWith<$Res> implements $LxdRemoteCopyWith<$Res> {
           _$_LxdRemote value, $Res Function(_$_LxdRemote) then) =
       __$$_LxdRemoteCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String name,
       String address,
@@ -100,35 +105,34 @@ abstract class _$$_LxdRemoteCopyWith<$Res> implements $LxdRemoteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LxdRemoteCopyWithImpl<$Res> extends _$LxdRemoteCopyWithImpl<$Res>
+class __$$_LxdRemoteCopyWithImpl<$Res>
+    extends _$LxdRemoteCopyWithImpl<$Res, _$_LxdRemote>
     implements _$$_LxdRemoteCopyWith<$Res> {
   __$$_LxdRemoteCopyWithImpl(
       _$_LxdRemote _value, $Res Function(_$_LxdRemote) _then)
-      : super(_value, (v) => _then(v as _$_LxdRemote));
+      : super(_value, _then);
 
-  @override
-  _$_LxdRemote get _value => super._value as _$_LxdRemote;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? address = freezed,
-    Object? isStatic = freezed,
-    Object? isPublic = freezed,
+    Object? name = null,
+    Object? address = null,
+    Object? isStatic = null,
+    Object? isPublic = null,
     Object? protocol = freezed,
   }) {
     return _then(_$_LxdRemote(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      isStatic: isStatic == freezed ? _value.isStatic : isStatic,
-      isPublic: isPublic == freezed ? _value.isPublic : isPublic,
-      protocol: protocol == freezed
+      isStatic: null == isStatic ? _value.isStatic : isStatic,
+      isPublic: null == isPublic ? _value.isPublic : isPublic,
+      protocol: freezed == protocol
           ? _value.protocol
           : protocol // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -173,25 +177,27 @@ class _$_LxdRemote extends _LxdRemote {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdRemote &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.address, address) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.address, address) || other.address == address) &&
             const DeepCollectionEquality().equals(other.isStatic, isStatic) &&
             const DeepCollectionEquality().equals(other.isPublic, isPublic) &&
-            const DeepCollectionEquality().equals(other.protocol, protocol));
+            (identical(other.protocol, protocol) ||
+                other.protocol == protocol));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(address),
+      name,
+      address,
       const DeepCollectionEquality().hash(isStatic),
       const DeepCollectionEquality().hash(isPublic),
-      const DeepCollectionEquality().hash(protocol));
+      protocol);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdRemoteCopyWith<_$_LxdRemote> get copyWith =>
       __$$_LxdRemoteCopyWithImpl<_$_LxdRemote>(this, _$identity);
 

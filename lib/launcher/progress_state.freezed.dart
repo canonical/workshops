@@ -31,15 +31,15 @@ mixin _$ProgressState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,15 +71,15 @@ mixin _$ProgressState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -102,17 +102,18 @@ mixin _$ProgressState {
 abstract class $ProgressStateCopyWith<$Res> {
   factory $ProgressStateCopyWith(
           ProgressState value, $Res Function(ProgressState) then) =
-      _$ProgressStateCopyWithImpl<$Res>;
+      _$ProgressStateCopyWithImpl<$Res, ProgressState>;
 }
 
 /// @nodoc
-class _$ProgressStateCopyWithImpl<$Res>
+class _$ProgressStateCopyWithImpl<$Res, $Val extends ProgressState>
     implements $ProgressStateCopyWith<$Res> {
   _$ProgressStateCopyWithImpl(this._value, this._then);
 
-  final ProgressState _value;
   // ignore: unused_field
-  final $Res Function(ProgressState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -124,14 +125,11 @@ abstract class _$$ProgressNoneCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressNoneCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressNone>
     implements _$$ProgressNoneCopyWith<$Res> {
   __$$ProgressNoneCopyWithImpl(
       _$ProgressNone _value, $Res Function(_$ProgressNone) _then)
-      : super(_value, (v) => _then(v as _$ProgressNone));
-
-  @override
-  _$ProgressNone get _value => super._value as _$ProgressNone;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -172,15 +170,15 @@ class _$ProgressNone extends ProgressNone {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) {
     return none?.call();
   }
@@ -224,15 +222,15 @@ class _$ProgressNone extends ProgressNone {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) {
     return none?.call(this);
   }
@@ -268,26 +266,25 @@ abstract class _$$ProgressErrorCopyWith<$Res> {
   factory _$$ProgressErrorCopyWith(
           _$ProgressError value, $Res Function(_$ProgressError) then) =
       __$$ProgressErrorCopyWithImpl<$Res>;
+  @useResult
   $Res call({String? message});
 }
 
 /// @nodoc
 class __$$ProgressErrorCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressError>
     implements _$$ProgressErrorCopyWith<$Res> {
   __$$ProgressErrorCopyWithImpl(
       _$ProgressError _value, $Res Function(_$ProgressError) _then)
-      : super(_value, (v) => _then(v as _$ProgressError));
+      : super(_value, _then);
 
-  @override
-  _$ProgressError get _value => super._value as _$ProgressError;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = freezed,
   }) {
     return _then(_$ProgressError(
-      message == freezed
+      freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -313,15 +310,15 @@ class _$ProgressError extends ProgressError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProgressError &&
-            const DeepCollectionEquality().equals(other.message, message));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProgressErrorCopyWith<_$ProgressError> get copyWith =>
       __$$ProgressErrorCopyWithImpl<_$ProgressError>(this, _$identity);
 
@@ -344,15 +341,15 @@ class _$ProgressError extends ProgressError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) {
     return error?.call(message);
   }
@@ -396,15 +393,15 @@ class _$ProgressError extends ProgressError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) {
     return error?.call(this);
   }
@@ -445,6 +442,7 @@ abstract class _$$ProgressCreateCopyWith<$Res> {
   factory _$$ProgressCreateCopyWith(
           _$ProgressCreate value, $Res Function(_$ProgressCreate) then) =
       __$$ProgressCreateCopyWithImpl<$Res>;
+  @useResult
   $Res call({String name, LxdOperation op});
 
   $LxdOperationCopyWith<$Res> get op;
@@ -452,26 +450,24 @@ abstract class _$$ProgressCreateCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressCreateCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressCreate>
     implements _$$ProgressCreateCopyWith<$Res> {
   __$$ProgressCreateCopyWithImpl(
       _$ProgressCreate _value, $Res Function(_$ProgressCreate) _then)
-      : super(_value, (v) => _then(v as _$ProgressCreate));
+      : super(_value, _then);
 
-  @override
-  _$ProgressCreate get _value => super._value as _$ProgressCreate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? op = freezed,
+    Object? name = null,
+    Object? op = null,
   }) {
     return _then(_$ProgressCreate(
-      name == freezed
+      null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      op == freezed
+      null == op
           ? _value.op
           : op // ignore: cast_nullable_to_non_nullable
               as LxdOperation,
@@ -479,6 +475,7 @@ class __$$ProgressCreateCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdOperationCopyWith<$Res> get op {
     return $LxdOperationCopyWith<$Res>(_value.op, (value) {
       return _then(_value.copyWith(op: value));
@@ -506,18 +503,16 @@ class _$ProgressCreate extends ProgressCreate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProgressCreate &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.op, op));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.op, op) || other.op == op));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(op));
+  int get hashCode => Object.hash(runtimeType, name, op);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProgressCreateCopyWith<_$ProgressCreate> get copyWith =>
       __$$ProgressCreateCopyWithImpl<_$ProgressCreate>(this, _$identity);
 
@@ -540,15 +535,15 @@ class _$ProgressCreate extends ProgressCreate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) {
     return create?.call(name, op);
   }
@@ -592,15 +587,15 @@ class _$ProgressCreate extends ProgressCreate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) {
     return create?.call(this);
   }
@@ -643,6 +638,7 @@ abstract class _$$ProgressInitCopyWith<$Res> {
   factory _$$ProgressInitCopyWith(
           _$ProgressInit value, $Res Function(_$ProgressInit) then) =
       __$$ProgressInitCopyWithImpl<$Res>;
+  @useResult
   $Res call({LxdInstance instance, LxdFeature feature});
 
   $LxdInstanceCopyWith<$Res> get instance;
@@ -650,26 +646,24 @@ abstract class _$$ProgressInitCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressInitCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressInit>
     implements _$$ProgressInitCopyWith<$Res> {
   __$$ProgressInitCopyWithImpl(
       _$ProgressInit _value, $Res Function(_$ProgressInit) _then)
-      : super(_value, (v) => _then(v as _$ProgressInit));
+      : super(_value, _then);
 
-  @override
-  _$ProgressInit get _value => super._value as _$ProgressInit;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? instance = freezed,
-    Object? feature = freezed,
+    Object? instance = null,
+    Object? feature = null,
   }) {
     return _then(_$ProgressInit(
-      instance == freezed
+      null == instance
           ? _value.instance
           : instance // ignore: cast_nullable_to_non_nullable
               as LxdInstance,
-      feature == freezed
+      null == feature
           ? _value.feature
           : feature // ignore: cast_nullable_to_non_nullable
               as LxdFeature,
@@ -677,6 +671,7 @@ class __$$ProgressInitCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdInstanceCopyWith<$Res> get instance {
     return $LxdInstanceCopyWith<$Res>(_value.instance, (value) {
       return _then(_value.copyWith(instance: value));
@@ -704,18 +699,17 @@ class _$ProgressInit extends ProgressInit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProgressInit &&
-            const DeepCollectionEquality().equals(other.instance, instance) &&
-            const DeepCollectionEquality().equals(other.feature, feature));
+            (identical(other.instance, instance) ||
+                other.instance == instance) &&
+            (identical(other.feature, feature) || other.feature == feature));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(instance),
-      const DeepCollectionEquality().hash(feature));
+  int get hashCode => Object.hash(runtimeType, instance, feature);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProgressInitCopyWith<_$ProgressInit> get copyWith =>
       __$$ProgressInitCopyWithImpl<_$ProgressInit>(this, _$identity);
 
@@ -738,15 +732,15 @@ class _$ProgressInit extends ProgressInit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) {
     return init?.call(instance, feature);
   }
@@ -790,15 +784,15 @@ class _$ProgressInit extends ProgressInit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) {
     return init?.call(this);
   }
@@ -841,6 +835,7 @@ abstract class _$$ProgressConfigCopyWith<$Res> {
   factory _$$ProgressConfigCopyWith(
           _$ProgressConfig value, $Res Function(_$ProgressConfig) then) =
       __$$ProgressConfigCopyWithImpl<$Res>;
+  @useResult
   $Res call({LxdInstance instance, LxdFeature feature});
 
   $LxdInstanceCopyWith<$Res> get instance;
@@ -848,26 +843,24 @@ abstract class _$$ProgressConfigCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressConfigCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressConfig>
     implements _$$ProgressConfigCopyWith<$Res> {
   __$$ProgressConfigCopyWithImpl(
       _$ProgressConfig _value, $Res Function(_$ProgressConfig) _then)
-      : super(_value, (v) => _then(v as _$ProgressConfig));
+      : super(_value, _then);
 
-  @override
-  _$ProgressConfig get _value => super._value as _$ProgressConfig;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? instance = freezed,
-    Object? feature = freezed,
+    Object? instance = null,
+    Object? feature = null,
   }) {
     return _then(_$ProgressConfig(
-      instance == freezed
+      null == instance
           ? _value.instance
           : instance // ignore: cast_nullable_to_non_nullable
               as LxdInstance,
-      feature == freezed
+      null == feature
           ? _value.feature
           : feature // ignore: cast_nullable_to_non_nullable
               as LxdFeature,
@@ -875,6 +868,7 @@ class __$$ProgressConfigCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdInstanceCopyWith<$Res> get instance {
     return $LxdInstanceCopyWith<$Res>(_value.instance, (value) {
       return _then(_value.copyWith(instance: value));
@@ -902,18 +896,17 @@ class _$ProgressConfig extends ProgressConfig {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProgressConfig &&
-            const DeepCollectionEquality().equals(other.instance, instance) &&
-            const DeepCollectionEquality().equals(other.feature, feature));
+            (identical(other.instance, instance) ||
+                other.instance == instance) &&
+            (identical(other.feature, feature) || other.feature == feature));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(instance),
-      const DeepCollectionEquality().hash(feature));
+  int get hashCode => Object.hash(runtimeType, instance, feature);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProgressConfigCopyWith<_$ProgressConfig> get copyWith =>
       __$$ProgressConfigCopyWithImpl<_$ProgressConfig>(this, _$identity);
 
@@ -936,15 +929,15 @@ class _$ProgressConfig extends ProgressConfig {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) {
     return config?.call(instance, feature);
   }
@@ -988,15 +981,15 @@ class _$ProgressConfig extends ProgressConfig {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) {
     return config?.call(this);
   }
@@ -1039,6 +1032,7 @@ abstract class _$$ProgressStageCopyWith<$Res> {
   factory _$$ProgressStageCopyWith(
           _$ProgressStage value, $Res Function(_$ProgressStage) then) =
       __$$ProgressStageCopyWithImpl<$Res>;
+  @useResult
   $Res call({LxdInstance instance, LxdOperation op});
 
   $LxdInstanceCopyWith<$Res> get instance;
@@ -1047,26 +1041,24 @@ abstract class _$$ProgressStageCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressStageCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressStage>
     implements _$$ProgressStageCopyWith<$Res> {
   __$$ProgressStageCopyWithImpl(
       _$ProgressStage _value, $Res Function(_$ProgressStage) _then)
-      : super(_value, (v) => _then(v as _$ProgressStage));
+      : super(_value, _then);
 
-  @override
-  _$ProgressStage get _value => super._value as _$ProgressStage;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? instance = freezed,
-    Object? op = freezed,
+    Object? instance = null,
+    Object? op = null,
   }) {
     return _then(_$ProgressStage(
-      instance == freezed
+      null == instance
           ? _value.instance
           : instance // ignore: cast_nullable_to_non_nullable
               as LxdInstance,
-      op == freezed
+      null == op
           ? _value.op
           : op // ignore: cast_nullable_to_non_nullable
               as LxdOperation,
@@ -1074,6 +1066,7 @@ class __$$ProgressStageCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdInstanceCopyWith<$Res> get instance {
     return $LxdInstanceCopyWith<$Res>(_value.instance, (value) {
       return _then(_value.copyWith(instance: value));
@@ -1081,6 +1074,7 @@ class __$$ProgressStageCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdOperationCopyWith<$Res> get op {
     return $LxdOperationCopyWith<$Res>(_value.op, (value) {
       return _then(_value.copyWith(op: value));
@@ -1108,18 +1102,17 @@ class _$ProgressStage extends ProgressStage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProgressStage &&
-            const DeepCollectionEquality().equals(other.instance, instance) &&
-            const DeepCollectionEquality().equals(other.op, op));
+            (identical(other.instance, instance) ||
+                other.instance == instance) &&
+            (identical(other.op, op) || other.op == op));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(instance),
-      const DeepCollectionEquality().hash(op));
+  int get hashCode => Object.hash(runtimeType, instance, op);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProgressStageCopyWith<_$ProgressStage> get copyWith =>
       __$$ProgressStageCopyWithImpl<_$ProgressStage>(this, _$identity);
 
@@ -1142,15 +1135,15 @@ class _$ProgressStage extends ProgressStage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) {
     return stage?.call(instance, op);
   }
@@ -1194,15 +1187,15 @@ class _$ProgressStage extends ProgressStage {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) {
     return stage?.call(this);
   }
@@ -1245,6 +1238,7 @@ abstract class _$$ProgressStartCopyWith<$Res> {
   factory _$$ProgressStartCopyWith(
           _$ProgressStart value, $Res Function(_$ProgressStart) then) =
       __$$ProgressStartCopyWithImpl<$Res>;
+  @useResult
   $Res call({LxdInstance instance, LxdOperation op});
 
   $LxdInstanceCopyWith<$Res> get instance;
@@ -1253,26 +1247,24 @@ abstract class _$$ProgressStartCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressStartCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressStart>
     implements _$$ProgressStartCopyWith<$Res> {
   __$$ProgressStartCopyWithImpl(
       _$ProgressStart _value, $Res Function(_$ProgressStart) _then)
-      : super(_value, (v) => _then(v as _$ProgressStart));
+      : super(_value, _then);
 
-  @override
-  _$ProgressStart get _value => super._value as _$ProgressStart;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? instance = freezed,
-    Object? op = freezed,
+    Object? instance = null,
+    Object? op = null,
   }) {
     return _then(_$ProgressStart(
-      instance == freezed
+      null == instance
           ? _value.instance
           : instance // ignore: cast_nullable_to_non_nullable
               as LxdInstance,
-      op == freezed
+      null == op
           ? _value.op
           : op // ignore: cast_nullable_to_non_nullable
               as LxdOperation,
@@ -1280,6 +1272,7 @@ class __$$ProgressStartCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdInstanceCopyWith<$Res> get instance {
     return $LxdInstanceCopyWith<$Res>(_value.instance, (value) {
       return _then(_value.copyWith(instance: value));
@@ -1287,6 +1280,7 @@ class __$$ProgressStartCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdOperationCopyWith<$Res> get op {
     return $LxdOperationCopyWith<$Res>(_value.op, (value) {
       return _then(_value.copyWith(op: value));
@@ -1314,18 +1308,17 @@ class _$ProgressStart extends ProgressStart {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProgressStart &&
-            const DeepCollectionEquality().equals(other.instance, instance) &&
-            const DeepCollectionEquality().equals(other.op, op));
+            (identical(other.instance, instance) ||
+                other.instance == instance) &&
+            (identical(other.op, op) || other.op == op));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(instance),
-      const DeepCollectionEquality().hash(op));
+  int get hashCode => Object.hash(runtimeType, instance, op);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProgressStartCopyWith<_$ProgressStart> get copyWith =>
       __$$ProgressStartCopyWithImpl<_$ProgressStart>(this, _$identity);
 
@@ -1348,15 +1341,15 @@ class _$ProgressStart extends ProgressStart {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) {
     return start?.call(instance, op);
   }
@@ -1400,15 +1393,15 @@ class _$ProgressStart extends ProgressStart {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) {
     return start?.call(this);
   }
@@ -1451,6 +1444,7 @@ abstract class _$$ProgressStopCopyWith<$Res> {
   factory _$$ProgressStopCopyWith(
           _$ProgressStop value, $Res Function(_$ProgressStop) then) =
       __$$ProgressStopCopyWithImpl<$Res>;
+  @useResult
   $Res call({LxdInstance instance, LxdOperation op});
 
   $LxdInstanceCopyWith<$Res> get instance;
@@ -1459,26 +1453,24 @@ abstract class _$$ProgressStopCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressStopCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressStop>
     implements _$$ProgressStopCopyWith<$Res> {
   __$$ProgressStopCopyWithImpl(
       _$ProgressStop _value, $Res Function(_$ProgressStop) _then)
-      : super(_value, (v) => _then(v as _$ProgressStop));
+      : super(_value, _then);
 
-  @override
-  _$ProgressStop get _value => super._value as _$ProgressStop;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? instance = freezed,
-    Object? op = freezed,
+    Object? instance = null,
+    Object? op = null,
   }) {
     return _then(_$ProgressStop(
-      instance == freezed
+      null == instance
           ? _value.instance
           : instance // ignore: cast_nullable_to_non_nullable
               as LxdInstance,
-      op == freezed
+      null == op
           ? _value.op
           : op // ignore: cast_nullable_to_non_nullable
               as LxdOperation,
@@ -1486,6 +1478,7 @@ class __$$ProgressStopCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdInstanceCopyWith<$Res> get instance {
     return $LxdInstanceCopyWith<$Res>(_value.instance, (value) {
       return _then(_value.copyWith(instance: value));
@@ -1493,6 +1486,7 @@ class __$$ProgressStopCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdOperationCopyWith<$Res> get op {
     return $LxdOperationCopyWith<$Res>(_value.op, (value) {
       return _then(_value.copyWith(op: value));
@@ -1520,18 +1514,17 @@ class _$ProgressStop extends ProgressStop {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProgressStop &&
-            const DeepCollectionEquality().equals(other.instance, instance) &&
-            const DeepCollectionEquality().equals(other.op, op));
+            (identical(other.instance, instance) ||
+                other.instance == instance) &&
+            (identical(other.op, op) || other.op == op));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(instance),
-      const DeepCollectionEquality().hash(op));
+  int get hashCode => Object.hash(runtimeType, instance, op);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProgressStopCopyWith<_$ProgressStop> get copyWith =>
       __$$ProgressStopCopyWithImpl<_$ProgressStop>(this, _$identity);
 
@@ -1554,15 +1547,15 @@ class _$ProgressStop extends ProgressStop {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) {
     return stop?.call(instance, op);
   }
@@ -1606,15 +1599,15 @@ class _$ProgressStop extends ProgressStop {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) {
     return stop?.call(this);
   }
@@ -1657,6 +1650,7 @@ abstract class _$$ProgressDeleteCopyWith<$Res> {
   factory _$$ProgressDeleteCopyWith(
           _$ProgressDelete value, $Res Function(_$ProgressDelete) then) =
       __$$ProgressDeleteCopyWithImpl<$Res>;
+  @useResult
   $Res call({LxdInstance instance, LxdOperation op});
 
   $LxdInstanceCopyWith<$Res> get instance;
@@ -1665,26 +1659,24 @@ abstract class _$$ProgressDeleteCopyWith<$Res> {
 
 /// @nodoc
 class __$$ProgressDeleteCopyWithImpl<$Res>
-    extends _$ProgressStateCopyWithImpl<$Res>
+    extends _$ProgressStateCopyWithImpl<$Res, _$ProgressDelete>
     implements _$$ProgressDeleteCopyWith<$Res> {
   __$$ProgressDeleteCopyWithImpl(
       _$ProgressDelete _value, $Res Function(_$ProgressDelete) _then)
-      : super(_value, (v) => _then(v as _$ProgressDelete));
+      : super(_value, _then);
 
-  @override
-  _$ProgressDelete get _value => super._value as _$ProgressDelete;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? instance = freezed,
-    Object? op = freezed,
+    Object? instance = null,
+    Object? op = null,
   }) {
     return _then(_$ProgressDelete(
-      instance == freezed
+      null == instance
           ? _value.instance
           : instance // ignore: cast_nullable_to_non_nullable
               as LxdInstance,
-      op == freezed
+      null == op
           ? _value.op
           : op // ignore: cast_nullable_to_non_nullable
               as LxdOperation,
@@ -1692,6 +1684,7 @@ class __$$ProgressDeleteCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdInstanceCopyWith<$Res> get instance {
     return $LxdInstanceCopyWith<$Res>(_value.instance, (value) {
       return _then(_value.copyWith(instance: value));
@@ -1699,6 +1692,7 @@ class __$$ProgressDeleteCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdOperationCopyWith<$Res> get op {
     return $LxdOperationCopyWith<$Res>(_value.op, (value) {
       return _then(_value.copyWith(op: value));
@@ -1726,18 +1720,17 @@ class _$ProgressDelete extends ProgressDelete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProgressDelete &&
-            const DeepCollectionEquality().equals(other.instance, instance) &&
-            const DeepCollectionEquality().equals(other.op, op));
+            (identical(other.instance, instance) ||
+                other.instance == instance) &&
+            (identical(other.op, op) || other.op == op));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(instance),
-      const DeepCollectionEquality().hash(op));
+  int get hashCode => Object.hash(runtimeType, instance, op);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ProgressDeleteCopyWith<_$ProgressDelete> get copyWith =>
       __$$ProgressDeleteCopyWithImpl<_$ProgressDelete>(this, _$identity);
 
@@ -1760,15 +1753,15 @@ class _$ProgressDelete extends ProgressDelete {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? none,
-    TResult Function(String? message)? error,
-    TResult Function(String name, LxdOperation op)? create,
-    TResult Function(LxdInstance instance, LxdFeature feature)? init,
-    TResult Function(LxdInstance instance, LxdFeature feature)? config,
-    TResult Function(LxdInstance instance, LxdOperation op)? stage,
-    TResult Function(LxdInstance instance, LxdOperation op)? start,
-    TResult Function(LxdInstance instance, LxdOperation op)? stop,
-    TResult Function(LxdInstance instance, LxdOperation op)? delete,
+    TResult? Function()? none,
+    TResult? Function(String? message)? error,
+    TResult? Function(String name, LxdOperation op)? create,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? init,
+    TResult? Function(LxdInstance instance, LxdFeature feature)? config,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stage,
+    TResult? Function(LxdInstance instance, LxdOperation op)? start,
+    TResult? Function(LxdInstance instance, LxdOperation op)? stop,
+    TResult? Function(LxdInstance instance, LxdOperation op)? delete,
   }) {
     return delete?.call(instance, op);
   }
@@ -1812,15 +1805,15 @@ class _$ProgressDelete extends ProgressDelete {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ProgressNone value)? none,
-    TResult Function(ProgressError value)? error,
-    TResult Function(ProgressCreate value)? create,
-    TResult Function(ProgressInit value)? init,
-    TResult Function(ProgressConfig value)? config,
-    TResult Function(ProgressStage value)? stage,
-    TResult Function(ProgressStart value)? start,
-    TResult Function(ProgressStop value)? stop,
-    TResult Function(ProgressDelete value)? delete,
+    TResult? Function(ProgressNone value)? none,
+    TResult? Function(ProgressError value)? error,
+    TResult? Function(ProgressCreate value)? create,
+    TResult? Function(ProgressInit value)? init,
+    TResult? Function(ProgressConfig value)? config,
+    TResult? Function(ProgressStage value)? stage,
+    TResult? Function(ProgressStart value)? start,
+    TResult? Function(ProgressStop value)? stop,
+    TResult? Function(ProgressDelete value)? delete,
   }) {
     return delete?.call(this);
   }
