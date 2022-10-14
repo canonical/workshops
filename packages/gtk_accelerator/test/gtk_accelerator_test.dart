@@ -30,6 +30,21 @@ void main() {
       isSingleActivator(LogicalKeyboardKey.keyX,
           control: true, shift: true, alt: true, meta: true),
     );
+
+    expect(
+      parseGtkAccelerator('<Control>Page_Up'),
+      isSingleActivator(LogicalKeyboardKey.pageUp, control: true),
+    );
+
+    expect(
+      parseGtkAccelerator('<Alt>5'),
+      isSingleActivator(LogicalKeyboardKey.digit5, alt: true),
+    );
+
+    expect(
+      parseGtkAccelerator('<Shift>KP_5'),
+      isSingleActivator(LogicalKeyboardKey.numpad5, shift: true),
+    );
   });
 
   test('format', () {
@@ -60,6 +75,24 @@ void main() {
       formatGtkAccelerator(const SingleActivator(LogicalKeyboardKey.keyX,
           control: true, shift: true, alt: true, meta: true)),
       '<Shift><Control><Alt><Meta>x',
+    );
+
+    expect(
+      formatGtkAccelerator(
+          const SingleActivator(LogicalKeyboardKey.pageUp, control: true)),
+      '<Control>Page_Up',
+    );
+
+    expect(
+      formatGtkAccelerator(
+          const SingleActivator(LogicalKeyboardKey.digit5, alt: true)),
+      '<Alt>5',
+    );
+
+    expect(
+      formatGtkAccelerator(
+          const SingleActivator(LogicalKeyboardKey.numpad5, shift: true)),
+      '<Shift>KP_5',
     );
   });
 }
