@@ -3,7 +3,6 @@ import 'package:xterm/xterm.dart' as xterm;
 
 import 'terminal_actions.dart';
 import 'terminal_intents.dart';
-import 'terminal_shortcuts.dart';
 import 'terminal_theme.dart';
 
 class TerminalView extends StatefulWidget {
@@ -15,6 +14,7 @@ class TerminalView extends StatefulWidget {
     this.focusNode,
     this.autofocus = false,
     this.onContextMenu,
+    this.shortcuts,
   });
 
   final xterm.Terminal terminal;
@@ -23,6 +23,7 @@ class TerminalView extends StatefulWidget {
   final FocusNode? focusNode;
   final bool autofocus;
   final void Function(Offset)? onContextMenu;
+  final Map<ShortcutActivator, Intent>? shortcuts;
 
   @override
   State<TerminalView> createState() => _TerminalViewState();
@@ -101,23 +102,7 @@ class _TerminalViewState extends State<TerminalView> {
           onSecondaryTapDown: (details, offset) {
             widget.onContextMenu?.call(details.globalPosition);
           },
-          shortcuts: const {
-            // edit
-            TerminalShortcuts.copy: TerminalIntents.copy,
-            TerminalShortcuts.paste: TerminalIntents.paste,
-            // scroll
-            TerminalShortcuts.scrollUp: TerminalIntents.scrollUp,
-            TerminalShortcuts.scrollDown: TerminalIntents.scrollDown,
-            TerminalShortcuts.scrollPageUp: TerminalIntents.scrollPageUp,
-            TerminalShortcuts.scrollPageDown: TerminalIntents.scrollPageDown,
-            TerminalShortcuts.scrollToTop: TerminalIntents.scrollToTop,
-            TerminalShortcuts.scrollToBottom: TerminalIntents.scrollToBottom,
-            // focus
-            TerminalShortcuts.moveFocusUp: TerminalIntents.moveFocusUp,
-            TerminalShortcuts.moveFocusDown: TerminalIntents.moveFocusDown,
-            TerminalShortcuts.moveFocusLeft: TerminalIntents.moveFocusLeft,
-            TerminalShortcuts.moveFocusRight: TerminalIntents.moveFocusRight,
-          },
+          shortcuts: widget.shortcuts,
           actions: {
             ScrollUpIntent: ScrollUpAction(_scrollController),
             ScrollDownIntent: ScrollDownAction(_scrollController),

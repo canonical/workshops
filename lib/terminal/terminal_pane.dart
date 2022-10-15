@@ -6,6 +6,7 @@ import 'package:terminal_view/terminal_view.dart';
 import '../tabs/tab_model.dart';
 import 'terminal_menu.dart';
 import 'terminal_model.dart';
+import 'terminal_shortcuts.dart';
 
 class TerminalPane extends StatelessWidget {
   const TerminalPane({
@@ -43,6 +44,7 @@ class TerminalPane extends StatelessWidget {
               ),
             );
           },
+          shortcuts: buildTerminalShortcuts(context),
         ),
         if (model.state == TerminalState.starting)
           const Center(child: CircularProgressIndicator())
