@@ -5,6 +5,7 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shortcut_store/shortcut_store.dart';
 import 'package:simplestreams/simplestreams.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -14,7 +15,6 @@ import 'instances/instance_store.dart';
 import 'launcher/local_image_model.dart';
 import 'launcher/remote_image_model.dart';
 import 'remotes/remote_store.dart';
-import 'settings/shortcut_settings.dart';
 
 Future<void> main() async {
   Logger.setup(level: LogLevel.fromString(kDebugMode ? 'debug' : 'info'));
