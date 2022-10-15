@@ -16,8 +16,6 @@ abstract class ShortcutSettings extends ChangeNotifier {
 class ShortcutGSettings extends ShortcutSettings {
   ShortcutGSettings(this._gsettings);
 
-  static const schemaId = 'com.canonical.workshops.shortcuts';
-
   final GSettings _gsettings;
   StreamSubscription? _sub;
   final _shortcuts = <String, SingleActivator?>{};

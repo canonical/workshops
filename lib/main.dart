@@ -77,7 +77,7 @@ Future<void> main() async {
         ChangeNotifierProvider<ShortcutSettings>(
           create: (_) {
             final gsettings =
-                createService<GSettings>(ShortcutGSettings.schemaId);
+                createService<GSettings>('com.canonical.workshops.shortcuts');
             return ShortcutGSettings(gsettings)..init();
           },
         ),
