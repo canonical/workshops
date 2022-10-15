@@ -15,17 +15,17 @@ class TabShortcuts extends StatelessWidget {
     final length = context.select<TabModel, int>((m) => m.length);
     final model = context.read<TabModel>();
 
-    final newTab = shortcuts.getShortcut('tab-new');
-    final closeTab = shortcuts.getShortcut('tab-close');
-    final previousTab = shortcuts.getShortcut('tab-previous');
-    final nextTab = shortcuts.getShortcut('tab-next');
-
     return CallbackShortcuts(
       bindings: {
-        if (newTab != null) newTab: model.newTab,
-        if (length > 1 && closeTab != null) closeTab: model.closeTab,
-        if (previousTab != null) previousTab: model.previousTab,
-        if (nextTab != null) nextTab: model.nextTab,
+        for (final shortcut in shortcuts.getShortcuts('tab-new'))
+          shortcut: model.newTab,
+        if (length > 1)
+          for (final shortcut in shortcuts.getShortcuts('tab-close'))
+            shortcut: model.closeTab,
+        for (final shortcut in shortcuts.getShortcuts('tab-next'))
+          shortcut: model.nextTab,
+        for (final shortcut in shortcuts.getShortcuts('tab-previous'))
+          shortcut: model.previousTab,
       },
       child: child,
     );

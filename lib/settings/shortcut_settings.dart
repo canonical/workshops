@@ -9,8 +9,11 @@ import 'package:gtk_accelerator/gtk_accelerator.dart';
 abstract class ShortcutSettings extends ChangeNotifier {
   Future<void> init();
 
-  SingleActivator? getShortcut(String id);
-  Future<void> setShortcut(String id, SingleActivator? shortcut);
+  List<SingleActivator> getShortcuts(String id);
+  Future<void> addShortcut(String id, SingleActivator shortcut);
+  Future<void> removeShortcut(String id, SingleActivator shortcut);
+  Future<void> setShortcuts(String id, List<SingleActivator> shortcuts);
+  Future<void> removeShortcuts(String id);
 }
 
 class ShortcutGSettings extends ShortcutSettings {
@@ -18,7 +21,7 @@ class ShortcutGSettings extends ShortcutSettings {
 
   final GSettings _gsettings;
   StreamSubscription? _sub;
-  final _shortcuts = <String, SingleActivator?>{};
+  final _shortcuts = <String, List<SingleActivator>>{};
 
   @override
   Future<void> init() async {
@@ -32,30 +35,45 @@ class ShortcutGSettings extends ShortcutSettings {
   }
 
   @override
-  SingleActivator? getShortcut(String id) {
-    return _shortcuts[id] ?? _updateShortcut(id);
+  List<SingleActivator> getShortcuts(String id) {
+    return _shortcuts[id] ?? _updateShortcuts(id);
   }
 
   @override
-  Future<void> setShortcut(String id, SingleActivator? shortcut) async {
-    final value = shortcut?.toDbusArray();
-    if (value != null) {
-      return _gsettings.set(id, value);
-    } else {
-      return _gsettings.unset(id);
-    }
+  Future<void> addShortcut(String id, SingleActivator shortcut) async {
+    final shortcuts = await _fetchShortcuts(id);
+    shortcuts.add(shortcut);
+    return setShortcuts(id, shortcuts);
   }
 
-  SingleActivator? _updateShortcut<T>(String id) {
-    SingleActivator? shortcut;
-    _gsettings.get(id).then((v) {
-      shortcut = (v as DBusArray?)?.toShortcut();
-      if (_shortcuts[id] != shortcut) {
-        _shortcuts[id] = shortcut;
+  @override
+  Future<void> removeShortcut(String id, SingleActivator shortcut) async {
+    final shortcuts = await _fetchShortcuts(id);
+    shortcuts.removeWhere((s) => s.equals(shortcut));
+    return setShortcuts(id, shortcuts);
+  }
+
+  @override
+  Future<void> setShortcuts(String id, List<SingleActivator> shortcuts) async {
+    return _gsettings.set(id, shortcuts.toDbusArray());
+  }
+
+  @override
+  Future<void> removeShortcuts(String id) => _gsettings.unset(id);
+
+  Future<List<SingleActivator>> _fetchShortcuts(String id) async {
+    final value = await _gsettings.get(id) as DBusArray;
+    return value.toSingleActivators();
+  }
+
+  List<SingleActivator> _updateShortcuts<T>(String id) {
+    _fetchShortcuts(id).then((value) {
+      if (!_SingleActivatorEquality.listEquals(_shortcuts[id], value)) {
+        _shortcuts[id] = value;
         notifyListeners();
       }
     });
-    return shortcut;
+    return <SingleActivator>[];
   }
 
   @override
@@ -67,16 +85,46 @@ class ShortcutGSettings extends ShortcutSettings {
 }
 
 extension _DBusArrayX on DBusArray {
-  SingleActivator? toShortcut() {
+  List<SingleActivator> toSingleActivators() {
     return children
         .map((k) => parseGtkAccelerator(k.asString()))
         .whereNotNull()
-        .firstOrNull;
+        .toList();
+  }
+}
+
+extension _SingleActivatorListX on List<SingleActivator> {
+  DBusArray toDbusArray() {
+    return DBusArray.string(map(formatGtkAccelerator).toList());
   }
 }
 
 extension _SingleActivatorX on SingleActivator {
-  DBusArray? toDbusArray() {
-    return DBusArray.string([formatGtkAccelerator(this)]);
+  bool equals(SingleActivator other) {
+    return other.trigger == trigger &&
+        other.alt == alt &&
+        other.control == control &&
+        other.meta == meta &&
+        other.shift == shift;
+  }
+}
+
+class _SingleActivatorEquality implements Equality<SingleActivator> {
+  const _SingleActivatorEquality();
+
+  static final listEquals =
+      const ListEquality<SingleActivator>(_SingleActivatorEquality()).equals;
+
+  @override
+  bool isValidKey(Object? o) => o is SingleActivator;
+
+  @override
+  bool equals(SingleActivator e1, SingleActivator e2) {
+    return identical(e1, e2) || e1.equals(e2);
+  }
+
+  @override
+  int hash(SingleActivator e) {
+    return Object.hash(e.trigger, e.alt, e.control, e.meta, e.shift);
   }
 }
