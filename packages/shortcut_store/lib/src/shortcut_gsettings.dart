@@ -17,7 +17,7 @@ class ShortcutGSettings extends ShortcutSettings {
 
   @override
   Future<void> init() async {
-    _sub = _gsettings.keysChanged.listen((keys) {
+    _sub ??= _gsettings.keysChanged.listen((keys) {
       var wasRemoved = false;
       for (final key in keys) {
         wasRemoved |= _shortcuts.remove(key) != null;
