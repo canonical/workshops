@@ -11,6 +11,7 @@ class ShortcutStore extends StatefulWidget {
   static ShortcutSettings of(BuildContext context) {
     final store =
         context.dependOnInheritedWidgetOfExactType<_InheritedShortcutStore>();
+    assert(store != null, 'ShortcutStore not found in context');
     return store!.settings;
   }
 
