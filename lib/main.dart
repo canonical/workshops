@@ -37,6 +37,10 @@ Future<void> main() async {
     (schemaId) => GSettings(schemaId as String),
   );
 
+  final shortcuts =
+      ShortcutGSettings(GSettings('com.canonical.workshops.shortcuts'));
+  registerServiceInstance<ShortcutSettings>(shortcuts);
+
   runApp(
     MultiProvider(
       providers: [
@@ -72,13 +76,6 @@ Future<void> main() async {
               model.init(client);
             }
             return model;
-          },
-        ),
-        ChangeNotifierProvider<ShortcutSettings>(
-          create: (_) {
-            final gsettings =
-                createService<GSettings>('com.canonical.workshops.shortcuts');
-            return ShortcutGSettings(gsettings)..init();
           },
         ),
       ],
