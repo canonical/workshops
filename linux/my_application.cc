@@ -99,7 +99,6 @@ static void my_application_class_init(MyApplicationClass* klass) {
 }
 
 static void my_application_init(MyApplication* self) {
-#ifndef NDEBUG
   g_autofree gchar* exe_path = g_file_read_link("/proc/self/exe", nullptr);
   g_autofree gchar* exe_dir = g_path_get_dirname(exe_path);
   g_autofree gchar* data_dir = g_build_filename(exe_dir, "data", nullptr);
@@ -107,7 +106,6 @@ static void my_application_init(MyApplication* self) {
       g_strdup_printf("%s%s%s", g_getenv("GSETTINGS_SCHEMA_DIR"),
                       G_SEARCHPATH_SEPARATOR_S, data_dir);
   g_setenv("GSETTINGS_SCHEMA_DIR", schema_dir, TRUE);
-#endif
 }
 
 MyApplication* my_application_new() {
