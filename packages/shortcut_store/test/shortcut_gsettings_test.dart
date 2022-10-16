@@ -27,73 +27,73 @@ void main() {
     return mock;
   }
 
-  test('get one shortcut', () async {
+  test('get one', () async {
     final gsettings = mockGSettings(shortcuts: {
       'foo': ['<Control>f']
     });
 
     final shortcuts = ShortcutGSettings(gsettings);
-    expect(shortcuts.getShortcuts('foo'), isEmpty);
+    expect(shortcuts.get('foo'), isEmpty);
 
     await shortcuts.load();
-    expect(shortcuts.getShortcuts('foo'), [
+    expect(shortcuts.get('foo'), [
       isSingleActivator(LogicalKeyboardKey.keyF, control: true),
     ]);
   });
 
-  test('get multiple shortcuts', () async {
+  test('get multiple', () async {
     final gsettings = mockGSettings(shortcuts: {
       'foo': ['<Control>f', '<Alt><Shift>g']
     });
 
     final shortcuts = ShortcutGSettings(gsettings);
-    expect(shortcuts.getShortcuts('foo'), isEmpty);
+    expect(shortcuts.get('foo'), isEmpty);
 
     await shortcuts.load();
-    expect(shortcuts.getShortcuts('foo'), [
+    expect(shortcuts.get('foo'), [
       isSingleActivator(LogicalKeyboardKey.keyF, control: true),
       isSingleActivator(LogicalKeyboardKey.keyG, alt: true, shift: true),
     ]);
   });
 
-  test('set shortcuts', () async {
+  test('set', () async {
     final gsettings = mockGSettings();
     final shortcuts = ShortcutGSettings(gsettings);
 
-    await shortcuts.setShortcuts('foo', []);
+    await shortcuts.set('foo', []);
     verify(gsettings.set('foo', DBusArray.string([])));
 
-    await shortcuts.setShortcuts(
+    await shortcuts.set(
         'bar', [const SingleActivator(LogicalKeyboardKey.keyB, control: true)]);
     verify(gsettings.set('bar', DBusArray.string(['<Control>b'])));
 
-    await shortcuts.setShortcuts('baz', [
+    await shortcuts.set('baz', [
       const SingleActivator(LogicalKeyboardKey.keyB, control: true),
       const SingleActivator(LogicalKeyboardKey.keyC, meta: true),
     ]);
     verify(gsettings.set('baz', DBusArray.string(['<Control>b', '<Meta>c'])));
   });
 
-  test('remove shortcuts', () async {
+  test('unset', () async {
     final gsettings = mockGSettings();
     final shortcuts = ShortcutGSettings(gsettings);
 
-    await shortcuts.removeShortcuts('foo');
+    await shortcuts.unset('foo');
     verify(gsettings.unset('foo'));
   });
 
-  test('add first shortcut', () async {
+  test('add first', () async {
     final gsettings = mockGSettings(shortcuts: {'foo': []});
 
     final shortcuts = ShortcutGSettings(gsettings);
     await shortcuts.load();
 
-    await shortcuts.addShortcut(
+    await shortcuts.add(
         'foo', const SingleActivator(LogicalKeyboardKey.keyB, control: true));
     verify(gsettings.set('foo', DBusArray.string(['<Control>b'])));
   });
 
-  test('add second shortcut', () async {
+  test('add second', () async {
     final gsettings = mockGSettings(shortcuts: {
       'foo': ['<Control>b']
     });
@@ -101,12 +101,12 @@ void main() {
     final shortcuts = ShortcutGSettings(gsettings);
     await shortcuts.load();
 
-    await shortcuts.addShortcut(
+    await shortcuts.add(
         'foo', const SingleActivator(LogicalKeyboardKey.keyC, meta: true));
     verify(gsettings.set('foo', DBusArray.string(['<Control>b', '<Meta>c'])));
   });
 
-  test('remove first shortcut', () async {
+  test('remove first', () async {
     final gsettings = mockGSettings(shortcuts: {
       'foo': ['<Control>b', '<Meta>c']
     });
@@ -115,12 +115,12 @@ void main() {
 
     await shortcuts.load();
 
-    await shortcuts.removeShortcut(
+    await shortcuts.remove(
         'foo', const SingleActivator(LogicalKeyboardKey.keyB, control: true));
     verify(gsettings.set('foo', DBusArray.string(['<Meta>c'])));
   });
 
-  test('remove last shortcut', () async {
+  test('remove last', () async {
     final gsettings = mockGSettings(shortcuts: {
       'foo': ['<Meta>c']
     });
@@ -129,12 +129,12 @@ void main() {
 
     await shortcuts.load();
 
-    await shortcuts.removeShortcut(
+    await shortcuts.remove(
         'foo', const SingleActivator(LogicalKeyboardKey.keyC, meta: true));
     verify(gsettings.set('foo', DBusArray.string([])));
   });
 
-  test('shortcut change', () async {
+  test('change', () async {
     final keysChanged = StreamController<List<String>>(sync: true);
 
     final gsettings = mockGSettings(shortcuts: {
@@ -149,7 +149,7 @@ void main() {
     await shortcuts.load();
 
     expect(wasNotified, 1);
-    expect(shortcuts.getShortcuts('foo'), [
+    expect(shortcuts.get('foo'), [
       isSingleActivator(LogicalKeyboardKey.keyC, control: true),
     ]);
 
@@ -159,7 +159,7 @@ void main() {
     final completer = Completer<List<SingleActivator>>();
     shortcuts.addListener(() {
       if (!completer.isCompleted) {
-        completer.complete(shortcuts.getShortcuts('foo'));
+        completer.complete(shortcuts.get('foo'));
       }
     });
 

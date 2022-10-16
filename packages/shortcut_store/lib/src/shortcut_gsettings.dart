@@ -23,38 +23,44 @@ class ShortcutGSettings extends ShortcutSettings {
       }
       notifyListeners();
     });
+
+    var wasChanged = false;
     for (final id in await _gsettings.list()) {
-      _shortcuts[id] = await _fetchShortcuts(id);
+      final shortcuts = await _fetchShortcuts(id);
+      if (!_SingleActivatorEquality.listEquals(_shortcuts[id], shortcuts)) {
+        _shortcuts[id] = shortcuts;
+        wasChanged = true;
+      }
     }
-    if (_shortcuts.isNotEmpty) notifyListeners();
+    if (wasChanged) notifyListeners();
   }
 
   @override
-  List<SingleActivator> getShortcuts(String id) {
+  List<SingleActivator> get(String id) {
     return List.of(_shortcuts[id] ?? []);
   }
 
   @override
-  Future<void> addShortcut(String id, SingleActivator shortcut) {
-    final shortcuts = getShortcuts(id);
+  Future<void> add(String id, SingleActivator shortcut) {
+    final shortcuts = get(id);
     shortcuts.add(shortcut);
-    return setShortcuts(id, shortcuts);
+    return set(id, shortcuts);
   }
 
   @override
-  Future<void> removeShortcut(String id, SingleActivator shortcut) {
-    final shortcuts = getShortcuts(id);
+  Future<void> remove(String id, SingleActivator shortcut) {
+    final shortcuts = get(id);
     shortcuts.removeWhere((s) => s.equals(shortcut));
-    return setShortcuts(id, shortcuts);
+    return set(id, shortcuts);
   }
 
   @override
-  Future<void> setShortcuts(String id, List<SingleActivator> shortcuts) {
+  Future<void> set(String id, List<SingleActivator> shortcuts) {
     return _gsettings.set(id, shortcuts.toDbusArray());
   }
 
   @override
-  Future<void> removeShortcuts(String id) => _gsettings.unset(id);
+  Future<void> unset(String id) => _gsettings.unset(id);
 
   Future<List<SingleActivator>> _fetchShortcuts(String id) async {
     final value = await _gsettings.get(id) as DBusArray;
@@ -93,5 +99,25 @@ extension _SingleActivatorX on SingleActivator {
         other.control == control &&
         other.meta == meta &&
         other.shift == shift;
+  }
+}
+
+class _SingleActivatorEquality implements Equality<SingleActivator> {
+  const _SingleActivatorEquality();
+
+  static final listEquals =
+      const ListEquality<SingleActivator>(_SingleActivatorEquality()).equals;
+
+  @override
+  bool isValidKey(Object? o) => o is SingleActivator;
+
+  @override
+  bool equals(SingleActivator e1, SingleActivator e2) {
+    return identical(e1, e2) || e1.equals(e2);
+  }
+
+  @override
+  int hash(SingleActivator e) {
+    return Object.hash(e.trigger, e.alt, e.control, e.meta, e.shift);
   }
 }

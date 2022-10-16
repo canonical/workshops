@@ -17,14 +17,12 @@ class TabShortcuts extends StatelessWidget {
 
     return CallbackShortcuts(
       bindings: {
-        for (final shortcut in store.getShortcuts('tab-new'))
-          shortcut: model.newTab,
+        for (final shortcut in store.get('tab-new')) shortcut: model.newTab,
         if (length > 1)
-          for (final shortcut in store.getShortcuts('tab-close'))
+          for (final shortcut in store.get('tab-close'))
             shortcut: model.closeTab,
-        for (final shortcut in store.getShortcuts('tab-next'))
-          shortcut: model.nextTab,
-        for (final shortcut in store.getShortcuts('tab-previous'))
+        for (final shortcut in store.get('tab-next')) shortcut: model.nextTab,
+        for (final shortcut in store.get('tab-previous'))
           shortcut: model.previousTab,
       },
       child: child,

@@ -35,30 +35,30 @@ class MockShortcutSettings extends _i1.Mock implements _i2.ShortcutSettings {
         returnValue: false,
       ) as bool);
   @override
-  _i3.Future<void> init() => (super.noSuchMethod(
+  _i3.Future<void> load() => (super.noSuchMethod(
         Invocation.method(
-          #init,
+          #load,
           [],
         ),
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
-  List<_i4.SingleActivator> getShortcuts(String? id) => (super.noSuchMethod(
+  List<_i4.SingleActivator> get(String? id) => (super.noSuchMethod(
         Invocation.method(
-          #getShortcuts,
+          #get,
           [id],
         ),
         returnValue: <_i4.SingleActivator>[],
       ) as List<_i4.SingleActivator>);
   @override
-  _i3.Future<void> addShortcut(
+  _i3.Future<void> add(
     String? id,
     _i4.SingleActivator? shortcut,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #addShortcut,
+          #add,
           [
             id,
             shortcut,
@@ -68,13 +68,13 @@ class MockShortcutSettings extends _i1.Mock implements _i2.ShortcutSettings {
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
-  _i3.Future<void> removeShortcut(
+  _i3.Future<void> remove(
     String? id,
     _i4.SingleActivator? shortcut,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #removeShortcut,
+          #remove,
           [
             id,
             shortcut,
@@ -84,13 +84,13 @@ class MockShortcutSettings extends _i1.Mock implements _i2.ShortcutSettings {
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
-  _i3.Future<void> setShortcuts(
+  _i3.Future<void> set(
     String? id,
     List<_i4.SingleActivator>? shortcuts,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
-          #setShortcuts,
+          #set,
           [
             id,
             shortcuts,
@@ -100,9 +100,9 @@ class MockShortcutSettings extends _i1.Mock implements _i2.ShortcutSettings {
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
-  _i3.Future<void> removeShortcuts(String? id) => (super.noSuchMethod(
+  _i3.Future<void> unset(String? id) => (super.noSuchMethod(
         Invocation.method(
-          #removeShortcuts,
+          #unset,
           [id],
         ),
         returnValue: _i3.Future<void>.value(),

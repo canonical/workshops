@@ -4,10 +4,9 @@ import 'package:flutter/widgets.dart';
 
 abstract class ShortcutSettings extends ChangeNotifier {
   Future<void> load();
-
-  List<SingleActivator> getShortcuts(String id);
-  Future<void> addShortcut(String id, SingleActivator shortcut);
-  Future<void> removeShortcut(String id, SingleActivator shortcut);
-  Future<void> setShortcuts(String id, List<SingleActivator> shortcuts);
-  Future<void> removeShortcuts(String id);
+  List<SingleActivator> get(String id);
+  Future<void> add(String id, SingleActivator shortcut);
+  Future<void> remove(String id, SingleActivator shortcut);
+  Future<void> set(String id, List<SingleActivator> shortcuts);
+  Future<void> unset(String id);
 }
