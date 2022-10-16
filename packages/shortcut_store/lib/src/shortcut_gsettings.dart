@@ -71,6 +71,7 @@ class ShortcutGSettings extends ShortcutSettings {
   @override
   Future<void> dispose() async {
     await _sub?.cancel();
+    _sub = null;
     await _gsettings.close();
     super.dispose();
   }
