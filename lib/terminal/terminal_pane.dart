@@ -6,6 +6,7 @@ import 'package:terminal_view/terminal_view.dart';
 import '../tabs/tab_model.dart';
 import 'terminal_menu.dart';
 import 'terminal_model.dart';
+import 'terminal_shortcuts.dart';
 
 class TerminalPane extends StatelessWidget {
   const TerminalPane({
@@ -42,6 +43,11 @@ class TerminalPane extends StatelessWidget {
                 onSelectAll: model.selectAll,
               ),
             );
+          },
+          shortcuts: buildTerminalShortcuts(context),
+          actions: {
+            MoveFocusIntent: MoveFocusAction(),
+            SplitAutoIntent: SplitAutoAction(onSplit),
           },
         ),
         if (model.state == TerminalState.starting)

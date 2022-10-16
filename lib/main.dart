@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gsettings/gsettings.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shortcut_store/shortcut_store.dart';
 import 'package:simplestreams/simplestreams.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -30,6 +32,15 @@ Future<void> main() async {
   registerServiceFactory<SimpleStreamClient>(
     (url) => SimpleStreamClient(url as String),
   );
+
+  registerServiceFactory<GSettings>(
+    (schemaId) => GSettings(schemaId as String),
+  );
+
+  final shortcuts =
+      ShortcutGSettings(GSettings('com.canonical.workshops.shortcuts'));
+  await shortcuts.load();
+  registerServiceInstance<ShortcutSettings>(shortcuts);
 
   runApp(
     MultiProvider(

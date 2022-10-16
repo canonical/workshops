@@ -76,4 +76,16 @@ class ScrollToBottomAction extends Action<ScrollToBottomIntent> {
   }
 }
 
+class SplitAutoAction extends Action<SplitAutoIntent> {
+  SplitAutoAction(this.onSplit);
+
+  final VoidCallback onSplit;
+
+  @override
+  Object? invoke(covariant SplitAutoIntent intent) {
+    onSplit();
+    return null;
+  }
+}
+
 class MoveFocusAction extends DirectionalFocusAction {}

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:movable_tabs/movable_tabs.dart';
@@ -10,6 +9,7 @@ import '../terminal/terminal_page.dart';
 import '../widgets/product_logo.dart';
 import 'tab_item.dart';
 import 'tab_model.dart';
+import 'tab_shortcuts.dart';
 
 class TabPage extends StatelessWidget {
   const TabPage({super.key});
@@ -25,30 +25,7 @@ class TabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final model = context.watch<TabModel>();
-    return CallbackShortcuts(
-      bindings: {
-        const SingleActivator(
-          LogicalKeyboardKey.keyT,
-          control: true,
-          shift: true,
-          includeRepeats: false,
-        ): model.newTab,
-        if (model.tabs.length > 1)
-          const SingleActivator(
-            LogicalKeyboardKey.keyW,
-            control: true,
-            shift: true,
-            includeRepeats: false,
-          ): model.closeTab,
-        const SingleActivator(
-          LogicalKeyboardKey.pageUp,
-          control: true,
-        ): model.previousTab,
-        const SingleActivator(
-          LogicalKeyboardKey.pageDown,
-          control: true,
-        ): model.nextTab,
-      },
+    return TabShortcuts(
       child: Focus(
         autofocus: true,
         child: Scaffold(
