@@ -39,6 +39,7 @@ Future<void> main() async {
 
   final shortcuts =
       ShortcutGSettings(GSettings('com.canonical.workshops.shortcuts'));
+  await shortcuts.load();
   registerServiceInstance<ShortcutSettings>(shortcuts);
 
   runApp(

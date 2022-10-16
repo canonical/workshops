@@ -22,7 +22,7 @@ class ShortcutStore extends StatefulWidget {
 class _ShortcutStoreState extends State<ShortcutStore> {
   @override
   void initState() {
-    widget.settings.init();
+    widget.settings.load();
     super.initState();
   }
 

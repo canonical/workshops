@@ -13,45 +13,51 @@ import 'shortcut_gsettings_test.mocks.dart';
 
 @GenerateMocks([GSettings])
 void main() {
+  MockGSettings mockGSettings({
+    Map<String, List<String>> shortcuts = const {},
+    Stream<List<String>> keysChanged = const Stream.empty(),
+  }) {
+    final mock = MockGSettings();
+    when(mock.list()).thenAnswer((_) => Future.value(shortcuts.keys.toList()));
+    when(mock.get(any)).thenAnswer((_) {
+      final id = _.positionalArguments[0] as String;
+      return Future.value(DBusArray.string(shortcuts[id] ?? []));
+    });
+    when(mock.keysChanged).thenAnswer((i) => keysChanged);
+    return mock;
+  }
+
   test('get one shortcut', () async {
-    final gsettings = MockGSettings();
-    when(gsettings.get('foo'))
-        .thenAnswer((_) async => DBusArray.string(['<Control>f']));
+    final gsettings = mockGSettings(shortcuts: {
+      'foo': ['<Control>f']
+    });
 
     final shortcuts = ShortcutGSettings(gsettings);
     expect(shortcuts.getShortcuts('foo'), isEmpty);
 
-    final completer = Completer<List<SingleActivator>>();
-    shortcuts.addListener(() {
-      completer.complete(shortcuts.getShortcuts('foo'));
-    });
-
-    expect(await completer.future, [
+    await shortcuts.load();
+    expect(shortcuts.getShortcuts('foo'), [
       isSingleActivator(LogicalKeyboardKey.keyF, control: true),
     ]);
   });
 
   test('get multiple shortcuts', () async {
-    final gsettings = MockGSettings();
-    when(gsettings.get('foo')).thenAnswer(
-        (_) async => DBusArray.string(['<Control>f', '<Alt><Shift>g']));
+    final gsettings = mockGSettings(shortcuts: {
+      'foo': ['<Control>f', '<Alt><Shift>g']
+    });
 
     final shortcuts = ShortcutGSettings(gsettings);
     expect(shortcuts.getShortcuts('foo'), isEmpty);
 
-    final completer = Completer<List<SingleActivator>>();
-    shortcuts.addListener(() {
-      completer.complete(shortcuts.getShortcuts('foo'));
-    });
-
-    expect(await completer.future, [
+    await shortcuts.load();
+    expect(shortcuts.getShortcuts('foo'), [
       isSingleActivator(LogicalKeyboardKey.keyF, control: true),
       isSingleActivator(LogicalKeyboardKey.keyG, alt: true, shift: true),
     ]);
   });
 
   test('set shortcuts', () async {
-    final gsettings = MockGSettings();
+    final gsettings = mockGSettings();
     final shortcuts = ShortcutGSettings(gsettings);
 
     await shortcuts.setShortcuts('foo', []);
@@ -69,47 +75,59 @@ void main() {
   });
 
   test('remove shortcuts', () async {
-    final gsettings = MockGSettings();
+    final gsettings = mockGSettings();
     final shortcuts = ShortcutGSettings(gsettings);
 
     await shortcuts.removeShortcuts('foo');
     verify(gsettings.unset('foo'));
   });
 
-  test('add shortcut', () async {
-    final gsettings = MockGSettings();
-    when(gsettings.get('foo')).thenAnswer((_) async => DBusArray.string([]));
+  test('add first shortcut', () async {
+    final gsettings = mockGSettings(shortcuts: {'foo': []});
 
     final shortcuts = ShortcutGSettings(gsettings);
+    await shortcuts.load();
 
     await shortcuts.addShortcut(
         'foo', const SingleActivator(LogicalKeyboardKey.keyB, control: true));
     verify(gsettings.set('foo', DBusArray.string(['<Control>b'])));
+  });
 
-    when(gsettings.get('foo'))
-        .thenAnswer((_) async => DBusArray.string(['<Control>b']));
+  test('add second shortcut', () async {
+    final gsettings = mockGSettings(shortcuts: {
+      'foo': ['<Control>b']
+    });
+
+    final shortcuts = ShortcutGSettings(gsettings);
+    await shortcuts.load();
 
     await shortcuts.addShortcut(
         'foo', const SingleActivator(LogicalKeyboardKey.keyC, meta: true));
     verify(gsettings.set('foo', DBusArray.string(['<Control>b', '<Meta>c'])));
-
-    when(gsettings.get('foo'))
-        .thenAnswer((_) async => DBusArray.string(['<Control>b', '<Meta>c']));
   });
 
-  test('remove shortcut', () async {
-    final gsettings = MockGSettings();
-    when(gsettings.get('foo'))
-        .thenAnswer((_) async => DBusArray.string(['<Control>b', '<Meta>c']));
+  test('remove first shortcut', () async {
+    final gsettings = mockGSettings(shortcuts: {
+      'foo': ['<Control>b', '<Meta>c']
+    });
 
     final shortcuts = ShortcutGSettings(gsettings);
+
+    await shortcuts.load();
 
     await shortcuts.removeShortcut(
         'foo', const SingleActivator(LogicalKeyboardKey.keyB, control: true));
     verify(gsettings.set('foo', DBusArray.string(['<Meta>c'])));
+  });
 
-    when(gsettings.get('foo'))
-        .thenAnswer((_) async => DBusArray.string(['<Meta>c']));
+  test('remove last shortcut', () async {
+    final gsettings = mockGSettings(shortcuts: {
+      'foo': ['<Meta>c']
+    });
+
+    final shortcuts = ShortcutGSettings(gsettings);
+
+    await shortcuts.load();
 
     await shortcuts.removeShortcut(
         'foo', const SingleActivator(LogicalKeyboardKey.keyC, meta: true));
@@ -119,21 +137,24 @@ void main() {
   test('shortcut change', () async {
     final keysChanged = StreamController<List<String>>(sync: true);
 
-    final gsettings = MockGSettings();
-    when(gsettings.get('foo'))
-        .thenAnswer((_) async => DBusArray.string(['<Control>c']));
-    when(gsettings.keysChanged).thenAnswer((_) => keysChanged.stream);
+    final gsettings = mockGSettings(shortcuts: {
+      'foo': ['<Control>c']
+    }, keysChanged: keysChanged.stream);
 
     final shortcuts = ShortcutGSettings(gsettings);
-    await shortcuts.init();
 
     var wasNotified = 0;
     shortcuts.addListener(() => ++wasNotified);
 
-    keysChanged.add(['foo']);
-    expect(wasNotified, 0);
+    await shortcuts.load();
 
-    expect(shortcuts.getShortcuts('foo'), isEmpty);
+    expect(wasNotified, 1);
+    expect(shortcuts.getShortcuts('foo'), [
+      isSingleActivator(LogicalKeyboardKey.keyC, control: true),
+    ]);
+
+    when(gsettings.get('foo'))
+        .thenAnswer((_) async => DBusArray.string(['<Control><Meta>c']));
 
     final completer = Completer<List<SingleActivator>>();
     shortcuts.addListener(() {
@@ -142,24 +163,22 @@ void main() {
       }
     });
 
-    expect(await completer.future, [
-      isSingleActivator(LogicalKeyboardKey.keyC, control: true),
-    ]);
-    expect(wasNotified, 1);
-
     keysChanged.add(['foo']);
+
+    expect(await completer.future, [
+      isSingleActivator(LogicalKeyboardKey.keyC, control: true, meta: true),
+    ]);
     expect(wasNotified, 2);
   });
 
   test('dispose', () async {
     final keysChanged = StreamController<List<String>>(sync: true);
 
-    final gsettings = MockGSettings();
-    when(gsettings.keysChanged).thenAnswer((_) => keysChanged.stream);
+    final gsettings = mockGSettings(keysChanged: keysChanged.stream);
 
     final shortcuts = ShortcutGSettings(gsettings);
 
-    await shortcuts.init();
+    await shortcuts.load();
     expect(keysChanged.hasListener, isTrue);
     verifyNever(gsettings.close());
 

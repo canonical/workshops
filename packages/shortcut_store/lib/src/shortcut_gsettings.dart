@@ -16,37 +16,40 @@ class ShortcutGSettings extends ShortcutSettings {
   final _shortcuts = <String, List<SingleActivator>>{};
 
   @override
-  Future<void> init() async {
-    _sub ??= _gsettings.keysChanged.listen((keys) {
-      var wasRemoved = false;
-      for (final key in keys) {
-        wasRemoved |= _shortcuts.remove(key) != null;
+  Future<void> load() async {
+    _sub ??= _gsettings.keysChanged.listen((ids) async {
+      for (final id in ids) {
+        _shortcuts[id] = await _fetchShortcuts(id);
       }
-      if (wasRemoved) notifyListeners();
+      notifyListeners();
     });
+    for (final id in await _gsettings.list()) {
+      _shortcuts[id] = await _fetchShortcuts(id);
+    }
+    if (_shortcuts.isNotEmpty) notifyListeners();
   }
 
   @override
   List<SingleActivator> getShortcuts(String id) {
-    return _shortcuts[id] ?? _updateShortcuts(id);
+    return List.of(_shortcuts[id] ?? []);
   }
 
   @override
-  Future<void> addShortcut(String id, SingleActivator shortcut) async {
-    final shortcuts = await _fetchShortcuts(id);
+  Future<void> addShortcut(String id, SingleActivator shortcut) {
+    final shortcuts = getShortcuts(id);
     shortcuts.add(shortcut);
     return setShortcuts(id, shortcuts);
   }
 
   @override
-  Future<void> removeShortcut(String id, SingleActivator shortcut) async {
-    final shortcuts = await _fetchShortcuts(id);
+  Future<void> removeShortcut(String id, SingleActivator shortcut) {
+    final shortcuts = getShortcuts(id);
     shortcuts.removeWhere((s) => s.equals(shortcut));
     return setShortcuts(id, shortcuts);
   }
 
   @override
-  Future<void> setShortcuts(String id, List<SingleActivator> shortcuts) async {
+  Future<void> setShortcuts(String id, List<SingleActivator> shortcuts) {
     return _gsettings.set(id, shortcuts.toDbusArray());
   }
 
@@ -56,16 +59,6 @@ class ShortcutGSettings extends ShortcutSettings {
   Future<List<SingleActivator>> _fetchShortcuts(String id) async {
     final value = await _gsettings.get(id) as DBusArray;
     return value.toSingleActivators();
-  }
-
-  List<SingleActivator> _updateShortcuts<T>(String id) {
-    _fetchShortcuts(id).then((value) {
-      if (!_SingleActivatorEquality.listEquals(_shortcuts[id], value)) {
-        _shortcuts[id] = value;
-        notifyListeners();
-      }
-    });
-    return <SingleActivator>[];
   }
 
   @override
@@ -100,25 +93,5 @@ extension _SingleActivatorX on SingleActivator {
         other.control == control &&
         other.meta == meta &&
         other.shift == shift;
-  }
-}
-
-class _SingleActivatorEquality implements Equality<SingleActivator> {
-  const _SingleActivatorEquality();
-
-  static final listEquals =
-      const ListEquality<SingleActivator>(_SingleActivatorEquality()).equals;
-
-  @override
-  bool isValidKey(Object? o) => o is SingleActivator;
-
-  @override
-  bool equals(SingleActivator e1, SingleActivator e2) {
-    return identical(e1, e2) || e1.equals(e2);
-  }
-
-  @override
-  int hash(SingleActivator e) {
-    return Object.hash(e.trigger, e.alt, e.control, e.meta, e.shift);
   }
 }

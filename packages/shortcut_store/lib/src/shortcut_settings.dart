@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 
 abstract class ShortcutSettings extends ChangeNotifier {
-  Future<void> init();
+  Future<void> load();
 
   List<SingleActivator> getShortcuts(String id);
   Future<void> addShortcut(String id, SingleActivator shortcut);
