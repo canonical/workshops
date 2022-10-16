@@ -49,6 +49,10 @@
       <default><![CDATA[['<Shift>End']]]></default>
       <summary>Terminal: scroll to bottom</summary>
     </key>
+    <key name="terminal-split-auto" type="as">
+      <default><![CDATA[['<Control><Shift>S']]]></default>
+      <summary>Terminal: automatically split horizontally or vertically</summary>
+    </key>
     <key name="terminal-focus-up" type="as">
       <default><![CDATA[['<Alt>Up']]]></default>
       <summary>Terminal: move focus to a split above</summary>

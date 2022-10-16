@@ -15,6 +15,9 @@ abstract class TerminalIntents {
   static const scrollToTop = ScrollToTopIntent();
   static const scrollToBottom = ScrollToBottomIntent();
 
+  // split
+  static const splitAuto = SplitAutoIntent();
+
   // focus
   static const moveFocusUp = MoveFocusIntent(TraversalDirection.up);
   static const moveFocusDown = MoveFocusIntent(TraversalDirection.down);
@@ -44,6 +47,10 @@ class ScrollToTopIntent extends Intent {
 
 class ScrollToBottomIntent extends Intent {
   const ScrollToBottomIntent();
+}
+
+class SplitAutoIntent extends Intent {
+  const SplitAutoIntent();
 }
 
 class MoveFocusIntent extends DirectionalFocusIntent {

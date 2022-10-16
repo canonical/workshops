@@ -15,6 +15,7 @@ class TerminalView extends StatefulWidget {
     this.autofocus = false,
     this.onContextMenu,
     this.shortcuts,
+    this.actions,
   });
 
   final xterm.Terminal terminal;
@@ -24,6 +25,7 @@ class TerminalView extends StatefulWidget {
   final bool autofocus;
   final void Function(Offset)? onContextMenu;
   final Map<ShortcutActivator, Intent>? shortcuts;
+  final Map<Type, Action<Intent>>? actions;
 
   @override
   State<TerminalView> createState() => _TerminalViewState();
@@ -110,7 +112,7 @@ class _TerminalViewState extends State<TerminalView> {
             ScrollPageDownIntent: ScrollPageDownAction(_scrollController),
             ScrollToTopIntent: ScrollToTopAction(_scrollController),
             ScrollToBottomIntent: ScrollToBottomAction(_scrollController),
-            MoveFocusIntent: MoveFocusAction(),
+            ...?widget.actions,
           },
         );
       },

@@ -23,6 +23,9 @@ Map<ShortcutActivator, Intent> buildTerminalShortcuts(BuildContext context) {
       shortcut: TerminalIntents.scrollToTop,
     for (final shortcut in shortcuts.get('terminal-scroll-to-bottom'))
       shortcut: TerminalIntents.scrollToBottom,
+    // split
+    for (final shortcut in shortcuts.get('terminal-split-auto'))
+      shortcut: TerminalIntents.splitAuto,
     // focus
     for (final shortcut in shortcuts.get('terminal-focus-up'))
       shortcut: TerminalIntents.moveFocusUp,

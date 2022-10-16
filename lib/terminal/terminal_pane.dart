@@ -45,6 +45,10 @@ class TerminalPane extends StatelessWidget {
             );
           },
           shortcuts: buildTerminalShortcuts(context),
+          actions: {
+            MoveFocusIntent: MoveFocusAction(),
+            SplitAutoIntent: SplitAutoAction(onSplit),
+          },
         ),
         if (model.state == TerminalState.starting)
           const Center(child: CircularProgressIndicator())
