@@ -2,77 +2,38 @@ import 'package:flutter/widgets.dart';
 
 import 'terminal_intents.dart';
 
-class ScrollUpAction extends Action<ScrollUpIntent> {
-  ScrollUpAction(this.controller);
-
-  final ScrollController controller;
-
+class ScrollToEndAction extends ScrollAction {
   @override
-  Object? invoke(covariant ScrollUpIntent intent) {
-    controller.jumpTo(controller.position.pixels - 10);
-    return null;
+  void invoke(covariant ScrollIntent intent) {
+    final context = primaryFocus!.context!;
+    var state = Scrollable.of(context);
+    if (state == null) {
+      final controller = PrimaryScrollController.of(context);
+      if (controller!.position.context.notificationContext == null &&
+          Scrollable.of(controller.position.context.notificationContext!) ==
+              null) {
+        return;
+      }
+      state = Scrollable.of(controller.position.context.notificationContext!);
+    }
+    state!.position.moveTo(
+      _getExtent(state.position, intent.direction),
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.easeInOut,
+    );
   }
-}
 
-class ScrollDownAction extends Action<ScrollDownIntent> {
-  ScrollDownAction(this.controller);
-
-  final ScrollController controller;
-
-  @override
-  Object? invoke(covariant ScrollDownIntent intent) {
-    controller.jumpTo(controller.position.pixels + 10);
-    return null;
-  }
-}
-
-class ScrollPageUpAction extends Action<ScrollPageUpIntent> {
-  ScrollPageUpAction(this.controller);
-
-  final ScrollController controller;
-
-  @override
-  Object? invoke(covariant ScrollPageUpIntent intent) {
-    controller.jumpTo(
-        controller.position.pixels - controller.position.viewportDimension);
-    return null;
-  }
-}
-
-class ScrollPageDownAction extends Action<ScrollPageDownIntent> {
-  ScrollPageDownAction(this.controller);
-
-  final ScrollController controller;
-
-  @override
-  Object? invoke(covariant ScrollPageDownIntent intent) {
-    controller.jumpTo(
-        controller.position.pixels + controller.position.viewportDimension);
-    return null;
-  }
-}
-
-class ScrollToTopAction extends Action<ScrollToTopIntent> {
-  ScrollToTopAction(this.controller);
-
-  final ScrollController controller;
-
-  @override
-  Object? invoke(covariant ScrollToTopIntent intent) {
-    controller.jumpTo(controller.position.minScrollExtent);
-    return null;
-  }
-}
-
-class ScrollToBottomAction extends Action<ScrollToBottomIntent> {
-  ScrollToBottomAction(this.controller);
-
-  final ScrollController controller;
-
-  @override
-  Object? invoke(covariant ScrollToBottomIntent intent) {
-    controller.jumpTo(controller.position.maxScrollExtent);
-    return null;
+  double _getExtent(ScrollPosition position, AxisDirection direction) {
+    switch (direction) {
+      case AxisDirection.up:
+        return position.minScrollExtent;
+      case AxisDirection.down:
+        return position.maxScrollExtent;
+      case AxisDirection.left:
+        return position.minScrollExtent;
+      case AxisDirection.right:
+        return position.maxScrollExtent;
+    }
   }
 }
 
