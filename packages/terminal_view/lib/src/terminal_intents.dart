@@ -8,12 +8,15 @@ abstract class TerminalIntents {
   static const paste = PasteTextIntent(SelectionChangedCause.keyboard);
 
   // scroll
-  static const scrollUp = ScrollUpIntent();
-  static const scrollDown = ScrollDownIntent();
-  static const scrollPageUp = ScrollPageUpIntent();
-  static const scrollPageDown = ScrollPageDownIntent();
-  static const scrollToTop = ScrollToTopIntent();
-  static const scrollToBottom = ScrollToBottomIntent();
+  static const scrollUp = ScrollIntent(direction: AxisDirection.up);
+  static const scrollDown = ScrollIntent(direction: AxisDirection.down);
+  static const scrollPageUp =
+      ScrollIntent(direction: AxisDirection.up, type: ScrollIncrementType.page);
+  static const scrollPageDown = ScrollIntent(
+      direction: AxisDirection.down, type: ScrollIncrementType.page);
+  static const scrollToTop = ScrollToEndIntent(direction: AxisDirection.up);
+  static const scrollToBottom =
+      ScrollToEndIntent(direction: AxisDirection.down);
 
   // split
   static const splitAuto = SplitAutoIntent();
@@ -25,28 +28,8 @@ abstract class TerminalIntents {
   static const moveFocusRight = MoveFocusIntent(TraversalDirection.right);
 }
 
-class ScrollUpIntent extends Intent {
-  const ScrollUpIntent();
-}
-
-class ScrollDownIntent extends Intent {
-  const ScrollDownIntent();
-}
-
-class ScrollPageUpIntent extends Intent {
-  const ScrollPageUpIntent();
-}
-
-class ScrollPageDownIntent extends Intent {
-  const ScrollPageDownIntent();
-}
-
-class ScrollToTopIntent extends Intent {
-  const ScrollToTopIntent();
-}
-
-class ScrollToBottomIntent extends Intent {
-  const ScrollToBottomIntent();
+class ScrollToEndIntent extends ScrollIntent {
+  const ScrollToEndIntent({required super.direction});
 }
 
 class SplitAutoIntent extends Intent {
