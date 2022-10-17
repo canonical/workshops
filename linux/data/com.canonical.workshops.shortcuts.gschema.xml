@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
   <schema id="com.canonical.workshops.shortcuts" path="/com/canonical/workshops/shortcuts/">
+    <key name="command-palette-open" type="as">
+      <default><![CDATA[['<Control><Shift>K']]]></default>
+      <summary>Open the command palette</summary>
+    </key>
+    <key name="command-palette-close" type="as">
+      <default><![CDATA[['Escape']]]></default>
+      <summary>Close the command palette</summary>
+    </key>
     <key name="tab-new" type="as">
       <default><![CDATA[['<Control><Shift>T']]]></default>
       <summary>Tabs: add a new tab</summary>

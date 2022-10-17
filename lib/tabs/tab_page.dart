@@ -8,6 +8,8 @@ import 'package:window_title_bar/window_title_bar.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
 import '../home/home_page.dart';
+import '../home/instance_actions.dart';
+import '../home/instance_commands.dart';
 import '../home/quick_menu.dart';
 import '../terminal/terminal_page.dart';
 import 'tab_actions.dart';
@@ -23,17 +25,21 @@ class TabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TabModel(),
-      builder: (context, child) => TabCommands(
-        child: TabActions(
-          child: Focus(
-            autofocus: true,
-            child: Scaffold(
-              appBar: WindowTitleBar(
-                titleSpacing: 0,
-                centerTitle: false,
-                title: const _TabBar(),
+      builder: (context, child) => InstanceCommands(
+        child: InstanceActions(
+          child: TabCommands(
+            child: TabActions(
+              child: Focus(
+                autofocus: true,
+                child: Scaffold(
+                  appBar: WindowTitleBar(
+                    titleSpacing: 0,
+                    centerTitle: false,
+                    title: const _TabBar(),
+                  ),
+                  body: const _TabStack(),
+                ),
               ),
-              body: const _TabStack(),
             ),
           ),
         ),

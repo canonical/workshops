@@ -1,6 +1,7 @@
 {
   "appTitle": "Workshops",
   "cancelButton": "Cancel",
+  "closePaletteCommand": "Close command palette",
   "closeSplitMenuItem": "Close Split",
   "closeTabCommand": "Close tab",
   "closeTabMenuItem": "Close Tab",
@@ -44,6 +45,7 @@
   "newTabCommand": "New tab",
   "newTabMenuItem": "New Tab",
   "okButton": "Ok",
+  "openPaletteCommand": "Open command palette",
   "pasteCommand": "Paste",
   "pasteMenuItem": "Paste",
   "pleaseWaitText": "Please wait",
@@ -55,6 +57,7 @@
   "scrollToBottomCommand": "Scroll to bottom",
   "scrollToTopCommand": "Scroll to top",
   "scrollUpCommand": "Scroll up",
+  "searchCommandHint": "Search command...",
   "selectAllMenuItem": "Select All",
   "selectFeaturesTitle": "Select features",
   "selectImageTitle": "Select image",
