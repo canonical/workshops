@@ -59,47 +59,56 @@ class TerminalCommands extends StatelessWidget {
         // split
         Command(
           id: 'terminal-split-auto',
+          priority: 32,
           label: l10n.splitAutoCommand,
           intent: TerminalIntents.splitAuto,
         ),
         Command(
           id: 'terminal-split-up',
+          priority: 30,
           label: l10n.splitUpCommand,
           intent: TerminalIntents.splitUp,
         ),
         Command(
           id: 'terminal-split-down',
+          priority: 31,
           label: l10n.splitDownCommand,
           intent: TerminalIntents.splitDown,
         ),
         Command(
           id: 'terminal-split-left',
+          priority: 30,
           label: l10n.splitLeftCommand,
           intent: TerminalIntents.splitLeft,
         ),
         Command(
           id: 'terminal-split-right',
+          priority: 31,
           label: l10n.splitRightCommand,
           intent: TerminalIntents.splitRight,
         ),
         // focus
         Command(
           id: 'terminal-focus-up',
+          priority: 30,
           label: l10n.moveFocusUpCommand,
           intent: TerminalIntents.moveFocusUp,
         ),
         Command(
           id: 'terminal-focus-down',
+          priority: 30,
           label: l10n.moveFocusDownCommand,
           intent: TerminalIntents.moveFocusDown,
         ),
         Command(
           id: 'terminal-focus-left',
+          priority: 30,
           label: l10n.moveFocusLeftCommand,
           intent: TerminalIntents.moveFocusLeft,
         ),
         Command(
           id: 'terminal-focus-right',
+          priority: 30,
           label: l10n.moveFocusRightCommand,
           intent: TerminalIntents.moveFocusRight,
         ),

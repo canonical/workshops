@@ -21,6 +21,7 @@ class InstanceCommands extends StatelessWidget {
         if (store.instances.value?.isNotEmpty == true) ...[
           Command(
             id: 'instance-launch',
+            priority: 20,
             label: l10n.launchInstanceCommand,
             children: store.instances.value
                 ?.map((i) => Command(
@@ -36,6 +37,7 @@ class InstanceCommands extends StatelessWidget {
           ),
           Command(
             id: 'instance-start',
+            priority: 20,
             label: l10n.startInstanceCommand,
             children: store.instances.value
                 ?.map((i) => Command(
@@ -51,6 +53,7 @@ class InstanceCommands extends StatelessWidget {
           ),
           Command(
             id: 'instance-stop',
+            priority: 20,
             label: l10n.stopInstanceCommand,
             children: store.instances.value
                 ?.map((i) => Command(
@@ -66,6 +69,7 @@ class InstanceCommands extends StatelessWidget {
           ),
           Command(
             id: 'instance-delete',
+            priority: 20,
             label: l10n.deleteInstanceCommand,
             children: store.instances.value
                 ?.map((i) => Command(
