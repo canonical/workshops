@@ -1,0 +1,80 @@
+{
+  "configuringFeatureText": "Configurando «{feature}»",
+  "@configuringFeatureText": {
+    "placeholders": {
+      "feature": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseWaitText": "Espere",
+  "@pleaseWaitText": {},
+  "continueButton": "Continuar",
+  "@continueButton": {},
+  "closeSplitMenuItem": "Cerrar división",
+  "@closeSplitMenuItem": {},
+  "closeTabMenuItem": "Cerrar pestaña",
+  "@closeTabMenuItem": {},
+  "appTitle": "Talleres",
+  "@appTitle": {},
+  "copyMenuItem": "Copiar",
+  "@copyMenuItem": {},
+  "creatingFeatureText": "Creando «{feature}»",
+  "@creatingFeatureText": {
+    "placeholders": {
+      "feature": {
+        "type": "String"
+      }
+    }
+  },
+  "creatingInstanceText": "Creando ejemplar",
+  "@creatingInstanceText": {},
+  "deletingInstanceText": "Eliminando ejemplar",
+  "@deletingInstanceText": {},
+  "downloadingInstanceText": "Descargando ejemplar",
+  "@downloadingInstanceText": {},
+  "launchingInstanceTitle": "Iniciando ejemplar",
+  "@launchingInstanceTitle": {},
+  "launchInstanceTitle": "Iniciar ejemplar",
+  "@launchInstanceTitle": {},
+  "newTabMenuItem": "Pestaña nueva",
+  "@newTabMenuItem": {},
+  "selectAllMenuItem": "Seleccionar todo",
+  "@selectAllMenuItem": {},
+  "releaseLabel": "Versión",
+  "@releaseLabel": {},
+  "selectFeaturesTitle": "Seleccionar funcionalidades",
+  "@selectFeaturesTitle": {},
+  "selectImageTitle": "Seleccionar imagen",
+  "@selectImageTitle": {},
+  "selectOsTitle": "Seleccionar sistema operativo",
+  "@selectOsTitle": {},
+  "startingInstanceText": "Iniciando ejemplar",
+  "@startingInstanceText": {},
+  "unpackingInstanceText": "Desempacando ejemplar",
+  "@unpackingInstanceText": {},
+  "finalizingFeaturesText": "Finalizando funcionalidades",
+  "@finalizingFeaturesText": {},
+  "cancelButton": "Cancelar",
+  "@cancelButton": {},
+  "launchButton": "Iniciar",
+  "@launchButton": {},
+  "okButton": "Aceptar",
+  "@okButton": {},
+  "pasteMenuItem": "Pegar",
+  "@pasteMenuItem": {},
+  "containerItem": "contenedor",
+  "@containerItem": {},
+  "typeLabel": "Tipo",
+  "@typeLabel": {},
+  "variantLabel": "Variante",
+  "@variantLabel": {},
+  "virtualMachineItem": "máquina virtual",
+  "@virtualMachineItem": {},
+  "homeTab": "Inicio",
+  "@homeTab": {},
+  "nameLabel": "Nombre",
+  "@nameLabel": {},
+  "stoppingInstanceText": "Deteniendo ejemplar",
+  "@stoppingInstanceText": {}
+}
