@@ -84,5 +84,5 @@ flutter:
 dependency_overrides:
   gsettings:
     git:
-      url: https://github.com/jpnurmi/gsettings.dart
-      ref: split-schema-dirs
+      # https://github.com/canonical/gsettings.dart/pull/47
+      url: https://github.com/canonical/gsettings.dart
