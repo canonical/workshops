@@ -1,10 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/painting.dart' show Axis;
+import 'package:flutter/painting.dart' show AxisDirection;
 import 'package:split_view/split_view.dart';
 
 import 'split_x.dart';
-export 'package:flutter/painting.dart' show Axis;
+export 'package:flutter/painting.dart' show AxisDirection;
 
 enum NestedSplitType { horizontal, vertical, view }
 
@@ -14,8 +14,8 @@ class NestedSplitController extends NestedSplitNode with ChangeNotifier {
   }
 
   @override
-  bool split(NestedSplitNode node, Axis axis) {
-    final res = super.split(node, axis);
+  bool split(NestedSplitNode node, AxisDirection direction) {
+    final res = super.split(node, direction);
     if (res) notifyListeners();
     return res;
   }
@@ -61,12 +61,12 @@ class NestedSplitNode with DiagnosticableTreeMixin {
     }
   }
 
-  bool split(NestedSplitNode node, Axis axis) {
+  bool split(NestedSplitNode node, AxisDirection direction) {
     if (node == this) {
-      parent?._splitChild(this, axis.toSplitType());
+      parent?._splitChild(this, direction);
       return true;
     }
-    return children.any((c) => c.split(node, axis));
+    return children.any((c) => c.split(node, direction));
   }
 
   bool unsplit(NestedSplitNode node) {
@@ -112,17 +112,27 @@ class NestedSplitNode with DiagnosticableTreeMixin {
     _insertChild(index, after);
   }
 
-  void _splitChild(NestedSplitNode child, NestedSplitType type) {
+  void _splitChild(NestedSplitNode child, AxisDirection direction) {
     final node = NestedSplitNode._(NestedSplitType.view);
     final index = _children.indexOf(child);
+    final type = direction.toSplitType();
     if (_type == type || _children.length == 1) {
       _type = type;
       _addWeight(index);
-      _insertChild(index + 1, node);
+      if (direction == AxisDirection.left || direction == AxisDirection.up) {
+        _insertChild(index, node);
+      } else {
+        _insertChild(index + 1, node);
+      }
     } else {
       final split = NestedSplitNode._(type);
-      split._appendChild(child);
-      split._appendChild(node);
+      if (direction == AxisDirection.left || direction == AxisDirection.up) {
+        split._appendChild(node);
+        split._appendChild(child);
+      } else {
+        split._appendChild(child);
+        split._appendChild(node);
+      }
       split.view!.weights = [0.5, 0.5];
       _insertChild(index, split);
     }

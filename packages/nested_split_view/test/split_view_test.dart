@@ -21,7 +21,7 @@ void main() {
     final nodes = find.textContaining(RegExp(r'NestedSplitNode#\w+'));
     expect(nodes, findsOneWidget);
 
-    controller.split(controller.children.single, Axis.horizontal);
+    controller.split(controller.children.single, AxisDirection.right);
     await tester.pump();
 
     expect(nodes, findsNWidgets(2));
@@ -41,7 +41,7 @@ void main() {
     final nodes = find.textContaining(RegExp(r'NestedSplitNode#\w+'));
     expect(nodes, findsOneWidget);
 
-    controller1.split(controller1.children.single, Axis.horizontal);
+    controller1.split(controller1.children.single, AxisDirection.right);
     await tester.pump();
 
     expect(nodes, findsNWidgets(2));

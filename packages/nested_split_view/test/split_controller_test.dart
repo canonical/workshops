@@ -23,7 +23,7 @@ void main() {
     final controller = NestedSplitController();
 
     expect(
-      controller.split(controller.children.single, Axis.horizontal),
+      controller.split(controller.children.single, AxisDirection.right),
       isTrue,
     );
 
@@ -45,7 +45,7 @@ void main() {
     final controller = NestedSplitController();
 
     expect(
-      controller.split(controller.children.single, Axis.vertical),
+      controller.split(controller.children.single, AxisDirection.down),
       isTrue,
     );
 
@@ -67,7 +67,7 @@ void main() {
     final controller = NestedSplitController();
 
     expect(
-      controller.split(controller.children.single, Axis.horizontal),
+      controller.split(controller.children.single, AxisDirection.right),
       isTrue,
     );
 
@@ -103,7 +103,7 @@ void main() {
     final controller = NestedSplitController();
 
     expect(
-      controller.split(controller.children.single, Axis.vertical),
+      controller.split(controller.children.single, AxisDirection.down),
       isTrue,
     );
 
@@ -139,7 +139,7 @@ void main() {
     final controller = NestedSplitController();
 
     expect(
-      controller.split(controller.children.single, Axis.horizontal),
+      controller.split(controller.children.single, AxisDirection.right),
       isTrue,
     );
 
@@ -157,7 +157,7 @@ void main() {
     expect(controller.length, 2);
 
     expect(
-      controller.split(controller.children.last, Axis.vertical),
+      controller.split(controller.children.last, AxisDirection.down),
       isTrue,
     );
 
@@ -201,7 +201,7 @@ void main() {
     final controller = NestedSplitController();
 
     expect(
-      controller.split(controller.children.single, Axis.vertical),
+      controller.split(controller.children.single, AxisDirection.down),
       isTrue,
     );
 
@@ -219,7 +219,7 @@ void main() {
     expect(controller.length, 2);
 
     expect(
-      controller.split(controller.children.last, Axis.horizontal),
+      controller.split(controller.children.last, AxisDirection.right),
       isTrue,
     );
 
@@ -244,7 +244,8 @@ void main() {
     expect(controller.length, 3);
 
     expect(
-      controller.split(controller.children.last.children.last, Axis.vertical),
+      controller.split(
+          controller.children.last.children.last, AxisDirection.down),
       isTrue,
     );
 
@@ -305,7 +306,7 @@ void main() {
     final controller = NestedSplitController();
 
     expect(
-      controller.split(controller.children.single, Axis.horizontal),
+      controller.split(controller.children.single, AxisDirection.right),
       isTrue,
     );
 
@@ -323,7 +324,7 @@ void main() {
     expect(controller.length, 2);
 
     expect(
-      controller.split(controller.children.first, Axis.horizontal),
+      controller.split(controller.children.first, AxisDirection.right),
       isTrue,
     );
 
@@ -348,7 +349,7 @@ void main() {
     var wasNotified = 0;
     controller.addListener(() => ++wasNotified);
 
-    controller.split(controller.children.single, Axis.horizontal);
+    controller.split(controller.children.single, AxisDirection.right);
     expect(wasNotified, 1);
 
     controller.unsplit(controller.children.last);

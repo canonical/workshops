@@ -2,12 +2,14 @@ import 'package:split_view/split_view.dart';
 
 import 'split_controller.dart';
 
-extension AxisX on Axis {
+extension AxisDirectionX on AxisDirection {
   NestedSplitType toSplitType() {
     switch (this) {
-      case Axis.horizontal:
+      case AxisDirection.left:
+      case AxisDirection.right:
         return NestedSplitType.horizontal;
-      case Axis.vertical:
+      case AxisDirection.up:
+      case AxisDirection.down:
         return NestedSplitType.vertical;
     }
   }
