@@ -37,16 +37,13 @@ class ScrollToEndAction extends ScrollAction {
   }
 }
 
-class SplitAutoAction extends Action<SplitAutoIntent> {
-  SplitAutoAction(this.onSplit);
+class SplitAction extends Action<SplitIntent> {
+  SplitAction(this.onSplit);
 
-  final VoidCallback onSplit;
+  final ValueChanged<SplitDirection> onSplit;
 
   @override
-  Object? invoke(covariant SplitAutoIntent intent) {
-    onSplit();
-    return null;
-  }
+  void invoke(covariant SplitIntent intent) => onSplit(intent.direction);
 }
 
 class MoveFocusAction extends DirectionalFocusAction {}

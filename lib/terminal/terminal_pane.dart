@@ -15,7 +15,7 @@ class TerminalPane extends StatelessWidget {
     required this.onUnsplit,
   });
 
-  final VoidCallback onSplit;
+  final ValueChanged<SplitDirection> onSplit;
   final VoidCallback? onUnsplit;
 
   @override
@@ -36,7 +36,7 @@ class TerminalPane extends StatelessWidget {
                 context: context,
                 onAddTab: tabs.newTab,
                 onCloseTab: tabs.length > 1 ? tabs.closeTab : null,
-                onSplitTab: onSplit,
+                onSplitTab: () => onSplit(SplitDirection.auto),
                 onCloseSplit: onUnsplit,
                 onCopy: model.canCopy ? model.copy : null,
                 onPaste: model.paste,
@@ -47,7 +47,7 @@ class TerminalPane extends StatelessWidget {
           shortcuts: buildTerminalShortcuts(context),
           actions: {
             MoveFocusIntent: MoveFocusAction(),
-            SplitAutoIntent: SplitAutoAction(onSplit),
+            SplitIntent: SplitAction(onSplit),
           },
         ),
         if (model.state == TerminalState.starting)

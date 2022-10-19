@@ -53,6 +53,22 @@
       <default><![CDATA[['<Control><Shift>S']]]></default>
       <summary>Terminal: automatically split horizontally or vertically</summary>
     </key>
+    <key name="terminal-split-up" type="as">
+      <default><![CDATA[['<Alt><Shift>Up']]]></default>
+      <summary>Terminal: split up</summary>
+    </key>
+    <key name="terminal-split-down" type="as">
+      <default><![CDATA[['<Alt><Shift>Down']]]></default>
+      <summary>Terminal: split down</summary>
+    </key>
+    <key name="terminal-split-left" type="as">
+      <default><![CDATA[['<Alt><Shift>Left']]]></default>
+      <summary>Terminal: split to the left</summary>
+    </key>
+    <key name="terminal-split-right" type="as">
+      <default><![CDATA[['<Alt><Shift>Right']]]></default>
+      <summary>Terminal: split to the right</summary>
+    </key>
     <key name="terminal-focus-up" type="as">
       <default><![CDATA[['<Alt>Up']]]></default>
       <summary>Terminal: move focus to a split above</summary>

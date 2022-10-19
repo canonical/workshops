@@ -19,7 +19,11 @@ abstract class TerminalIntents {
       ScrollToEndIntent(direction: AxisDirection.down);
 
   // split
-  static const splitAuto = SplitAutoIntent();
+  static const splitAuto = SplitIntent(SplitDirection.auto);
+  static const splitUp = SplitIntent(SplitDirection.up);
+  static const splitDown = SplitIntent(SplitDirection.down);
+  static const splitLeft = SplitIntent(SplitDirection.left);
+  static const splitRight = SplitIntent(SplitDirection.right);
 
   // focus
   static const moveFocusUp = MoveFocusIntent(TraversalDirection.up);
@@ -32,8 +36,12 @@ class ScrollToEndIntent extends ScrollIntent {
   const ScrollToEndIntent({required super.direction});
 }
 
-class SplitAutoIntent extends Intent {
-  const SplitAutoIntent();
+enum SplitDirection { auto, up, down, left, right }
+
+class SplitIntent extends Intent {
+  const SplitIntent(this.direction);
+
+  final SplitDirection direction;
 }
 
 class MoveFocusIntent extends DirectionalFocusIntent {
