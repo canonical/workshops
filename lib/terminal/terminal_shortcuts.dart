@@ -26,6 +26,14 @@ Map<ShortcutActivator, Intent> buildTerminalShortcuts(BuildContext context) {
     // split
     for (final shortcut in shortcuts.get('terminal-split-auto'))
       shortcut: TerminalIntents.splitAuto,
+    for (final shortcut in shortcuts.get('terminal-split-up'))
+      shortcut: TerminalIntents.splitUp,
+    for (final shortcut in shortcuts.get('terminal-split-down'))
+      shortcut: TerminalIntents.splitDown,
+    for (final shortcut in shortcuts.get('terminal-split-left'))
+      shortcut: TerminalIntents.splitLeft,
+    for (final shortcut in shortcuts.get('terminal-split-right'))
+      shortcut: TerminalIntents.splitRight,
     // focus
     for (final shortcut in shortcuts.get('terminal-focus-up'))
       shortcut: TerminalIntents.moveFocusUp,
