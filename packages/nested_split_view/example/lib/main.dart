@@ -57,8 +57,8 @@ class _MyPageState extends State<MyPage> {
   Widget buildPane(BuildContext context, NestedSplitNode node) {
     return MyPane(
       node: node,
-      onSplit: (axis) {
-        _controller.split(node, axis);
+      onSplit: (direction) {
+        _controller.split(node, direction);
         debugPrint(_controller.toStringDeep());
       },
       onRemove: () {
@@ -78,7 +78,7 @@ class MyPane extends StatelessWidget {
   });
 
   final NestedSplitNode node;
-  final ValueChanged<Axis> onSplit;
+  final ValueChanged<AxisDirection> onSplit;
   final VoidCallback onRemove;
 
   @override
@@ -114,13 +114,23 @@ class MyPane extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextButton(
-                      onPressed: () => onSplit(Axis.horizontal),
-                      child: const Icon(Icons.border_vertical),
+                      onPressed: () => onSplit(AxisDirection.up),
+                      child: const Icon(Icons.arrow_upward),
                     ),
                     const VerticalDivider(width: 1, thickness: 1),
                     TextButton(
-                      onPressed: () => onSplit(Axis.vertical),
-                      child: const Icon(Icons.border_horizontal),
+                      onPressed: () => onSplit(AxisDirection.down),
+                      child: const Icon(Icons.arrow_downward),
+                    ),
+                    const VerticalDivider(width: 1, thickness: 1),
+                    TextButton(
+                      onPressed: () => onSplit(AxisDirection.left),
+                      child: const Icon(Icons.arrow_back),
+                    ),
+                    const VerticalDivider(width: 1, thickness: 1),
+                    TextButton(
+                      onPressed: () => onSplit(AxisDirection.right),
+                      child: const Icon(Icons.arrow_forward),
                     ),
                   ],
                 ),

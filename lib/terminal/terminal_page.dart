@@ -83,7 +83,7 @@ class _TerminalPageState extends State<_TerminalPage>
       return ChangeNotifierProvider.value(
         value: terminal,
         child: TerminalPane(
-          onSplit: () => _splitter.split(node, orientation.toAxis()),
+          onSplit: () => _splitter.split(node, orientation.toAxisDirection()),
           onUnsplit: _splitter.length > 1 ? terminal.close : null,
         ),
       );
@@ -125,12 +125,12 @@ class _TerminalPageState extends State<_TerminalPage>
 }
 
 extension OrientationX on Orientation {
-  Axis toAxis() {
+  AxisDirection toAxisDirection() {
     switch (this) {
       case Orientation.portrait:
-        return Axis.vertical;
+        return AxisDirection.down;
       case Orientation.landscape:
-        return Axis.horizontal;
+        return AxisDirection.right;
     }
   }
 }
