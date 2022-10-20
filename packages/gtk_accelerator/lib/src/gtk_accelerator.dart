@@ -9,7 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'libgtk.dart';
 
 /// See https://docs.gtk.org/gtk3/func.accelerator_parse.html
-SingleActivator? parseGtkAccelerator(String accelerator) {
+LogicalKeySet? parseGtkAccelerator(String accelerator) {
   return ffi.using((arena) {
     final cstr = accelerator.toNativeUtf8(allocator: arena);
     final key = arena<ffi.UnsignedInt>();
@@ -19,21 +19,23 @@ SingleActivator? parseGtkAccelerator(String accelerator) {
     final logicalKey = _findLogicalKey(key.value);
     if (logicalKey == null) return null;
 
-    return SingleActivator(
+    return LogicalKeySet.fromSet({
       logicalKey,
-      alt: modifiers.value & GdkModifierType.GDK_MOD1_MASK != 0,
-      control: modifiers.value & GdkModifierType.GDK_CONTROL_MASK != 0,
-      meta: modifiers.value & GdkModifierType.GDK_META_MASK != 0,
-      shift: modifiers.value & GdkModifierType.GDK_SHIFT_MASK != 0,
-    );
+      if (modifiers.value & GdkModifierType.GDK_MOD1_MASK != 0)
+        LogicalKeyboardKey.alt,
+      if (modifiers.value & GdkModifierType.GDK_CONTROL_MASK != 0)
+        LogicalKeyboardKey.control,
+      if (modifiers.value & GdkModifierType.GDK_META_MASK != 0)
+        LogicalKeyboardKey.meta,
+      if (modifiers.value & GdkModifierType.GDK_SHIFT_MASK != 0)
+        LogicalKeyboardKey.shift,
+    });
   });
 }
 
 /// See https://docs.gtk.org/gtk3/func.accelerator_name.html
-String formatGtkAccelerator(SingleActivator shortcut) {
-  final key = _findGtkKey(shortcut.trigger);
-  final modifiers = shortcut.modifiers;
-  final cstr = lib.gtk_accelerator_name(key, modifiers);
+String formatGtkAccelerator(LogicalKeySet shortcut) {
+  final cstr = lib.gtk_accelerator_name(shortcut.key, shortcut.modifiers);
   final str = cstr.cast<ffi.Utf8>().toDartString();
   lib.g_free(cstr.cast());
   return str;
@@ -62,7 +64,26 @@ extension _MapX<K, V> on Map<K, V> {
   Map<V, K> inverse() => Map.fromIterables(values, keys);
 }
 
-extension _SingleActivatorX on SingleActivator {
+extension _LogicalKeySetX on LogicalKeySet {
+  bool get alt =>
+      triggers.contains(LogicalKeyboardKey.alt) ||
+      triggers.contains(LogicalKeyboardKey.altLeft) ||
+      triggers.contains(LogicalKeyboardKey.altRight);
+  bool get control =>
+      triggers.contains(LogicalKeyboardKey.control) ||
+      triggers.contains(LogicalKeyboardKey.controlLeft) ||
+      triggers.contains(LogicalKeyboardKey.controlRight);
+  bool get meta =>
+      triggers.contains(LogicalKeyboardKey.meta) ||
+      triggers.contains(LogicalKeyboardKey.metaLeft) ||
+      triggers.contains(LogicalKeyboardKey.metaRight);
+  bool get shift =>
+      triggers.contains(LogicalKeyboardKey.shift) ||
+      triggers.contains(LogicalKeyboardKey.shiftLeft) ||
+      triggers.contains(LogicalKeyboardKey.shiftRight);
+
+  int get key => _findGtkKey(triggers.singleWhere((t) => !t.isModifier));
+
   int get modifiers {
     var value = 0;
     if (alt) value |= GdkModifierType.GDK_MOD1_MASK;
@@ -72,3 +93,14 @@ extension _SingleActivatorX on SingleActivator {
     return value;
   }
 }
+
+extension _LogicalKeyboardKeyX on LogicalKeyboardKey {
+  bool get isModifier => synonyms.isNotEmpty || _modifiers.contains(this);
+}
+
+final Set<LogicalKeyboardKey> _modifiers = <LogicalKeyboardKey>{
+  LogicalKeyboardKey.alt,
+  LogicalKeyboardKey.control,
+  LogicalKeyboardKey.meta,
+  LogicalKeyboardKey.shift,
+};

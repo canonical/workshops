@@ -37,7 +37,7 @@ void main() {
 
     await shortcuts.load();
     expect(shortcuts.get('foo'), [
-      isSingleActivator(LogicalKeyboardKey.keyF, control: true),
+      isLogicalKeySet({LogicalKeyboardKey.keyF, LogicalKeyboardKey.control}),
     ]);
   });
 
@@ -51,8 +51,12 @@ void main() {
 
     await shortcuts.load();
     expect(shortcuts.get('foo'), [
-      isSingleActivator(LogicalKeyboardKey.keyF, control: true),
-      isSingleActivator(LogicalKeyboardKey.keyG, alt: true, shift: true),
+      isLogicalKeySet({LogicalKeyboardKey.keyF, LogicalKeyboardKey.control}),
+      isLogicalKeySet({
+        LogicalKeyboardKey.keyG,
+        LogicalKeyboardKey.alt,
+        LogicalKeyboardKey.shift,
+      }),
     ]);
   });
 
@@ -63,13 +67,14 @@ void main() {
     await shortcuts.set('foo', []);
     verify(gsettings.set('foo', DBusArray.string([])));
 
-    await shortcuts.set(
-        'bar', [const SingleActivator(LogicalKeyboardKey.keyB, control: true)]);
+    await shortcuts.set('bar', [
+      LogicalKeySet(LogicalKeyboardKey.keyB, LogicalKeyboardKey.control),
+    ]);
     verify(gsettings.set('bar', DBusArray.string(['<Control>b'])));
 
     await shortcuts.set('baz', [
-      const SingleActivator(LogicalKeyboardKey.keyB, control: true),
-      const SingleActivator(LogicalKeyboardKey.keyC, meta: true),
+      LogicalKeySet(LogicalKeyboardKey.keyB, LogicalKeyboardKey.control),
+      LogicalKeySet(LogicalKeyboardKey.keyC, LogicalKeyboardKey.meta),
     ]);
     verify(gsettings.set('baz', DBusArray.string(['<Control>b', '<Meta>c'])));
   });
@@ -89,7 +94,9 @@ void main() {
     await shortcuts.load();
 
     await shortcuts.add(
-        'foo', const SingleActivator(LogicalKeyboardKey.keyB, control: true));
+      'foo',
+      LogicalKeySet(LogicalKeyboardKey.keyB, LogicalKeyboardKey.control),
+    );
     verify(gsettings.set('foo', DBusArray.string(['<Control>b'])));
   });
 
@@ -102,7 +109,9 @@ void main() {
     await shortcuts.load();
 
     await shortcuts.add(
-        'foo', const SingleActivator(LogicalKeyboardKey.keyC, meta: true));
+      'foo',
+      LogicalKeySet(LogicalKeyboardKey.keyC, LogicalKeyboardKey.meta),
+    );
     verify(gsettings.set('foo', DBusArray.string(['<Control>b', '<Meta>c'])));
   });
 
@@ -116,7 +125,9 @@ void main() {
     await shortcuts.load();
 
     await shortcuts.remove(
-        'foo', const SingleActivator(LogicalKeyboardKey.keyB, control: true));
+      'foo',
+      LogicalKeySet(LogicalKeyboardKey.keyB, LogicalKeyboardKey.control),
+    );
     verify(gsettings.set('foo', DBusArray.string(['<Meta>c'])));
   });
 
@@ -130,7 +141,9 @@ void main() {
     await shortcuts.load();
 
     await shortcuts.remove(
-        'foo', const SingleActivator(LogicalKeyboardKey.keyC, meta: true));
+      'foo',
+      LogicalKeySet(LogicalKeyboardKey.keyC, LogicalKeyboardKey.meta),
+    );
     verify(gsettings.set('foo', DBusArray.string([])));
   });
 
@@ -150,13 +163,13 @@ void main() {
 
     expect(wasNotified, 1);
     expect(shortcuts.get('foo'), [
-      isSingleActivator(LogicalKeyboardKey.keyC, control: true),
+      isLogicalKeySet({LogicalKeyboardKey.keyC, LogicalKeyboardKey.control}),
     ]);
 
     when(gsettings.get('foo'))
         .thenAnswer((_) async => DBusArray.string(['<Control><Meta>c']));
 
-    final completer = Completer<List<SingleActivator>>();
+    final completer = Completer<List<LogicalKeySet>>();
     shortcuts.addListener(() {
       if (!completer.isCompleted) {
         completer.complete(shortcuts.get('foo'));
@@ -166,7 +179,11 @@ void main() {
     keysChanged.add(['foo']);
 
     expect(await completer.future, [
-      isSingleActivator(LogicalKeyboardKey.keyC, control: true, meta: true),
+      isLogicalKeySet({
+        LogicalKeyboardKey.keyC,
+        LogicalKeyboardKey.control,
+        LogicalKeyboardKey.meta,
+      }),
     ]);
     expect(wasNotified, 2);
   });
@@ -188,17 +205,9 @@ void main() {
   });
 }
 
-Matcher isSingleActivator(
-  LogicalKeyboardKey trigger, {
-  bool alt = false,
-  bool control = false,
-  bool meta = false,
-  bool shift = false,
-}) {
-  return isA<SingleActivator>()
-      .having((a) => a.trigger, 'key', trigger)
-      .having((a) => a.alt, 'alt', alt)
-      .having((a) => a.control, 'control', control)
-      .having((a) => a.meta, 'meta', meta)
-      .having((a) => a.shift, 'shift', shift);
+Matcher isLogicalKeySet(Set<LogicalKeyboardKey> triggers) {
+  return isA<LogicalKeySet>().having(
+      (keyset) => LogicalKeyboardKey.collapseSynonyms(keyset.triggers.toSet()),
+      'triggers',
+      triggers);
 }

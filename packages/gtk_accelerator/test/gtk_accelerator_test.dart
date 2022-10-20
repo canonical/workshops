@@ -7,107 +7,109 @@ void main() {
   test('parse', () {
     expect(
       parseGtkAccelerator('A'),
-      isSingleActivator(LogicalKeyboardKey.keyA),
+      isLogicalKeySet({LogicalKeyboardKey.keyA}),
     );
 
     expect(
       parseGtkAccelerator('<Ctrl>B'),
-      isSingleActivator(LogicalKeyboardKey.keyB, control: true),
+      isLogicalKeySet({LogicalKeyboardKey.keyB, LogicalKeyboardKey.control}),
     );
 
     expect(
       parseGtkAccelerator('<Shift>C'),
-      isSingleActivator(LogicalKeyboardKey.keyC, shift: true),
+      isLogicalKeySet({LogicalKeyboardKey.keyC, LogicalKeyboardKey.shift}),
     );
 
     expect(
       parseGtkAccelerator('<Meta>D'),
-      isSingleActivator(LogicalKeyboardKey.keyD, meta: true),
+      isLogicalKeySet({LogicalKeyboardKey.keyD, LogicalKeyboardKey.meta}),
     );
 
     expect(
       parseGtkAccelerator('<Ctrl><Shift><Alt><Meta>x'),
-      isSingleActivator(LogicalKeyboardKey.keyX,
-          control: true, shift: true, alt: true, meta: true),
+      isLogicalKeySet({
+        LogicalKeyboardKey.keyX,
+        LogicalKeyboardKey.control,
+        LogicalKeyboardKey.shift,
+        LogicalKeyboardKey.alt,
+        LogicalKeyboardKey.meta
+      }),
     );
 
     expect(
       parseGtkAccelerator('<Control>Page_Up'),
-      isSingleActivator(LogicalKeyboardKey.pageUp, control: true),
+      isLogicalKeySet({LogicalKeyboardKey.pageUp, LogicalKeyboardKey.control}),
     );
 
     expect(
       parseGtkAccelerator('<Alt>5'),
-      isSingleActivator(LogicalKeyboardKey.digit5, alt: true),
+      isLogicalKeySet({LogicalKeyboardKey.digit5, LogicalKeyboardKey.alt}),
     );
 
     expect(
       parseGtkAccelerator('<Shift>KP_5'),
-      isSingleActivator(LogicalKeyboardKey.numpad5, shift: true),
+      isLogicalKeySet({LogicalKeyboardKey.numpad5, LogicalKeyboardKey.shift}),
     );
   });
 
   test('format', () {
     expect(
-      formatGtkAccelerator(const SingleActivator(LogicalKeyboardKey.keyA)),
+      formatGtkAccelerator(LogicalKeySet(LogicalKeyboardKey.keyA)),
       'a',
     );
 
     expect(
       formatGtkAccelerator(
-          const SingleActivator(LogicalKeyboardKey.keyB, control: true)),
+          LogicalKeySet(LogicalKeyboardKey.keyB, LogicalKeyboardKey.control)),
       '<Control>b',
     );
 
     expect(
       formatGtkAccelerator(
-          const SingleActivator(LogicalKeyboardKey.keyC, shift: true)),
+          LogicalKeySet(LogicalKeyboardKey.keyC, LogicalKeyboardKey.shift)),
       '<Shift>c',
     );
 
     expect(
       formatGtkAccelerator(
-          const SingleActivator(LogicalKeyboardKey.keyD, meta: true)),
+          LogicalKeySet(LogicalKeyboardKey.keyD, LogicalKeyboardKey.meta)),
       '<Meta>d',
     );
 
     expect(
-      formatGtkAccelerator(const SingleActivator(LogicalKeyboardKey.keyX,
-          control: true, shift: true, alt: true, meta: true)),
+      formatGtkAccelerator(LogicalKeySet.fromSet({
+        LogicalKeyboardKey.keyX,
+        LogicalKeyboardKey.control,
+        LogicalKeyboardKey.shift,
+        LogicalKeyboardKey.alt,
+        LogicalKeyboardKey.meta
+      })),
       '<Shift><Control><Alt><Meta>x',
     );
 
     expect(
       formatGtkAccelerator(
-          const SingleActivator(LogicalKeyboardKey.pageUp, control: true)),
+          LogicalKeySet(LogicalKeyboardKey.pageUp, LogicalKeyboardKey.control)),
       '<Control>Page_Up',
     );
 
     expect(
       formatGtkAccelerator(
-          const SingleActivator(LogicalKeyboardKey.digit5, alt: true)),
+          LogicalKeySet(LogicalKeyboardKey.digit5, LogicalKeyboardKey.alt)),
       '<Alt>5',
     );
 
     expect(
       formatGtkAccelerator(
-          const SingleActivator(LogicalKeyboardKey.numpad5, shift: true)),
+          LogicalKeySet(LogicalKeyboardKey.numpad5, LogicalKeyboardKey.shift)),
       '<Shift>KP_5',
     );
   });
 }
 
-Matcher isSingleActivator(
-  LogicalKeyboardKey trigger, {
-  bool alt = false,
-  bool control = false,
-  bool meta = false,
-  bool shift = false,
-}) {
-  return isA<SingleActivator>()
-      .having((a) => a.trigger, 'key', trigger)
-      .having((a) => a.alt, 'alt', alt)
-      .having((a) => a.control, 'control', control)
-      .having((a) => a.meta, 'meta', meta)
-      .having((a) => a.shift, 'shift', shift);
+Matcher isLogicalKeySet(Set<LogicalKeyboardKey> triggers) {
+  return isA<LogicalKeySet>().having(
+      (keyset) => LogicalKeyboardKey.collapseSynonyms(keyset.triggers.toSet()),
+      'triggers',
+      triggers);
 }
