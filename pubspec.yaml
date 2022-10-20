@@ -10,6 +10,8 @@ dependencies:
   async_value:
     path: packages/async_value
   collection: ^1.15.0
+  command_store:
+    path: packages/command_store
   context_menu:
     path: packages/context_menu
   data_size: ^0.2.0
@@ -45,8 +47,6 @@ dependencies:
   provider: ^6.0.3
   safe_change_notifier: ^0.2.0
   shared_preferences: ^2.0.15
-  shortcut_store:
-    path: packages/shortcut_store
   simplestreams:
     path: packages/simplestreams
   terminal_view:
