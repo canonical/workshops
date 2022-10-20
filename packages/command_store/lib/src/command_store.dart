@@ -46,7 +46,9 @@ class CommandStoreState extends State<CommandStore> {
     final ref = _refs.update(command.id, (value) => ++value, ifAbsent: () => 1);
     if (ref == 1) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        setState(() => _commands = List.of(_commands)..add(command));
+        if (mounted) {
+          setState(() => _commands = List.of(_commands)..add(command));
+        }
       });
     }
   }
@@ -55,7 +57,9 @@ class CommandStoreState extends State<CommandStore> {
     final ref = _refs.update(command.id, (value) => --value, ifAbsent: () => 0);
     if (ref == 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        setState(() => _commands = List.of(_commands)..remove(command));
+        if (mounted) {
+          setState(() => _commands = List.of(_commands)..remove(command));
+        }
       });
     }
   }
