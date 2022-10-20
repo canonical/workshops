@@ -8,6 +8,7 @@ import 'package:terminal_view/terminal_view.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../tabs/tab_model.dart';
+import 'terminal_commands.dart';
 import 'terminal_manager.dart';
 import 'terminal_pane.dart';
 import 'terminal_settings.dart';
@@ -114,11 +115,13 @@ class _TerminalPageState extends State<_TerminalPage>
     final tabs = context.read<TabModel>();
     return Stack(
       children: [
-        TerminalTheme(
-          data: getTerminalTheme(widget.instance.os),
-          child: NestedSplitView(
-            controller: _splitter,
-            builder: _buildPane,
+        TerminalCommands(
+          child: TerminalTheme(
+            data: getTerminalTheme(widget.instance.os),
+            child: NestedSplitView(
+              controller: _splitter,
+              builder: _buildPane,
+            ),
           ),
         ),
         if (tabs.length == 1)

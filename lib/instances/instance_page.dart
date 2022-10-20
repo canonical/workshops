@@ -1,3 +1,4 @@
+import 'package:command_store/command_store.dart';
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
@@ -21,25 +22,31 @@ class InstancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabs = context.read<TabModel>();
-    return Scaffold(
-      body: ContextMenuArea(
-        builder: (context, position) => buildInstanceMenu(
-          context: context,
-          onAddTab: tabs.newTab,
-          onCloseTab: tabs.length > 1 ? tabs.closeTab : null,
+    return Shortcuts(
+      shortcuts: CommandStore.shortcutsOf(context),
+      child: Scaffold(
+        body: ContextMenuArea(
+          builder: (context, position) => buildInstanceMenu(
+            context: context,
+            onAddTab: tabs.newTab,
+            onCloseTab: tabs.length > 1 ? tabs.closeTab : null,
+          ),
+          child: Focus(
+            autofocus: true,
+            child: InstanceView(
+              onStart: onStart,
+            ),
+          ),
         ),
-        child: InstanceView(
-          onStart: onStart,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            final instance = await showLauncherWizard(context);
+            if (instance != null) {
+              onCreate(instance);
+            }
+          },
+          child: const Icon(Icons.add),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final instance = await showLauncherWizard(context);
-          if (instance != null) {
-            onCreate(instance);
-          }
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }
