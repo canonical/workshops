@@ -1,6 +1,6 @@
+import 'package:command_store/command_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shortcut_store/shortcut_store.dart';
 
 import 'tab_model.dart';
 
@@ -13,7 +13,7 @@ class TabShortcuts extends StatelessWidget {
   Widget build(BuildContext context) {
     final length = context.select<TabModel, int>((m) => m.length);
     final model = context.read<TabModel>();
-    final shortcuts = ShortcutStore.of(context);
+    final shortcuts = CommandStore.shortcutsOf(context);
 
     return CallbackShortcuts(
       bindings: {

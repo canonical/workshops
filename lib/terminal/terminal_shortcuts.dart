@@ -1,9 +1,9 @@
+import 'package:command_store/command_store.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shortcut_store/shortcut_store.dart';
 import 'package:terminal_view/terminal_view.dart';
 
 Map<ShortcutActivator, Intent> buildTerminalShortcuts(BuildContext context) {
-  final shortcuts = ShortcutStore.of(context);
+  final shortcuts = CommandStore.shortcutsOf(context);
   return {
     // edit
     for (final shortcut in shortcuts.get('terminal-copy'))

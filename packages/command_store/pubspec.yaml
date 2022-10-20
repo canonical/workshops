@@ -1,4 +1,4 @@
-name: shortcut_store
+name: command_store
 publish_to: 'none'
 
 environment:
