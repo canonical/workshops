@@ -16,7 +16,6 @@ class CommandScope extends StatefulWidget {
 
 class _CommandScopeState extends State<CommandScope> {
   late CommandStoreState _store;
-  final _focusNode = FocusNode();
 
   void _addCommands(List<Command> commands) {
     for (final command in commands) {
@@ -30,8 +29,8 @@ class _CommandScopeState extends State<CommandScope> {
     }
   }
 
-  void _updateCommands() {
-    if (_focusNode.hasFocus) {
+  void _onFocusChange(bool hasFocus) {
+    if (hasFocus) {
       _addCommands(widget.commands);
     } else {
       _removeCommands(widget.commands);
@@ -42,7 +41,12 @@ class _CommandScopeState extends State<CommandScope> {
   void initState() {
     super.initState();
     _store = CommandStore.of(context);
-    _focusNode.addListener(_updateCommands);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _store = CommandStore.of(context);
   }
 
   @override
@@ -59,15 +63,14 @@ class _CommandScopeState extends State<CommandScope> {
   @override
   void dispose() {
     _removeCommands(widget.commands);
-    _focusNode.removeListener(_updateCommands);
-    _focusNode.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Focus(
-      focusNode: _focusNode,
+      canRequestFocus: false,
+      onFocusChange: _onFocusChange,
       child: widget.child,
     );
   }
