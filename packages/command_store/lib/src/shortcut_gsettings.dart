@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:dbus/dbus.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gsettings/gsettings.dart';
 import 'package:gtk_accelerator/gtk_accelerator.dart';
 
+import 'logical_key_set_x.dart';
 import 'shortcut_settings.dart';
 
 class ShortcutGSettings extends ShortcutSettings {
@@ -28,7 +28,7 @@ class ShortcutGSettings extends ShortcutSettings {
     var wasChanged = false;
     for (final id in await _gsettings.list()) {
       final shortcuts = await _fetchShortcuts(id);
-      if (!_LogicalKeySetEquality.listEquals(_shortcuts[id], shortcuts)) {
+      if (!logicalKeySetListEquals(_shortcuts[id], shortcuts)) {
         _shortcuts[id] = shortcuts;
         wasChanged = true;
       }
@@ -91,29 +91,4 @@ extension _LogicalKeySetListX on List<LogicalKeySet> {
   DBusArray toDbusArray() {
     return DBusArray.string(map(formatGtkAccelerator).toList());
   }
-}
-
-extension _LogicalKeySetX on LogicalKeySet {
-  bool equals(LogicalKeySet other) {
-    final listEquals = const IterableEquality<LogicalKeyboardKey>().equals;
-    return listEquals(other.triggers, triggers);
-  }
-}
-
-class _LogicalKeySetEquality implements Equality<LogicalKeySet> {
-  const _LogicalKeySetEquality();
-
-  static final listEquals =
-      const ListEquality<LogicalKeySet>(_LogicalKeySetEquality()).equals;
-
-  @override
-  bool isValidKey(Object? o) => o is LogicalKeySet;
-
-  @override
-  bool equals(LogicalKeySet e1, LogicalKeySet e2) {
-    return identical(e1, e2) || e1.equals(e2);
-  }
-
-  @override
-  int hash(LogicalKeySet e) => Object.hashAll(e.triggers);
 }

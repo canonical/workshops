@@ -1,5 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
+
+import 'logical_key_set_x.dart';
 
 @immutable
 class Command {
@@ -42,16 +43,12 @@ class Command {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    final listEquals = const ListEquality().equals;
     return other is Command &&
         other.id == id &&
-        listEquals(other.shortcuts, shortcuts) &&
+        logicalKeySetListEquals(other.shortcuts, shortcuts) &&
         other.intent == intent;
   }
 
   @override
-  int get hashCode {
-    final listHash = const ListEquality().hash;
-    return Object.hash(id, listHash(shortcuts), intent);
-  }
+  int get hashCode => Object.hash(id, logicalKeySetListHash(shortcuts), intent);
 }
