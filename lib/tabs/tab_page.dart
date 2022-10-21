@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 import '../instances/instance_page.dart';
 import '../terminal/terminal_page.dart';
 import '../widgets/product_logo.dart';
+import 'tab_commands.dart';
 import 'tab_item.dart';
 import 'tab_model.dart';
-import 'tab_shortcuts.dart';
 
 class TabPage extends StatelessWidget {
   const TabPage({super.key});
@@ -25,7 +25,7 @@ class TabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final model = context.watch<TabModel>();
-    return TabShortcuts(
+    return TabCommands(
       child: Focus(
         autofocus: true,
         child: Scaffold(

@@ -1,5 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 
+import 'command.dart';
 import 'shortcut_settings.dart';
 
 class CommandStore extends StatefulWidget {
@@ -8,18 +10,60 @@ class CommandStore extends StatefulWidget {
   final Widget child;
   final ShortcutSettings shortcuts;
 
-  static ShortcutSettings shortcutsOf(BuildContext context) {
+  static List<Command> commandsOf(BuildContext context) {
     final store =
         context.dependOnInheritedWidgetOfExactType<_InheritedCommandStore>();
     assert(store != null, 'CommandStore not found in context');
-    return store!.shortcuts;
+    return store!.commands;
+  }
+
+  static Map<ShortcutActivator, Intent> shortcutsOf(BuildContext context) {
+    final commands = CommandStore.commandsOf(context);
+    return Map.fromEntries([
+      for (final command in commands)
+        for (final shortcut in command.shortcuts ?? const <LogicalKeySet>[])
+          MapEntry(shortcut, command.intent),
+    ]);
+  }
+
+  static CommandStoreState of(BuildContext context) {
+    final state = context.findAncestorStateOfType<CommandStoreState>();
+    assert(state != null, 'CommandStore not found in context');
+    return state!;
   }
 
   @override
-  State<CommandStore> createState() => _CommandStoreState();
+  State<CommandStore> createState() => CommandStoreState();
 }
 
-class _CommandStoreState extends State<CommandStore> {
+class CommandStoreState extends State<CommandStore> {
+  var _commands = <Command>[];
+  final _refs = <String, int>{};
+
+  List<Command> get commands => _commands;
+
+  void add(Command command) {
+    final ref = _refs.update(command.id, (value) => ++value, ifAbsent: () => 1);
+    if (ref == 1) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() => _commands = List.of(_commands)..add(command));
+        }
+      });
+    }
+  }
+
+  void remove(Command command) {
+    final ref = _refs.update(command.id, (value) => --value, ifAbsent: () => 0);
+    if (ref == 0) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() => _commands = List.of(_commands)..remove(command));
+        }
+      });
+    }
+  }
+
   @override
   void initState() {
     widget.shortcuts.load();
@@ -34,18 +78,29 @@ class _CommandStoreState extends State<CommandStore> {
 
   @override
   Widget build(BuildContext context) {
-    return _InheritedCommandStore(
-      shortcuts: widget.shortcuts,
+    return AnimatedBuilder(
+      animation: widget.shortcuts,
+      builder: (context, child) {
+        return _InheritedCommandStore(
+          commands: _commands
+              .map((c) => c.copyWith(shortcuts: widget.shortcuts.get(c.id)))
+              .toList(),
+          child: child!,
+        );
+      },
       child: widget.child,
     );
   }
 }
 
-class _InheritedCommandStore extends InheritedNotifier<ShortcutSettings> {
-  const _InheritedCommandStore({
-    required super.child,
-    required ShortcutSettings shortcuts,
-  }) : super(notifier: shortcuts);
+class _InheritedCommandStore extends InheritedWidget {
+  const _InheritedCommandStore({required super.child, required this.commands});
 
-  ShortcutSettings get shortcuts => notifier!;
+  final List<Command> commands;
+
+  @override
+  bool updateShouldNotify(covariant _InheritedCommandStore oldWidget) {
+    final listEquals = const ListEquality().equals;
+    return !listEquals(commands, oldWidget.commands);
+  }
 }

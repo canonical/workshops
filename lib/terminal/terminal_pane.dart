@@ -1,3 +1,4 @@
+import 'package:command_store/command_store.dart';
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +7,6 @@ import 'package:terminal_view/terminal_view.dart';
 import '../tabs/tab_model.dart';
 import 'terminal_menu.dart';
 import 'terminal_model.dart';
-import 'terminal_shortcuts.dart';
 
 class TerminalPane extends StatelessWidget {
   const TerminalPane({
@@ -44,7 +44,7 @@ class TerminalPane extends StatelessWidget {
               ),
             );
           },
-          shortcuts: buildTerminalShortcuts(context),
+          shortcuts: CommandStore.shortcutsOf(context),
           actions: {
             MoveFocusIntent: MoveFocusAction(),
             SplitIntent: SplitAction(onSplit),
