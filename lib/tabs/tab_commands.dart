@@ -20,19 +20,20 @@ class TabCommands extends StatelessWidget {
           id: 'tab-new',
           intent: VoidCallbackIntent(model.newTab),
         ),
-        if (length > 1)
+        if (length > 1) ...[
           Command(
             id: 'tab-close',
             intent: VoidCallbackIntent(model.closeTab),
           ),
-        Command(
-          id: 'tab-next',
-          intent: VoidCallbackIntent(model.nextTab),
-        ),
-        Command(
-          id: 'tab-previous',
-          intent: VoidCallbackIntent(model.previousTab),
-        ),
+          Command(
+            id: 'tab-next',
+            intent: VoidCallbackIntent(model.nextTab),
+          ),
+          Command(
+            id: 'tab-previous',
+            intent: VoidCallbackIntent(model.previousTab),
+          ),
+        ],
       ],
       child: child,
     );
