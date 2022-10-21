@@ -51,8 +51,8 @@ class _CommandScopeState extends State<CommandScope> {
 
   @override
   void dispose() {
-    super.dispose();
     _removeCommands(widget.commands);
+    super.dispose();
   }
 
   @override
