@@ -58,7 +58,8 @@ class CommandStoreState extends State<CommandStore> {
     if (ref == 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
-          setState(() => _commands = List.of(_commands)..remove(command));
+          setState(() => _commands = List.of(_commands)
+            ..removeWhere((c) => c.id == command.id));
         }
       });
     }
