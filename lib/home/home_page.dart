@@ -5,12 +5,14 @@ import 'package:lxd/lxd.dart';
 
 import '../launcher/launcher_wizard.dart';
 import 'home_menu.dart';
+import 'instance_actions.dart';
+import 'instance_intents.dart';
 import 'instance_view.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.onStart});
+  const HomePage({super.key, required this.onSelected});
 
-  final ValueChanged<LxdInstance> onStart;
+  final ValueChanged<LxdInstance> onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +21,13 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         body: ContextMenuArea(
           builder: (context, position) => buildHomeMenu(context: context),
-          child: Focus(
-            autofocus: true,
-            child: InstanceView(
-              onStart: onStart,
+          child: Actions(
+            actions: {
+              SelectInstanceIntent: SelectInstanceAction(onSelected),
+            },
+            child: const Focus(
+              autofocus: true,
+              child: InstanceView(),
             ),
           ),
         ),
@@ -30,7 +35,7 @@ class HomePage extends StatelessWidget {
           onPressed: () async {
             final instance = await showLauncherWizard(context);
             if (instance != null) {
-              onStart(instance);
+              onSelected(instance);
             }
           },
           child: const Icon(Icons.add),

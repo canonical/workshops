@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lxd/lxd.dart';
 import 'package:provider/provider.dart';
 
 import 'instance_store.dart';
 import 'instance_tile.dart';
 
 class InstanceView extends StatefulWidget {
-  const InstanceView({super.key, this.onStart});
-
-  final ValueChanged<LxdInstance>? onStart;
+  const InstanceView({super.key});
 
   @override
   State<InstanceView> createState() => _InstanceViewState();
@@ -26,39 +23,26 @@ class _InstanceViewState extends State<InstanceView> {
   Widget build(BuildContext context) {
     final store = context.watch<InstanceStore>();
     return store.instances.map(
-      data: (data) => _InstanceListView(
-        instances: data.value,
-        onStart: widget.onStart,
-      ),
-      loading: (loading) => _InstanceListView(
-        instances: loading.value,
-        onStart: widget.onStart,
-      ),
+      data: (data) => _InstanceListView(instances: data.value),
+      loading: (loading) => _InstanceListView(instances: loading.value),
       error: (error) => Text('TODO: ${error.error}'),
     );
   }
 }
 
 class _InstanceListView extends StatelessWidget {
-  const _InstanceListView({
-    required this.instances,
-    this.onStart,
-  });
+  const _InstanceListView({required this.instances});
 
   final List<String>? instances;
-  final ValueChanged<LxdInstance>? onStart;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: instances?.length ?? 0,
-      itemBuilder: (context, index) {
-        return InstanceTile.create(
-          context,
-          name: instances![index],
-          onStart: onStart,
-        );
-      },
+      itemBuilder: (context, index) => InstanceTile.create(
+        context,
+        name: instances![index],
+      ),
     );
   }
 }

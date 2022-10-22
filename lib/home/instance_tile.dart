@@ -7,22 +7,18 @@ import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
+import 'instance_actions.dart';
+import 'instance_intents.dart';
 import 'instance_model.dart';
 
 class InstanceTile extends StatefulWidget {
-  const InstanceTile({super.key, this.onStart});
+  const InstanceTile({super.key});
 
-  final ValueChanged<LxdInstance>? onStart;
-
-  static Widget create(
-    BuildContext context, {
-    required String name,
-    required ValueChanged<LxdInstance>? onStart,
-  }) {
+  static Widget create(BuildContext context, {required String name}) {
     return ChangeNotifierProvider(
       key: ValueKey(name),
       create: (_) => InstanceModel(name, getService<LxdService>()),
-      child: InstanceTile(onStart: onStart),
+      child: const InstanceTile(),
     );
   }
 
@@ -41,22 +37,39 @@ class _InstanceTileState extends State<InstanceTile> {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<InstanceModel>();
-    final instance = model.instance.valueOrNull;
-    final canStop = instance?.isRunning == true;
-    final canDelete = instance?.isStopped == true;
-    final canStart = widget.onStart != null && instance != null;
-    return ListTile(
-      leading: OsLogo.asset(name: instance?.imageName, size: 48),
-      title: Text(instance?.name ?? ''),
-      subtitle: Text(instance?.imageDescription ?? ''),
-      trailing: instance?.isBusy == true
-          ? _BusyButton()
-          : canStop
-              ? _StopButton(model.stop)
-              : canDelete
-                  ? _DeleteButton(model.delete)
-                  : null,
-      onTap: canStart ? () => widget.onStart!(instance) : null,
+    return InstanceActions(
+      child: Builder(
+        builder: (context) {
+          final instance = model.instance.valueOrNull;
+
+          final canStop =
+              Actions.find<StopInstanceIntent>(context).isActionEnabled;
+          final stopHandler =
+              Actions.handler(context, StopInstanceIntent(instance));
+
+          final canDelete =
+              Actions.find<DeleteInstanceIntent>(context).isActionEnabled;
+          final deleteHandler =
+              Actions.handler(context, DeleteInstanceIntent(instance));
+
+          return ListTile(
+            leading: OsLogo.asset(name: instance?.imageName, size: 48),
+            title: Text(instance?.name ?? ''),
+            subtitle: Text(instance?.imageDescription ?? ''),
+            trailing: instance?.isBusy == true
+                ? _BusyButton()
+                : canStop
+                    ? _StopButton(stopHandler)
+                    : canDelete
+                        ? _DeleteButton(deleteHandler)
+                        : null,
+            onTap: () {
+              Actions.invoke(context, SelectInstanceIntent(instance));
+              Actions.invoke(context, StartInstanceIntent(instance));
+            },
+          );
+        },
+      ),
     );
   }
 }
@@ -72,12 +85,12 @@ class _IconButton extends IconButton {
 }
 
 class _StopButton extends _IconButton {
-  const _StopButton(VoidCallback onPressed)
+  const _StopButton(VoidCallback? onPressed)
       : super(icon: const Icon(Icons.stop), onPressed: onPressed);
 }
 
 class _DeleteButton extends _IconButton {
-  const _DeleteButton(VoidCallback onPressed)
+  const _DeleteButton(VoidCallback? onPressed)
       : super(icon: const Icon(Icons.close), onPressed: onPressed);
 }
 
