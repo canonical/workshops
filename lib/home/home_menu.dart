@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../tabs/tab_intents.dart';
 
-List<PopupMenuEntry> buildInstanceMenu({
+List<PopupMenuEntry> buildHomeMenu({
   required BuildContext context,
 }) {
   final l10n = AppLocalizations.of(context);

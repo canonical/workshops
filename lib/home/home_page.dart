@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
 
 import '../launcher/launcher_wizard.dart';
-import 'instance_menu.dart';
+import 'home_menu.dart';
 import 'instance_view.dart';
 
-class InstancePage extends StatelessWidget {
-  const InstancePage({
+class HomePage extends StatelessWidget {
+  const HomePage({
     super.key,
     required this.onStart,
     required this.onCreate,
@@ -23,7 +23,7 @@ class InstancePage extends StatelessWidget {
       shortcuts: CommandStore.shortcutsOf(context),
       child: Scaffold(
         body: ContextMenuArea(
-          builder: (context, position) => buildInstanceMenu(context: context),
+          builder: (context, position) => buildHomeMenu(context: context),
           child: Focus(
             autofocus: true,
             child: InstanceView(

@@ -4,7 +4,7 @@ import 'package:lxd_x/lxd_x.dart';
 import 'package:movable_tabs/movable_tabs.dart';
 import 'package:provider/provider.dart';
 
-import '../instances/instance_page.dart';
+import '../home/home_page.dart';
 import '../terminal/terminal_page.dart';
 import '../widgets/product_logo.dart';
 import 'tab_actions.dart';
@@ -81,7 +81,7 @@ class TabPage extends StatelessWidget {
                       return FocusScope(
                         node: tab.focusScope,
                         child: tab.instance == null
-                            ? InstancePage(
+                            ? HomePage(
                                 onStart: (instance) => tab.instance = instance,
                                 onCreate: (instance) => tab.instance = instance,
                               )
