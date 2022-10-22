@@ -1,4 +1,5 @@
 import 'package:async_value/async_value.dart';
+import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
@@ -9,6 +10,7 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 
 import 'instance_actions.dart';
 import 'instance_intents.dart';
+import 'instance_menu.dart';
 import 'instance_model.dart';
 
 class InstanceTile extends StatefulWidget {
@@ -52,21 +54,27 @@ class _InstanceTileState extends State<InstanceTile> {
           final deleteHandler =
               Actions.handler(context, DeleteInstanceIntent(instance));
 
-          return ListTile(
-            leading: OsLogo.asset(name: instance?.imageName, size: 48),
-            title: Text(instance?.name ?? ''),
-            subtitle: Text(instance?.imageDescription ?? ''),
-            trailing: instance?.isBusy == true
-                ? _BusyButton()
-                : canStop
-                    ? _StopButton(stopHandler)
-                    : canDelete
-                        ? _DeleteButton(deleteHandler)
-                        : null,
-            onTap: () {
-              Actions.invoke(context, SelectInstanceIntent(instance));
-              Actions.invoke(context, StartInstanceIntent(instance));
-            },
+          return ContextMenuArea(
+            builder: (context, position) => buildInstanceMenu(
+              context: context,
+              instance: instance,
+            ),
+            child: ListTile(
+              leading: OsLogo.asset(name: instance?.imageName, size: 48),
+              title: Text(instance?.name ?? ''),
+              subtitle: Text(instance?.imageDescription ?? ''),
+              trailing: instance?.isBusy == true
+                  ? _BusyButton()
+                  : canStop
+                      ? _StopButton(stopHandler)
+                      : canDelete
+                          ? _DeleteButton(deleteHandler)
+                          : null,
+              onTap: () {
+                Actions.invoke(context, SelectInstanceIntent(instance));
+                Actions.invoke(context, StartInstanceIntent(instance));
+              },
+            ),
           );
         },
       ),
