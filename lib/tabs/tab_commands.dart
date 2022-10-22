@@ -2,6 +2,7 @@ import 'package:command_store/command_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'tab_intents.dart';
 import 'tab_model.dart';
 
 class TabCommands extends StatelessWidget {
@@ -12,26 +13,24 @@ class TabCommands extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final length = context.select<TabModel, int>((m) => m.length);
-    final model = context.read<TabModel>();
-
     return CommandScope(
       commands: [
-        Command(
+        const Command(
           id: 'tab-new',
-          intent: VoidCallbackIntent(model.newTab),
+          intent: AddTabIntent(),
         ),
         if (length > 1) ...[
-          Command(
+          const Command(
             id: 'tab-close',
-            intent: VoidCallbackIntent(model.closeTab),
+            intent: CloseTabIntent(),
           ),
-          Command(
+          const Command(
             id: 'tab-next',
-            intent: VoidCallbackIntent(model.nextTab),
+            intent: NextTabIntent(),
           ),
-          Command(
+          const Command(
             id: 'tab-previous',
-            intent: VoidCallbackIntent(model.previousTab),
+            intent: PreviousTabIntent(),
           ),
         ],
       ],

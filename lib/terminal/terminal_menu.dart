@@ -2,10 +2,10 @@ import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../tabs/tab_intents.dart';
+
 List<PopupMenuEntry> buildTerminalMenu({
   required BuildContext context,
-  required VoidCallback? onAddTab,
-  required VoidCallback? onCloseTab,
   required VoidCallback? onSplitTab,
   required VoidCallback? onCloseSplit,
   VoidCallback? onCopy,
@@ -15,13 +15,13 @@ List<PopupMenuEntry> buildTerminalMenu({
   final l10n = AppLocalizations.of(context);
   return <PopupMenuEntry>[
     ContextMenuItem(
-      onTap: onAddTab,
-      enabled: onAddTab != null,
+      onTap: Actions.handler(context, const AddTabIntent()),
+      enabled: Actions.find<AddTabIntent>(context).isActionEnabled,
       child: Text(l10n.newTabMenuItem),
     ),
     ContextMenuItem(
-      onTap: onCloseTab,
-      enabled: onCloseTab != null,
+      onTap: Actions.handler(context, const CloseTabIntent()),
+      enabled: Actions.find<CloseTabIntent>(context).isActionEnabled,
       child: Text(l10n.closeTabMenuItem),
     ),
     const PopupMenuDivider(),

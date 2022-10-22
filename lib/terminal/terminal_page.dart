@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:terminal_view/terminal_view.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
-import '../tabs/tab_model.dart';
+import '../tabs/tab_intents.dart';
 import 'terminal_commands.dart';
 import 'terminal_manager.dart';
 import 'terminal_pane.dart';
@@ -112,7 +112,6 @@ class _TerminalPageState extends State<_TerminalPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final tabs = context.read<TabModel>();
     return Stack(
       children: [
         TerminalCommands(
@@ -124,7 +123,7 @@ class _TerminalPageState extends State<_TerminalPage>
             ),
           ),
         ),
-        if (tabs.length == 1)
+        if (Actions.find<NewTabIntent>(context).isActionEnabled)
           Positioned.directional(
             textDirection: Directionality.of(context),
             top: 8,
@@ -136,7 +135,7 @@ class _TerminalPageState extends State<_TerminalPage>
                 color: Colors.white,
                 splashRadius: 16,
                 iconSize: 16,
-                onPressed: tabs.newTab,
+                onPressed: () => Actions.invoke(context, const NewTabIntent()),
               ),
             ),
           ),
