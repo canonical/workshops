@@ -83,7 +83,6 @@ class TabPage extends StatelessWidget {
                         child: tab.instance == null
                             ? HomePage(
                                 onStart: (instance) => tab.instance = instance,
-                                onCreate: (instance) => tab.instance = instance,
                               )
                             : TerminalPage(
                                 instance: tab.instance!,

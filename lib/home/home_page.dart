@@ -8,14 +8,9 @@ import 'home_menu.dart';
 import 'instance_view.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({
-    super.key,
-    required this.onStart,
-    required this.onCreate,
-  });
+  const HomePage({super.key, required this.onStart});
 
   final ValueChanged<LxdInstance> onStart;
-  final ValueChanged<LxdInstance> onCreate;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +30,7 @@ class HomePage extends StatelessWidget {
           onPressed: () async {
             final instance = await showLauncherWizard(context);
             if (instance != null) {
-              onCreate(instance);
+              onStart(instance);
             }
           },
           child: const Icon(Icons.add),
