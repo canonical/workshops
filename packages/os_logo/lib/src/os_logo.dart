@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ProductLogo extends StatefulWidget {
-  const ProductLogo.asset({super.key, required this.name, required this.size});
+class OsLogo extends StatefulWidget {
+  const OsLogo.asset({super.key, required this.name, required this.size});
 
   final String? name;
   final double size;
 
   @override
-  State<ProductLogo> createState() => _ProductLogoState();
+  State<OsLogo> createState() => _OsLogoState();
 }
 
-class _ProductLogoState extends State<ProductLogo> {
+class _OsLogoState extends State<OsLogo> {
   String? _svg;
 
   @override
   void initState() {
     super.initState();
-    _updateSvg();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _updateSvg());
+  }
+
+  @override
+  void didUpdateWidget(covariant OsLogo oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.name != oldWidget.name) {
+      _updateSvg();
+    }
   }
 
   Future<void> _updateSvg() async {
@@ -31,7 +39,7 @@ class _ProductLogoState extends State<ProductLogo> {
       final name = widget.name?.toLowerCase();
       if (name != null) {
         final bundle = DefaultAssetBundle.of(context);
-        return await bundle.loadString('assets/$name.svg');
+        return await bundle.loadString('packages/os_logo/assets/$name.svg');
       }
     } on FlutterError catch (_) {}
     return null;
@@ -49,13 +57,5 @@ class _ProductLogoState extends State<ProductLogo> {
             )
           : null,
     );
-  }
-
-  @override
-  void didUpdateWidget(covariant ProductLogo oldWidget) {
-    if (widget.name != oldWidget.name) {
-      _updateSvg();
-    }
-    super.didUpdateWidget(oldWidget);
   }
 }

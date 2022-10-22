@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_x/lxd_x.dart';
+import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
-import '../widgets/product_logo.dart';
 import 'instance_model.dart';
 
 class InstanceTile extends StatefulWidget {
@@ -46,7 +46,7 @@ class _InstanceTileState extends State<InstanceTile> {
     final canDelete = instance?.isStopped == true;
     final canStart = widget.onStart != null && instance != null;
     return ListTile(
-      leading: ProductLogo.asset(name: instance?.imageName, size: 48),
+      leading: OsLogo.asset(name: instance?.imageName, size: 48),
       title: Text(instance?.name ?? ''),
       subtitle: Text(instance?.imageDescription ?? ''),
       trailing: instance?.isBusy == true

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:movable_tabs/movable_tabs.dart';
+import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
 
 import '../home/home_page.dart';
 import '../terminal/terminal_page.dart';
-import '../widgets/product_logo.dart';
 import 'tab_actions.dart';
 import 'tab_commands.dart';
 import 'tab_intents.dart';
@@ -48,7 +48,7 @@ class TabPage extends StatelessWidget {
                               context,
                               CloseTabIntent(index),
                             ),
-                            icon: ProductLogo.asset(
+                            icon: OsLogo.asset(
                               name: tab.instance?.os,
                               size: 32,
                             ),

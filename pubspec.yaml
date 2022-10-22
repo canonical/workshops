@@ -20,7 +20,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_staggered_grid_view: ^0.6.1
-  flutter_svg: ^1.1.0
   freezed_annotation: ^2.0.3
   gsettings: ^0.2.5
   handy_window: ^0.1.4+1
@@ -40,6 +39,8 @@ dependencies:
     path: packages/movable_tabs
   nested_split_view:
     path: packages/nested_split_view
+  os_logo:
+    path: packages/os_logo
   osarch:
     path: packages/osarch
   petname:
