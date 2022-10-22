@@ -82,7 +82,8 @@ class TabPage extends StatelessWidget {
                         node: tab.focusScope,
                         child: tab.instance == null
                             ? HomePage(
-                                onStart: (instance) => tab.instance = instance,
+                                onSelected: (instance) =>
+                                    tab.instance = instance,
                               )
                             : TerminalPage(
                                 instance: tab.instance!,

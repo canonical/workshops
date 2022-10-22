@@ -23,6 +23,7 @@
     }
   },
   "creatingInstanceText": "Creating instance",
+  "deleteInstanceMenuItem": "Delete Instance",
   "deletingInstanceText": "Deleting instance",
   "downloadingInstanceText": "Downloading instance",
   "finalizingFeaturesText": "Finalizing features",
@@ -41,7 +42,9 @@
   "selectImageTitle": "Select image",
   "selectOsTitle": "Select OS",
   "splitTabMenuItem": "Split Tab",
+  "startInstanceMenuItem": "Start Instance",
   "startingInstanceText": "Starting instance",
+  "stopInstanceMenuItem": "Stop Instance",
   "stoppingInstanceText": "Stopping instance",
   "typeLabel": "Type",
   "unpackingInstanceText": "Unpacking instance",

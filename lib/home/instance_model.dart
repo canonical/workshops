@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:async_value/async_value.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
+import 'package:lxd_x/lxd_x.dart';
 import 'package:meta/meta.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
@@ -17,6 +18,9 @@ class InstanceModel extends SafeChangeNotifier {
   var _instance = const InstanceValue.data(null);
 
   InstanceValue get instance => _instance;
+
+  bool get isRunning => instance.value?.isRunning == true;
+  bool get isStopped => instance.value?.isStopped == true;
 
   @protected
   set instance(InstanceValue instance) {
@@ -43,6 +47,8 @@ class InstanceModel extends SafeChangeNotifier {
     _sub?.cancel();
     super.dispose();
   }
+
+  Future<void> start() => _service.startInstance(_name);
 
   Future<void> stop() => _service.stopInstance(_name);
 
