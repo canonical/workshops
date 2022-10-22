@@ -3,11 +3,11 @@ import 'package:data_size/data_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd/lxd.dart';
+import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
-import '../widgets/product_logo.dart';
 import '../widgets/wizard_page.dart';
 import 'launcher_l10n.dart';
 import 'launcher_model.dart';
@@ -85,7 +85,7 @@ class RemoteImagePage extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ProductLogo.asset(name: os, size: 192),
+                        OsLogo.asset(name: os, size: 192),
                         const SizedBox(height: 8),
                         Text(
                           os,

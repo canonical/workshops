@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
-import 'product_logo.dart';
+import 'package:os_logo/os_logo.dart';
 
 class OsSelector extends StatelessWidget {
   const OsSelector({
@@ -77,7 +76,7 @@ class _OsTile extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ProductLogo.asset(
+          OsLogo.asset(
             key: ValueKey(os),
             name: os,
             size: logoSize,
