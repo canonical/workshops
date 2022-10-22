@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 import '../instances/instance_page.dart';
 import '../terminal/terminal_page.dart';
 import '../widgets/product_logo.dart';
+import 'tab_actions.dart';
 import 'tab_commands.dart';
+import 'tab_intents.dart';
 import 'tab_item.dart';
 import 'tab_model.dart';
 
@@ -26,64 +28,72 @@ class TabPage extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final model = context.watch<TabModel>();
     return TabCommands(
-      child: Focus(
-        autofocus: true,
-        child: Scaffold(
-          appBar: model.tabs.length <= 1
-              ? null
-              : MovableTabBar(
-                  count: model.tabs.length,
-                  builder: (context, index) {
-                    return ChangeNotifierProvider.value(
-                      value: model.tabs[index],
-                      builder: (context, child) {
-                        final tab = context.watch<TabItem>();
-                        return MovableTabButton(
-                          selected: index == model.currentIndex,
-                          onPressed: () => model.currentIndex = index,
-                          onClosed: () => model.removeTab(index),
-                          icon: ProductLogo.asset(
-                            name: tab.instance?.os,
-                            size: 32,
-                          ),
-                          label: Text(tab.instance?.name ?? l10n.homeTab),
-                        );
-                      },
-                    );
-                  },
-                  trailing: IconButton(
-                    icon: const Icon(Icons.add),
-                    splashRadius: 16,
-                    iconSize: 16,
-                    onPressed: model.newTab,
-                  ),
-                  onMoved: model.moveTab,
-                  preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
-                ),
-          body: IndexedStack(
-            index: model.currentIndex,
-            children: [
-              for (final tab in model.tabs)
-                ChangeNotifierProvider.value(
-                  value: tab,
-                  key: ValueKey(tab),
-                  builder: (context, child) {
-                    final tab = context.watch<TabItem>();
-                    return FocusScope(
-                      node: tab.focusScope,
-                      child: tab.instance == null
-                          ? InstancePage(
-                              onStart: (instance) => tab.instance = instance,
-                              onCreate: (instance) => tab.instance = instance,
-                            )
-                          : TerminalPage(
-                              instance: tab.instance!,
-                              onExit: () => tab.instance = null,
+      child: TabActions(
+        child: Focus(
+          autofocus: true,
+          child: Scaffold(
+            appBar: model.tabs.length <= 1
+                ? null
+                : MovableTabBar(
+                    count: model.tabs.length,
+                    builder: (context, index) {
+                      return ChangeNotifierProvider.value(
+                        value: model.tabs[index],
+                        builder: (context, child) {
+                          final tab = context.watch<TabItem>();
+                          return MovableTabButton(
+                            selected: index == model.currentIndex,
+                            onPressed: () => model.currentIndex = index,
+                            onClosed: Actions.handler(
+                              context,
+                              CloseTabIntent(index),
                             ),
-                    );
-                  },
-                ),
-            ],
+                            icon: ProductLogo.asset(
+                              name: tab.instance?.os,
+                              size: 32,
+                            ),
+                            label: Text(tab.instance?.name ?? l10n.homeTab),
+                          );
+                        },
+                      );
+                    },
+                    trailing: IconButton(
+                      icon: const Icon(Icons.add),
+                      splashRadius: 16,
+                      iconSize: 16,
+                      onPressed: Actions.handler(context, const AddTabIntent()),
+                    ),
+                    onMoved: (from, to) {
+                      Actions.invoke(context, MoveTabIntent(from, to));
+                    },
+                    preferredHeight:
+                        Theme.of(context).appBarTheme.toolbarHeight,
+                  ),
+            body: IndexedStack(
+              index: model.currentIndex,
+              children: [
+                for (final tab in model.tabs)
+                  ChangeNotifierProvider.value(
+                    value: tab,
+                    key: ValueKey(tab),
+                    builder: (context, child) {
+                      final tab = context.watch<TabItem>();
+                      return FocusScope(
+                        node: tab.focusScope,
+                        child: tab.instance == null
+                            ? InstancePage(
+                                onStart: (instance) => tab.instance = instance,
+                                onCreate: (instance) => tab.instance = instance,
+                              )
+                            : TerminalPage(
+                                instance: tab.instance!,
+                                onExit: () => tab.instance = null,
+                              ),
+                      );
+                    },
+                  ),
+              ],
+            ),
           ),
         ),
       ),
