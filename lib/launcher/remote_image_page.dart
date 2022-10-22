@@ -8,11 +8,11 @@ import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
-import '../widgets/wizard_page.dart';
 import 'launcher_l10n.dart';
 import 'launcher_model.dart';
 import 'remote_image_filter.dart';
 import 'remote_image_model.dart';
+import 'wizard_page.dart';
 
 class RemoteImagePage extends StatelessWidget {
   const RemoteImagePage({super.key, required this.os});

@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
-import '../widgets/wizard_page.dart';
 import 'feature_model.dart';
 import 'launcher_l10n.dart';
 import 'launcher_model.dart';
+import 'wizard_page.dart';
 
 class FeaturePage extends StatefulWidget {
   const FeaturePage({super.key});

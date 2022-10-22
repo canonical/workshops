@@ -6,9 +6,9 @@ import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
 import '../remotes/remote_selector.dart';
-import '../widgets/os_selector.dart';
-import '../widgets/wizard_page.dart';
+import 'os_selector.dart';
 import 'remote_image_model.dart';
+import 'wizard_page.dart';
 
 class RemoteOsPage extends StatelessWidget {
   const RemoteOsPage({super.key});

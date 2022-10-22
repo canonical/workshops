@@ -10,8 +10,8 @@ import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
 import '../remotes/remote_selector.dart';
-import '../widgets/wizard_page.dart';
 import 'local_image_model.dart';
+import 'wizard_page.dart';
 
 class LocalImagePage extends StatelessWidget {
   const LocalImagePage({super.key});

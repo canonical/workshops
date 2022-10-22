@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
-import '../widgets/wizard_page.dart';
 import 'launcher_model.dart';
 import 'property_model.dart';
+import 'wizard_page.dart';
 
 class PropertyPage extends StatefulWidget {
   const PropertyPage({super.key});
