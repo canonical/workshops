@@ -54,6 +54,14 @@ void main() {
       commands.last.copyWith(shortcuts: [b, c]),
     ]);
     expect(CommandStore.shortcutsOf(context), {a: fi, b: bi, c: bi});
+
+    CommandStore.of(context).execute(commands.last);
+    await tester.pump();
+
+    expect(CommandStore.commandsOf(context), [
+      commands.last.copyWith(shortcuts: [b, c]),
+      commands.first.copyWith(shortcuts: [a]),
+    ]);
   });
 
   testWidgets('missing store', (tester) async {
