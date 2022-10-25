@@ -6,6 +6,7 @@ import 'package:ffi/ffi.dart' as ffi;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'accel_key_x.dart';
 import 'libgtk.dart';
 
 /// See https://docs.gtk.org/gtk3/func.accelerator_parse.html
@@ -35,7 +36,7 @@ LogicalKeySet? parseAccelKey(String label) {
 
 /// See https://docs.gtk.org/gtk3/func.accelerator_name.html
 String? formatAccelKey(LogicalKeySet keyset) {
-  final cstr = lib.gtk_accelerator_name(keyset.key, keyset.modifiers);
+  final cstr = lib.gtk_accelerator_name(keyset.gtkKey(), keyset.gtkModifiers());
   if (cstr == ffi.nullptr) return null;
   final str = cstr.cast<ffi.Utf8>().toDartString();
   lib.g_free(cstr.cast());
@@ -66,42 +67,13 @@ extension _MapX<K, V> on Map<K, V> {
 }
 
 extension _LogicalKeySetX on LogicalKeySet {
-  bool get alt =>
-      triggers.contains(LogicalKeyboardKey.alt) ||
-      triggers.contains(LogicalKeyboardKey.altLeft) ||
-      triggers.contains(LogicalKeyboardKey.altRight);
-  bool get control =>
-      triggers.contains(LogicalKeyboardKey.control) ||
-      triggers.contains(LogicalKeyboardKey.controlLeft) ||
-      triggers.contains(LogicalKeyboardKey.controlRight);
-  bool get meta =>
-      triggers.contains(LogicalKeyboardKey.meta) ||
-      triggers.contains(LogicalKeyboardKey.metaLeft) ||
-      triggers.contains(LogicalKeyboardKey.metaRight);
-  bool get shift =>
-      triggers.contains(LogicalKeyboardKey.shift) ||
-      triggers.contains(LogicalKeyboardKey.shiftLeft) ||
-      triggers.contains(LogicalKeyboardKey.shiftRight);
-
-  int get key => _findGtkKey(triggers.singleWhere((t) => !t.isModifier));
-
-  int get modifiers {
+  int gtkKey() => _findGtkKey(triggers.singleWhere((t) => !t.isModifier));
+  int gtkModifiers() {
     var value = 0;
-    if (alt) value |= GdkModifierType.GDK_MOD1_MASK;
-    if (control) value |= GdkModifierType.GDK_CONTROL_MASK;
-    if (meta) value |= GdkModifierType.GDK_META_MASK;
-    if (shift) value |= GdkModifierType.GDK_SHIFT_MASK;
+    if (hasAlt) value |= GdkModifierType.GDK_MOD1_MASK;
+    if (hasControl) value |= GdkModifierType.GDK_CONTROL_MASK;
+    if (hasMeta) value |= GdkModifierType.GDK_META_MASK;
+    if (hasShift) value |= GdkModifierType.GDK_SHIFT_MASK;
     return value;
   }
 }
-
-extension _LogicalKeyboardKeyX on LogicalKeyboardKey {
-  bool get isModifier => synonyms.isNotEmpty || _modifiers.contains(this);
-}
-
-final Set<LogicalKeyboardKey> _modifiers = <LogicalKeyboardKey>{
-  LogicalKeyboardKey.alt,
-  LogicalKeyboardKey.control,
-  LogicalKeyboardKey.meta,
-  LogicalKeyboardKey.shift,
-};
