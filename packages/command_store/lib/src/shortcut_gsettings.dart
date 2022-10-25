@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:accel_key/accel_key.dart';
 import 'package:collection/collection.dart';
 import 'package:dbus/dbus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gsettings/gsettings.dart';
-import 'package:gtk_accelerator/gtk_accelerator.dart';
 
 import 'logical_key_set_x.dart';
 import 'shortcut_settings.dart';
@@ -81,7 +81,7 @@ class ShortcutGSettings extends ShortcutSettings {
 extension _DBusArrayX on DBusArray {
   List<LogicalKeySet> toLogicalKeySets() {
     return children
-        .map((k) => parseGtkAccelerator(k.asString()))
+        .map((k) => parseAccelKey(k.asString()))
         .whereNotNull()
         .toList();
   }
@@ -89,6 +89,6 @@ extension _DBusArrayX on DBusArray {
 
 extension _LogicalKeySetListX on List<LogicalKeySet> {
   DBusArray toDbusArray() {
-    return DBusArray.string(map(formatGtkAccelerator).toList());
+    return DBusArray.string(map(formatAccelKey).whereNotNull().toList());
   }
 }

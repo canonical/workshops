@@ -9,9 +9,9 @@ import 'package:flutter/widgets.dart';
 import 'libgtk.dart';
 
 /// See https://docs.gtk.org/gtk3/func.accelerator_parse.html
-LogicalKeySet? parseGtkAccelerator(String accelerator) {
+LogicalKeySet? parseAccelKey(String label) {
   return ffi.using((arena) {
-    final cstr = accelerator.toNativeUtf8(allocator: arena);
+    final cstr = label.toNativeUtf8(allocator: arena);
     final key = arena<ffi.UnsignedInt>();
     final modifiers = arena<ffi.Int32>();
     lib.gtk_accelerator_parse(cstr.cast(), key, modifiers);
@@ -34,8 +34,9 @@ LogicalKeySet? parseGtkAccelerator(String accelerator) {
 }
 
 /// See https://docs.gtk.org/gtk3/func.accelerator_name.html
-String formatGtkAccelerator(LogicalKeySet shortcut) {
-  final cstr = lib.gtk_accelerator_name(shortcut.key, shortcut.modifiers);
+String? formatAccelKey(LogicalKeySet keyset) {
+  final cstr = lib.gtk_accelerator_name(keyset.key, keyset.modifiers);
+  if (cstr == ffi.nullptr) return null;
   final str = cstr.cast<ffi.Utf8>().toDartString();
   lib.g_free(cstr.cast());
   return str;

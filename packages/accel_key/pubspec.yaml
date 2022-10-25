@@ -1,4 +1,4 @@
-name: gtk_accelerator
+name: accel_key
 publish_to: 'none'
 
 environment:
