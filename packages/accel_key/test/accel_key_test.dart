@@ -105,6 +105,93 @@ void main() {
       '<Shift>KP_5',
     );
   });
+
+  test('extensions', () {
+    expect(LogicalKeyboardKey.keyA.isAlt, isFalse);
+    expect(LogicalKeyboardKey.keyA.isControl, isFalse);
+    expect(LogicalKeyboardKey.keyA.isMeta, isFalse);
+    expect(LogicalKeyboardKey.keyA.isShift, isFalse);
+
+    expect(LogicalKeyboardKey.alt.isAlt, isTrue);
+    expect(LogicalKeyboardKey.alt.isControl, isFalse);
+    expect(LogicalKeyboardKey.alt.isMeta, isFalse);
+    expect(LogicalKeyboardKey.alt.isShift, isFalse);
+
+    expect(LogicalKeyboardKey.control.isAlt, isFalse);
+    expect(LogicalKeyboardKey.control.isControl, isTrue);
+    expect(LogicalKeyboardKey.control.isMeta, isFalse);
+    expect(LogicalKeyboardKey.control.isShift, isFalse);
+
+    expect(LogicalKeyboardKey.meta.isAlt, isFalse);
+    expect(LogicalKeyboardKey.meta.isControl, isFalse);
+    expect(LogicalKeyboardKey.meta.isMeta, isTrue);
+    expect(LogicalKeyboardKey.meta.isShift, isFalse);
+
+    expect(LogicalKeyboardKey.shift.isAlt, isFalse);
+    expect(LogicalKeyboardKey.shift.isControl, isFalse);
+    expect(LogicalKeyboardKey.shift.isMeta, isFalse);
+    expect(LogicalKeyboardKey.shift.isShift, isTrue);
+
+    expect(LogicalKeySet(LogicalKeyboardKey.keyA).hasAlt, isFalse);
+    expect(LogicalKeySet(LogicalKeyboardKey.keyA).hasControl, isFalse);
+    expect(LogicalKeySet(LogicalKeyboardKey.keyA).hasMeta, isFalse);
+    expect(LogicalKeySet(LogicalKeyboardKey.keyA).hasShift, isFalse);
+
+    final controlA = LogicalKeySet(
+      LogicalKeyboardKey.control,
+      LogicalKeyboardKey.keyA,
+    );
+    expect(controlA.hasAlt, isFalse);
+    expect(controlA.hasControl, isTrue);
+    expect(controlA.hasMeta, isFalse);
+    expect(controlA.hasShift, isFalse);
+
+    final shiftB = LogicalKeySet(
+      LogicalKeyboardKey.keyB,
+      LogicalKeyboardKey.shift,
+    );
+    expect(shiftB.hasAlt, isFalse);
+    expect(shiftB.hasControl, isFalse);
+    expect(shiftB.hasMeta, isFalse);
+    expect(shiftB.hasShift, isTrue);
+
+    final controlAltC = LogicalKeySet(
+      LogicalKeyboardKey.alt,
+      LogicalKeyboardKey.keyC,
+      LogicalKeyboardKey.control,
+    );
+    expect(controlAltC.hasAlt, isTrue);
+    expect(controlAltC.hasControl, isTrue);
+    expect(controlAltC.hasMeta, isFalse);
+    expect(controlAltC.hasShift, isFalse);
+
+    expect(controlA.sorted(), [
+      LogicalKeyboardKey.control,
+      LogicalKeyboardKey.keyA,
+    ]);
+    expect(shiftB.sorted(), [
+      LogicalKeyboardKey.shift,
+      LogicalKeyboardKey.keyB,
+    ]);
+    expect(controlAltC.sorted(), [
+      LogicalKeyboardKey.control,
+      LogicalKeyboardKey.alt,
+      LogicalKeyboardKey.keyC,
+    ]);
+
+    final allModifiers = LogicalKeySet(
+      LogicalKeyboardKey.alt,
+      LogicalKeyboardKey.control,
+      LogicalKeyboardKey.meta,
+      LogicalKeyboardKey.shift,
+    );
+    expect(allModifiers.sorted(), [
+      LogicalKeyboardKey.control,
+      LogicalKeyboardKey.shift,
+      LogicalKeyboardKey.alt,
+      LogicalKeyboardKey.meta,
+    ]);
+  });
 }
 
 Matcher isLogicalKeySet(Set<LogicalKeyboardKey> triggers) {
