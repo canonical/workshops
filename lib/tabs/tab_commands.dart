@@ -1,5 +1,6 @@
 import 'package:command_store/command_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'tab_intents.dart';
@@ -12,25 +13,30 @@ class TabCommands extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final length = context.select<TabModel, int>((m) => m.length);
     return CommandScope(
       commands: [
-        const Command(
+        Command(
           id: 'tab-new',
-          intent: AddTabIntent(),
+          label: l10n.newTabCommand,
+          intent: const AddTabIntent(),
         ),
         if (length > 1) ...[
-          const Command(
+          Command(
             id: 'tab-close',
-            intent: CloseTabIntent(),
+            label: l10n.closeTabCommand,
+            intent: const CloseTabIntent(),
           ),
-          const Command(
+          Command(
             id: 'tab-next',
-            intent: NextTabIntent(),
+            label: l10n.nextTabCommand,
+            intent: const NextTabIntent(),
           ),
-          const Command(
+          Command(
             id: 'tab-previous',
-            intent: PreviousTabIntent(),
+            label: l10n.previousTabCommand,
+            intent: const PreviousTabIntent(),
           ),
         ],
       ],

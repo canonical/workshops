@@ -21,8 +21,8 @@ void main() {
     final c = LogicalKeySet(LogicalKeyboardKey.shift, LogicalKeyboardKey.keyC);
 
     final commands = [
-      Command(id: 'foo', intent: fi),
-      Command(id: 'bar', intent: bi),
+      Command(id: 'foo', label: 'Foo', intent: fi),
+      Command(id: 'bar', label: 'Bar', intent: bi),
     ];
 
     final shortcuts = MockShortcutSettings();

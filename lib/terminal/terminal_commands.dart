@@ -1,5 +1,6 @@
 import 'package:command_store/command_store.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:terminal_view/terminal_view.dart';
 
 class TerminalCommands extends StatelessWidget {
@@ -9,78 +10,96 @@ class TerminalCommands extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return CommandScope(
-      commands: const [
+      commands: [
         // edit
         Command(
           id: 'terminal-copy',
+          label: l10n.copyCommand,
           intent: TerminalIntents.copy,
         ),
         Command(
           id: 'terminal-paste',
+          label: l10n.pasteCommand,
           intent: TerminalIntents.paste,
         ),
         // scroll
         Command(
           id: 'terminal-scroll-up',
+          label: l10n.scrollUpCommand,
           intent: TerminalIntents.scrollUp,
         ),
         Command(
           id: 'terminal-scroll-down',
+          label: l10n.scrollDownCommand,
           intent: TerminalIntents.scrollDown,
         ),
         Command(
           id: 'terminal-scroll-page-up',
+          label: l10n.scrollPageUpCommand,
           intent: TerminalIntents.scrollPageUp,
         ),
         Command(
           id: 'terminal-scroll-page-down',
+          label: l10n.scrollPageDownCommand,
           intent: TerminalIntents.scrollPageDown,
         ),
         Command(
           id: 'terminal-scroll-to-top',
+          label: l10n.scrollToTopCommand,
           intent: TerminalIntents.scrollToTop,
         ),
         Command(
           id: 'terminal-scroll-to-bottom',
+          label: l10n.scrollToBottomCommand,
           intent: TerminalIntents.scrollToBottom,
         ),
         // split
         Command(
           id: 'terminal-split-auto',
+          label: l10n.splitAutoCommand,
           intent: TerminalIntents.splitAuto,
         ),
         Command(
           id: 'terminal-split-up',
+          label: l10n.splitUpCommand,
           intent: TerminalIntents.splitUp,
         ),
         Command(
           id: 'terminal-split-down',
+          label: l10n.splitDownCommand,
           intent: TerminalIntents.splitDown,
         ),
         Command(
           id: 'terminal-split-left',
+          label: l10n.splitLeftCommand,
           intent: TerminalIntents.splitLeft,
         ),
         Command(
           id: 'terminal-split-right',
+          label: l10n.splitRightCommand,
           intent: TerminalIntents.splitRight,
         ),
         // focus
         Command(
           id: 'terminal-focus-up',
+          label: l10n.moveFocusUpCommand,
           intent: TerminalIntents.moveFocusUp,
         ),
         Command(
           id: 'terminal-focus-down',
+          label: l10n.moveFocusDownCommand,
           intent: TerminalIntents.moveFocusDown,
         ),
         Command(
           id: 'terminal-focus-left',
+          label: l10n.moveFocusLeftCommand,
           intent: TerminalIntents.moveFocusLeft,
         ),
         Command(
           id: 'terminal-focus-right',
+          label: l10n.moveFocusRightCommand,
           intent: TerminalIntents.moveFocusRight,
         ),
       ],
