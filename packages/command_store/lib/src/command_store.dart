@@ -39,6 +39,7 @@ class CommandStore extends StatefulWidget {
 class CommandStoreState extends State<CommandStore> {
   var _commands = <Command>[];
   final _refs = <String, int>{};
+  final _mru = <String, int>{};
 
   List<Command> get commands => _commands;
 
@@ -47,7 +48,12 @@ class CommandStoreState extends State<CommandStore> {
     if (ref == 1) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
-          setState(() => _commands = List.of(_commands)..add(command));
+          final shortcuts = widget.shortcuts.get(command.id);
+          setState(() {
+            _commands = List.of(_commands)
+              ..add(command.copyWith(shortcuts: shortcuts));
+            _sort();
+          });
         }
       });
     }
@@ -58,11 +64,46 @@ class CommandStoreState extends State<CommandStore> {
     if (ref == 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
-          setState(() => _commands = List.of(_commands)
-            ..removeWhere((c) => c.id == command.id));
+          setState(() {
+            _commands = List.of(_commands)
+              ..removeWhere((c) => c.id == command.id);
+          });
         }
       });
     }
+  }
+
+  void execute(Command command) {
+    setState(() {
+      _mru[command.id] = (_mru[command.id] ?? 0) + 1;
+      _sort();
+    });
+
+    void dispatchIntent() {
+      final primaryContext = primaryFocus!.context;
+      if (primaryContext != null) {
+        Actions.maybeInvoke(primaryContext, command.intent);
+      }
+      FocusManager.instance.removeListener(dispatchIntent);
+    }
+
+    FocusManager.instance.addListener(dispatchIntent);
+  }
+
+  void _sort() {
+    _commands.sort((c1, c2) {
+      final i1 = _mru[c1.id];
+      final i2 = _mru[c2.id];
+      if (i1 != null && i2 != null) {
+        return i2.compareTo(i1);
+      } else if (i1 != null) {
+        return -1;
+      } else if (i2 != null) {
+        return 1;
+      } else {
+        return c2.priority.compareTo(c1.priority);
+      }
+    });
   }
 
   @override
@@ -83,9 +124,7 @@ class CommandStoreState extends State<CommandStore> {
       animation: widget.shortcuts,
       builder: (context, child) {
         return _InheritedCommandStore(
-          commands: _commands
-              .map((c) => c.copyWith(shortcuts: widget.shortcuts.get(c.id)))
-              .toList(),
+          commands: List.of(commands),
           child: child!,
         );
       },

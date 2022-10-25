@@ -6,30 +6,25 @@ import 'logical_key_set_x.dart';
 class Command {
   const Command({
     required this.id,
+    this.priority = 0,
     this.shortcuts,
     required this.intent,
   });
 
   final String id;
+  final int priority;
   final List<LogicalKeySet>? shortcuts;
   final Intent intent;
 
-  void execute() {
-    void dispatchIntent() {
-      Actions.maybeInvoke(primaryFocus!.context!, intent);
-      FocusManager.instance.removeListener(dispatchIntent);
-    }
-
-    FocusManager.instance.addListener(dispatchIntent);
-  }
-
   Command copyWith({
     String? id,
+    int? priority,
     List<LogicalKeySet>? shortcuts,
     Intent? intent,
   }) {
     return Command(
       id: id ?? this.id,
+      priority: priority ?? this.priority,
       shortcuts: shortcuts ?? this.shortcuts,
       intent: intent ?? this.intent,
     );
@@ -37,7 +32,7 @@ class Command {
 
   @override
   String toString() {
-    return 'Command(id: $id, shortcuts: $shortcuts)';
+    return 'Command(id: $id, priority: $priority, shortcuts: $shortcuts)';
   }
 
   @override
@@ -45,10 +40,13 @@ class Command {
     if (identical(this, other)) return true;
     return other is Command &&
         other.id == id &&
+        other.priority == priority &&
         logicalKeySetListEquals(other.shortcuts, shortcuts) &&
         other.intent == intent;
   }
 
   @override
-  int get hashCode => Object.hash(id, logicalKeySetListHash(shortcuts), intent);
+  int get hashCode {
+    return Object.hash(id, priority, logicalKeySetListHash(shortcuts), intent);
+  }
 }
