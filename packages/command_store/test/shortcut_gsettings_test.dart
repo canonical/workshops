@@ -1,27 +1,26 @@
 import 'dart:async';
 
 import 'package:command_store/command_store.dart';
-import 'package:dbus/dbus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gsettings/gsettings.dart';
+import 'package:gio_settings/gio_settings.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'shortcut_gsettings_test.mocks.dart';
 
-@GenerateMocks([GSettings])
+@GenerateMocks([GioSettings])
 void main() {
-  MockGSettings mockGSettings({
+  MockGioSettings mockGSettings({
     Map<String, List<String>> shortcuts = const {},
     Stream<List<String>> keysChanged = const Stream.empty(),
   }) {
-    final mock = MockGSettings();
+    final mock = MockGioSettings();
     when(mock.list()).thenAnswer((_) => Future.value(shortcuts.keys.toList()));
     when(mock.get(any)).thenAnswer((_) {
       final id = _.positionalArguments[0] as String;
-      return Future.value(DBusArray.string(shortcuts[id] ?? []));
+      return Future.value(shortcuts[id] ?? []);
     });
     when(mock.keysChanged).thenAnswer((i) => keysChanged);
     return mock;
@@ -65,18 +64,18 @@ void main() {
     final shortcuts = ShortcutGSettings.of(gsettings);
 
     await shortcuts.set('foo', []);
-    verify(gsettings.set('foo', DBusArray.string([])));
+    verify(gsettings.set('foo', []));
 
     await shortcuts.set('bar', [
       LogicalKeySet(LogicalKeyboardKey.keyB, LogicalKeyboardKey.control),
     ]);
-    verify(gsettings.set('bar', DBusArray.string(['<Control>b'])));
+    verify(gsettings.set('bar', ['<Control>b']));
 
     await shortcuts.set('baz', [
       LogicalKeySet(LogicalKeyboardKey.keyB, LogicalKeyboardKey.control),
       LogicalKeySet(LogicalKeyboardKey.keyC, LogicalKeyboardKey.meta),
     ]);
-    verify(gsettings.set('baz', DBusArray.string(['<Control>b', '<Meta>c'])));
+    verify(gsettings.set('baz', ['<Control>b', '<Meta>c']));
   });
 
   test('unset', () async {
@@ -97,7 +96,7 @@ void main() {
       'foo',
       LogicalKeySet(LogicalKeyboardKey.keyB, LogicalKeyboardKey.control),
     );
-    verify(gsettings.set('foo', DBusArray.string(['<Control>b'])));
+    verify(gsettings.set('foo', ['<Control>b']));
   });
 
   test('add second', () async {
@@ -112,7 +111,7 @@ void main() {
       'foo',
       LogicalKeySet(LogicalKeyboardKey.keyC, LogicalKeyboardKey.meta),
     );
-    verify(gsettings.set('foo', DBusArray.string(['<Control>b', '<Meta>c'])));
+    verify(gsettings.set('foo', ['<Control>b', '<Meta>c']));
   });
 
   test('remove first', () async {
@@ -128,7 +127,7 @@ void main() {
       'foo',
       LogicalKeySet(LogicalKeyboardKey.keyB, LogicalKeyboardKey.control),
     );
-    verify(gsettings.set('foo', DBusArray.string(['<Meta>c'])));
+    verify(gsettings.set('foo', ['<Meta>c']));
   });
 
   test('remove last', () async {
@@ -144,7 +143,7 @@ void main() {
       'foo',
       LogicalKeySet(LogicalKeyboardKey.keyC, LogicalKeyboardKey.meta),
     );
-    verify(gsettings.set('foo', DBusArray.string([])));
+    verify(gsettings.set('foo', []));
   });
 
   test('change', () async {
@@ -166,8 +165,7 @@ void main() {
       isLogicalKeySet({LogicalKeyboardKey.keyC, LogicalKeyboardKey.control}),
     ]);
 
-    when(gsettings.get('foo'))
-        .thenAnswer((_) async => DBusArray.string(['<Control><Meta>c']));
+    when(gsettings.get('foo')).thenAnswer((_) async => ['<Control><Meta>c']);
 
     final completer = Completer<List<LogicalKeySet>>();
     shortcuts.addListener(() {

@@ -3,10 +3,9 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i3;
 
-import 'package:dbus/dbus.dart' as _i2;
-import 'package:gsettings/src/gsettings.dart' as _i3;
+import 'package:gio_settings/src/gio_settings.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -20,120 +19,80 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeDBusValue_0 extends _i1.SmartFake implements _i2.DBusValue {
-  _FakeDBusValue_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-/// A class which mocks [GSettings].
+/// A class which mocks [GioSettings].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGSettings extends _i1.Mock implements _i3.GSettings {
-  MockGSettings() {
+class MockGioSettings extends _i1.Mock implements _i2.GioSettings {
+  MockGioSettings() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  String get schemaName => (super.noSuchMethod(
-        Invocation.getter(#schemaName),
+  String get schemaId => (super.noSuchMethod(
+        Invocation.getter(#schemaId),
         returnValue: '',
       ) as String);
   @override
-  _i4.Stream<List<String>> get keysChanged => (super.noSuchMethod(
+  _i3.Stream<List<String>> get keysChanged => (super.noSuchMethod(
         Invocation.getter(#keysChanged),
-        returnValue: _i4.Stream<List<String>>.empty(),
-      ) as _i4.Stream<List<String>>);
+        returnValue: _i3.Stream<List<String>>.empty(),
+      ) as _i3.Stream<List<String>>);
   @override
-  _i4.Future<List<String>> list() => (super.noSuchMethod(
+  _i3.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  _i3.Future<List<String>> list() => (super.noSuchMethod(
         Invocation.method(
           #list,
           [],
         ),
-        returnValue: _i4.Future<List<String>>.value(<String>[]),
-      ) as _i4.Future<List<String>>);
+        returnValue: _i3.Future<List<String>>.value(<String>[]),
+      ) as _i3.Future<List<String>>);
   @override
-  _i4.Future<_i2.DBusValue> get(String? name) => (super.noSuchMethod(
+  _i3.Future<T> get<T>(String? key) => (super.noSuchMethod(
         Invocation.method(
           #get,
-          [name],
+          [key],
         ),
-        returnValue: _i4.Future<_i2.DBusValue>.value(_FakeDBusValue_0(
-          this,
-          Invocation.method(
-            #get,
-            [name],
-          ),
-        )),
-      ) as _i4.Future<_i2.DBusValue>);
+        returnValue: _i3.Future<T>.value(null),
+      ) as _i3.Future<T>);
   @override
-  _i4.Future<_i2.DBusValue> getDefault(String? name) => (super.noSuchMethod(
+  _i3.Future<T> getDefault<T>(String? key) => (super.noSuchMethod(
         Invocation.method(
           #getDefault,
-          [name],
+          [key],
         ),
-        returnValue: _i4.Future<_i2.DBusValue>.value(_FakeDBusValue_0(
-          this,
-          Invocation.method(
-            #getDefault,
-            [name],
-          ),
-        )),
-      ) as _i4.Future<_i2.DBusValue>);
+        returnValue: _i3.Future<T>.value(null),
+      ) as _i3.Future<T>);
   @override
-  _i4.Future<bool> isSet(String? name) => (super.noSuchMethod(
-        Invocation.method(
-          #isSet,
-          [name],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
-  @override
-  _i4.Future<void> set(
-    String? name,
-    _i2.DBusValue? value,
+  _i3.Future<void> set<T>(
+    String? key,
+    T? value,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
           #set,
           [
-            name,
+            key,
             value,
           ],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
   @override
-  _i4.Future<void> unset(String? name) => (super.noSuchMethod(
+  _i3.Future<void> unset(String? key) => (super.noSuchMethod(
         Invocation.method(
           #unset,
-          [name],
+          [key],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> setAll(Map<String, _i2.DBusValue?>? values) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #setAll,
-          [values],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-  @override
-  _i4.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
 }

@@ -16,6 +16,8 @@ import 'launcher/remote_image_model.dart';
 import 'remotes/remote_store.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Logger.setup(level: LogLevel.fromString(kDebugMode ? 'debug' : 'info'));
 
   final service = LxdService(LxdClient());

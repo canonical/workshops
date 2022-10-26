@@ -2,18 +2,17 @@ import 'dart:async';
 
 import 'package:accel_key/accel_key.dart';
 import 'package:collection/collection.dart';
-import 'package:dbus/dbus.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gsettings/gsettings.dart';
+import 'package:gio_settings/gio_settings.dart';
 
 import 'logical_key_set_x.dart';
 import 'shortcut_settings.dart';
 
 class ShortcutGSettings extends ShortcutSettings {
-  ShortcutGSettings(String schemaId) : _gsettings = GSettings(schemaId);
+  ShortcutGSettings(String schemaId) : _gsettings = GioSettings(schemaId);
   ShortcutGSettings.of(this._gsettings);
 
-  final GSettings _gsettings;
+  final GioSettings _gsettings;
   StreamSubscription? _sub;
   final _shortcuts = <String, List<LogicalKeySet>>{};
 
@@ -58,15 +57,15 @@ class ShortcutGSettings extends ShortcutSettings {
 
   @override
   Future<void> set(String id, List<LogicalKeySet> shortcuts) {
-    return _gsettings.set(id, shortcuts.toDbusArray());
+    return _gsettings.set(id, shortcuts.toStringList());
   }
 
   @override
   Future<void> unset(String id) => _gsettings.unset(id);
 
   Future<List<LogicalKeySet>> _fetchShortcuts(String id) async {
-    final value = await _gsettings.get(id) as DBusArray;
-    return value.toLogicalKeySets();
+    final value = await _gsettings.get<List>(id);
+    return value.cast<String>().toLogicalKeySets();
   }
 
   @override
@@ -79,17 +78,14 @@ class ShortcutGSettings extends ShortcutSettings {
   }
 }
 
-extension _DBusArrayX on DBusArray {
+extension _StringListX on List<String> {
   List<LogicalKeySet> toLogicalKeySets() {
-    return children
-        .map((k) => parseAccelKey(k.asString()))
-        .whereNotNull()
-        .toList();
+    return map(parseAccelKey).whereNotNull().toList();
   }
 }
 
 extension _LogicalKeySetListX on List<LogicalKeySet> {
-  DBusArray toDbusArray() {
-    return DBusArray.string(map(formatAccelKey).whereNotNull().toList());
+  List<String> toStringList() {
+    return map(formatAccelKey).whereNotNull().toList();
   }
 }

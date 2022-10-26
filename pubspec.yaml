@@ -80,9 +80,3 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-
-dependency_overrides:
-  gsettings:
-    git:
-      # https://github.com/canonical/gsettings.dart/pull/47
-      url: https://github.com/canonical/gsettings.dart
