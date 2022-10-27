@@ -32,7 +32,7 @@ void main() {
       'foo': ['<Control>f']
     });
 
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
     expect(shortcuts.get('foo'), isEmpty);
 
     await shortcuts.load();
@@ -46,7 +46,7 @@ void main() {
       'foo': ['<Control>f', '<Alt><Shift>g']
     });
 
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
     expect(shortcuts.get('foo'), isEmpty);
 
     await shortcuts.load();
@@ -62,7 +62,7 @@ void main() {
 
   test('set', () async {
     final gsettings = mockGSettings();
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
 
     await shortcuts.set('foo', []);
     verify(gsettings.set('foo', DBusArray.string([])));
@@ -81,7 +81,7 @@ void main() {
 
   test('unset', () async {
     final gsettings = mockGSettings();
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
 
     await shortcuts.unset('foo');
     verify(gsettings.unset('foo'));
@@ -90,7 +90,7 @@ void main() {
   test('add first', () async {
     final gsettings = mockGSettings(shortcuts: {'foo': []});
 
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
     await shortcuts.load();
 
     await shortcuts.add(
@@ -105,7 +105,7 @@ void main() {
       'foo': ['<Control>b']
     });
 
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
     await shortcuts.load();
 
     await shortcuts.add(
@@ -120,7 +120,7 @@ void main() {
       'foo': ['<Control>b', '<Meta>c']
     });
 
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
 
     await shortcuts.load();
 
@@ -136,7 +136,7 @@ void main() {
       'foo': ['<Meta>c']
     });
 
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
 
     await shortcuts.load();
 
@@ -154,7 +154,7 @@ void main() {
       'foo': ['<Control>c']
     }, keysChanged: keysChanged.stream);
 
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
 
     var wasNotified = 0;
     shortcuts.addListener(() => ++wasNotified);
@@ -193,7 +193,7 @@ void main() {
 
     final gsettings = mockGSettings(keysChanged: keysChanged.stream);
 
-    final shortcuts = ShortcutGSettings(gsettings);
+    final shortcuts = ShortcutGSettings.of(gsettings);
 
     await shortcuts.load();
     expect(keysChanged.hasListener, isTrue);
