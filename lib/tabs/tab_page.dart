@@ -57,11 +57,14 @@ class TabPage extends StatelessWidget {
                         },
                       );
                     },
-                    trailing: IconButton(
-                      icon: const Icon(Icons.add),
-                      splashRadius: 16,
-                      iconSize: 16,
-                      onPressed: Actions.handler(context, const AddTabIntent()),
+                    trailing: Builder(
+                      builder: (context) => IconButton(
+                        icon: const Icon(Icons.add),
+                        splashRadius: 16,
+                        iconSize: 16,
+                        onPressed:
+                            Actions.handler(context, const AddTabIntent()),
+                      ),
                     ),
                     onMoved: (from, to) {
                       Actions.invoke(context, MoveTabIntent(from, to));
