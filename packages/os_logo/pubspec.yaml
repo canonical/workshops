@@ -21,3 +21,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
+
+dependency_overrides:
+  # https://github.com/canonical/workshops/pull/158
+  analyzer: 5.1.0
