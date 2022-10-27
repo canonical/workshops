@@ -1,7 +1,6 @@
 import 'package:command_store/command_store.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gsettings/gsettings.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
@@ -33,12 +32,7 @@ Future<void> main() async {
     (url) => SimpleStreamClient(url as String),
   );
 
-  registerServiceFactory<GSettings>(
-    (schemaId) => GSettings(schemaId as String),
-  );
-
-  final shortcuts =
-      ShortcutGSettings(GSettings('com.canonical.workshops.shortcuts'));
+  final shortcuts = ShortcutGSettings('com.canonical.workshops.shortcuts');
   await shortcuts.load();
   registerServiceInstance<ShortcutSettings>(shortcuts);
 

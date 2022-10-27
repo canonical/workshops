@@ -10,7 +10,8 @@ import 'logical_key_set_x.dart';
 import 'shortcut_settings.dart';
 
 class ShortcutGSettings extends ShortcutSettings {
-  ShortcutGSettings(this._gsettings);
+  ShortcutGSettings(String schemaId) : _gsettings = GSettings(schemaId);
+  ShortcutGSettings.of(this._gsettings);
 
   final GSettings _gsettings;
   StreamSubscription? _sub;
