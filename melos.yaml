@@ -41,7 +41,7 @@ scripts:
       flutter pub run build_runner build --delete-conflicting-outputs
 
   # run gen-l10n to generate localizations in all packages
-  gen-l10n:
+  gen-l10n: >
     melos exec -c 1 --fail-fast --dir-exists=lib/l10n -- \
      flutter gen-l10n
 
