@@ -1,9 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-class NewTabIntent extends Intent {
-  const NewTabIntent();
-}
-
 class AddTabIntent extends Intent {
   const AddTabIntent();
 }

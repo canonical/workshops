@@ -32,46 +32,44 @@ class TabPage extends StatelessWidget {
         child: Focus(
           autofocus: true,
           child: Scaffold(
-            appBar: model.tabs.length <= 1
-                ? null
-                : MovableTabBar(
-                    count: model.tabs.length,
-                    builder: (context, index) {
-                      return ChangeNotifierProvider.value(
-                        value: model.tabs[index],
-                        builder: (context, child) {
-                          final tab = context.watch<TabItem>();
-                          return MovableTabButton(
-                            selected: index == model.currentIndex,
-                            onPressed: () => model.currentIndex = index,
-                            onClosed: Actions.handler(
-                              context,
-                              CloseTabIntent(index),
-                            ),
-                            icon: OsLogo.asset(
-                              name: tab.instance?.os,
-                              size: 32,
-                            ),
-                            label: Text(tab.instance?.name ?? l10n.homeTab),
-                          );
-                        },
-                      );
-                    },
-                    trailing: Builder(
-                      builder: (context) => IconButton(
-                        icon: const Icon(Icons.add),
-                        splashRadius: 16,
-                        iconSize: 16,
-                        onPressed:
-                            Actions.handler(context, const AddTabIntent()),
+            appBar: MovableTabBar(
+              count: model.tabs.length,
+              builder: (context, index) {
+                return ChangeNotifierProvider.value(
+                  value: model.tabs[index],
+                  builder: (context, child) {
+                    final tab = context.watch<TabItem>();
+                    return MovableTabButton(
+                      selected: index == model.currentIndex,
+                      onPressed: () => model.currentIndex = index,
+                      onClosed: Actions.handler(
+                        context,
+                        CloseTabIntent(index),
                       ),
-                    ),
-                    onMoved: (from, to) {
-                      Actions.invoke(context, MoveTabIntent(from, to));
-                    },
-                    preferredHeight:
-                        Theme.of(context).appBarTheme.toolbarHeight,
-                  ),
+                      icon: tab.instance != null
+                          ? OsLogo.asset(
+                              name: tab.instance!.os,
+                              size: 32,
+                            )
+                          : null,
+                      label: Text(tab.instance?.name ?? l10n.homeTab),
+                    );
+                  },
+                );
+              },
+              trailing: Builder(
+                builder: (context) => IconButton(
+                  icon: const Icon(Icons.add),
+                  splashRadius: 16,
+                  iconSize: 16,
+                  onPressed: Actions.handler(context, const AddTabIntent()),
+                ),
+              ),
+              onMoved: (from, to) {
+                Actions.invoke(context, MoveTabIntent(from, to));
+              },
+              preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
+            ),
             body: IndexedStack(
               index: model.currentIndex,
               children: [

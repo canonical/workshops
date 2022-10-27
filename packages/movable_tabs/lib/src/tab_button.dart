@@ -68,20 +68,23 @@ class MovableTabButton extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (onClosed != null)
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Center(
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        icon: const Icon(Icons.close),
-                        color: Theme.of(context).colorScheme.onSurface,
-                        iconSize: 16,
-                        splashRadius: 16,
-                        onPressed: onClosed,
-                      ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                    end: 8,
+                    top: 8,
+                    bottom: 8,
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: const Icon(Icons.close),
+                      color: Theme.of(context).colorScheme.onSurface,
+                      iconSize: 16,
+                      splashRadius: 16,
+                      onPressed: onClosed,
                     ),
                   ),
+                ),
               ],
             ),
           ),

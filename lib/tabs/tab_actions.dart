@@ -14,7 +14,6 @@ class TabActions extends StatelessWidget {
     final model = context.read<TabModel>();
     return Actions(
       actions: {
-        NewTabIntent: NewTabAction(model),
         AddTabIntent: AddTabAction(model),
         CloseTabIntent: CloseTabAction(model),
         NextTabIntent: NextTabAction(model),
@@ -31,16 +30,6 @@ abstract class TabAction<T extends Intent> extends Action<T> {
   }
 
   final TabModel model;
-}
-
-class NewTabAction extends TabAction<NewTabIntent> {
-  NewTabAction(super.model);
-
-  @override
-  bool get isActionEnabled => model.length <= 1;
-
-  @override
-  void invoke(NewTabIntent intent) => model.newTab();
 }
 
 class AddTabAction extends TabAction<AddTabIntent> {
