@@ -36,7 +36,7 @@ class AddTabAction extends TabAction<AddTabIntent> {
   AddTabAction(super.model);
 
   @override
-  void invoke(AddTabIntent intent) => model.newTab();
+  void invoke(AddTabIntent intent) => model.newTab(intent.instance);
 }
 
 class CloseTabAction extends TabAction<CloseTabIntent> {
