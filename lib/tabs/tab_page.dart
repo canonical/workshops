@@ -6,6 +6,7 @@ import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
 
 import '../home/home_page.dart';
+import '../home/quick_menu.dart';
 import '../terminal/terminal_page.dart';
 import 'tab_actions.dart';
 import 'tab_commands.dart';
@@ -58,11 +59,22 @@ class TabPage extends StatelessWidget {
                 );
               },
               trailing: Builder(
-                builder: (context) => IconButton(
-                  icon: const Icon(Icons.add),
-                  splashRadius: 16,
-                  iconSize: 16,
-                  onPressed: Actions.handler(context, const AddTabIntent()),
+                builder: (context) => Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.add),
+                      splashRadius: 16,
+                      iconSize: 16,
+                      onPressed: Actions.handler(context, const AddTabIntent()),
+                    ),
+                    const SizedBox(width: 2),
+                    QuickMenuButton(
+                      onSelected: (instance) {
+                        Actions.maybeInvoke(context, AddTabIntent(instance));
+                      },
+                    ),
+                  ],
                 ),
               ),
               onMoved: (from, to) {

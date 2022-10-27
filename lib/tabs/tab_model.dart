@@ -1,3 +1,4 @@
+import 'package:lxd/lxd.dart';
 import 'package:movable_tabs/movable_tabs.dart';
 
 import 'tab_item.dart';
@@ -11,7 +12,7 @@ class TabModel extends MovableTabController<TabItem> {
     currentTab.focusScope.requestFocus();
   }
 
-  void newTab() => addTab(TabItem());
+  void newTab([LxdInstance? instance]) => addTab(TabItem(instance));
   void closeTab() => removeTab(currentIndex);
 
   @override

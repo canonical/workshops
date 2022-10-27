@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
+import 'package:lxd/lxd.dart';
 
 class AddTabIntent extends Intent {
-  const AddTabIntent();
+  const AddTabIntent([this.instance]);
+  final LxdInstance? instance;
 }
 
 class CloseTabIntent extends Intent {
