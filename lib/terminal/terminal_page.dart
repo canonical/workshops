@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:terminal_view/terminal_view.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
-import '../tabs/tab_intents.dart';
 import 'terminal_commands.dart';
 import 'terminal_manager.dart';
 import 'terminal_pane.dart';
@@ -112,34 +111,14 @@ class _TerminalPageState extends State<_TerminalPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Stack(
-      children: [
-        TerminalCommands(
-          child: TerminalTheme(
-            data: getTerminalTheme(widget.instance.os),
-            child: NestedSplitView(
-              controller: _splitter,
-              builder: _buildPane,
-            ),
-          ),
+    return TerminalCommands(
+      child: TerminalTheme(
+        data: getTerminalTheme(widget.instance.os),
+        child: NestedSplitView(
+          controller: _splitter,
+          builder: _buildPane,
         ),
-        if (Actions.find<NewTabIntent>(context).isActionEnabled)
-          Positioned.directional(
-            textDirection: Directionality.of(context),
-            top: 8,
-            end: 0,
-            child: Material(
-              color: Colors.transparent,
-              child: IconButton(
-                icon: const Icon(Icons.add),
-                color: Colors.white,
-                splashRadius: 16,
-                iconSize: 16,
-                onPressed: () => Actions.invoke(context, const NewTabIntent()),
-              ),
-            ),
-          ),
-      ],
+      ),
     );
   }
 }
