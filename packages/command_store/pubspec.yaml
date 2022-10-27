@@ -20,7 +20,3 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: 5.3.2
-
-dependency_overrides:
-  # https://github.com/canonical/workshops/pull/158
-  analyzer: 5.1.0
