@@ -20,6 +20,7 @@ Future<void> main() async {
   Logger.setup(level: LogLevel.fromString(kDebugMode ? 'debug' : 'info'));
 
   final service = LxdService(LxdClient());
+  await service.init();
   registerServiceInstance<LxdService>(service);
 
   final preferences = await SharedPreferences.getInstance();
@@ -43,7 +44,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => InstanceStore(service),
+          create: (_) => InstanceStore(service)..init(),
         ),
         ChangeNotifierProvider(
           create: (_) => RemoteStore(preferences)..init(),
