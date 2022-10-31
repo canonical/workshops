@@ -32,81 +32,84 @@ class TabPage extends StatelessWidget {
       child: TabActions(
         child: Focus(
           autofocus: true,
-          child: Scaffold(
-            appBar: MovableTabBar(
-              count: model.tabs.length,
-              builder: (context, index) {
-                return ChangeNotifierProvider.value(
-                  value: model.tabs[index],
-                  builder: (context, child) {
-                    final tab = context.watch<TabItem>();
-                    return MovableTabButton(
-                      selected: index == model.currentIndex,
-                      onPressed: () => model.currentIndex = index,
-                      onClosed: Actions.handler(
-                        context,
-                        CloseTabIntent(index),
-                      ),
-                      icon: tab.instance != null
-                          ? OsLogo.asset(
-                              name: tab.instance!.os,
-                              size: 32,
-                            )
-                          : null,
-                      label: Text(tab.instance?.name ?? l10n.homeTab),
+          child: Builder(
+            builder: (context) {
+              return Scaffold(
+                appBar: MovableTabBar(
+                  count: model.tabs.length,
+                  builder: (context, index) {
+                    return ChangeNotifierProvider.value(
+                      value: model.tabs[index],
+                      builder: (context, child) {
+                        final tab = context.watch<TabItem>();
+                        return MovableTabButton(
+                          selected: index == model.currentIndex,
+                          onPressed: () => model.currentIndex = index,
+                          onClosed: Actions.handler(
+                            context,
+                            CloseTabIntent(index),
+                          ),
+                          icon: tab.instance != null
+                              ? OsLogo.asset(
+                                  name: tab.instance!.os,
+                                  size: 32,
+                                )
+                              : null,
+                          label: Text(tab.instance?.name ?? l10n.homeTab),
+                        );
+                      },
                     );
                   },
-                );
-              },
-              trailing: Builder(
-                builder: (context) => Row(
-                  mainAxisSize: MainAxisSize.min,
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.add),
+                        splashRadius: 16,
+                        iconSize: 16,
+                        onPressed:
+                            Actions.handler(context, const AddTabIntent()),
+                      ),
+                      const SizedBox(width: 2),
+                      QuickMenuButton(
+                        onSelected: (instance) {
+                          Actions.maybeInvoke(context, AddTabIntent(instance));
+                        },
+                      ),
+                    ],
+                  ),
+                  onMoved: (from, to) {
+                    Actions.invoke(context, MoveTabIntent(from, to));
+                  },
+                  preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
+                ),
+                body: IndexedStack(
+                  index: model.currentIndex,
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.add),
-                      splashRadius: 16,
-                      iconSize: 16,
-                      onPressed: Actions.handler(context, const AddTabIntent()),
-                    ),
-                    const SizedBox(width: 2),
-                    QuickMenuButton(
-                      onSelected: (instance) {
-                        Actions.maybeInvoke(context, AddTabIntent(instance));
-                      },
-                    ),
+                    for (final tab in model.tabs)
+                      ChangeNotifierProvider.value(
+                        value: tab,
+                        key: ValueKey(tab),
+                        builder: (context, child) {
+                          final tab = context.watch<TabItem>();
+                          return FocusScope(
+                            node: tab.focusScope,
+                            child: tab.instance == null
+                                ? HomePage(
+                                    onSelected: (instance) =>
+                                        tab.instance = instance,
+                                  )
+                                : TerminalPage(
+                                    instance: tab.instance!,
+                                    onExit: () => tab.instance = null,
+                                  ),
+                          );
+                        },
+                      ),
                   ],
                 ),
-              ),
-              onMoved: (from, to) {
-                Actions.invoke(context, MoveTabIntent(from, to));
-              },
-              preferredHeight: Theme.of(context).appBarTheme.toolbarHeight,
-            ),
-            body: IndexedStack(
-              index: model.currentIndex,
-              children: [
-                for (final tab in model.tabs)
-                  ChangeNotifierProvider.value(
-                    value: tab,
-                    key: ValueKey(tab),
-                    builder: (context, child) {
-                      final tab = context.watch<TabItem>();
-                      return FocusScope(
-                        node: tab.focusScope,
-                        child: tab.instance == null
-                            ? HomePage(
-                                onSelected: (instance) =>
-                                    tab.instance = instance,
-                              )
-                            : TerminalPage(
-                                instance: tab.instance!,
-                                onExit: () => tab.instance = null,
-                              ),
-                      );
-                    },
-                  ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),

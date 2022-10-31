@@ -16,6 +16,7 @@ class TabActions extends StatelessWidget {
       actions: {
         AddTabIntent: AddTabAction(model),
         CloseTabIntent: CloseTabAction(model),
+        MoveTabIntent: MoveTabAction(model),
         NextTabIntent: NextTabAction(model),
         PreviousTabIntent: PreviousTabAction(model),
       },
