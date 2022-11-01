@@ -2,13 +2,13 @@ import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 
 import 'command.dart';
-import 'shortcut_settings.dart';
+import 'shortcut_store.dart';
 
 class CommandStore extends StatefulWidget {
   const CommandStore({super.key, required this.child, required this.shortcuts});
 
   final Widget child;
-  final ShortcutSettings shortcuts;
+  final ShortcutStore shortcuts;
 
   static List<Command> commandsOf(BuildContext context) {
     final store =
@@ -48,10 +48,8 @@ class CommandStoreState extends State<CommandStore> {
     if (ref == 1) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
-          final shortcuts = widget.shortcuts.get(command.id);
           setState(() {
-            _commands = List.of(_commands)
-              ..add(command.copyWith(shortcuts: shortcuts));
+            _commands = List.of(_commands)..add(command);
             _sort();
           });
         }
@@ -108,8 +106,8 @@ class CommandStoreState extends State<CommandStore> {
 
   @override
   void initState() {
-    widget.shortcuts.load();
     super.initState();
+    widget.shortcuts.load();
   }
 
   @override
@@ -124,7 +122,10 @@ class CommandStoreState extends State<CommandStore> {
       animation: widget.shortcuts,
       builder: (context, child) {
         return _InheritedCommandStore(
-          commands: List.of(commands),
+          commands: commands
+              .map((c) =>
+                  c.copyWith(shortcuts: widget.shortcuts.getShortcuts(c.id)))
+              .toList(),
           child: child!,
         );
       },

@@ -1,7 +1,7 @@
 import 'package:command_store/command_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:provider/provider.dart';
 import 'package:yaru/yaru.dart';
 
 import 'tabs/tab_page.dart';
@@ -12,7 +12,7 @@ class Workshops extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommandStore(
-      shortcuts: getService<ShortcutSettings>(),
+      shortcuts: context.watch<ShortcutStore>(),
       child: YaruTheme(builder: (context, yaru, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
