@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
+import 'package:settings_store/settings_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simplestreams/simplestreams.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
@@ -35,6 +36,9 @@ Future<void> main() async {
   final shortcuts = ShortcutStore('com.canonical.workshops.shortcuts');
   await shortcuts.load();
 
+  final settings = SettingsStore('com.canonical.workshops');
+  await settings.load();
+
   runApp(
     MultiProvider(
       providers: [
@@ -45,6 +49,7 @@ Future<void> main() async {
           create: (_) => RemoteStore(preferences)..init(),
         ),
         ChangeNotifierProvider<ShortcutStore>.value(value: shortcuts),
+        ChangeNotifierProvider<SettingsStore>.value(value: settings),
         ChangeNotifierProxyProvider<RemoteStore, RemoteImageModel>(
           create: (_) => RemoteImageModel(),
           update: (_, store, model) {

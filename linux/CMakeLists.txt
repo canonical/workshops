@@ -117,8 +117,9 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
 endif()
 
 # GSettings
-set(GSETTINGS_SCHEMA "data/${APPLICATION_ID}.shortcuts.gschema.xml")
-install(FILES "${GSETTINGS_SCHEMA}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}"
+install(FILES "data/${APPLICATION_ID}.gschema.xml" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}"
+  COMPONENT Runtime)
+install(FILES "data/${APPLICATION_ID}.shortcuts.gschema.xml" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}"
   COMPONENT Runtime)
 install(CODE "
   execute_process(COMMAND glib-compile-schemas \"${INSTALL_BUNDLE_DATA_DIR}\")

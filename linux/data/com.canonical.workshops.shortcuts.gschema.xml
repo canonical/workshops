@@ -85,5 +85,17 @@
       <default><![CDATA[['<Alt>Right']]]></default>
       <summary>Terminal: move focus to a split on the right</summary>
     </key>
+    <key name="terminal-zoom-in" type="as">
+      <default><![CDATA[['<Control>plus']]]></default>
+      <summary>Terminal: zoom in</summary>
+    </key>
+    <key name="terminal-zoom-out" type="as">
+      <default><![CDATA[['<Control>minus']]]></default>
+      <summary>Terminal: zoom out</summary>
+    </key>
+    <key name="terminal-zoom-reset" type="as">
+      <default><![CDATA[['<Control>0']]]></default>
+      <summary>Terminal: reset zoom</summary>
+    </key>
   </schema>
 </schemalist>
