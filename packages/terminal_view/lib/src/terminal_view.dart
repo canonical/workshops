@@ -89,29 +89,31 @@ class _TerminalViewState extends State<TerminalView> {
       builder: (context, child) {
         return PrimaryScrollController(
           controller: _scrollController,
-          child: xterm.TerminalView(
-            widget.terminal,
-            controller: _controller,
-            scrollController: _scrollController,
-            padding: const EdgeInsets.all(2),
-            backgroundOpacity:
-                FocusScope.of(context).focusedChild == _focusNode ? 1 : 0.5,
-            autofocus: widget.autofocus,
-            focusNode: _focusNode,
-            theme: theme?.toXterm() ?? xterm.TerminalThemes.defaultTheme,
-            textStyle: xterm.TerminalStyle(
-              fontSize: theme?.fontSize ?? 16,
-              fontFamily: theme?.fontFamily ?? 'Monospace',
+          child: ClipRect(
+            child: xterm.TerminalView(
+              widget.terminal,
+              controller: _controller,
+              scrollController: _scrollController,
+              padding: const EdgeInsets.all(2),
+              backgroundOpacity:
+                  FocusScope.of(context).focusedChild == _focusNode ? 1 : 0.5,
+              autofocus: widget.autofocus,
+              focusNode: _focusNode,
+              theme: theme?.toXterm() ?? xterm.TerminalThemes.defaultTheme,
+              textStyle: xterm.TerminalStyle(
+                fontSize: theme?.fontSize ?? 16,
+                fontFamily: theme?.fontFamily ?? 'Monospace',
+              ),
+              onSecondaryTapDown: (details, offset) {
+                widget.onContextMenu?.call(details.globalPosition);
+              },
+              shortcuts: widget.shortcuts,
+              actions: {
+                ScrollIntent: ScrollAction(),
+                ScrollToEndIntent: ScrollToEndAction(),
+                ...?widget.actions,
+              },
             ),
-            onSecondaryTapDown: (details, offset) {
-              widget.onContextMenu?.call(details.globalPosition);
-            },
-            shortcuts: widget.shortcuts,
-            actions: {
-              ScrollIntent: ScrollAction(),
-              ScrollToEndIntent: ScrollToEndAction(),
-              ...?widget.actions,
-            },
           ),
         );
       },
