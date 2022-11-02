@@ -103,6 +103,21 @@ class TerminalCommands extends StatelessWidget {
           label: l10n.moveFocusRightCommand,
           intent: TerminalIntents.moveFocusRight,
         ),
+        Command(
+          id: 'terminal-zoom-in',
+          label: l10n.zoomInCommand,
+          intent: TerminalIntents.zoomIn,
+        ),
+        Command(
+          id: 'terminal-zoom-out',
+          label: l10n.zoomOutCommand,
+          intent: TerminalIntents.zoomOut,
+        ),
+        Command(
+          id: 'terminal-zoom-reset',
+          label: l10n.zoomResetCommand,
+          intent: TerminalIntents.zoomReset,
+        ),
       ],
       child: child,
     );

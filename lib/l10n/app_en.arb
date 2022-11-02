@@ -70,5 +70,8 @@
   "typeLabel": "Type",
   "unpackingInstanceText": "Unpacking instance",
   "variantLabel": "Variant",
-  "virtualMachineItem": "virtual machine"
+  "virtualMachineItem": "virtual machine",
+  "zoomInCommand": "Zoom in",
+  "zoomOutCommand": "Zoom out",
+  "zoomResetCommand": "Reset zoom"
 }

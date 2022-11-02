@@ -30,6 +30,11 @@ abstract class TerminalIntents {
   static const moveFocusDown = MoveFocusIntent(TraversalDirection.down);
   static const moveFocusLeft = MoveFocusIntent(TraversalDirection.left);
   static const moveFocusRight = MoveFocusIntent(TraversalDirection.right);
+
+  // zoom
+  static const zoomIn = ZoomIntent(delta: 1);
+  static const zoomOut = ZoomIntent(delta: -1);
+  static const zoomReset = ZoomIntent();
 }
 
 class ScrollToEndIntent extends ScrollIntent {
@@ -46,4 +51,10 @@ class SplitIntent extends Intent {
 
 class MoveFocusIntent extends DirectionalFocusIntent {
   const MoveFocusIntent(super.direction);
+}
+
+class ZoomIntent extends Intent {
+  const ZoomIntent({this.delta});
+
+  final double? delta;
 }

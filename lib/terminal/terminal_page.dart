@@ -4,6 +4,7 @@ import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:nested_split_view/nested_split_view.dart';
 import 'package:provider/provider.dart';
+import 'package:settings_store/settings_store.dart';
 import 'package:terminal_view/terminal_view.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
@@ -112,9 +113,10 @@ class _TerminalPageState extends State<_TerminalPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final settings = context.watch<SettingsStore>();
     return TerminalCommands(
       child: TerminalTheme(
-        data: getTerminalTheme(widget.instance.os),
+        data: settings.getTheme(widget.instance.os),
         child: NestedSplitView(
           controller: _splitter,
           builder: _buildPane,
