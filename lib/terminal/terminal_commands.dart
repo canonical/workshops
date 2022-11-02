@@ -1,7 +1,8 @@
 import 'package:command_store/command_store.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:terminal_view/terminal_view.dart';
+
+import 'terminal_intents.dart';
 
 class TerminalCommands extends StatelessWidget {
   const TerminalCommands({super.key, required this.child});
