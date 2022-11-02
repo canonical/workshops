@@ -32,9 +32,8 @@ Future<void> main() async {
     (url) => SimpleStreamClient(url as String),
   );
 
-  final shortcuts = ShortcutGSettings('com.canonical.workshops.shortcuts');
+  final shortcuts = ShortcutStore('com.canonical.workshops.shortcuts');
   await shortcuts.load();
-  registerServiceInstance<ShortcutSettings>(shortcuts);
 
   runApp(
     MultiProvider(
@@ -45,6 +44,7 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (_) => RemoteStore(preferences)..init(),
         ),
+        ChangeNotifierProvider<ShortcutStore>.value(value: shortcuts),
         ChangeNotifierProxyProvider<RemoteStore, RemoteImageModel>(
           create: (_) => RemoteImageModel(),
           update: (_, store, model) {

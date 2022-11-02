@@ -1,4 +1,4 @@
-name: command_store
+name: settings_store
 publish_to: 'none'
 
 environment:
@@ -6,15 +6,10 @@ environment:
   flutter: ">=3.0.0"
 
 dependencies:
-  accel_key:
-    path: ../accel_key
-  collection: ^1.16.0
   dbus: ^0.7.8
   flutter:
     sdk: flutter
   gsettings: ^0.2.5
-  settings_store:
-    path: ../settings_store
 
 dev_dependencies:
   build_runner: ^2.3.0

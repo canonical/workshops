@@ -3,11 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
-import 'dart:ui' as _i5;
+import 'dart:async' as _i4;
+import 'dart:ui' as _i6;
 
-import 'package:command_store/src/shortcut_settings.dart' as _i2;
-import 'package:flutter/widgets.dart' as _i4;
+import 'package:command_store/src/shortcut_store.dart' as _i2;
+import 'package:dbus/dbus.dart' as _i5;
+import 'package:flutter/widgets.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -21,11 +22,11 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [ShortcutSettings].
+/// A class which mocks [ShortcutStore].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockShortcutSettings extends _i1.Mock implements _i2.ShortcutSettings {
-  MockShortcutSettings() {
+class MockShortcutStore extends _i1.Mock implements _i2.ShortcutStore {
+  MockShortcutStore() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -35,81 +36,120 @@ class MockShortcutSettings extends _i1.Mock implements _i2.ShortcutSettings {
         returnValue: false,
       ) as bool);
   @override
-  _i3.Future<void> load() => (super.noSuchMethod(
+  List<_i3.LogicalKeySet> getShortcuts(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #getShortcuts,
+          [id],
+        ),
+        returnValue: <_i3.LogicalKeySet>[],
+      ) as List<_i3.LogicalKeySet>);
+  @override
+  _i4.Future<void> addShortcut(
+    String? id,
+    _i3.LogicalKeySet? shortcut,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addShortcut,
+          [
+            id,
+            shortcut,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> removeShortcut(
+    String? id,
+    _i3.LogicalKeySet? shortcut,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeShortcut,
+          [
+            id,
+            shortcut,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> setShortcuts(
+    String? id,
+    List<_i3.LogicalKeySet>? shortcuts,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setShortcuts,
+          [
+            id,
+            shortcuts,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> removeShortcuts(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #removeShortcuts,
+          [id],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> load() => (super.noSuchMethod(
         Invocation.method(
           #load,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
-  List<_i4.LogicalKeySet> get(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #get,
-          [id],
-        ),
-        returnValue: <_i4.LogicalKeySet>[],
-      ) as List<_i4.LogicalKeySet>);
+  _i5.DBusValue? get(String? id) => (super.noSuchMethod(Invocation.method(
+        #get,
+        [id],
+      )) as _i5.DBusValue?);
   @override
-  _i3.Future<void> add(
+  _i4.Future<void> set(
     String? id,
-    _i4.LogicalKeySet? shortcut,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [
-            id,
-            shortcut,
-          ],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
-  @override
-  _i3.Future<void> remove(
-    String? id,
-    _i4.LogicalKeySet? shortcut,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #remove,
-          [
-            id,
-            shortcut,
-          ],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
-  @override
-  _i3.Future<void> set(
-    String? id,
-    List<_i4.LogicalKeySet>? shortcuts,
+    _i5.DBusValue? value,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
           #set,
           [
             id,
-            shortcuts,
+            value,
           ],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
-  _i3.Future<void> unset(String? id) => (super.noSuchMethod(
+  _i4.Future<void> unset(String? id) => (super.noSuchMethod(
         Invocation.method(
           #unset,
           [id],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
-  void addListener(_i5.VoidCallback? listener) => super.noSuchMethod(
+  _i4.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -117,18 +157,10 @@ class MockShortcutSettings extends _i1.Mock implements _i2.ShortcutSettings {
         returnValueForMissingStub: null,
       );
   @override
-  void removeListener(_i5.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
         ),
         returnValueForMissingStub: null,
       );

@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 
 import 'command_store_test.mocks.dart';
 
-@GenerateMocks([ShortcutSettings])
+@GenerateMocks([ShortcutStore])
 void main() {
   testWidgets('inherited commands', (tester) async {
     var foo = 0;
@@ -25,9 +25,9 @@ void main() {
       Command(id: 'bar', label: 'Bar', intent: bi),
     ];
 
-    final shortcuts = MockShortcutSettings();
-    when(shortcuts.get('foo')).thenReturn([a]);
-    when(shortcuts.get('bar')).thenReturn([b, c]);
+    final shortcuts = MockShortcutStore();
+    when(shortcuts.getShortcuts('foo')).thenReturn([a]);
+    when(shortcuts.getShortcuts('bar')).thenReturn([b, c]);
 
     await tester.pumpWidget(
       CommandStore(
