@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xterm/xterm.dart' as xterm;
 
-import 'terminal_actions.dart';
-import 'terminal_intents.dart';
 import 'terminal_theme.dart';
 
 class TerminalView extends StatefulWidget {
@@ -108,11 +106,7 @@ class _TerminalViewState extends State<TerminalView> {
                 widget.onContextMenu?.call(details.globalPosition);
               },
               shortcuts: widget.shortcuts,
-              actions: {
-                ScrollIntent: ScrollAction(),
-                ScrollToEndIntent: ScrollToEndAction(),
-                ...?widget.actions,
-              },
+              actions: widget.actions,
             ),
           ),
         );

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terminal_view/terminal_view.dart';
 
+import 'terminal_actions.dart';
+import 'terminal_intents.dart';
 import 'terminal_menu.dart';
 import 'terminal_model.dart';
 
@@ -43,6 +45,8 @@ class TerminalPane extends StatelessWidget {
           shortcuts: CommandStore.shortcutsOf(context),
           actions: {
             MoveFocusIntent: MoveFocusAction(),
+            ScrollIntent: ScrollAction(),
+            ScrollToEndIntent: ScrollToEndAction(),
             SplitIntent: SplitAction(onSplit),
           },
         ),
