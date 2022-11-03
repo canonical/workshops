@@ -12,14 +12,16 @@ void main() {
   }) {
     return MaterialApp(
       home: Scaffold(
-        appBar: MovableTabBar(
-          count: tabs.length,
-          builder: (context, index) => MovableTabButton(
-            selected: index == currentIndex,
-            label: Text(index.toString()),
-            onClosed: closable ? () => tabs.removeAt(index) : null,
+        body: Center(
+          child: MovableTabBar(
+            count: tabs.length,
+            builder: (context, index) => MovableTabButton(
+              selected: index == currentIndex,
+              label: Text(index.toString()),
+              onClosed: closable ? () => tabs.removeAt(index) : null,
+            ),
+            onMoved: tabs.move,
           ),
-          onMoved: tabs.move,
         ),
       ),
     );

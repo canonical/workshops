@@ -4,16 +4,15 @@ import 'package:flutter/material.dart';
 
 typedef OnMovedCallback = void Function(int from, int to);
 
-class MovableTabBar extends StatelessWidget implements PreferredSizeWidget {
-  MovableTabBar({
+class MovableTabBar extends StatelessWidget {
+  const MovableTabBar({
     super.key,
     required this.count,
     required this.builder,
     required this.onMoved,
-    double? preferredHeight,
     this.leading,
     this.trailing,
-  }) : preferredSize = Size.fromHeight(preferredHeight ?? kToolbarHeight);
+  });
 
   final int count;
   final IndexedWidgetBuilder builder;
@@ -22,38 +21,28 @@ class MovableTabBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? trailing;
 
   @override
-  final Size preferredSize;
-
-  @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Theme.of(context).dividerColor),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (leading != null)
-            Padding(
-              padding: const EdgeInsets.all(4),
-              child: leading!,
-            ),
-          Flexible(
-            child: _ReorderableTabBar(
-              count: count,
-              builder: builder,
-              onMoved: onMoved,
-            ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (leading != null)
+          Padding(
+            padding: const EdgeInsets.all(4),
+            child: leading!,
           ),
-          if (trailing != null)
-            Padding(
-              padding: const EdgeInsets.all(4),
-              child: trailing!,
-            ),
-        ],
-      ),
+        Flexible(
+          child: _ReorderableTabBar(
+            count: count,
+            builder: builder,
+            onMoved: onMoved,
+          ),
+        ),
+        if (trailing != null)
+          Padding(
+            padding: const EdgeInsets.all(4),
+            child: trailing!,
+          ),
+      ],
     );
   }
 }
