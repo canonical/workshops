@@ -1,9 +1,28 @@
 import 'package:accel_key/accel_key.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  testWidgets('widget', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: AccelKey(
+              keys: ['Control', 'A'],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    expect(find.byType(AccelKey), findsOneWidget);
+    expect(find.byType(Card), findsNWidgets(2));
+    expect(find.text('Control'), findsOneWidget);
+    expect(find.text('A'), findsOneWidget);
+  });
+
   test('parse', () {
     expect(
       parseAccelKey('A'),
