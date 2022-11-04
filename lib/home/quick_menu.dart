@@ -5,6 +5,7 @@ import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 
 import 'instance_model.dart';
 import 'instance_store.dart';
@@ -16,20 +17,24 @@ class QuickMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<LxdInstance>(
-      icon: const Icon(Icons.expand_more),
-      splashRadius: 16,
-      iconSize: 16,
-      position: PopupMenuPosition.under,
-      tooltip: '',
-      itemBuilder: (context) {
-        final store = context.read<InstanceStore>();
-        return [
-          for (final name in store.instances.value ?? <String>[])
-            _QuickMenuItem(name)
-        ];
-      },
-      onSelected: onSelected,
+    return Theme(
+      data: Theme.of(context).copyWith(
+          visualDensity: const VisualDensity(horizontal: -4, vertical: -4)),
+      child: PopupMenuButton<LxdInstance>(
+        icon: const Icon(YaruIcons.pan_down),
+        iconSize: 16,
+        padding: EdgeInsets.zero,
+        position: PopupMenuPosition.under,
+        tooltip: '',
+        itemBuilder: (context) {
+          final store = context.read<InstanceStore>();
+          return [
+            for (final name in store.instances.value ?? <String>[])
+              _QuickMenuItem(name)
+          ];
+        },
+        onSelected: onSelected,
+      ),
     );
   }
 }

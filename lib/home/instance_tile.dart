@@ -7,6 +7,7 @@ import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 
 import 'instance_actions.dart';
 import 'instance_intents.dart';
@@ -99,7 +100,7 @@ class _StopButton extends _IconButton {
 
 class _DeleteButton extends _IconButton {
   const _DeleteButton(VoidCallback? onPressed)
-      : super(icon: const Icon(Icons.close), onPressed: onPressed);
+      : super(icon: const Icon(YaruIcons.window_close), onPressed: onPressed);
 }
 
 class _BusyButton extends IconButton {
