@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 
 class MovableTabButton extends StatelessWidget {
   const MovableTabButton({
@@ -37,7 +38,7 @@ class MovableTabButton extends StatelessWidget {
             child: DecoratedBox(
               decoration: UnderlineTabIndicator(
                 borderSide: BorderSide(
-                  width: 3,
+                  width: 4,
                   color: selected == true
                       ? Theme.of(context).indicatorColor
                       : Colors.transparent,
@@ -78,10 +79,11 @@ class MovableTabButton extends StatelessWidget {
                         child: Center(
                           child: IconButton(
                             padding: EdgeInsets.zero,
-                            icon: const Icon(Icons.close),
+                            icon: const Icon(YaruIcons.window_close),
                             color: Theme.of(context).colorScheme.onSurface,
                             iconSize: 16,
-                            splashRadius: 16,
+                            visualDensity: const VisualDensity(
+                                horizontal: -4, vertical: -4),
                             onPressed: onClosed,
                           ),
                         ),

@@ -5,6 +5,7 @@ import 'package:movable_tabs/movable_tabs.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
 import 'package:window_title_bar/window_title_bar.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 
 import '../home/home_page.dart';
 import '../home/quick_menu.dart';
@@ -67,9 +68,11 @@ class TabPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.add),
-                        splashRadius: 16,
+                        icon: const Icon(YaruIcons.plus),
                         iconSize: 16,
+                        padding: EdgeInsets.zero,
+                        visualDensity:
+                            const VisualDensity(horizontal: -4, vertical: -4),
                         onPressed:
                             Actions.handler(context, const AddTabIntent()),
                       ),
