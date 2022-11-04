@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:movable_tabs/movable_tabs.dart';
 import 'package:movable_tabs/src/tab_x.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 
 void main() {
   Widget buildTabs(
@@ -103,7 +104,7 @@ void main() {
 
     final button = find.descendant(
       of: find.widgetWithText(MovableTabButton, '3'),
-      matching: find.byIcon(Icons.close),
+      matching: find.byIcon(YaruIcons.window_close),
     );
     await tester.tap(button);
     await tester.pumpAndSettle();
