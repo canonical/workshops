@@ -1,24 +1,30 @@
 import 'package:flutter/widgets.dart';
 import 'package:lxd/lxd.dart';
+import 'package:lxd_service/lxd_service.dart';
+import 'package:lxd_x/lxd_x.dart';
 import 'package:provider/provider.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../tabs/tab_item.dart';
 import 'instance_intents.dart';
-import 'instance_model.dart';
+import 'instance_store.dart';
 
 class InstanceActions extends StatelessWidget {
-  const InstanceActions({super.key, required this.child});
+  const InstanceActions({super.key, this.name, required this.child});
 
   final Widget child;
+  final String? name;
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<InstanceModel>();
+    final instance = name != null
+        ? context.select<InstanceStore, LxdInstance?>((s) => s.get(name!))
+        : null;
     return Actions(
       actions: {
-        StartInstanceIntent: StartInstanceAction(model),
-        StopInstanceIntent: StopInstanceAction(model),
-        DeleteInstanceIntent: DeleteInstanceAction(model),
+        StartInstanceIntent: StartInstanceAction(instance),
+        StopInstanceIntent: StopInstanceAction(instance),
+        DeleteInstanceIntent: DeleteInstanceAction(instance),
       },
       child: child,
     );
@@ -38,43 +44,46 @@ class SelectInstanceAction extends ContextAction<SelectInstanceIntent> {
 }
 
 class StartInstanceAction extends Action<StartInstanceIntent> {
-  StartInstanceAction(this.model) {
-    model.addListener(notifyActionListeners);
+  StartInstanceAction(this.instance);
+
+  final LxdInstance? instance;
+
+  @override
+  bool get isActionEnabled => instance?.isRunning != true;
+
+  @override
+  void invoke(StartInstanceIntent intent) {
+    final service = getService<LxdService>();
+    service.startInstance(intent.instance?.name ?? instance!.name);
   }
-
-  final InstanceModel model;
-
-  @override
-  bool get isActionEnabled => !model.isRunning;
-
-  @override
-  void invoke(StartInstanceIntent intent) => model.start();
 }
 
 class StopInstanceAction extends Action<StopInstanceIntent> {
-  StopInstanceAction(this.model) {
-    model.addListener(notifyActionListeners);
+  StopInstanceAction(this.instance);
+
+  final LxdInstance? instance;
+
+  @override
+  bool get isActionEnabled => instance?.isRunning == true;
+
+  @override
+  void invoke(StopInstanceIntent intent) {
+    final service = getService<LxdService>();
+    service.stopInstance(intent.instance?.name ?? instance!.name);
   }
-
-  final InstanceModel model;
-
-  @override
-  bool get isActionEnabled => model.isRunning;
-
-  @override
-  void invoke(StopInstanceIntent intent) => model.stop();
 }
 
 class DeleteInstanceAction extends Action<DeleteInstanceIntent> {
-  DeleteInstanceAction(this.model) {
-    model.addListener(notifyActionListeners);
+  DeleteInstanceAction(this.instance);
+
+  final LxdInstance? instance;
+
+  @override
+  bool get isActionEnabled => instance?.isStopped == true;
+
+  @override
+  void invoke(DeleteInstanceIntent intent) {
+    final service = getService<LxdService>();
+    service.deleteInstance(intent.instance?.name ?? instance!.name);
   }
-
-  final InstanceModel model;
-
-  @override
-  bool get isActionEnabled => model.isStopped;
-
-  @override
-  void invoke(DeleteInstanceIntent intent) => model.delete();
 }

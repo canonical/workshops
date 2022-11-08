@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
-import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
-import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
-import 'instance_model.dart';
 import 'instance_store.dart';
 
 class QuickMenuButton extends StatelessWidget {
@@ -59,29 +56,24 @@ class _InstancePopupMenuItemState
 
   @override
   Widget buildChild() {
-    final service = getService<LxdService>();
-    return ChangeNotifierProvider(
-      create: (_) => InstanceModel(widget.name, service)..init(),
-      builder: (context, child) {
-        final model = context.watch<InstanceModel>();
-        _instance = model.instance.value;
-        return Row(
-          children: [
-            OsLogo.asset(
-              name: model.instance.value?.os,
-              size: 32,
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                widget.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        );
-      },
+    _instance = context
+        .select<InstanceStore, LxdInstance?>((store) => store.get(widget.name));
+
+    return Row(
+      children: [
+        OsLogo.asset(
+          name: _instance?.os,
+          size: 32,
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            widget.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,50 +1,29 @@
-import 'package:async_value/async_value.dart';
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
-import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
-import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
 import 'instance_actions.dart';
 import 'instance_intents.dart';
 import 'instance_menu.dart';
-import 'instance_model.dart';
+import 'instance_store.dart';
 
-class InstanceTile extends StatefulWidget {
-  const InstanceTile({super.key});
+class InstanceTile extends StatelessWidget {
+  const InstanceTile({super.key, required this.name});
 
-  static Widget create(BuildContext context, {required String name}) {
-    return ChangeNotifierProvider(
-      key: ValueKey(name),
-      create: (_) => InstanceModel(name, getService<LxdService>()),
-      child: const InstanceTile(),
-    );
-  }
-
-  @override
-  State<InstanceTile> createState() => _InstanceTileState();
-}
-
-class _InstanceTileState extends State<InstanceTile> {
-  @override
-  void initState() {
-    super.initState();
-    final model = context.read<InstanceModel>();
-    WidgetsBinding.instance.addPostFrameCallback((_) => model.init());
-  }
+  final String name;
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<InstanceModel>();
+    final instance =
+        context.select<InstanceStore, LxdInstance?>((s) => s.get(name));
     return InstanceActions(
+      name: name,
       child: Builder(
         builder: (context) {
-          final instance = model.instance.valueOrNull;
-
           final canStop =
               Actions.find<StopInstanceIntent>(context).isActionEnabled;
           final stopHandler =

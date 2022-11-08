@@ -28,8 +28,7 @@ class _InstanceListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: instances?.length ?? 0,
-      itemBuilder: (context, index) => InstanceTile.create(
-        context,
+      itemBuilder: (context, index) => InstanceTile(
         name: instances![index],
       ),
     );
