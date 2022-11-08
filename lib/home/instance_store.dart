@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:async_value/async_value.dart';
+import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:meta/meta.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
@@ -11,10 +12,13 @@ class InstanceStore extends SafeChangeNotifier {
   InstanceStore(this._service);
 
   final LxdService _service;
-  StreamSubscription? _sub;
+  List<StreamSubscription>? _subs;
   var _instances = const InstanceList.data([]);
+  final _values = <String, LxdInstance>{};
 
   InstanceList get instances => _instances;
+
+  LxdInstance? getInstance(String instance) => _values[instance];
 
   @protected
   set instances(InstanceList instances) {
@@ -24,21 +28,43 @@ class InstanceStore extends SafeChangeNotifier {
   }
 
   Future<void> init() async {
-    _sub ??= _service.instanceStream.listen((value) {
-      instances = InstanceList.data(value);
-    });
+    _subs ??= [
+      _service.instanceAdded.listen(_update),
+      _service.instanceUpdated.listen(_update),
+      _service.instanceRemoved.listen(_remove),
+      _service.instanceStream
+          .listen((value) => instances = InstanceList.data(value)),
+    ];
 
     instances = const InstanceList.loading().copyWithPrevious(instances);
 
     instances = await InstanceList.guard(() async {
-      await _service.init();
-      return _service.instances ?? [];
+      final names = _service.instances ?? [];
+      await Future.wait(names.map(_update));
+      return names;
     });
   }
 
+  Future<void> _update(String name) async {
+    final value = await _service.getInstance(name);
+    if (value != _values[name]) {
+      _values[name] = value;
+      notifyListeners();
+    }
+  }
+
+  Future<void> _remove(String name) async {
+    if (_values.remove(name) != null) {
+      notifyListeners();
+    }
+  }
+
   @override
-  void dispose() {
-    _sub?.cancel();
+  Future<void> dispose() async {
+    for (final sub in _subs ?? []) {
+      await sub.cancel();
+    }
+    _subs = null;
     super.dispose();
   }
 }
