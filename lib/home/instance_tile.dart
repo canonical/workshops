@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
-import 'package:provider/provider.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
 import 'instance_actions.dart';
+import 'instance_context.dart';
 import 'instance_intents.dart';
 import 'instance_menu.dart';
-import 'instance_store.dart';
 
 class InstanceTile extends StatelessWidget {
   const InstanceTile({super.key, required this.name});
@@ -18,8 +17,7 @@ class InstanceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final instance =
-        context.select<InstanceStore, LxdInstance?>((s) => s.get(name));
+    final instance = context.selectInstance(name);
     return InstanceActions(
       name: name,
       child: Builder(

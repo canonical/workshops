@@ -56,8 +56,8 @@ class _InstancePopupMenuItemState
 
   @override
   Widget buildChild() {
-    _instance = context
-        .select<InstanceStore, LxdInstance?>((store) => store.get(widget.name));
+    _instance = context.select<InstanceStore, LxdInstance?>(
+        (store) => store.getInstance(widget.name));
 
     return Row(
       children: [

@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../tabs/tab_item.dart';
+import 'instance_context.dart';
 import 'instance_intents.dart';
-import 'instance_store.dart';
 
 class InstanceActions extends StatelessWidget {
   const InstanceActions({super.key, this.name, required this.child});
@@ -17,9 +17,7 @@ class InstanceActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final instance = name != null
-        ? context.select<InstanceStore, LxdInstance?>((s) => s.get(name!))
-        : null;
+    final instance = context.selectInstance(name ?? '');
     return Actions(
       actions: {
         StartInstanceIntent: StartInstanceAction(instance),

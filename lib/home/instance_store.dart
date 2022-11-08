@@ -18,7 +18,7 @@ class InstanceStore extends SafeChangeNotifier {
 
   InstanceList get instances => _instances;
 
-  LxdInstance? get(String instance) => _values[instance];
+  LxdInstance? getInstance(String instance) => _values[instance];
 
   @protected
   set instances(InstanceList instances) {
