@@ -23,9 +23,7 @@ class Workshops extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-          routes: const {
-            '/': TabPage.create,
-          },
+          home: const TabPage(),
         );
       }),
     );
