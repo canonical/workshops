@@ -56,6 +56,7 @@ class _LauncherWizardState extends State<LauncherWizard> {
     final remote = context.select<RemoteStore, LxdRemote?>((s) => s.current);
     return Dialog(
       clipBehavior: Clip.hardEdge,
+      insetPadding: const EdgeInsets.all(20),
       child: SizedBox.fromSize(
         size: MediaQuery.of(context).size,
         child: Theme(
