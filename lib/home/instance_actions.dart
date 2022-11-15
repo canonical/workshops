@@ -41,47 +41,78 @@ class SelectInstanceAction extends ContextAction<SelectInstanceIntent> {
   }
 }
 
-class StartInstanceAction extends Action<StartInstanceIntent> {
-  StartInstanceAction(this.instance);
+abstract class InstanceAction<T extends InstanceIntent> extends Action<T> {
+  InstanceAction(this._instance);
 
-  final LxdInstance? instance;
+  final LxdInstance? _instance;
+
+  LxdInstance? getInstance([InstanceIntent? intent]) {
+    return intent?.instance ?? _instance;
+  }
+}
+
+class StartInstanceAction extends InstanceAction<StartInstanceIntent> {
+  StartInstanceAction(super.instance);
 
   @override
-  bool get isActionEnabled => instance?.isRunning != true;
+  bool get isActionEnabled => getInstance()?.canStart == true;
+
+  @override
+  bool isEnabled(StartInstanceIntent intent) {
+    return getInstance(intent)?.canStart == true;
+  }
 
   @override
   void invoke(StartInstanceIntent intent) {
-    final service = getService<LxdService>();
-    service.startInstance(intent.instance?.name ?? instance!.name);
+    final instance = getInstance(intent);
+    if (instance != null) {
+      getService<LxdService>().startInstance(instance.name);
+    }
   }
 }
 
-class StopInstanceAction extends Action<StopInstanceIntent> {
-  StopInstanceAction(this.instance);
-
-  final LxdInstance? instance;
+class StopInstanceAction extends InstanceAction<StopInstanceIntent> {
+  StopInstanceAction(super.instance);
 
   @override
-  bool get isActionEnabled => instance?.isRunning == true;
+  bool get isActionEnabled => getInstance()?.canStop == true;
+
+  @override
+  bool isEnabled(StopInstanceIntent intent) {
+    return getInstance(intent)?.canStop == true;
+  }
 
   @override
   void invoke(StopInstanceIntent intent) {
-    final service = getService<LxdService>();
-    service.stopInstance(intent.instance?.name ?? instance!.name);
+    final instance = getInstance(intent);
+    if (instance != null) {
+      getService<LxdService>().stopInstance(instance.name);
+    }
   }
 }
 
-class DeleteInstanceAction extends Action<DeleteInstanceIntent> {
-  DeleteInstanceAction(this.instance);
-
-  final LxdInstance? instance;
+class DeleteInstanceAction extends InstanceAction<DeleteInstanceIntent> {
+  DeleteInstanceAction(super.instance);
 
   @override
-  bool get isActionEnabled => instance?.isStopped == true;
+  bool get isActionEnabled => getInstance()?.canDelete == true;
+
+  @override
+  bool isEnabled(DeleteInstanceIntent intent) {
+    return getInstance(intent)?.canDelete == true;
+  }
 
   @override
   void invoke(DeleteInstanceIntent intent) {
-    final service = getService<LxdService>();
-    service.deleteInstance(intent.instance?.name ?? instance!.name);
+    final instance = getInstance(intent);
+    if (instance != null) {
+      getService<LxdService>().deleteInstance(instance.name);
+    }
   }
+}
+
+extension _LxdInstanceX on LxdInstance {
+  bool get canStart => !isRunning;
+  bool get canStop => isRunning;
+  bool get canDelete => isStopped;
 }
