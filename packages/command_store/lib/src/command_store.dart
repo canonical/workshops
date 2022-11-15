@@ -21,8 +21,9 @@ class CommandStore extends StatefulWidget {
     final commands = CommandStore.commandsOf(context);
     return Map.fromEntries([
       for (final command in commands)
-        for (final shortcut in command.shortcuts ?? const <LogicalKeySet>[])
-          MapEntry(shortcut, command.intent),
+        if (command.intent != null)
+          for (final shortcut in command.shortcuts ?? const <LogicalKeySet>[])
+            MapEntry(shortcut, command.intent!),
     ]);
   }
 
@@ -79,8 +80,8 @@ class CommandStoreState extends State<CommandStore> {
 
     void dispatchIntent() {
       final primaryContext = primaryFocus!.context;
-      if (primaryContext != null) {
-        Actions.maybeInvoke(primaryContext, command.intent);
+      if (primaryContext != null && command.intent != null) {
+        Actions.maybeInvoke(primaryContext, command.intent!);
       }
       FocusManager.instance.removeListener(dispatchIntent);
     }

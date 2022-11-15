@@ -12,9 +12,11 @@ void main() {
   testWidgets('inherited commands', (tester) async {
     var foo = 0;
     var bar = 0;
+    var qux = 0;
 
     final fi = VoidCallbackIntent(() => ++foo);
     final bi = VoidCallbackIntent(() => ++bar);
+    final qi = VoidCallbackIntent(() => ++qux);
 
     final a = LogicalKeySet(LogicalKeyboardKey.alt, LogicalKeyboardKey.keyA);
     final b = LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyB);
@@ -23,11 +25,18 @@ void main() {
     final commands = [
       Command(id: 'foo', label: 'Foo', intent: fi),
       Command(id: 'bar', label: 'Bar', intent: bi),
+      Command(
+        id: 'baz',
+        label: 'Baz',
+        children: [Command(id: 'qux', label: 'Qux', intent: qi)],
+      ),
     ];
 
     final shortcuts = MockShortcutStore();
     when(shortcuts.getShortcuts('foo')).thenReturn([a]);
     when(shortcuts.getShortcuts('bar')).thenReturn([b, c]);
+    when(shortcuts.getShortcuts('baz')).thenReturn(null);
+    when(shortcuts.getShortcuts('qux')).thenReturn(null);
 
     await tester.pumpWidget(
       CommandStore(
@@ -50,17 +59,19 @@ void main() {
     final context = tester.element(find.byType(SizedBox));
     expect(CommandStore.of(context), isA<CommandStoreState>());
     expect(CommandStore.commandsOf(context), [
-      commands.first.copyWith(shortcuts: [a]),
-      commands.last.copyWith(shortcuts: [b, c]),
+      commands[0].copyWith(shortcuts: [a]),
+      commands[1].copyWith(shortcuts: [b, c]),
+      commands[2],
     ]);
     expect(CommandStore.shortcutsOf(context), {a: fi, b: bi, c: bi});
 
-    CommandStore.of(context).execute(commands.last);
+    CommandStore.of(context).execute(commands[1]);
     await tester.pump();
 
     expect(CommandStore.commandsOf(context), [
-      commands.last.copyWith(shortcuts: [b, c]),
-      commands.first.copyWith(shortcuts: [a]),
+      commands[1].copyWith(shortcuts: [b, c]),
+      commands[0].copyWith(shortcuts: [a]),
+      commands[2],
     ]);
   });
 

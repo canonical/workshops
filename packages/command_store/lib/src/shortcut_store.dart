@@ -12,18 +12,18 @@ class ShortcutStore extends SettingsStore {
   ShortcutStore(super.schemaId);
   ShortcutStore.of(super.gsettings);
 
-  List<LogicalKeySet> getShortcuts(String id) {
-    return get(id)?.toLogicalKeySets() ?? [];
+  List<LogicalKeySet>? getShortcuts(String id) {
+    return get(id)?.toLogicalKeySets();
   }
 
   Future<void> addShortcut(String id, LogicalKeySet shortcut) {
-    final shortcuts = getShortcuts(id);
+    final shortcuts = getShortcuts(id) ?? [];
     shortcuts.add(shortcut);
     return setShortcuts(id, shortcuts);
   }
 
   Future<void> removeShortcut(String id, LogicalKeySet shortcut) {
-    final shortcuts = getShortcuts(id);
+    final shortcuts = getShortcuts(id) ?? [];
     shortcuts.removeWhere((s) => s.equals(shortcut));
     return setShortcuts(id, shortcuts);
   }
