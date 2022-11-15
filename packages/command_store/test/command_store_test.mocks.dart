@@ -36,13 +36,11 @@ class MockShortcutStore extends _i1.Mock implements _i2.ShortcutStore {
         returnValue: false,
       ) as bool);
   @override
-  List<_i3.LogicalKeySet> getShortcuts(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #getShortcuts,
-          [id],
-        ),
-        returnValue: <_i3.LogicalKeySet>[],
-      ) as List<_i3.LogicalKeySet>);
+  List<_i3.LogicalKeySet>? getShortcuts(String? id) =>
+      (super.noSuchMethod(Invocation.method(
+        #getShortcuts,
+        [id],
+      )) as List<_i3.LogicalKeySet>?);
   @override
   _i4.Future<void> addShortcut(
     String? id,
