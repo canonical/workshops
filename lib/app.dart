@@ -2,6 +2,7 @@ import 'package:command_store/command_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:ubuntu_localizations/ubuntu_localizations.dart';
 import 'package:yaru/yaru.dart';
 
 import 'tabs/tab_page.dart';
@@ -20,8 +21,15 @@ class Workshops extends StatelessWidget {
           darkTheme: yaru.darkTheme,
           highContrastTheme: yaruHighContrastLight,
           highContrastDarkTheme: yaruHighContrastDark,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const [
+            ...AppLocalizations.localizationsDelegates,
+            ...GlobalUbuntuLocalizations.delegates,
+          ],
+          supportedLocales: {
+            const Locale('en'), // make sure 'en' comes first
+            ...List.of(AppLocalizations.supportedLocales)
+              ..remove(const Locale('en')),
+          },
           onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
           home: const TabPage(),
         );

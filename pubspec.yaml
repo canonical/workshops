@@ -54,6 +54,7 @@ dependencies:
     path: packages/simplestreams
   terminal_view:
     path: packages/terminal_view
+  ubuntu_localizations: ^0.0.2
   ubuntu_logger:
     git:
       url: https://github.com/canonical/ubuntu-flutter-plugins.git
