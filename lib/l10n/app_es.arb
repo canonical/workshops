@@ -132,5 +132,19 @@
   "zoomOutCommand": "Alejarse",
   "@zoomOutCommand": {},
   "zoomResetCommand": "Restablecer zoom",
-  "@zoomResetCommand": {}
+  "@zoomResetCommand": {},
+  "closePaletteCommand": "Cerrar la paleta de comandos",
+  "@closePaletteCommand": {},
+  "deleteInstanceCommand": "Eliminar instancia",
+  "@deleteInstanceCommand": {},
+  "launchInstanceCommand": "Lanzar la instancia",
+  "@launchInstanceCommand": {},
+  "openPaletteCommand": "Abrir la paleta de comandos",
+  "@openPaletteCommand": {},
+  "searchCommandHint": "Buscando el comando...",
+  "@searchCommandHint": {},
+  "startInstanceCommand": "Empezar instancia",
+  "@startInstanceCommand": {},
+  "stopInstanceCommand": "Parar la instancia",
+  "@stopInstanceCommand": {}
 }
