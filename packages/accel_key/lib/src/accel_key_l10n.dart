@@ -1,7 +1,8 @@
-import 'package:accel_key/accel_key.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ubuntu_localizations/ubuntu_localizations.dart';
+
+import 'accel_key_x.dart';
 
 extension LogicalKeySetL10n on LogicalKeySet {
   List<String> localize(BuildContext context) {

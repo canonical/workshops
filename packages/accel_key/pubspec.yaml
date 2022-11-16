@@ -10,6 +10,7 @@ dependencies:
   ffi: ^2.0.1
   flutter:
     sdk: flutter
+  ubuntu_localizations: ^0.0.2
 
 dev_dependencies:
   ffigen: ^7.1.0

@@ -1,3 +1,4 @@
+import 'package:accel_key/accel_key.dart';
 import 'package:collection/collection.dart';
 import 'package:command_palette/command_palette.dart';
 import 'package:command_store/command_store.dart';
@@ -9,7 +10,6 @@ import 'command_palette_actions.dart';
 import 'command_palette_builder.dart';
 import 'command_palette_commands.dart';
 import 'command_palette_intents.dart';
-import 'command_palette_l10n.dart';
 
 class CommandPalettePage extends StatelessWidget {
   const CommandPalettePage({super.key, required this.child});
