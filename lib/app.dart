@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:ubuntu_localizations/ubuntu_localizations.dart';
 import 'package:yaru/yaru.dart';
 
+import 'command_palette/command_palette_page.dart';
 import 'tabs/tab_page.dart';
 
 class Workshops extends StatelessWidget {
@@ -31,7 +32,7 @@ class Workshops extends StatelessWidget {
               ..remove(const Locale('en')),
           },
           onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
-          home: const TabPage(),
+          home: const CommandPalettePage(child: TabPage()),
         );
       }),
     );

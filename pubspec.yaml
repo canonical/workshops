@@ -7,9 +7,15 @@ environment:
   flutter: ">=3.0.0"
 
 dependencies:
+  accel_key:
+    path: packages/accel_key
   async_value:
     path: packages/async_value
   collection: ^1.15.0
+  command_palette:
+    git:
+      ref: scroll-to-highlighted-action
+      url: https://github.com/jpnurmi/command_palette.git
   command_store:
     path: packages/command_store
   context_menu:
@@ -52,6 +58,7 @@ dependencies:
   shared_preferences: ^2.0.15
   simplestreams:
     path: packages/simplestreams
+  substring_highlight: ^1.0.33
   terminal_view:
     path: packages/terminal_view
   ubuntu_localizations: ^0.0.2
