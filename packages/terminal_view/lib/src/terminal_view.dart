@@ -85,6 +85,7 @@ class _TerminalViewState extends State<TerminalView> {
     return AnimatedBuilder(
       animation: _focusNode,
       builder: (context, child) {
+        final hasfocus = FocusScope.of(context).focusedChild == _focusNode;
         return PrimaryScrollController(
           controller: _scrollController,
           child: ClipRect(
@@ -93,11 +94,11 @@ class _TerminalViewState extends State<TerminalView> {
               controller: _controller,
               scrollController: _scrollController,
               padding: const EdgeInsets.all(2),
-              backgroundOpacity:
-                  FocusScope.of(context).focusedChild == _focusNode ? 1 : 0.5,
+              backgroundOpacity: 0.9,
               autofocus: widget.autofocus,
               focusNode: _focusNode,
-              theme: theme?.toXterm() ?? xterm.TerminalThemes.defaultTheme,
+              theme: theme?.toXterm(hasfocus ? 1.0 : 0.6) ??
+                  xterm.TerminalThemes.defaultTheme,
               textStyle: xterm.TerminalStyle(
                 fontSize: theme?.fontSize ?? 16,
                 fontFamily: theme?.fontFamily ?? 'Monospace',
@@ -116,26 +117,26 @@ class _TerminalViewState extends State<TerminalView> {
 }
 
 extension _XtermTheme on TerminalThemeData {
-  xterm.TerminalTheme toXterm() {
+  xterm.TerminalTheme toXterm(double opacity) {
     return xterm.TerminalTheme(
-      foreground: scheme.foreground,
+      foreground: scheme.foreground.withOpacity(opacity),
       background: scheme.background,
-      black: palette.black,
-      red: palette.red,
-      green: palette.green,
-      yellow: palette.yellow,
-      blue: palette.blue,
-      magenta: palette.magenta,
-      cyan: palette.cyan,
-      white: palette.white,
-      brightBlack: brightPalette.black,
-      brightRed: brightPalette.red,
-      brightGreen: brightPalette.green,
-      brightYellow: brightPalette.yellow,
-      brightBlue: brightPalette.black,
-      brightMagenta: brightPalette.magenta,
-      brightCyan: brightPalette.cyan,
-      brightWhite: brightPalette.white,
+      black: palette.black.withOpacity(opacity),
+      red: palette.red.withOpacity(opacity),
+      green: palette.green.withOpacity(opacity),
+      yellow: palette.yellow.withOpacity(opacity),
+      blue: palette.blue.withOpacity(opacity),
+      magenta: palette.magenta.withOpacity(opacity),
+      cyan: palette.cyan.withOpacity(opacity),
+      white: palette.white.withOpacity(opacity),
+      brightBlack: brightPalette.black.withOpacity(opacity),
+      brightRed: brightPalette.red.withOpacity(opacity),
+      brightGreen: brightPalette.green.withOpacity(opacity),
+      brightYellow: brightPalette.yellow.withOpacity(opacity),
+      brightBlue: brightPalette.black.withOpacity(opacity),
+      brightMagenta: brightPalette.magenta.withOpacity(opacity),
+      brightCyan: brightPalette.cyan.withOpacity(opacity),
+      brightWhite: brightPalette.white.withOpacity(opacity),
       searchHitBackground: searchHitBackground,
       searchHitBackgroundCurrent: searchHitBackgroundCurrent,
       searchHitForeground: searchHitForeground,
