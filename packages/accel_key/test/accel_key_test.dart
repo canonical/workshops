@@ -4,6 +4,51 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  testWidgets('listener', (tester) async {
+    LogicalKeySet? accelKey;
+    final focusNode = FocusNode();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: AccelKeyListener(
+              autofocus: true,
+              focusNode: focusNode,
+              onAccelKey: (value) => accelKey = value,
+              child: const SizedBox.shrink(),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    expect(accelKey, isNull);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    expect(accelKey, isNull);
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
+    expect(accelKey, isLogicalKeySet({LogicalKeyboardKey.control}));
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+    expect(
+      accelKey,
+      isLogicalKeySet({LogicalKeyboardKey.control, LogicalKeyboardKey.shift}),
+    );
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.keyA);
+    expect(
+      accelKey,
+      isLogicalKeySet({
+        LogicalKeyboardKey.control,
+        LogicalKeyboardKey.shift,
+        LogicalKeyboardKey.keyA,
+      }),
+    );
+  });
+
   testWidgets('widget', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
