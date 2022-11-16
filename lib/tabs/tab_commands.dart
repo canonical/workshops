@@ -19,22 +19,26 @@ class TabCommands extends StatelessWidget {
       commands: [
         Command(
           id: 'tab-new',
+          priority: 10,
           label: l10n.newTabCommand,
           intent: const AddTabIntent(),
         ),
         if (length > 1) ...[
           Command(
             id: 'tab-close',
+            priority: 10,
             label: l10n.closeTabCommand,
             intent: const CloseTabIntent(),
           ),
           Command(
             id: 'tab-next',
+            priority: 10,
             label: l10n.nextTabCommand,
             intent: const NextTabIntent(),
           ),
           Command(
             id: 'tab-previous',
+            priority: 10,
             label: l10n.previousTabCommand,
             intent: const PreviousTabIntent(),
           ),
