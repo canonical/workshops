@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
+import '../preferences/preferences_intents.dart';
 import 'instance_store.dart';
 
 class QuickMenuButton extends StatelessWidget {
@@ -14,10 +16,11 @@ class QuickMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Theme(
       data: Theme.of(context).copyWith(
           visualDensity: const VisualDensity(horizontal: -4, vertical: -4)),
-      child: PopupMenuButton<LxdInstance>(
+      child: PopupMenuButton<dynamic>(
         icon: const Icon(YaruIcons.pan_down),
         iconSize: 16,
         padding: EdgeInsets.zero,
@@ -27,10 +30,21 @@ class QuickMenuButton extends StatelessWidget {
           final store = context.read<InstanceStore>();
           return [
             for (final name in store.instances.value ?? <String>[])
-              _QuickMenuItem(name)
+              _QuickMenuItem(name),
+            const PopupMenuDivider(),
+            PopupMenuItem(
+              value: const OpenPreferencesIntent(),
+              child: Text(l10n.preferencesMenuItem),
+            ),
           ];
         },
-        onSelected: onSelected,
+        onSelected: (value) {
+          if (value is Intent) {
+            Actions.invoke(context, value);
+          } else if (value is LxdInstance) {
+            onSelected?.call(value);
+          }
+        },
       ),
     );
   }
