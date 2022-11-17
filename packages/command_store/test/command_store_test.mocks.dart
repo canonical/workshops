@@ -31,6 +31,11 @@ class MockShortcutStore extends _i1.Mock implements _i2.ShortcutStore {
   }
 
   @override
+  Iterable<String> get keys => (super.noSuchMethod(
+        Invocation.getter(#keys),
+        returnValue: <String>[],
+      ) as Iterable<String>);
+  @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
         returnValue: false,
@@ -99,29 +104,29 @@ class MockShortcutStore extends _i1.Mock implements _i2.ShortcutStore {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<void> load() => (super.noSuchMethod(
+  _i4.Future<void> init() => (super.noSuchMethod(
         Invocation.method(
-          #load,
+          #init,
           [],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i5.DBusValue? get(String? id) => (super.noSuchMethod(Invocation.method(
+  _i5.DBusValue? get(String? key) => (super.noSuchMethod(Invocation.method(
         #get,
-        [id],
+        [key],
       )) as _i5.DBusValue?);
   @override
   _i4.Future<void> set(
-    String? id,
+    String? key,
     _i5.DBusValue? value,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
           #set,
           [
-            id,
+            key,
             value,
           ],
         ),
@@ -129,10 +134,10 @@ class MockShortcutStore extends _i1.Mock implements _i2.ShortcutStore {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<void> unset(String? id) => (super.noSuchMethod(
+  _i4.Future<void> unset(String? key) => (super.noSuchMethod(
         Invocation.method(
           #unset,
-          [id],
+          [key],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),

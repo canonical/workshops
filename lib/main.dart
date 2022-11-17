@@ -35,10 +35,10 @@ Future<void> main() async {
   );
 
   final shortcuts = ShortcutStore('com.canonical.workshops.shortcuts');
-  await shortcuts.load();
+  await shortcuts.init();
 
   final settings = SettingsStore('com.canonical.workshops');
-  await settings.load();
+  await settings.init();
 
   runApp(
     MultiProvider(

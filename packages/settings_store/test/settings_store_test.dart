@@ -18,59 +18,59 @@ void main() {
     final mock = MockGSettings();
     when(mock.list()).thenAnswer((_) => Future.value(values.keys.toList()));
     when(mock.get(any)).thenAnswer((_) {
-      final id = _.positionalArguments[0] as String;
-      return Future.value(values[id]);
+      final key = _.positionalArguments[0] as String;
+      return Future.value(values[key]);
     });
     when(mock.keysChanged).thenAnswer((i) => keysChanged);
     return mock;
   }
 
-  test('get null', () async {
-    final gsettings = mockGSettings(values: {});
-
-    final store = SettingsStore.of(gsettings);
-    expect(store.get('foo'), isNull);
-
-    await store.load();
-    expect(store.get('foo'), isNull);
-  });
-
-  test('get one', () async {
+  test('keys', () async {
     final gsettings = mockGSettings(values: {
-      'foo': DBusArray.string(['<Control>f'])
+      'int32': const DBusInt32(123),
+      'string': const DBusString('foo'),
+      'array': DBusArray.string(['foo', 'bar']),
     });
 
     final store = SettingsStore.of(gsettings);
-    expect(store.get('foo'), isNull);
+    expect(store.keys, isEmpty);
 
-    await store.load();
-    expect(store.get('foo'), DBusArray.string(['<Control>f']));
+    await store.init();
+    expect(store.keys, ['int32', 'string', 'array']);
   });
 
-  test('get multiple', () async {
+  test('get', () async {
     final gsettings = mockGSettings(values: {
-      'foo': DBusArray.string(['<Control>f', '<Alt><Shift>g'])
+      'int32': const DBusInt32(123),
+      'string': const DBusString('foo'),
+      'array': DBusArray.string(['foo', 'bar']),
     });
 
     final store = SettingsStore.of(gsettings);
-    expect(store.get('foo'), isNull);
+    expect(store.get('none'), isNull);
+    expect(store.get('int32'), isNull);
+    expect(store.get('string'), isNull);
+    expect(store.get('array'), isNull);
 
-    await store.load();
-    expect(
-      store.get('foo'),
-      DBusArray.string(['<Control>f', '<Alt><Shift>g']),
-    );
+    await store.init();
+    expect(store.get('none'), isNull);
+    expect(store.get('int32'), const DBusInt32(123));
+    expect(store.get('string'), const DBusString('foo'));
+    expect(store.get('array'), DBusArray.string(['foo', 'bar']));
   });
 
   test('set', () async {
     final gsettings = mockGSettings();
     final store = SettingsStore.of(gsettings);
 
-    await store.set('foo', const DBusInt32(123));
-    verify(gsettings.set('foo', const DBusInt32(123)));
+    await store.set('int32', const DBusInt32(123));
+    verify(gsettings.set('int32', const DBusInt32(123)));
 
-    await store.set('bar', DBusArray.string(['<Control>b']));
-    verify(gsettings.set('bar', DBusArray.string(['<Control>b'])));
+    await store.set('string', const DBusString('foo'));
+    verify(gsettings.set('string', const DBusString('foo')));
+
+    await store.set('array', DBusArray.string(['foo', 'bar']));
+    verify(gsettings.set('array', DBusArray.string(['foo', 'bar'])));
   });
 
   test('unset', () async {
@@ -84,22 +84,22 @@ void main() {
   test('change', () async {
     final keysChanged = StreamController<List<String>>(sync: true);
 
-    final gsettings = mockGSettings(values: {
-      'foo': DBusArray.string(['<Control>c'])
-    }, keysChanged: keysChanged.stream);
+    final gsettings = mockGSettings(
+      values: {'foo': const DBusString('bar')},
+      keysChanged: keysChanged.stream,
+    );
 
     final store = SettingsStore.of(gsettings);
 
     var wasNotified = 0;
     store.addListener(() => ++wasNotified);
 
-    await store.load();
+    await store.init();
 
     expect(wasNotified, 1);
-    expect(store.get('foo'), DBusArray.string(['<Control>c']));
+    expect(store.get('foo'), const DBusString('bar'));
 
-    when(gsettings.get('foo'))
-        .thenAnswer((_) async => DBusArray.string(['<Control><Meta>c']));
+    when(gsettings.get('foo')).thenAnswer((_) async => const DBusString('baz'));
 
     final completer = Completer<DBusValue>();
     store.addListener(() {
@@ -110,7 +110,7 @@ void main() {
 
     keysChanged.add(['foo']);
 
-    expect(await completer.future, DBusArray.string(['<Control><Meta>c']));
+    expect(await completer.future, const DBusString('baz'));
     expect(wasNotified, 2);
   });
 
@@ -121,7 +121,7 @@ void main() {
 
     final store = SettingsStore.of(gsettings);
 
-    await store.load();
+    await store.init();
     expect(keysChanged.hasListener, isTrue);
     verifyNever(gsettings.close());
 

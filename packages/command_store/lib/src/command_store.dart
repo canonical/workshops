@@ -108,7 +108,7 @@ class CommandStoreState extends State<CommandStore> {
   @override
   void initState() {
     super.initState();
-    widget.shortcuts.load();
+    widget.shortcuts.init();
   }
 
   @override
