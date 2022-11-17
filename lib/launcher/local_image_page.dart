@@ -10,8 +10,8 @@ import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
 import '../remotes/remote_selector.dart';
+import 'launcher_page.dart';
 import 'local_image_model.dart';
-import 'wizard_page.dart';
 
 class LocalImagePage extends StatelessWidget {
   const LocalImagePage({super.key});
@@ -21,7 +21,7 @@ class LocalImagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return WizardPage(
+    return LauncherPage(
       title: Text(l10n.selectImageTitle),
       content: LocalImageView(
         onSelected: (image) => Wizard.of(context).next(arguments: image),

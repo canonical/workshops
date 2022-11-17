@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:wizard_router/wizard_router.dart';
+import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
-class WizardPage extends StatelessWidget {
-  const WizardPage({
+import 'launcher_model.dart';
+
+class LauncherPage extends StatelessWidget {
+  const LauncherPage({
     super.key,
     required this.title,
     required this.content,
@@ -32,29 +37,35 @@ class WizardPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.only(
-                start: 24,
-                top: 16,
-                bottom: 16,
+            Theme(
+              data: Theme.of(context).copyWith(
+                appBarTheme: AppBarTheme(
+                  shape: const Border(),
+                  titleSpacing: Wizard.of(context).hasPrevious ? 8 : 24,
+                ),
               ),
-              child: Row(
-                children: [
-                  if (Wizard.of(context).hasPrevious)
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 8.0),
-                      child: IconButton(
-                        splashRadius: 16,
-                        padding: EdgeInsets.zero,
-                        onPressed: Wizard.of(context).back,
-                        icon: const Icon(Icons.arrow_back),
-                      ),
-                    ),
-                  DefaultTextStyle(
-                    style: Theme.of(context).textTheme.headlineSmall!,
-                    child: title,
+              child: YaruTitleBar(
+                title: title,
+                centerTitle: false,
+                leading: Wizard.of(context).hasPrevious
+                    ? Padding(
+                        padding: const EdgeInsetsDirectional.only(start: 16),
+                        child: Center(
+                          child: YaruIconButton(
+                            iconSize: 32,
+                            padding: EdgeInsets.zero,
+                            onPressed: Wizard.of(context).back,
+                            icon: const Icon(YaruIcons.go_previous),
+                          ),
+                        ),
+                      )
+                    : null,
+                trailing: Hero(
+                  tag: '$this',
+                  child: YaruCloseButton(
+                    onPressed: context.read<LauncherModel>().cancel,
                   ),
-                ],
+                ),
               ),
             ),
             Expanded(

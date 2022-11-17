@@ -6,8 +6,8 @@ import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
 import 'launcher_model.dart';
+import 'launcher_page.dart';
 import 'property_model.dart';
-import 'wizard_page.dart';
 
 class PropertyPage extends StatefulWidget {
   const PropertyPage({super.key});
@@ -46,7 +46,7 @@ class _PropertyPageState extends State<PropertyPage> {
   Widget build(BuildContext context) {
     final model = context.watch<PropertyModel>();
     final l10n = AppLocalizations.of(context);
-    return WizardPage(
+    return LauncherPage(
       title: Text(l10n.launchInstanceTitle),
       content: RoundedContainer(
         child: Padding(
