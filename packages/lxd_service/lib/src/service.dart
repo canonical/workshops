@@ -27,6 +27,7 @@ abstract class LxdService {
   Stream<String> get instanceUpdated;
 
   Future<LxdInstance> getInstance(String name);
+  Future<LxdInstanceState> getInstanceState(String name);
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote});
   Future<LxdOperation> startInstance(String name, {bool force = false});
   Future<LxdOperation> restartInstance(String name,
@@ -113,6 +114,15 @@ class _LxdService implements LxdService {
     return statusCode != null
         ? instance.copyWith(statusCode: statusCode)
         : instance;
+  }
+
+  @override
+  Future<LxdInstanceState> getInstanceState(String name) async {
+    final state = await _client.getInstanceState(name);
+
+    // check for status override from pending/running operations
+    final statusCode = _statuses[name];
+    return statusCode != null ? state.copyWith(statusCode: statusCode) : state;
   }
 
   @override

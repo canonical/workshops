@@ -8,4 +8,9 @@ extension InstanceContext on BuildContext {
   LxdInstance? selectInstance(String name) {
     return select<InstanceStore, LxdInstance?>((s) => s.getInstance(name));
   }
+
+  LxdInstanceState? selectInstanceState(String name) {
+    return select<InstanceStore, LxdInstanceState?>(
+        (s) => s.getInstanceState(name));
+  }
 }
