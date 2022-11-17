@@ -3,7 +3,7 @@ library settings_store;
 import 'dart:async';
 
 import 'package:dbus/dbus.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:gsettings/gsettings.dart';
 
 class SettingsStore extends ChangeNotifier {
@@ -14,30 +14,31 @@ class SettingsStore extends ChangeNotifier {
   StreamSubscription? _sub;
   final _values = <String, DBusValue>{};
 
-  Future<void> load() async {
+  Future<void> init() async {
     _sub ??= _gsettings.keysChanged.listen((keys) async {
       for (final key in keys) {
-        _values[key] = await _fetchValue(key);
+        _values[key] = await _getValue(key);
       }
       notifyListeners();
     });
 
     var wasChanged = false;
-    for (final id in await _gsettings.list()) {
-      final value = await _fetchValue(id);
-      if (_values[id] != value) {
-        _values[id] = value;
+    for (final key in await _gsettings.list()) {
+      final value = await _getValue(key);
+      if (_values[key] != value) {
+        _values[key] = value;
         wasChanged = true;
       }
     }
     if (wasChanged) notifyListeners();
   }
 
-  DBusValue? get(String id) => _values[id];
-  Future<void> set(String id, DBusValue value) => _gsettings.set(id, value);
-  Future<void> unset(String id) => _gsettings.unset(id);
+  Iterable<String> get keys => _values.keys;
+  DBusValue? get(String key) => _values[key];
+  Future<void> set(String key, DBusValue value) => _gsettings.set(key, value);
+  Future<void> unset(String key) => _gsettings.unset(key);
 
-  Future<DBusValue> _fetchValue(String id) => _gsettings.get(id);
+  Future<DBusValue> _getValue(String key) => _gsettings.get(key);
 
   @override
   Future<void> dispose() async {
