@@ -8,7 +8,7 @@ import 'package:wizard_router/wizard_router.dart';
 import 'feature_model.dart';
 import 'launcher_l10n.dart';
 import 'launcher_model.dart';
-import 'wizard_page.dart';
+import 'launcher_page.dart';
 
 class FeaturePage extends StatefulWidget {
   const FeaturePage({super.key});
@@ -37,7 +37,7 @@ class _FeaturePageState extends State<FeaturePage> {
   Widget build(BuildContext context) {
     final model = context.watch<FeatureModel>();
     final l10n = AppLocalizations.of(context);
-    return WizardPage(
+    return LauncherPage(
       title: Text(l10n.selectFeaturesTitle),
       content: RoundedContainer(
         child: ListView(

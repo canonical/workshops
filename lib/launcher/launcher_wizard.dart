@@ -43,6 +43,8 @@ class LauncherWizard extends StatefulWidget {
 }
 
 class _LauncherWizardState extends State<LauncherWizard> {
+  final _hero = HeroController();
+
   @override
   void initState() {
     super.initState();
@@ -63,23 +65,15 @@ class _LauncherWizardState extends State<LauncherWizard> {
           data: Theme.of(context).copyWith(
             pageTransitionsTheme: YaruPageTransitionsTheme.horizontal,
           ),
-          child: Stack(
-            children: [
-              remote?.isLocal == true
-                  ? const LocalImageWizard()
-                  : const RemoteImageWizard(),
-              Positioned.directional(
-                top: 12,
-                end: 12,
-                textDirection: Directionality.of(context),
-                child: IconButton(
-                  splashRadius: 16,
-                  padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.close),
-                  onPressed: context.read<LauncherModel>().cancel,
-                ),
-              ),
-            ],
+          child: HeroControllerScope(
+            controller: _hero,
+            child: Stack(
+              children: [
+                remote?.isLocal == true
+                    ? const LocalImageWizard()
+                    : const RemoteImageWizard(),
+              ],
+            ),
           ),
         ),
       ),

@@ -10,9 +10,9 @@ import 'package:wizard_router/wizard_router.dart';
 
 import 'launcher_l10n.dart';
 import 'launcher_model.dart';
+import 'launcher_page.dart';
 import 'remote_image_filter.dart';
 import 'remote_image_model.dart';
-import 'wizard_page.dart';
 
 class RemoteImagePage extends StatelessWidget {
   const RemoteImagePage({super.key, required this.os});
@@ -34,7 +34,7 @@ class RemoteImagePage extends StatelessWidget {
     final filter = context.watch<RemoteImageFilter>();
     final l10n = AppLocalizations.of(context);
 
-    return WizardPage(
+    return LauncherPage(
       title: Text(l10n.selectImageTitle),
       content: RoundedContainer(
         child: Padding(

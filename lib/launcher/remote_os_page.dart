@@ -6,9 +6,9 @@ import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
 import '../remotes/remote_selector.dart';
+import 'launcher_page.dart';
 import 'os_selector.dart';
 import 'remote_image_model.dart';
-import 'wizard_page.dart';
 
 class RemoteOsPage extends StatelessWidget {
   const RemoteOsPage({super.key});
@@ -17,7 +17,7 @@ class RemoteOsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = context.watch<RemoteImageModel>();
     final l10n = AppLocalizations.of(context);
-    return WizardPage(
+    return LauncherPage(
       title: Text(l10n.selectOsTitle),
       content: RoundedContainer(
         child: model.images?.when(
