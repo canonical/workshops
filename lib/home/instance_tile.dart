@@ -1,5 +1,6 @@
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
@@ -17,6 +18,8 @@ class InstanceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     final instance = context.selectInstance(name);
     return InstanceActions(
       name: name,
@@ -37,12 +40,12 @@ class InstanceTile extends StatelessWidget {
               [
                 PopupMenuItem(
                   value: SelectInstanceIntent(instance),
-                  child: const Text('Open shell'),
+                  child: Text(l10n.openShell),
                 ),
                 PopupMenuItem(
                   value: ShowInstanceInfoIntent(instance),
                   enabled: canStop,
-                  child: const Text('Network information'),
+                  child: Text(l10n.networkInformation),
                 ),
               ];
 
