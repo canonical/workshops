@@ -32,8 +32,9 @@ class _FakeLxdInstance_0 extends _i1.SmartFake implements _i2.LxdInstance {
         );
 }
 
-class _FakeLxdOperation_1 extends _i1.SmartFake implements _i2.LxdOperation {
-  _FakeLxdOperation_1(
+class _FakeLxdInstanceState_1 extends _i1.SmartFake
+    implements _i2.LxdInstanceState {
+  _FakeLxdInstanceState_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -42,8 +43,8 @@ class _FakeLxdOperation_1 extends _i1.SmartFake implements _i2.LxdOperation {
         );
 }
 
-class _FakeLxdImage_2 extends _i1.SmartFake implements _i2.LxdImage {
-  _FakeLxdImage_2(
+class _FakeLxdOperation_2 extends _i1.SmartFake implements _i2.LxdOperation {
+  _FakeLxdOperation_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -52,8 +53,18 @@ class _FakeLxdImage_2 extends _i1.SmartFake implements _i2.LxdImage {
         );
 }
 
-class _FakeLxdTerminal_3 extends _i1.SmartFake implements _i3.LxdTerminal {
-  _FakeLxdTerminal_3(
+class _FakeLxdImage_3 extends _i1.SmartFake implements _i2.LxdImage {
+  _FakeLxdImage_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdTerminal_4 extends _i1.SmartFake implements _i3.LxdTerminal {
+  _FakeLxdTerminal_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -123,6 +134,22 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         )),
       ) as _i4.Future<_i2.LxdInstance>);
   @override
+  _i4.Future<_i2.LxdInstanceState> getInstanceState(String? name) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getInstanceState,
+          [name],
+        ),
+        returnValue:
+            _i4.Future<_i2.LxdInstanceState>.value(_FakeLxdInstanceState_1(
+          this,
+          Invocation.method(
+            #getInstanceState,
+            [name],
+          ),
+        )),
+      ) as _i4.Future<_i2.LxdInstanceState>);
+  @override
   _i4.Future<_i2.LxdOperation> createInstance(
     _i2.LxdImage? image, {
     _i5.LxdRemote? remote,
@@ -133,7 +160,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           [image],
           {#remote: remote},
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #createInstance,
@@ -153,7 +180,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           [name],
           {#force: force},
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #startInstance,
@@ -177,7 +204,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             #timeout: timeout,
           },
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #restartInstance,
@@ -204,7 +231,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             #timeout: timeout,
           },
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #stopInstance,
@@ -223,7 +250,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           #deleteInstance,
           [name],
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #deleteInstance,
@@ -270,7 +297,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             image,
           ],
         ),
-        returnValue: _i4.Future<_i2.LxdImage>.value(_FakeLxdImage_2(
+        returnValue: _i4.Future<_i2.LxdImage>.value(_FakeLxdImage_3(
           this,
           Invocation.method(
             #configureImage,
@@ -314,7 +341,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             image,
           ],
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #stageFeatures,
@@ -349,7 +376,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           #execTerminal,
           [name],
         ),
-        returnValue: _i4.Future<_i3.LxdTerminal>.value(_FakeLxdTerminal_3(
+        returnValue: _i4.Future<_i3.LxdTerminal>.value(_FakeLxdTerminal_4(
           this,
           Invocation.method(
             #execTerminal,
@@ -363,7 +390,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           #getOperation,
           [id],
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #getOperation,
@@ -386,7 +413,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           #waitOperation,
           [id],
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #waitOperation,
@@ -421,7 +448,7 @@ class MockLxdTerminal extends _i1.Mock implements _i3.LxdTerminal {
   @override
   _i2.LxdOperation get operation => (super.noSuchMethod(
         Invocation.getter(#operation),
-        returnValue: _FakeLxdOperation_1(
+        returnValue: _FakeLxdOperation_2(
           this,
           Invocation.getter(#operation),
         ),
