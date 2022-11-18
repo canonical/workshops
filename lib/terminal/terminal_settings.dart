@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:dbus/dbus.dart';
 import 'package:settings_store/settings_store.dart';
 import 'package:terminal_view/terminal_view.dart';
 
@@ -10,14 +9,13 @@ const _kFontSize = 'terminal-font-size';
 const _kFontFamily = 'terminal-font-family';
 
 extension TerminalSettings on SettingsStore {
-  double? get fontSize => get(_kFontSize)?.asDouble();
+  double? get fontSize => get(_kFontSize);
   set fontSize(double? value) =>
-      value != null ? set(_kFontSize, DBusDouble(value)) : unset(_kFontSize);
+      value != null ? set(_kFontSize, value) : unset(_kFontSize);
 
-  String? get fontFamily => get(_kFontFamily)?.asString();
-  set fontFamily(String? value) => value != null
-      ? set(_kFontFamily, DBusString(value))
-      : unset(_kFontFamily);
+  String? get fontFamily => get(_kFontFamily);
+  set fontFamily(String? value) =>
+      value != null ? set(_kFontFamily, value) : unset(_kFontFamily);
 
   TerminalThemeData getTheme(String? os) {
     return defaultTheme(os).copyWith(

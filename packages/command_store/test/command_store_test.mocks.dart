@@ -4,10 +4,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:ui' as _i6;
+import 'dart:ui' as _i5;
 
 import 'package:command_store/src/shortcut_store.dart' as _i2;
-import 'package:dbus/dbus.dart' as _i5;
 import 'package:flutter/widgets.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -113,14 +112,14 @@ class MockShortcutStore extends _i1.Mock implements _i2.ShortcutStore {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i5.DBusValue? get(String? key) => (super.noSuchMethod(Invocation.method(
+  T? get<T>(String? key) => (super.noSuchMethod(Invocation.method(
         #get,
         [key],
-      )) as _i5.DBusValue?);
+      )) as T?);
   @override
-  _i4.Future<void> set(
+  _i4.Future<void> set<T>(
     String? key,
-    _i5.DBusValue? value,
+    T? value,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -152,7 +151,7 @@ class MockShortcutStore extends _i1.Mock implements _i2.ShortcutStore {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i5.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -160,7 +159,7 @@ class MockShortcutStore extends _i1.Mock implements _i2.ShortcutStore {
         returnValueForMissingStub: null,
       );
   @override
-  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i5.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

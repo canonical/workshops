@@ -9,7 +9,6 @@ dependencies:
   accel_key:
     path: ../accel_key
   collection: ^1.16.0
-  dbus: ^0.7.8
   flutter:
     sdk: flutter
   gsettings: ^0.2.5
