@@ -7,12 +7,22 @@ import 'package:settings_store/settings_store.dart';
 
 import 'logical_key_set_x.dart';
 
-class ShortcutStore extends SettingsStore {
-  ShortcutStore(super.schemaId);
-  ShortcutStore.of(super.gsettings);
+class ShortcutStore with ChangeNotifier {
+  factory ShortcutStore(String schemaId) =>
+      ShortcutStore.of(SettingsStore(schemaId));
+
+  ShortcutStore.of(this._settings) {
+    _settings.addListener(notifyListeners);
+  }
+
+  final SettingsStore _settings;
+
+  Future<void> init() => _settings.init();
+
+  Iterable<String> get keys => _settings.keys;
 
   List<LogicalKeySet>? getShortcuts(String id) {
-    return get<List<String>>(id)?.toLogicalKeySets();
+    return _settings.get<List<String>>(id)?.toLogicalKeySets();
   }
 
   Future<void> addShortcut(String id, LogicalKeySet shortcut) {
@@ -28,10 +38,16 @@ class ShortcutStore extends SettingsStore {
   }
 
   Future<void> setShortcuts(String id, List<LogicalKeySet> shortcuts) {
-    return set(id, shortcuts.toStringList());
+    return _settings.set(id, shortcuts.toStringList());
   }
 
-  Future<void> removeShortcuts(String id) => unset(id);
+  Future<void> removeShortcuts(String id) => _settings.unset(id);
+
+  @override
+  void dispose() {
+    _settings.removeListener(notifyListeners);
+    super.dispose();
+  }
 }
 
 extension _StringListX on List<String> {

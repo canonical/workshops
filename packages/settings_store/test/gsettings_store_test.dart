@@ -7,7 +7,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:settings_store/settings_store.dart';
 
-import 'settings_store_test.mocks.dart';
+import 'gsettings_store_test.mocks.dart';
 
 @GenerateMocks([GSettings])
 void main() {
@@ -34,7 +34,7 @@ void main() {
       'array': DBusArray.string(['foo', 'bar']),
     });
 
-    final store = SettingsStore.of(gsettings);
+    final store = GSettingsStore.of(gsettings);
     expect(store.keys, isEmpty);
 
     await store.init();
@@ -50,7 +50,7 @@ void main() {
       'array': DBusArray.string(['foo', 'bar']),
     });
 
-    final store = SettingsStore.of(gsettings);
+    final store = GSettingsStore.of(gsettings);
     expect(store.get('none'), isNull);
     expect(store.get('bool'), isNull);
     expect(store.get('int32'), isNull);
@@ -69,7 +69,7 @@ void main() {
 
   test('set', () async {
     final gsettings = mockGSettings();
-    final store = SettingsStore.of(gsettings);
+    final store = GSettingsStore.of(gsettings);
 
     await store.set('bool', true);
     verify(gsettings.set('bool', const DBusBoolean(true))).called(1);
@@ -89,7 +89,7 @@ void main() {
 
   test('unset', () async {
     final gsettings = mockGSettings();
-    final store = SettingsStore.of(gsettings);
+    final store = GSettingsStore.of(gsettings);
 
     await store.unset('foo');
     verify(gsettings.unset('foo'));
@@ -103,7 +103,7 @@ void main() {
       keysChanged: keysChanged.stream,
     );
 
-    final store = SettingsStore.of(gsettings);
+    final store = GSettingsStore.of(gsettings);
 
     var wasNotified = 0;
     store.addListener(() => ++wasNotified);
@@ -133,7 +133,7 @@ void main() {
 
     final gsettings = mockGSettings(keysChanged: keysChanged.stream);
 
-    final store = SettingsStore.of(gsettings);
+    final store = GSettingsStore.of(gsettings);
 
     await store.init();
     expect(keysChanged.hasListener, isTrue);
