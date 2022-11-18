@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:accel_key/accel_key.dart';
 import 'package:collection/collection.dart';
-import 'package:dbus/dbus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:settings_store/settings_store.dart';
 
@@ -13,7 +12,7 @@ class ShortcutStore extends SettingsStore {
   ShortcutStore.of(super.gsettings);
 
   List<LogicalKeySet>? getShortcuts(String id) {
-    return get(id)?.toLogicalKeySets();
+    return get<List<String>>(id)?.toLogicalKeySets();
   }
 
   Future<void> addShortcut(String id, LogicalKeySet shortcut) {
@@ -29,23 +28,20 @@ class ShortcutStore extends SettingsStore {
   }
 
   Future<void> setShortcuts(String id, List<LogicalKeySet> shortcuts) {
-    return set(id, shortcuts.toDbusArray());
+    return set(id, shortcuts.toStringList());
   }
 
   Future<void> removeShortcuts(String id) => unset(id);
 }
 
-extension _DBusValueX on DBusValue {
+extension _StringListX on List<String> {
   List<LogicalKeySet> toLogicalKeySets() {
-    return asArray()
-        .map((k) => parseAccelKey(k.asString()))
-        .whereNotNull()
-        .toList();
+    return map(parseAccelKey).whereNotNull().toList();
   }
 }
 
 extension _LogicalKeySetListX on List<LogicalKeySet> {
-  DBusArray toDbusArray() {
-    return DBusArray.string(map(formatAccelKey).whereNotNull().toList());
+  List<String> toStringList() {
+    return map(formatAccelKey).whereNotNull().toList();
   }
 }
