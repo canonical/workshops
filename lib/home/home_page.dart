@@ -24,6 +24,7 @@ class HomePage extends StatelessWidget {
           child: Actions(
             actions: {
               SelectInstanceIntent: SelectInstanceAction(onSelected),
+              ShowInstanceInfoIntent: ShowInstanceInfoAction(),
             },
             child: const Focus(
               autofocus: true,
