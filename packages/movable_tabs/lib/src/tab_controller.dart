@@ -24,7 +24,8 @@ class MovableTabController<T> extends ChangeNotifier {
 
   void addTab(T tab) {
     _tabs.add(tab);
-    currentIndex = _tabs.length - 1;
+    _currentIndex = _tabs.length - 1;
+    notifyListeners();
   }
 
   T removeTab(int index) {
@@ -49,7 +50,6 @@ class MovableTabController<T> extends ChangeNotifier {
   }
 
   void previousTab() {
-    final index = currentIndex - 1;
-    currentIndex = index < 0 ? _tabs.length - 1 : index;
+    currentIndex = (_currentIndex - 1) % _tabs.length;
   }
 }
