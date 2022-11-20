@@ -98,7 +98,7 @@ class JSettings {
   Future<void> reset(String key) async {
     final values = getValues();
     if (values.remove(key) != null) {
-      _writeFile(values);
+      return _writeFile(values);
     }
   }
 
