@@ -67,7 +67,7 @@ class JSettings {
   Future<void> setValue(String key, Object value) {
     final values = getValues();
     values[key] = value;
-    return _saveFile(values);
+    return _writeFile(values);
   }
 
   bool? getBool(String key) => getValue(key) as bool?;
@@ -98,7 +98,7 @@ class JSettings {
   Future<void> reset(String key) async {
     final values = getValues();
     if (values.remove(key) != null) {
-      _saveFile(values);
+      _writeFile(values);
     }
   }
 
@@ -150,7 +150,7 @@ class JSettings {
     return {};
   }
 
-  Future<void> _saveFile(Map<String, Object> json) {
+  Future<void> _writeFile(Map<String, Object> json) {
     final file = fs.file(_path);
     if (!file.existsSync()) {
       file.createSync(recursive: true);
