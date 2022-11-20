@@ -50,7 +50,7 @@ class JSettings {
     });
   }
 
-  Future<void> dispose() {
+  Future<void> close() {
     return Future.wait([
       if (_watcher != null) _watcher!.cancel(),
       _added.close(),
