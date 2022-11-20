@@ -61,6 +61,7 @@ class JSettings {
   }
 
   Set<String> getKeys() => Set.of(getValues().keys);
+  bool hasKey(String key) => getKeys().contains(key);
   Map<String, Object> getValues() => Map.of(_values ??= _readFile() ?? {});
 
   Object? getValue(String key) => getValues()[key];
