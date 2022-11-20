@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:meta/meta.dart';
+import 'package:path/path.dart' as path;
 import 'package:watcher/watcher.dart';
 
 class JSettings {
@@ -27,7 +28,14 @@ class JSettings {
   FileSystem fs = const LocalFileSystem();
 
   Future<void> init() async {
-    _watcher ??= FileWatcher(_path).events.listen((event) async {
+    final dir = fs.directory(path.dirname(_path));
+    if (!dir.existsSync()) {
+      dir.createSync(recursive: true);
+    }
+    _watcher ??= DirectoryWatcher(dir.path).events.listen((event) {
+      if (!path.equals(_path, event.path)) {
+        return;
+      }
       switch (event.type) {
         case ChangeType.ADD:
         case ChangeType.REMOVE:
@@ -53,7 +61,7 @@ class JSettings {
   }
 
   Set<String> getKeys() => Set.of(getValues().keys);
-  Map<String, Object> getValues() => _values ??= _readFile();
+  Map<String, Object> getValues() => _values ??= _readFile() ?? {};
 
   Object? getValue(String key) => getValues()[key];
   Future<void> setValue(String key, Object value) {
@@ -94,46 +102,50 @@ class JSettings {
     }
   }
 
+  final _valueEquals = const DeepCollectionEquality().equals;
+
   void _invalidate() {
     if (_invalid == true) return;
     _invalid = true;
     scheduleMicrotask(() {
       final oldValues = _values;
       final newValues = _readFile();
-
-      final newKeys = Set.of(newValues.keys);
-      final oldKeys = Set.of(oldValues?.keys ?? const <String>[]);
-      for (final key in newKeys.difference(oldKeys)) {
-        _added.add(key);
-      }
-      for (final key in oldKeys.difference(newKeys)) {
-        _removed.add(key);
-      }
-
-      final deepEquals = const DeepCollectionEquality().equals;
-      for (final key in newKeys) {
-        final oldValue = oldValues?[key];
-        if (oldValue != null && !deepEquals(oldValue, newValues[key])) {
-          _changed.add(key);
+      if (newValues != null) {
+        final newKeys = Set.of(newValues.keys);
+        final oldKeys = Set.of(oldValues?.keys ?? const <String>[]);
+        for (final key in newKeys.difference(oldKeys)) {
+          _added.add(key);
         }
+        for (final key in oldKeys.difference(newKeys)) {
+          _removed.add(key);
+        }
+        for (final key in newKeys) {
+          final oldValue = oldValues?[key];
+          if (oldValue != null && !_valueEquals(oldValue, newValues[key])) {
+            _changed.add(key);
+          }
+        }
+        _values = newValues;
       }
-
-      _values = newValues;
       _invalid = false;
     });
   }
 
-  Map<String, Object> _readFile() {
+  Map<String, Object>? _readFile() {
     final file = fs.file(_path);
-    if (file.existsSync()) {
-      final str = file.readAsStringSync();
-      if (str.isNotEmpty) {
-        final json = jsonDecode(str);
-        if (json is Map) {
-          _timestamp = file.lastModifiedSync();
-          return json.cast<String, Object>();
+    try {
+      if (file.existsSync()) {
+        final str = file.readAsStringSync();
+        if (str.isNotEmpty) {
+          final json = jsonDecode(str);
+          if (json is Map) {
+            _timestamp = file.lastModifiedSync();
+            return json.cast<String, Object>();
+          }
         }
       }
+    } on FormatException {
+      return null;
     }
     return {};
   }
