@@ -9,9 +9,11 @@ import 'package:path/path.dart' as path;
 import 'package:watcher/watcher.dart';
 
 class JSettings {
-  JSettings(this._path);
+  JSettings(this._path, {@visibleForTesting FileSystem? fs})
+      : _fs = fs ?? const LocalFileSystem();
 
   final String _path;
+  final FileSystem _fs;
   bool? _invalid;
   DateTime? _timestamp;
   StreamSubscription? _watcher;
@@ -24,11 +26,8 @@ class JSettings {
   Stream<String> get changed => _changed.stream;
   Stream<String> get removed => _removed.stream;
 
-  @visibleForTesting
-  FileSystem fs = const LocalFileSystem();
-
   Future<void> init() async {
-    final dir = fs.directory(path.dirname(_path));
+    final dir = _fs.directory(path.dirname(_path));
     if (!dir.existsSync()) {
       dir.createSync(recursive: true);
     }
@@ -43,7 +42,7 @@ class JSettings {
           break;
         case ChangeType.MODIFY:
           if (_timestamp == null ||
-              fs.file(_path).lastModifiedSync().isAfter(_timestamp!)) {
+              _fs.file(_path).lastModifiedSync().isAfter(_timestamp!)) {
             _invalidate();
           }
           break;
@@ -132,7 +131,7 @@ class JSettings {
   }
 
   Map<String, Object>? _readFile() {
-    final file = fs.file(_path);
+    final file = _fs.file(_path);
     try {
       if (file.existsSync()) {
         final str = file.readAsStringSync();
@@ -151,7 +150,7 @@ class JSettings {
   }
 
   Future<void> _writeFile(Map<String, Object> json) {
-    final file = fs.file(_path);
+    final file = _fs.file(_path);
     if (!file.existsSync()) {
       file.createSync(recursive: true);
     }
