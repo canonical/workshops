@@ -60,7 +60,7 @@ class JSettings {
   }
 
   Set<String> getKeys() => Set.of(getValues().keys);
-  Map<String, Object> getValues() => _values ??= _readFile() ?? {};
+  Map<String, Object> getValues() => Map.of(_values ??= _readFile() ?? {});
 
   Object? getValue(String key) => getValues()[key];
   Future<void> setValue(String key, Object value) {
