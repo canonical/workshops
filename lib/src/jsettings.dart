@@ -21,6 +21,7 @@ class JSettings {
   final _added = StreamController<String>.broadcast();
   final _changed = StreamController<String>.broadcast();
   final _removed = StreamController<String>.broadcast();
+  final _valueEquals = const DeepCollectionEquality().equals;
 
   Stream<String> get added => _added.stream;
   Stream<String> get changed => _changed.stream;
@@ -100,8 +101,6 @@ class JSettings {
       return _writeFile(values);
     }
   }
-
-  final _valueEquals = const DeepCollectionEquality().equals;
 
   void _invalidate() {
     if (_invalid == true) return;
