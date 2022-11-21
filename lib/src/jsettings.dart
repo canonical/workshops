@@ -32,23 +32,7 @@ class JSettings {
     if (!dir.existsSync()) {
       dir.createSync(recursive: true);
     }
-    _watcher ??= DirectoryWatcher(dir.path).events.listen((event) {
-      if (!path.equals(_path, event.path)) {
-        return;
-      }
-      switch (event.type) {
-        case ChangeType.ADD:
-        case ChangeType.REMOVE:
-          _invalidate();
-          break;
-        case ChangeType.MODIFY:
-          if (_timestamp == null ||
-              _fs.file(_path).lastModifiedSync().isAfter(_timestamp!)) {
-            _invalidate();
-          }
-          break;
-      }
-    });
+    _watcher ??= _watchFile();
   }
 
   Future<void> close() {
@@ -156,5 +140,26 @@ class JSettings {
     }
     final str = jsonEncode(json);
     return file.writeAsString(str);
+  }
+
+  StreamSubscription _watchFile() {
+    final watcher = DirectoryWatcher(path.dirname(_path));
+    return watcher.events.listen((event) {
+      if (!path.equals(_path, event.path)) {
+        return;
+      }
+      switch (event.type) {
+        case ChangeType.ADD:
+        case ChangeType.REMOVE:
+          _invalidate();
+          break;
+        case ChangeType.MODIFY:
+          if (_timestamp == null ||
+              _fs.file(_path).lastModifiedSync().isAfter(_timestamp!)) {
+            _invalidate();
+          }
+          break;
+      }
+    });
   }
 }
