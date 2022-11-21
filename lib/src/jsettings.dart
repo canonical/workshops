@@ -1,22 +1,17 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
+import 'package:jsettings/src/settings_file.dart';
 import 'package:meta/meta.dart';
-import 'package:path/path.dart' as path;
-import 'package:watcher/watcher.dart';
 
 class JSettings {
-  JSettings(this._path, {@visibleForTesting FileSystem? fs})
-      : _fs = fs ?? const LocalFileSystem();
+  JSettings(String path, {@visibleForTesting FileSystem? fs})
+      : _file = JSettingsFile(path, fs ?? const LocalFileSystem());
 
-  final String _path;
-  final FileSystem _fs;
+  final JSettingsFile _file;
   bool? _invalid;
-  DateTime? _timestamp;
-  StreamSubscription? _watcher;
   Map<String, Object>? _values;
   final _added = StreamController<String>.broadcast();
   final _changed = StreamController<String>.broadcast();
@@ -27,17 +22,13 @@ class JSettings {
   Stream<String> get changed => _changed.stream;
   Stream<String> get removed => _removed.stream;
 
-  Future<void> init() async {
-    final dir = _fs.directory(path.dirname(_path));
-    if (!dir.existsSync()) {
-      dir.createSync(recursive: true);
-    }
-    _watcher ??= _watchFile();
+  Future<void> init() {
+    return _file.init().then((_) => _file.watch(_invalidateValues));
   }
 
   Future<void> close() {
     return Future.wait([
-      if (_watcher != null) _watcher!.cancel(),
+      _file.unwatch(),
       _added.close(),
       _changed.close(),
       _removed.close(),
@@ -46,13 +37,13 @@ class JSettings {
 
   Set<String> getKeys() => Set.of(getValues().keys);
   bool hasValue(String key) => getKeys().contains(key);
-  Map<String, Object> getValues() => Map.of(_values ??= _readFile() ?? {});
+  Map<String, Object> getValues() => Map.of(_values ??= _file.read() ?? {});
 
   Object? getValue(String key) => getValues()[key];
   Future<void> setValue(String key, Object value) {
     final values = getValues();
     values[key] = value;
-    return _writeFile(values);
+    return _file.write(values);
   }
 
   bool? getBool(String key) => getValue(key) as bool?;
@@ -83,7 +74,7 @@ class JSettings {
   Future<void> resetValue(String key) async {
     final values = getValues();
     if (values.remove(key) != null) {
-      return _writeFile(values);
+      return _file.write(values);
     }
   }
 
@@ -91,7 +82,7 @@ class JSettings {
     if (_invalid == true) return;
     _invalid = true;
     scheduleMicrotask(() {
-      final values = _readFile();
+      final values = _file.read();
       if (values != null) {
         _updateValues(values);
       }
@@ -115,54 +106,5 @@ class JSettings {
       }
     }
     _values = values;
-  }
-
-  Map<String, Object>? _readFile() {
-    final file = _fs.file(_path);
-    try {
-      if (file.existsSync()) {
-        final str = file.readAsStringSync();
-        if (str.isNotEmpty) {
-          final json = jsonDecode(str);
-          if (json is Map) {
-            _timestamp = file.lastModifiedSync();
-            return json.cast<String, Object>();
-          }
-        }
-      }
-    } on FormatException {
-      return null;
-    }
-    return {};
-  }
-
-  Future<void> _writeFile(Map<String, Object> json) {
-    final file = _fs.file(_path);
-    if (!file.existsSync()) {
-      file.createSync(recursive: true);
-    }
-    final str = jsonEncode(json);
-    return file.writeAsString(str);
-  }
-
-  StreamSubscription _watchFile() {
-    final watcher = DirectoryWatcher(path.dirname(_path));
-    return watcher.events.listen((event) {
-      if (!path.equals(_path, event.path)) {
-        return;
-      }
-      switch (event.type) {
-        case ChangeType.ADD:
-        case ChangeType.REMOVE:
-          _invalidateValues();
-          break;
-        case ChangeType.MODIFY:
-          if (_timestamp == null ||
-              _fs.file(_path).lastModifiedSync().isAfter(_timestamp!)) {
-            _invalidateValues();
-          }
-          break;
-      }
-    });
   }
 }
