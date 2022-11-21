@@ -16,7 +16,6 @@ class JSettings {
   final _added = StreamController<String>.broadcast();
   final _changed = StreamController<String>.broadcast();
   final _removed = StreamController<String>.broadcast();
-  final _valueEquals = const DeepCollectionEquality().equals;
 
   Stream<String> get added => _added.stream;
   Stream<String> get changed => _changed.stream;
@@ -36,7 +35,13 @@ class JSettings {
   }
 
   Set<String> getKeys() => Set.of(getValues().keys);
+
   bool hasValue(String key) => getKeys().contains(key);
+
+  bool valueEquals(Object? a, Object? b) {
+    return const DeepCollectionEquality().equals(a, b);
+  }
+
   Map<String, Object> getValues() => Map.of(_values ??= _file.read() ?? {});
 
   Object? getValue(String key) => getValues()[key];
@@ -101,7 +106,7 @@ class JSettings {
     }
     for (final key in newKeys) {
       final oldValue = _values?[key];
-      if (oldValue != null && !_valueEquals(oldValue, values[key])) {
+      if (oldValue != null && !valueEquals(oldValue, values[key])) {
         _changed.add(key);
       }
     }
