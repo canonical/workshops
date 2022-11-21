@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:lxd/lxd.dart';
+import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../workshops_l10n.dart';
 import 'instance_info_model.dart';
@@ -14,7 +16,8 @@ import 'instance_info_model.dart';
 Future<void> showInstanceInfoDialog(
     {required BuildContext context, required String instanceName}) {
   final l10n = AppLocalizations.of(context);
-  final model = InstanceInfoModel(instanceName: instanceName);
+  final model = InstanceInfoModel(
+      instanceName: instanceName, service: getService<LxdService>());
   return model.init().then((_) => showDialog(
         context: context,
         builder: (context) => AlertDialog(
