@@ -1,28 +1,27 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:file/file.dart';
-import 'package:path/path.dart' as path;
+import 'package:path/path.dart' as p;
 import 'package:watcher/watcher.dart';
 
 class JSettingsFile {
-  JSettingsFile(this._path, this._fs);
+  JSettingsFile(this._path);
 
   final String _path;
-  final FileSystem _fs;
 
   DateTime? _timestamp;
   StreamSubscription? _watcher;
 
   Future<void> init() async {
-    final dir = _fs.directory(path.dirname(_path));
+    final dir = Directory(p.dirname(_path));
     if (!dir.existsSync()) {
       dir.createSync(recursive: true);
     }
   }
 
   Map<String, Object>? read() {
-    final file = _fs.file(_path);
+    final file = File(_path);
     try {
       if (file.existsSync()) {
         final str = file.readAsStringSync();
@@ -41,7 +40,7 @@ class JSettingsFile {
   }
 
   Future<void> write(Map<String, Object> json) {
-    final file = _fs.file(_path);
+    final file = File(_path);
     if (!file.existsSync()) {
       file.createSync(recursive: true);
     }
@@ -50,8 +49,8 @@ class JSettingsFile {
   }
 
   Future<void> watch(void Function() onChanged) async {
-    _watcher ??= DirectoryWatcher(path.dirname(_path)).events.listen((event) {
-      if (!path.equals(_path, event.path)) {
+    _watcher ??= DirectoryWatcher(p.dirname(_path)).events.listen((event) {
+      if (!p.equals(_path, event.path)) {
         return;
       }
       switch (event.type) {
@@ -61,7 +60,7 @@ class JSettingsFile {
           break;
         case ChangeType.MODIFY:
           if (_timestamp == null ||
-              _fs.file(_path).lastModifiedSync().isAfter(_timestamp!)) {
+              File(_path).lastModifiedSync().isAfter(_timestamp!)) {
             onChanged();
           }
           break;

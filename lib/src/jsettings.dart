@@ -1,15 +1,11 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:file/file.dart';
-import 'package:file/local.dart';
-import 'package:meta/meta.dart';
 
-import 'settings_file.dart';
+import 'jsettings_file.dart';
 
 class JSettings {
-  JSettings(String path, {@visibleForTesting FileSystem? fs})
-      : _file = JSettingsFile(path, fs ?? const LocalFileSystem());
+  JSettings(String path) : _file = JSettingsFile(path);
 
   final JSettingsFile _file;
   bool? _invalid;
@@ -35,7 +31,7 @@ class JSettings {
     ]);
   }
 
-  Set<String> getKeys() => Set.of(_getValues().keys);
+  Set<String> getKeys() => Set.unmodifiable(_getValues().keys);
 
   bool hasValue(String key) => _getValues().containsKey(key);
 
