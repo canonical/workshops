@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import 'settings_notifier.dart';
 
 class UserSettings extends SettingsNotifier {
@@ -15,10 +13,7 @@ class WorkspaceSettings extends SettingsNotifier {
   Set<String> getKeys() => Set.of({...super.getKeys(), ...?_base?.getKeys()});
 
   @override
-  bool hasValue(String key) {
-    print('hasKey($key) ${getKeys()} ${describeIdentity(this)}');
-    return super.getKeys().contains(key);
-  }
+  bool hasValue(String key) => super.getKeys().contains(key);
 
   @override
   Object? getValue(String key) => super.getValue(key) ?? _base?.getValue(key);
