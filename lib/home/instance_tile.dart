@@ -40,12 +40,12 @@ class InstanceTile extends StatelessWidget {
               [
                 PopupMenuItem(
                   value: SelectInstanceIntent(instance),
-                  child: Text(l10n.openTerminal),
+                  child: Text(l10n.openTerminalMenuItem),
                 ),
                 PopupMenuItem(
                   value: ShowInstanceInfoIntent(instance),
                   enabled: canStop,
-                  child: Text(l10n.instanceInformation),
+                  child: Text(l10n.instanceInformationMenuItem),
                 ),
               ];
 
