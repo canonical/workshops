@@ -45,35 +45,17 @@ class JSettings {
   Map<String, Object> getValues() => Map.of(_values ??= _file.read() ?? {});
 
   Object? getValue(String key) => getValues()[key];
+
+  bool? getBool(String key) => getValue(key) as bool?;
+  int? getInt(String key) => getValue(key) as int?;
+  double? getDouble(String key) => getValue(key) as double?;
+  String? getString(String key) => getValue(key) as String?;
+  List<String>? getStringList(String key) => getValue(key) as List<String>?;
+
   Future<void> setValue(String key, Object value) {
     final values = getValues();
     values[key] = value;
     return _file.write(values);
-  }
-
-  bool? getBool(String key) => getValue(key) as bool?;
-  Future<void> setBool(String key, bool value) {
-    return setValue(key, value);
-  }
-
-  int? getInt(String key) => getValue(key) as int?;
-  Future<void> setInt(String key, int value) {
-    return setValue(key, value);
-  }
-
-  double? getDouble(String key) => getValue(key) as double?;
-  Future<void> setDouble(String key, double value) {
-    return setValue(key, value);
-  }
-
-  String? getString(String key) => getValue(key) as String?;
-  Future<void> setString(String key, String value) {
-    return setValue(key, value);
-  }
-
-  List<String>? getStringList(String key) => getValue(key) as List<String>?;
-  Future<void> setStringList(String key, List<String> value) {
-    return setValue(key, value);
   }
 
   Future<void> resetValue(String key) async {
