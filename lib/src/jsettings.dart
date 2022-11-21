@@ -87,31 +87,34 @@ class JSettings {
     }
   }
 
-  void _invalidate() {
+  void _invalidateValues() {
     if (_invalid == true) return;
     _invalid = true;
     scheduleMicrotask(() {
-      final oldValues = _values;
-      final newValues = _readFile();
-      if (newValues != null) {
-        final newKeys = Set.of(newValues.keys);
-        final oldKeys = Set.of(oldValues?.keys ?? const <String>[]);
-        for (final key in newKeys.difference(oldKeys)) {
-          _added.add(key);
-        }
-        for (final key in oldKeys.difference(newKeys)) {
-          _removed.add(key);
-        }
-        for (final key in newKeys) {
-          final oldValue = oldValues?[key];
-          if (oldValue != null && !_valueEquals(oldValue, newValues[key])) {
-            _changed.add(key);
-          }
-        }
-        _values = newValues;
+      final values = _readFile();
+      if (values != null) {
+        _updateValues(values);
       }
       _invalid = false;
     });
+  }
+
+  void _updateValues(Map<String, Object> values) {
+    final newKeys = Set.of(values.keys);
+    final oldKeys = Set.of(_values?.keys ?? const <String>[]);
+    for (final key in newKeys.difference(oldKeys)) {
+      _added.add(key);
+    }
+    for (final key in oldKeys.difference(newKeys)) {
+      _removed.add(key);
+    }
+    for (final key in newKeys) {
+      final oldValue = _values?[key];
+      if (oldValue != null && !_valueEquals(oldValue, values[key])) {
+        _changed.add(key);
+      }
+    }
+    _values = values;
   }
 
   Map<String, Object>? _readFile() {
@@ -151,12 +154,12 @@ class JSettings {
       switch (event.type) {
         case ChangeType.ADD:
         case ChangeType.REMOVE:
-          _invalidate();
+          _invalidateValues();
           break;
         case ChangeType.MODIFY:
           if (_timestamp == null ||
               _fs.file(_path).lastModifiedSync().isAfter(_timestamp!)) {
-            _invalidate();
+            _invalidateValues();
           }
           break;
       }
