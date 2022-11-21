@@ -27,7 +27,7 @@ class JSettingsFile {
       if (file.existsSync()) {
         final str = file.readAsStringSync();
         if (str.isNotEmpty) {
-          final json = jsonDecode(str);
+          final dynamic json = jsonDecode(str);
           if (json is Map) {
             _timestamp = file.lastModifiedSync();
             return json.cast<String, Object>();

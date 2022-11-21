@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
-import 'package:jsettings/src/settings_file.dart';
 import 'package:meta/meta.dart';
+
+import 'settings_file.dart';
 
 class JSettings {
   JSettings(String path, {@visibleForTesting FileSystem? fs})
@@ -26,7 +27,7 @@ class JSettings {
   }
 
   Future<void> close() {
-    return Future.wait([
+    return Future.wait<void>([
       _file.unwatch(),
       _added.close(),
       _changed.close(),
