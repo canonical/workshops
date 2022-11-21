@@ -33,8 +33,9 @@ class SettingsEditor extends StatelessWidget {
                   label: Text(key),
                   suffix: IconButton(
                     icon: const Icon(Icons.close),
-                    onPressed:
-                        settings.hasKey(key) ? () => settings.reset(key) : null,
+                    onPressed: settings.hasValue(key)
+                        ? () => settings.resetValue(key)
+                        : null,
                   ),
                 ),
                 initialValue: value.toString(),

@@ -15,7 +15,7 @@ class WorkspaceSettings extends SettingsNotifier {
   Set<String> getKeys() => Set.of({...super.getKeys(), ...?_base?.getKeys()});
 
   @override
-  bool hasKey(String key) {
+  bool hasValue(String key) {
     print('hasKey($key) ${getKeys()} ${describeIdentity(this)}');
     return super.getKeys().contains(key);
   }
