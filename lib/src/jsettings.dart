@@ -48,7 +48,8 @@ class JSettings {
   int? getInt(String key) => getValue(key) as int?;
   double? getDouble(String key) => getValue(key) as double?;
   String? getString(String key) => getValue(key) as String?;
-  List<String>? getStringList(String key) => getValue(key) as List<String>?;
+  List? getList(String key) => getValue(key) as List?;
+  Map? getMap(String key) => getValue(key) as Map?;
 
   Future<void> setValue(String key, Object value) {
     final values = Map.of(_getValues());
