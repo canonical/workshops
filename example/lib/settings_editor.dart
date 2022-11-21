@@ -8,10 +8,12 @@ class SettingsEditor extends StatelessWidget {
     super.key,
     required this.title,
     required this.settings,
+    this.readOnly = false,
   });
 
   final Widget title;
   final SettingsNotifier settings;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +31,14 @@ class SettingsEditor extends StatelessWidget {
               final value = settings.getValue(key);
               return TextFormField(
                 key: ValueKey('$key:$value'),
+                readOnly: readOnly,
                 decoration: InputDecoration(
                   label: Text(key),
                   suffix: IconButton(
+                    iconSize: 16,
+                    padding: EdgeInsets.zero,
                     icon: const Icon(Icons.close),
-                    onPressed: settings.hasValue(key)
+                    onPressed: !readOnly && settings.hasValue(key)
                         ? () => settings.resetValue(key)
                         : null,
                   ),
@@ -45,10 +50,6 @@ class SettingsEditor extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(height: 24),
           );
         },
-      ),
-      floatingActionButton: const FloatingActionButton(
-        onPressed: null,
-        child: Icon(Icons.add),
       ),
     );
   }

@@ -1,12 +1,30 @@
 import 'settings_notifier.dart';
 
-class UserSettings extends SettingsNotifier {
+class GlobalSettings extends SettingsNotifier with ReadOnlySettings {
+  GlobalSettings(super.path);
+}
+
+class UserSettings extends SettingsNotifier with InheritedSettings {
   UserSettings(super.path);
 }
 
-class WorkspaceSettings extends SettingsNotifier {
-  WorkspaceSettings(super.path, {SettingsNotifier? base}) : _base = base;
+class WorkspaceSettings extends SettingsNotifier with InheritedSettings {
+  WorkspaceSettings(super.path);
+}
 
+mixin ReadOnlySettings on SettingsNotifier {
+  @override
+  Future<void> setValue(String key, Object value) {
+    throw UnsupportedError('Read-only');
+  }
+
+  @override
+  Future<void> resetValue(String key) {
+    throw UnsupportedError('Read-only');
+  }
+}
+
+mixin InheritedSettings on SettingsNotifier {
   SettingsNotifier? _base;
 
   @override
