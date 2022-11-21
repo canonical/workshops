@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:lxd/lxd.dart';
 import 'package:provider/provider.dart';
 
+import '../workshops_l10n.dart';
 import 'instance_info_model.dart';
 
 Future<void> showInstanceInfoDialog(
@@ -55,11 +56,11 @@ class InstanceInfoPage extends StatelessWidget {
             ]),
             _TableRowPaddedSelectable(entries: [
               '${l10n.statusLabel}:',
-              model.instanceState.status.toString(),
+              model.instanceState.status.localize(context),
             ]),
             _TableRowPaddedSelectable(entries: [
               '${l10n.typeLabel}:',
-              model.instance.type.toString(),
+              model.instance.type.localize(context),
             ]),
             _TableRowPaddedSelectable(entries: [
               '${l10n.architectureLabel}:',
