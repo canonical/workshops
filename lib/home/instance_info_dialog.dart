@@ -22,8 +22,8 @@ Future<void> showInstanceInfoDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: Text(l10n.instanceInformationTitle),
-          content: ChangeNotifierProvider(
-            create: (_) => model,
+          content: ChangeNotifierProvider.value(
+            value: model,
             child: InstanceInfoPage(
               instanceName: instanceName,
             ),
