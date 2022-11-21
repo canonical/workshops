@@ -16,19 +16,19 @@ Future<void> showInstanceInfoDialog(
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      title: Text(l10n.networkInformation),
+      title: Text(l10n.instanceInformation),
       content: Table(
         defaultColumnWidth: const IntrinsicColumnWidth(),
         children: [
           TableRow(
-              children: [
-            Text(l10n.networkInterface),
-            const Text('IPv4'),
-            const Text('IPv6')
-          ]
-                  .map((e) =>
-                      Padding(padding: const EdgeInsets.all(8), child: e))
-                  .toList()),
+            children: [
+              Text(l10n.networkInterface),
+              const Text('IPv4'),
+              const Text('IPv6')
+            ]
+                .map((e) => Padding(padding: const EdgeInsets.all(8), child: e))
+                .toList(),
+          ),
           for (final e in interfaces.entries)
             TableRow(
               children: [
