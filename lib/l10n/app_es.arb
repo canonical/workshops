@@ -146,5 +146,13 @@
   "startInstanceCommand": "Empezar instancia",
   "@startInstanceCommand": {},
   "stopInstanceCommand": "Parar la instancia",
-  "@stopInstanceCommand": {}
+  "@stopInstanceCommand": {},
+  "openPreferencesCommand": "Abrir las preferencias",
+  "@openPreferencesCommand": {},
+  "preferencesMenuItem": "Preferencias",
+  "@preferencesMenuItem": {},
+  "preferencesTitle": "Preferencias",
+  "@preferencesTitle": {},
+  "pressAndConfirmShortcut": "Pulse un acceso directo y confirme con ENTER.",
+  "@pressAndConfirmShortcut": {}
 }
