@@ -1,5 +1,6 @@
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
@@ -17,20 +18,36 @@ class InstanceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     final instance = context.selectInstance(name);
     return InstanceActions(
       name: name,
       child: Builder(
         builder: (context) {
+          final canStart =
+              Actions.find<StartInstanceIntent>(context).isActionEnabled;
           final canStop =
               Actions.find<StopInstanceIntent>(context).isActionEnabled;
+          final startHandler =
+              Actions.handler(context, StartInstanceIntent(instance));
           final stopHandler =
               Actions.handler(context, StopInstanceIntent(instance));
-
-          final canDelete =
-              Actions.find<DeleteInstanceIntent>(context).isActionEnabled;
           final deleteHandler =
               Actions.handler(context, DeleteInstanceIntent(instance));
+
+          List<PopupMenuEntry<Intent>> popupMenuBuilder(BuildContext context) =>
+              [
+                PopupMenuItem(
+                  value: SelectInstanceIntent(instance),
+                  child: Text(l10n.openTerminal),
+                ),
+                PopupMenuItem(
+                  value: ShowInstanceInfoIntent(instance),
+                  enabled: canStop,
+                  child: Text(l10n.instanceInformation),
+                ),
+              ];
 
           return ContextMenuArea(
             builder: (context, position) => buildInstanceMenu(
@@ -41,17 +58,23 @@ class InstanceTile extends StatelessWidget {
               leading: OsLogo.asset(name: instance?.imageName, size: 48),
               title: Text(instance?.name ?? ''),
               subtitle: Text(instance?.imageDescription ?? ''),
-              trailing: instance?.isBusy == true
-                  ? _BusyButton()
-                  : canStop
-                      ? _StopButton(stopHandler)
-                      : canDelete
-                          ? _DeleteButton(deleteHandler)
-                          : null,
-              onTap: () {
-                Actions.invoke(context, SelectInstanceIntent(instance));
-                Actions.invoke(context, StartInstanceIntent(instance));
-              },
+              trailing: ButtonBar(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  instance?.isBusy == true
+                      ? _BusyButton()
+                      : canStop
+                          ? _StopButton(stopHandler)
+                          : canStart
+                              ? _StartButton(startHandler)
+                              : const SizedBox.shrink(),
+                  _PopupMenuButton<Intent>(
+                    itemBuilder: popupMenuBuilder,
+                    onSelected: (value) => Actions.invoke(context, value),
+                  ),
+                  _DeleteButton(deleteHandler),
+                ],
+              ),
             ),
           );
         },
@@ -70,6 +93,11 @@ class _IconButton extends IconButton {
       : super(splashRadius: 24, iconSize: 16);
 }
 
+class _StartButton extends _IconButton {
+  const _StartButton(VoidCallback? onPressed)
+      : super(icon: const Icon(Icons.play_arrow), onPressed: onPressed);
+}
+
 class _StopButton extends _IconButton {
   const _StopButton(VoidCallback? onPressed)
       : super(icon: const Icon(Icons.stop), onPressed: onPressed);
@@ -77,7 +105,7 @@ class _StopButton extends _IconButton {
 
 class _DeleteButton extends _IconButton {
   const _DeleteButton(VoidCallback? onPressed)
-      : super(icon: const Icon(YaruIcons.window_close), onPressed: onPressed);
+      : super(icon: const Icon(YaruIcons.trash), onPressed: onPressed);
 }
 
 class _BusyButton extends IconButton {
@@ -90,5 +118,16 @@ class _BusyButton extends IconButton {
           splashColor: Colors.transparent,
           hoverColor: Colors.transparent,
           onPressed: () {}, // block
+        );
+}
+
+class _PopupMenuButton<T> extends PopupMenuButton<T> {
+  const _PopupMenuButton({
+    required super.itemBuilder,
+    super.onSelected,
+  }) : super(
+          icon: const Icon(YaruIcons.view_more),
+          splashRadius: 24,
+          iconSize: 16,
         );
 }

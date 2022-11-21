@@ -21,3 +21,7 @@ class StopInstanceIntent extends InstanceIntent {
 class DeleteInstanceIntent extends InstanceIntent {
   const DeleteInstanceIntent(super.instance);
 }
+
+class ShowInstanceInfoIntent extends InstanceIntent {
+  const ShowInstanceInfoIntent(super.instance);
+}

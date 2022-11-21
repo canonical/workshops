@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
@@ -7,6 +8,7 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 
 import '../tabs/tab_item.dart';
 import 'instance_context.dart';
+import 'instance_info_dialog.dart';
 import 'instance_intents.dart';
 
 class InstanceActions extends StatelessWidget {
@@ -38,6 +40,22 @@ class SelectInstanceAction extends ContextAction<SelectInstanceIntent> {
   void invoke(SelectInstanceIntent intent, [BuildContext? context]) {
     final tab = context?.read<TabItem>();
     tab?.instance = intent.instance;
+  }
+}
+
+class ShowInstanceInfoAction extends ContextAction<ShowInstanceInfoIntent> {
+  ShowInstanceInfoAction();
+
+  @override
+  bool isEnabled(ShowInstanceInfoIntent intent) =>
+      intent.instance?.isRunning == true;
+
+  @override
+  void invoke(ShowInstanceInfoIntent intent, [BuildContext? context]) async {
+    if (context == null || intent.instance == null) return;
+
+    await showInstanceInfoDialog(
+        context: context, instanceName: intent.instance!.name);
   }
 }
 
