@@ -34,17 +34,18 @@ class JSettings {
     ]);
   }
 
-  Set<String> getKeys() => Set.of(getValues().keys);
+  Set<String> getKeys() => Set.of(_getValues().keys);
 
-  bool hasValue(String key) => getKeys().contains(key);
+  bool hasValue(String key) => _getValues().containsKey(key);
 
   bool valueEquals(Object? a, Object? b) {
     return const DeepCollectionEquality().equals(a, b);
   }
 
-  Map<String, Object> getValues() => Map.of(_values ??= _file.read() ?? {});
+  Map<String, Object> getValues() => Map.unmodifiable(_getValues());
+  Map<String, Object> _getValues() => _values ??= _file.read() ?? {};
 
-  Object? getValue(String key) => getValues()[key];
+  Object? getValue(String key) => _getValues()[key];
 
   bool? getBool(String key) => getValue(key) as bool?;
   int? getInt(String key) => getValue(key) as int?;
@@ -53,13 +54,13 @@ class JSettings {
   List<String>? getStringList(String key) => getValue(key) as List<String>?;
 
   Future<void> setValue(String key, Object value) {
-    final values = getValues();
+    final values = Map.of(_getValues());
     values[key] = value;
     return _file.write(values);
   }
 
   Future<void> resetValue(String key) async {
-    final values = getValues();
+    final values = Map.of(_getValues());
     if (values.remove(key) != null) {
       return _file.write(values);
     }
