@@ -1,29 +1,36 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
 import 'path_provider.dart';
-import 'settings.dart';
 import 'settings_editor.dart';
+import 'settings_notifier.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
+  registerService(PathProvider.new);
 
-  final path = PathProvider();
-  await path.init();
-
-  runApp(ChangeNotifierProvider.value(
-    value: path,
-    child: YaruTheme(
+  runApp(
+    YaruTheme(
       builder: (context, yaru, child) => MaterialApp(
         theme: yaru.theme,
         darkTheme: yaru.darkTheme,
         home: const HomePage(),
       ),
     ),
-  ));
+  );
+}
+
+class GlobalSettings extends SettingsNotifier with ReadOnlySettings {
+  GlobalSettings(super.path);
+}
+
+class UserSettings extends SettingsNotifier with InheritedSettings {
+  UserSettings(super.path);
+}
+
+class WorkspaceSettings extends SettingsNotifier with InheritedSettings {
+  WorkspaceSettings(super.path);
 }
 
 class HomePage extends StatelessWidget {
@@ -31,10 +38,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final path = context.watch<PathProvider>();
+    final path = getService<PathProvider>();
     return Scaffold(
       body: ChangeNotifierProvider(
-        create: (_) => GlobalSettings(path.getBundle('global'))..init(),
+        create: (_) =>
+            GlobalSettings(path.getBundleFile('global.json'))..init(),
         builder: (context, child) => Row(
           children: [
             Expanded(
@@ -49,7 +57,8 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child:
                     ChangeNotifierProxyProvider<GlobalSettings, UserSettings>(
-                  create: (_) => UserSettings(path.getConfig('user$i')),
+                  create: (_) =>
+                      UserSettings(path.getConfigFile('user$i.json')),
                   update: (_, global, user) => user!..init(base: global),
                   builder: (context, child) => Column(
                     children: [
@@ -63,7 +72,7 @@ class HomePage extends StatelessWidget {
                         child: ChangeNotifierProxyProvider<UserSettings,
                             WorkspaceSettings>(
                           create: (_) => WorkspaceSettings(
-                              path.getConfig('user$i/workspace$i')),
+                              path.getConfigFile('user$i/workspace$i.json')),
                           update: (_, user, workspace) =>
                               workspace!..init(base: user),
                           builder: (context, child) => SettingsEditor(
@@ -79,10 +88,6 @@ class HomePage extends StatelessWidget {
             ],
           ],
         ),
-      ),
-      floatingActionButton: const FloatingActionButton(
-        onPressed: null,
-        child: Icon(Icons.add),
       ),
     );
   }

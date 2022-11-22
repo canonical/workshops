@@ -11,8 +11,9 @@ dependencies:
   jsettings:
     path: ../
   path: ^1.8.2
-  path_provider: ^2.0.11
   provider: ^6.0.4
+  ubuntu_service: ^0.2.0
+  xdg_directories: ^0.2.0+2
   yaru: ^0.4.3
 
 dev_dependencies:

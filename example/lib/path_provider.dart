@@ -1,23 +1,24 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
+import 'package:xdg_directories/xdg_directories.dart' as xdg;
 
-class PathProvider extends ChangeNotifier {
-  String _bundlePath = '';
-  String _configPath = '';
+class PathProvider {
+  String getBundleFile(String name) => p.join(getBundleDirectory(), name);
+  String getConfigFile(String name) => p.join(getConfigDirectory(), name);
 
-  String getBundle(String name) => p.join(_bundlePath, '$name.json');
-  String getConfig(String name) => p.join(_configPath, '$name.json');
+  String? _bundleDirectory;
+  String getBundleDirectory() => _bundleDirectory ??= _resolveBundleDirectory();
 
-  Future<void> init() async {
-    final exePath = p.dirname(Platform.resolvedExecutable);
-    _bundlePath = p.join(exePath, 'data', 'flutter_assets', 'assets');
+  String? _configDirectory;
+  String getConfigDirectory() => _configDirectory ??= _resolveConfigDirectory();
 
-    return getApplicationSupportDirectory().then((dir) {
-      _configPath = dir.path;
-      notifyListeners();
-    });
-  }
+  String _resolveBundleDirectory() => p.join(
+      p.dirname(Platform.resolvedExecutable),
+      'data',
+      'flutter_assets',
+      'assets');
+
+  String _resolveConfigDirectory() =>
+      p.join(xdg.configHome.path, p.basename(Platform.resolvedExecutable));
 }
