@@ -51,6 +51,16 @@ LxdInstance testInstance({
   );
 }
 
+LxdInstanceState testInstanceState({
+  LxdInstanceStatus? status,
+}) {
+  return LxdInstanceState(
+    status: status ?? LxdInstanceStatus.stopped,
+    statusCode: 0,
+    pid: 0,
+  );
+}
+
 LxdOperation testOperation({
   String? description,
   String? id,
