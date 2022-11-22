@@ -155,10 +155,6 @@
   "@preferencesTitle": {},
   "pressAndConfirmShortcut": "Pulse un acceso directo y confirme con ENTER.",
   "@pressAndConfirmShortcut": {},
-  "instanceInformation": "Información de la instancia",
-  "@instanceInformation": {},
   "networkInterface": "Interfaz",
-  "@networkInterface": {},
-  "openTerminal": "Abrir el terminal",
-  "@openTerminal": {}
+  "@networkInterface": {}
 }
