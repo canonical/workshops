@@ -1,4 +1,8 @@
 name: jsettings
+description: JSON settings
+homepage: https://github.com/jpnurmi/jsettings.dart
+repository: https://github.com/jpnurmi/jsettings.dart
+issue_tracker: https://github.com/jpnurmi/jsettings.dart/issues
 version: 0.0.1
 
 environment:
