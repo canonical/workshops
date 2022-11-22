@@ -14,6 +14,7 @@ class InstanceInfoModel extends SafeChangeNotifier {
   final String instanceName;
   final Duration _updateInterval;
   final LxdService service;
+  bool initialized = false;
 
   late LxdInstanceState _instanceState;
   late final LxdInstance _instance;
@@ -29,6 +30,8 @@ class InstanceInfoModel extends SafeChangeNotifier {
       _updateInterval,
       (_) => _updateInstanceState(),
     );
+    initialized = true;
+    notifyListeners();
   }
 
   Future<void> _updateInstanceState() async {
