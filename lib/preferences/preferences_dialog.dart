@@ -64,7 +64,6 @@ class PreferencesDialog extends StatelessWidget {
                       pageBuilder: (context, index) => const YaruDetailPage(
                         body: ShortcutView(),
                       ),
-                      leftPaneWidth: 240,
                     ),
                   ),
                 ),
