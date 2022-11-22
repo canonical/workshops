@@ -25,4 +25,6 @@ settings.removed.listen((key) => print('Removed: $key'))
 
 await settings.setValue('key', 'value');
 await settings.resetValue('key');
+
+await settings.close();
 ```

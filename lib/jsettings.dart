@@ -23,6 +23,8 @@
 ///
 /// await settings.setValue('key', 'value');
 /// await settings.resetValue('key');
+///
+/// await settings.close();
 /// ```
 library jsettings;
 
