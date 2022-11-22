@@ -154,7 +154,5 @@
   "preferencesTitle": "Preferencias",
   "@preferencesTitle": {},
   "pressAndConfirmShortcut": "Pulse un acceso directo y confirme con ENTER.",
-  "@pressAndConfirmShortcut": {},
-  "networkInterface": "Interfaz",
-  "@networkInterface": {}
+  "@pressAndConfirmShortcut": {}
 }
