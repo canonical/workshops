@@ -14,6 +14,8 @@ class JSettings {
   final _changed = StreamController<String>.broadcast();
   final _removed = StreamController<String>.broadcast();
 
+  String get path => _file.path;
+
   Stream<String> get added => _added.stream;
   Stream<String> get changed => _changed.stream;
   Stream<String> get removed => _removed.stream;

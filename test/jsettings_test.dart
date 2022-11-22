@@ -10,6 +10,7 @@ import 'mock_file.dart';
 void main() {
   test('read non-existent file', () async {
     final settings = JSettings('non-existent.json');
+    expect(settings.path, 'non-existent.json');
 
     final file = MockFile('non-existent.json');
     when(file.existsSync()).thenReturn(false);
@@ -30,6 +31,7 @@ void main() {
 
   test('read existent file', () async {
     final settings = JSettings('existing.json');
+    expect(settings.path, 'existing.json');
 
     const values = {
       'b': true,
@@ -73,6 +75,7 @@ void main() {
 
   test('write non-existent file', () async {
     final settings = JSettings('non-existent.json');
+    expect(settings.path, 'non-existent.json');
 
     final file = MockFile('non-existent.json');
     when(file.existsSync()).thenReturn(false);
@@ -92,6 +95,7 @@ void main() {
 
   test('write existing file', () async {
     final settings = JSettings('existing.json');
+    expect(settings.path, 'existing.json');
 
     final file = MockFile('existing.json');
     when(file.existsSync()).thenReturn(true);
