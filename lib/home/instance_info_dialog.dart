@@ -8,8 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
+import 'package:title_bar/title_bar.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
 
 import '../workshops_l10n.dart';
 import 'instance_info_model.dart';
@@ -50,17 +50,8 @@ class InstanceInfoDialog extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Theme(
-                data: Theme.of(context).copyWith(
-                  appBarTheme: const AppBarTheme(
-                    shape: Border(),
-                    titleSpacing: 24,
-                  ),
-                ),
-                child: YaruTitleBar(
-                  centerTitle: false,
-                  title: Text(l10n.networkInformationLabel),
-                ),
+              DialogTitleBar(
+                title: Text(l10n.networkInformationLabel),
               ),
               Padding(
                 padding: const EdgeInsets.all(24),

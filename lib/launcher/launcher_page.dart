@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:title_bar/title_bar.dart';
 import 'package:wizard_router/wizard_router.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
@@ -37,34 +38,20 @@ class LauncherPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Theme(
-              data: Theme.of(context).copyWith(
-                appBarTheme: AppBarTheme(
-                  shape: const Border(),
-                  titleSpacing: Wizard.of(context).hasPrevious ? 8 : 24,
-                ),
-              ),
-              child: YaruTitleBar(
-                title: title,
-                centerTitle: false,
-                leading: Wizard.of(context).hasPrevious
-                    ? Padding(
-                        padding: const EdgeInsetsDirectional.only(start: 16),
-                        child: Center(
-                          child: YaruIconButton(
-                            iconSize: 32,
-                            padding: EdgeInsets.zero,
-                            onPressed: Wizard.of(context).back,
-                            icon: const Icon(YaruIcons.go_previous),
-                          ),
-                        ),
-                      )
-                    : null,
-                trailing: Hero(
-                  tag: '$this',
-                  child: YaruCloseButton(
-                    onPressed: context.read<LauncherModel>().cancel,
-                  ),
+            DialogTitleBar(
+              title: title,
+              leading: Wizard.of(context).hasPrevious
+                  ? YaruIconButton(
+                      iconSize: 32,
+                      padding: EdgeInsets.zero,
+                      onPressed: Wizard.of(context).back,
+                      icon: const Icon(YaruIcons.go_previous),
+                    )
+                  : null,
+              trailing: Hero(
+                tag: '$this',
+                child: YaruCloseButton(
+                  onPressed: context.read<LauncherModel>().cancel,
                 ),
               ),
             ),

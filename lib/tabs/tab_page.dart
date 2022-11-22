@@ -4,7 +4,7 @@ import 'package:lxd_x/lxd_x.dart';
 import 'package:movable_tabs/movable_tabs.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
-import 'package:window_title_bar/window_title_bar.dart';
+import 'package:title_bar/title_bar.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
 import '../home/home_page.dart';
