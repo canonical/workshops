@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
-import 'package:settings_store/settings_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simplestreams/simplestreams.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
@@ -14,7 +13,9 @@ import 'app.dart';
 import 'home/instance_store.dart';
 import 'launcher/local_image_model.dart';
 import 'launcher/remote_image_model.dart';
+import 'path_provider.dart';
 import 'remotes/remote_store.dart';
+import 'settings.dart';
 
 Future<void> main() async {
   Logger.setup(level: LogLevel.fromString(kDebugMode ? 'debug' : 'info'));
@@ -26,6 +27,9 @@ Future<void> main() async {
   final preferences = await SharedPreferences.getInstance();
   registerServiceInstance<SharedPreferences>(preferences);
 
+  final path = PathProvider();
+  registerServiceInstance<PathProvider>(path);
+
   registerServiceFactory<LxdClient>(
     (url) => LxdClient.remote(url: Uri.parse(url as String)),
   );
@@ -33,12 +37,6 @@ Future<void> main() async {
   registerServiceFactory<SimpleStreamClient>(
     (url) => SimpleStreamClient(url as String),
   );
-
-  final shortcuts = ShortcutStore('com.canonical.workshops.shortcuts');
-  await shortcuts.init();
-
-  final settings = SettingsStore('com.canonical.workshops');
-  await settings.init();
 
   runApp(
     MultiProvider(
@@ -49,8 +47,24 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (_) => RemoteStore(preferences)..init(),
         ),
-        ChangeNotifierProvider<ShortcutStore>.value(value: shortcuts),
-        ChangeNotifierProvider<SettingsStore>.value(value: settings),
+        ChangeNotifierProvider(
+          create: (_) => DefaultSettings(path.getBundleFile('settings.json')),
+        ),
+        ChangeNotifierProxyProvider<DefaultSettings, AppSettings>(
+          create: (_) => AppSettings(path.getConfigFile('settings.json')),
+          update: (_, base, settings) => settings!..init(base: base),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DefaultShortcuts(path.getBundleFile('shortcuts.json')),
+        ),
+        ChangeNotifierProxyProvider<DefaultShortcuts, ShortcutSettings>(
+          create: (_) => ShortcutSettings(path.getConfigFile('shortcuts.json')),
+          update: (_, base, settings) => settings!..init(base: base),
+        ),
+        ChangeNotifierProxyProvider<ShortcutSettings, ShortcutStore>(
+          create: (_) => ShortcutStore(),
+          update: (_, settings, store) => store!..init(settings),
+        ),
         ChangeNotifierProxyProvider<RemoteStore, RemoteImageModel>(
           create: (_) => RemoteImageModel(),
           update: (_, store, model) {
