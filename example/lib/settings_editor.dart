@@ -18,7 +18,18 @@ class SettingsEditor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: title),
+      appBar: AppBar(
+        title: title,
+        actions: [
+          Tooltip(
+            message: settings.path,
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.info_outline),
+            ),
+          )
+        ],
+      ),
       body: AnimatedBuilder(
         animation: settings,
         builder: (context, child) {
