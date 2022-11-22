@@ -11,7 +11,6 @@ dependencies:
   collection: ^1.16.0
   flutter:
     sdk: flutter
-  gsettings: ^0.2.5
   settings_store:
     path: ../settings_store
 
