@@ -43,7 +43,6 @@ class InstanceInfoDialog extends StatelessWidget {
 
     if (!model.initialized) return Container();
     return AlertDialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 100),
       title: Text(l10n.instanceInformationTitle),
       content: SizedBox.fromSize(
         size: MediaQuery.of(context).size,
