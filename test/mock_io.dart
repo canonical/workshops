@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:mockito/mockito.dart';
 
-final epoch = DateTime.fromMicrosecondsSinceEpoch(0);
+DateTime unixTime(int msec) => DateTime.fromMillisecondsSinceEpoch(msec);
 
 class MockDirectory extends Mock implements Directory {
   MockDirectory(this.path);
@@ -20,12 +20,29 @@ class MockDirectory extends Mock implements Directory {
   }
 
   @override
+  Stream<FileSystemEntity> list({
+    bool recursive = false,
+    bool followLinks = true,
+  }) {
+    return super.noSuchMethod(
+      Invocation.method(#list, [], {
+        #recursive: recursive,
+        #followLinks: followLinks,
+      }),
+      returnValue: const Stream<FileSystemEntity>.empty(),
+    ) as Stream<FileSystemEntity>;
+  }
+
+  @override
   Stream<FileSystemEvent> watch({
     int events = FileSystemEvent.all,
     bool recursive = false,
   }) {
     return super.noSuchMethod(
-      Invocation.method(#watch, [events, recursive]),
+      Invocation.method(#watch, [], {
+        #events: events,
+        #recursive: recursive,
+      }),
       returnValue: const Stream<FileSystemEvent>.empty(),
     ) as Stream<FileSystemEvent>;
   }
@@ -49,7 +66,7 @@ class MockFile extends Mock implements File {
   DateTime lastModifiedSync() {
     return super.noSuchMethod(
       Invocation.method(#lastModifiedSync, []),
-      returnValue: epoch,
+      returnValue: unixTime(0),
     ) as DateTime;
   }
 
@@ -73,4 +90,23 @@ class MockFile extends Mock implements File {
       returnValue: Future.value(this),
     ) as Future<File>;
   }
+}
+
+class FakeFileSystemEvent extends Fake implements FileSystemEvent {
+  FakeFileSystemEvent(this.type, this.path);
+  factory FakeFileSystemEvent.create(String path) =>
+      FakeFileSystemEvent(FileSystemEvent.create, path);
+  factory FakeFileSystemEvent.modify(String path) =>
+      FakeFileSystemEvent(FileSystemEvent.modify, path);
+  factory FakeFileSystemEvent.delete(String path) =>
+      FakeFileSystemEvent(FileSystemEvent.delete, path);
+
+  @override
+  final int type;
+
+  @override
+  final String path;
+
+  @override
+  bool get isDirectory => false;
 }

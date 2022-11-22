@@ -45,7 +45,7 @@ void main() {
 
     final file = MockFile('existing.json');
     when(file.existsSync()).thenReturn(true);
-    when(file.lastModifiedSync()).thenReturn(epoch);
+    when(file.lastModifiedSync()).thenReturn(unixTime(0));
     when(file.readAsStringSync()).thenReturn(jsonEncode(values));
 
     await IOOverrides.runZoned(() async {
@@ -80,7 +80,7 @@ void main() {
 
     final file = MockFile('broken.json');
     when(file.existsSync()).thenReturn(true);
-    when(file.lastModifiedSync()).thenReturn(epoch);
+    when(file.lastModifiedSync()).thenReturn(unixTime(0));
     when(file.readAsStringSync()).thenReturn('broken');
 
     await IOOverrides.runZoned(() async {
@@ -126,7 +126,7 @@ void main() {
 
     final file = MockFile('existing.json');
     when(file.existsSync()).thenReturn(true);
-    when(file.lastModifiedSync()).thenReturn(epoch);
+    when(file.lastModifiedSync()).thenReturn(unixTime(0));
     when(file.readAsStringSync()).thenReturn('{"key1":"value1"}');
     when(file.writeAsString(any)).thenAnswer((i) async => file);
     when(file.writeAsString(any)).thenAnswer((i) async => file);
@@ -166,26 +166,49 @@ void main() {
   });
 
   test('watch changes', () async {
-    final settings = JSettings('watched.json');
+    final settings = JSettings('/path/to/watched.json');
 
-    final controller = StreamController<FileSystemEvent>(sync: true);
+    final events = StreamController<FileSystemEvent>();
 
-    final dir = MockDirectory('.');
+    final dir = MockDirectory('/path/to');
     when(dir.existsSync()).thenReturn(true);
-    when(dir.watch()).thenAnswer((_) => controller.stream);
+    when(dir.watch()).thenAnswer((_) => events.stream);
+
+    final file = MockFile('/path/to/watched.json');
+    when(file.existsSync()).thenReturn(true);
+    when(file.lastModifiedSync()).thenReturn(unixTime(0));
+    when(file.readAsStringSync()).thenReturn('{"key":"value"}');
 
     await IOOverrides.runZoned(() async {
       await settings.init();
-      expect(controller.hasListener, isTrue);
     }, createDirectory: (path) {
       expect(path, dir.path);
       return dir;
+    }, createFile: (path) {
+      expect(path, file.path);
+      return file;
     });
+    expect(events.hasListener, isTrue);
 
     verify(dir.existsSync()).called(isPositive);
     verifyNever(dir.createSync(recursive: true));
+    verify(dir.watch()).called(1);
+
+    events.add(FakeFileSystemEvent.create('/path/to/watched.json'));
+    await expectLater(settings.added, emits('key'));
+
+    when(file.lastModifiedSync()).thenReturn(unixTime(1));
+    when(file.readAsStringSync()).thenReturn('{"key":"changed"}');
+
+    events.add(FakeFileSystemEvent.modify('/path/to/watched.json'));
+    await expectLater(settings.changed, emits('key'));
+
+    when(file.existsSync()).thenReturn(false);
+
+    events.add(FakeFileSystemEvent.delete('/path/to/watched.json'));
+    await expectLater(settings.removed, emits('key'));
 
     await settings.close();
-    expect(controller.hasListener, isFalse);
+    expect(events.hasListener, isFalse);
   });
 }
