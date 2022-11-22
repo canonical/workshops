@@ -2,9 +2,9 @@ import 'package:command_store/command_store.dart';
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:settings_store/settings_store.dart';
 import 'package:terminal_view/terminal_view.dart';
 
-import '../settings.dart';
 import 'terminal_actions.dart';
 import 'terminal_intents.dart';
 import 'terminal_menu.dart';
@@ -23,7 +23,7 @@ class TerminalPane extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<TerminalModel>();
-    final settings = context.watch<AppSettings>();
+    final settings = context.watch<SettingsStore>();
     return Stack(
       children: [
         TerminalView(
