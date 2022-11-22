@@ -51,15 +51,26 @@ class JSettings {
   List? getList(String key) => getValue(key) as List?;
   Map? getMap(String key) => getValue(key) as Map?;
 
-  Future<void> setValue(String key, Object value) {
+  Future<void> setValue(String key, Object value) async {
     final values = Map.of(_getValues());
+    final oldValue = values[key];
     values[key] = value;
-    return _file.write(values);
+    if (oldValue == null) {
+      _values = values;
+      _added.add(key);
+      return _file.write(values);
+    } else if (!valueEquals(oldValue, value)) {
+      _values = values;
+      _changed.add(key);
+      return _file.write(values);
+    }
   }
 
   Future<void> resetValue(String key) async {
     final values = Map.of(_getValues());
     if (values.remove(key) != null) {
+      _values = values;
+      _removed.add(key);
       return _file.write(values);
     }
   }
