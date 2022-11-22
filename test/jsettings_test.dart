@@ -19,12 +19,6 @@ void main() {
       expect(settings.getValues(), isEmpty);
       expect(settings.hasValue('key'), isFalse);
       expect(settings.getValue('key'), isNull);
-      expect(settings.getBool('key'), isNull);
-      expect(settings.getInt('key'), isNull);
-      expect(settings.getDouble('key'), isNull);
-      expect(settings.getString('key'), isNull);
-      expect(settings.getList('key'), isNull);
-      expect(settings.getMap('key'), isNull);
     }, createFile: (path) {
       expect(path, file.path);
       return file;
@@ -61,26 +55,13 @@ void main() {
       expect(settings.hasValue('s'), isTrue);
       expect(settings.hasValue('l'), isTrue);
       expect(settings.hasValue('m'), isTrue);
-
       expect(settings.getValue('x'), isNull);
-
-      expect(settings.getBool('b'), values['b']);
       expect(settings.getValue('b'), values['b']);
-
       expect(settings.getValue('i'), values['i']);
-      expect(settings.getInt('i'), values['i']);
-
       expect(settings.getValue('d'), values['d']);
-      expect(settings.getDouble('d'), values['d']);
-
       expect(settings.getValue('s'), values['s']);
-      expect(settings.getString('s'), values['s']);
-
       expect(settings.getValue('l'), values['l']);
-      expect(settings.getList('l'), values['l']);
-
       expect(settings.getValue('m'), values['m']);
-      expect(settings.getMap('m'), values['m']);
     }, createFile: (path) {
       expect(path, file.path);
       return file;

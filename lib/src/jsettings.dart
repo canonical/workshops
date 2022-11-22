@@ -44,13 +44,6 @@ class JSettings {
 
   Object? getValue(String key) => _getValues()[key];
 
-  bool? getBool(String key) => getValue(key) as bool?;
-  int? getInt(String key) => getValue(key) as int?;
-  double? getDouble(String key) => getValue(key) as double?;
-  String? getString(String key) => getValue(key) as String?;
-  List? getList(String key) => getValue(key) as List?;
-  Map? getMap(String key) => getValue(key) as Map?;
-
   Future<void> setValue(String key, Object value) async {
     final values = Map.of(_getValues());
     final oldValue = values[key];
