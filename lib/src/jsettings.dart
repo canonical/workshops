@@ -46,7 +46,11 @@ class JSettings {
 
   Object? getValue(String key) => _getValues()[key];
 
-  Future<void> setValue(String key, Object value) async {
+  Future<void> setValue(String key, Object? value) async {
+    if (value == null) {
+      return resetValue(key);
+    }
+
     final values = Map.of(_getValues());
     final oldValue = values[key];
     values[key] = value;

@@ -33,7 +33,7 @@ class SettingsNotifier extends JSettings with ChangeNotifier {
 
 mixin ReadOnlySettings on SettingsNotifier {
   @override
-  Future<void> setValue(String key, Object value) {
+  Future<void> setValue(String key, Object? value) {
     throw UnsupportedError('Read-only');
   }
 
