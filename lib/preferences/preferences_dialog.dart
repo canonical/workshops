@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:title_bar/title_bar.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
@@ -39,17 +40,8 @@ class PreferencesDialog extends StatelessWidget {
           size: MediaQuery.of(context).size,
           child: Column(
             children: [
-              Theme(
-                data: Theme.of(context).copyWith(
-                  appBarTheme: const AppBarTheme(
-                    shape: Border(),
-                    titleSpacing: 24,
-                  ),
-                ),
-                child: YaruTitleBar(
-                  centerTitle: false,
-                  title: Text(l10n.preferencesTitle),
-                ),
+              DialogTitleBar(
+                title: Text(l10n.preferencesTitle),
               ),
               Expanded(
                 child: Padding(

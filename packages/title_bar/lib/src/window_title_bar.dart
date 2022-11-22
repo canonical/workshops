@@ -1,5 +1,3 @@
-library window_title_bar;
-
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:yaru_icons/yaru_icons.dart';
