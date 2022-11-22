@@ -71,7 +71,15 @@ static void my_application_class_init(MyApplicationClass* klass) {
   G_OBJECT_CLASS(klass)->dispose = my_application_dispose;
 }
 
-static void my_application_init(MyApplication* self) {}
+static void my_application_init(MyApplication* self) {
+  g_autofree gchar* exe_path = g_file_read_link("/proc/self/exe", nullptr);
+  g_autofree gchar* exe_dir = g_path_get_dirname(exe_path);
+  g_autofree gchar* data_dir = g_build_filename(exe_dir, "data", nullptr);
+  g_autofree gchar* schema_dir =
+      g_strdup_printf("%s%s%s", g_getenv("GSETTINGS_SCHEMA_DIR"),
+                      G_SEARCHPATH_SEPARATOR_S, data_dir);
+  g_setenv("GSETTINGS_SCHEMA_DIR", schema_dir, TRUE);
+}
 
 MyApplication* my_application_new() {
   return MY_APPLICATION(g_object_new(my_application_get_type(),

@@ -8,20 +8,21 @@ import 'package:settings_store/settings_store.dart';
 import 'logical_key_set_x.dart';
 
 class ShortcutStore with ChangeNotifier {
-  SettingsStore? _settings;
+  factory ShortcutStore(String schemaId) =>
+      ShortcutStore.of(SettingsStore(schemaId));
 
-  void init(SettingsStore settings) {
-    if (_settings != settings) {
-      _settings?.removeListener(notifyListeners);
-      settings.addListener(notifyListeners);
-      _settings = settings;
-    }
+  ShortcutStore.of(this._settings) {
+    _settings.addListener(notifyListeners);
   }
 
-  Set<String> getKeys() => _settings!.getKeys();
+  final SettingsStore _settings;
+
+  Future<void> init() => _settings.init();
+
+  Iterable<String> get keys => _settings.keys;
 
   List<LogicalKeySet>? getShortcuts(String id) {
-    return _settings!.getValue(id)?.toLogicalKeySets();
+    return _settings.get<List<String>>(id)?.toLogicalKeySets();
   }
 
   Future<void> addShortcut(String id, LogicalKeySet shortcut) {
@@ -37,36 +38,26 @@ class ShortcutStore with ChangeNotifier {
   }
 
   Future<void> setShortcuts(String id, List<LogicalKeySet> shortcuts) {
-    return _settings!.setValue(id, shortcuts.toSetting());
+    return _settings.set(id, shortcuts.toStringList());
   }
 
-  Future<void> removeShortcuts(String id) => _settings!.resetValue(id);
+  Future<void> removeShortcuts(String id) => _settings.unset(id);
 
   @override
   void dispose() {
-    _settings?.removeListener(notifyListeners);
+    _settings.removeListener(notifyListeners);
     super.dispose();
   }
 }
 
-extension _ObjectX on Object {
+extension _StringListX on List<String> {
   List<LogicalKeySet> toLogicalKeySets() {
-    late final Iterable<LogicalKeySet?> keys;
-    if (this is List) {
-      keys = (this as List).cast<String>().map(parseAccelKey);
-    } else if (this is String) {
-      keys = [parseAccelKey(this as String)];
-    }
-    return keys.whereNotNull().toList();
+    return map(parseAccelKey).whereNotNull().toList();
   }
 }
 
 extension _LogicalKeySetListX on List<LogicalKeySet> {
-  Object? toSetting() {
-    if (length > 1) {
-      return map(formatAccelKey).whereNotNull().toList();
-    } else {
-      return formatAccelKey(single);
-    }
+  List<String> toStringList() {
+    return map(formatAccelKey).whereNotNull().toList();
   }
 }

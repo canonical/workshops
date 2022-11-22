@@ -106,6 +106,18 @@ class CommandStoreState extends State<CommandStore> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    widget.shortcuts.init();
+  }
+
+  @override
+  void dispose() {
+    widget.shortcuts.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: widget.shortcuts,

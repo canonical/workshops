@@ -9,13 +9,13 @@ const _kFontSize = 'terminal-font-size';
 const _kFontFamily = 'terminal-font-family';
 
 extension TerminalSettings on SettingsStore {
-  double? get fontSize => getValue(_kFontSize) as double?;
+  double? get fontSize => get(_kFontSize);
   set fontSize(double? value) =>
-      value != null ? setValue(_kFontSize, value) : resetValue(_kFontSize);
+      value != null ? set(_kFontSize, value) : unset(_kFontSize);
 
-  String? get fontFamily => getValue(_kFontFamily) as String?;
+  String? get fontFamily => get(_kFontFamily);
   set fontFamily(String? value) =>
-      value != null ? setValue(_kFontFamily, value) : resetValue(_kFontFamily);
+      value != null ? set(_kFontFamily, value) : unset(_kFontFamily);
 
   TerminalThemeData getTheme(String? os) {
     return defaultTheme(os).copyWith(

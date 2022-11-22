@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="com.canonical.workshops" path="/com/canonical/workshops/">
+    <key name="terminal-font-size" type="d">
+      <default>16.0</default>
+      <summary>Terminal: font size</summary>
+    </key>
+    <key name="terminal-font-family" type="s">
+      <default>"Ubuntu Mono"</default>
+      <summary>Terminal: font family</summary>
+    </key>
+  </schema>
+</schemalist>
