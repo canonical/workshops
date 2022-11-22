@@ -11,7 +11,7 @@ class SettingsNotifier extends JSettings with ChangeNotifier {
   StreamSubscription? _removed;
 
   @override
-  Future<void> init({SettingsNotifier? base}) {
+  Future<void> init() {
     return super.init().then((_) {
       _added ??= added.listen((_) => notifyListeners());
       _changed ??= changed.listen((_) => notifyListeners());
