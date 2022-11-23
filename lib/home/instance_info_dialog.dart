@@ -45,6 +45,7 @@ class InstanceInfoDialog extends StatelessWidget {
 
     if (!model.initialized) return const SizedBox.shrink();
     return Dialog(
+      clipBehavior: Clip.antiAlias,
       insetPadding: const EdgeInsets.all(20),
       child: SizedBox.fromSize(
           size: MediaQuery.of(context).size,

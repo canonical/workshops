@@ -35,6 +35,7 @@ class PreferencesDialog extends StatelessWidget {
             Navigator.of(context).pop,
       },
       child: Dialog(
+        clipBehavior: Clip.antiAlias,
         insetPadding: const EdgeInsets.all(20),
         child: SizedBox.fromSize(
           size: MediaQuery.of(context).size,

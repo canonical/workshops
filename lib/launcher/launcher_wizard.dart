@@ -57,7 +57,7 @@ class _LauncherWizardState extends State<LauncherWizard> {
   Widget build(BuildContext context) {
     final remote = context.select<RemoteStore, LxdRemote?>((s) => s.current);
     return Dialog(
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: Clip.antiAlias,
       insetPadding: const EdgeInsets.all(20),
       child: SizedBox.fromSize(
         size: MediaQuery.of(context).size,
