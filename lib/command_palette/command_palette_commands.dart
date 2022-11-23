@@ -15,12 +15,12 @@ class CommandPaletteCommands extends StatelessWidget {
     return CommandScope(
       commands: [
         Command(
-          id: 'command-palette-open',
+          id: 'commandPalette.open',
           label: l10n.openPaletteCommand,
           intent: CommandPaletteOpenIntent(),
         ),
         Command(
-          id: 'command-palette-close',
+          id: 'commandPalette.close',
           label: l10n.closePaletteCommand,
           intent: CommandPaletteCloseIntent(),
         ),

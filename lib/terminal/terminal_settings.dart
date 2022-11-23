@@ -5,8 +5,8 @@ import 'package:terminal_view/terminal_view.dart';
 
 import 'terminal_colors.dart';
 
-const _kFontSize = 'terminal-font-size';
-const _kFontFamily = 'terminal-font-family';
+const _kFontSize = 'terminal.fontSize';
+const _kFontFamily = 'terminal.fontFamily';
 
 extension TerminalSettings on SettingsStore {
   double? get fontSize => getValue(_kFontSize) as double?;
