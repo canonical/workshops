@@ -58,6 +58,8 @@ class InstanceTile extends StatelessWidget {
               leading: OsLogo.asset(name: instance?.imageName, size: 48),
               title: Text(instance?.name ?? ''),
               subtitle: Text(instance?.imageDescription ?? ''),
+              onTap: () =>
+                  Actions.invoke(context, SelectInstanceIntent(instance)),
               trailing: ButtonBar(
                 mainAxisSize: MainAxisSize.min,
                 children: [
