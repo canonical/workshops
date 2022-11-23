@@ -47,10 +47,6 @@ class ShowInstanceInfoAction extends ContextAction<ShowInstanceInfoIntent> {
   ShowInstanceInfoAction();
 
   @override
-  bool isEnabled(ShowInstanceInfoIntent intent) =>
-      intent.instance?.isRunning == true;
-
-  @override
   void invoke(ShowInstanceInfoIntent intent, [BuildContext? context]) async {
     if (context == null || intent.instance == null) return;
 
