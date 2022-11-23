@@ -35,6 +35,7 @@
   "diskUsageLabel": "Disk usage",
   "downloadingInstanceText": "Downloading instance",
   "finalizingFeaturesText": "Finalizing features",
+  "generalLabel": "General",
   "homeTab": "Home",
   "instanceInformationMenuItem": "Instance information",
   "instanceInformationTitle": "Instance information",
