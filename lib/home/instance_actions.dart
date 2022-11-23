@@ -25,6 +25,7 @@ class InstanceActions extends StatelessWidget {
         StartInstanceIntent: StartInstanceAction(instance),
         StopInstanceIntent: StopInstanceAction(instance),
         DeleteInstanceIntent: DeleteInstanceAction(instance),
+        ShowInstanceInfoIntent: ShowInstanceInfoAction(),
       },
       child: child,
     );
@@ -45,10 +46,6 @@ class SelectInstanceAction extends ContextAction<SelectInstanceIntent> {
 
 class ShowInstanceInfoAction extends ContextAction<ShowInstanceInfoIntent> {
   ShowInstanceInfoAction();
-
-  @override
-  bool isEnabled(ShowInstanceInfoIntent intent) =>
-      intent.instance?.isRunning == true;
 
   @override
   void invoke(ShowInstanceInfoIntent intent, [BuildContext? context]) async {
