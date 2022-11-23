@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 extension ThemeDataX on ThemeData {
-  Color titleBarColor({bool active = false}) {
+  Color titleBarColor({bool active = true}) {
     return backgroundColor.darken(active ? 0.04 : 0.01);
   }
 
