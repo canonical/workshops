@@ -20,12 +20,12 @@ class InstanceCommands extends StatelessWidget {
       commands: [
         if (store.instances.value?.isNotEmpty == true) ...[
           Command(
-            id: 'instance-launch',
+            id: 'instance.launch',
             priority: 20,
             label: l10n.launchInstanceCommand,
             children: store.instances.value
                 ?.map((i) => Command(
-                    id: 'instance-launch-$i',
+                    id: 'instance.launch.$i',
                     label: i,
                     intent: VoidCallbackIntent(() {
                       Actions.invoke(
@@ -36,12 +36,12 @@ class InstanceCommands extends StatelessWidget {
                 .toList(),
           ),
           Command(
-            id: 'instance-start',
+            id: 'instance.start',
             priority: 20,
             label: l10n.startInstanceCommand,
             children: store.instances.value
                 ?.map((i) => Command(
-                    id: 'instance-start-$i',
+                    id: 'instance.start.$i',
                     label: i,
                     intent: VoidCallbackIntent(() {
                       Actions.invoke(
@@ -52,12 +52,12 @@ class InstanceCommands extends StatelessWidget {
                 .toList(),
           ),
           Command(
-            id: 'instance-stop',
+            id: 'instance.stop',
             priority: 20,
             label: l10n.stopInstanceCommand,
             children: store.instances.value
                 ?.map((i) => Command(
-                    id: 'instance-stop-$i',
+                    id: 'instance.stop.$i',
                     label: i,
                     intent: VoidCallbackIntent(() {
                       Actions.invoke(
@@ -68,12 +68,12 @@ class InstanceCommands extends StatelessWidget {
                 .toList(),
           ),
           Command(
-            id: 'instance-delete',
+            id: 'instance.delete',
             priority: 20,
             label: l10n.deleteInstanceCommand,
             children: store.instances.value
                 ?.map((i) => Command(
-                    id: 'instance-delete-$i',
+                    id: 'instance.delete.$i',
                     label: i,
                     intent: VoidCallbackIntent(() {
                       Actions.invoke(

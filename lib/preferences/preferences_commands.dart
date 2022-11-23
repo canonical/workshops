@@ -15,7 +15,7 @@ class PreferencesCommands extends StatelessWidget {
     return CommandScope(
       commands: [
         Command(
-          id: 'preferences-open',
+          id: 'preferences.open',
           label: l10n.openPreferencesCommand,
           intent: const OpenPreferencesIntent(),
         ),

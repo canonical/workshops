@@ -1,4 +1,4 @@
 {
-  "terminal-font-size": 16.0,
-  "terminal-font-family": "Ubuntu Mono"
+  "terminal.fontSize": 16.0,
+  "terminal.fontFamily": "Ubuntu Mono"
 }
