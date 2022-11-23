@@ -34,6 +34,15 @@ static void my_application_activate(GApplication* application) {
   gtk_widget_show(GTK_WIDGET(window));
   gtk_widget_show(GTK_WIDGET(view));
   gtk_widget_grab_focus(GTK_WIDGET(view));
+
+  GdkScreen* screen = gtk_window_get_screen(window);
+  if (gdk_screen_is_composited(screen)) {
+    GdkVisual* visual = gdk_screen_get_rgba_visual(screen);
+    if (visual != nullptr) {
+      gtk_widget_set_app_paintable(GTK_WIDGET(window), true);
+      gtk_widget_set_visual(GTK_WIDGET(window), visual);
+    }
+  }
 }
 
 // Implements GApplication::local_command_line.

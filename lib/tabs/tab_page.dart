@@ -36,6 +36,7 @@ class TabPage extends StatelessWidget {
                   child: Focus(
                     autofocus: true,
                     child: Scaffold(
+                      backgroundColor: Colors.transparent,
                       appBar: WindowTitleBar(
                         titleSpacing: 0,
                         centerTitle: false,
