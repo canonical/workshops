@@ -83,6 +83,22 @@ class InstanceCommands extends StatelessWidget {
                     })))
                 .toList(),
           ),
+          Command(
+            id: 'instance.info',
+            priority: 20,
+            label: l10n.instanceInformationCommand,
+            children: store.instances.value
+                ?.map((i) => Command(
+                    id: 'instance.info.$i',
+                    label: i,
+                    intent: VoidCallbackIntent(() {
+                      Actions.invoke(
+                        primaryFocus!.context!,
+                        ShowInstanceInfoIntent(store.getInstance(i)),
+                      );
+                    })))
+                .toList(),
+          ),
         ],
       ],
       child: child,

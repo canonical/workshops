@@ -25,6 +25,7 @@ class InstanceActions extends StatelessWidget {
         StartInstanceIntent: StartInstanceAction(instance),
         StopInstanceIntent: StopInstanceAction(instance),
         DeleteInstanceIntent: DeleteInstanceAction(instance),
+        ShowInstanceInfoIntent: ShowInstanceInfoAction(),
       },
       child: child,
     );
