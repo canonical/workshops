@@ -52,7 +52,7 @@ class InstanceInfoDialog extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DialogTitleBar(
-                title: Text(l10n.networkInformationLabel),
+                title: Text(l10n.instanceInformationTitle),
               ),
               Padding(
                 padding: const EdgeInsets.all(24),
