@@ -14,7 +14,7 @@ class ShortcutView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final store = context.watch<ShortcutStore>();
-    final ids = store.keys.sorted();
+    final ids = store.getKeys().sorted();
 
     return ListView.builder(
       itemCount: ids.length,

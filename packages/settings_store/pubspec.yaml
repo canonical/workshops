@@ -6,10 +6,12 @@ environment:
   flutter: ">=3.0.0"
 
 dependencies:
-  dbus: ^0.7.8
   flutter:
     sdk: flutter
-  gsettings: ^0.2.5
+  jsettings:
+    git:
+      url: https://github.com/ubuntu-flutter-community/jsettings.dart
+      ref: 9a040b93d1c0a48307e2ab0518beb59a9e6aea12
 
 dev_dependencies:
   build_runner: ^2.3.0
