@@ -45,7 +45,7 @@ class PreferencesDialog extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.all(24),
                   child: RoundedContainer(
                     child: YaruMasterDetailPage(
                       length: 1,
@@ -61,7 +61,7 @@ class PreferencesDialog extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.only(left: 24, bottom: 24, right: 24),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

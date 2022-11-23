@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
+
+import 'title_bar_theme.dart';
 
 const _kTitleBarHeight = 46.0;
 
@@ -99,12 +102,10 @@ class _TitleBarLayoutState extends State<_TitleBarLayout> with WindowListener {
       },
       onSecondaryTap: windowManager.popUpWindowMenu,
       child: Theme(
-        data: Theme.of(context).copyWith(
-          appBarTheme: Theme.of(context).appBarTheme.copyWith(
-                shape: Border(
-                  bottom: BorderSide(color: theme.backgroundColor.darken(0.1)),
-                ),
-              ),
+        data: theme.copyWith(
+          appBarTheme: theme.appBarTheme.copyWith(
+            shape: theme.titleBarBorder(),
+          ),
         ),
         child: AppBar(
           leading: widget.icon != null
@@ -117,66 +118,19 @@ class _TitleBarLayoutState extends State<_TitleBarLayout> with WindowListener {
           centerTitle: widget.centerTitle ?? true,
           titleSpacing: widget.titleSpacing,
           toolbarHeight: _kTitleBarHeight,
-          backgroundColor:
-              theme.backgroundColor.darken(_isActive ? 0.04 : 0.01),
+          backgroundColor: theme.titleBarColor(active: _isActive),
           actions: [
             if (_isClosable)
-              _TitleBarButton(
-                icon: const Icon(YaruIcons.window_close),
-                states: {if (_isActive) MaterialState.focused},
-                onPressed: windowManager.close,
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: YaruWindowControl(
+                  type: YaruWindowControlType.close,
+                  onTap: windowManager.close,
+                ),
               ),
           ],
         ),
       ),
     );
-  }
-}
-
-class _TitleBarButton extends StatelessWidget {
-  const _TitleBarButton({
-    required this.icon,
-    required this.states,
-    required this.onPressed,
-  });
-
-  final Widget icon;
-  final Set<MaterialState> states;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.all(8),
-      child: Center(
-        child: IconButton(
-          icon: icon,
-          iconSize: 16,
-          padding: EdgeInsets.zero,
-          visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-          onPressed: onPressed,
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith((_) {
-              if (states.contains(MaterialState.focused)) {
-                return Theme.of(context)
-                    .colorScheme
-                    .onSurface
-                    .withOpacity(0.08);
-              }
-              return null;
-            }),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-extension _ColorX on Color {
-  Color darken(double amount) {
-    final hsl = HSLColor.fromColor(this);
-    return hsl
-        .withLightness((hsl.lightness - amount).clamp(0.0, 1.0))
-        .toColor();
   }
 }

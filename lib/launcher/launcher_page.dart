@@ -50,19 +50,20 @@ class LauncherPage extends StatelessWidget {
                   : null,
               trailing: Hero(
                 tag: '$this',
-                child: YaruCloseButton(
-                  onPressed: context.read<LauncherModel>().cancel,
+                child: YaruWindowControl(
+                  type: YaruWindowControlType.close,
+                  onTap: context.read<LauncherModel>().cancel,
                 ),
               ),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.all(24),
                 child: content,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.only(left: 24, bottom: 24, right: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: actions.separated(const SizedBox(width: 8)).toList(),
