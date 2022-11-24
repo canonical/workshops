@@ -4,8 +4,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_localizations/ubuntu_localizations.dart';
 import 'package:yaru/yaru.dart';
+import 'package:yaru_colors/yaru_colors.dart';
 
 import 'command_palette/command_palette_page.dart';
+import 'settings.dart';
 import 'tabs/tab_page.dart';
 
 class Workshops extends StatelessWidget {
@@ -16,12 +18,22 @@ class Workshops extends StatelessWidget {
     return CommandStore(
       shortcuts: context.watch<ShortcutStore>(),
       child: YaruTheme(builder: (context, yaru, child) {
+        final settings = context.watch<AppSettings>();
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: yaru.theme,
-          darkTheme: yaru.darkTheme,
+          // set explicit dialog background colors to avoid theme change
+          // rendering issues (https://github.com/ubuntu/yaru.dart/issues/222)
+          theme: yaru.theme?.copyWith(
+            dialogTheme: yaru.theme?.dialogTheme
+                .copyWith(backgroundColor: YaruColors.porcelain),
+          ),
+          darkTheme: yaru.darkTheme?.copyWith(
+            dialogTheme: yaru.darkTheme?.dialogTheme
+                .copyWith(backgroundColor: YaruColors.coolGrey),
+          ),
           highContrastTheme: yaruHighContrastLight,
           highContrastDarkTheme: yaruHighContrastDark,
+          themeMode: settings.themeMode,
           localizationsDelegates: const [
             ...AppLocalizations.localizationsDelegates,
             ...GlobalUbuntuLocalizations.delegates,

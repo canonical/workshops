@@ -8,6 +8,7 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
+import 'appearance_view.dart';
 import 'preferences_model.dart';
 import 'shortcut_view.dart';
 
@@ -23,12 +24,34 @@ Future<void> showPreferencesDialog({required BuildContext context}) async {
   );
 }
 
+class PreferencesItem {
+  const PreferencesItem({
+    required this.title,
+    required this.builder,
+  });
+
+  final String title;
+  final Widget Function(BuildContext) builder;
+}
+
 class PreferencesDialog extends StatelessWidget {
   const PreferencesDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+
+    final preferences = [
+      PreferencesItem(
+        title: l10n.appearancePreferences,
+        builder: (_) => const AppearanceView(),
+      ),
+      PreferencesItem(
+        title: l10n.shortcutPreferences,
+        builder: (_) => const ShortcutView(),
+      ),
+    ];
+
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.escape):
@@ -49,13 +72,12 @@ class PreferencesDialog extends StatelessWidget {
                   padding: const EdgeInsets.all(24),
                   child: RoundedContainer(
                     child: YaruMasterDetailPage(
-                      length: 1,
-                      tileBuilder: (context, index, selected) =>
-                          const YaruMasterTile(
-                        title: Text('Shortcuts'),
+                      length: preferences.length,
+                      tileBuilder: (context, index, selected) => YaruMasterTile(
+                        title: Text(preferences[index].title),
                       ),
-                      pageBuilder: (context, index) => const YaruDetailPage(
-                        body: ShortcutView(),
+                      pageBuilder: (context, index) => YaruDetailPage(
+                        body: preferences[index].builder(context),
                       ),
                     ),
                   ),
