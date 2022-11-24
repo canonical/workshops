@@ -29,3 +29,4 @@
 library jsettings;
 
 export 'src/jsettings.dart';
+export 'src/jsettings_x.dart';

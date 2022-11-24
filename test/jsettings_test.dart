@@ -21,6 +21,12 @@ void main() {
       expect(settings.getValues(), isEmpty);
       expect(settings.hasValue('key'), isFalse);
       expect(settings.getValue('key'), isNull);
+      expect(settings.getBool('key'), isNull);
+      expect(settings.getInt('key'), isNull);
+      expect(settings.getDouble('key'), isNull);
+      expect(settings.getString('key'), isNull);
+      expect(settings.getList('key'), isNull);
+      expect(settings.getMap('key'), isNull);
     }, createFile: (path) {
       expect(path, file.path);
       return file;
@@ -65,6 +71,18 @@ void main() {
       expect(settings.getValue('s'), values['s']);
       expect(settings.getValue('l'), values['l']);
       expect(settings.getValue('m'), values['m']);
+      expect(settings.getBool('b'),
+          isA<bool>().having((v) => v, 'bool', values['b']));
+      expect(settings.getInt('i'),
+          isA<int>().having((v) => v, 'int', values['i']));
+      expect(settings.getDouble('d'),
+          isA<double>().having((v) => v, 'double', values['d']));
+      expect(settings.getString('s'),
+          isA<String>().having((v) => v, 'string', values['s']));
+      expect(settings.getList('l'),
+          isA<List>().having((v) => v, 'list', values['l']));
+      expect(settings.getMap('m'),
+          isA<Map>().having((v) => v, 'map', values['m']));
     }, createFile: (path) {
       expect(path, file.path);
       return file;
