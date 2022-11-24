@@ -74,6 +74,29 @@ void main() {
     verify(file.readAsStringSync()).called(1);
   });
 
+  test('read broken formatting', () async {
+    final settings = JSettings('broken.json');
+    expect(settings.path, 'broken.json');
+
+    final file = MockFile('broken.json');
+    when(file.existsSync()).thenReturn(true);
+    when(file.lastModifiedSync()).thenReturn(epoch);
+    when(file.readAsStringSync()).thenReturn('broken');
+
+    await IOOverrides.runZoned(() async {
+      expect(settings.getKeys(), isEmpty);
+      expect(settings.getValues(), isEmpty);
+      expect(settings.hasValue('x'), isFalse);
+      expect(settings.getValue('x'), isNull);
+    }, createFile: (path) {
+      expect(path, file.path);
+      return file;
+    });
+
+    verify(file.existsSync()).called(1);
+    verify(file.readAsStringSync()).called(1);
+  });
+
   test('write non-existent file', () async {
     final settings = JSettings('non-existent.json');
     expect(settings.path, 'non-existent.json');
