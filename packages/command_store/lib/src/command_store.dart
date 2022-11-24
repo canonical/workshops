@@ -4,6 +4,25 @@ import 'package:flutter/widgets.dart';
 import 'command.dart';
 import 'shortcut_store.dart';
 
+/// Schedules the action associated with the given [Intent] to be invoked using
+/// the [Actions] widget that most tightly encloses the [BuildContext] that is
+/// about to gain primary focus.
+///
+/// This is mostly useful for invoking actions from temporary overlay contexts
+/// such as popup menus and command palettes so that the action gets invoked as
+/// soon as the primary focus returns to where it was before the popup opened.
+void scheduleAction<T extends Intent>(T intent) {
+  void invokeAction() {
+    final primaryContext = primaryFocus?.context;
+    if (primaryContext != null) {
+      Actions.maybeInvoke(primaryContext, intent);
+    }
+    FocusManager.instance.removeListener(invokeAction);
+  }
+
+  FocusManager.instance.addListener(invokeAction);
+}
+
 class CommandStore extends StatefulWidget {
   const CommandStore({super.key, required this.child, required this.shortcuts});
 
@@ -78,15 +97,9 @@ class CommandStoreState extends State<CommandStore> {
       _sort();
     });
 
-    void dispatchIntent() {
-      final primaryContext = primaryFocus!.context;
-      if (primaryContext != null && command.intent != null) {
-        Actions.maybeInvoke(primaryContext, command.intent!);
-      }
-      FocusManager.instance.removeListener(dispatchIntent);
+    if (command.intent != null) {
+      scheduleAction(command.intent!);
     }
-
-    FocusManager.instance.addListener(dispatchIntent);
   }
 
   void _sort() {
