@@ -76,7 +76,9 @@ class _LxdService implements LxdService {
 
   @override
   Future<void> init() async {
-    _instances.add(await _client.getInstances());
+    _instances.add(await _client
+        .getInstances()
+        .then((ids) => ids.map((i) => i.name).toList()));
 
     // process ongoing operations to see if instances being started or stopped
     final allIds = await _client.getOperations();
@@ -107,7 +109,7 @@ class _LxdService implements LxdService {
 
   @override
   Future<LxdInstance> getInstance(String name) async {
-    final instance = await _client.getInstance(name);
+    final instance = await _client.getInstance(LxdInstanceId(name));
 
     // check for status override from pending/running operations
     final statusCode = _statuses[name];
@@ -118,7 +120,7 @@ class _LxdService implements LxdService {
 
   @override
   Future<LxdInstanceState> getInstanceState(String name) async {
-    final state = await _client.getInstanceState(name);
+    final state = await _client.getInstanceState(LxdInstanceId(name));
 
     // check for status override from pending/running operations
     final statusCode = _statuses[name];
@@ -136,7 +138,7 @@ class _LxdService implements LxdService {
 
   @override
   Future<LxdOperation> startInstance(String name, {bool force = false}) {
-    return _client.startInstance(name, force: force);
+    return _client.startInstance(LxdInstanceId(name), force: force);
   }
 
   @override
@@ -145,13 +147,14 @@ class _LxdService implements LxdService {
     bool force = false,
     Duration? timeout,
   }) {
-    return _client.restartInstance(name, force: force, timeout: timeout);
+    return _client.restartInstance(LxdInstanceId(name),
+        force: force, timeout: timeout);
   }
 
   @override
   Future<LxdOperation?> initFeature(
       String name, LxdFeatureProvider feature, LxdImage image) async {
-    final instance = await _client.getInstance(name);
+    final instance = await _client.getInstance(LxdInstanceId(name));
     return feature.init(_client, instance, image);
   }
 
@@ -161,8 +164,8 @@ class _LxdService implements LxdService {
     return image.copyWith(
       properties: {
         ...image.properties,
-        'user.uid': await _client.uid(instance, username),
-        'user.gid': await _client.gid(instance, username),
+        'user.uid': await _client.uid(LxdInstanceId(instance), username),
+        'user.gid': await _client.gid(LxdInstanceId(instance), username),
       },
     );
   }
@@ -172,19 +175,20 @@ class _LxdService implements LxdService {
       String name, LxdFeatureProvider feature, LxdImage image) async {
     final dirs = feature.getDirectories(image);
     for (final dir in dirs) {
-      await _client.mkdir(name, dir);
+      await _client.mkdir(LxdInstanceId(name), dir);
     }
 
     final files = feature.getFiles(image);
     for (final file in files.entries) {
-      await _client.pushFile(name, path: file.key, data: file.value);
+      await _client.pushFile(LxdInstanceId(name),
+          path: file.key, data: file.value);
     }
   }
 
   @override
   Future<LxdOperation> stageFeatures(
       String name, List<LxdFeatureProvider> features, LxdImage image) async {
-    final instance = await _client.getInstance(name);
+    final instance = await _client.getInstance(LxdInstanceId(name));
     return _client.updateInstance(
       instance.copyWith(
         config: {
@@ -205,12 +209,13 @@ class _LxdService implements LxdService {
     bool force = false,
     Duration? timeout,
   }) {
-    return _client.stopInstance(name, force: force, timeout: timeout);
+    return _client.stopInstance(LxdInstanceId(name),
+        force: force, timeout: timeout);
   }
 
   @override
   Future<LxdOperation> deleteInstance(String name) {
-    return _client.deleteInstance(name);
+    return _client.deleteInstance(LxdInstanceId(name));
   }
 
   @override
@@ -233,7 +238,7 @@ class _LxdService implements LxdService {
   }) async {
     interval ??= const Duration(seconds: 1);
     var future = Future.doWhile(() async {
-      final state = await _client.getInstanceState(name);
+      final state = await _client.getInstanceState(LxdInstanceId(name));
       if (state.processes > 0) return false;
       return Future.delayed(interval!, () => true);
     });
@@ -245,10 +250,10 @@ class _LxdService implements LxdService {
   }
 
   Future<LxdTerminal> execTerminal(String name) async {
-    final instance = await _client.getInstance(name);
+    final instance = await _client.getInstance(LxdInstanceId(name));
     final user = instance.config['user.name'] ?? 'root';
     final op = await _client.execInstance(
-      instance.name,
+      instance.id,
       command: ['login', '-f', user],
       environment: {'TERM': 'xterm-256color'},
       interactive: true,
@@ -283,7 +288,9 @@ class _LxdService implements LxdService {
   Future<void> cancelOperation(String id) => _client.cancelOperation(id);
 
   Future<void> _updateInstances([LxdEvent? event]) async {
-    final newInstances = await _client.getInstances();
+    final newInstances = await _client
+        .getInstances()
+        .then((ids) => ids.map((id) => id.name).toList());
     final newInstanceSet = Set.of(newInstances);
     final oldInstanceSet = Set.of(instances ?? const <String>[]);
 
