@@ -19,22 +19,22 @@ String resolveLxdSocketPath([String? socketPath]) {
 }
 
 extension LxdClientX on LxdClient {
-  Future<void> mkdir(String instance, String path) async {
-    final op = await execInstance(instance, command: ['mkdir', '-p', path]);
+  Future<void> mkdir(LxdInstanceId id, String path) async {
+    final op = await execInstance(id, command: ['mkdir', '-p', path]);
     await waitOperation(op.id);
   }
 
-  Future<String> uid(String instance, String username) {
-    return _exec(instance, ['id', '-u', username]);
+  Future<String> uid(LxdInstanceId id, String username) {
+    return _exec(id, ['id', '-u', username]);
   }
 
-  Future<String> gid(String instance, String username) {
-    return _exec(instance, ['id', '-g', username]);
+  Future<String> gid(LxdInstanceId id, String username) {
+    return _exec(id, ['id', '-g', username]);
   }
 
-  Future<String> _exec(String instance, List<String> command) async {
+  Future<String> _exec(LxdInstanceId id, List<String> command) async {
     final exec = await execInstance(
-      instance,
+      id,
       command: command,
       interactive: true,
       waitForWebSocket: true,

@@ -18,8 +18,9 @@ import 'package:lxd/src/api/profile.dart' as _i11;
 import 'package:lxd/src/api/project.dart' as _i12;
 import 'package:lxd/src/api/resource.dart' as _i4;
 import 'package:lxd/src/api/storage_pool.dart' as _i13;
-import 'package:lxd/src/enums.dart' as _i17;
-import 'package:lxd/src/lxd_client.dart' as _i15;
+import 'package:lxd/src/client.dart' as _i15;
+import 'package:lxd/src/enums.dart' as _i18;
+import 'package:lxd/src/instance_id.dart' as _i17;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -360,60 +361,87 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
         returnValue: _i14.Future<List<String>>.value(<String>[]),
       ) as _i14.Future<List<String>>);
   @override
-  _i14.Future<_i6.LxdImage> getImage(String? fingerprint) =>
+  _i14.Future<_i6.LxdImage> getImage(
+    String? fingerprint, {
+    String? project,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImage,
           [fingerprint],
+          {#project: project},
         ),
         returnValue: _i14.Future<_i6.LxdImage>.value(_FakeLxdImage_5(
           this,
           Invocation.method(
             #getImage,
             [fingerprint],
+            {#project: project},
           ),
         )),
       ) as _i14.Future<_i6.LxdImage>);
   @override
-  _i14.Future<List<String>> getInstances() => (super.noSuchMethod(
+  _i14.Future<List<_i17.LxdInstanceId>> getInstances({
+    String? project,
+    String? filter,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getInstances,
           [],
+          {
+            #project: project,
+            #filter: filter,
+          },
         ),
-        returnValue: _i14.Future<List<String>>.value(<String>[]),
-      ) as _i14.Future<List<String>>);
+        returnValue:
+            _i14.Future<List<_i17.LxdInstanceId>>.value(<_i17.LxdInstanceId>[]),
+      ) as _i14.Future<List<_i17.LxdInstanceId>>);
   @override
-  _i14.Future<_i7.LxdInstance> getInstance(String? name) => (super.noSuchMethod(
+  _i14.Future<List<_i17.LxdInstanceId>> getAllInstances({String? filter}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAllInstances,
+          [],
+          {#filter: filter},
+        ),
+        returnValue:
+            _i14.Future<List<_i17.LxdInstanceId>>.value(<_i17.LxdInstanceId>[]),
+      ) as _i14.Future<List<_i17.LxdInstanceId>>);
+  @override
+  _i14.Future<_i7.LxdInstance> getInstance(_i17.LxdInstanceId? id) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getInstance,
-          [name],
+          [id],
         ),
         returnValue: _i14.Future<_i7.LxdInstance>.value(_FakeLxdInstance_6(
           this,
           Invocation.method(
             #getInstance,
-            [name],
+            [id],
           ),
         )),
       ) as _i14.Future<_i7.LxdInstance>);
   @override
-  _i14.Future<_i8.LxdInstanceState> getInstanceState(String? name) =>
+  _i14.Future<_i8.LxdInstanceState> getInstanceState(_i17.LxdInstanceId? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getInstanceState,
-          [name],
+          [id],
         ),
         returnValue:
             _i14.Future<_i8.LxdInstanceState>.value(_FakeLxdInstanceState_7(
           this,
           Invocation.method(
             #getInstanceState,
-            [name],
+            [id],
           ),
         )),
       ) as _i14.Future<_i8.LxdInstanceState>);
   @override
   _i14.Future<_i2.LxdOperation> createInstance({
+    String? project,
     String? architecture,
     Map<String, String>? config,
     Map<String, Map<String, String>>? devices,
@@ -433,6 +461,7 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
           #createInstance,
           [],
           {
+            #project: project,
             #architecture: architecture,
             #config: config,
             #devices: devices,
@@ -454,6 +483,7 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
             #createInstance,
             [],
             {
+              #project: project,
               #architecture: architecture,
               #config: config,
               #devices: devices,
@@ -473,27 +503,27 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
       ) as _i14.Future<_i2.LxdOperation>);
   @override
   _i14.Future<_i2.LxdOperation> startInstance(
-    String? name, {
+    _i17.LxdInstanceId? id, {
     bool? force = false,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #startInstance,
-          [name],
+          [id],
           {#force: force},
         ),
         returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #startInstance,
-            [name],
+            [id],
             {#force: force},
           ),
         )),
       ) as _i14.Future<_i2.LxdOperation>);
   @override
   _i14.Future<_i2.LxdOperation> execInstance(
-    String? name, {
+    _i17.LxdInstanceId? id, {
     required List<String>? command,
     String? workingDirectory,
     Map<String, String>? environment,
@@ -508,7 +538,7 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
       (super.noSuchMethod(
         Invocation.method(
           #execInstance,
-          [name],
+          [id],
           {
             #command: command,
             #workingDirectory: workingDirectory,
@@ -526,7 +556,7 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
           this,
           Invocation.method(
             #execInstance,
-            [name],
+            [id],
             {
               #command: command,
               #workingDirectory: workingDirectory,
@@ -559,14 +589,14 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
       ) as _i14.Future<_i2.LxdOperation>);
   @override
   _i14.Future<_i2.LxdOperation> stopInstance(
-    String? name, {
+    _i17.LxdInstanceId? id, {
     bool? force = false,
     Duration? timeout,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #stopInstance,
-          [name],
+          [id],
           {
             #force: force,
             #timeout: timeout,
@@ -576,7 +606,7 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
           this,
           Invocation.method(
             #stopInstance,
-            [name],
+            [id],
             {
               #force: force,
               #timeout: timeout,
@@ -586,14 +616,14 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
       ) as _i14.Future<_i2.LxdOperation>);
   @override
   _i14.Future<_i2.LxdOperation> restartInstance(
-    String? name, {
+    _i17.LxdInstanceId? id, {
     bool? force = false,
     Duration? timeout,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #restartInstance,
-          [name],
+          [id],
           {
             #force: force,
             #timeout: timeout,
@@ -603,7 +633,7 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
           this,
           Invocation.method(
             #restartInstance,
-            [name],
+            [id],
             {
               #force: force,
               #timeout: timeout,
@@ -612,74 +642,64 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
         )),
       ) as _i14.Future<_i2.LxdOperation>);
   @override
-  _i14.Future<_i2.LxdOperation> deleteInstance(String? name) =>
+  _i14.Future<_i2.LxdOperation> deleteInstance(_i17.LxdInstanceId? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteInstance,
-          [name],
+          [id],
         ),
         returnValue: _i14.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #deleteInstance,
-            [name],
+            [id],
           ),
         )),
       ) as _i14.Future<_i2.LxdOperation>);
   @override
   _i14.Future<String> pullFile(
-    String? instance, {
+    _i17.LxdInstanceId? id, {
     required String? path,
-    String? project,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #pullFile,
-          [instance],
-          {
-            #path: path,
-            #project: project,
-          },
+          [id],
+          {#path: path},
         ),
         returnValue: _i14.Future<String>.value(''),
       ) as _i14.Future<String>);
   @override
   _i14.Future<void> deleteFile(
-    String? instance, {
+    _i17.LxdInstanceId? id, {
     required String? path,
-    String? project,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteFile,
-          [instance],
-          {
-            #path: path,
-            #project: project,
-          },
+          [id],
+          {#path: path},
         ),
         returnValue: _i14.Future<void>.value(),
         returnValueForMissingStub: _i14.Future<void>.value(),
       ) as _i14.Future<void>);
   @override
   _i14.Future<void> pushFile(
-    String? instance, {
+    _i17.LxdInstanceId? id, {
     required String? path,
-    String? project,
     String? data,
     int? uid,
     int? gid,
     String? mode,
-    _i17.LxdFileType? type,
-    _i17.LxdWriteMode? write,
+    _i18.LxdFileType? type,
+    _i18.LxdWriteMode? write,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #pushFile,
-          [instance],
+          [id],
           {
             #path: path,
-            #project: project,
             #data: data,
             #uid: uid,
             #gid: gid,
@@ -740,19 +760,25 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
         )),
       ) as _i14.Future<_i9.LxdNetworkState>);
   @override
-  _i14.Future<List<String>> getNetworkAcls() => (super.noSuchMethod(
+  _i14.Future<List<String>> getNetworkAcls({String? project}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getNetworkAcls,
           [],
+          {#project: project},
         ),
         returnValue: _i14.Future<List<String>>.value(<String>[]),
       ) as _i14.Future<List<String>>);
   @override
-  _i14.Future<_i10.LxdNetworkAcl> getNetworkAcl(String? name) =>
+  _i14.Future<_i10.LxdNetworkAcl> getNetworkAcl(
+    String? name, {
+    String? project,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getNetworkAcl,
           [name],
+          {#project: project},
         ),
         returnValue:
             _i14.Future<_i10.LxdNetworkAcl>.value(_FakeLxdNetworkAcl_10(
@@ -760,28 +786,37 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
           Invocation.method(
             #getNetworkAcl,
             [name],
+            {#project: project},
           ),
         )),
       ) as _i14.Future<_i10.LxdNetworkAcl>);
   @override
-  _i14.Future<List<String>> getProfiles() => (super.noSuchMethod(
+  _i14.Future<List<String>> getProfiles({String? project}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getProfiles,
           [],
+          {#project: project},
         ),
         returnValue: _i14.Future<List<String>>.value(<String>[]),
       ) as _i14.Future<List<String>>);
   @override
-  _i14.Future<_i11.LxdProfile> getProfile(String? name) => (super.noSuchMethod(
+  _i14.Future<_i11.LxdProfile> getProfile(
+    String? name, {
+    String? project,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getProfile,
           [name],
+          {#project: project},
         ),
         returnValue: _i14.Future<_i11.LxdProfile>.value(_FakeLxdProfile_11(
           this,
           Invocation.method(
             #getProfile,
             [name],
+            {#project: project},
           ),
         )),
       ) as _i14.Future<_i11.LxdProfile>);
@@ -808,19 +843,25 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
         )),
       ) as _i14.Future<_i12.LxdProject>);
   @override
-  _i14.Future<List<String>> getStoragePools() => (super.noSuchMethod(
+  _i14.Future<List<String>> getStoragePools({String? project}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getStoragePools,
           [],
+          {#project: project},
         ),
         returnValue: _i14.Future<List<String>>.value(<String>[]),
       ) as _i14.Future<List<String>>);
   @override
-  _i14.Future<_i13.LxdStoragePool> getStoragePool(String? name) =>
+  _i14.Future<_i13.LxdStoragePool> getStoragePool(
+    String? name, {
+    String? project,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #getStoragePool,
           [name],
+          {#project: project},
         ),
         returnValue:
             _i14.Future<_i13.LxdStoragePool>.value(_FakeLxdStoragePool_13(
@@ -828,6 +869,7 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
           Invocation.method(
             #getStoragePool,
             [name],
+            {#project: project},
           ),
         )),
       ) as _i14.Future<_i13.LxdStoragePool>);

@@ -47,7 +47,7 @@ gid ${getgid()} $gid
 
     // sudo vs. wheel
     final group =
-        await client.pullFile(instance.name, path: '/etc/group').then((data) {
+        await client.pullFile(instance.id, path: '/etc/group').then((data) {
       return data
           .split('\n')
           .firstWhereOrNull(
@@ -58,7 +58,7 @@ gid ${getgid()} $gid
 
     // useradd
     return client.execInstance(
-      instance.name,
+      instance.id,
       command: [
         'useradd',
         '--create-home',
