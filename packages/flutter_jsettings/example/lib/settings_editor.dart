@@ -2,8 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jsettings/flutter_jsettings.dart';
 
-import 'settings_notifier.dart';
-
 class SettingsEditor extends StatelessWidget {
   const SettingsEditor({
     super.key,

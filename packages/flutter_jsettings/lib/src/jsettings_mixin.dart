@@ -1,6 +1,6 @@
-import 'package:flutter_jsettings/flutter_jsettings.dart';
+import 'jsettings_notifier.dart';
 
-mixin ReadOnlySettings on JSettingsNotifier {
+mixin JSettingsReadOnlyMixin on JSettingsNotifier {
   @override
   Future<void> setValue(String key, Object? value) {
     throw UnsupportedError('Read-only');
@@ -12,7 +12,7 @@ mixin ReadOnlySettings on JSettingsNotifier {
   }
 }
 
-mixin InheritedSettings on JSettingsNotifier {
+mixin JSettingsInheritedMixin on JSettingsNotifier {
   JSettingsNotifier? _base;
 
   @override

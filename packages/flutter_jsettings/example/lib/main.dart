@@ -6,7 +6,6 @@ import 'package:yaru/yaru.dart';
 
 import 'path_provider.dart';
 import 'settings_editor.dart';
-import 'settings_notifier.dart';
 
 void main() {
   registerService(PathProvider.new);
@@ -22,15 +21,15 @@ void main() {
   );
 }
 
-class GlobalSettings extends JSettingsNotifier with ReadOnlySettings {
+class GlobalSettings extends JSettingsNotifier with JSettingsReadOnlyMixin {
   GlobalSettings(super.path);
 }
 
-class UserSettings extends JSettingsNotifier with InheritedSettings {
+class UserSettings extends JSettingsNotifier with JSettingsInheritedMixin {
   UserSettings(super.path);
 }
 
-class WorkspaceSettings extends JSettingsNotifier with InheritedSettings {
+class WorkspaceSettings extends JSettingsNotifier with JSettingsInheritedMixin {
   WorkspaceSettings(super.path);
 }
 
