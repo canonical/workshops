@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -5,7 +6,7 @@ import 'package:jsettings/jsettings.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'mock_file.dart';
+import 'mock_io.dart';
 
 void main() {
   test('read non-existent file', () async {
@@ -114,5 +115,47 @@ void main() {
     verify(file.existsSync()).called(isPositive);
     verifyNever(file.createSync(recursive: true));
     verify(file.writeAsString('{"key1":"value1","key2":"value2"}')).called(1);
+  });
+
+  test('create directory', () async {
+    final settings = JSettings('watched.json');
+
+    final dir = MockDirectory('.');
+    when(dir.existsSync()).thenReturn(false);
+    when(dir.watch()).thenAnswer((_) => const Stream<FileSystemEvent>.empty());
+
+    await IOOverrides.runZoned(() async {
+      await settings.init();
+    }, createDirectory: (path) {
+      expect(path, dir.path);
+      return dir;
+    });
+
+    verify(dir.existsSync()).called(isPositive);
+    verify(dir.createSync(recursive: true)).called(1);
+  });
+
+  test('watch changes', () async {
+    final settings = JSettings('watched.json');
+
+    final controller = StreamController<FileSystemEvent>(sync: true);
+
+    final dir = MockDirectory('.');
+    when(dir.existsSync()).thenReturn(true);
+    when(dir.watch()).thenAnswer((_) => controller.stream);
+
+    await IOOverrides.runZoned(() async {
+      await settings.init();
+      expect(controller.hasListener, isTrue);
+    }, createDirectory: (path) {
+      expect(path, dir.path);
+      return dir;
+    });
+
+    verify(dir.existsSync()).called(isPositive);
+    verifyNever(dir.createSync(recursive: true));
+
+    await settings.close();
+    expect(controller.hasListener, isFalse);
   });
 }

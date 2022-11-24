@@ -5,6 +5,32 @@ import 'package:mockito/mockito.dart';
 
 final epoch = DateTime.fromMicrosecondsSinceEpoch(0);
 
+class MockDirectory extends Mock implements Directory {
+  MockDirectory(this.path);
+
+  @override
+  final String path;
+
+  @override
+  bool existsSync() {
+    return super.noSuchMethod(
+      Invocation.method(#existsSync, []),
+      returnValue: false,
+    ) as bool;
+  }
+
+  @override
+  Stream<FileSystemEvent> watch({
+    int events = FileSystemEvent.all,
+    bool recursive = false,
+  }) {
+    return super.noSuchMethod(
+      Invocation.method(#watch, [events, recursive]),
+      returnValue: const Stream<FileSystemEvent>.empty(),
+    ) as Stream<FileSystemEvent>;
+  }
+}
+
 class MockFile extends Mock implements File {
   MockFile(this.path);
 
