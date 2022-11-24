@@ -22,3 +22,7 @@ coverage/
 *.js.deps
 *.js.map
 
+
+.idea/
+.vscode/
+*.iml
