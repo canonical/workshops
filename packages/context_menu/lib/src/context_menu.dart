@@ -19,8 +19,8 @@ import 'package:flutter/rendering.dart';
 // enum Menu { itemOne, itemTwo, itemThree, itemFour }
 
 const Duration _kMenuDuration = Duration.zero;
-const double _kMenuMaxWidth = 5.0 * _kMenuWidthStep;
-const double _kMenuMinWidth = 2.0 * _kMenuWidthStep;
+const double _kMenuMaxWidth = 6.0 * _kMenuWidthStep;
+const double _kMenuMinWidth = 4.0 * _kMenuWidthStep;
 const double _kMenuVerticalPadding = 8.0;
 const double _kMenuWidthStep = 56.0;
 const double _kMenuScreenPadding = 8.0;
