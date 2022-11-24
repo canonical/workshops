@@ -91,7 +91,10 @@ void main() {
 
     verify(file.existsSync()).called(isPositive);
     verify(file.createSync(recursive: true)).called(1);
-    verify(file.writeAsString('{"key":"value"}')).called(1);
+    verify(file.writeAsString('''
+{
+  "key": "value"
+}''')).called(1);
   });
 
   test('write existing file', () async {
@@ -114,7 +117,11 @@ void main() {
 
     verify(file.existsSync()).called(isPositive);
     verifyNever(file.createSync(recursive: true));
-    verify(file.writeAsString('{"key1":"value1","key2":"value2"}')).called(1);
+    verify(file.writeAsString('''
+{
+  "key1": "value1",
+  "key2": "value2"
+}''')).called(1);
   });
 
   test('create directory', () async {

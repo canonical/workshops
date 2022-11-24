@@ -43,7 +43,7 @@ class JSettingsFile {
     if (!file.existsSync()) {
       file.createSync(recursive: true);
     }
-    final str = jsonEncode(json);
+    final str = const JsonEncoder.withIndent('  ').convert(json);
     return file.writeAsString(str);
   }
 
