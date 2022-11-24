@@ -18,7 +18,6 @@ class Workshops extends StatelessWidget {
     return CommandStore(
       shortcuts: context.watch<ShortcutStore>(),
       child: YaruTheme(builder: (context, yaru, child) {
-        final settings = context.watch<AppSettings>();
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           // set explicit dialog background colors to avoid theme change
@@ -33,7 +32,7 @@ class Workshops extends StatelessWidget {
           ),
           highContrastTheme: yaruHighContrastLight,
           highContrastDarkTheme: yaruHighContrastDark,
-          themeMode: settings.themeMode,
+          themeMode: context.themeMode,
           localizationsDelegates: const [
             ...AppLocalizations.localizationsDelegates,
             ...GlobalUbuntuLocalizations.delegates,
