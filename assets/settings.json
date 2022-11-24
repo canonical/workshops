@@ -1,4 +1,5 @@
 {
+  "app.theme": "system",
   "terminal.fontSize": 16.0,
   "terminal.fontFamily": "Ubuntu Mono"
 }

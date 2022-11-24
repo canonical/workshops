@@ -1,4 +1,5 @@
 {
+  "appearancePreferences": "Appearance",
   "appTitle": "Workshops",
   "architectureLabel": "Architecture",
   "cancelButton": "Cancel",
@@ -90,6 +91,7 @@
   "selectImageTitle": "Select image",
   "selectOsTitle": "Select OS",
   "sentLabel": "Sent",
+  "shortcutPreferences": "Shortcuts",
   "splitTabMenuItem": "Split Tab",
   "splitAutoCommand": "Auto-split horizontally or vertically",
   "splitUpCommand": "Split upward",
@@ -104,6 +106,7 @@
   "stopInstanceMenuItem": "Stop Instance",
   "stoppingInstanceText": "Stopping instance",
   "swapUsageLabel": "Swap usage",
+  "themeLabel": "Theme",
   "typeLabel": "Type",
   "unpackingInstanceText": "Unpacking instance",
   "variantLabel": "Variant",
