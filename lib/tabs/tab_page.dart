@@ -1,3 +1,4 @@
+import 'package:command_store/command_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd_x/lxd_x.dart';
@@ -131,10 +132,8 @@ class _TabBar extends StatelessWidget {
             onPressed: Actions.handler(context, const AddTabIntent()),
           ),
           const SizedBox(width: 2),
-          QuickMenuButton(
-            onSelected: (instance) {
-              Actions.maybeInvoke(context, AddTabIntent(instance));
-            },
+          const QuickMenuButton(
+            onSelected: scheduleAction,
           ),
           const SizedBox(width: kMinInteractiveDimension),
         ],

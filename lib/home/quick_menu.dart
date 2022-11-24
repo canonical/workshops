@@ -7,12 +7,13 @@ import 'package:provider/provider.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 
 import '../preferences/preferences_intents.dart';
+import '../tabs/tab_intents.dart';
 import 'instance_store.dart';
 
 class QuickMenuButton extends StatelessWidget {
   const QuickMenuButton({super.key, this.onSelected});
 
-  final ValueChanged<LxdInstance>? onSelected;
+  final ValueChanged<Intent>? onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class QuickMenuButton extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
           visualDensity: const VisualDensity(horizontal: -4, vertical: -4)),
-      child: PopupMenuButton<dynamic>(
+      child: PopupMenuButton<Intent>(
         icon: const Icon(YaruIcons.pan_down),
         iconSize: 16,
         padding: EdgeInsets.zero,
@@ -38,35 +39,29 @@ class QuickMenuButton extends StatelessWidget {
             ),
           ];
         },
-        onSelected: (value) {
-          if (value is Intent) {
-            Actions.invoke(context, value);
-          } else if (value is LxdInstance) {
-            onSelected?.call(value);
-          }
-        },
+        onSelected: onSelected,
       ),
     );
   }
 }
 
-class _QuickMenuItem extends PopupMenuItem<LxdInstance> {
+class _QuickMenuItem extends PopupMenuItem<Intent> {
   const _QuickMenuItem(this.name) : super(child: null);
 
   final String name;
 
   @override
-  PopupMenuItemState<LxdInstance, _QuickMenuItem> createState() =>
+  PopupMenuItemState<Intent, _QuickMenuItem> createState() =>
       _InstancePopupMenuItemState();
 }
 
 class _InstancePopupMenuItemState
-    extends PopupMenuItemState<LxdInstance, _QuickMenuItem>
+    extends PopupMenuItemState<Intent, _QuickMenuItem>
     with SingleTickerProviderStateMixin {
   LxdInstance? _instance;
 
   @override
-  void handleTap() => Navigator.pop<LxdInstance>(context, _instance);
+  void handleTap() => Navigator.pop<Intent>(context, AddTabIntent(_instance));
 
   @override
   Widget buildChild() {
