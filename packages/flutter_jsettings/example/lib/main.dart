@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jsettings/flutter_jsettings.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
@@ -21,15 +22,15 @@ void main() {
   );
 }
 
-class GlobalSettings extends SettingsNotifier with ReadOnlySettings {
+class GlobalSettings extends JSettingsNotifier with ReadOnlySettings {
   GlobalSettings(super.path);
 }
 
-class UserSettings extends SettingsNotifier with InheritedSettings {
+class UserSettings extends JSettingsNotifier with InheritedSettings {
   UserSettings(super.path);
 }
 
-class WorkspaceSettings extends SettingsNotifier with InheritedSettings {
+class WorkspaceSettings extends JSettingsNotifier with InheritedSettings {
   WorkspaceSettings(super.path);
 }
 
