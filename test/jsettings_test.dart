@@ -211,4 +211,28 @@ void main() {
     await settings.close();
     expect(events.hasListener, isFalse);
   });
+
+  test('emit explicit changes', () async {
+    final settings = JSettings('settings.json');
+
+    final file = MockFile('settings.json');
+    when(file.existsSync()).thenReturn(true);
+    when(file.lastModifiedSync()).thenReturn(unixTime(0));
+    when(file.readAsStringSync()).thenReturn('');
+    when(file.writeAsString(any)).thenAnswer((_) async => file);
+
+    await IOOverrides.runZoned(() async {
+      expect(settings.added, emits('foo'));
+      await settings.setValue('foo', 'bar');
+
+      expect(settings.changed, emits('foo'));
+      await settings.setValue('foo', 'baz');
+
+      expect(settings.removed, emits('foo'));
+      await settings.setValue('foo', null);
+    }, createFile: (path) {
+      expect(path, file.path);
+      return file;
+    });
+  });
 }
