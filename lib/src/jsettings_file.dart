@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
-import 'package:watcher/watcher.dart';
 
 class JSettingsFile {
   JSettingsFile(this.path);
@@ -49,16 +48,16 @@ class JSettingsFile {
   }
 
   Future<void> watch(void Function() onChanged) async {
-    _watcher ??= DirectoryWatcher(p.dirname(path)).events.listen((event) {
+    _watcher ??= Directory(p.dirname(path)).watch().listen((event) {
       if (!p.equals(path, event.path)) {
         return;
       }
       switch (event.type) {
-        case ChangeType.ADD:
-        case ChangeType.REMOVE:
+        case FileSystemEvent.create:
+        case FileSystemEvent.delete:
           onChanged();
           break;
-        case ChangeType.MODIFY:
+        case FileSystemEvent.modify:
           if (_timestamp == null ||
               File(path).lastModifiedSync().isAfter(_timestamp!)) {
             onChanged();
