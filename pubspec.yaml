@@ -67,9 +67,7 @@ dependencies:
     path: packages/title_bar
   ubuntu_localizations: ^0.0.2
   ubuntu_logger: ^0.0.1
-  ubuntu_service:
-    git:
-      url: https://github.com/ubuntu-flutter-community/ubuntu_service.git
+  ubuntu_service: ^0.2.0
   ubuntu_widgets:
     git:
       url: https://github.com/canonical/ubuntu-flutter-plugins.git
