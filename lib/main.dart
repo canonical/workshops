@@ -51,15 +51,17 @@ Future<void> main() async {
           create: (_) => DefaultSettings(path.getBundleFile('settings.json')),
         ),
         ChangeNotifierProxyProvider<DefaultSettings, AppSettings>(
-          create: (_) => AppSettings(path.getConfigFile('settings.json')),
-          update: (_, base, settings) => settings!..init(base: base),
+          create: (_) =>
+              AppSettings(path.getConfigFile('settings.json'))..init(),
+          update: (_, base, settings) => settings!..inherit(base),
         ),
         ChangeNotifierProvider(
           create: (_) => DefaultShortcuts(path.getBundleFile('shortcuts.json')),
         ),
         ChangeNotifierProxyProvider<DefaultShortcuts, ShortcutSettings>(
-          create: (_) => ShortcutSettings(path.getConfigFile('shortcuts.json')),
-          update: (_, base, settings) => settings!..init(base: base),
+          create: (_) =>
+              ShortcutSettings(path.getConfigFile('shortcuts.json'))..init(),
+          update: (_, base, settings) => settings!..inherit(base),
         ),
         ChangeNotifierProxyProvider<ShortcutSettings, ShortcutStore>(
           create: (_) => ShortcutStore(),

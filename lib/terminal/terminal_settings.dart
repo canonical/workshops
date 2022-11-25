@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:settings_store/settings_store.dart';
+import 'package:jsettings/jsettings.dart';
 import 'package:terminal_view/terminal_view.dart';
 
 import 'terminal_colors.dart';
@@ -8,12 +8,12 @@ import 'terminal_colors.dart';
 const _kFontSize = 'terminal.fontSize';
 const _kFontFamily = 'terminal.fontFamily';
 
-extension TerminalSettings on SettingsStore {
-  double? get fontSize => getValue(_kFontSize) as double?;
+extension TerminalSettings on JSettings {
+  double? get fontSize => getDouble(_kFontSize);
   set fontSize(double? value) =>
       value != null ? setValue(_kFontSize, value) : resetValue(_kFontSize);
 
-  String? get fontFamily => getValue(_kFontFamily) as String?;
+  String? get fontFamily => getString(_kFontFamily);
   set fontFamily(String? value) =>
       value != null ? setValue(_kFontFamily, value) : resetValue(_kFontFamily);
 

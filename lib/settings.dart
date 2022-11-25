@@ -1,25 +1,25 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_jsettings/flutter_jsettings.dart';
 import 'package:provider/provider.dart';
-import 'package:settings_store/settings_store.dart';
 
-class DefaultSettings extends SettingsStore with ReadOnlySettings {
+class DefaultSettings extends JSettingsNotifier with JSettingsReadOnlyMixin {
   DefaultSettings(super.path);
 }
 
-class AppSettings extends SettingsStore with InheritedSettings {
+class AppSettings extends JSettingsNotifier with JSettingsInheritedMixin {
   AppSettings(super.path);
 }
 
-class DefaultShortcuts extends SettingsStore with ReadOnlySettings {
+class DefaultShortcuts extends JSettingsNotifier with JSettingsReadOnlyMixin {
   DefaultShortcuts(super.path);
 }
 
-class ShortcutSettings extends SettingsStore with InheritedSettings {
+class ShortcutSettings extends JSettingsNotifier with JSettingsInheritedMixin {
   ShortcutSettings(super.path);
 }
 
-extension ThemeSettings on SettingsStore {
+extension ThemeSettings on JSettings {
   ThemeMode? get themeMode {
     final theme = (getValue('app.theme') as String?)?.toLowerCase();
     return ThemeMode.values.firstWhereOrNull((mode) => mode.name == theme);

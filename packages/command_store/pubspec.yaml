@@ -11,8 +11,7 @@ dependencies:
   collection: ^1.16.0
   flutter:
     sdk: flutter
-  settings_store:
-    path: ../settings_store
+  flutter_jsettings: ^0.1.0
 
 dev_dependencies:
   build_runner: ^2.3.0
