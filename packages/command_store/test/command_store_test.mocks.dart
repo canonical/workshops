@@ -8,8 +8,8 @@ import 'dart:ui' as _i6;
 
 import 'package:command_store/src/shortcut_store.dart' as _i2;
 import 'package:flutter/widgets.dart' as _i4;
+import 'package:flutter_jsettings/flutter_jsettings.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:settings_store/settings_store.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -36,7 +36,7 @@ class MockShortcutStore extends _i1.Mock implements _i2.ShortcutStore {
         returnValue: false,
       ) as bool);
   @override
-  void init(_i3.SettingsStore? settings) => super.noSuchMethod(
+  void init(_i3.JSettingsNotifier? settings) => super.noSuchMethod(
         Invocation.method(
           #init,
           [settings],
