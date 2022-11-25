@@ -58,8 +58,8 @@ class HomePage extends StatelessWidget {
                 child:
                     ChangeNotifierProxyProvider<GlobalSettings, UserSettings>(
                   create: (_) =>
-                      UserSettings(path.getConfigFile('user$i.json')),
-                  update: (_, global, user) => user!..init(base: global),
+                      UserSettings(path.getConfigFile('user$i.json'))..init(),
+                  update: (_, global, user) => user!..inherit(global),
                   builder: (context, child) => Column(
                     children: [
                       Expanded(
@@ -72,9 +72,10 @@ class HomePage extends StatelessWidget {
                         child: ChangeNotifierProxyProvider<UserSettings,
                             WorkspaceSettings>(
                           create: (_) => WorkspaceSettings(
-                              path.getConfigFile('user$i/workspace$i.json')),
+                              path.getConfigFile('user$i/workspace$i.json'))
+                            ..init(),
                           update: (_, user, workspace) =>
-                              workspace!..init(base: user),
+                              workspace!..inherit(user),
                           builder: (context, child) => SettingsEditor(
                             title: Text('Workspace $i'),
                             settings: context.watch<WorkspaceSettings>(),

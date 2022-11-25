@@ -15,6 +15,13 @@ mixin JSettingsReadOnlyMixin on JSettingsNotifier {
 mixin JSettingsInheritedMixin on JSettingsNotifier {
   JSettingsNotifier? _base;
 
+  void inherit(JSettingsNotifier? base) {
+    if (_base == base) return;
+    _base?.removeListener(notifyListeners);
+    base?.addListener(notifyListeners);
+    _base = base;
+  }
+
   @override
   Set<String> getKeys() => Set.of({...super.getKeys(), ...?_base?.getKeys()});
 
@@ -23,16 +30,6 @@ mixin JSettingsInheritedMixin on JSettingsNotifier {
 
   @override
   Object? getValue(String key) => super.getValue(key) ?? _base?.getValue(key);
-
-  @override
-  Future<void> init({JSettingsNotifier? base}) {
-    if (_base != base) {
-      _base?.removeListener(notifyListeners);
-      base?.addListener(notifyListeners);
-      _base = base;
-    }
-    return super.init();
-  }
 
   @override
   Future<void> dispose() {
