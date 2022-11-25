@@ -6,8 +6,7 @@ part of 'index.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SimpleStream _$$_SimpleStreamFromJson(Map<String, dynamic> json) =>
-    _$_SimpleStream(
+SimpleStream _$SimpleStreamFromJson(Map<String, dynamic> json) => SimpleStream(
       format: json['format'] as String,
       index: (json['index'] as Map<String, dynamic>).map(
         (k, e) =>
@@ -16,15 +15,15 @@ _$_SimpleStream _$$_SimpleStreamFromJson(Map<String, dynamic> json) =>
       updated: const DateTimeConverter().fromJson(json['updated'] as String?),
     );
 
-Map<String, dynamic> _$$_SimpleStreamToJson(_$_SimpleStream instance) =>
+Map<String, dynamic> _$SimpleStreamToJson(SimpleStream instance) =>
     <String, dynamic>{
       'format': instance.format,
       'index': instance.index.map((k, e) => MapEntry(k, e.toJson())),
       'updated': const DateTimeConverter().toJson(instance.updated),
     };
 
-_$_SimpleStreamIndex _$$_SimpleStreamIndexFromJson(Map<String, dynamic> json) =>
-    _$_SimpleStreamIndex(
+SimpleStreamIndex _$SimpleStreamIndexFromJson(Map<String, dynamic> json) =>
+    SimpleStreamIndex(
       datatype: json['datatype'] as String,
       format: json['format'] as String?,
       path: json['path'] as String,
@@ -33,8 +32,7 @@ _$_SimpleStreamIndex _$$_SimpleStreamIndexFromJson(Map<String, dynamic> json) =>
       updated: const DateTimeConverter().fromJson(json['updated'] as String?),
     );
 
-Map<String, dynamic> _$$_SimpleStreamIndexToJson(
-        _$_SimpleStreamIndex instance) =>
+Map<String, dynamic> _$SimpleStreamIndexToJson(SimpleStreamIndex instance) =>
     <String, dynamic>{
       'datatype': instance.datatype,
       'format': instance.format,
