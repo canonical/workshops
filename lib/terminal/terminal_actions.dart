@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:settings_store/settings_store.dart';
+import 'package:jsettings/jsettings.dart';
 
 import 'terminal_intents.dart';
 import 'terminal_settings.dart';
@@ -53,7 +53,7 @@ class MoveFocusAction extends DirectionalFocusAction {}
 class ZoomAction extends Action<ZoomIntent> {
   ZoomAction(this.settings);
 
-  final SettingsStore settings;
+  final JSettings settings;
 
   @override
   Future<void> invoke(ZoomIntent intent) async {

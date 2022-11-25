@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:accel_key/accel_key.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
-import 'package:settings_store/settings_store.dart';
+import 'package:flutter_jsettings/flutter_jsettings.dart';
 
 import 'logical_key_set_x.dart';
 
 class ShortcutStore with ChangeNotifier {
-  SettingsStore? _settings;
+  JSettingsNotifier? _settings;
 
-  void init(SettingsStore settings) {
+  void init(JSettingsNotifier settings) {
     if (_settings != settings) {
       _settings?.removeListener(notifyListeners);
       settings.addListener(notifyListeners);
