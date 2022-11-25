@@ -33,7 +33,12 @@ class RemoteImageFilter extends SafeChangeNotifier {
       _selectedVariant ?? _defaultVariant ?? _availableVariants?.firstOrNull;
   String? get _defaultVariant =>
       _availableVariants?.contains('default') == true ? 'default' : null;
-  LxdImageType? get selectedType => _selectedType ?? LxdImageType.container;
+  LxdImageType? get _defaultType =>
+      _availableTypes?.contains(LxdImageType.container) == true
+          ? LxdImageType.container
+          : null;
+  LxdImageType? get selectedType =>
+      _selectedType ?? _defaultType ?? _availableTypes?.firstOrNull;
 
   void init(List<LxdImage> images) {
     _allImages = images;
