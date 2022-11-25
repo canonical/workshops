@@ -6,7 +6,7 @@ import 'package:lxd_service/lxd_service.dart';
 import 'package:meta/meta.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
-typedef InstanceList = AsyncValue<List<String>>;
+typedef InstanceList = AsyncValue<List<LxdInstanceId>>;
 
 class InstanceStore extends SafeChangeNotifier {
   InstanceStore(this._service);
@@ -14,11 +14,11 @@ class InstanceStore extends SafeChangeNotifier {
   final LxdService _service;
   List<StreamSubscription>? _subs;
   var _instances = const InstanceList.data([]);
-  final _values = <String, LxdInstance>{};
+  final _values = <LxdInstanceId, LxdInstance>{};
 
   InstanceList get instances => _instances;
 
-  LxdInstance? getInstance(String instance) => _values[instance];
+  LxdInstance? getInstance(LxdInstanceId id) => _values[id];
 
   @protected
   set instances(InstanceList instances) {
@@ -33,7 +33,6 @@ class InstanceStore extends SafeChangeNotifier {
       _service.instanceUpdated.listen(_update),
       _service.instanceRemoved.listen(_remove),
       _service.instanceStream
-          .map((ids) => ids.map((id) => id.name).toList())
           .listen((value) => instances = InstanceList.data(value)),
     ];
 
@@ -42,20 +41,20 @@ class InstanceStore extends SafeChangeNotifier {
     instances = await InstanceList.guard(() async {
       final ids = _service.instances ?? [];
       await Future.wait(ids.map(_update));
-      return ids.map((id) => id.name).toList();
+      return ids;
     });
   }
 
   Future<void> _update(LxdInstanceId id) async {
     final value = await _service.getInstance(id);
-    if (value != _values[id.name]) {
-      _values[id.name] = value;
+    if (value != _values[id]) {
+      _values[id] = value;
       notifyListeners();
     }
   }
 
   Future<void> _remove(LxdInstanceId id) async {
-    if (_values.remove(id.name) != null) {
+    if (_values.remove(id) != null) {
       notifyListeners();
     }
   }
