@@ -31,7 +31,7 @@ class QuickMenuButton extends StatelessWidget {
           final store = context.read<InstanceStore>();
           return [
             for (final id in store.instances.value ?? <LxdInstanceId>[])
-              _QuickMenuItem(id.name),
+              _QuickMenuItem(id),
             const PopupMenuDivider(),
             PopupMenuItem(
               value: const OpenPreferencesIntent(),
@@ -46,9 +46,9 @@ class QuickMenuButton extends StatelessWidget {
 }
 
 class _QuickMenuItem extends PopupMenuItem<Intent> {
-  const _QuickMenuItem(this.name) : super(child: null);
+  const _QuickMenuItem(this.id) : super(child: null);
 
-  final String name;
+  final LxdInstanceId id;
 
   @override
   PopupMenuItemState<Intent, _QuickMenuItem> createState() =>
@@ -66,7 +66,7 @@ class _InstancePopupMenuItemState
   @override
   Widget buildChild() {
     _instance = context.select<InstanceStore, LxdInstance?>(
-        (store) => store.getInstance(LxdInstanceId(widget.name)));
+        (store) => store.getInstance(widget.id));
 
     return Row(
       children: [
@@ -77,7 +77,7 @@ class _InstancePopupMenuItemState
         const SizedBox(width: 8),
         Expanded(
           child: Text(
-            widget.name,
+            widget.id.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

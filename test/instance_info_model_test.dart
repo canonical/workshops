@@ -23,7 +23,7 @@ void main() {
       when(service.getInstanceState(instanceId))
           .thenAnswer((_) async => instanceState);
       final model = InstanceInfoModel(
-        instanceName: instanceId.name,
+        id: instanceId,
         service: service,
         updateInterval: updateInterval,
       );

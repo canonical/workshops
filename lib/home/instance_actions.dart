@@ -12,14 +12,14 @@ import 'instance_info_dialog.dart';
 import 'instance_intents.dart';
 
 class InstanceActions extends StatelessWidget {
-  const InstanceActions({super.key, this.name, required this.child});
+  const InstanceActions({super.key, this.id, required this.child});
 
   final Widget child;
-  final String? name;
+  final LxdInstanceId? id;
 
   @override
   Widget build(BuildContext context) {
-    final instance = context.selectInstance(name ?? '');
+    final instance = id != null ? context.selectInstance(id!) : null;
     return Actions(
       actions: {
         StartInstanceIntent: StartInstanceAction(instance),
@@ -51,8 +51,7 @@ class ShowInstanceInfoAction extends ContextAction<ShowInstanceInfoIntent> {
   void invoke(ShowInstanceInfoIntent intent, [BuildContext? context]) async {
     if (context == null || intent.instance == null) return;
 
-    await showInstanceInfoDialog(
-        context: context, instanceName: intent.instance!.name);
+    await showInstanceInfoDialog(context: context, id: intent.instance!.id);
   }
 }
 
