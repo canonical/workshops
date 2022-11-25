@@ -6,8 +6,8 @@ part of 'products.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SimpleProducts _$$_SimpleProductsFromJson(Map<String, dynamic> json) =>
-    _$_SimpleProducts(
+SimpleProducts _$SimpleProductsFromJson(Map<String, dynamic> json) =>
+    SimpleProducts(
       contentId: json['content_id'] as String?,
       datatype: json['datatype'] as String?,
       format: json['format'] as String?,
@@ -19,7 +19,7 @@ _$_SimpleProducts _$$_SimpleProductsFromJson(Map<String, dynamic> json) =>
       updated: const DateTimeConverter().fromJson(json['updated'] as String?),
     );
 
-Map<String, dynamic> _$$_SimpleProductsToJson(_$_SimpleProducts instance) =>
+Map<String, dynamic> _$SimpleProductsToJson(SimpleProducts instance) =>
     <String, dynamic>{
       'content_id': instance.contentId,
       'datatype': instance.datatype,
@@ -29,8 +29,8 @@ Map<String, dynamic> _$$_SimpleProductsToJson(_$_SimpleProducts instance) =>
       'updated': const DateTimeConverter().toJson(instance.updated),
     };
 
-_$_SimpleProduct _$$_SimpleProductFromJson(Map<String, dynamic> json) =>
-    _$_SimpleProduct(
+SimpleProduct _$SimpleProductFromJson(Map<String, dynamic> json) =>
+    SimpleProduct(
       aliases: const AliasConverter().fromJson(json['aliases'] as String?),
       arch: json['arch'] as String,
       os: json['os'] as String?,
@@ -48,7 +48,7 @@ _$_SimpleProduct _$$_SimpleProductFromJson(Map<String, dynamic> json) =>
       ),
     );
 
-Map<String, dynamic> _$$_SimpleProductToJson(_$_SimpleProduct instance) =>
+Map<String, dynamic> _$SimpleProductToJson(SimpleProduct instance) =>
     <String, dynamic>{
       'aliases': const AliasConverter().toJson(instance.aliases),
       'arch': instance.arch,
@@ -63,8 +63,8 @@ Map<String, dynamic> _$$_SimpleProductToJson(_$_SimpleProduct instance) =>
       'versions': instance.versions.map((k, e) => MapEntry(k, e.toJson())),
     };
 
-_$_SimpleVersion _$$_SimpleVersionFromJson(Map<String, dynamic> json) =>
-    _$_SimpleVersion(
+SimpleVersion _$SimpleVersionFromJson(Map<String, dynamic> json) =>
+    SimpleVersion(
       items: (json['items'] as Map<String, dynamic>?)?.map(
             (k, e) => MapEntry(
                 k,
@@ -76,7 +76,7 @@ _$_SimpleVersion _$$_SimpleVersionFromJson(Map<String, dynamic> json) =>
       pubname: json['pubname'] as String?,
     );
 
-Map<String, dynamic> _$$_SimpleVersionToJson(_$_SimpleVersion instance) =>
+Map<String, dynamic> _$SimpleVersionToJson(SimpleVersion instance) =>
     <String, dynamic>{
       'items': instance.items
           .map((k, e) => MapEntry(k, const SimpleItemConverter().toJson(e))),
@@ -84,8 +84,8 @@ Map<String, dynamic> _$$_SimpleVersionToJson(_$_SimpleVersion instance) =>
       'pubname': instance.pubname,
     };
 
-_$SimpleDownload _$$SimpleDownloadFromJson(Map<String, dynamic> json) =>
-    _$SimpleDownload(
+SimpleDownload _$SimpleDownloadFromJson(Map<String, dynamic> json) =>
+    SimpleDownload(
       combinedDisk1ImgSha256: json['combined_disk1-img_sha256'] as String?,
       combinedDiskKvmImgSha256: json['combined_disk-kvm-img_sha256'] as String?,
       combinedUefi1ImgSha256: json['combined_uefi1-img_sha256'] as String?,
@@ -98,10 +98,9 @@ _$SimpleDownload _$$SimpleDownloadFromJson(Map<String, dynamic> json) =>
       path: json['path'] as String,
       sha256: json['sha256'] as String?,
       size: json['size'] as int,
-      $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SimpleDownloadToJson(_$SimpleDownload instance) =>
+Map<String, dynamic> _$SimpleDownloadToJson(SimpleDownload instance) =>
     <String, dynamic>{
       'combined_disk1-img_sha256': instance.combinedDisk1ImgSha256,
       'combined_disk-kvm-img_sha256': instance.combinedDiskKvmImgSha256,
@@ -115,22 +114,18 @@ Map<String, dynamic> _$$SimpleDownloadToJson(_$SimpleDownload instance) =>
       'path': instance.path,
       'sha256': instance.sha256,
       'size': instance.size,
-      'runtimeType': instance.$type,
     };
 
-_$SimpleId _$$SimpleIdFromJson(Map<String, dynamic> json) => _$SimpleId(
+SimpleId _$SimpleIdFromJson(Map<String, dynamic> json) => SimpleId(
       crsn: json['crsn'] as String?,
       id: json['id'] as String?,
       rootStore: json['root_store'] as String?,
       virt: json['virt'] as String?,
-      $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SimpleIdToJson(_$SimpleId instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SimpleIdToJson(SimpleId instance) => <String, dynamic>{
       'crsn': instance.crsn,
       'id': instance.id,
       'root_store': instance.rootStore,
       'virt': instance.virt,
-      'runtimeType': instance.$type,
     };
