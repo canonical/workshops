@@ -38,8 +38,8 @@ void main() {
     verify(client.getOperations()).called(1);
     verify(client.getOperation('op')).called(1);
 
-    expect(service.instances, ['foo']);
-    expect(service.instanceStream, emits(['foo']));
+    expect(service.instances, [fooId]);
+    expect(service.instanceStream, emits([fooId]));
 
     expect(service.instanceAdded, neverEmits(anything));
     expect(service.instanceRemoved, neverEmits(anything));
@@ -163,12 +163,12 @@ void main() {
       timestamp: DateTime.now(),
     ));
 
-    await expectLater(service.instanceAdded, emits('bar'));
+    await expectLater(service.instanceAdded, emits(barId));
     expect(service.instanceRemoved, neverEmits(anything));
     expect(service.instanceUpdated, neverEmits(anything));
 
-    expect(service.instances, ['foo', 'bar']);
-    expect(service.instanceStream, emits(['foo', 'bar']));
+    expect(service.instances, [fooId, barId]);
+    expect(service.instanceStream, emits([fooId, barId]));
 
     await service.dispose();
   });
@@ -193,11 +193,11 @@ void main() {
     ));
 
     expect(service.instanceAdded, neverEmits(anything));
-    await expectLater(service.instanceRemoved, emits('foo'));
+    await expectLater(service.instanceRemoved, emits(fooId));
     expect(service.instanceUpdated, neverEmits(anything));
 
-    expect(service.instances, ['bar']);
-    expect(service.instanceStream, emits(['bar']));
+    expect(service.instances, [barId]);
+    expect(service.instanceStream, emits([barId]));
 
     await service.dispose();
   });
@@ -221,10 +221,10 @@ void main() {
 
     expect(service.instanceAdded, neverEmits(anything));
     expect(service.instanceRemoved, neverEmits(anything));
-    await expectLater(service.instanceUpdated, emits('bar'));
+    await expectLater(service.instanceUpdated, emits(barId));
 
-    expect(service.instances, ['foo', 'bar', 'baz']);
-    expect(service.instanceStream, emits(['foo', 'bar', 'baz']));
+    expect(service.instances, [fooId, barId, bazId]);
+    expect(service.instanceStream, emits([fooId, barId, bazId]));
 
     await service.dispose();
   });
@@ -279,7 +279,7 @@ void main() {
       timestamp: DateTime.now(),
     ));
 
-    await expectLater(service.instanceUpdated, emits('foo'));
+    await expectLater(service.instanceUpdated, emits(fooId));
 
     expect(await service.getInstance(fooId),
         foo.copyWith(statusCode: LxdStatusCode.starting));

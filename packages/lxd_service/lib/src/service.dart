@@ -19,12 +19,12 @@ abstract class LxdService {
   Future<void> init();
   Future<void> dispose();
 
-  List<String>? get instances;
-  Stream<List<String>> get instanceStream;
+  List<LxdInstanceId>? get instances;
+  Stream<List<LxdInstanceId>> get instanceStream;
 
-  Stream<String> get instanceAdded;
-  Stream<String> get instanceRemoved;
-  Stream<String> get instanceUpdated;
+  Stream<LxdInstanceId> get instanceAdded;
+  Stream<LxdInstanceId> get instanceRemoved;
+  Stream<LxdInstanceId> get instanceUpdated;
 
   Future<LxdInstance> getInstance(LxdInstanceId id);
   Future<LxdInstanceState> getInstanceState(LxdInstanceId id);
@@ -61,24 +61,22 @@ class _LxdService implements LxdService {
 
   final LxdClient _client;
   StreamSubscription? _events;
-  final _instances = BehaviorSubject<List<String>>();
-  final _added = StreamController<String>.broadcast();
-  final _removed = StreamController<String>.broadcast();
-  final _updated = StreamController<String>.broadcast();
-  final _statuses = <String, int>{};
+  final _instances = BehaviorSubject<List<LxdInstanceId>>();
+  final _added = StreamController<LxdInstanceId>.broadcast();
+  final _removed = StreamController<LxdInstanceId>.broadcast();
+  final _updated = StreamController<LxdInstanceId>.broadcast();
+  final _statuses = <LxdInstanceId, int>{};
 
-  List<String>? get instances => _instances.valueOrNull;
-  Stream<List<String>> get instanceStream => _instances.stream;
+  List<LxdInstanceId>? get instances => _instances.valueOrNull;
+  Stream<List<LxdInstanceId>> get instanceStream => _instances.stream;
 
-  Stream<String> get instanceAdded => _added.stream;
-  Stream<String> get instanceRemoved => _removed.stream;
-  Stream<String> get instanceUpdated => _updated.stream;
+  Stream<LxdInstanceId> get instanceAdded => _added.stream;
+  Stream<LxdInstanceId> get instanceRemoved => _removed.stream;
+  Stream<LxdInstanceId> get instanceUpdated => _updated.stream;
 
   @override
   Future<void> init() async {
-    _instances.add(await _client
-        .getInstances()
-        .then((ids) => ids.map((i) => i.name).toList()));
+    _instances.add(await _client.getInstances());
 
     // process ongoing operations to see if instances being started or stopped
     final allIds = await _client.getOperations();
@@ -112,7 +110,7 @@ class _LxdService implements LxdService {
     final instance = await _client.getInstance(id);
 
     // check for status override from pending/running operations
-    final statusCode = _statuses[id.name];
+    final statusCode = _statuses[id];
     return statusCode != null
         ? instance.copyWith(statusCode: statusCode)
         : instance;
@@ -123,7 +121,7 @@ class _LxdService implements LxdService {
     final state = await _client.getInstanceState(id);
 
     // check for status override from pending/running operations
-    final statusCode = _statuses[id.name];
+    final statusCode = _statuses[id];
     return statusCode != null ? state.copyWith(statusCode: statusCode) : state;
   }
 
@@ -222,7 +220,7 @@ class _LxdService implements LxdService {
         .getEvents()
         .where((event) => event.isOperation)
         .map((event) => LxdOperation.fromJson(event.metadata!))
-        .where((op) => op.instances?.contains(id.name) == true);
+        .where((op) => op.instances?.contains(id) == true);
   }
 
   /// Waits for the VM agent to be ready, which is a pre-requisite for executing
@@ -286,11 +284,9 @@ class _LxdService implements LxdService {
   Future<void> cancelOperation(String id) => _client.cancelOperation(id);
 
   Future<void> _updateInstances([LxdEvent? event]) async {
-    final newInstances = await _client
-        .getInstances()
-        .then((ids) => ids.map((id) => id.name).toList());
+    final newInstances = await _client.getInstances();
     final newInstanceSet = Set.of(newInstances);
-    final oldInstanceSet = Set.of(instances ?? const <String>[]);
+    final oldInstanceSet = Set.of(instances ?? const <LxdInstanceId>[]);
 
     final added = newInstanceSet.difference(oldInstanceSet);
     for (final instance in added) {
@@ -307,11 +303,10 @@ class _LxdService implements LxdService {
       _handleOperation(operation);
       final updated = operation.instances ?? [];
       for (final instance in updated) {
-        final name = instance.split('/').last;
-        if (!added.contains(name) &&
-            !removed.contains(name) &&
-            oldInstanceSet.contains(name)) {
-          _updated.add(name);
+        if (!added.contains(instance) &&
+            !removed.contains(instance) &&
+            oldInstanceSet.contains(instance)) {
+          _updated.add(instance);
         }
       }
     }

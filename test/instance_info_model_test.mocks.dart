@@ -82,25 +82,25 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
   }
 
   @override
-  _i4.Stream<List<String>> get instanceStream => (super.noSuchMethod(
+  _i4.Stream<List<_i2.LxdInstanceId>> get instanceStream => (super.noSuchMethod(
         Invocation.getter(#instanceStream),
-        returnValue: _i4.Stream<List<String>>.empty(),
-      ) as _i4.Stream<List<String>>);
+        returnValue: _i4.Stream<List<_i2.LxdInstanceId>>.empty(),
+      ) as _i4.Stream<List<_i2.LxdInstanceId>>);
   @override
-  _i4.Stream<String> get instanceAdded => (super.noSuchMethod(
+  _i4.Stream<_i2.LxdInstanceId> get instanceAdded => (super.noSuchMethod(
         Invocation.getter(#instanceAdded),
-        returnValue: _i4.Stream<String>.empty(),
-      ) as _i4.Stream<String>);
+        returnValue: _i4.Stream<_i2.LxdInstanceId>.empty(),
+      ) as _i4.Stream<_i2.LxdInstanceId>);
   @override
-  _i4.Stream<String> get instanceRemoved => (super.noSuchMethod(
+  _i4.Stream<_i2.LxdInstanceId> get instanceRemoved => (super.noSuchMethod(
         Invocation.getter(#instanceRemoved),
-        returnValue: _i4.Stream<String>.empty(),
-      ) as _i4.Stream<String>);
+        returnValue: _i4.Stream<_i2.LxdInstanceId>.empty(),
+      ) as _i4.Stream<_i2.LxdInstanceId>);
   @override
-  _i4.Stream<String> get instanceUpdated => (super.noSuchMethod(
+  _i4.Stream<_i2.LxdInstanceId> get instanceUpdated => (super.noSuchMethod(
         Invocation.getter(#instanceUpdated),
-        returnValue: _i4.Stream<String>.empty(),
-      ) as _i4.Stream<String>);
+        returnValue: _i4.Stream<_i2.LxdInstanceId>.empty(),
+      ) as _i4.Stream<_i2.LxdInstanceId>);
   @override
   _i4.Future<void> init() => (super.noSuchMethod(
         Invocation.method(

@@ -33,28 +33,29 @@ class InstanceStore extends SafeChangeNotifier {
       _service.instanceUpdated.listen(_update),
       _service.instanceRemoved.listen(_remove),
       _service.instanceStream
+          .map((ids) => ids.map((id) => id.name).toList())
           .listen((value) => instances = InstanceList.data(value)),
     ];
 
     instances = const InstanceList.loading().copyWithPrevious(instances);
 
     instances = await InstanceList.guard(() async {
-      final names = _service.instances ?? [];
-      await Future.wait(names.map(_update));
-      return names;
+      final ids = _service.instances ?? [];
+      await Future.wait(ids.map(_update));
+      return ids.map((id) => id.name).toList();
     });
   }
 
-  Future<void> _update(String name) async {
-    final value = await _service.getInstance(LxdInstanceId(name));
-    if (value != _values[name]) {
-      _values[name] = value;
+  Future<void> _update(LxdInstanceId id) async {
+    final value = await _service.getInstance(id);
+    if (value != _values[id.name]) {
+      _values[id.name] = value;
       notifyListeners();
     }
   }
 
-  Future<void> _remove(String name) async {
-    if (_values.remove(name) != null) {
+  Future<void> _remove(LxdInstanceId id) async {
+    if (_values.remove(id.name) != null) {
       notifyListeners();
     }
   }
