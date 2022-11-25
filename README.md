@@ -9,5 +9,5 @@ A simple JSON key-value store for Dart and Flutter.
 Similar to [shared_preferences](https://pub.dev/packages/shared_preferences) on
 Linux and Windows but uses a filesystem watcher to provide change notifications.
 
-- [![jsettings](https://img.shields.io/pub/v/jsettings.svg)](https://pub.dev/packages/jsettings) [jsettings](https://pub.dev/packages/jsettings) for Dart
-- [![flutter_jsettings](https://img.shields.io/pub/v/flutter_jsettings.svg)](https://pub.dev/packages/flutter_jsettings) [flutter_jsettings](https://pub.dev/packages/flutter_jsettings) for Flutter
+- [![jsettings](https://img.shields.io/pub/v/jsettings.svg?label=jsettings)](https://pub.dev/packages/jsettings) for Dart: [packages/jsettings](https://github.com/ubuntu-flutter-community/jsettings.dart/tree/main/packages/jsettings)
+- [![flutter_jsettings](https://img.shields.io/pub/v/flutter_jsettings.svg?label=flutter_jsettings)](https://pub.dev/packages/flutter_jsettings) for Flutter: [packages/flutter_jsettings](https://github.com/ubuntu-flutter-community/jsettings.dart/tree/main/packages/flutter_jsettings)
