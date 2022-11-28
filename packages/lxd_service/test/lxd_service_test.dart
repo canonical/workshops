@@ -82,13 +82,13 @@ void main() {
 
     final service = LxdService(client);
 
-    await service.startInstance('foo');
+    await service.startInstance(fooId);
     verify(client.startInstance(fooId, force: false)).called(1);
 
-    await service.startInstance('foo', force: false);
+    await service.startInstance(fooId, force: false);
     verify(client.startInstance(fooId, force: false)).called(1);
 
-    await service.startInstance('foo', force: true);
+    await service.startInstance(fooId, force: true);
     verify(client.startInstance(fooId, force: true)).called(1);
   });
 
@@ -101,14 +101,14 @@ void main() {
 
     final service = LxdService(client);
 
-    await service.restartInstance('foo');
+    await service.restartInstance(fooId);
     verify(client.restartInstance(fooId, force: false, timeout: null))
         .called(1);
 
-    await service.restartInstance('foo', force: true);
+    await service.restartInstance(fooId, force: true);
     verify(client.restartInstance(fooId, force: true, timeout: null)).called(1);
 
-    await service.restartInstance('foo', force: false, timeout: Duration.zero);
+    await service.restartInstance(fooId, force: false, timeout: Duration.zero);
     verify(client.restartInstance(fooId, force: false, timeout: Duration.zero))
         .called(1);
   });
@@ -122,13 +122,13 @@ void main() {
 
     final service = LxdService(client);
 
-    await service.stopInstance('foo');
+    await service.stopInstance(fooId);
     verify(client.stopInstance(fooId, force: false, timeout: null)).called(1);
 
-    await service.stopInstance('foo', force: true);
+    await service.stopInstance(fooId, force: true);
     verify(client.stopInstance(fooId, force: true, timeout: null)).called(1);
 
-    await service.stopInstance('foo', force: false, timeout: Duration.zero);
+    await service.stopInstance(fooId, force: false, timeout: Duration.zero);
     verify(client.stopInstance(fooId, force: false, timeout: Duration.zero))
         .called(1);
   });
@@ -140,7 +140,7 @@ void main() {
 
     final service = LxdService(client);
 
-    await service.deleteInstance('foo');
+    await service.deleteInstance(fooId);
     verify(client.deleteInstance(fooId)).called(1);
   });
 
@@ -281,11 +281,11 @@ void main() {
 
     await expectLater(service.instanceUpdated, emits('foo'));
 
-    expect(await service.getInstance('foo'),
+    expect(await service.getInstance(fooId),
         foo.copyWith(statusCode: LxdStatusCode.starting));
-    expect(await service.getInstance('bar'),
+    expect(await service.getInstance(barId),
         bar.copyWith(statusCode: LxdStatusCode.stopping));
-    expect(await service.getInstance('baz'),
+    expect(await service.getInstance(bazId),
         baz.copyWith(statusCode: LxdStatusCode.stopped));
 
     await service.dispose();
@@ -297,7 +297,7 @@ void main() {
     when(client.getEvents()).thenAnswer((_) => events.stream);
 
     final service = LxdService(client);
-    final stream = service.watchInstance('foo');
+    final stream = service.watchInstance(fooId);
 
     final foo = testOperation(id: 'f', instances: ['foo']);
     final bar = testOperation(id: 'b', instances: ['bar']);
