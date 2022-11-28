@@ -46,7 +46,7 @@ class InstanceStore extends SafeChangeNotifier {
   }
 
   Future<void> _update(String name) async {
-    final value = await _service.getInstance(name);
+    final value = await _service.getInstance(LxdInstanceId(name));
     if (value != _values[name]) {
       _values[name] = value;
       notifyListeners();

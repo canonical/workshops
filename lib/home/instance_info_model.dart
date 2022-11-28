@@ -24,7 +24,7 @@ class InstanceInfoModel extends SafeChangeNotifier {
   LxdInstanceState get instanceState => _instanceState;
 
   Future<void> init() async {
-    _instance = await service.getInstance(instanceName);
+    _instance = await service.getInstance(LxdInstanceId(instanceName));
     await _updateInstanceState();
     _timer = Timer.periodic(
       _updateInterval,
@@ -35,7 +35,8 @@ class InstanceInfoModel extends SafeChangeNotifier {
   }
 
   Future<void> _updateInstanceState() async {
-    _instanceState = await service.getInstanceState(instanceName);
+    _instanceState =
+        await service.getInstanceState(LxdInstanceId(instanceName));
     notifyListeners();
   }
 

@@ -26,16 +26,16 @@ abstract class LxdService {
   Stream<String> get instanceRemoved;
   Stream<String> get instanceUpdated;
 
-  Future<LxdInstance> getInstance(String name);
-  Future<LxdInstanceState> getInstanceState(String name);
+  Future<LxdInstance> getInstance(LxdInstanceId id);
+  Future<LxdInstanceState> getInstanceState(LxdInstanceId id);
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote});
-  Future<LxdOperation> startInstance(String name, {bool force = false});
-  Future<LxdOperation> restartInstance(String name,
+  Future<LxdOperation> startInstance(LxdInstanceId id, {bool force = false});
+  Future<LxdOperation> restartInstance(LxdInstanceId id,
       {bool force = false, Duration? timeout});
-  Future<LxdOperation> stopInstance(String name,
+  Future<LxdOperation> stopInstance(LxdInstanceId id,
       {bool force = false, Duration? timeout});
-  Future<LxdOperation> deleteInstance(String name);
-  Stream<LxdOperation> watchInstance(String instance);
+  Future<LxdOperation> deleteInstance(LxdInstanceId id);
+  Stream<LxdOperation> watchInstance(LxdInstanceId id);
 
   Future<LxdOperation?> initFeature(
       String name, LxdFeatureProvider feature, LxdImage image);
@@ -108,22 +108,22 @@ class _LxdService implements LxdService {
   }
 
   @override
-  Future<LxdInstance> getInstance(String name) async {
-    final instance = await _client.getInstance(LxdInstanceId(name));
+  Future<LxdInstance> getInstance(LxdInstanceId id) async {
+    final instance = await _client.getInstance(id);
 
     // check for status override from pending/running operations
-    final statusCode = _statuses[name];
+    final statusCode = _statuses[id.name];
     return statusCode != null
         ? instance.copyWith(statusCode: statusCode)
         : instance;
   }
 
   @override
-  Future<LxdInstanceState> getInstanceState(String name) async {
-    final state = await _client.getInstanceState(LxdInstanceId(name));
+  Future<LxdInstanceState> getInstanceState(LxdInstanceId id) async {
+    final state = await _client.getInstanceState(id);
 
     // check for status override from pending/running operations
-    final statusCode = _statuses[name];
+    final statusCode = _statuses[id.name];
     return statusCode != null ? state.copyWith(statusCode: statusCode) : state;
   }
 
@@ -137,18 +137,17 @@ class _LxdService implements LxdService {
   }
 
   @override
-  Future<LxdOperation> startInstance(String name, {bool force = false}) {
-    return _client.startInstance(LxdInstanceId(name), force: force);
+  Future<LxdOperation> startInstance(LxdInstanceId id, {bool force = false}) {
+    return _client.startInstance(id, force: force);
   }
 
   @override
   Future<LxdOperation> restartInstance(
-    String name, {
+    LxdInstanceId id, {
     bool force = false,
     Duration? timeout,
   }) {
-    return _client.restartInstance(LxdInstanceId(name),
-        force: force, timeout: timeout);
+    return _client.restartInstance(id, force: force, timeout: timeout);
   }
 
   @override
@@ -205,26 +204,25 @@ class _LxdService implements LxdService {
 
   @override
   Future<LxdOperation> stopInstance(
-    String name, {
+    LxdInstanceId id, {
     bool force = false,
     Duration? timeout,
   }) {
-    return _client.stopInstance(LxdInstanceId(name),
-        force: force, timeout: timeout);
+    return _client.stopInstance(id, force: force, timeout: timeout);
   }
 
   @override
-  Future<LxdOperation> deleteInstance(String name) {
-    return _client.deleteInstance(LxdInstanceId(name));
+  Future<LxdOperation> deleteInstance(LxdInstanceId id) {
+    return _client.deleteInstance(id);
   }
 
   @override
-  Stream<LxdOperation> watchInstance(String instance) {
+  Stream<LxdOperation> watchInstance(LxdInstanceId id) {
     return _client
         .getEvents()
         .where((event) => event.isOperation)
         .map((event) => LxdOperation.fromJson(event.metadata!))
-        .where((op) => op.instances?.contains(instance) == true);
+        .where((op) => op.instances?.contains(id.name) == true);
   }
 
   /// Waits for the VM agent to be ready, which is a pre-requisite for executing

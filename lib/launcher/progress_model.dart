@@ -38,12 +38,12 @@ class ProgressModel extends SafeChangeNotifier {
     final wait = await _service.waitOperation(create.id);
     if (isDisposed || wait.statusCode == LxdStatusCode.cancelled) {
       try {
-        await _service.deleteInstance(name);
+        await _service.deleteInstance(LxdInstanceId(name));
       } on LxdException catch (_) {}
       return null;
     }
 
-    final instance = await _service.getInstance(name);
+    final instance = await _service.getInstance(LxdInstanceId(name));
     return configure(instance, image);
   }
 
@@ -99,7 +99,7 @@ class ProgressModel extends SafeChangeNotifier {
   }
 
   Future<bool?> start(LxdInstance instance) async {
-    final start = await _service.startInstance(instance.name);
+    final start = await _service.startInstance(instance.id);
     _setState(ProgressState.start(instance, start));
 
     final wait = await _service.waitOperation(start.id);
@@ -116,14 +116,14 @@ class ProgressModel extends SafeChangeNotifier {
   }
 
   Future<bool?> stop(LxdInstance instance) async {
-    final stop = await _service.stopInstance(instance.name, timeout: kTimeout);
+    final stop = await _service.stopInstance(instance.id, timeout: kTimeout);
     _setState(ProgressState.stop(instance, stop));
 
     final wait = await _service.waitOperation(stop.id);
     if (isDisposed || wait.statusCode == LxdStatusCode.cancelled) {
       return delete(instance);
     } else if (wait.statusCode != LxdStatusCode.success) {
-      final force = await _service.stopInstance(instance.name, force: true);
+      final force = await _service.stopInstance(instance.id, force: true);
       await _service.waitOperation(force.id);
     }
     return true;
@@ -131,7 +131,7 @@ class ProgressModel extends SafeChangeNotifier {
 
   Future<bool?> cancel(LxdInstance instance) async {
     try {
-      final stop = await _service.stopInstance(instance.name, force: true);
+      final stop = await _service.stopInstance(instance.id, force: true);
       await _service.waitOperation(stop.id);
     } on LxdException catch (_) {}
 
@@ -140,7 +140,7 @@ class ProgressModel extends SafeChangeNotifier {
 
   Future<bool?> delete(LxdInstance instance) async {
     try {
-      final delete = await _service.deleteInstance(instance.name);
+      final delete = await _service.deleteInstance(instance.id);
       _setState(ProgressState.delete(instance, delete));
       await _service.waitOperation(delete.id);
     } on LxdException catch (_) {}

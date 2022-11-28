@@ -81,7 +81,7 @@ class StartInstanceAction extends InstanceAction<StartInstanceIntent> {
   void invoke(StartInstanceIntent intent) {
     final instance = getInstance(intent);
     if (instance != null) {
-      getService<LxdService>().startInstance(instance.name);
+      getService<LxdService>().startInstance(instance.id);
     }
   }
 }
@@ -101,7 +101,7 @@ class StopInstanceAction extends InstanceAction<StopInstanceIntent> {
   void invoke(StopInstanceIntent intent) {
     final instance = getInstance(intent);
     if (instance != null) {
-      getService<LxdService>().stopInstance(instance.name);
+      getService<LxdService>().stopInstance(instance.id);
     }
   }
 }
@@ -121,7 +121,7 @@ class DeleteInstanceAction extends InstanceAction<DeleteInstanceIntent> {
   void invoke(DeleteInstanceIntent intent) {
     final instance = getInstance(intent);
     if (instance != null) {
-      getService<LxdService>().deleteInstance(instance.name);
+      getService<LxdService>().deleteInstance(instance.id);
     }
   }
 }

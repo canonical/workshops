@@ -43,7 +43,7 @@ class TerminalModel extends SafeChangeNotifier with TerminalMixin {
   Future<void> execute(LxdInstance instance) async {
     _setState(TerminalState.starting);
 
-    final start = await _service.startInstance(instance.name);
+    final start = await _service.startInstance(instance.id);
     await _service.waitOperation(start.id);
     await _service.waitVmAgent(instance.name);
 

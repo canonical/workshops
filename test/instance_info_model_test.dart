@@ -1,5 +1,6 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_test/lxd_test.dart';
 import 'package:mockito/annotations.dart';
@@ -12,17 +13,17 @@ import 'instance_info_model_test.mocks.dart';
 void main() {
   test('timer', () async {
     fakeAsync((async) {
-      const instanceName = 'foo';
+      const instanceId = LxdInstanceId('foo');
       const updateInterval = Duration(milliseconds: 10);
-      final instance = testInstance(name: instanceName);
+      final instance = testInstance(name: instanceId.name);
       final instanceState = testInstanceState();
       final service = MockLxdService();
 
-      when(service.getInstance(instanceName)).thenAnswer((_) async => instance);
-      when(service.getInstanceState(instanceName))
+      when(service.getInstance(instanceId)).thenAnswer((_) async => instance);
+      when(service.getInstanceState(instanceId))
           .thenAnswer((_) async => instanceState);
       final model = InstanceInfoModel(
-        instanceName: instanceName,
+        instanceName: instanceId.name,
         service: service,
         updateInterval: updateInterval,
       );
