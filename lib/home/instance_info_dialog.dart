@@ -81,6 +81,18 @@ class InstanceInfoDialog extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(bottom: 24, end: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  OutlinedButton(
+                    onPressed: Navigator.of(context).pop,
+                    child: Text(l10n.closeButton),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
