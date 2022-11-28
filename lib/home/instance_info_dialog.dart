@@ -40,14 +40,15 @@ class InstanceInfoDialog extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       insetPadding: const EdgeInsets.all(20),
       child: SizedBox.fromSize(
-          size: MediaQuery.of(context).size,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DialogTitleBar(
-                title: Text(l10n.instanceInformationTitle),
-              ),
-              Padding(
+        size: MediaQuery.of(context).size,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            DialogTitleBar(
+              title: Text(l10n.instanceInformationTitle),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +80,22 @@ class InstanceInfoDialog extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
-          )),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(bottom: 24, end: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  OutlinedButton(
+                    onPressed: Navigator.of(context).pop,
+                    child: Text(l10n.closeButton),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -118,6 +133,10 @@ class _GeneralInfoTable extends StatelessWidget {
         _TableRowPaddedSelectable(entries: [
           '${l10n.nameLabel}:',
           instance.name,
+        ]),
+        _TableRowPaddedSelectable(entries: [
+          '${l10n.projectLabel}:',
+          instance.project,
         ]),
         _TableRowPaddedSelectable(entries: [
           '${l10n.statusLabel}:',
