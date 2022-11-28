@@ -40,14 +40,15 @@ class InstanceInfoDialog extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       insetPadding: const EdgeInsets.all(20),
       child: SizedBox.fromSize(
-          size: MediaQuery.of(context).size,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DialogTitleBar(
-                title: Text(l10n.instanceInformationTitle),
-              ),
-              Padding(
+        size: MediaQuery.of(context).size,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            DialogTitleBar(
+              title: Text(l10n.instanceInformationTitle),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,8 +80,10 @@ class InstanceInfoDialog extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
