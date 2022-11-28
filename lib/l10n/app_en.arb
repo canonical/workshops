@@ -76,6 +76,7 @@
   "pressAndConfirmShortcut": "Press a shortcut and confirm with ENTER.",
   "previousTabCommand": "Previous tab",
   "pidLabel": "Process ID",
+  "projectLabel": "Project",
   "receivedLabel": "Received",
   "releaseLabel": "Release",
   "resourcesLabel": "Resources",

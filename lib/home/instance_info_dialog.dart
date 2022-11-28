@@ -120,6 +120,10 @@ class _GeneralInfoTable extends StatelessWidget {
           instance.name,
         ]),
         _TableRowPaddedSelectable(entries: [
+          '${l10n.projectLabel}:',
+          instance.project,
+        ]),
+        _TableRowPaddedSelectable(entries: [
           '${l10n.statusLabel}:',
           instanceState.status.localize(context),
         ]),
