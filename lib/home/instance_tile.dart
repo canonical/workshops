@@ -12,17 +12,17 @@ import 'instance_intents.dart';
 import 'instance_menu.dart';
 
 class InstanceTile extends StatelessWidget {
-  const InstanceTile({super.key, required this.name});
+  const InstanceTile({super.key, required this.id});
 
-  final String name;
+  final LxdInstanceId id;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    final instance = context.selectInstance(name);
+    final instance = context.selectInstance(id);
     return InstanceActions(
-      name: name,
+      id: id,
       child: Builder(
         builder: (context) {
           final canStart =

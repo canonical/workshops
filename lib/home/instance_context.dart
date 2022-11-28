@@ -5,8 +5,7 @@ import 'package:provider/provider.dart';
 import 'instance_store.dart';
 
 extension InstanceContext on BuildContext {
-  LxdInstance? selectInstance(String name) {
-    return select<InstanceStore, LxdInstance?>(
-        (s) => s.getInstance(LxdInstanceId(name)));
+  LxdInstance? selectInstance(LxdInstanceId id) {
+    return select<InstanceStore, LxdInstance?>((s) => s.getInstance(id));
   }
 }

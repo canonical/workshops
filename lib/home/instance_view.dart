@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lxd/lxd.dart';
 import 'package:provider/provider.dart';
 
 import 'instance_store.dart';
@@ -12,10 +13,8 @@ class InstanceView extends StatelessWidget {
     final instances =
         context.select<InstanceStore, InstanceList>((store) => store.instances);
     return instances.map(
-      data: (data) => _InstanceListView(
-          instances: data.value.map((id) => id.name).toList()),
-      loading: (loading) => _InstanceListView(
-          instances: loading.value?.map((id) => id.name).toList()),
+      data: (data) => _InstanceListView(instances: data.value),
+      loading: (loading) => _InstanceListView(instances: loading.value),
       error: (error) => Text('TODO: ${error.error}'),
     );
   }
@@ -24,14 +23,14 @@ class InstanceView extends StatelessWidget {
 class _InstanceListView extends StatelessWidget {
   const _InstanceListView({required this.instances});
 
-  final List<String>? instances;
+  final List<LxdInstanceId>? instances;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: instances?.length ?? 0,
       itemBuilder: (context, index) => InstanceTile(
-        name: instances![index],
+        id: instances![index],
       ),
     );
   }

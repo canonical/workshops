@@ -16,27 +16,19 @@ import '../workshops_l10n.dart';
 import 'instance_info_model.dart';
 
 Future<void> showInstanceInfoDialog(
-    {required BuildContext context, required String instanceName}) {
+    {required BuildContext context, required LxdInstanceId id}) {
   return showDialog(
     context: context,
     builder: (context) => ChangeNotifierProvider(
-      create: (_) => InstanceInfoModel(
-          instanceName: instanceName, service: getService<LxdService>())
-        ..init(),
-      child: InstanceInfoDialog(
-        instanceName: instanceName,
-      ),
+      create: (_) =>
+          InstanceInfoModel(id: id, service: getService<LxdService>())..init(),
+      child: const InstanceInfoDialog(),
     ),
   );
 }
 
 class InstanceInfoDialog extends StatelessWidget {
-  const InstanceInfoDialog({
-    super.key,
-    required this.instanceName,
-  });
-
-  final String instanceName;
+  const InstanceInfoDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

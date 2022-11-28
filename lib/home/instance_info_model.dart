@@ -7,11 +7,11 @@ import 'package:safe_change_notifier/safe_change_notifier.dart';
 
 class InstanceInfoModel extends SafeChangeNotifier {
   InstanceInfoModel({
-    required this.instanceName,
+    required this.id,
     required this.service,
     @visibleForTesting Duration? updateInterval,
   }) : _updateInterval = updateInterval ?? const Duration(seconds: 1);
-  final String instanceName;
+  final LxdInstanceId id;
   final Duration _updateInterval;
   final LxdService service;
   bool initialized = false;
@@ -24,7 +24,7 @@ class InstanceInfoModel extends SafeChangeNotifier {
   LxdInstanceState get instanceState => _instanceState;
 
   Future<void> init() async {
-    _instance = await service.getInstance(LxdInstanceId(instanceName));
+    _instance = await service.getInstance(id);
     await _updateInstanceState();
     _timer = Timer.periodic(
       _updateInterval,
@@ -35,8 +35,7 @@ class InstanceInfoModel extends SafeChangeNotifier {
   }
 
   Future<void> _updateInstanceState() async {
-    _instanceState =
-        await service.getInstanceState(LxdInstanceId(instanceName));
+    _instanceState = await service.getInstanceState(id);
     notifyListeners();
   }
 
