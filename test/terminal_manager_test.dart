@@ -26,9 +26,9 @@ void main() {
     final service = MockLxdService();
     when(service.startInstance(instance.id)).thenAnswer((_) async => start);
     when(service.waitOperation(start.id)).thenAnswer((_) async => start);
-    when(service.execTerminal(instance.name)).thenAnswer((_) async => lxd);
+    when(service.execTerminal(instance.id)).thenAnswer((_) async => lxd);
     when(service.waitOperation(exec.id)).thenAnswer((_) => completer.future);
-    when(service.waitVmAgent(instance.name)).thenAnswer((_) async => true);
+    when(service.waitVmAgent(instance.id)).thenAnswer((_) async => true);
 
     final manager = TerminalManager(service);
 

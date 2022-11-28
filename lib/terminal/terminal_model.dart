@@ -45,11 +45,11 @@ class TerminalModel extends SafeChangeNotifier with TerminalMixin {
 
     final start = await _service.startInstance(instance.id);
     await _service.waitOperation(start.id);
-    await _service.waitVmAgent(instance.name);
+    await _service.waitVmAgent(instance.id);
 
     _setState(TerminalState.running);
 
-    _op = await _service.execTerminal(instance.name);
+    _op = await _service.execTerminal(instance.id);
     _op!.resize(terminal.viewWidth, terminal.viewHeight);
     _op!.listen(terminal.write);
     terminal.onOutput = (data) => _op?.write(data);
