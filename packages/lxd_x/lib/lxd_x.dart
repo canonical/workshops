@@ -112,8 +112,8 @@ extension LxdNetworkStateX on LxdNetworkState {
 }
 
 extension LxdOperationX on LxdOperation {
-  List<String>? get instances =>
-      resources?['instances']?.map((path) => path.split('/').last).toList();
+  List<LxdInstanceId>? get instances =>
+      resources?['instances']?.map(LxdInstanceId.fromPath).toList();
 
   bool get isRunning => statusCode == LxdStatusCode.running;
   bool get isPending => statusCode == LxdStatusCode.pending;

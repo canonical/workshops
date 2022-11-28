@@ -32,18 +32,18 @@ class ProgressModel extends SafeChangeNotifier {
 
   Future<bool?> create(LxdImage image, {LxdRemote? remote}) async {
     final create = await _service.createInstance(image, remote: remote);
-    final name = create.instances!.single;
-    _setState(ProgressState.create(name, create));
+    final id = create.instances!.single;
+    _setState(ProgressState.create(id.name, create));
 
     final wait = await _service.waitOperation(create.id);
     if (isDisposed || wait.statusCode == LxdStatusCode.cancelled) {
       try {
-        await _service.deleteInstance(LxdInstanceId(name));
+        await _service.deleteInstance(id);
       } on LxdException catch (_) {}
       return null;
     }
 
-    final instance = await _service.getInstance(LxdInstanceId(name));
+    final instance = await _service.getInstance(id);
     return configure(instance, image);
   }
 
