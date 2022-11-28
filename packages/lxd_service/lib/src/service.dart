@@ -216,7 +216,7 @@ class _LxdService implements LxdService {
   @override
   Stream<LxdOperation> watchInstance(LxdInstanceId id) {
     return _client
-        .getEvents()
+        .getEvents(project: id.project)
         .where((event) => event.isOperation)
         .map((event) => LxdOperation.fromJson(event.metadata!))
         .where((op) => op.instances?.contains(id) == true);
