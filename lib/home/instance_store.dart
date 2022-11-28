@@ -15,12 +15,10 @@ class InstanceStore extends SafeChangeNotifier {
   List<StreamSubscription>? _subs;
   var _instances = const InstanceList.data([]);
   final _values = <String, LxdInstance>{};
-  final _states = <String, LxdInstanceState>{};
 
   InstanceList get instances => _instances;
 
   LxdInstance? getInstance(String instance) => _values[instance];
-  LxdInstanceState? getInstanceState(String instance) => _states[instance];
 
   @protected
   set instances(InstanceList instances) {
@@ -49,17 +47,14 @@ class InstanceStore extends SafeChangeNotifier {
 
   Future<void> _update(String name) async {
     final value = await _service.getInstance(name);
-    final state = await _service.getInstanceState(name);
     if (value != _values[name]) {
       _values[name] = value;
-      _states[name] = state;
       notifyListeners();
     }
   }
 
   Future<void> _remove(String name) async {
     if (_values.remove(name) != null) {
-      _states.remove(name);
       notifyListeners();
     }
   }
