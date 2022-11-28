@@ -24,13 +24,13 @@ class InstanceCommands extends StatelessWidget {
             priority: 20,
             label: l10n.launchInstanceCommand,
             children: store.instances.value
-                ?.map((i) => Command(
-                    id: 'instance.launch.$i',
-                    label: i,
+                ?.map((id) => Command(
+                    id: 'instance.launch.$id',
+                    label: id.name,
                     intent: VoidCallbackIntent(() {
                       Actions.invoke(
                         primaryFocus!.context!,
-                        AddTabIntent(store.getInstance(i)),
+                        AddTabIntent(store.getInstance(id)),
                       );
                     })))
                 .toList(),
@@ -40,13 +40,13 @@ class InstanceCommands extends StatelessWidget {
             priority: 20,
             label: l10n.startInstanceCommand,
             children: store.instances.value
-                ?.map((i) => Command(
-                    id: 'instance.start.$i',
-                    label: i,
+                ?.map((id) => Command(
+                    id: 'instance.start.$id',
+                    label: id.name,
                     intent: VoidCallbackIntent(() {
                       Actions.invoke(
                         primaryFocus!.context!,
-                        StartInstanceIntent(store.getInstance(i)),
+                        StartInstanceIntent(store.getInstance(id)),
                       );
                     })))
                 .toList(),
@@ -56,13 +56,13 @@ class InstanceCommands extends StatelessWidget {
             priority: 20,
             label: l10n.stopInstanceCommand,
             children: store.instances.value
-                ?.map((i) => Command(
-                    id: 'instance.stop.$i',
-                    label: i,
+                ?.map((id) => Command(
+                    id: 'instance.stop.$id',
+                    label: id.name,
                     intent: VoidCallbackIntent(() {
                       Actions.invoke(
                         primaryFocus!.context!,
-                        StopInstanceIntent(store.getInstance(i)),
+                        StopInstanceIntent(store.getInstance(id)),
                       );
                     })))
                 .toList(),
@@ -72,13 +72,13 @@ class InstanceCommands extends StatelessWidget {
             priority: 20,
             label: l10n.deleteInstanceCommand,
             children: store.instances.value
-                ?.map((i) => Command(
-                    id: 'instance.delete.$i',
-                    label: i,
+                ?.map((id) => Command(
+                    id: 'instance.delete.$id',
+                    label: id.name,
                     intent: VoidCallbackIntent(() {
                       Actions.invoke(
                         primaryFocus!.context!,
-                        DeleteInstanceIntent(store.getInstance(i)),
+                        DeleteInstanceIntent(store.getInstance(id)),
                       );
                     })))
                 .toList(),
@@ -88,13 +88,13 @@ class InstanceCommands extends StatelessWidget {
             priority: 20,
             label: l10n.instanceInformationCommand,
             children: store.instances.value
-                ?.map((i) => Command(
-                    id: 'instance.info.$i',
-                    label: i,
+                ?.map((id) => Command(
+                    id: 'instance.info.$id',
+                    label: id.name,
                     intent: VoidCallbackIntent(() {
                       Actions.invoke(
                         primaryFocus!.context!,
-                        ShowInstanceInfoIntent(store.getInstance(i)),
+                        ShowInstanceInfoIntent(store.getInstance(id)),
                       );
                     })))
                 .toList(),

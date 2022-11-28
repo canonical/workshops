@@ -12,8 +12,10 @@ class InstanceView extends StatelessWidget {
     final instances =
         context.select<InstanceStore, InstanceList>((store) => store.instances);
     return instances.map(
-      data: (data) => _InstanceListView(instances: data.value),
-      loading: (loading) => _InstanceListView(instances: loading.value),
+      data: (data) => _InstanceListView(
+          instances: data.value.map((id) => id.name).toList()),
+      loading: (loading) => _InstanceListView(
+          instances: loading.value?.map((id) => id.name).toList()),
       error: (error) => Text('TODO: ${error.error}'),
     );
   }
