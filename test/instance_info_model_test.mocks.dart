@@ -270,7 +270,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
       ) as _i4.Stream<_i2.LxdOperation>);
   @override
   _i4.Future<_i2.LxdOperation?> initFeature(
-    String? name,
+    _i2.LxdInstanceId? id,
     _i6.LxdFeatureProvider? feature,
     _i2.LxdImage? image,
   ) =>
@@ -278,7 +278,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         Invocation.method(
           #initFeature,
           [
-            name,
+            id,
             feature,
             image,
           ],
@@ -287,14 +287,14 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
       ) as _i4.Future<_i2.LxdOperation?>);
   @override
   _i4.Future<_i2.LxdImage> configureImage(
-    String? instance,
+    _i2.LxdInstanceId? id,
     _i2.LxdImage? image,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
           #configureImage,
           [
-            instance,
+            id,
             image,
           ],
         ),
@@ -303,7 +303,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           Invocation.method(
             #configureImage,
             [
-              instance,
+              id,
               image,
             ],
           ),
@@ -311,7 +311,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
       ) as _i4.Future<_i2.LxdImage>);
   @override
   _i4.Future<void> configureFeature(
-    String? name,
+    _i2.LxdInstanceId? id,
     _i6.LxdFeatureProvider? feature,
     _i2.LxdImage? image,
   ) =>
@@ -319,7 +319,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         Invocation.method(
           #configureFeature,
           [
-            name,
+            id,
             feature,
             image,
           ],
@@ -329,7 +329,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
       ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.LxdOperation> stageFeatures(
-    String? name,
+    _i2.LxdInstanceId? id,
     List<_i6.LxdFeatureProvider>? features,
     _i2.LxdImage? image,
   ) =>
@@ -337,7 +337,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         Invocation.method(
           #stageFeatures,
           [
-            name,
+            id,
             features,
             image,
           ],
@@ -347,7 +347,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           Invocation.method(
             #stageFeatures,
             [
-              name,
+              id,
               features,
               image,
             ],
@@ -356,14 +356,14 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
       ) as _i4.Future<_i2.LxdOperation>);
   @override
   _i4.Future<bool> waitVmAgent(
-    String? name, {
+    _i2.LxdInstanceId? id, {
     Duration? timeout,
     Duration? interval,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #waitVmAgent,
-          [name],
+          [id],
           {
             #timeout: timeout,
             #interval: interval,
@@ -372,16 +372,17 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         returnValue: _i4.Future<bool>.value(false),
       ) as _i4.Future<bool>);
   @override
-  _i4.Future<_i3.LxdTerminal> execTerminal(String? name) => (super.noSuchMethod(
+  _i4.Future<_i3.LxdTerminal> execTerminal(_i2.LxdInstanceId? id) =>
+      (super.noSuchMethod(
         Invocation.method(
           #execTerminal,
-          [name],
+          [id],
         ),
         returnValue: _i4.Future<_i3.LxdTerminal>.value(_FakeLxdTerminal_4(
           this,
           Invocation.method(
             #execTerminal,
-            [name],
+            [id],
           ),
         )),
       ) as _i4.Future<_i3.LxdTerminal>);

@@ -38,17 +38,17 @@ abstract class LxdService {
   Stream<LxdOperation> watchInstance(LxdInstanceId id);
 
   Future<LxdOperation?> initFeature(
-      String name, LxdFeatureProvider feature, LxdImage image);
-  Future<LxdImage> configureImage(String instance, LxdImage image);
+      LxdInstanceId id, LxdFeatureProvider feature, LxdImage image);
+  Future<LxdImage> configureImage(LxdInstanceId id, LxdImage image);
   Future<void> configureFeature(
-      String name, LxdFeatureProvider feature, LxdImage image);
+      LxdInstanceId id, LxdFeatureProvider feature, LxdImage image);
   Future<LxdOperation> stageFeatures(
-      String name, List<LxdFeatureProvider> features, LxdImage image);
+      LxdInstanceId id, List<LxdFeatureProvider> features, LxdImage image);
 
-  Future<bool> waitVmAgent(String name,
+  Future<bool> waitVmAgent(LxdInstanceId id,
       {Duration? timeout, Duration? interval});
 
-  Future<LxdTerminal> execTerminal(String name);
+  Future<LxdTerminal> execTerminal(LxdInstanceId id);
 
   Future<LxdOperation> getOperation(String id);
   Stream<LxdOperation> watchOperation(String id);
@@ -150,42 +150,41 @@ class _LxdService implements LxdService {
 
   @override
   Future<LxdOperation?> initFeature(
-      String name, LxdFeatureProvider feature, LxdImage image) async {
-    final instance = await _client.getInstance(LxdInstanceId(name));
+      LxdInstanceId id, LxdFeatureProvider feature, LxdImage image) async {
+    final instance = await _client.getInstance(id);
     return feature.init(_client, instance, image);
   }
 
   @override
-  Future<LxdImage> configureImage(String instance, LxdImage image) async {
+  Future<LxdImage> configureImage(LxdInstanceId id, LxdImage image) async {
     final username = image.properties['user.name']!;
     return image.copyWith(
       properties: {
         ...image.properties,
-        'user.uid': await _client.uid(LxdInstanceId(instance), username),
-        'user.gid': await _client.gid(LxdInstanceId(instance), username),
+        'user.uid': await _client.uid(id, username),
+        'user.gid': await _client.gid(id, username),
       },
     );
   }
 
   @override
   Future<void> configureFeature(
-      String name, LxdFeatureProvider feature, LxdImage image) async {
+      LxdInstanceId id, LxdFeatureProvider feature, LxdImage image) async {
     final dirs = feature.getDirectories(image);
     for (final dir in dirs) {
-      await _client.mkdir(LxdInstanceId(name), dir);
+      await _client.mkdir(id, dir);
     }
 
     final files = feature.getFiles(image);
     for (final file in files.entries) {
-      await _client.pushFile(LxdInstanceId(name),
-          path: file.key, data: file.value);
+      await _client.pushFile(id, path: file.key, data: file.value);
     }
   }
 
   @override
-  Future<LxdOperation> stageFeatures(
-      String name, List<LxdFeatureProvider> features, LxdImage image) async {
-    final instance = await _client.getInstance(LxdInstanceId(name));
+  Future<LxdOperation> stageFeatures(LxdInstanceId id,
+      List<LxdFeatureProvider> features, LxdImage image) async {
+    final instance = await _client.getInstance(id);
     return _client.updateInstance(
       instance.copyWith(
         config: {
@@ -228,13 +227,13 @@ class _LxdService implements LxdService {
   /// reports that there are any running processes.
   @override
   Future<bool> waitVmAgent(
-    String name, {
+    LxdInstanceId id, {
     Duration? timeout,
     Duration? interval,
   }) async {
     interval ??= const Duration(seconds: 1);
     var future = Future.doWhile(() async {
-      final state = await _client.getInstanceState(LxdInstanceId(name));
+      final state = await _client.getInstanceState(id);
       if (state.processes > 0) return false;
       return Future.delayed(interval!, () => true);
     });
@@ -245,8 +244,8 @@ class _LxdService implements LxdService {
     return result is bool ? result : true;
   }
 
-  Future<LxdTerminal> execTerminal(String name) async {
-    final instance = await _client.getInstance(LxdInstanceId(name));
+  Future<LxdTerminal> execTerminal(LxdInstanceId id) async {
+    final instance = await _client.getInstance(id);
     final user = instance.config['user.name'] ?? 'root';
     final op = await _client.execInstance(
       instance.id,

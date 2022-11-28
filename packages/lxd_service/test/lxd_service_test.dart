@@ -392,10 +392,10 @@ void main() {
     when(client.getInstanceState(fooId)).thenAnswer((_) async => state0);
 
     final service = LxdService(client);
-    expect(await service.waitVmAgent('foo', timeout: Duration.zero), isFalse);
+    expect(await service.waitVmAgent(fooId, timeout: Duration.zero), isFalse);
 
     when(client.getInstanceState(fooId)).thenAnswer((_) async => state1);
-    expect(await service.waitVmAgent('foo', timeout: Duration.zero), isTrue);
+    expect(await service.waitVmAgent(fooId, timeout: Duration.zero), isTrue);
   });
 
   test('exec terminal', () async {
@@ -435,7 +435,7 @@ void main() {
 
     final service = LxdService(client);
 
-    final terminal = await service.execTerminal('foo');
+    final terminal = await service.execTerminal(fooId);
     expect(terminal.operation, exec);
     expect(terminal.id, exec.id);
 

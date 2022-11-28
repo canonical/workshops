@@ -62,7 +62,7 @@ class ProgressModel extends SafeChangeNotifier {
       final provider = LxdFeature.get(feature);
       _setState(ProgressState.init(instance, feature));
 
-      final init = await _service.initFeature(instance.name, provider, image);
+      final init = await _service.initFeature(instance.id, provider, image);
       if (init != null) {
         final wait = await _service.waitOperation(init.id);
         if (isDisposed || wait.statusCode == LxdStatusCode.cancelled) {
@@ -71,11 +71,11 @@ class ProgressModel extends SafeChangeNotifier {
       }
     }
 
-    final context = await _service.configureImage(instance.name, image);
+    final context = await _service.configureImage(instance.id, image);
     for (final feature in features) {
       final provider = LxdFeature.get(feature);
       _setState(ProgressState.config(instance, feature));
-      await _service.configureFeature(instance.name, provider, context);
+      await _service.configureFeature(instance.id, provider, context);
       if (isDisposed) {
         return cancel(instance);
       }
@@ -87,8 +87,7 @@ class ProgressModel extends SafeChangeNotifier {
     }
 
     final providers = features.map(LxdFeature.get).toList();
-    final stage =
-        await _service.stageFeatures(instance.name, providers, context);
+    final stage = await _service.stageFeatures(instance.id, providers, context);
     _setState(ProgressState.stage(instance, stage));
     final wait = await _service.waitOperation(stage.id);
     if (isDisposed || wait.statusCode == LxdStatusCode.cancelled) {
@@ -107,7 +106,7 @@ class ProgressModel extends SafeChangeNotifier {
       return cancel(instance);
     }
 
-    await _service.waitVmAgent(instance.name);
+    await _service.waitVmAgent(instance.id);
     if (isDisposed) {
       return cancel(instance);
     }
