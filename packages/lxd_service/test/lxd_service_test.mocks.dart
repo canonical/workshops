@@ -330,7 +330,7 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
       ) as _i14.Future<_i5.LxdCertificate>);
   @override
   _i14.Stream<_i16.LxdEvent> getEvents({
-    String? project = r'',
+    String? project,
     Set<_i16.LxdEventType>? types = const {},
   }) =>
       (super.noSuchMethod(
@@ -341,6 +341,17 @@ class MockLxdClient extends _i1.Mock implements _i15.LxdClient {
             #project: project,
             #types: types,
           },
+        ),
+        returnValue: _i14.Stream<_i16.LxdEvent>.empty(),
+      ) as _i14.Stream<_i16.LxdEvent>);
+  @override
+  _i14.Stream<_i16.LxdEvent> getAllEvents(
+          {Set<_i16.LxdEventType>? types = const {}}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAllEvents,
+          [],
+          {#types: types},
         ),
         returnValue: _i14.Stream<_i16.LxdEvent>.empty(),
       ) as _i14.Stream<_i16.LxdEvent>);
