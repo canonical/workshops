@@ -17,8 +17,8 @@ abstract class ProgressWatcher extends SafeChangeNotifier {
       none: () => NoneWatcher(service),
       error: (message) => NoneWatcher(service),
       create: (_, op) => OperationWatcher(op.id, service),
-      init: (instance, _) => InstanceWatcher(instance.name, service),
-      config: (instance, _) => InstanceWatcher(instance.name, service),
+      init: (instance, _) => InstanceWatcher(instance.id, service),
+      config: (instance, _) => InstanceWatcher(instance.id, service),
       stage: (_, op) => OperationWatcher(op.id, service),
       start: (_, op) => OperationWatcher(op.id, service),
       stop: (_, op) => OperationWatcher(op.id, service),
@@ -76,9 +76,9 @@ class OperationWatcher extends ProgressWatcher {
 }
 
 class InstanceWatcher extends ProgressWatcher {
-  InstanceWatcher(this.name, LxdService service) : super._(service);
+  InstanceWatcher(this.id, LxdService service) : super._(service);
 
-  final String name;
+  final LxdInstanceId id;
 
   @override
   Future<OperationValue> load() async {
@@ -88,7 +88,7 @@ class InstanceWatcher extends ProgressWatcher {
   @override
   StreamSubscription<LxdOperation> watch() {
     return service
-        .watchInstance(name)
+        .watchInstance(id.name)
         .listen((event) => operation = OperationValue.data(event));
   }
 }
