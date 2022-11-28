@@ -88,7 +88,7 @@ class InstanceWatcher extends ProgressWatcher {
   @override
   StreamSubscription<LxdOperation> watch() {
     return service
-        .watchInstance(id.name)
+        .watchInstance(id)
         .listen((event) => operation = OperationValue.data(event));
   }
 }

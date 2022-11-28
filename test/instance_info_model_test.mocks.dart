@@ -120,32 +120,33 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<_i2.LxdInstance> getInstance(String? name) => (super.noSuchMethod(
+  _i4.Future<_i2.LxdInstance> getInstance(_i2.LxdInstanceId? id) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getInstance,
-          [name],
+          [id],
         ),
         returnValue: _i4.Future<_i2.LxdInstance>.value(_FakeLxdInstance_0(
           this,
           Invocation.method(
             #getInstance,
-            [name],
+            [id],
           ),
         )),
       ) as _i4.Future<_i2.LxdInstance>);
   @override
-  _i4.Future<_i2.LxdInstanceState> getInstanceState(String? name) =>
+  _i4.Future<_i2.LxdInstanceState> getInstanceState(_i2.LxdInstanceId? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getInstanceState,
-          [name],
+          [id],
         ),
         returnValue:
             _i4.Future<_i2.LxdInstanceState>.value(_FakeLxdInstanceState_1(
           this,
           Invocation.method(
             #getInstanceState,
-            [name],
+            [id],
           ),
         )),
       ) as _i4.Future<_i2.LxdInstanceState>);
@@ -171,34 +172,34 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
       ) as _i4.Future<_i2.LxdOperation>);
   @override
   _i4.Future<_i2.LxdOperation> startInstance(
-    String? name, {
+    _i2.LxdInstanceId? id, {
     bool? force = false,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #startInstance,
-          [name],
+          [id],
           {#force: force},
         ),
         returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #startInstance,
-            [name],
+            [id],
             {#force: force},
           ),
         )),
       ) as _i4.Future<_i2.LxdOperation>);
   @override
   _i4.Future<_i2.LxdOperation> restartInstance(
-    String? name, {
+    _i2.LxdInstanceId? id, {
     bool? force = false,
     Duration? timeout,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #restartInstance,
-          [name],
+          [id],
           {
             #force: force,
             #timeout: timeout,
@@ -208,7 +209,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           this,
           Invocation.method(
             #restartInstance,
-            [name],
+            [id],
             {
               #force: force,
               #timeout: timeout,
@@ -218,14 +219,14 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
       ) as _i4.Future<_i2.LxdOperation>);
   @override
   _i4.Future<_i2.LxdOperation> stopInstance(
-    String? name, {
+    _i2.LxdInstanceId? id, {
     bool? force = false,
     Duration? timeout,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #stopInstance,
-          [name],
+          [id],
           {
             #force: force,
             #timeout: timeout,
@@ -235,7 +236,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           this,
           Invocation.method(
             #stopInstance,
-            [name],
+            [id],
             {
               #force: force,
               #timeout: timeout,
@@ -244,26 +245,26 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         )),
       ) as _i4.Future<_i2.LxdOperation>);
   @override
-  _i4.Future<_i2.LxdOperation> deleteInstance(String? name) =>
+  _i4.Future<_i2.LxdOperation> deleteInstance(_i2.LxdInstanceId? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteInstance,
-          [name],
+          [id],
         ),
         returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #deleteInstance,
-            [name],
+            [id],
           ),
         )),
       ) as _i4.Future<_i2.LxdOperation>);
   @override
-  _i4.Stream<_i2.LxdOperation> watchInstance(String? instance) =>
+  _i4.Stream<_i2.LxdOperation> watchInstance(_i2.LxdInstanceId? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #watchInstance,
-          [instance],
+          [id],
         ),
         returnValue: _i4.Stream<_i2.LxdOperation>.empty(),
       ) as _i4.Stream<_i2.LxdOperation>);

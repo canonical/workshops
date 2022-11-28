@@ -24,7 +24,7 @@ void main() {
     when(lxd.id).thenReturn(exec.id);
 
     final service = MockLxdService();
-    when(service.startInstance(instance.name)).thenAnswer((_) async => start);
+    when(service.startInstance(instance.id)).thenAnswer((_) async => start);
     when(service.waitOperation(start.id)).thenAnswer((_) async => start);
     when(service.execTerminal(instance.name)).thenAnswer((_) async => lxd);
     when(service.waitOperation(exec.id)).thenAnswer((_) => completer.future);
