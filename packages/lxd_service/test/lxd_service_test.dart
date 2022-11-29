@@ -22,7 +22,7 @@ void main() {
     final events = StreamController<LxdEvent>();
     when(client.getEvents(types: {LxdEventType.operation}))
         .thenAnswer((_) => events.stream);
-    when(client.getInstances()).thenAnswer((_) async => [fooId]);
+    when(client.getAllInstances()).thenAnswer((_) async => [fooId]);
     when(client.getOperations()).thenAnswer((_) async => {
           'running': ['op']
         });
@@ -34,7 +34,7 @@ void main() {
 
     await service.init();
     verify(client.getEvents(types: {LxdEventType.operation})).called(1);
-    verify(client.getInstances()).called(1);
+    verify(client.getAllInstances()).called(1);
     verify(client.getOperations()).called(1);
     verify(client.getOperation('op')).called(1);
 
@@ -149,13 +149,13 @@ void main() {
     final events = StreamController<LxdEvent>();
     when(client.getEvents(types: {LxdEventType.operation}))
         .thenAnswer((_) => events.stream);
-    when(client.getInstances()).thenAnswer((_) async => [fooId]);
+    when(client.getAllInstances()).thenAnswer((_) async => [fooId]);
     when(client.getOperations()).thenAnswer((_) async => {});
 
     final service = LxdService(client);
     await service.init();
 
-    when(client.getInstances()).thenAnswer((_) async => [fooId, barId]);
+    when(client.getAllInstances()).thenAnswer((_) async => [fooId, barId]);
 
     events.add(LxdEvent(
       type: LxdEventType.operation,
@@ -178,13 +178,13 @@ void main() {
     final events = StreamController<LxdEvent>();
     when(client.getEvents(types: {LxdEventType.operation}))
         .thenAnswer((_) => events.stream);
-    when(client.getInstances()).thenAnswer((_) async => [fooId, barId]);
+    when(client.getAllInstances()).thenAnswer((_) async => [fooId, barId]);
     when(client.getOperations()).thenAnswer((_) async => {});
 
     final service = LxdService(client);
     await service.init();
 
-    when(client.getInstances()).thenAnswer((_) async => [barId]);
+    when(client.getAllInstances()).thenAnswer((_) async => [barId]);
 
     events.add(LxdEvent(
       type: LxdEventType.operation,
@@ -207,7 +207,8 @@ void main() {
     final events = StreamController<LxdEvent>();
     when(client.getEvents(types: {LxdEventType.operation}))
         .thenAnswer((_) => events.stream);
-    when(client.getInstances()).thenAnswer((_) async => [fooId, barId, bazId]);
+    when(client.getAllInstances())
+        .thenAnswer((_) async => [fooId, barId, bazId]);
     when(client.getOperations()).thenAnswer((_) async => {});
 
     final service = LxdService(client);
@@ -257,7 +258,8 @@ void main() {
     final events = StreamController<LxdEvent>();
     when(client.getEvents(types: {LxdEventType.operation}))
         .thenAnswer((_) => events.stream);
-    when(client.getInstances()).thenAnswer((_) async => [fooId, barId, bazId]);
+    when(client.getAllInstances())
+        .thenAnswer((_) async => [fooId, barId, bazId]);
     when(client.getInstance(fooId)).thenAnswer((_) async => foo);
     when(client.getInstance(barId)).thenAnswer((_) async => bar);
     when(client.getInstance(bazId)).thenAnswer((_) async => baz);

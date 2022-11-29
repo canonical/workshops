@@ -78,7 +78,7 @@ class _LxdService implements LxdService {
 
   @override
   Future<void> init() async {
-    _instances.add(await _client.getInstances());
+    _instances.add(await _client.getAllInstances());
 
     // process ongoing operations to see if instances being started or stopped
     final allIds = await _client.getOperations();
@@ -290,7 +290,7 @@ class _LxdService implements LxdService {
   Future<void> cancelOperation(String id) => _client.cancelOperation(id);
 
   Future<void> _updateInstances([LxdEvent? event]) async {
-    final newInstances = await _client.getInstances();
+    final newInstances = await _client.getAllInstances();
     final newInstanceSet = Set.of(newInstances);
     final oldInstanceSet = Set.of(instances ?? const <LxdInstanceId>[]);
 
