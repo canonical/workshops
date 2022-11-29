@@ -1,7 +1,5 @@
 library lxd_x;
 
-import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
@@ -16,55 +14,6 @@ String resolveLxdSocketPath([String? socketPath]) {
   ];
   return paths.firstWhereOrNull((path) => File(path).existsSync()) ??
       '/var/lib/lxd/unix.socket';
-}
-
-extension LxdClientX on LxdClient {
-  Future<void> mkdir(LxdInstanceId id, String path) async {
-    final op = await execInstance(id, command: ['mkdir', '-p', path]);
-    await waitOperation(op.id);
-  }
-
-  Future<String> uid(LxdInstanceId id, String username) {
-    return _exec(id, ['id', '-u', username]);
-  }
-
-  Future<String> gid(LxdInstanceId id, String username) {
-    return _exec(id, ['id', '-g', username]);
-  }
-
-  Future<String> _exec(LxdInstanceId id, List<String> command) async {
-    final exec = await execInstance(
-      id,
-      command: command,
-      interactive: true,
-      waitForWebSocket: true,
-    );
-
-    Future<WebSocket> getWebSocket(String id) {
-      final fd = exec.metadata!['fds'][id] as String;
-      return getOperationWebSocket(exec.id, fd);
-    }
-
-    final wsc = await getWebSocket('control');
-    final ws0 = await getWebSocket('0');
-
-    final out = <String>[];
-    final sub = ws0.listen((data) async {
-      if (data is List<int>) {
-        out.add(utf8.decode(data).trim());
-      } else if (data == '') {
-        await ws0.close();
-        await wsc.close();
-      }
-    });
-
-    await waitOperation(exec.id);
-    await sub.cancel();
-    await ws0.close();
-    await wsc.close();
-
-    return out.join();
-  }
 }
 
 extension LxdEventX on LxdEvent {
