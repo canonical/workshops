@@ -21,7 +21,7 @@ _$_LxdCertificate _$$_LxdCertificateFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_LxdCertificateToJson(_$_LxdCertificate instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'type': _$LxdCertificateTypeEnumMap[instance.type],
+      'type': _$LxdCertificateTypeEnumMap[instance.type]!,
       'restricted': instance.restricted,
       'projects': instance.projects,
       'certificate': instance.certificate,

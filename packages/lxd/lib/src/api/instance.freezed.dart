@@ -125,7 +125,8 @@ mixin _$LxdInstance {
 abstract class $LxdInstanceCopyWith<$Res> {
   factory $LxdInstanceCopyWith(
           LxdInstance value, $Res Function(LxdInstance) then) =
-      _$LxdInstanceCopyWithImpl<$Res>;
+      _$LxdInstanceCopyWithImpl<$Res, LxdInstance>;
+  @useResult
   $Res call(
       {String architecture,
       Map<String, String> config,
@@ -151,108 +152,111 @@ abstract class $LxdInstanceCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdInstanceCopyWithImpl<$Res> implements $LxdInstanceCopyWith<$Res> {
+class _$LxdInstanceCopyWithImpl<$Res, $Val extends LxdInstance>
+    implements $LxdInstanceCopyWith<$Res> {
   _$LxdInstanceCopyWithImpl(this._value, this._then);
 
-  final LxdInstance _value;
   // ignore: unused_field
-  final $Res Function(LxdInstance) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? architecture = freezed,
-    Object? config = freezed,
-    Object? devices = freezed,
-    Object? ephemeral = freezed,
-    Object? profiles = freezed,
+    Object? architecture = null,
+    Object? config = null,
+    Object? devices = null,
+    Object? ephemeral = null,
+    Object? profiles = null,
     Object? restore = freezed,
-    Object? stateful = freezed,
-    Object? description = freezed,
-    Object? createdAt = freezed,
+    Object? stateful = null,
+    Object? description = null,
+    Object? createdAt = null,
     Object? expandedConfig = freezed,
     Object? expandedDevices = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
-    Object? statusCode = freezed,
-    Object? lastUsedAt = freezed,
-    Object? location = freezed,
-    Object? type = freezed,
-    Object? project = freezed,
+    Object? name = null,
+    Object? status = null,
+    Object? statusCode = null,
+    Object? lastUsedAt = null,
+    Object? location = null,
+    Object? type = null,
+    Object? project = null,
   }) {
     return _then(_value.copyWith(
-      architecture: architecture == freezed
+      architecture: null == architecture
           ? _value.architecture
           : architecture // ignore: cast_nullable_to_non_nullable
               as String,
-      config: config == freezed
+      config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      devices: devices == freezed
+      devices: null == devices
           ? _value.devices
           : devices // ignore: cast_nullable_to_non_nullable
               as Map<String, Map<String, String>>,
-      ephemeral: ephemeral == freezed
+      ephemeral: null == ephemeral
           ? _value.ephemeral
           : ephemeral // ignore: cast_nullable_to_non_nullable
               as bool,
-      profiles: profiles == freezed
+      profiles: null == profiles
           ? _value.profiles
           : profiles // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      restore: restore == freezed
+      restore: freezed == restore
           ? _value.restore
           : restore // ignore: cast_nullable_to_non_nullable
               as String?,
-      stateful: stateful == freezed
+      stateful: null == stateful
           ? _value.stateful
           : stateful // ignore: cast_nullable_to_non_nullable
               as bool,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      expandedConfig: expandedConfig == freezed
+      expandedConfig: freezed == expandedConfig
           ? _value.expandedConfig
           : expandedConfig // ignore: cast_nullable_to_non_nullable
               as Map<String, String>?,
-      expandedDevices: expandedDevices == freezed
+      expandedDevices: freezed == expandedDevices
           ? _value.expandedDevices
           : expandedDevices // ignore: cast_nullable_to_non_nullable
               as Map<String, Map<String, String>>?,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      statusCode: statusCode == freezed
+      statusCode: null == statusCode
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int,
-      lastUsedAt: lastUsedAt == freezed
+      lastUsedAt: null == lastUsedAt
           ? _value.lastUsedAt
           : lastUsedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      location: location == freezed
+      location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as LxdInstanceType,
-      project: project == freezed
+      project: null == project
           ? _value.project
           : project // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -263,6 +267,7 @@ abstract class _$$_LxdInstanceCopyWith<$Res>
           _$_LxdInstance value, $Res Function(_$_LxdInstance) then) =
       __$$_LxdInstanceCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String architecture,
       Map<String, String> config,
@@ -288,106 +293,105 @@ abstract class _$$_LxdInstanceCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LxdInstanceCopyWithImpl<$Res> extends _$LxdInstanceCopyWithImpl<$Res>
+class __$$_LxdInstanceCopyWithImpl<$Res>
+    extends _$LxdInstanceCopyWithImpl<$Res, _$_LxdInstance>
     implements _$$_LxdInstanceCopyWith<$Res> {
   __$$_LxdInstanceCopyWithImpl(
       _$_LxdInstance _value, $Res Function(_$_LxdInstance) _then)
-      : super(_value, (v) => _then(v as _$_LxdInstance));
+      : super(_value, _then);
 
-  @override
-  _$_LxdInstance get _value => super._value as _$_LxdInstance;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? architecture = freezed,
-    Object? config = freezed,
-    Object? devices = freezed,
-    Object? ephemeral = freezed,
-    Object? profiles = freezed,
+    Object? architecture = null,
+    Object? config = null,
+    Object? devices = null,
+    Object? ephemeral = null,
+    Object? profiles = null,
     Object? restore = freezed,
-    Object? stateful = freezed,
-    Object? description = freezed,
-    Object? createdAt = freezed,
+    Object? stateful = null,
+    Object? description = null,
+    Object? createdAt = null,
     Object? expandedConfig = freezed,
     Object? expandedDevices = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
-    Object? statusCode = freezed,
-    Object? lastUsedAt = freezed,
-    Object? location = freezed,
-    Object? type = freezed,
-    Object? project = freezed,
+    Object? name = null,
+    Object? status = null,
+    Object? statusCode = null,
+    Object? lastUsedAt = null,
+    Object? location = null,
+    Object? type = null,
+    Object? project = null,
   }) {
     return _then(_$_LxdInstance(
-      architecture: architecture == freezed
+      architecture: null == architecture
           ? _value.architecture
           : architecture // ignore: cast_nullable_to_non_nullable
               as String,
-      config: config == freezed
+      config: null == config
           ? _value._config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      devices: devices == freezed
+      devices: null == devices
           ? _value._devices
           : devices // ignore: cast_nullable_to_non_nullable
               as Map<String, Map<String, String>>,
-      ephemeral: ephemeral == freezed
+      ephemeral: null == ephemeral
           ? _value.ephemeral
           : ephemeral // ignore: cast_nullable_to_non_nullable
               as bool,
-      profiles: profiles == freezed
+      profiles: null == profiles
           ? _value._profiles
           : profiles // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      restore: restore == freezed
+      restore: freezed == restore
           ? _value.restore
           : restore // ignore: cast_nullable_to_non_nullable
               as String?,
-      stateful: stateful == freezed
+      stateful: null == stateful
           ? _value.stateful
           : stateful // ignore: cast_nullable_to_non_nullable
               as bool,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      expandedConfig: expandedConfig == freezed
+      expandedConfig: freezed == expandedConfig
           ? _value._expandedConfig
           : expandedConfig // ignore: cast_nullable_to_non_nullable
               as Map<String, String>?,
-      expandedDevices: expandedDevices == freezed
+      expandedDevices: freezed == expandedDevices
           ? _value._expandedDevices
           : expandedDevices // ignore: cast_nullable_to_non_nullable
               as Map<String, Map<String, String>>?,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      statusCode: statusCode == freezed
+      statusCode: null == statusCode
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int,
-      lastUsedAt: lastUsedAt == freezed
+      lastUsedAt: null == lastUsedAt
           ? _value.lastUsedAt
           : lastUsedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      location: location == freezed
+      location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as LxdInstanceType,
-      project: project == freezed
+      project: null == project
           ? _value.project
           : project // ignore: cast_nullable_to_non_nullable
               as String,
@@ -604,63 +608,70 @@ class _$_LxdInstance implements _LxdInstance {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdInstance &&
-            const DeepCollectionEquality()
-                .equals(other.architecture, architecture) &&
+            (identical(other.architecture, architecture) ||
+                other.architecture == architecture) &&
             const DeepCollectionEquality().equals(other._config, _config) &&
             const DeepCollectionEquality().equals(other._devices, _devices) &&
-            const DeepCollectionEquality().equals(other.ephemeral, ephemeral) &&
+            (identical(other.ephemeral, ephemeral) ||
+                other.ephemeral == ephemeral) &&
             const DeepCollectionEquality().equals(other._profiles, _profiles) &&
-            const DeepCollectionEquality().equals(other.restore, restore) &&
-            const DeepCollectionEquality().equals(other.stateful, stateful) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            (identical(other.restore, restore) || other.restore == restore) &&
+            (identical(other.stateful, stateful) ||
+                other.stateful == stateful) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             const DeepCollectionEquality()
                 .equals(other._expandedConfig, _expandedConfig) &&
             const DeepCollectionEquality()
                 .equals(other._expandedDevices, _expandedDevices) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.statusCode, statusCode) &&
-            const DeepCollectionEquality()
-                .equals(other.lastUsedAt, lastUsedAt) &&
-            const DeepCollectionEquality().equals(other.location, location) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.project, project));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.statusCode, statusCode) ||
+                other.statusCode == statusCode) &&
+            (identical(other.lastUsedAt, lastUsedAt) ||
+                other.lastUsedAt == lastUsedAt) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.project, project) || other.project == project));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(architecture),
+      architecture,
       const DeepCollectionEquality().hash(_config),
       const DeepCollectionEquality().hash(_devices),
-      const DeepCollectionEquality().hash(ephemeral),
+      ephemeral,
       const DeepCollectionEquality().hash(_profiles),
-      const DeepCollectionEquality().hash(restore),
-      const DeepCollectionEquality().hash(stateful),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(createdAt),
+      restore,
+      stateful,
+      description,
+      createdAt,
       const DeepCollectionEquality().hash(_expandedConfig),
       const DeepCollectionEquality().hash(_expandedDevices),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(statusCode),
-      const DeepCollectionEquality().hash(lastUsedAt),
-      const DeepCollectionEquality().hash(location),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(project));
+      name,
+      status,
+      statusCode,
+      lastUsedAt,
+      location,
+      type,
+      project);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdInstanceCopyWith<_$_LxdInstance> get copyWith =>
       __$$_LxdInstanceCopyWithImpl<_$_LxdInstance>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdInstanceToJson(this);
+    return _$$_LxdInstanceToJson(
+      this,
+    );
   }
 }
 
@@ -696,7 +707,7 @@ abstract class _LxdInstance implements LxdInstance {
   /// Architecture name
   ///
   /// Example: x86_64
-  String get architecture => throw _privateConstructorUsedError;
+  String get architecture;
   @override
 
   /// Instance configuration
@@ -707,7 +718,7 @@ abstract class _LxdInstance implements LxdInstance {
   /// ```
   ///
   /// See: https://linuxcontainers.org/lxd/docs/master/instances/
-  Map<String, String> get config => throw _privateConstructorUsedError;
+  Map<String, String> get config;
   @override
 
   /// Instance devices
@@ -718,92 +729,90 @@ abstract class _LxdInstance implements LxdInstance {
   /// ```
   ///
   /// See: https://linuxcontainers.org/lxd/docs/master/instances/
-  Map<String, Map<String, String>> get devices =>
-      throw _privateConstructorUsedError;
+  Map<String, Map<String, String>> get devices;
   @override
 
   /// Whether the instance is ephemeral (deleted on shutdown)
-  bool get ephemeral => throw _privateConstructorUsedError;
+  bool get ephemeral;
   @override
 
   /// List of profiles applied to the instance
   ///
   /// Example: ["default"]
-  List<String> get profiles => throw _privateConstructorUsedError;
+  List<String> get profiles;
   @override
 
   /// If set, instance will be restored to the provided snapshot name
   ///
   /// Example: snap0
   @JsonKey(includeIfNull: false)
-  String? get restore => throw _privateConstructorUsedError;
+  String? get restore;
   @override
 
   /// Whether the instance currently has saved state on disk
-  bool get stateful => throw _privateConstructorUsedError;
+  bool get stateful;
   @override
 
   /// Instance description
   ///
   /// Example: My test instance
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
 
   /// Instance creation timestamp
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt;
   @override
 
   /// Expanded configuration (all profiles and local config merged)
   ///
   /// Example: {"security.nesting": "true"}
   @JsonKey(includeIfNull: false)
-  Map<String, String>? get expandedConfig => throw _privateConstructorUsedError;
+  Map<String, String>? get expandedConfig;
   @override
 
   /// Expanded devices (all profiles and local devices merged)
   ///
   /// Example: {"root": {"type": "disk", "pool": "default", "path": "/"}}
   @JsonKey(includeIfNull: false)
-  Map<String, Map<String, String>>? get expandedDevices =>
-      throw _privateConstructorUsedError;
+  Map<String, Map<String, String>>? get expandedDevices;
   @override
 
   /// Instance name
   ///
   /// Example: foo
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
 
   /// Instance status
   ///
   /// Example: Running
-  String get status => throw _privateConstructorUsedError;
+  String get status;
   @override
 
   /// Instance status code
   ///
   /// Example: 101
-  int get statusCode => throw _privateConstructorUsedError;
+  int get statusCode;
   @override
 
   /// Last start timestamp
-  DateTime get lastUsedAt => throw _privateConstructorUsedError;
+  DateTime get lastUsedAt;
   @override
 
   /// What cluster member this instance is located on
   ///
   /// Example: lxd01
-  String get location => throw _privateConstructorUsedError;
+  String get location;
   @override
 
   /// The type of instance
-  LxdInstanceType get type => throw _privateConstructorUsedError;
+  LxdInstanceType get type;
   @override
 
   /// Instance project name
   ///
   /// Example: foo
-  String get project => throw _privateConstructorUsedError;
+  String get project;
   @override
   @JsonKey(ignore: true)
   _$$_LxdInstanceCopyWith<_$_LxdInstance> get copyWith =>

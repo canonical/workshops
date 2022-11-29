@@ -61,7 +61,7 @@ Map<String, dynamic> _$$_LxdInstanceToJson(_$_LxdInstance instance) {
   val['status_code'] = instance.statusCode;
   val['last_used_at'] = instance.lastUsedAt.toIso8601String();
   val['location'] = instance.location;
-  val['type'] = _$LxdInstanceTypeEnumMap[instance.type];
+  val['type'] = _$LxdInstanceTypeEnumMap[instance.type]!;
   val['project'] = instance.project;
   return val;
 }

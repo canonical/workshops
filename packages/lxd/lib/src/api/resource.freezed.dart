@@ -33,34 +33,37 @@ mixin _$LxdCpuResources {
 abstract class $LxdCpuResourcesCopyWith<$Res> {
   factory $LxdCpuResourcesCopyWith(
           LxdCpuResources value, $Res Function(LxdCpuResources) then) =
-      _$LxdCpuResourcesCopyWithImpl<$Res>;
+      _$LxdCpuResourcesCopyWithImpl<$Res, LxdCpuResources>;
+  @useResult
   $Res call({String architecture, List<String> sockets});
 }
 
 /// @nodoc
-class _$LxdCpuResourcesCopyWithImpl<$Res>
+class _$LxdCpuResourcesCopyWithImpl<$Res, $Val extends LxdCpuResources>
     implements $LxdCpuResourcesCopyWith<$Res> {
   _$LxdCpuResourcesCopyWithImpl(this._value, this._then);
 
-  final LxdCpuResources _value;
   // ignore: unused_field
-  final $Res Function(LxdCpuResources) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? architecture = freezed,
-    Object? sockets = freezed,
+    Object? architecture = null,
+    Object? sockets = null,
   }) {
     return _then(_value.copyWith(
-      architecture: architecture == freezed
+      architecture: null == architecture
           ? _value.architecture
           : architecture // ignore: cast_nullable_to_non_nullable
               as String,
-      sockets: sockets == freezed
+      sockets: null == sockets
           ? _value.sockets
           : sockets // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -71,31 +74,30 @@ abstract class _$$_LxdCpuResourcesCopyWith<$Res>
           _$_LxdCpuResources value, $Res Function(_$_LxdCpuResources) then) =
       __$$_LxdCpuResourcesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String architecture, List<String> sockets});
 }
 
 /// @nodoc
 class __$$_LxdCpuResourcesCopyWithImpl<$Res>
-    extends _$LxdCpuResourcesCopyWithImpl<$Res>
+    extends _$LxdCpuResourcesCopyWithImpl<$Res, _$_LxdCpuResources>
     implements _$$_LxdCpuResourcesCopyWith<$Res> {
   __$$_LxdCpuResourcesCopyWithImpl(
       _$_LxdCpuResources _value, $Res Function(_$_LxdCpuResources) _then)
-      : super(_value, (v) => _then(v as _$_LxdCpuResources));
+      : super(_value, _then);
 
-  @override
-  _$_LxdCpuResources get _value => super._value as _$_LxdCpuResources;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? architecture = freezed,
-    Object? sockets = freezed,
+    Object? architecture = null,
+    Object? sockets = null,
   }) {
     return _then(_$_LxdCpuResources(
-      architecture: architecture == freezed
+      architecture: null == architecture
           ? _value.architecture
           : architecture // ignore: cast_nullable_to_non_nullable
               as String,
-      sockets: sockets == freezed
+      sockets: null == sockets
           ? _value._sockets
           : sockets // ignore: cast_nullable_to_non_nullable
               as List<String>,
@@ -132,26 +134,27 @@ class _$_LxdCpuResources implements _LxdCpuResources {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdCpuResources &&
-            const DeepCollectionEquality()
-                .equals(other.architecture, architecture) &&
+            (identical(other.architecture, architecture) ||
+                other.architecture == architecture) &&
             const DeepCollectionEquality().equals(other._sockets, _sockets));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(architecture),
-      const DeepCollectionEquality().hash(_sockets));
+      runtimeType, architecture, const DeepCollectionEquality().hash(_sockets));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdCpuResourcesCopyWith<_$_LxdCpuResources> get copyWith =>
       __$$_LxdCpuResourcesCopyWithImpl<_$_LxdCpuResources>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdCpuResourcesToJson(this);
+    return _$$_LxdCpuResourcesToJson(
+      this,
+    );
   }
 }
 
@@ -164,9 +167,9 @@ abstract class _LxdCpuResources implements LxdCpuResources {
       _$_LxdCpuResources.fromJson;
 
   @override
-  String get architecture => throw _privateConstructorUsedError;
+  String get architecture;
   @override
-  List<String> get sockets => throw _privateConstructorUsedError;
+  List<String> get sockets;
   @override
   @JsonKey(ignore: true)
   _$$_LxdCpuResourcesCopyWith<_$_LxdCpuResources> get copyWith =>
@@ -192,34 +195,37 @@ mixin _$LxdMemoryResources {
 abstract class $LxdMemoryResourcesCopyWith<$Res> {
   factory $LxdMemoryResourcesCopyWith(
           LxdMemoryResources value, $Res Function(LxdMemoryResources) then) =
-      _$LxdMemoryResourcesCopyWithImpl<$Res>;
+      _$LxdMemoryResourcesCopyWithImpl<$Res, LxdMemoryResources>;
+  @useResult
   $Res call({int used, int total});
 }
 
 /// @nodoc
-class _$LxdMemoryResourcesCopyWithImpl<$Res>
+class _$LxdMemoryResourcesCopyWithImpl<$Res, $Val extends LxdMemoryResources>
     implements $LxdMemoryResourcesCopyWith<$Res> {
   _$LxdMemoryResourcesCopyWithImpl(this._value, this._then);
 
-  final LxdMemoryResources _value;
   // ignore: unused_field
-  final $Res Function(LxdMemoryResources) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? used = freezed,
-    Object? total = freezed,
+    Object? used = null,
+    Object? total = null,
   }) {
     return _then(_value.copyWith(
-      used: used == freezed
+      used: null == used
           ? _value.used
           : used // ignore: cast_nullable_to_non_nullable
               as int,
-      total: total == freezed
+      total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -230,31 +236,30 @@ abstract class _$$_LxdMemoryResourcesCopyWith<$Res>
           $Res Function(_$_LxdMemoryResources) then) =
       __$$_LxdMemoryResourcesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int used, int total});
 }
 
 /// @nodoc
 class __$$_LxdMemoryResourcesCopyWithImpl<$Res>
-    extends _$LxdMemoryResourcesCopyWithImpl<$Res>
+    extends _$LxdMemoryResourcesCopyWithImpl<$Res, _$_LxdMemoryResources>
     implements _$$_LxdMemoryResourcesCopyWith<$Res> {
   __$$_LxdMemoryResourcesCopyWithImpl(
       _$_LxdMemoryResources _value, $Res Function(_$_LxdMemoryResources) _then)
-      : super(_value, (v) => _then(v as _$_LxdMemoryResources));
+      : super(_value, _then);
 
-  @override
-  _$_LxdMemoryResources get _value => super._value as _$_LxdMemoryResources;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? used = freezed,
-    Object? total = freezed,
+    Object? used = null,
+    Object? total = null,
   }) {
     return _then(_$_LxdMemoryResources(
-      used: used == freezed
+      used: null == used
           ? _value.used
           : used // ignore: cast_nullable_to_non_nullable
               as int,
-      total: total == freezed
+      total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as int,
@@ -285,26 +290,26 @@ class _$_LxdMemoryResources implements _LxdMemoryResources {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdMemoryResources &&
-            const DeepCollectionEquality().equals(other.used, used) &&
-            const DeepCollectionEquality().equals(other.total, total));
+            (identical(other.used, used) || other.used == used) &&
+            (identical(other.total, total) || other.total == total));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(used),
-      const DeepCollectionEquality().hash(total));
+  int get hashCode => Object.hash(runtimeType, used, total);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdMemoryResourcesCopyWith<_$_LxdMemoryResources> get copyWith =>
       __$$_LxdMemoryResourcesCopyWithImpl<_$_LxdMemoryResources>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdMemoryResourcesToJson(this);
+    return _$$_LxdMemoryResourcesToJson(
+      this,
+    );
   }
 }
 
@@ -317,9 +322,9 @@ abstract class _LxdMemoryResources implements LxdMemoryResources {
       _$_LxdMemoryResources.fromJson;
 
   @override
-  int get used => throw _privateConstructorUsedError;
+  int get used;
   @override
-  int get total => throw _privateConstructorUsedError;
+  int get total;
   @override
   @JsonKey(ignore: true)
   _$$_LxdMemoryResourcesCopyWith<_$_LxdMemoryResources> get copyWith =>
@@ -344,29 +349,32 @@ mixin _$LxdGpuResources {
 abstract class $LxdGpuResourcesCopyWith<$Res> {
   factory $LxdGpuResourcesCopyWith(
           LxdGpuResources value, $Res Function(LxdGpuResources) then) =
-      _$LxdGpuResourcesCopyWithImpl<$Res>;
+      _$LxdGpuResourcesCopyWithImpl<$Res, LxdGpuResources>;
+  @useResult
   $Res call({List<LxdGpuCard> cards});
 }
 
 /// @nodoc
-class _$LxdGpuResourcesCopyWithImpl<$Res>
+class _$LxdGpuResourcesCopyWithImpl<$Res, $Val extends LxdGpuResources>
     implements $LxdGpuResourcesCopyWith<$Res> {
   _$LxdGpuResourcesCopyWithImpl(this._value, this._then);
 
-  final LxdGpuResources _value;
   // ignore: unused_field
-  final $Res Function(LxdGpuResources) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cards = freezed,
+    Object? cards = null,
   }) {
     return _then(_value.copyWith(
-      cards: cards == freezed
+      cards: null == cards
           ? _value.cards
           : cards // ignore: cast_nullable_to_non_nullable
               as List<LxdGpuCard>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -377,26 +385,25 @@ abstract class _$$_LxdGpuResourcesCopyWith<$Res>
           _$_LxdGpuResources value, $Res Function(_$_LxdGpuResources) then) =
       __$$_LxdGpuResourcesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<LxdGpuCard> cards});
 }
 
 /// @nodoc
 class __$$_LxdGpuResourcesCopyWithImpl<$Res>
-    extends _$LxdGpuResourcesCopyWithImpl<$Res>
+    extends _$LxdGpuResourcesCopyWithImpl<$Res, _$_LxdGpuResources>
     implements _$$_LxdGpuResourcesCopyWith<$Res> {
   __$$_LxdGpuResourcesCopyWithImpl(
       _$_LxdGpuResources _value, $Res Function(_$_LxdGpuResources) _then)
-      : super(_value, (v) => _then(v as _$_LxdGpuResources));
+      : super(_value, _then);
 
-  @override
-  _$_LxdGpuResources get _value => super._value as _$_LxdGpuResources;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cards = freezed,
+    Object? cards = null,
   }) {
     return _then(_$_LxdGpuResources(
-      cards: cards == freezed
+      cards: null == cards
           ? _value._cards
           : cards // ignore: cast_nullable_to_non_nullable
               as List<LxdGpuCard>,
@@ -440,12 +447,15 @@ class _$_LxdGpuResources implements _LxdGpuResources {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdGpuResourcesCopyWith<_$_LxdGpuResources> get copyWith =>
       __$$_LxdGpuResourcesCopyWithImpl<_$_LxdGpuResources>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdGpuResourcesToJson(this);
+    return _$$_LxdGpuResourcesToJson(
+      this,
+    );
   }
 }
 
@@ -457,7 +467,7 @@ abstract class _LxdGpuResources implements LxdGpuResources {
       _$_LxdGpuResources.fromJson;
 
   @override
-  List<LxdGpuCard> get cards => throw _privateConstructorUsedError;
+  List<LxdGpuCard> get cards;
   @override
   @JsonKey(ignore: true)
   _$$_LxdGpuResourcesCopyWith<_$_LxdGpuResources> get copyWith =>
@@ -485,44 +495,48 @@ mixin _$LxdGpuCard {
 abstract class $LxdGpuCardCopyWith<$Res> {
   factory $LxdGpuCardCopyWith(
           LxdGpuCard value, $Res Function(LxdGpuCard) then) =
-      _$LxdGpuCardCopyWithImpl<$Res>;
+      _$LxdGpuCardCopyWithImpl<$Res, LxdGpuCard>;
+  @useResult
   $Res call(
       {String driver, String driverVersion, String vendor, String vendorId});
 }
 
 /// @nodoc
-class _$LxdGpuCardCopyWithImpl<$Res> implements $LxdGpuCardCopyWith<$Res> {
+class _$LxdGpuCardCopyWithImpl<$Res, $Val extends LxdGpuCard>
+    implements $LxdGpuCardCopyWith<$Res> {
   _$LxdGpuCardCopyWithImpl(this._value, this._then);
 
-  final LxdGpuCard _value;
   // ignore: unused_field
-  final $Res Function(LxdGpuCard) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? driver = freezed,
-    Object? driverVersion = freezed,
-    Object? vendor = freezed,
-    Object? vendorId = freezed,
+    Object? driver = null,
+    Object? driverVersion = null,
+    Object? vendor = null,
+    Object? vendorId = null,
   }) {
     return _then(_value.copyWith(
-      driver: driver == freezed
+      driver: null == driver
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
               as String,
-      driverVersion: driverVersion == freezed
+      driverVersion: null == driverVersion
           ? _value.driverVersion
           : driverVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      vendorId: vendorId == freezed
+      vendorId: null == vendorId
           ? _value.vendorId
           : vendorId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -533,41 +547,41 @@ abstract class _$$_LxdGpuCardCopyWith<$Res>
           _$_LxdGpuCard value, $Res Function(_$_LxdGpuCard) then) =
       __$$_LxdGpuCardCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String driver, String driverVersion, String vendor, String vendorId});
 }
 
 /// @nodoc
-class __$$_LxdGpuCardCopyWithImpl<$Res> extends _$LxdGpuCardCopyWithImpl<$Res>
+class __$$_LxdGpuCardCopyWithImpl<$Res>
+    extends _$LxdGpuCardCopyWithImpl<$Res, _$_LxdGpuCard>
     implements _$$_LxdGpuCardCopyWith<$Res> {
   __$$_LxdGpuCardCopyWithImpl(
       _$_LxdGpuCard _value, $Res Function(_$_LxdGpuCard) _then)
-      : super(_value, (v) => _then(v as _$_LxdGpuCard));
+      : super(_value, _then);
 
-  @override
-  _$_LxdGpuCard get _value => super._value as _$_LxdGpuCard;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? driver = freezed,
-    Object? driverVersion = freezed,
-    Object? vendor = freezed,
-    Object? vendorId = freezed,
+    Object? driver = null,
+    Object? driverVersion = null,
+    Object? vendor = null,
+    Object? vendorId = null,
   }) {
     return _then(_$_LxdGpuCard(
-      driver: driver == freezed
+      driver: null == driver
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
               as String,
-      driverVersion: driverVersion == freezed
+      driverVersion: null == driverVersion
           ? _value.driverVersion
           : driverVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      vendorId: vendorId == freezed
+      vendorId: null == vendorId
           ? _value.vendorId
           : vendorId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -606,30 +620,30 @@ class _$_LxdGpuCard implements _LxdGpuCard {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdGpuCard &&
-            const DeepCollectionEquality().equals(other.driver, driver) &&
-            const DeepCollectionEquality()
-                .equals(other.driverVersion, driverVersion) &&
-            const DeepCollectionEquality().equals(other.vendor, vendor) &&
-            const DeepCollectionEquality().equals(other.vendorId, vendorId));
+            (identical(other.driver, driver) || other.driver == driver) &&
+            (identical(other.driverVersion, driverVersion) ||
+                other.driverVersion == driverVersion) &&
+            (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.vendorId, vendorId) ||
+                other.vendorId == vendorId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(driver),
-      const DeepCollectionEquality().hash(driverVersion),
-      const DeepCollectionEquality().hash(vendor),
-      const DeepCollectionEquality().hash(vendorId));
+  int get hashCode =>
+      Object.hash(runtimeType, driver, driverVersion, vendor, vendorId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdGpuCardCopyWith<_$_LxdGpuCard> get copyWith =>
       __$$_LxdGpuCardCopyWithImpl<_$_LxdGpuCard>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdGpuCardToJson(this);
+    return _$$_LxdGpuCardToJson(
+      this,
+    );
   }
 }
 
@@ -644,13 +658,13 @@ abstract class _LxdGpuCard implements LxdGpuCard {
       _$_LxdGpuCard.fromJson;
 
   @override
-  String get driver => throw _privateConstructorUsedError;
+  String get driver;
   @override
-  String get driverVersion => throw _privateConstructorUsedError;
+  String get driverVersion;
   @override
-  String get vendor => throw _privateConstructorUsedError;
+  String get vendor;
   @override
-  String get vendorId => throw _privateConstructorUsedError;
+  String get vendorId;
   @override
   @JsonKey(ignore: true)
   _$$_LxdGpuCardCopyWith<_$_LxdGpuCard> get copyWith =>
@@ -675,29 +689,32 @@ mixin _$LXdNetworkResources {
 abstract class $LXdNetworkResourcesCopyWith<$Res> {
   factory $LXdNetworkResourcesCopyWith(
           LXdNetworkResources value, $Res Function(LXdNetworkResources) then) =
-      _$LXdNetworkResourcesCopyWithImpl<$Res>;
+      _$LXdNetworkResourcesCopyWithImpl<$Res, LXdNetworkResources>;
+  @useResult
   $Res call({List<LxdNetworkCard> cards});
 }
 
 /// @nodoc
-class _$LXdNetworkResourcesCopyWithImpl<$Res>
+class _$LXdNetworkResourcesCopyWithImpl<$Res, $Val extends LXdNetworkResources>
     implements $LXdNetworkResourcesCopyWith<$Res> {
   _$LXdNetworkResourcesCopyWithImpl(this._value, this._then);
 
-  final LXdNetworkResources _value;
   // ignore: unused_field
-  final $Res Function(LXdNetworkResources) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cards = freezed,
+    Object? cards = null,
   }) {
     return _then(_value.copyWith(
-      cards: cards == freezed
+      cards: null == cards
           ? _value.cards
           : cards // ignore: cast_nullable_to_non_nullable
               as List<LxdNetworkCard>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -708,26 +725,25 @@ abstract class _$$_LXdNetworkResourcesCopyWith<$Res>
           $Res Function(_$_LXdNetworkResources) then) =
       __$$_LXdNetworkResourcesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<LxdNetworkCard> cards});
 }
 
 /// @nodoc
 class __$$_LXdNetworkResourcesCopyWithImpl<$Res>
-    extends _$LXdNetworkResourcesCopyWithImpl<$Res>
+    extends _$LXdNetworkResourcesCopyWithImpl<$Res, _$_LXdNetworkResources>
     implements _$$_LXdNetworkResourcesCopyWith<$Res> {
   __$$_LXdNetworkResourcesCopyWithImpl(_$_LXdNetworkResources _value,
       $Res Function(_$_LXdNetworkResources) _then)
-      : super(_value, (v) => _then(v as _$_LXdNetworkResources));
+      : super(_value, _then);
 
-  @override
-  _$_LXdNetworkResources get _value => super._value as _$_LXdNetworkResources;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cards = freezed,
+    Object? cards = null,
   }) {
     return _then(_$_LXdNetworkResources(
-      cards: cards == freezed
+      cards: null == cards
           ? _value._cards
           : cards // ignore: cast_nullable_to_non_nullable
               as List<LxdNetworkCard>,
@@ -771,13 +787,16 @@ class _$_LXdNetworkResources implements _LXdNetworkResources {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LXdNetworkResourcesCopyWith<_$_LXdNetworkResources> get copyWith =>
       __$$_LXdNetworkResourcesCopyWithImpl<_$_LXdNetworkResources>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LXdNetworkResourcesToJson(this);
+    return _$$_LXdNetworkResourcesToJson(
+      this,
+    );
   }
 }
 
@@ -789,7 +808,7 @@ abstract class _LXdNetworkResources implements LXdNetworkResources {
       _$_LXdNetworkResources.fromJson;
 
   @override
-  List<LxdNetworkCard> get cards => throw _privateConstructorUsedError;
+  List<LxdNetworkCard> get cards;
   @override
   @JsonKey(ignore: true)
   _$$_LXdNetworkResourcesCopyWith<_$_LXdNetworkResources> get copyWith =>
@@ -817,45 +836,48 @@ mixin _$LxdNetworkCard {
 abstract class $LxdNetworkCardCopyWith<$Res> {
   factory $LxdNetworkCardCopyWith(
           LxdNetworkCard value, $Res Function(LxdNetworkCard) then) =
-      _$LxdNetworkCardCopyWithImpl<$Res>;
+      _$LxdNetworkCardCopyWithImpl<$Res, LxdNetworkCard>;
+  @useResult
   $Res call(
       {String driver, String driverVersion, String vendor, String vendorId});
 }
 
 /// @nodoc
-class _$LxdNetworkCardCopyWithImpl<$Res>
+class _$LxdNetworkCardCopyWithImpl<$Res, $Val extends LxdNetworkCard>
     implements $LxdNetworkCardCopyWith<$Res> {
   _$LxdNetworkCardCopyWithImpl(this._value, this._then);
 
-  final LxdNetworkCard _value;
   // ignore: unused_field
-  final $Res Function(LxdNetworkCard) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? driver = freezed,
-    Object? driverVersion = freezed,
-    Object? vendor = freezed,
-    Object? vendorId = freezed,
+    Object? driver = null,
+    Object? driverVersion = null,
+    Object? vendor = null,
+    Object? vendorId = null,
   }) {
     return _then(_value.copyWith(
-      driver: driver == freezed
+      driver: null == driver
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
               as String,
-      driverVersion: driverVersion == freezed
+      driverVersion: null == driverVersion
           ? _value.driverVersion
           : driverVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      vendorId: vendorId == freezed
+      vendorId: null == vendorId
           ? _value.vendorId
           : vendorId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -866,42 +888,41 @@ abstract class _$$_LxdNetworkCardCopyWith<$Res>
           _$_LxdNetworkCard value, $Res Function(_$_LxdNetworkCard) then) =
       __$$_LxdNetworkCardCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String driver, String driverVersion, String vendor, String vendorId});
 }
 
 /// @nodoc
 class __$$_LxdNetworkCardCopyWithImpl<$Res>
-    extends _$LxdNetworkCardCopyWithImpl<$Res>
+    extends _$LxdNetworkCardCopyWithImpl<$Res, _$_LxdNetworkCard>
     implements _$$_LxdNetworkCardCopyWith<$Res> {
   __$$_LxdNetworkCardCopyWithImpl(
       _$_LxdNetworkCard _value, $Res Function(_$_LxdNetworkCard) _then)
-      : super(_value, (v) => _then(v as _$_LxdNetworkCard));
+      : super(_value, _then);
 
-  @override
-  _$_LxdNetworkCard get _value => super._value as _$_LxdNetworkCard;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? driver = freezed,
-    Object? driverVersion = freezed,
-    Object? vendor = freezed,
-    Object? vendorId = freezed,
+    Object? driver = null,
+    Object? driverVersion = null,
+    Object? vendor = null,
+    Object? vendorId = null,
   }) {
     return _then(_$_LxdNetworkCard(
-      driver: driver == freezed
+      driver: null == driver
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
               as String,
-      driverVersion: driverVersion == freezed
+      driverVersion: null == driverVersion
           ? _value.driverVersion
           : driverVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      vendorId: vendorId == freezed
+      vendorId: null == vendorId
           ? _value.vendorId
           : vendorId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -940,30 +961,30 @@ class _$_LxdNetworkCard implements _LxdNetworkCard {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdNetworkCard &&
-            const DeepCollectionEquality().equals(other.driver, driver) &&
-            const DeepCollectionEquality()
-                .equals(other.driverVersion, driverVersion) &&
-            const DeepCollectionEquality().equals(other.vendor, vendor) &&
-            const DeepCollectionEquality().equals(other.vendorId, vendorId));
+            (identical(other.driver, driver) || other.driver == driver) &&
+            (identical(other.driverVersion, driverVersion) ||
+                other.driverVersion == driverVersion) &&
+            (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.vendorId, vendorId) ||
+                other.vendorId == vendorId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(driver),
-      const DeepCollectionEquality().hash(driverVersion),
-      const DeepCollectionEquality().hash(vendor),
-      const DeepCollectionEquality().hash(vendorId));
+  int get hashCode =>
+      Object.hash(runtimeType, driver, driverVersion, vendor, vendorId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdNetworkCardCopyWith<_$_LxdNetworkCard> get copyWith =>
       __$$_LxdNetworkCardCopyWithImpl<_$_LxdNetworkCard>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdNetworkCardToJson(this);
+    return _$$_LxdNetworkCardToJson(
+      this,
+    );
   }
 }
 
@@ -978,13 +999,13 @@ abstract class _LxdNetworkCard implements LxdNetworkCard {
       _$_LxdNetworkCard.fromJson;
 
   @override
-  String get driver => throw _privateConstructorUsedError;
+  String get driver;
   @override
-  String get driverVersion => throw _privateConstructorUsedError;
+  String get driverVersion;
   @override
-  String get vendor => throw _privateConstructorUsedError;
+  String get vendor;
   @override
-  String get vendorId => throw _privateConstructorUsedError;
+  String get vendorId;
   @override
   @JsonKey(ignore: true)
   _$$_LxdNetworkCardCopyWith<_$_LxdNetworkCard> get copyWith =>
@@ -1009,29 +1030,32 @@ mixin _$LxdStorageResources {
 abstract class $LxdStorageResourcesCopyWith<$Res> {
   factory $LxdStorageResourcesCopyWith(
           LxdStorageResources value, $Res Function(LxdStorageResources) then) =
-      _$LxdStorageResourcesCopyWithImpl<$Res>;
+      _$LxdStorageResourcesCopyWithImpl<$Res, LxdStorageResources>;
+  @useResult
   $Res call({List<LxdStorageDisk> disks});
 }
 
 /// @nodoc
-class _$LxdStorageResourcesCopyWithImpl<$Res>
+class _$LxdStorageResourcesCopyWithImpl<$Res, $Val extends LxdStorageResources>
     implements $LxdStorageResourcesCopyWith<$Res> {
   _$LxdStorageResourcesCopyWithImpl(this._value, this._then);
 
-  final LxdStorageResources _value;
   // ignore: unused_field
-  final $Res Function(LxdStorageResources) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disks = freezed,
+    Object? disks = null,
   }) {
     return _then(_value.copyWith(
-      disks: disks == freezed
+      disks: null == disks
           ? _value.disks
           : disks // ignore: cast_nullable_to_non_nullable
               as List<LxdStorageDisk>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1042,26 +1066,25 @@ abstract class _$$_LxdStorageResourcesCopyWith<$Res>
           $Res Function(_$_LxdStorageResources) then) =
       __$$_LxdStorageResourcesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<LxdStorageDisk> disks});
 }
 
 /// @nodoc
 class __$$_LxdStorageResourcesCopyWithImpl<$Res>
-    extends _$LxdStorageResourcesCopyWithImpl<$Res>
+    extends _$LxdStorageResourcesCopyWithImpl<$Res, _$_LxdStorageResources>
     implements _$$_LxdStorageResourcesCopyWith<$Res> {
   __$$_LxdStorageResourcesCopyWithImpl(_$_LxdStorageResources _value,
       $Res Function(_$_LxdStorageResources) _then)
-      : super(_value, (v) => _then(v as _$_LxdStorageResources));
+      : super(_value, _then);
 
-  @override
-  _$_LxdStorageResources get _value => super._value as _$_LxdStorageResources;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? disks = freezed,
+    Object? disks = null,
   }) {
     return _then(_$_LxdStorageResources(
-      disks: disks == freezed
+      disks: null == disks
           ? _value._disks
           : disks // ignore: cast_nullable_to_non_nullable
               as List<LxdStorageDisk>,
@@ -1105,13 +1128,16 @@ class _$_LxdStorageResources implements _LxdStorageResources {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdStorageResourcesCopyWith<_$_LxdStorageResources> get copyWith =>
       __$$_LxdStorageResourcesCopyWithImpl<_$_LxdStorageResources>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdStorageResourcesToJson(this);
+    return _$$_LxdStorageResourcesToJson(
+      this,
+    );
   }
 }
 
@@ -1123,7 +1149,7 @@ abstract class _LxdStorageResources implements LxdStorageResources {
       _$_LxdStorageResources.fromJson;
 
   @override
-  List<LxdStorageDisk> get disks => throw _privateConstructorUsedError;
+  List<LxdStorageDisk> get disks;
   @override
   @JsonKey(ignore: true)
   _$$_LxdStorageResourcesCopyWith<_$_LxdStorageResources> get copyWith =>
@@ -1152,49 +1178,52 @@ mixin _$LxdStorageDisk {
 abstract class $LxdStorageDiskCopyWith<$Res> {
   factory $LxdStorageDiskCopyWith(
           LxdStorageDisk value, $Res Function(LxdStorageDisk) then) =
-      _$LxdStorageDiskCopyWithImpl<$Res>;
+      _$LxdStorageDiskCopyWithImpl<$Res, LxdStorageDisk>;
+  @useResult
   $Res call({String id, String model, String serial, int size, String type});
 }
 
 /// @nodoc
-class _$LxdStorageDiskCopyWithImpl<$Res>
+class _$LxdStorageDiskCopyWithImpl<$Res, $Val extends LxdStorageDisk>
     implements $LxdStorageDiskCopyWith<$Res> {
   _$LxdStorageDiskCopyWithImpl(this._value, this._then);
 
-  final LxdStorageDisk _value;
   // ignore: unused_field
-  final $Res Function(LxdStorageDisk) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? model = freezed,
-    Object? serial = freezed,
-    Object? size = freezed,
-    Object? type = freezed,
+    Object? id = null,
+    Object? model = null,
+    Object? serial = null,
+    Object? size = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      model: model == freezed
+      model: null == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as String,
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as String,
-      size: size == freezed
+      size: null == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1205,46 +1234,45 @@ abstract class _$$_LxdStorageDiskCopyWith<$Res>
           _$_LxdStorageDisk value, $Res Function(_$_LxdStorageDisk) then) =
       __$$_LxdStorageDiskCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, String model, String serial, int size, String type});
 }
 
 /// @nodoc
 class __$$_LxdStorageDiskCopyWithImpl<$Res>
-    extends _$LxdStorageDiskCopyWithImpl<$Res>
+    extends _$LxdStorageDiskCopyWithImpl<$Res, _$_LxdStorageDisk>
     implements _$$_LxdStorageDiskCopyWith<$Res> {
   __$$_LxdStorageDiskCopyWithImpl(
       _$_LxdStorageDisk _value, $Res Function(_$_LxdStorageDisk) _then)
-      : super(_value, (v) => _then(v as _$_LxdStorageDisk));
+      : super(_value, _then);
 
-  @override
-  _$_LxdStorageDisk get _value => super._value as _$_LxdStorageDisk;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? model = freezed,
-    Object? serial = freezed,
-    Object? size = freezed,
-    Object? type = freezed,
+    Object? id = null,
+    Object? model = null,
+    Object? serial = null,
+    Object? size = null,
+    Object? type = null,
   }) {
     return _then(_$_LxdStorageDisk(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      model: model == freezed
+      model: null == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as String,
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as String,
-      size: size == freezed
+      size: null == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1286,31 +1314,28 @@ class _$_LxdStorageDisk implements _LxdStorageDisk {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdStorageDisk &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.model, model) &&
-            const DeepCollectionEquality().equals(other.serial, serial) &&
-            const DeepCollectionEquality().equals(other.size, size) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.serial, serial) || other.serial == serial) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(model),
-      const DeepCollectionEquality().hash(serial),
-      const DeepCollectionEquality().hash(size),
-      const DeepCollectionEquality().hash(type));
+  int get hashCode => Object.hash(runtimeType, id, model, serial, size, type);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdStorageDiskCopyWith<_$_LxdStorageDisk> get copyWith =>
       __$$_LxdStorageDiskCopyWithImpl<_$_LxdStorageDisk>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdStorageDiskToJson(this);
+    return _$$_LxdStorageDiskToJson(
+      this,
+    );
   }
 }
 
@@ -1326,15 +1351,15 @@ abstract class _LxdStorageDisk implements LxdStorageDisk {
       _$_LxdStorageDisk.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get model => throw _privateConstructorUsedError;
+  String get model;
   @override
-  String get serial => throw _privateConstructorUsedError;
+  String get serial;
   @override
-  int get size => throw _privateConstructorUsedError;
+  int get size;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$_LxdStorageDiskCopyWith<_$_LxdStorageDisk> get copyWith =>
@@ -1359,29 +1384,32 @@ mixin _$LxdUsbResources {
 abstract class $LxdUsbResourcesCopyWith<$Res> {
   factory $LxdUsbResourcesCopyWith(
           LxdUsbResources value, $Res Function(LxdUsbResources) then) =
-      _$LxdUsbResourcesCopyWithImpl<$Res>;
+      _$LxdUsbResourcesCopyWithImpl<$Res, LxdUsbResources>;
+  @useResult
   $Res call({List<LxdUsbDevice> devices});
 }
 
 /// @nodoc
-class _$LxdUsbResourcesCopyWithImpl<$Res>
+class _$LxdUsbResourcesCopyWithImpl<$Res, $Val extends LxdUsbResources>
     implements $LxdUsbResourcesCopyWith<$Res> {
   _$LxdUsbResourcesCopyWithImpl(this._value, this._then);
 
-  final LxdUsbResources _value;
   // ignore: unused_field
-  final $Res Function(LxdUsbResources) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? devices = freezed,
+    Object? devices = null,
   }) {
     return _then(_value.copyWith(
-      devices: devices == freezed
+      devices: null == devices
           ? _value.devices
           : devices // ignore: cast_nullable_to_non_nullable
               as List<LxdUsbDevice>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1392,26 +1420,25 @@ abstract class _$$_LxdUsbResourcesCopyWith<$Res>
           _$_LxdUsbResources value, $Res Function(_$_LxdUsbResources) then) =
       __$$_LxdUsbResourcesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<LxdUsbDevice> devices});
 }
 
 /// @nodoc
 class __$$_LxdUsbResourcesCopyWithImpl<$Res>
-    extends _$LxdUsbResourcesCopyWithImpl<$Res>
+    extends _$LxdUsbResourcesCopyWithImpl<$Res, _$_LxdUsbResources>
     implements _$$_LxdUsbResourcesCopyWith<$Res> {
   __$$_LxdUsbResourcesCopyWithImpl(
       _$_LxdUsbResources _value, $Res Function(_$_LxdUsbResources) _then)
-      : super(_value, (v) => _then(v as _$_LxdUsbResources));
+      : super(_value, _then);
 
-  @override
-  _$_LxdUsbResources get _value => super._value as _$_LxdUsbResources;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? devices = freezed,
+    Object? devices = null,
   }) {
     return _then(_$_LxdUsbResources(
-      devices: devices == freezed
+      devices: null == devices
           ? _value._devices
           : devices // ignore: cast_nullable_to_non_nullable
               as List<LxdUsbDevice>,
@@ -1455,12 +1482,15 @@ class _$_LxdUsbResources implements _LxdUsbResources {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdUsbResourcesCopyWith<_$_LxdUsbResources> get copyWith =>
       __$$_LxdUsbResourcesCopyWithImpl<_$_LxdUsbResources>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdUsbResourcesToJson(this);
+    return _$$_LxdUsbResourcesToJson(
+      this,
+    );
   }
 }
 
@@ -1472,7 +1502,7 @@ abstract class _LxdUsbResources implements LxdUsbResources {
       _$_LxdUsbResources.fromJson;
 
   @override
-  List<LxdUsbDevice> get devices => throw _privateConstructorUsedError;
+  List<LxdUsbDevice> get devices;
   @override
   @JsonKey(ignore: true)
   _$$_LxdUsbResourcesCopyWith<_$_LxdUsbResources> get copyWith =>
@@ -1503,7 +1533,8 @@ mixin _$LxdUsbDevice {
 abstract class $LxdUsbDeviceCopyWith<$Res> {
   factory $LxdUsbDeviceCopyWith(
           LxdUsbDevice value, $Res Function(LxdUsbDevice) then) =
-      _$LxdUsbDeviceCopyWithImpl<$Res>;
+      _$LxdUsbDeviceCopyWithImpl<$Res, LxdUsbDevice>;
+  @useResult
   $Res call(
       {int busAddress,
       int deviceAddress,
@@ -1515,53 +1546,56 @@ abstract class $LxdUsbDeviceCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdUsbDeviceCopyWithImpl<$Res> implements $LxdUsbDeviceCopyWith<$Res> {
+class _$LxdUsbDeviceCopyWithImpl<$Res, $Val extends LxdUsbDevice>
+    implements $LxdUsbDeviceCopyWith<$Res> {
   _$LxdUsbDeviceCopyWithImpl(this._value, this._then);
 
-  final LxdUsbDevice _value;
   // ignore: unused_field
-  final $Res Function(LxdUsbDevice) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? busAddress = freezed,
-    Object? deviceAddress = freezed,
-    Object? product = freezed,
-    Object? productId = freezed,
-    Object? speed = freezed,
-    Object? vendor = freezed,
-    Object? vendorId = freezed,
+    Object? busAddress = null,
+    Object? deviceAddress = null,
+    Object? product = null,
+    Object? productId = null,
+    Object? speed = null,
+    Object? vendor = null,
+    Object? vendorId = null,
   }) {
     return _then(_value.copyWith(
-      busAddress: busAddress == freezed
+      busAddress: null == busAddress
           ? _value.busAddress
           : busAddress // ignore: cast_nullable_to_non_nullable
               as int,
-      deviceAddress: deviceAddress == freezed
+      deviceAddress: null == deviceAddress
           ? _value.deviceAddress
           : deviceAddress // ignore: cast_nullable_to_non_nullable
               as int,
-      product: product == freezed
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
-      productId: productId == freezed
+      productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
               as String,
-      speed: speed == freezed
+      speed: null == speed
           ? _value.speed
           : speed // ignore: cast_nullable_to_non_nullable
               as double,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      vendorId: vendorId == freezed
+      vendorId: null == vendorId
           ? _value.vendorId
           : vendorId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1572,6 +1606,7 @@ abstract class _$$_LxdUsbDeviceCopyWith<$Res>
           _$_LxdUsbDevice value, $Res Function(_$_LxdUsbDevice) then) =
       __$$_LxdUsbDeviceCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int busAddress,
       int deviceAddress,
@@ -1584,51 +1619,49 @@ abstract class _$$_LxdUsbDeviceCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdUsbDeviceCopyWithImpl<$Res>
-    extends _$LxdUsbDeviceCopyWithImpl<$Res>
+    extends _$LxdUsbDeviceCopyWithImpl<$Res, _$_LxdUsbDevice>
     implements _$$_LxdUsbDeviceCopyWith<$Res> {
   __$$_LxdUsbDeviceCopyWithImpl(
       _$_LxdUsbDevice _value, $Res Function(_$_LxdUsbDevice) _then)
-      : super(_value, (v) => _then(v as _$_LxdUsbDevice));
+      : super(_value, _then);
 
-  @override
-  _$_LxdUsbDevice get _value => super._value as _$_LxdUsbDevice;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? busAddress = freezed,
-    Object? deviceAddress = freezed,
-    Object? product = freezed,
-    Object? productId = freezed,
-    Object? speed = freezed,
-    Object? vendor = freezed,
-    Object? vendorId = freezed,
+    Object? busAddress = null,
+    Object? deviceAddress = null,
+    Object? product = null,
+    Object? productId = null,
+    Object? speed = null,
+    Object? vendor = null,
+    Object? vendorId = null,
   }) {
     return _then(_$_LxdUsbDevice(
-      busAddress: busAddress == freezed
+      busAddress: null == busAddress
           ? _value.busAddress
           : busAddress // ignore: cast_nullable_to_non_nullable
               as int,
-      deviceAddress: deviceAddress == freezed
+      deviceAddress: null == deviceAddress
           ? _value.deviceAddress
           : deviceAddress // ignore: cast_nullable_to_non_nullable
               as int,
-      product: product == freezed
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
-      productId: productId == freezed
+      productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
               as String,
-      speed: speed == freezed
+      speed: null == speed
           ? _value.speed
           : speed // ignore: cast_nullable_to_non_nullable
               as double,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      vendorId: vendorId == freezed
+      vendorId: null == vendorId
           ? _value.vendorId
           : vendorId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1676,37 +1709,35 @@ class _$_LxdUsbDevice implements _LxdUsbDevice {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdUsbDevice &&
-            const DeepCollectionEquality()
-                .equals(other.busAddress, busAddress) &&
-            const DeepCollectionEquality()
-                .equals(other.deviceAddress, deviceAddress) &&
-            const DeepCollectionEquality().equals(other.product, product) &&
-            const DeepCollectionEquality().equals(other.productId, productId) &&
-            const DeepCollectionEquality().equals(other.speed, speed) &&
-            const DeepCollectionEquality().equals(other.vendor, vendor) &&
-            const DeepCollectionEquality().equals(other.vendorId, vendorId));
+            (identical(other.busAddress, busAddress) ||
+                other.busAddress == busAddress) &&
+            (identical(other.deviceAddress, deviceAddress) ||
+                other.deviceAddress == deviceAddress) &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.speed, speed) || other.speed == speed) &&
+            (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.vendorId, vendorId) ||
+                other.vendorId == vendorId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(busAddress),
-      const DeepCollectionEquality().hash(deviceAddress),
-      const DeepCollectionEquality().hash(product),
-      const DeepCollectionEquality().hash(productId),
-      const DeepCollectionEquality().hash(speed),
-      const DeepCollectionEquality().hash(vendor),
-      const DeepCollectionEquality().hash(vendorId));
+  int get hashCode => Object.hash(runtimeType, busAddress, deviceAddress,
+      product, productId, speed, vendor, vendorId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdUsbDeviceCopyWith<_$_LxdUsbDevice> get copyWith =>
       __$$_LxdUsbDeviceCopyWithImpl<_$_LxdUsbDevice>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdUsbDeviceToJson(this);
+    return _$$_LxdUsbDeviceToJson(
+      this,
+    );
   }
 }
 
@@ -1724,19 +1755,19 @@ abstract class _LxdUsbDevice implements LxdUsbDevice {
       _$_LxdUsbDevice.fromJson;
 
   @override
-  int get busAddress => throw _privateConstructorUsedError;
+  int get busAddress;
   @override
-  int get deviceAddress => throw _privateConstructorUsedError;
+  int get deviceAddress;
   @override
-  String get product => throw _privateConstructorUsedError;
+  String get product;
   @override
-  String get productId => throw _privateConstructorUsedError;
+  String get productId;
   @override
-  double get speed => throw _privateConstructorUsedError;
+  double get speed;
   @override
-  String get vendor => throw _privateConstructorUsedError;
+  String get vendor;
   @override
-  String get vendorId => throw _privateConstructorUsedError;
+  String get vendorId;
   @override
   @JsonKey(ignore: true)
   _$$_LxdUsbDeviceCopyWith<_$_LxdUsbDevice> get copyWith =>
@@ -1761,29 +1792,32 @@ mixin _$LxdPciResources {
 abstract class $LxdPciResourcesCopyWith<$Res> {
   factory $LxdPciResourcesCopyWith(
           LxdPciResources value, $Res Function(LxdPciResources) then) =
-      _$LxdPciResourcesCopyWithImpl<$Res>;
+      _$LxdPciResourcesCopyWithImpl<$Res, LxdPciResources>;
+  @useResult
   $Res call({List<LxdPciDevice> devices});
 }
 
 /// @nodoc
-class _$LxdPciResourcesCopyWithImpl<$Res>
+class _$LxdPciResourcesCopyWithImpl<$Res, $Val extends LxdPciResources>
     implements $LxdPciResourcesCopyWith<$Res> {
   _$LxdPciResourcesCopyWithImpl(this._value, this._then);
 
-  final LxdPciResources _value;
   // ignore: unused_field
-  final $Res Function(LxdPciResources) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? devices = freezed,
+    Object? devices = null,
   }) {
     return _then(_value.copyWith(
-      devices: devices == freezed
+      devices: null == devices
           ? _value.devices
           : devices // ignore: cast_nullable_to_non_nullable
               as List<LxdPciDevice>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1794,26 +1828,25 @@ abstract class _$$_LxdPciResourcesCopyWith<$Res>
           _$_LxdPciResources value, $Res Function(_$_LxdPciResources) then) =
       __$$_LxdPciResourcesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<LxdPciDevice> devices});
 }
 
 /// @nodoc
 class __$$_LxdPciResourcesCopyWithImpl<$Res>
-    extends _$LxdPciResourcesCopyWithImpl<$Res>
+    extends _$LxdPciResourcesCopyWithImpl<$Res, _$_LxdPciResources>
     implements _$$_LxdPciResourcesCopyWith<$Res> {
   __$$_LxdPciResourcesCopyWithImpl(
       _$_LxdPciResources _value, $Res Function(_$_LxdPciResources) _then)
-      : super(_value, (v) => _then(v as _$_LxdPciResources));
+      : super(_value, _then);
 
-  @override
-  _$_LxdPciResources get _value => super._value as _$_LxdPciResources;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? devices = freezed,
+    Object? devices = null,
   }) {
     return _then(_$_LxdPciResources(
-      devices: devices == freezed
+      devices: null == devices
           ? _value._devices
           : devices // ignore: cast_nullable_to_non_nullable
               as List<LxdPciDevice>,
@@ -1857,12 +1890,15 @@ class _$_LxdPciResources implements _LxdPciResources {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdPciResourcesCopyWith<_$_LxdPciResources> get copyWith =>
       __$$_LxdPciResourcesCopyWithImpl<_$_LxdPciResources>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdPciResourcesToJson(this);
+    return _$$_LxdPciResourcesToJson(
+      this,
+    );
   }
 }
 
@@ -1874,7 +1910,7 @@ abstract class _LxdPciResources implements LxdPciResources {
       _$_LxdPciResources.fromJson;
 
   @override
-  List<LxdPciDevice> get devices => throw _privateConstructorUsedError;
+  List<LxdPciDevice> get devices;
   @override
   @JsonKey(ignore: true)
   _$$_LxdPciResourcesCopyWith<_$_LxdPciResources> get copyWith =>
@@ -1905,7 +1941,8 @@ mixin _$LxdPciDevice {
 abstract class $LxdPciDeviceCopyWith<$Res> {
   factory $LxdPciDeviceCopyWith(
           LxdPciDevice value, $Res Function(LxdPciDevice) then) =
-      _$LxdPciDeviceCopyWithImpl<$Res>;
+      _$LxdPciDeviceCopyWithImpl<$Res, LxdPciDevice>;
+  @useResult
   $Res call(
       {String driver,
       String driverVersion,
@@ -1917,53 +1954,56 @@ abstract class $LxdPciDeviceCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdPciDeviceCopyWithImpl<$Res> implements $LxdPciDeviceCopyWith<$Res> {
+class _$LxdPciDeviceCopyWithImpl<$Res, $Val extends LxdPciDevice>
+    implements $LxdPciDeviceCopyWith<$Res> {
   _$LxdPciDeviceCopyWithImpl(this._value, this._then);
 
-  final LxdPciDevice _value;
   // ignore: unused_field
-  final $Res Function(LxdPciDevice) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? driver = freezed,
-    Object? driverVersion = freezed,
-    Object? pciAddress = freezed,
-    Object? product = freezed,
-    Object? productId = freezed,
-    Object? vendor = freezed,
-    Object? vendorId = freezed,
+    Object? driver = null,
+    Object? driverVersion = null,
+    Object? pciAddress = null,
+    Object? product = null,
+    Object? productId = null,
+    Object? vendor = null,
+    Object? vendorId = null,
   }) {
     return _then(_value.copyWith(
-      driver: driver == freezed
+      driver: null == driver
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
               as String,
-      driverVersion: driverVersion == freezed
+      driverVersion: null == driverVersion
           ? _value.driverVersion
           : driverVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      pciAddress: pciAddress == freezed
+      pciAddress: null == pciAddress
           ? _value.pciAddress
           : pciAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      product: product == freezed
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
-      productId: productId == freezed
+      productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      vendorId: vendorId == freezed
+      vendorId: null == vendorId
           ? _value.vendorId
           : vendorId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1974,6 +2014,7 @@ abstract class _$$_LxdPciDeviceCopyWith<$Res>
           _$_LxdPciDevice value, $Res Function(_$_LxdPciDevice) then) =
       __$$_LxdPciDeviceCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String driver,
       String driverVersion,
@@ -1986,51 +2027,49 @@ abstract class _$$_LxdPciDeviceCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdPciDeviceCopyWithImpl<$Res>
-    extends _$LxdPciDeviceCopyWithImpl<$Res>
+    extends _$LxdPciDeviceCopyWithImpl<$Res, _$_LxdPciDevice>
     implements _$$_LxdPciDeviceCopyWith<$Res> {
   __$$_LxdPciDeviceCopyWithImpl(
       _$_LxdPciDevice _value, $Res Function(_$_LxdPciDevice) _then)
-      : super(_value, (v) => _then(v as _$_LxdPciDevice));
+      : super(_value, _then);
 
-  @override
-  _$_LxdPciDevice get _value => super._value as _$_LxdPciDevice;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? driver = freezed,
-    Object? driverVersion = freezed,
-    Object? pciAddress = freezed,
-    Object? product = freezed,
-    Object? productId = freezed,
-    Object? vendor = freezed,
-    Object? vendorId = freezed,
+    Object? driver = null,
+    Object? driverVersion = null,
+    Object? pciAddress = null,
+    Object? product = null,
+    Object? productId = null,
+    Object? vendor = null,
+    Object? vendorId = null,
   }) {
     return _then(_$_LxdPciDevice(
-      driver: driver == freezed
+      driver: null == driver
           ? _value.driver
           : driver // ignore: cast_nullable_to_non_nullable
               as String,
-      driverVersion: driverVersion == freezed
+      driverVersion: null == driverVersion
           ? _value.driverVersion
           : driverVersion // ignore: cast_nullable_to_non_nullable
               as String,
-      pciAddress: pciAddress == freezed
+      pciAddress: null == pciAddress
           ? _value.pciAddress
           : pciAddress // ignore: cast_nullable_to_non_nullable
               as String,
-      product: product == freezed
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
-      productId: productId == freezed
+      productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      vendorId: vendorId == freezed
+      vendorId: null == vendorId
           ? _value.vendorId
           : vendorId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -2078,37 +2117,35 @@ class _$_LxdPciDevice implements _LxdPciDevice {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdPciDevice &&
-            const DeepCollectionEquality().equals(other.driver, driver) &&
-            const DeepCollectionEquality()
-                .equals(other.driverVersion, driverVersion) &&
-            const DeepCollectionEquality()
-                .equals(other.pciAddress, pciAddress) &&
-            const DeepCollectionEquality().equals(other.product, product) &&
-            const DeepCollectionEquality().equals(other.productId, productId) &&
-            const DeepCollectionEquality().equals(other.vendor, vendor) &&
-            const DeepCollectionEquality().equals(other.vendorId, vendorId));
+            (identical(other.driver, driver) || other.driver == driver) &&
+            (identical(other.driverVersion, driverVersion) ||
+                other.driverVersion == driverVersion) &&
+            (identical(other.pciAddress, pciAddress) ||
+                other.pciAddress == pciAddress) &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.vendorId, vendorId) ||
+                other.vendorId == vendorId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(driver),
-      const DeepCollectionEquality().hash(driverVersion),
-      const DeepCollectionEquality().hash(pciAddress),
-      const DeepCollectionEquality().hash(product),
-      const DeepCollectionEquality().hash(productId),
-      const DeepCollectionEquality().hash(vendor),
-      const DeepCollectionEquality().hash(vendorId));
+  int get hashCode => Object.hash(runtimeType, driver, driverVersion,
+      pciAddress, product, productId, vendor, vendorId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdPciDeviceCopyWith<_$_LxdPciDevice> get copyWith =>
       __$$_LxdPciDeviceCopyWithImpl<_$_LxdPciDevice>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdPciDeviceToJson(this);
+    return _$$_LxdPciDeviceToJson(
+      this,
+    );
   }
 }
 
@@ -2126,19 +2163,19 @@ abstract class _LxdPciDevice implements LxdPciDevice {
       _$_LxdPciDevice.fromJson;
 
   @override
-  String get driver => throw _privateConstructorUsedError;
+  String get driver;
   @override
-  String get driverVersion => throw _privateConstructorUsedError;
+  String get driverVersion;
   @override
-  String get pciAddress => throw _privateConstructorUsedError;
+  String get pciAddress;
   @override
-  String get product => throw _privateConstructorUsedError;
+  String get product;
   @override
-  String get productId => throw _privateConstructorUsedError;
+  String get productId;
   @override
-  String get vendor => throw _privateConstructorUsedError;
+  String get vendor;
   @override
-  String get vendorId => throw _privateConstructorUsedError;
+  String get vendorId;
   @override
   @JsonKey(ignore: true)
   _$$_LxdPciDeviceCopyWith<_$_LxdPciDevice> get copyWith =>
@@ -2165,38 +2202,42 @@ mixin _$LxdFirmware {
 abstract class $LxdFirmwareCopyWith<$Res> {
   factory $LxdFirmwareCopyWith(
           LxdFirmware value, $Res Function(LxdFirmware) then) =
-      _$LxdFirmwareCopyWithImpl<$Res>;
+      _$LxdFirmwareCopyWithImpl<$Res, LxdFirmware>;
+  @useResult
   $Res call({String date, String vendor, String version});
 }
 
 /// @nodoc
-class _$LxdFirmwareCopyWithImpl<$Res> implements $LxdFirmwareCopyWith<$Res> {
+class _$LxdFirmwareCopyWithImpl<$Res, $Val extends LxdFirmware>
+    implements $LxdFirmwareCopyWith<$Res> {
   _$LxdFirmwareCopyWithImpl(this._value, this._then);
 
-  final LxdFirmware _value;
   // ignore: unused_field
-  final $Res Function(LxdFirmware) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? date = freezed,
-    Object? vendor = freezed,
-    Object? version = freezed,
+    Object? date = null,
+    Object? vendor = null,
+    Object? version = null,
   }) {
     return _then(_value.copyWith(
-      date: date == freezed
+      date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -2207,35 +2248,35 @@ abstract class _$$_LxdFirmwareCopyWith<$Res>
           _$_LxdFirmware value, $Res Function(_$_LxdFirmware) then) =
       __$$_LxdFirmwareCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String date, String vendor, String version});
 }
 
 /// @nodoc
-class __$$_LxdFirmwareCopyWithImpl<$Res> extends _$LxdFirmwareCopyWithImpl<$Res>
+class __$$_LxdFirmwareCopyWithImpl<$Res>
+    extends _$LxdFirmwareCopyWithImpl<$Res, _$_LxdFirmware>
     implements _$$_LxdFirmwareCopyWith<$Res> {
   __$$_LxdFirmwareCopyWithImpl(
       _$_LxdFirmware _value, $Res Function(_$_LxdFirmware) _then)
-      : super(_value, (v) => _then(v as _$_LxdFirmware));
+      : super(_value, _then);
 
-  @override
-  _$_LxdFirmware get _value => super._value as _$_LxdFirmware;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? date = freezed,
-    Object? vendor = freezed,
-    Object? version = freezed,
+    Object? date = null,
+    Object? vendor = null,
+    Object? version = null,
   }) {
     return _then(_$_LxdFirmware(
-      date: date == freezed
+      date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
@@ -2269,27 +2310,26 @@ class _$_LxdFirmware implements _LxdFirmware {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdFirmware &&
-            const DeepCollectionEquality().equals(other.date, date) &&
-            const DeepCollectionEquality().equals(other.vendor, vendor) &&
-            const DeepCollectionEquality().equals(other.version, version));
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.version, version) || other.version == version));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(date),
-      const DeepCollectionEquality().hash(vendor),
-      const DeepCollectionEquality().hash(version));
+  int get hashCode => Object.hash(runtimeType, date, vendor, version);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdFirmwareCopyWith<_$_LxdFirmware> get copyWith =>
       __$$_LxdFirmwareCopyWithImpl<_$_LxdFirmware>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdFirmwareToJson(this);
+    return _$$_LxdFirmwareToJson(
+      this,
+    );
   }
 }
 
@@ -2303,11 +2343,11 @@ abstract class _LxdFirmware implements LxdFirmware {
       _$_LxdFirmware.fromJson;
 
   @override
-  String get date => throw _privateConstructorUsedError;
+  String get date;
   @override
-  String get vendor => throw _privateConstructorUsedError;
+  String get vendor;
   @override
-  String get version => throw _privateConstructorUsedError;
+  String get version;
   @override
   @JsonKey(ignore: true)
   _$$_LxdFirmwareCopyWith<_$_LxdFirmware> get copyWith =>
@@ -2335,43 +2375,47 @@ mixin _$LxdChassis {
 abstract class $LxdChassisCopyWith<$Res> {
   factory $LxdChassisCopyWith(
           LxdChassis value, $Res Function(LxdChassis) then) =
-      _$LxdChassisCopyWithImpl<$Res>;
+      _$LxdChassisCopyWithImpl<$Res, LxdChassis>;
+  @useResult
   $Res call({String serial, String type, String vendor, String version});
 }
 
 /// @nodoc
-class _$LxdChassisCopyWithImpl<$Res> implements $LxdChassisCopyWith<$Res> {
+class _$LxdChassisCopyWithImpl<$Res, $Val extends LxdChassis>
+    implements $LxdChassisCopyWith<$Res> {
   _$LxdChassisCopyWithImpl(this._value, this._then);
 
-  final LxdChassis _value;
   // ignore: unused_field
-  final $Res Function(LxdChassis) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? serial = freezed,
-    Object? type = freezed,
-    Object? vendor = freezed,
-    Object? version = freezed,
+    Object? serial = null,
+    Object? type = null,
+    Object? vendor = null,
+    Object? version = null,
   }) {
     return _then(_value.copyWith(
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -2382,40 +2426,40 @@ abstract class _$$_LxdChassisCopyWith<$Res>
           _$_LxdChassis value, $Res Function(_$_LxdChassis) then) =
       __$$_LxdChassisCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String serial, String type, String vendor, String version});
 }
 
 /// @nodoc
-class __$$_LxdChassisCopyWithImpl<$Res> extends _$LxdChassisCopyWithImpl<$Res>
+class __$$_LxdChassisCopyWithImpl<$Res>
+    extends _$LxdChassisCopyWithImpl<$Res, _$_LxdChassis>
     implements _$$_LxdChassisCopyWith<$Res> {
   __$$_LxdChassisCopyWithImpl(
       _$_LxdChassis _value, $Res Function(_$_LxdChassis) _then)
-      : super(_value, (v) => _then(v as _$_LxdChassis));
+      : super(_value, _then);
 
-  @override
-  _$_LxdChassis get _value => super._value as _$_LxdChassis;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? serial = freezed,
-    Object? type = freezed,
-    Object? vendor = freezed,
-    Object? version = freezed,
+    Object? serial = null,
+    Object? type = null,
+    Object? vendor = null,
+    Object? version = null,
   }) {
     return _then(_$_LxdChassis(
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
@@ -2454,29 +2498,27 @@ class _$_LxdChassis implements _LxdChassis {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdChassis &&
-            const DeepCollectionEquality().equals(other.serial, serial) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.vendor, vendor) &&
-            const DeepCollectionEquality().equals(other.version, version));
+            (identical(other.serial, serial) || other.serial == serial) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.version, version) || other.version == version));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(serial),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(vendor),
-      const DeepCollectionEquality().hash(version));
+  int get hashCode => Object.hash(runtimeType, serial, type, vendor, version);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdChassisCopyWith<_$_LxdChassis> get copyWith =>
       __$$_LxdChassisCopyWithImpl<_$_LxdChassis>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdChassisToJson(this);
+    return _$$_LxdChassisToJson(
+      this,
+    );
   }
 }
 
@@ -2491,13 +2533,13 @@ abstract class _LxdChassis implements LxdChassis {
       _$_LxdChassis.fromJson;
 
   @override
-  String get serial => throw _privateConstructorUsedError;
+  String get serial;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
-  String get vendor => throw _privateConstructorUsedError;
+  String get vendor;
   @override
-  String get version => throw _privateConstructorUsedError;
+  String get version;
   @override
   @JsonKey(ignore: true)
   _$$_LxdChassisCopyWith<_$_LxdChassis> get copyWith =>
@@ -2525,44 +2567,47 @@ mixin _$LxdMotherboard {
 abstract class $LxdMotherboardCopyWith<$Res> {
   factory $LxdMotherboardCopyWith(
           LxdMotherboard value, $Res Function(LxdMotherboard) then) =
-      _$LxdMotherboardCopyWithImpl<$Res>;
+      _$LxdMotherboardCopyWithImpl<$Res, LxdMotherboard>;
+  @useResult
   $Res call({String product, String serial, String vendor, String version});
 }
 
 /// @nodoc
-class _$LxdMotherboardCopyWithImpl<$Res>
+class _$LxdMotherboardCopyWithImpl<$Res, $Val extends LxdMotherboard>
     implements $LxdMotherboardCopyWith<$Res> {
   _$LxdMotherboardCopyWithImpl(this._value, this._then);
 
-  final LxdMotherboard _value;
   // ignore: unused_field
-  final $Res Function(LxdMotherboard) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = freezed,
-    Object? serial = freezed,
-    Object? vendor = freezed,
-    Object? version = freezed,
+    Object? product = null,
+    Object? serial = null,
+    Object? vendor = null,
+    Object? version = null,
   }) {
     return _then(_value.copyWith(
-      product: product == freezed
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -2573,41 +2618,40 @@ abstract class _$$_LxdMotherboardCopyWith<$Res>
           _$_LxdMotherboard value, $Res Function(_$_LxdMotherboard) then) =
       __$$_LxdMotherboardCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String product, String serial, String vendor, String version});
 }
 
 /// @nodoc
 class __$$_LxdMotherboardCopyWithImpl<$Res>
-    extends _$LxdMotherboardCopyWithImpl<$Res>
+    extends _$LxdMotherboardCopyWithImpl<$Res, _$_LxdMotherboard>
     implements _$$_LxdMotherboardCopyWith<$Res> {
   __$$_LxdMotherboardCopyWithImpl(
       _$_LxdMotherboard _value, $Res Function(_$_LxdMotherboard) _then)
-      : super(_value, (v) => _then(v as _$_LxdMotherboard));
+      : super(_value, _then);
 
-  @override
-  _$_LxdMotherboard get _value => super._value as _$_LxdMotherboard;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = freezed,
-    Object? serial = freezed,
-    Object? vendor = freezed,
-    Object? version = freezed,
+    Object? product = null,
+    Object? serial = null,
+    Object? vendor = null,
+    Object? version = null,
   }) {
     return _then(_$_LxdMotherboard(
-      product: product == freezed
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
@@ -2646,29 +2690,28 @@ class _$_LxdMotherboard implements _LxdMotherboard {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdMotherboard &&
-            const DeepCollectionEquality().equals(other.product, product) &&
-            const DeepCollectionEquality().equals(other.serial, serial) &&
-            const DeepCollectionEquality().equals(other.vendor, vendor) &&
-            const DeepCollectionEquality().equals(other.version, version));
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.serial, serial) || other.serial == serial) &&
+            (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.version, version) || other.version == version));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(product),
-      const DeepCollectionEquality().hash(serial),
-      const DeepCollectionEquality().hash(vendor),
-      const DeepCollectionEquality().hash(version));
+  int get hashCode =>
+      Object.hash(runtimeType, product, serial, vendor, version);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdMotherboardCopyWith<_$_LxdMotherboard> get copyWith =>
       __$$_LxdMotherboardCopyWithImpl<_$_LxdMotherboard>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdMotherboardToJson(this);
+    return _$$_LxdMotherboardToJson(
+      this,
+    );
   }
 }
 
@@ -2683,13 +2726,13 @@ abstract class _LxdMotherboard implements LxdMotherboard {
       _$_LxdMotherboard.fromJson;
 
   @override
-  String get product => throw _privateConstructorUsedError;
+  String get product;
   @override
-  String get serial => throw _privateConstructorUsedError;
+  String get serial;
   @override
-  String get vendor => throw _privateConstructorUsedError;
+  String get vendor;
   @override
-  String get version => throw _privateConstructorUsedError;
+  String get version;
   @override
   @JsonKey(ignore: true)
   _$$_LxdMotherboardCopyWith<_$_LxdMotherboard> get copyWith =>
@@ -2724,7 +2767,8 @@ mixin _$LxdSystemResources {
 abstract class $LxdSystemResourcesCopyWith<$Res> {
   factory $LxdSystemResourcesCopyWith(
           LxdSystemResources value, $Res Function(LxdSystemResources) then) =
-      _$LxdSystemResourcesCopyWithImpl<$Res>;
+      _$LxdSystemResourcesCopyWithImpl<$Res, LxdSystemResources>;
+  @useResult
   $Res call(
       {String uuid,
       String vendor,
@@ -2744,94 +2788,99 @@ abstract class $LxdSystemResourcesCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdSystemResourcesCopyWithImpl<$Res>
+class _$LxdSystemResourcesCopyWithImpl<$Res, $Val extends LxdSystemResources>
     implements $LxdSystemResourcesCopyWith<$Res> {
   _$LxdSystemResourcesCopyWithImpl(this._value, this._then);
 
-  final LxdSystemResources _value;
   // ignore: unused_field
-  final $Res Function(LxdSystemResources) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? vendor = freezed,
-    Object? product = freezed,
-    Object? family = freezed,
-    Object? version = freezed,
-    Object? sku = freezed,
-    Object? serial = freezed,
-    Object? type = freezed,
-    Object? firmware = freezed,
-    Object? chassis = freezed,
-    Object? motherboard = freezed,
+    Object? uuid = null,
+    Object? vendor = null,
+    Object? product = null,
+    Object? family = null,
+    Object? version = null,
+    Object? sku = null,
+    Object? serial = null,
+    Object? type = null,
+    Object? firmware = null,
+    Object? chassis = null,
+    Object? motherboard = null,
   }) {
     return _then(_value.copyWith(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      product: product == freezed
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
-      family: family == freezed
+      family: null == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
-      sku: sku == freezed
+      sku: null == sku
           ? _value.sku
           : sku // ignore: cast_nullable_to_non_nullable
               as String,
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      firmware: firmware == freezed
+      firmware: null == firmware
           ? _value.firmware
           : firmware // ignore: cast_nullable_to_non_nullable
               as LxdFirmware,
-      chassis: chassis == freezed
+      chassis: null == chassis
           ? _value.chassis
           : chassis // ignore: cast_nullable_to_non_nullable
               as LxdChassis,
-      motherboard: motherboard == freezed
+      motherboard: null == motherboard
           ? _value.motherboard
           : motherboard // ignore: cast_nullable_to_non_nullable
               as LxdMotherboard,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdFirmwareCopyWith<$Res> get firmware {
     return $LxdFirmwareCopyWith<$Res>(_value.firmware, (value) {
-      return _then(_value.copyWith(firmware: value));
+      return _then(_value.copyWith(firmware: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdChassisCopyWith<$Res> get chassis {
     return $LxdChassisCopyWith<$Res>(_value.chassis, (value) {
-      return _then(_value.copyWith(chassis: value));
+      return _then(_value.copyWith(chassis: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdMotherboardCopyWith<$Res> get motherboard {
     return $LxdMotherboardCopyWith<$Res>(_value.motherboard, (value) {
-      return _then(_value.copyWith(motherboard: value));
+      return _then(_value.copyWith(motherboard: value) as $Val);
     });
   }
 }
@@ -2843,6 +2892,7 @@ abstract class _$$_LxdSystemResourcesCopyWith<$Res>
           $Res Function(_$_LxdSystemResources) then) =
       __$$_LxdSystemResourcesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String uuid,
       String vendor,
@@ -2866,71 +2916,69 @@ abstract class _$$_LxdSystemResourcesCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdSystemResourcesCopyWithImpl<$Res>
-    extends _$LxdSystemResourcesCopyWithImpl<$Res>
+    extends _$LxdSystemResourcesCopyWithImpl<$Res, _$_LxdSystemResources>
     implements _$$_LxdSystemResourcesCopyWith<$Res> {
   __$$_LxdSystemResourcesCopyWithImpl(
       _$_LxdSystemResources _value, $Res Function(_$_LxdSystemResources) _then)
-      : super(_value, (v) => _then(v as _$_LxdSystemResources));
+      : super(_value, _then);
 
-  @override
-  _$_LxdSystemResources get _value => super._value as _$_LxdSystemResources;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
-    Object? vendor = freezed,
-    Object? product = freezed,
-    Object? family = freezed,
-    Object? version = freezed,
-    Object? sku = freezed,
-    Object? serial = freezed,
-    Object? type = freezed,
-    Object? firmware = freezed,
-    Object? chassis = freezed,
-    Object? motherboard = freezed,
+    Object? uuid = null,
+    Object? vendor = null,
+    Object? product = null,
+    Object? family = null,
+    Object? version = null,
+    Object? sku = null,
+    Object? serial = null,
+    Object? type = null,
+    Object? firmware = null,
+    Object? chassis = null,
+    Object? motherboard = null,
   }) {
     return _then(_$_LxdSystemResources(
-      uuid: uuid == freezed
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
-      vendor: vendor == freezed
+      vendor: null == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
               as String,
-      product: product == freezed
+      product: null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as String,
-      family: family == freezed
+      family: null == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
-      sku: sku == freezed
+      sku: null == sku
           ? _value.sku
           : sku // ignore: cast_nullable_to_non_nullable
               as String,
-      serial: serial == freezed
+      serial: null == serial
           ? _value.serial
           : serial // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      firmware: firmware == freezed
+      firmware: null == firmware
           ? _value.firmware
           : firmware // ignore: cast_nullable_to_non_nullable
               as LxdFirmware,
-      chassis: chassis == freezed
+      chassis: null == chassis
           ? _value.chassis
           : chassis // ignore: cast_nullable_to_non_nullable
               as LxdChassis,
-      motherboard: motherboard == freezed
+      motherboard: null == motherboard
           ? _value.motherboard
           : motherboard // ignore: cast_nullable_to_non_nullable
               as LxdMotherboard,
@@ -2990,45 +3038,38 @@ class _$_LxdSystemResources implements _LxdSystemResources {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdSystemResources &&
-            const DeepCollectionEquality().equals(other.uuid, uuid) &&
-            const DeepCollectionEquality().equals(other.vendor, vendor) &&
-            const DeepCollectionEquality().equals(other.product, product) &&
-            const DeepCollectionEquality().equals(other.family, family) &&
-            const DeepCollectionEquality().equals(other.version, version) &&
-            const DeepCollectionEquality().equals(other.sku, sku) &&
-            const DeepCollectionEquality().equals(other.serial, serial) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.firmware, firmware) &&
-            const DeepCollectionEquality().equals(other.chassis, chassis) &&
-            const DeepCollectionEquality()
-                .equals(other.motherboard, motherboard));
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.vendor, vendor) || other.vendor == vendor) &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.family, family) || other.family == family) &&
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.sku, sku) || other.sku == sku) &&
+            (identical(other.serial, serial) || other.serial == serial) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.firmware, firmware) ||
+                other.firmware == firmware) &&
+            (identical(other.chassis, chassis) || other.chassis == chassis) &&
+            (identical(other.motherboard, motherboard) ||
+                other.motherboard == motherboard));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uuid),
-      const DeepCollectionEquality().hash(vendor),
-      const DeepCollectionEquality().hash(product),
-      const DeepCollectionEquality().hash(family),
-      const DeepCollectionEquality().hash(version),
-      const DeepCollectionEquality().hash(sku),
-      const DeepCollectionEquality().hash(serial),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(firmware),
-      const DeepCollectionEquality().hash(chassis),
-      const DeepCollectionEquality().hash(motherboard));
+  int get hashCode => Object.hash(runtimeType, uuid, vendor, product, family,
+      version, sku, serial, type, firmware, chassis, motherboard);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdSystemResourcesCopyWith<_$_LxdSystemResources> get copyWith =>
       __$$_LxdSystemResourcesCopyWithImpl<_$_LxdSystemResources>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdSystemResourcesToJson(this);
+    return _$$_LxdSystemResourcesToJson(
+      this,
+    );
   }
 }
 
@@ -3050,27 +3091,27 @@ abstract class _LxdSystemResources implements LxdSystemResources {
       _$_LxdSystemResources.fromJson;
 
   @override
-  String get uuid => throw _privateConstructorUsedError;
+  String get uuid;
   @override
-  String get vendor => throw _privateConstructorUsedError;
+  String get vendor;
   @override
-  String get product => throw _privateConstructorUsedError;
+  String get product;
   @override
-  String get family => throw _privateConstructorUsedError;
+  String get family;
   @override
-  String get version => throw _privateConstructorUsedError;
+  String get version;
   @override
-  String get sku => throw _privateConstructorUsedError;
+  String get sku;
   @override
-  String get serial => throw _privateConstructorUsedError;
+  String get serial;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
-  LxdFirmware get firmware => throw _privateConstructorUsedError;
+  LxdFirmware get firmware;
   @override
-  LxdChassis get chassis => throw _privateConstructorUsedError;
+  LxdChassis get chassis;
   @override
-  LxdMotherboard get motherboard => throw _privateConstructorUsedError;
+  LxdMotherboard get motherboard;
   @override
   @JsonKey(ignore: true)
   _$$_LxdSystemResourcesCopyWith<_$_LxdSystemResources> get copyWith =>
@@ -3102,7 +3143,8 @@ mixin _$LxdResources {
 abstract class $LxdResourcesCopyWith<$Res> {
   factory $LxdResourcesCopyWith(
           LxdResources value, $Res Function(LxdResources) then) =
-      _$LxdResourcesCopyWithImpl<$Res>;
+      _$LxdResourcesCopyWithImpl<$Res, LxdResources>;
+  @useResult
   $Res call(
       {LxdCpuResources cpu,
       LxdMemoryResources memory,
@@ -3124,113 +3166,124 @@ abstract class $LxdResourcesCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdResourcesCopyWithImpl<$Res> implements $LxdResourcesCopyWith<$Res> {
+class _$LxdResourcesCopyWithImpl<$Res, $Val extends LxdResources>
+    implements $LxdResourcesCopyWith<$Res> {
   _$LxdResourcesCopyWithImpl(this._value, this._then);
 
-  final LxdResources _value;
   // ignore: unused_field
-  final $Res Function(LxdResources) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cpu = freezed,
-    Object? memory = freezed,
-    Object? gpu = freezed,
-    Object? network = freezed,
-    Object? storage = freezed,
-    Object? usb = freezed,
-    Object? pci = freezed,
-    Object? system = freezed,
+    Object? cpu = null,
+    Object? memory = null,
+    Object? gpu = null,
+    Object? network = null,
+    Object? storage = null,
+    Object? usb = null,
+    Object? pci = null,
+    Object? system = null,
   }) {
     return _then(_value.copyWith(
-      cpu: cpu == freezed
+      cpu: null == cpu
           ? _value.cpu
           : cpu // ignore: cast_nullable_to_non_nullable
               as LxdCpuResources,
-      memory: memory == freezed
+      memory: null == memory
           ? _value.memory
           : memory // ignore: cast_nullable_to_non_nullable
               as LxdMemoryResources,
-      gpu: gpu == freezed
+      gpu: null == gpu
           ? _value.gpu
           : gpu // ignore: cast_nullable_to_non_nullable
               as LxdGpuResources,
-      network: network == freezed
+      network: null == network
           ? _value.network
           : network // ignore: cast_nullable_to_non_nullable
               as LXdNetworkResources,
-      storage: storage == freezed
+      storage: null == storage
           ? _value.storage
           : storage // ignore: cast_nullable_to_non_nullable
               as LxdStorageResources,
-      usb: usb == freezed
+      usb: null == usb
           ? _value.usb
           : usb // ignore: cast_nullable_to_non_nullable
               as LxdUsbResources,
-      pci: pci == freezed
+      pci: null == pci
           ? _value.pci
           : pci // ignore: cast_nullable_to_non_nullable
               as LxdPciResources,
-      system: system == freezed
+      system: null == system
           ? _value.system
           : system // ignore: cast_nullable_to_non_nullable
               as LxdSystemResources,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdCpuResourcesCopyWith<$Res> get cpu {
     return $LxdCpuResourcesCopyWith<$Res>(_value.cpu, (value) {
-      return _then(_value.copyWith(cpu: value));
+      return _then(_value.copyWith(cpu: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdMemoryResourcesCopyWith<$Res> get memory {
     return $LxdMemoryResourcesCopyWith<$Res>(_value.memory, (value) {
-      return _then(_value.copyWith(memory: value));
+      return _then(_value.copyWith(memory: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdGpuResourcesCopyWith<$Res> get gpu {
     return $LxdGpuResourcesCopyWith<$Res>(_value.gpu, (value) {
-      return _then(_value.copyWith(gpu: value));
+      return _then(_value.copyWith(gpu: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LXdNetworkResourcesCopyWith<$Res> get network {
     return $LXdNetworkResourcesCopyWith<$Res>(_value.network, (value) {
-      return _then(_value.copyWith(network: value));
+      return _then(_value.copyWith(network: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdStorageResourcesCopyWith<$Res> get storage {
     return $LxdStorageResourcesCopyWith<$Res>(_value.storage, (value) {
-      return _then(_value.copyWith(storage: value));
+      return _then(_value.copyWith(storage: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdUsbResourcesCopyWith<$Res> get usb {
     return $LxdUsbResourcesCopyWith<$Res>(_value.usb, (value) {
-      return _then(_value.copyWith(usb: value));
+      return _then(_value.copyWith(usb: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdPciResourcesCopyWith<$Res> get pci {
     return $LxdPciResourcesCopyWith<$Res>(_value.pci, (value) {
-      return _then(_value.copyWith(pci: value));
+      return _then(_value.copyWith(pci: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdSystemResourcesCopyWith<$Res> get system {
     return $LxdSystemResourcesCopyWith<$Res>(_value.system, (value) {
-      return _then(_value.copyWith(system: value));
+      return _then(_value.copyWith(system: value) as $Val);
     });
   }
 }
@@ -3242,6 +3295,7 @@ abstract class _$$_LxdResourcesCopyWith<$Res>
           _$_LxdResources value, $Res Function(_$_LxdResources) then) =
       __$$_LxdResourcesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {LxdCpuResources cpu,
       LxdMemoryResources memory,
@@ -3272,56 +3326,54 @@ abstract class _$$_LxdResourcesCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdResourcesCopyWithImpl<$Res>
-    extends _$LxdResourcesCopyWithImpl<$Res>
+    extends _$LxdResourcesCopyWithImpl<$Res, _$_LxdResources>
     implements _$$_LxdResourcesCopyWith<$Res> {
   __$$_LxdResourcesCopyWithImpl(
       _$_LxdResources _value, $Res Function(_$_LxdResources) _then)
-      : super(_value, (v) => _then(v as _$_LxdResources));
+      : super(_value, _then);
 
-  @override
-  _$_LxdResources get _value => super._value as _$_LxdResources;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cpu = freezed,
-    Object? memory = freezed,
-    Object? gpu = freezed,
-    Object? network = freezed,
-    Object? storage = freezed,
-    Object? usb = freezed,
-    Object? pci = freezed,
-    Object? system = freezed,
+    Object? cpu = null,
+    Object? memory = null,
+    Object? gpu = null,
+    Object? network = null,
+    Object? storage = null,
+    Object? usb = null,
+    Object? pci = null,
+    Object? system = null,
   }) {
     return _then(_$_LxdResources(
-      cpu: cpu == freezed
+      cpu: null == cpu
           ? _value.cpu
           : cpu // ignore: cast_nullable_to_non_nullable
               as LxdCpuResources,
-      memory: memory == freezed
+      memory: null == memory
           ? _value.memory
           : memory // ignore: cast_nullable_to_non_nullable
               as LxdMemoryResources,
-      gpu: gpu == freezed
+      gpu: null == gpu
           ? _value.gpu
           : gpu // ignore: cast_nullable_to_non_nullable
               as LxdGpuResources,
-      network: network == freezed
+      network: null == network
           ? _value.network
           : network // ignore: cast_nullable_to_non_nullable
               as LXdNetworkResources,
-      storage: storage == freezed
+      storage: null == storage
           ? _value.storage
           : storage // ignore: cast_nullable_to_non_nullable
               as LxdStorageResources,
-      usb: usb == freezed
+      usb: null == usb
           ? _value.usb
           : usb // ignore: cast_nullable_to_non_nullable
               as LxdUsbResources,
-      pci: pci == freezed
+      pci: null == pci
           ? _value.pci
           : pci // ignore: cast_nullable_to_non_nullable
               as LxdPciResources,
-      system: system == freezed
+      system: null == system
           ? _value.system
           : system // ignore: cast_nullable_to_non_nullable
               as LxdSystemResources,
@@ -3372,37 +3424,32 @@ class _$_LxdResources implements _LxdResources {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdResources &&
-            const DeepCollectionEquality().equals(other.cpu, cpu) &&
-            const DeepCollectionEquality().equals(other.memory, memory) &&
-            const DeepCollectionEquality().equals(other.gpu, gpu) &&
-            const DeepCollectionEquality().equals(other.network, network) &&
-            const DeepCollectionEquality().equals(other.storage, storage) &&
-            const DeepCollectionEquality().equals(other.usb, usb) &&
-            const DeepCollectionEquality().equals(other.pci, pci) &&
-            const DeepCollectionEquality().equals(other.system, system));
+            (identical(other.cpu, cpu) || other.cpu == cpu) &&
+            (identical(other.memory, memory) || other.memory == memory) &&
+            (identical(other.gpu, gpu) || other.gpu == gpu) &&
+            (identical(other.network, network) || other.network == network) &&
+            (identical(other.storage, storage) || other.storage == storage) &&
+            (identical(other.usb, usb) || other.usb == usb) &&
+            (identical(other.pci, pci) || other.pci == pci) &&
+            (identical(other.system, system) || other.system == system));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(cpu),
-      const DeepCollectionEquality().hash(memory),
-      const DeepCollectionEquality().hash(gpu),
-      const DeepCollectionEquality().hash(network),
-      const DeepCollectionEquality().hash(storage),
-      const DeepCollectionEquality().hash(usb),
-      const DeepCollectionEquality().hash(pci),
-      const DeepCollectionEquality().hash(system));
+      runtimeType, cpu, memory, gpu, network, storage, usb, pci, system);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdResourcesCopyWith<_$_LxdResources> get copyWith =>
       __$$_LxdResourcesCopyWithImpl<_$_LxdResources>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdResourcesToJson(this);
+    return _$$_LxdResourcesToJson(
+      this,
+    );
   }
 }
 
@@ -3421,21 +3468,21 @@ abstract class _LxdResources implements LxdResources {
       _$_LxdResources.fromJson;
 
   @override
-  LxdCpuResources get cpu => throw _privateConstructorUsedError;
+  LxdCpuResources get cpu;
   @override
-  LxdMemoryResources get memory => throw _privateConstructorUsedError;
+  LxdMemoryResources get memory;
   @override
-  LxdGpuResources get gpu => throw _privateConstructorUsedError;
+  LxdGpuResources get gpu;
   @override
-  LXdNetworkResources get network => throw _privateConstructorUsedError;
+  LXdNetworkResources get network;
   @override
-  LxdStorageResources get storage => throw _privateConstructorUsedError;
+  LxdStorageResources get storage;
   @override
-  LxdUsbResources get usb => throw _privateConstructorUsedError;
+  LxdUsbResources get usb;
   @override
-  LxdPciResources get pci => throw _privateConstructorUsedError;
+  LxdPciResources get pci;
   @override
-  LxdSystemResources get system => throw _privateConstructorUsedError;
+  LxdSystemResources get system;
   @override
   @JsonKey(ignore: true)
   _$$_LxdResourcesCopyWith<_$_LxdResources> get copyWith =>

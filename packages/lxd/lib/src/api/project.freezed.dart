@@ -34,38 +34,42 @@ mixin _$LxdProject {
 abstract class $LxdProjectCopyWith<$Res> {
   factory $LxdProjectCopyWith(
           LxdProject value, $Res Function(LxdProject) then) =
-      _$LxdProjectCopyWithImpl<$Res>;
+      _$LxdProjectCopyWithImpl<$Res, LxdProject>;
+  @useResult
   $Res call({Map<String, String> config, String description, String name});
 }
 
 /// @nodoc
-class _$LxdProjectCopyWithImpl<$Res> implements $LxdProjectCopyWith<$Res> {
+class _$LxdProjectCopyWithImpl<$Res, $Val extends LxdProject>
+    implements $LxdProjectCopyWith<$Res> {
   _$LxdProjectCopyWithImpl(this._value, this._then);
 
-  final LxdProject _value;
   // ignore: unused_field
-  final $Res Function(LxdProject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? config = freezed,
-    Object? description = freezed,
-    Object? name = freezed,
+    Object? config = null,
+    Object? description = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
-      config: config == freezed
+      config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -76,35 +80,35 @@ abstract class _$$_LxdProjectCopyWith<$Res>
           _$_LxdProject value, $Res Function(_$_LxdProject) then) =
       __$$_LxdProjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({Map<String, String> config, String description, String name});
 }
 
 /// @nodoc
-class __$$_LxdProjectCopyWithImpl<$Res> extends _$LxdProjectCopyWithImpl<$Res>
+class __$$_LxdProjectCopyWithImpl<$Res>
+    extends _$LxdProjectCopyWithImpl<$Res, _$_LxdProject>
     implements _$$_LxdProjectCopyWith<$Res> {
   __$$_LxdProjectCopyWithImpl(
       _$_LxdProject _value, $Res Function(_$_LxdProject) _then)
-      : super(_value, (v) => _then(v as _$_LxdProject));
+      : super(_value, _then);
 
-  @override
-  _$_LxdProject get _value => super._value as _$_LxdProject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? config = freezed,
-    Object? description = freezed,
-    Object? name = freezed,
+    Object? config = null,
+    Object? description = null,
+    Object? name = null,
   }) {
     return _then(_$_LxdProject(
-      config: config == freezed
+      config: null == config
           ? _value._config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -147,27 +151,27 @@ class _$_LxdProject implements _LxdProject {
         (other.runtimeType == runtimeType &&
             other is _$_LxdProject &&
             const DeepCollectionEquality().equals(other._config, _config) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_config),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_config), description, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdProjectCopyWith<_$_LxdProject> get copyWith =>
       __$$_LxdProjectCopyWithImpl<_$_LxdProject>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdProjectToJson(this);
+    return _$$_LxdProjectToJson(
+      this,
+    );
   }
 }
 
@@ -181,11 +185,11 @@ abstract class _LxdProject implements LxdProject {
       _$_LxdProject.fromJson;
 
   @override
-  Map<String, String> get config => throw _privateConstructorUsedError;
+  Map<String, String> get config;
   @override
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
   @JsonKey(ignore: true)
   _$$_LxdProjectCopyWith<_$_LxdProject> get copyWith =>

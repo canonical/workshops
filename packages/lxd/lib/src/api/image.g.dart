@@ -53,7 +53,7 @@ Map<String, dynamic> _$$_LxdImageToJson(_$_LxdImage instance) =>
       'fingerprint': instance.fingerprint,
       'size': instance.size,
       'update_source': instance.updateSource?.toJson(),
-      'type': _$LxdImageTypeEnumMap[instance.type],
+      'type': _$LxdImageTypeEnumMap[instance.type]!,
       'created_at': instance.createdAt.toIso8601String(),
       'last_used_at': instance.lastUsedAt?.toIso8601String(),
       'uploaded_at': instance.uploadedAt.toIso8601String(),

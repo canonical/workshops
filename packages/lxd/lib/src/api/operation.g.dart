@@ -28,7 +28,7 @@ _$_LxdOperation _$$_LxdOperationFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_LxdOperationToJson(_$_LxdOperation instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'class': _$LxdOperationTypeEnumMap[instance.type],
+      'class': _$LxdOperationTypeEnumMap[instance.type]!,
       'description': instance.description,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),

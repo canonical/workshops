@@ -45,11 +45,11 @@ mixin _$LxdResponse {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String status, int statusCode, dynamic metadata)? sync,
-    TResult Function(String status, int statusCode, String operation,
+    TResult? Function(String status, int statusCode, dynamic metadata)? sync,
+    TResult? Function(String status, int statusCode, String operation,
             Map<String, dynamic> metadata)?
         async,
-    TResult Function(
+    TResult? Function(
             String error, int errorCode, Map<String, dynamic>? metadata)?
         error,
   }) =>
@@ -75,9 +75,9 @@ mixin _$LxdResponse {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LxdSyncResponse value)? sync,
-    TResult Function(LxdAsyncResponse value)? async,
-    TResult Function(LxdErrorResponse value)? error,
+    TResult? Function(LxdSyncResponse value)? sync,
+    TResult? Function(LxdAsyncResponse value)? async,
+    TResult? Function(LxdErrorResponse value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,16 +95,18 @@ mixin _$LxdResponse {
 abstract class $LxdResponseCopyWith<$Res> {
   factory $LxdResponseCopyWith(
           LxdResponse value, $Res Function(LxdResponse) then) =
-      _$LxdResponseCopyWithImpl<$Res>;
+      _$LxdResponseCopyWithImpl<$Res, LxdResponse>;
 }
 
 /// @nodoc
-class _$LxdResponseCopyWithImpl<$Res> implements $LxdResponseCopyWith<$Res> {
+class _$LxdResponseCopyWithImpl<$Res, $Val extends LxdResponse>
+    implements $LxdResponseCopyWith<$Res> {
   _$LxdResponseCopyWithImpl(this._value, this._then);
 
-  final LxdResponse _value;
   // ignore: unused_field
-  final $Res Function(LxdResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -112,36 +114,35 @@ abstract class _$$LxdSyncResponseCopyWith<$Res> {
   factory _$$LxdSyncResponseCopyWith(
           _$LxdSyncResponse value, $Res Function(_$LxdSyncResponse) then) =
       __$$LxdSyncResponseCopyWithImpl<$Res>;
+  @useResult
   $Res call({String status, int statusCode, dynamic metadata});
 }
 
 /// @nodoc
 class __$$LxdSyncResponseCopyWithImpl<$Res>
-    extends _$LxdResponseCopyWithImpl<$Res>
+    extends _$LxdResponseCopyWithImpl<$Res, _$LxdSyncResponse>
     implements _$$LxdSyncResponseCopyWith<$Res> {
   __$$LxdSyncResponseCopyWithImpl(
       _$LxdSyncResponse _value, $Res Function(_$LxdSyncResponse) _then)
-      : super(_value, (v) => _then(v as _$LxdSyncResponse));
+      : super(_value, _then);
 
-  @override
-  _$LxdSyncResponse get _value => super._value as _$LxdSyncResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = freezed,
-    Object? statusCode = freezed,
-    Object? metadata = freezed,
+    Object? status = null,
+    Object? statusCode = null,
+    Object? metadata = null,
   }) {
     return _then(_$LxdSyncResponse(
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      statusCode: statusCode == freezed
+      statusCode: null == statusCode
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int,
-      metadata: metadata == freezed
+      metadata: null == metadata
           ? _value.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -182,22 +183,20 @@ class _$LxdSyncResponse implements LxdSyncResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LxdSyncResponse &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.statusCode, statusCode) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.statusCode, statusCode) ||
+                other.statusCode == statusCode) &&
             const DeepCollectionEquality().equals(other.metadata, metadata));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(statusCode),
+  int get hashCode => Object.hash(runtimeType, status, statusCode,
       const DeepCollectionEquality().hash(metadata));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LxdSyncResponseCopyWith<_$LxdSyncResponse> get copyWith =>
       __$$LxdSyncResponseCopyWithImpl<_$LxdSyncResponse>(this, _$identity);
 
@@ -219,11 +218,11 @@ class _$LxdSyncResponse implements LxdSyncResponse {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String status, int statusCode, dynamic metadata)? sync,
-    TResult Function(String status, int statusCode, String operation,
+    TResult? Function(String status, int statusCode, dynamic metadata)? sync,
+    TResult? Function(String status, int statusCode, String operation,
             Map<String, dynamic> metadata)?
         async,
-    TResult Function(
+    TResult? Function(
             String error, int errorCode, Map<String, dynamic>? metadata)?
         error,
   }) {
@@ -261,9 +260,9 @@ class _$LxdSyncResponse implements LxdSyncResponse {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LxdSyncResponse value)? sync,
-    TResult Function(LxdAsyncResponse value)? async,
-    TResult Function(LxdErrorResponse value)? error,
+    TResult? Function(LxdSyncResponse value)? sync,
+    TResult? Function(LxdAsyncResponse value)? async,
+    TResult? Function(LxdErrorResponse value)? error,
   }) {
     return sync?.call(this);
   }
@@ -284,7 +283,9 @@ class _$LxdSyncResponse implements LxdSyncResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdSyncResponseToJson(this);
+    return _$$LxdSyncResponseToJson(
+      this,
+    );
   }
 }
 
@@ -297,9 +298,9 @@ abstract class LxdSyncResponse implements LxdResponse {
   factory LxdSyncResponse.fromJson(Map<String, dynamic> json) =
       _$LxdSyncResponse.fromJson;
 
-  String get status => throw _privateConstructorUsedError;
-  int get statusCode => throw _privateConstructorUsedError;
-  dynamic get metadata => throw _privateConstructorUsedError;
+  String get status;
+  int get statusCode;
+  dynamic get metadata;
   @JsonKey(ignore: true)
   _$$LxdSyncResponseCopyWith<_$LxdSyncResponse> get copyWith =>
       throw _privateConstructorUsedError;
@@ -310,6 +311,7 @@ abstract class _$$LxdAsyncResponseCopyWith<$Res> {
   factory _$$LxdAsyncResponseCopyWith(
           _$LxdAsyncResponse value, $Res Function(_$LxdAsyncResponse) then) =
       __$$LxdAsyncResponseCopyWithImpl<$Res>;
+  @useResult
   $Res call(
       {String status,
       int statusCode,
@@ -319,36 +321,34 @@ abstract class _$$LxdAsyncResponseCopyWith<$Res> {
 
 /// @nodoc
 class __$$LxdAsyncResponseCopyWithImpl<$Res>
-    extends _$LxdResponseCopyWithImpl<$Res>
+    extends _$LxdResponseCopyWithImpl<$Res, _$LxdAsyncResponse>
     implements _$$LxdAsyncResponseCopyWith<$Res> {
   __$$LxdAsyncResponseCopyWithImpl(
       _$LxdAsyncResponse _value, $Res Function(_$LxdAsyncResponse) _then)
-      : super(_value, (v) => _then(v as _$LxdAsyncResponse));
+      : super(_value, _then);
 
-  @override
-  _$LxdAsyncResponse get _value => super._value as _$LxdAsyncResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = freezed,
-    Object? statusCode = freezed,
-    Object? operation = freezed,
-    Object? metadata = freezed,
+    Object? status = null,
+    Object? statusCode = null,
+    Object? operation = null,
+    Object? metadata = null,
   }) {
     return _then(_$LxdAsyncResponse(
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      statusCode: statusCode == freezed
+      statusCode: null == statusCode
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int,
-      operation: operation == freezed
+      operation: null == operation
           ? _value.operation
           : operation // ignore: cast_nullable_to_non_nullable
               as String,
-      metadata: metadata == freezed
+      metadata: null == metadata
           ? _value._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
@@ -397,24 +397,22 @@ class _$LxdAsyncResponse implements LxdAsyncResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LxdAsyncResponse &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.statusCode, statusCode) &&
-            const DeepCollectionEquality().equals(other.operation, operation) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.statusCode, statusCode) ||
+                other.statusCode == statusCode) &&
+            (identical(other.operation, operation) ||
+                other.operation == operation) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(statusCode),
-      const DeepCollectionEquality().hash(operation),
+  int get hashCode => Object.hash(runtimeType, status, statusCode, operation,
       const DeepCollectionEquality().hash(_metadata));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LxdAsyncResponseCopyWith<_$LxdAsyncResponse> get copyWith =>
       __$$LxdAsyncResponseCopyWithImpl<_$LxdAsyncResponse>(this, _$identity);
 
@@ -436,11 +434,11 @@ class _$LxdAsyncResponse implements LxdAsyncResponse {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String status, int statusCode, dynamic metadata)? sync,
-    TResult Function(String status, int statusCode, String operation,
+    TResult? Function(String status, int statusCode, dynamic metadata)? sync,
+    TResult? Function(String status, int statusCode, String operation,
             Map<String, dynamic> metadata)?
         async,
-    TResult Function(
+    TResult? Function(
             String error, int errorCode, Map<String, dynamic>? metadata)?
         error,
   }) {
@@ -478,9 +476,9 @@ class _$LxdAsyncResponse implements LxdAsyncResponse {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LxdSyncResponse value)? sync,
-    TResult Function(LxdAsyncResponse value)? async,
-    TResult Function(LxdErrorResponse value)? error,
+    TResult? Function(LxdSyncResponse value)? sync,
+    TResult? Function(LxdAsyncResponse value)? async,
+    TResult? Function(LxdErrorResponse value)? error,
   }) {
     return async?.call(this);
   }
@@ -501,7 +499,9 @@ class _$LxdAsyncResponse implements LxdAsyncResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdAsyncResponseToJson(this);
+    return _$$LxdAsyncResponseToJson(
+      this,
+    );
   }
 }
 
@@ -515,10 +515,10 @@ abstract class LxdAsyncResponse implements LxdResponse {
   factory LxdAsyncResponse.fromJson(Map<String, dynamic> json) =
       _$LxdAsyncResponse.fromJson;
 
-  String get status => throw _privateConstructorUsedError;
-  int get statusCode => throw _privateConstructorUsedError;
-  String get operation => throw _privateConstructorUsedError;
-  Map<String, dynamic> get metadata => throw _privateConstructorUsedError;
+  String get status;
+  int get statusCode;
+  String get operation;
+  Map<String, dynamic> get metadata;
   @JsonKey(ignore: true)
   _$$LxdAsyncResponseCopyWith<_$LxdAsyncResponse> get copyWith =>
       throw _privateConstructorUsedError;
@@ -529,36 +529,35 @@ abstract class _$$LxdErrorResponseCopyWith<$Res> {
   factory _$$LxdErrorResponseCopyWith(
           _$LxdErrorResponse value, $Res Function(_$LxdErrorResponse) then) =
       __$$LxdErrorResponseCopyWithImpl<$Res>;
+  @useResult
   $Res call({String error, int errorCode, Map<String, dynamic>? metadata});
 }
 
 /// @nodoc
 class __$$LxdErrorResponseCopyWithImpl<$Res>
-    extends _$LxdResponseCopyWithImpl<$Res>
+    extends _$LxdResponseCopyWithImpl<$Res, _$LxdErrorResponse>
     implements _$$LxdErrorResponseCopyWith<$Res> {
   __$$LxdErrorResponseCopyWithImpl(
       _$LxdErrorResponse _value, $Res Function(_$LxdErrorResponse) _then)
-      : super(_value, (v) => _then(v as _$LxdErrorResponse));
+      : super(_value, _then);
 
-  @override
-  _$LxdErrorResponse get _value => super._value as _$LxdErrorResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
-    Object? errorCode = freezed,
+    Object? error = null,
+    Object? errorCode = null,
     Object? metadata = freezed,
   }) {
     return _then(_$LxdErrorResponse(
-      error: error == freezed
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
-      errorCode: errorCode == freezed
+      errorCode: null == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
               as int,
-      metadata: metadata == freezed
+      metadata: freezed == metadata
           ? _value._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
@@ -606,21 +605,20 @@ class _$LxdErrorResponse implements LxdErrorResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LxdErrorResponse &&
-            const DeepCollectionEquality().equals(other.error, error) &&
-            const DeepCollectionEquality().equals(other.errorCode, errorCode) &&
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(error),
-      const DeepCollectionEquality().hash(errorCode),
+  int get hashCode => Object.hash(runtimeType, error, errorCode,
       const DeepCollectionEquality().hash(_metadata));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$LxdErrorResponseCopyWith<_$LxdErrorResponse> get copyWith =>
       __$$LxdErrorResponseCopyWithImpl<_$LxdErrorResponse>(this, _$identity);
 
@@ -642,11 +640,11 @@ class _$LxdErrorResponse implements LxdErrorResponse {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String status, int statusCode, dynamic metadata)? sync,
-    TResult Function(String status, int statusCode, String operation,
+    TResult? Function(String status, int statusCode, dynamic metadata)? sync,
+    TResult? Function(String status, int statusCode, String operation,
             Map<String, dynamic> metadata)?
         async,
-    TResult Function(
+    TResult? Function(
             String error, int errorCode, Map<String, dynamic>? metadata)?
         error,
   }) {
@@ -684,9 +682,9 @@ class _$LxdErrorResponse implements LxdErrorResponse {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(LxdSyncResponse value)? sync,
-    TResult Function(LxdAsyncResponse value)? async,
-    TResult Function(LxdErrorResponse value)? error,
+    TResult? Function(LxdSyncResponse value)? sync,
+    TResult? Function(LxdAsyncResponse value)? async,
+    TResult? Function(LxdErrorResponse value)? error,
   }) {
     return error?.call(this);
   }
@@ -707,7 +705,9 @@ class _$LxdErrorResponse implements LxdErrorResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LxdErrorResponseToJson(this);
+    return _$$LxdErrorResponseToJson(
+      this,
+    );
   }
 }
 
@@ -720,9 +720,9 @@ abstract class LxdErrorResponse implements LxdResponse {
   factory LxdErrorResponse.fromJson(Map<String, dynamic> json) =
       _$LxdErrorResponse.fromJson;
 
-  String get error => throw _privateConstructorUsedError;
-  int get errorCode => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
+  String get error;
+  int get errorCode;
+  Map<String, dynamic>? get metadata;
   @JsonKey(ignore: true)
   _$$LxdErrorResponseCopyWith<_$LxdErrorResponse> get copyWith =>
       throw _privateConstructorUsedError;

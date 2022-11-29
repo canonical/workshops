@@ -102,7 +102,8 @@ mixin _$LxdOperation {
 abstract class $LxdOperationCopyWith<$Res> {
   factory $LxdOperationCopyWith(
           LxdOperation value, $Res Function(LxdOperation) then) =
-      _$LxdOperationCopyWithImpl<$Res>;
+      _$LxdOperationCopyWithImpl<$Res, LxdOperation>;
+  @useResult
   $Res call(
       {String id,
       @JsonKey(name: 'class') LxdOperationType type,
@@ -119,78 +120,81 @@ abstract class $LxdOperationCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdOperationCopyWithImpl<$Res> implements $LxdOperationCopyWith<$Res> {
+class _$LxdOperationCopyWithImpl<$Res, $Val extends LxdOperation>
+    implements $LxdOperationCopyWith<$Res> {
   _$LxdOperationCopyWithImpl(this._value, this._then);
 
-  final LxdOperation _value;
   // ignore: unused_field
-  final $Res Function(LxdOperation) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? type = freezed,
-    Object? description = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? status = freezed,
-    Object? statusCode = freezed,
+    Object? id = null,
+    Object? type = null,
+    Object? description = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? status = null,
+    Object? statusCode = null,
     Object? resources = freezed,
     Object? metadata = freezed,
-    Object? mayCancel = freezed,
-    Object? error = freezed,
-    Object? location = freezed,
+    Object? mayCancel = null,
+    Object? error = null,
+    Object? location = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as LxdOperationType,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: updatedAt == freezed
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      statusCode: statusCode == freezed
+      statusCode: null == statusCode
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int,
-      resources: resources == freezed
+      resources: freezed == resources
           ? _value.resources
           : resources // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>?,
-      metadata: metadata == freezed
+      metadata: freezed == metadata
           ? _value.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
-      mayCancel: mayCancel == freezed
+      mayCancel: null == mayCancel
           ? _value.mayCancel
           : mayCancel // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: error == freezed
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
-      location: location == freezed
+      location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -201,6 +205,7 @@ abstract class _$$_LxdOperationCopyWith<$Res>
           _$_LxdOperation value, $Res Function(_$_LxdOperation) then) =
       __$$_LxdOperationCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       @JsonKey(name: 'class') LxdOperationType type,
@@ -218,76 +223,74 @@ abstract class _$$_LxdOperationCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdOperationCopyWithImpl<$Res>
-    extends _$LxdOperationCopyWithImpl<$Res>
+    extends _$LxdOperationCopyWithImpl<$Res, _$_LxdOperation>
     implements _$$_LxdOperationCopyWith<$Res> {
   __$$_LxdOperationCopyWithImpl(
       _$_LxdOperation _value, $Res Function(_$_LxdOperation) _then)
-      : super(_value, (v) => _then(v as _$_LxdOperation));
+      : super(_value, _then);
 
-  @override
-  _$_LxdOperation get _value => super._value as _$_LxdOperation;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? type = freezed,
-    Object? description = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? status = freezed,
-    Object? statusCode = freezed,
+    Object? id = null,
+    Object? type = null,
+    Object? description = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? status = null,
+    Object? statusCode = null,
     Object? resources = freezed,
     Object? metadata = freezed,
-    Object? mayCancel = freezed,
-    Object? error = freezed,
-    Object? location = freezed,
+    Object? mayCancel = null,
+    Object? error = null,
+    Object? location = null,
   }) {
     return _then(_$_LxdOperation(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as LxdOperationType,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: updatedAt == freezed
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      statusCode: statusCode == freezed
+      statusCode: null == statusCode
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int,
-      resources: resources == freezed
+      resources: freezed == resources
           ? _value._resources
           : resources // ignore: cast_nullable_to_non_nullable
               as Map<String, List<String>>?,
-      metadata: metadata == freezed
+      metadata: freezed == metadata
           ? _value._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
-      mayCancel: mayCancel == freezed
+      mayCancel: null == mayCancel
           ? _value.mayCancel
           : mayCancel // ignore: cast_nullable_to_non_nullable
               as bool,
-      error: error == freezed
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
-      location: location == freezed
+      location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
@@ -447,48 +450,55 @@ class _$_LxdOperation implements _LxdOperation {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdOperation &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.statusCode, statusCode) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.statusCode, statusCode) ||
+                other.statusCode == statusCode) &&
             const DeepCollectionEquality()
                 .equals(other._resources, _resources) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata) &&
-            const DeepCollectionEquality().equals(other.mayCancel, mayCancel) &&
-            const DeepCollectionEquality().equals(other.error, error) &&
-            const DeepCollectionEquality().equals(other.location, location));
+            (identical(other.mayCancel, mayCancel) ||
+                other.mayCancel == mayCancel) &&
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.location, location) ||
+                other.location == location));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(statusCode),
+      id,
+      type,
+      description,
+      createdAt,
+      updatedAt,
+      status,
+      statusCode,
       const DeepCollectionEquality().hash(_resources),
       const DeepCollectionEquality().hash(_metadata),
-      const DeepCollectionEquality().hash(mayCancel),
-      const DeepCollectionEquality().hash(error),
-      const DeepCollectionEquality().hash(location));
+      mayCancel,
+      error,
+      location);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdOperationCopyWith<_$_LxdOperation> get copyWith =>
       __$$_LxdOperationCopyWithImpl<_$_LxdOperation>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdOperationToJson(this);
+    return _$$_LxdOperationToJson(
+      this,
+    );
   }
 }
 
@@ -515,45 +525,44 @@ abstract class _LxdOperation implements LxdOperation {
   /// UUID of the operation
   ///
   /// Example: 6916c8a6-9b7d-4abd-90b3-aedfec7ec7da
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
 
   /// Type of operation (task, token or websocket)
   @JsonKey(name: 'class')
-  LxdOperationType get type => throw _privateConstructorUsedError;
+  LxdOperationType get type;
   @override
 
   /// Description of the operation
   ///
   /// Example: Executing command
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
 
   /// Operation creation time
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt;
   @override
 
   /// Operation last change
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt;
   @override
 
   /// Status name
   ///
   /// Example: Running
-  String get status => throw _privateConstructorUsedError;
+  String get status;
   @override
 
   /// Status code
   ///
   /// Example: 103
-  int get statusCode => throw _privateConstructorUsedError;
+  int get statusCode;
   @override
 
   /// Affected resourcs
   ///
   /// Example: {"containers": ["/1.0/containers/foo"], "instances": ["/1.0/instances/foo"]}
-  Map<String, List<String>>? get resources =>
-      throw _privateConstructorUsedError;
+  Map<String, List<String>>? get resources;
   @override
 
   /// Operation specific metadata
@@ -576,24 +585,24 @@ abstract class _LxdOperation implements LxdOperation {
   ///   "interactive": true
   /// }
   /// ```
-  Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get metadata;
   @override
 
   /// Whether the operation can be canceled
-  bool get mayCancel => throw _privateConstructorUsedError;
+  bool get mayCancel;
   @override
 
   /// Operation error mesage
   ///
   /// Example: Some error message
   @JsonKey(name: 'err')
-  String get error => throw _privateConstructorUsedError;
+  String get error;
   @override
 
   /// What cluster member this record was found on
   ///
   /// Example: lxd01
-  String get location => throw _privateConstructorUsedError;
+  String get location;
   @override
   @JsonKey(ignore: true)
   _$$_LxdOperationCopyWith<_$_LxdOperation> get copyWith =>

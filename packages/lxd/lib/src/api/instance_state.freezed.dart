@@ -56,7 +56,8 @@ mixin _$LxdInstanceState {
 abstract class $LxdInstanceStateCopyWith<$Res> {
   factory $LxdInstanceStateCopyWith(
           LxdInstanceState value, $Res Function(LxdInstanceState) then) =
-      _$LxdInstanceStateCopyWithImpl<$Res>;
+      _$LxdInstanceStateCopyWithImpl<$Res, LxdInstanceState>;
+  @useResult
   $Res call(
       {LxdInstanceStatus status,
       int statusCode,
@@ -72,80 +73,84 @@ abstract class $LxdInstanceStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdInstanceStateCopyWithImpl<$Res>
+class _$LxdInstanceStateCopyWithImpl<$Res, $Val extends LxdInstanceState>
     implements $LxdInstanceStateCopyWith<$Res> {
   _$LxdInstanceStateCopyWithImpl(this._value, this._then);
 
-  final LxdInstanceState _value;
   // ignore: unused_field
-  final $Res Function(LxdInstanceState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = freezed,
-    Object? statusCode = freezed,
+    Object? status = null,
+    Object? statusCode = null,
     Object? disk = freezed,
     Object? memory = freezed,
     Object? network = freezed,
-    Object? pid = freezed,
-    Object? processes = freezed,
+    Object? pid = null,
+    Object? processes = null,
     Object? cpu = freezed,
   }) {
     return _then(_value.copyWith(
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as LxdInstanceStatus,
-      statusCode: statusCode == freezed
+      statusCode: null == statusCode
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int,
-      disk: disk == freezed
+      disk: freezed == disk
           ? _value.disk
           : disk // ignore: cast_nullable_to_non_nullable
               as Map<String, LxdInstanceDiskState>?,
-      memory: memory == freezed
+      memory: freezed == memory
           ? _value.memory
           : memory // ignore: cast_nullable_to_non_nullable
               as LxdInstanceMemoryState?,
-      network: network == freezed
+      network: freezed == network
           ? _value.network
           : network // ignore: cast_nullable_to_non_nullable
               as Map<String, LxdInstanceNetworkState>?,
-      pid: pid == freezed
+      pid: null == pid
           ? _value.pid
           : pid // ignore: cast_nullable_to_non_nullable
               as int,
-      processes: processes == freezed
+      processes: null == processes
           ? _value.processes
           : processes // ignore: cast_nullable_to_non_nullable
               as int,
-      cpu: cpu == freezed
+      cpu: freezed == cpu
           ? _value.cpu
           : cpu // ignore: cast_nullable_to_non_nullable
               as LxdInstanceCpuState?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdInstanceMemoryStateCopyWith<$Res>? get memory {
     if (_value.memory == null) {
       return null;
     }
 
     return $LxdInstanceMemoryStateCopyWith<$Res>(_value.memory!, (value) {
-      return _then(_value.copyWith(memory: value));
+      return _then(_value.copyWith(memory: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdInstanceCpuStateCopyWith<$Res>? get cpu {
     if (_value.cpu == null) {
       return null;
     }
 
     return $LxdInstanceCpuStateCopyWith<$Res>(_value.cpu!, (value) {
-      return _then(_value.copyWith(cpu: value));
+      return _then(_value.copyWith(cpu: value) as $Val);
     });
   }
 }
@@ -157,6 +162,7 @@ abstract class _$$_LxdInstanceStateCopyWith<$Res>
           _$_LxdInstanceState value, $Res Function(_$_LxdInstanceState) then) =
       __$$_LxdInstanceStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {LxdInstanceStatus status,
       int statusCode,
@@ -175,56 +181,54 @@ abstract class _$$_LxdInstanceStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdInstanceStateCopyWithImpl<$Res>
-    extends _$LxdInstanceStateCopyWithImpl<$Res>
+    extends _$LxdInstanceStateCopyWithImpl<$Res, _$_LxdInstanceState>
     implements _$$_LxdInstanceStateCopyWith<$Res> {
   __$$_LxdInstanceStateCopyWithImpl(
       _$_LxdInstanceState _value, $Res Function(_$_LxdInstanceState) _then)
-      : super(_value, (v) => _then(v as _$_LxdInstanceState));
+      : super(_value, _then);
 
-  @override
-  _$_LxdInstanceState get _value => super._value as _$_LxdInstanceState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = freezed,
-    Object? statusCode = freezed,
+    Object? status = null,
+    Object? statusCode = null,
     Object? disk = freezed,
     Object? memory = freezed,
     Object? network = freezed,
-    Object? pid = freezed,
-    Object? processes = freezed,
+    Object? pid = null,
+    Object? processes = null,
     Object? cpu = freezed,
   }) {
     return _then(_$_LxdInstanceState(
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as LxdInstanceStatus,
-      statusCode: statusCode == freezed
+      statusCode: null == statusCode
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int,
-      disk: disk == freezed
+      disk: freezed == disk
           ? _value._disk
           : disk // ignore: cast_nullable_to_non_nullable
               as Map<String, LxdInstanceDiskState>?,
-      memory: memory == freezed
+      memory: freezed == memory
           ? _value.memory
           : memory // ignore: cast_nullable_to_non_nullable
               as LxdInstanceMemoryState?,
-      network: network == freezed
+      network: freezed == network
           ? _value._network
           : network // ignore: cast_nullable_to_non_nullable
               as Map<String, LxdInstanceNetworkState>?,
-      pid: pid == freezed
+      pid: null == pid
           ? _value.pid
           : pid // ignore: cast_nullable_to_non_nullable
               as int,
-      processes: processes == freezed
+      processes: null == processes
           ? _value.processes
           : processes // ignore: cast_nullable_to_non_nullable
               as int,
-      cpu: cpu == freezed
+      cpu: freezed == cpu
           ? _value.cpu
           : cpu // ignore: cast_nullable_to_non_nullable
               as LxdInstanceCpuState?,
@@ -309,38 +313,42 @@ class _$_LxdInstanceState implements _LxdInstanceState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdInstanceState &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.statusCode, statusCode) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.statusCode, statusCode) ||
+                other.statusCode == statusCode) &&
             const DeepCollectionEquality().equals(other._disk, _disk) &&
-            const DeepCollectionEquality().equals(other.memory, memory) &&
+            (identical(other.memory, memory) || other.memory == memory) &&
             const DeepCollectionEquality().equals(other._network, _network) &&
-            const DeepCollectionEquality().equals(other.pid, pid) &&
-            const DeepCollectionEquality().equals(other.processes, processes) &&
-            const DeepCollectionEquality().equals(other.cpu, cpu));
+            (identical(other.pid, pid) || other.pid == pid) &&
+            (identical(other.processes, processes) ||
+                other.processes == processes) &&
+            (identical(other.cpu, cpu) || other.cpu == cpu));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(statusCode),
+      status,
+      statusCode,
       const DeepCollectionEquality().hash(_disk),
-      const DeepCollectionEquality().hash(memory),
+      memory,
       const DeepCollectionEquality().hash(_network),
-      const DeepCollectionEquality().hash(pid),
-      const DeepCollectionEquality().hash(processes),
-      const DeepCollectionEquality().hash(cpu));
+      pid,
+      processes,
+      cpu);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdInstanceStateCopyWith<_$_LxdInstanceState> get copyWith =>
       __$$_LxdInstanceStateCopyWithImpl<_$_LxdInstanceState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdInstanceStateToJson(this);
+    return _$$_LxdInstanceStateToJson(
+      this,
+    );
   }
 }
 
@@ -361,37 +369,35 @@ abstract class _LxdInstanceState implements LxdInstanceState {
   @override
 
   /// Current status
-  LxdInstanceStatus get status => throw _privateConstructorUsedError;
+  LxdInstanceStatus get status;
   @override
 
   /// Numeric status code (101, 102, 110, 112)
-  int get statusCode => throw _privateConstructorUsedError;
+  int get statusCode;
   @override
 
   /// Disk usage
-  Map<String, LxdInstanceDiskState>? get disk =>
-      throw _privateConstructorUsedError;
+  Map<String, LxdInstanceDiskState>? get disk;
   @override
 
   /// Memory usage information
-  LxdInstanceMemoryState? get memory => throw _privateConstructorUsedError;
+  LxdInstanceMemoryState? get memory;
   @override
 
   /// Network usage
-  Map<String, LxdInstanceNetworkState>? get network =>
-      throw _privateConstructorUsedError;
+  Map<String, LxdInstanceNetworkState>? get network;
   @override
 
   /// PID of the runtime
-  int get pid => throw _privateConstructorUsedError;
+  int get pid;
   @override
 
   /// Number of processes in the instance
-  int get processes => throw _privateConstructorUsedError;
+  int get processes;
   @override
 
   /// CPU usage information
-  LxdInstanceCpuState? get cpu => throw _privateConstructorUsedError;
+  LxdInstanceCpuState? get cpu;
   @override
   @JsonKey(ignore: true)
   _$$_LxdInstanceStateCopyWith<_$_LxdInstanceState> get copyWith =>
@@ -419,29 +425,33 @@ mixin _$LxdInstanceDiskState {
 abstract class $LxdInstanceDiskStateCopyWith<$Res> {
   factory $LxdInstanceDiskStateCopyWith(LxdInstanceDiskState value,
           $Res Function(LxdInstanceDiskState) then) =
-      _$LxdInstanceDiskStateCopyWithImpl<$Res>;
+      _$LxdInstanceDiskStateCopyWithImpl<$Res, LxdInstanceDiskState>;
+  @useResult
   $Res call({int usage});
 }
 
 /// @nodoc
-class _$LxdInstanceDiskStateCopyWithImpl<$Res>
+class _$LxdInstanceDiskStateCopyWithImpl<$Res,
+        $Val extends LxdInstanceDiskState>
     implements $LxdInstanceDiskStateCopyWith<$Res> {
   _$LxdInstanceDiskStateCopyWithImpl(this._value, this._then);
 
-  final LxdInstanceDiskState _value;
   // ignore: unused_field
-  final $Res Function(LxdInstanceDiskState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usage = freezed,
+    Object? usage = null,
   }) {
     return _then(_value.copyWith(
-      usage: usage == freezed
+      usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -452,26 +462,25 @@ abstract class _$$_LxdInstanceDiskStateCopyWith<$Res>
           $Res Function(_$_LxdInstanceDiskState) then) =
       __$$_LxdInstanceDiskStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int usage});
 }
 
 /// @nodoc
 class __$$_LxdInstanceDiskStateCopyWithImpl<$Res>
-    extends _$LxdInstanceDiskStateCopyWithImpl<$Res>
+    extends _$LxdInstanceDiskStateCopyWithImpl<$Res, _$_LxdInstanceDiskState>
     implements _$$_LxdInstanceDiskStateCopyWith<$Res> {
   __$$_LxdInstanceDiskStateCopyWithImpl(_$_LxdInstanceDiskState _value,
       $Res Function(_$_LxdInstanceDiskState) _then)
-      : super(_value, (v) => _then(v as _$_LxdInstanceDiskState));
+      : super(_value, _then);
 
-  @override
-  _$_LxdInstanceDiskState get _value => super._value as _$_LxdInstanceDiskState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usage = freezed,
+    Object? usage = null,
   }) {
     return _then(_$_LxdInstanceDiskState(
-      usage: usage == freezed
+      usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
               as int,
@@ -503,23 +512,25 @@ class _$_LxdInstanceDiskState implements _LxdInstanceDiskState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdInstanceDiskState &&
-            const DeepCollectionEquality().equals(other.usage, usage));
+            (identical(other.usage, usage) || other.usage == usage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(usage));
+  int get hashCode => Object.hash(runtimeType, usage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdInstanceDiskStateCopyWith<_$_LxdInstanceDiskState> get copyWith =>
       __$$_LxdInstanceDiskStateCopyWithImpl<_$_LxdInstanceDiskState>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdInstanceDiskStateToJson(this);
+    return _$$_LxdInstanceDiskStateToJson(
+      this,
+    );
   }
 }
 
@@ -535,7 +546,7 @@ abstract class _LxdInstanceDiskState implements LxdInstanceDiskState {
   /// Disk usage in bytes
   ///
   /// Example: 502239232
-  int get usage => throw _privateConstructorUsedError;
+  int get usage;
   @override
   @JsonKey(ignore: true)
   _$$_LxdInstanceDiskStateCopyWith<_$_LxdInstanceDiskState> get copyWith =>
@@ -563,29 +574,32 @@ mixin _$LxdInstanceCpuState {
 abstract class $LxdInstanceCpuStateCopyWith<$Res> {
   factory $LxdInstanceCpuStateCopyWith(
           LxdInstanceCpuState value, $Res Function(LxdInstanceCpuState) then) =
-      _$LxdInstanceCpuStateCopyWithImpl<$Res>;
+      _$LxdInstanceCpuStateCopyWithImpl<$Res, LxdInstanceCpuState>;
+  @useResult
   $Res call({int usage});
 }
 
 /// @nodoc
-class _$LxdInstanceCpuStateCopyWithImpl<$Res>
+class _$LxdInstanceCpuStateCopyWithImpl<$Res, $Val extends LxdInstanceCpuState>
     implements $LxdInstanceCpuStateCopyWith<$Res> {
   _$LxdInstanceCpuStateCopyWithImpl(this._value, this._then);
 
-  final LxdInstanceCpuState _value;
   // ignore: unused_field
-  final $Res Function(LxdInstanceCpuState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usage = freezed,
+    Object? usage = null,
   }) {
     return _then(_value.copyWith(
-      usage: usage == freezed
+      usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -596,26 +610,25 @@ abstract class _$$_LxdInstanceCpuStateCopyWith<$Res>
           $Res Function(_$_LxdInstanceCpuState) then) =
       __$$_LxdInstanceCpuStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int usage});
 }
 
 /// @nodoc
 class __$$_LxdInstanceCpuStateCopyWithImpl<$Res>
-    extends _$LxdInstanceCpuStateCopyWithImpl<$Res>
+    extends _$LxdInstanceCpuStateCopyWithImpl<$Res, _$_LxdInstanceCpuState>
     implements _$$_LxdInstanceCpuStateCopyWith<$Res> {
   __$$_LxdInstanceCpuStateCopyWithImpl(_$_LxdInstanceCpuState _value,
       $Res Function(_$_LxdInstanceCpuState) _then)
-      : super(_value, (v) => _then(v as _$_LxdInstanceCpuState));
+      : super(_value, _then);
 
-  @override
-  _$_LxdInstanceCpuState get _value => super._value as _$_LxdInstanceCpuState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usage = freezed,
+    Object? usage = null,
   }) {
     return _then(_$_LxdInstanceCpuState(
-      usage: usage == freezed
+      usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
               as int,
@@ -647,23 +660,25 @@ class _$_LxdInstanceCpuState implements _LxdInstanceCpuState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdInstanceCpuState &&
-            const DeepCollectionEquality().equals(other.usage, usage));
+            (identical(other.usage, usage) || other.usage == usage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(usage));
+  int get hashCode => Object.hash(runtimeType, usage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdInstanceCpuStateCopyWith<_$_LxdInstanceCpuState> get copyWith =>
       __$$_LxdInstanceCpuStateCopyWithImpl<_$_LxdInstanceCpuState>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdInstanceCpuStateToJson(this);
+    return _$$_LxdInstanceCpuStateToJson(
+      this,
+    );
   }
 }
 
@@ -679,7 +694,7 @@ abstract class _LxdInstanceCpuState implements LxdInstanceCpuState {
   /// CPU usage in nanoseconds
   ///
   /// Example: 3637691016
-  int get usage => throw _privateConstructorUsedError;
+  int get usage;
   @override
   @JsonKey(ignore: true)
   _$$_LxdInstanceCpuStateCopyWith<_$_LxdInstanceCpuState> get copyWith =>
@@ -723,44 +738,48 @@ mixin _$LxdInstanceMemoryState {
 abstract class $LxdInstanceMemoryStateCopyWith<$Res> {
   factory $LxdInstanceMemoryStateCopyWith(LxdInstanceMemoryState value,
           $Res Function(LxdInstanceMemoryState) then) =
-      _$LxdInstanceMemoryStateCopyWithImpl<$Res>;
+      _$LxdInstanceMemoryStateCopyWithImpl<$Res, LxdInstanceMemoryState>;
+  @useResult
   $Res call({int usage, int usagePeak, int swapUsage, int swapUsagePeak});
 }
 
 /// @nodoc
-class _$LxdInstanceMemoryStateCopyWithImpl<$Res>
+class _$LxdInstanceMemoryStateCopyWithImpl<$Res,
+        $Val extends LxdInstanceMemoryState>
     implements $LxdInstanceMemoryStateCopyWith<$Res> {
   _$LxdInstanceMemoryStateCopyWithImpl(this._value, this._then);
 
-  final LxdInstanceMemoryState _value;
   // ignore: unused_field
-  final $Res Function(LxdInstanceMemoryState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usage = freezed,
-    Object? usagePeak = freezed,
-    Object? swapUsage = freezed,
-    Object? swapUsagePeak = freezed,
+    Object? usage = null,
+    Object? usagePeak = null,
+    Object? swapUsage = null,
+    Object? swapUsagePeak = null,
   }) {
     return _then(_value.copyWith(
-      usage: usage == freezed
+      usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
               as int,
-      usagePeak: usagePeak == freezed
+      usagePeak: null == usagePeak
           ? _value.usagePeak
           : usagePeak // ignore: cast_nullable_to_non_nullable
               as int,
-      swapUsage: swapUsage == freezed
+      swapUsage: null == swapUsage
           ? _value.swapUsage
           : swapUsage // ignore: cast_nullable_to_non_nullable
               as int,
-      swapUsagePeak: swapUsagePeak == freezed
+      swapUsagePeak: null == swapUsagePeak
           ? _value.swapUsagePeak
           : swapUsagePeak // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -771,42 +790,41 @@ abstract class _$$_LxdInstanceMemoryStateCopyWith<$Res>
           $Res Function(_$_LxdInstanceMemoryState) then) =
       __$$_LxdInstanceMemoryStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int usage, int usagePeak, int swapUsage, int swapUsagePeak});
 }
 
 /// @nodoc
 class __$$_LxdInstanceMemoryStateCopyWithImpl<$Res>
-    extends _$LxdInstanceMemoryStateCopyWithImpl<$Res>
+    extends _$LxdInstanceMemoryStateCopyWithImpl<$Res,
+        _$_LxdInstanceMemoryState>
     implements _$$_LxdInstanceMemoryStateCopyWith<$Res> {
   __$$_LxdInstanceMemoryStateCopyWithImpl(_$_LxdInstanceMemoryState _value,
       $Res Function(_$_LxdInstanceMemoryState) _then)
-      : super(_value, (v) => _then(v as _$_LxdInstanceMemoryState));
+      : super(_value, _then);
 
-  @override
-  _$_LxdInstanceMemoryState get _value =>
-      super._value as _$_LxdInstanceMemoryState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? usage = freezed,
-    Object? usagePeak = freezed,
-    Object? swapUsage = freezed,
-    Object? swapUsagePeak = freezed,
+    Object? usage = null,
+    Object? usagePeak = null,
+    Object? swapUsage = null,
+    Object? swapUsagePeak = null,
   }) {
     return _then(_$_LxdInstanceMemoryState(
-      usage: usage == freezed
+      usage: null == usage
           ? _value.usage
           : usage // ignore: cast_nullable_to_non_nullable
               as int,
-      usagePeak: usagePeak == freezed
+      usagePeak: null == usagePeak
           ? _value.usagePeak
           : usagePeak // ignore: cast_nullable_to_non_nullable
               as int,
-      swapUsage: swapUsage == freezed
+      swapUsage: null == swapUsage
           ? _value.swapUsage
           : swapUsage // ignore: cast_nullable_to_non_nullable
               as int,
-      swapUsagePeak: swapUsagePeak == freezed
+      swapUsagePeak: null == swapUsagePeak
           ? _value.swapUsagePeak
           : swapUsagePeak // ignore: cast_nullable_to_non_nullable
               as int,
@@ -860,31 +878,32 @@ class _$_LxdInstanceMemoryState implements _LxdInstanceMemoryState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdInstanceMemoryState &&
-            const DeepCollectionEquality().equals(other.usage, usage) &&
-            const DeepCollectionEquality().equals(other.usagePeak, usagePeak) &&
-            const DeepCollectionEquality().equals(other.swapUsage, swapUsage) &&
-            const DeepCollectionEquality()
-                .equals(other.swapUsagePeak, swapUsagePeak));
+            (identical(other.usage, usage) || other.usage == usage) &&
+            (identical(other.usagePeak, usagePeak) ||
+                other.usagePeak == usagePeak) &&
+            (identical(other.swapUsage, swapUsage) ||
+                other.swapUsage == swapUsage) &&
+            (identical(other.swapUsagePeak, swapUsagePeak) ||
+                other.swapUsagePeak == swapUsagePeak));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(usage),
-      const DeepCollectionEquality().hash(usagePeak),
-      const DeepCollectionEquality().hash(swapUsage),
-      const DeepCollectionEquality().hash(swapUsagePeak));
+  int get hashCode =>
+      Object.hash(runtimeType, usage, usagePeak, swapUsage, swapUsagePeak);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdInstanceMemoryStateCopyWith<_$_LxdInstanceMemoryState> get copyWith =>
       __$$_LxdInstanceMemoryStateCopyWithImpl<_$_LxdInstanceMemoryState>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdInstanceMemoryStateToJson(this);
+    return _$$_LxdInstanceMemoryStateToJson(
+      this,
+    );
   }
 }
 
@@ -903,25 +922,25 @@ abstract class _LxdInstanceMemoryState implements LxdInstanceMemoryState {
   /// Memory usage in bytes
   ///
   /// Example: 73248768
-  int get usage => throw _privateConstructorUsedError;
+  int get usage;
   @override
 
   /// Peak memory usage in bytes
   ///
   /// Example: 73785344
-  int get usagePeak => throw _privateConstructorUsedError;
+  int get usagePeak;
   @override
 
   /// SWAP usage in bytes
   ///
   /// Example: 12297557
-  int get swapUsage => throw _privateConstructorUsedError;
+  int get swapUsage;
   @override
 
   /// Peak SWAP usage in bytes
   ///
   /// Example: 12297557
-  int get swapUsagePeak => throw _privateConstructorUsedError;
+  int get swapUsagePeak;
   @override
   @JsonKey(ignore: true)
   _$$_LxdInstanceMemoryStateCopyWith<_$_LxdInstanceMemoryState> get copyWith =>
@@ -977,7 +996,8 @@ mixin _$LxdInstanceNetworkState {
 abstract class $LxdInstanceNetworkStateCopyWith<$Res> {
   factory $LxdInstanceNetworkStateCopyWith(LxdInstanceNetworkState value,
           $Res Function(LxdInstanceNetworkState) then) =
-      _$LxdInstanceNetworkStateCopyWithImpl<$Res>;
+      _$LxdInstanceNetworkStateCopyWithImpl<$Res, LxdInstanceNetworkState>;
+  @useResult
   $Res call(
       {List<LxdInstanceNetworkAddress> addresses,
       LxdInstanceNetworkCounters counters,
@@ -991,60 +1011,64 @@ abstract class $LxdInstanceNetworkStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdInstanceNetworkStateCopyWithImpl<$Res>
+class _$LxdInstanceNetworkStateCopyWithImpl<$Res,
+        $Val extends LxdInstanceNetworkState>
     implements $LxdInstanceNetworkStateCopyWith<$Res> {
   _$LxdInstanceNetworkStateCopyWithImpl(this._value, this._then);
 
-  final LxdInstanceNetworkState _value;
   // ignore: unused_field
-  final $Res Function(LxdInstanceNetworkState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? addresses = freezed,
-    Object? counters = freezed,
-    Object? hwaddr = freezed,
-    Object? hostName = freezed,
-    Object? mtu = freezed,
-    Object? state = freezed,
-    Object? type = freezed,
+    Object? addresses = null,
+    Object? counters = null,
+    Object? hwaddr = null,
+    Object? hostName = null,
+    Object? mtu = null,
+    Object? state = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      addresses: addresses == freezed
+      addresses: null == addresses
           ? _value.addresses
           : addresses // ignore: cast_nullable_to_non_nullable
               as List<LxdInstanceNetworkAddress>,
-      counters: counters == freezed
+      counters: null == counters
           ? _value.counters
           : counters // ignore: cast_nullable_to_non_nullable
               as LxdInstanceNetworkCounters,
-      hwaddr: hwaddr == freezed
+      hwaddr: null == hwaddr
           ? _value.hwaddr
           : hwaddr // ignore: cast_nullable_to_non_nullable
               as String,
-      hostName: hostName == freezed
+      hostName: null == hostName
           ? _value.hostName
           : hostName // ignore: cast_nullable_to_non_nullable
               as String,
-      mtu: mtu == freezed
+      mtu: null == mtu
           ? _value.mtu
           : mtu // ignore: cast_nullable_to_non_nullable
               as int,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdInstanceNetworkCountersCopyWith<$Res> get counters {
     return $LxdInstanceNetworkCountersCopyWith<$Res>(_value.counters, (value) {
-      return _then(_value.copyWith(counters: value));
+      return _then(_value.copyWith(counters: value) as $Val);
     });
   }
 }
@@ -1056,6 +1080,7 @@ abstract class _$$_LxdInstanceNetworkStateCopyWith<$Res>
           $Res Function(_$_LxdInstanceNetworkState) then) =
       __$$_LxdInstanceNetworkStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<LxdInstanceNetworkAddress> addresses,
       LxdInstanceNetworkCounters counters,
@@ -1071,52 +1096,50 @@ abstract class _$$_LxdInstanceNetworkStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdInstanceNetworkStateCopyWithImpl<$Res>
-    extends _$LxdInstanceNetworkStateCopyWithImpl<$Res>
+    extends _$LxdInstanceNetworkStateCopyWithImpl<$Res,
+        _$_LxdInstanceNetworkState>
     implements _$$_LxdInstanceNetworkStateCopyWith<$Res> {
   __$$_LxdInstanceNetworkStateCopyWithImpl(_$_LxdInstanceNetworkState _value,
       $Res Function(_$_LxdInstanceNetworkState) _then)
-      : super(_value, (v) => _then(v as _$_LxdInstanceNetworkState));
+      : super(_value, _then);
 
-  @override
-  _$_LxdInstanceNetworkState get _value =>
-      super._value as _$_LxdInstanceNetworkState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? addresses = freezed,
-    Object? counters = freezed,
-    Object? hwaddr = freezed,
-    Object? hostName = freezed,
-    Object? mtu = freezed,
-    Object? state = freezed,
-    Object? type = freezed,
+    Object? addresses = null,
+    Object? counters = null,
+    Object? hwaddr = null,
+    Object? hostName = null,
+    Object? mtu = null,
+    Object? state = null,
+    Object? type = null,
   }) {
     return _then(_$_LxdInstanceNetworkState(
-      addresses: addresses == freezed
+      addresses: null == addresses
           ? _value._addresses
           : addresses // ignore: cast_nullable_to_non_nullable
               as List<LxdInstanceNetworkAddress>,
-      counters: counters == freezed
+      counters: null == counters
           ? _value.counters
           : counters // ignore: cast_nullable_to_non_nullable
               as LxdInstanceNetworkCounters,
-      hwaddr: hwaddr == freezed
+      hwaddr: null == hwaddr
           ? _value.hwaddr
           : hwaddr // ignore: cast_nullable_to_non_nullable
               as String,
-      hostName: hostName == freezed
+      hostName: null == hostName
           ? _value.hostName
           : hostName // ignore: cast_nullable_to_non_nullable
               as String,
-      mtu: mtu == freezed
+      mtu: null == mtu
           ? _value.mtu
           : mtu // ignore: cast_nullable_to_non_nullable
               as int,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1196,12 +1219,14 @@ class _$_LxdInstanceNetworkState implements _LxdInstanceNetworkState {
             other is _$_LxdInstanceNetworkState &&
             const DeepCollectionEquality()
                 .equals(other._addresses, _addresses) &&
-            const DeepCollectionEquality().equals(other.counters, counters) &&
-            const DeepCollectionEquality().equals(other.hwaddr, hwaddr) &&
-            const DeepCollectionEquality().equals(other.hostName, hostName) &&
-            const DeepCollectionEquality().equals(other.mtu, mtu) &&
-            const DeepCollectionEquality().equals(other.state, state) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            (identical(other.counters, counters) ||
+                other.counters == counters) &&
+            (identical(other.hwaddr, hwaddr) || other.hwaddr == hwaddr) &&
+            (identical(other.hostName, hostName) ||
+                other.hostName == hostName) &&
+            (identical(other.mtu, mtu) || other.mtu == mtu) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
@@ -1209,15 +1234,16 @@ class _$_LxdInstanceNetworkState implements _LxdInstanceNetworkState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_addresses),
-      const DeepCollectionEquality().hash(counters),
-      const DeepCollectionEquality().hash(hwaddr),
-      const DeepCollectionEquality().hash(hostName),
-      const DeepCollectionEquality().hash(mtu),
-      const DeepCollectionEquality().hash(state),
-      const DeepCollectionEquality().hash(type));
+      counters,
+      hwaddr,
+      hostName,
+      mtu,
+      state,
+      type);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdInstanceNetworkStateCopyWith<_$_LxdInstanceNetworkState>
       get copyWith =>
           __$$_LxdInstanceNetworkStateCopyWithImpl<_$_LxdInstanceNetworkState>(
@@ -1225,7 +1251,9 @@ class _$_LxdInstanceNetworkState implements _LxdInstanceNetworkState {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdInstanceNetworkStateToJson(this);
+    return _$$_LxdInstanceNetworkStateToJson(
+      this,
+    );
   }
 }
 
@@ -1245,42 +1273,41 @@ abstract class _LxdInstanceNetworkState implements LxdInstanceNetworkState {
   @override
 
   /// List of IP addresses
-  List<LxdInstanceNetworkAddress> get addresses =>
-      throw _privateConstructorUsedError;
+  List<LxdInstanceNetworkAddress> get addresses;
   @override
 
   /// Traffic counters
-  LxdInstanceNetworkCounters get counters => throw _privateConstructorUsedError;
+  LxdInstanceNetworkCounters get counters;
   @override
 
   /// MAC address
   ///
   /// Example: 00:16:3e:0c:ee:dd
-  String get hwaddr => throw _privateConstructorUsedError;
+  String get hwaddr;
   @override
 
   /// Name of the interface on the host
   ///
   /// Example: vethbbcd39c7
-  String get hostName => throw _privateConstructorUsedError;
+  String get hostName;
   @override
 
   /// MTU (maximum transmit unit) for the interface
   ///
   /// Example: 1500
-  int get mtu => throw _privateConstructorUsedError;
+  int get mtu;
   @override
 
   /// Administrative state of the interface (up/down)
   ///
   /// Example: up
-  String get state => throw _privateConstructorUsedError;
+  String get state;
   @override
 
   /// Type of interface (broadcast, loopback, point-to-point, ...)
   ///
   /// Example: broadcast
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$_LxdInstanceNetworkStateCopyWith<_$_LxdInstanceNetworkState>
@@ -1320,7 +1347,8 @@ mixin _$LxdInstanceNetworkAddress {
 abstract class $LxdInstanceNetworkAddressCopyWith<$Res> {
   factory $LxdInstanceNetworkAddressCopyWith(LxdInstanceNetworkAddress value,
           $Res Function(LxdInstanceNetworkAddress) then) =
-      _$LxdInstanceNetworkAddressCopyWithImpl<$Res>;
+      _$LxdInstanceNetworkAddressCopyWithImpl<$Res, LxdInstanceNetworkAddress>;
+  @useResult
   $Res call(
       {LxdNetworkFamily family,
       String address,
@@ -1329,39 +1357,42 @@ abstract class $LxdInstanceNetworkAddressCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdInstanceNetworkAddressCopyWithImpl<$Res>
+class _$LxdInstanceNetworkAddressCopyWithImpl<$Res,
+        $Val extends LxdInstanceNetworkAddress>
     implements $LxdInstanceNetworkAddressCopyWith<$Res> {
   _$LxdInstanceNetworkAddressCopyWithImpl(this._value, this._then);
 
-  final LxdInstanceNetworkAddress _value;
   // ignore: unused_field
-  final $Res Function(LxdInstanceNetworkAddress) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? family = freezed,
-    Object? address = freezed,
-    Object? netmask = freezed,
-    Object? scope = freezed,
+    Object? family = null,
+    Object? address = null,
+    Object? netmask = null,
+    Object? scope = null,
   }) {
     return _then(_value.copyWith(
-      family: family == freezed
+      family: null == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as LxdNetworkFamily,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      netmask: netmask == freezed
+      netmask: null == netmask
           ? _value.netmask
           : netmask // ignore: cast_nullable_to_non_nullable
               as String,
-      scope: scope == freezed
+      scope: null == scope
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
               as LxdNetworkScope,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1373,6 +1404,7 @@ abstract class _$$_LxdInstanceNetworkAddressCopyWith<$Res>
           $Res Function(_$_LxdInstanceNetworkAddress) then) =
       __$$_LxdInstanceNetworkAddressCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {LxdNetworkFamily family,
       String address,
@@ -1382,38 +1414,36 @@ abstract class _$$_LxdInstanceNetworkAddressCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdInstanceNetworkAddressCopyWithImpl<$Res>
-    extends _$LxdInstanceNetworkAddressCopyWithImpl<$Res>
+    extends _$LxdInstanceNetworkAddressCopyWithImpl<$Res,
+        _$_LxdInstanceNetworkAddress>
     implements _$$_LxdInstanceNetworkAddressCopyWith<$Res> {
   __$$_LxdInstanceNetworkAddressCopyWithImpl(
       _$_LxdInstanceNetworkAddress _value,
       $Res Function(_$_LxdInstanceNetworkAddress) _then)
-      : super(_value, (v) => _then(v as _$_LxdInstanceNetworkAddress));
+      : super(_value, _then);
 
-  @override
-  _$_LxdInstanceNetworkAddress get _value =>
-      super._value as _$_LxdInstanceNetworkAddress;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? family = freezed,
-    Object? address = freezed,
-    Object? netmask = freezed,
-    Object? scope = freezed,
+    Object? family = null,
+    Object? address = null,
+    Object? netmask = null,
+    Object? scope = null,
   }) {
     return _then(_$_LxdInstanceNetworkAddress(
-      family: family == freezed
+      family: null == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as LxdNetworkFamily,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      netmask: netmask == freezed
+      netmask: null == netmask
           ? _value.netmask
           : netmask // ignore: cast_nullable_to_non_nullable
               as String,
-      scope: scope == freezed
+      scope: null == scope
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
               as LxdNetworkScope,
@@ -1463,30 +1493,28 @@ class _$_LxdInstanceNetworkAddress implements _LxdInstanceNetworkAddress {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdInstanceNetworkAddress &&
-            const DeepCollectionEquality().equals(other.family, family) &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.netmask, netmask) &&
-            const DeepCollectionEquality().equals(other.scope, scope));
+            (identical(other.family, family) || other.family == family) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.netmask, netmask) || other.netmask == netmask) &&
+            (identical(other.scope, scope) || other.scope == scope));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(family),
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(netmask),
-      const DeepCollectionEquality().hash(scope));
+  int get hashCode => Object.hash(runtimeType, family, address, netmask, scope);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdInstanceNetworkAddressCopyWith<_$_LxdInstanceNetworkAddress>
       get copyWith => __$$_LxdInstanceNetworkAddressCopyWithImpl<
           _$_LxdInstanceNetworkAddress>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdInstanceNetworkAddressToJson(this);
+    return _$$_LxdInstanceNetworkAddressToJson(
+      this,
+    );
   }
 }
 
@@ -1503,23 +1531,23 @@ abstract class _LxdInstanceNetworkAddress implements LxdInstanceNetworkAddress {
   @override
 
   /// Network family
-  LxdNetworkFamily get family => throw _privateConstructorUsedError;
+  LxdNetworkFamily get family;
   @override
 
   /// IP address
   ///
   /// Example: fd42:4c81:5770:1eaf:216:3eff:fe0c:eedd
-  String get address => throw _privateConstructorUsedError;
+  String get address;
   @override
 
   /// Network mask
   ///
   /// Example: 64
-  String get netmask => throw _privateConstructorUsedError;
+  String get netmask;
   @override
 
   /// Address scope
-  LxdNetworkScope get scope => throw _privateConstructorUsedError;
+  LxdNetworkScope get scope;
   @override
   @JsonKey(ignore: true)
   _$$_LxdInstanceNetworkAddressCopyWith<_$_LxdInstanceNetworkAddress>
@@ -1583,7 +1611,9 @@ mixin _$LxdInstanceNetworkCounters {
 abstract class $LxdInstanceNetworkCountersCopyWith<$Res> {
   factory $LxdInstanceNetworkCountersCopyWith(LxdInstanceNetworkCounters value,
           $Res Function(LxdInstanceNetworkCounters) then) =
-      _$LxdInstanceNetworkCountersCopyWithImpl<$Res>;
+      _$LxdInstanceNetworkCountersCopyWithImpl<$Res,
+          LxdInstanceNetworkCounters>;
+  @useResult
   $Res call(
       {int bytesReceived,
       int bytesSent,
@@ -1596,59 +1626,62 @@ abstract class $LxdInstanceNetworkCountersCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdInstanceNetworkCountersCopyWithImpl<$Res>
+class _$LxdInstanceNetworkCountersCopyWithImpl<$Res,
+        $Val extends LxdInstanceNetworkCounters>
     implements $LxdInstanceNetworkCountersCopyWith<$Res> {
   _$LxdInstanceNetworkCountersCopyWithImpl(this._value, this._then);
 
-  final LxdInstanceNetworkCounters _value;
   // ignore: unused_field
-  final $Res Function(LxdInstanceNetworkCounters) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bytesReceived = freezed,
-    Object? bytesSent = freezed,
-    Object? packetsReceived = freezed,
-    Object? packetsSent = freezed,
-    Object? errorsReceived = freezed,
-    Object? errorsSent = freezed,
-    Object? packetsDroppedOutbound = freezed,
-    Object? packetsDroppedInbound = freezed,
+    Object? bytesReceived = null,
+    Object? bytesSent = null,
+    Object? packetsReceived = null,
+    Object? packetsSent = null,
+    Object? errorsReceived = null,
+    Object? errorsSent = null,
+    Object? packetsDroppedOutbound = null,
+    Object? packetsDroppedInbound = null,
   }) {
     return _then(_value.copyWith(
-      bytesReceived: bytesReceived == freezed
+      bytesReceived: null == bytesReceived
           ? _value.bytesReceived
           : bytesReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      bytesSent: bytesSent == freezed
+      bytesSent: null == bytesSent
           ? _value.bytesSent
           : bytesSent // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsReceived: packetsReceived == freezed
+      packetsReceived: null == packetsReceived
           ? _value.packetsReceived
           : packetsReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsSent: packetsSent == freezed
+      packetsSent: null == packetsSent
           ? _value.packetsSent
           : packetsSent // ignore: cast_nullable_to_non_nullable
               as int,
-      errorsReceived: errorsReceived == freezed
+      errorsReceived: null == errorsReceived
           ? _value.errorsReceived
           : errorsReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      errorsSent: errorsSent == freezed
+      errorsSent: null == errorsSent
           ? _value.errorsSent
           : errorsSent // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsDroppedOutbound: packetsDroppedOutbound == freezed
+      packetsDroppedOutbound: null == packetsDroppedOutbound
           ? _value.packetsDroppedOutbound
           : packetsDroppedOutbound // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsDroppedInbound: packetsDroppedInbound == freezed
+      packetsDroppedInbound: null == packetsDroppedInbound
           ? _value.packetsDroppedInbound
           : packetsDroppedInbound // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1660,6 +1693,7 @@ abstract class _$$_LxdInstanceNetworkCountersCopyWith<$Res>
           $Res Function(_$_LxdInstanceNetworkCounters) then) =
       __$$_LxdInstanceNetworkCountersCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int bytesReceived,
       int bytesSent,
@@ -1673,58 +1707,56 @@ abstract class _$$_LxdInstanceNetworkCountersCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdInstanceNetworkCountersCopyWithImpl<$Res>
-    extends _$LxdInstanceNetworkCountersCopyWithImpl<$Res>
+    extends _$LxdInstanceNetworkCountersCopyWithImpl<$Res,
+        _$_LxdInstanceNetworkCounters>
     implements _$$_LxdInstanceNetworkCountersCopyWith<$Res> {
   __$$_LxdInstanceNetworkCountersCopyWithImpl(
       _$_LxdInstanceNetworkCounters _value,
       $Res Function(_$_LxdInstanceNetworkCounters) _then)
-      : super(_value, (v) => _then(v as _$_LxdInstanceNetworkCounters));
+      : super(_value, _then);
 
-  @override
-  _$_LxdInstanceNetworkCounters get _value =>
-      super._value as _$_LxdInstanceNetworkCounters;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bytesReceived = freezed,
-    Object? bytesSent = freezed,
-    Object? packetsReceived = freezed,
-    Object? packetsSent = freezed,
-    Object? errorsReceived = freezed,
-    Object? errorsSent = freezed,
-    Object? packetsDroppedOutbound = freezed,
-    Object? packetsDroppedInbound = freezed,
+    Object? bytesReceived = null,
+    Object? bytesSent = null,
+    Object? packetsReceived = null,
+    Object? packetsSent = null,
+    Object? errorsReceived = null,
+    Object? errorsSent = null,
+    Object? packetsDroppedOutbound = null,
+    Object? packetsDroppedInbound = null,
   }) {
     return _then(_$_LxdInstanceNetworkCounters(
-      bytesReceived: bytesReceived == freezed
+      bytesReceived: null == bytesReceived
           ? _value.bytesReceived
           : bytesReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      bytesSent: bytesSent == freezed
+      bytesSent: null == bytesSent
           ? _value.bytesSent
           : bytesSent // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsReceived: packetsReceived == freezed
+      packetsReceived: null == packetsReceived
           ? _value.packetsReceived
           : packetsReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsSent: packetsSent == freezed
+      packetsSent: null == packetsSent
           ? _value.packetsSent
           : packetsSent // ignore: cast_nullable_to_non_nullable
               as int,
-      errorsReceived: errorsReceived == freezed
+      errorsReceived: null == errorsReceived
           ? _value.errorsReceived
           : errorsReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      errorsSent: errorsSent == freezed
+      errorsSent: null == errorsSent
           ? _value.errorsSent
           : errorsSent // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsDroppedOutbound: packetsDroppedOutbound == freezed
+      packetsDroppedOutbound: null == packetsDroppedOutbound
           ? _value.packetsDroppedOutbound
           : packetsDroppedOutbound // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsDroppedInbound: packetsDroppedInbound == freezed
+      packetsDroppedInbound: null == packetsDroppedInbound
           ? _value.packetsDroppedInbound
           : packetsDroppedInbound // ignore: cast_nullable_to_non_nullable
               as int,
@@ -1806,45 +1838,49 @@ class _$_LxdInstanceNetworkCounters implements _LxdInstanceNetworkCounters {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdInstanceNetworkCounters &&
-            const DeepCollectionEquality()
-                .equals(other.bytesReceived, bytesReceived) &&
-            const DeepCollectionEquality().equals(other.bytesSent, bytesSent) &&
-            const DeepCollectionEquality()
-                .equals(other.packetsReceived, packetsReceived) &&
-            const DeepCollectionEquality()
-                .equals(other.packetsSent, packetsSent) &&
-            const DeepCollectionEquality()
-                .equals(other.errorsReceived, errorsReceived) &&
-            const DeepCollectionEquality()
-                .equals(other.errorsSent, errorsSent) &&
-            const DeepCollectionEquality()
-                .equals(other.packetsDroppedOutbound, packetsDroppedOutbound) &&
-            const DeepCollectionEquality()
-                .equals(other.packetsDroppedInbound, packetsDroppedInbound));
+            (identical(other.bytesReceived, bytesReceived) ||
+                other.bytesReceived == bytesReceived) &&
+            (identical(other.bytesSent, bytesSent) ||
+                other.bytesSent == bytesSent) &&
+            (identical(other.packetsReceived, packetsReceived) ||
+                other.packetsReceived == packetsReceived) &&
+            (identical(other.packetsSent, packetsSent) ||
+                other.packetsSent == packetsSent) &&
+            (identical(other.errorsReceived, errorsReceived) ||
+                other.errorsReceived == errorsReceived) &&
+            (identical(other.errorsSent, errorsSent) ||
+                other.errorsSent == errorsSent) &&
+            (identical(other.packetsDroppedOutbound, packetsDroppedOutbound) ||
+                other.packetsDroppedOutbound == packetsDroppedOutbound) &&
+            (identical(other.packetsDroppedInbound, packetsDroppedInbound) ||
+                other.packetsDroppedInbound == packetsDroppedInbound));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(bytesReceived),
-      const DeepCollectionEquality().hash(bytesSent),
-      const DeepCollectionEquality().hash(packetsReceived),
-      const DeepCollectionEquality().hash(packetsSent),
-      const DeepCollectionEquality().hash(errorsReceived),
-      const DeepCollectionEquality().hash(errorsSent),
-      const DeepCollectionEquality().hash(packetsDroppedOutbound),
-      const DeepCollectionEquality().hash(packetsDroppedInbound));
+      bytesReceived,
+      bytesSent,
+      packetsReceived,
+      packetsSent,
+      errorsReceived,
+      errorsSent,
+      packetsDroppedOutbound,
+      packetsDroppedInbound);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdInstanceNetworkCountersCopyWith<_$_LxdInstanceNetworkCounters>
       get copyWith => __$$_LxdInstanceNetworkCountersCopyWithImpl<
           _$_LxdInstanceNetworkCounters>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdInstanceNetworkCountersToJson(this);
+    return _$$_LxdInstanceNetworkCountersToJson(
+      this,
+    );
   }
 }
 
@@ -1869,49 +1905,49 @@ abstract class _LxdInstanceNetworkCounters
   /// Number of bytes received
   ///
   /// Example: 192021
-  int get bytesReceived => throw _privateConstructorUsedError;
+  int get bytesReceived;
   @override
 
   /// Number of bytes sent
   ///
   /// Example: 10888579
-  int get bytesSent => throw _privateConstructorUsedError;
+  int get bytesSent;
   @override
 
   /// Number of packets received
   ///
   /// Example: 1748
-  int get packetsReceived => throw _privateConstructorUsedError;
+  int get packetsReceived;
   @override
 
   /// Number of packets sent
   ///
   /// Example: 964
-  int get packetsSent => throw _privateConstructorUsedError;
+  int get packetsSent;
   @override
 
   /// Number of errors received
   ///
   /// Example: 14
-  int get errorsReceived => throw _privateConstructorUsedError;
+  int get errorsReceived;
   @override
 
   /// Number of errors sent
   ///
   /// Example: 41
-  int get errorsSent => throw _privateConstructorUsedError;
+  int get errorsSent;
   @override
 
   /// Number of outbound packets dropped
   ///
   /// Example: 541
-  int get packetsDroppedOutbound => throw _privateConstructorUsedError;
+  int get packetsDroppedOutbound;
   @override
 
   /// Number of inbound packets dropped
   ///
   /// Example: 179
-  int get packetsDroppedInbound => throw _privateConstructorUsedError;
+  int get packetsDroppedInbound;
   @override
   @JsonKey(ignore: true)
   _$$_LxdInstanceNetworkCountersCopyWith<_$_LxdInstanceNetworkCounters>

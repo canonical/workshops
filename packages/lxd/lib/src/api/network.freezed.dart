@@ -37,7 +37,8 @@ mixin _$LxdNetwork {
 abstract class $LxdNetworkCopyWith<$Res> {
   factory $LxdNetworkCopyWith(
           LxdNetwork value, $Res Function(LxdNetwork) then) =
-      _$LxdNetworkCopyWithImpl<$Res>;
+      _$LxdNetworkCopyWithImpl<$Res, LxdNetwork>;
+  @useResult
   $Res call(
       {Map<String, String> config,
       String description,
@@ -48,48 +49,51 @@ abstract class $LxdNetworkCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdNetworkCopyWithImpl<$Res> implements $LxdNetworkCopyWith<$Res> {
+class _$LxdNetworkCopyWithImpl<$Res, $Val extends LxdNetwork>
+    implements $LxdNetworkCopyWith<$Res> {
   _$LxdNetworkCopyWithImpl(this._value, this._then);
 
-  final LxdNetwork _value;
   // ignore: unused_field
-  final $Res Function(LxdNetwork) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? config = freezed,
-    Object? description = freezed,
-    Object? managed = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
-    Object? type = freezed,
+    Object? config = null,
+    Object? description = null,
+    Object? managed = null,
+    Object? name = null,
+    Object? status = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      config: config == freezed
+      config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      managed: managed == freezed
+      managed: null == managed
           ? _value.managed
           : managed // ignore: cast_nullable_to_non_nullable
               as bool,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -100,6 +104,7 @@ abstract class _$$_LxdNetworkCopyWith<$Res>
           _$_LxdNetwork value, $Res Function(_$_LxdNetwork) then) =
       __$$_LxdNetworkCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {Map<String, String> config,
       String description,
@@ -110,46 +115,45 @@ abstract class _$$_LxdNetworkCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LxdNetworkCopyWithImpl<$Res> extends _$LxdNetworkCopyWithImpl<$Res>
+class __$$_LxdNetworkCopyWithImpl<$Res>
+    extends _$LxdNetworkCopyWithImpl<$Res, _$_LxdNetwork>
     implements _$$_LxdNetworkCopyWith<$Res> {
   __$$_LxdNetworkCopyWithImpl(
       _$_LxdNetwork _value, $Res Function(_$_LxdNetwork) _then)
-      : super(_value, (v) => _then(v as _$_LxdNetwork));
+      : super(_value, _then);
 
-  @override
-  _$_LxdNetwork get _value => super._value as _$_LxdNetwork;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? config = freezed,
-    Object? description = freezed,
-    Object? managed = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
-    Object? type = freezed,
+    Object? config = null,
+    Object? description = null,
+    Object? managed = null,
+    Object? name = null,
+    Object? status = null,
+    Object? type = null,
   }) {
     return _then(_$_LxdNetwork(
-      config: config == freezed
+      config: null == config
           ? _value._config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      managed: managed == freezed
+      managed: null == managed
           ? _value.managed
           : managed // ignore: cast_nullable_to_non_nullable
               as bool,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
@@ -201,12 +205,12 @@ class _$_LxdNetwork implements _LxdNetwork {
         (other.runtimeType == runtimeType &&
             other is _$_LxdNetwork &&
             const DeepCollectionEquality().equals(other._config, _config) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.managed, managed) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.managed, managed) || other.managed == managed) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
@@ -214,20 +218,23 @@ class _$_LxdNetwork implements _LxdNetwork {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_config),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(managed),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(type));
+      description,
+      managed,
+      name,
+      status,
+      type);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdNetworkCopyWith<_$_LxdNetwork> get copyWith =>
       __$$_LxdNetworkCopyWithImpl<_$_LxdNetwork>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdNetworkToJson(this);
+    return _$$_LxdNetworkToJson(
+      this,
+    );
   }
 }
 
@@ -244,17 +251,17 @@ abstract class _LxdNetwork implements LxdNetwork {
       _$_LxdNetwork.fromJson;
 
   @override
-  Map<String, String> get config => throw _privateConstructorUsedError;
+  Map<String, String> get config;
   @override
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
-  bool get managed => throw _privateConstructorUsedError;
+  bool get managed;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get status => throw _privateConstructorUsedError;
+  String get status;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$_LxdNetworkCopyWith<_$_LxdNetwork> get copyWith =>
@@ -283,7 +290,8 @@ mixin _$LxdNetworkLease {
 abstract class $LxdNetworkLeaseCopyWith<$Res> {
   factory $LxdNetworkLeaseCopyWith(
           LxdNetworkLease value, $Res Function(LxdNetworkLease) then) =
-      _$LxdNetworkLeaseCopyWithImpl<$Res>;
+      _$LxdNetworkLeaseCopyWithImpl<$Res, LxdNetworkLease>;
+  @useResult
   $Res call(
       {String address,
       String hostname,
@@ -293,44 +301,46 @@ abstract class $LxdNetworkLeaseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdNetworkLeaseCopyWithImpl<$Res>
+class _$LxdNetworkLeaseCopyWithImpl<$Res, $Val extends LxdNetworkLease>
     implements $LxdNetworkLeaseCopyWith<$Res> {
   _$LxdNetworkLeaseCopyWithImpl(this._value, this._then);
 
-  final LxdNetworkLease _value;
   // ignore: unused_field
-  final $Res Function(LxdNetworkLease) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? address = freezed,
-    Object? hostname = freezed,
-    Object? hwaddr = freezed,
-    Object? location = freezed,
-    Object? type = freezed,
+    Object? address = null,
+    Object? hostname = null,
+    Object? hwaddr = null,
+    Object? location = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      hostname: hostname == freezed
+      hostname: null == hostname
           ? _value.hostname
           : hostname // ignore: cast_nullable_to_non_nullable
               as String,
-      hwaddr: hwaddr == freezed
+      hwaddr: null == hwaddr
           ? _value.hwaddr
           : hwaddr // ignore: cast_nullable_to_non_nullable
               as String,
-      location: location == freezed
+      location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -341,6 +351,7 @@ abstract class _$$_LxdNetworkLeaseCopyWith<$Res>
           _$_LxdNetworkLease value, $Res Function(_$_LxdNetworkLease) then) =
       __$$_LxdNetworkLeaseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String address,
       String hostname,
@@ -351,41 +362,39 @@ abstract class _$$_LxdNetworkLeaseCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdNetworkLeaseCopyWithImpl<$Res>
-    extends _$LxdNetworkLeaseCopyWithImpl<$Res>
+    extends _$LxdNetworkLeaseCopyWithImpl<$Res, _$_LxdNetworkLease>
     implements _$$_LxdNetworkLeaseCopyWith<$Res> {
   __$$_LxdNetworkLeaseCopyWithImpl(
       _$_LxdNetworkLease _value, $Res Function(_$_LxdNetworkLease) _then)
-      : super(_value, (v) => _then(v as _$_LxdNetworkLease));
+      : super(_value, _then);
 
-  @override
-  _$_LxdNetworkLease get _value => super._value as _$_LxdNetworkLease;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? address = freezed,
-    Object? hostname = freezed,
-    Object? hwaddr = freezed,
-    Object? location = freezed,
-    Object? type = freezed,
+    Object? address = null,
+    Object? hostname = null,
+    Object? hwaddr = null,
+    Object? location = null,
+    Object? type = null,
   }) {
     return _then(_$_LxdNetworkLease(
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      hostname: hostname == freezed
+      hostname: null == hostname
           ? _value.hostname
           : hostname // ignore: cast_nullable_to_non_nullable
               as String,
-      hwaddr: hwaddr == freezed
+      hwaddr: null == hwaddr
           ? _value.hwaddr
           : hwaddr // ignore: cast_nullable_to_non_nullable
               as String,
-      location: location == freezed
+      location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
@@ -427,31 +436,31 @@ class _$_LxdNetworkLease implements _LxdNetworkLease {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdNetworkLease &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.hostname, hostname) &&
-            const DeepCollectionEquality().equals(other.hwaddr, hwaddr) &&
-            const DeepCollectionEquality().equals(other.location, location) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.hostname, hostname) ||
+                other.hostname == hostname) &&
+            (identical(other.hwaddr, hwaddr) || other.hwaddr == hwaddr) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(hostname),
-      const DeepCollectionEquality().hash(hwaddr),
-      const DeepCollectionEquality().hash(location),
-      const DeepCollectionEquality().hash(type));
+  int get hashCode =>
+      Object.hash(runtimeType, address, hostname, hwaddr, location, type);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdNetworkLeaseCopyWith<_$_LxdNetworkLease> get copyWith =>
       __$$_LxdNetworkLeaseCopyWithImpl<_$_LxdNetworkLease>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdNetworkLeaseToJson(this);
+    return _$$_LxdNetworkLeaseToJson(
+      this,
+    );
   }
 }
 
@@ -467,15 +476,15 @@ abstract class _LxdNetworkLease implements LxdNetworkLease {
       _$_LxdNetworkLease.fromJson;
 
   @override
-  String get address => throw _privateConstructorUsedError;
+  String get address;
   @override
-  String get hostname => throw _privateConstructorUsedError;
+  String get hostname;
   @override
-  String get hwaddr => throw _privateConstructorUsedError;
+  String get hwaddr;
   @override
-  String get location => throw _privateConstructorUsedError;
+  String get location;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$_LxdNetworkLeaseCopyWith<_$_LxdNetworkLease> get copyWith =>
@@ -505,7 +514,8 @@ mixin _$LxdNetworkState {
 abstract class $LxdNetworkStateCopyWith<$Res> {
   factory $LxdNetworkStateCopyWith(
           LxdNetworkState value, $Res Function(LxdNetworkState) then) =
-      _$LxdNetworkStateCopyWithImpl<$Res>;
+      _$LxdNetworkStateCopyWithImpl<$Res, LxdNetworkState>;
+  @useResult
   $Res call(
       {List<LxdNetworkAddress> addresses,
       LxdNetworkCounters counters,
@@ -518,55 +528,58 @@ abstract class $LxdNetworkStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdNetworkStateCopyWithImpl<$Res>
+class _$LxdNetworkStateCopyWithImpl<$Res, $Val extends LxdNetworkState>
     implements $LxdNetworkStateCopyWith<$Res> {
   _$LxdNetworkStateCopyWithImpl(this._value, this._then);
 
-  final LxdNetworkState _value;
   // ignore: unused_field
-  final $Res Function(LxdNetworkState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? addresses = freezed,
-    Object? counters = freezed,
-    Object? hwaddr = freezed,
-    Object? mtu = freezed,
-    Object? state = freezed,
-    Object? type = freezed,
+    Object? addresses = null,
+    Object? counters = null,
+    Object? hwaddr = null,
+    Object? mtu = null,
+    Object? state = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      addresses: addresses == freezed
+      addresses: null == addresses
           ? _value.addresses
           : addresses // ignore: cast_nullable_to_non_nullable
               as List<LxdNetworkAddress>,
-      counters: counters == freezed
+      counters: null == counters
           ? _value.counters
           : counters // ignore: cast_nullable_to_non_nullable
               as LxdNetworkCounters,
-      hwaddr: hwaddr == freezed
+      hwaddr: null == hwaddr
           ? _value.hwaddr
           : hwaddr // ignore: cast_nullable_to_non_nullable
               as String,
-      mtu: mtu == freezed
+      mtu: null == mtu
           ? _value.mtu
           : mtu // ignore: cast_nullable_to_non_nullable
               as int,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $LxdNetworkCountersCopyWith<$Res> get counters {
     return $LxdNetworkCountersCopyWith<$Res>(_value.counters, (value) {
-      return _then(_value.copyWith(counters: value));
+      return _then(_value.copyWith(counters: value) as $Val);
     });
   }
 }
@@ -578,6 +591,7 @@ abstract class _$$_LxdNetworkStateCopyWith<$Res>
           _$_LxdNetworkState value, $Res Function(_$_LxdNetworkState) then) =
       __$$_LxdNetworkStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<LxdNetworkAddress> addresses,
       LxdNetworkCounters counters,
@@ -592,46 +606,44 @@ abstract class _$$_LxdNetworkStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdNetworkStateCopyWithImpl<$Res>
-    extends _$LxdNetworkStateCopyWithImpl<$Res>
+    extends _$LxdNetworkStateCopyWithImpl<$Res, _$_LxdNetworkState>
     implements _$$_LxdNetworkStateCopyWith<$Res> {
   __$$_LxdNetworkStateCopyWithImpl(
       _$_LxdNetworkState _value, $Res Function(_$_LxdNetworkState) _then)
-      : super(_value, (v) => _then(v as _$_LxdNetworkState));
+      : super(_value, _then);
 
-  @override
-  _$_LxdNetworkState get _value => super._value as _$_LxdNetworkState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? addresses = freezed,
-    Object? counters = freezed,
-    Object? hwaddr = freezed,
-    Object? mtu = freezed,
-    Object? state = freezed,
-    Object? type = freezed,
+    Object? addresses = null,
+    Object? counters = null,
+    Object? hwaddr = null,
+    Object? mtu = null,
+    Object? state = null,
+    Object? type = null,
   }) {
     return _then(_$_LxdNetworkState(
-      addresses: addresses == freezed
+      addresses: null == addresses
           ? _value._addresses
           : addresses // ignore: cast_nullable_to_non_nullable
               as List<LxdNetworkAddress>,
-      counters: counters == freezed
+      counters: null == counters
           ? _value.counters
           : counters // ignore: cast_nullable_to_non_nullable
               as LxdNetworkCounters,
-      hwaddr: hwaddr == freezed
+      hwaddr: null == hwaddr
           ? _value.hwaddr
           : hwaddr // ignore: cast_nullable_to_non_nullable
               as String,
-      mtu: mtu == freezed
+      mtu: null == mtu
           ? _value.mtu
           : mtu // ignore: cast_nullable_to_non_nullable
               as int,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
@@ -684,11 +696,12 @@ class _$_LxdNetworkState implements _LxdNetworkState {
             other is _$_LxdNetworkState &&
             const DeepCollectionEquality()
                 .equals(other._addresses, _addresses) &&
-            const DeepCollectionEquality().equals(other.counters, counters) &&
-            const DeepCollectionEquality().equals(other.hwaddr, hwaddr) &&
-            const DeepCollectionEquality().equals(other.mtu, mtu) &&
-            const DeepCollectionEquality().equals(other.state, state) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            (identical(other.counters, counters) ||
+                other.counters == counters) &&
+            (identical(other.hwaddr, hwaddr) || other.hwaddr == hwaddr) &&
+            (identical(other.mtu, mtu) || other.mtu == mtu) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
@@ -696,20 +709,23 @@ class _$_LxdNetworkState implements _LxdNetworkState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_addresses),
-      const DeepCollectionEquality().hash(counters),
-      const DeepCollectionEquality().hash(hwaddr),
-      const DeepCollectionEquality().hash(mtu),
-      const DeepCollectionEquality().hash(state),
-      const DeepCollectionEquality().hash(type));
+      counters,
+      hwaddr,
+      mtu,
+      state,
+      type);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdNetworkStateCopyWith<_$_LxdNetworkState> get copyWith =>
       __$$_LxdNetworkStateCopyWithImpl<_$_LxdNetworkState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdNetworkStateToJson(this);
+    return _$$_LxdNetworkStateToJson(
+      this,
+    );
   }
 }
 
@@ -726,17 +742,17 @@ abstract class _LxdNetworkState implements LxdNetworkState {
       _$_LxdNetworkState.fromJson;
 
   @override
-  List<LxdNetworkAddress> get addresses => throw _privateConstructorUsedError;
+  List<LxdNetworkAddress> get addresses;
   @override
-  LxdNetworkCounters get counters => throw _privateConstructorUsedError;
+  LxdNetworkCounters get counters;
   @override
-  String get hwaddr => throw _privateConstructorUsedError;
+  String get hwaddr;
   @override
-  int get mtu => throw _privateConstructorUsedError;
+  int get mtu;
   @override
-  String get state => throw _privateConstructorUsedError;
+  String get state;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$_LxdNetworkStateCopyWith<_$_LxdNetworkState> get copyWith =>
@@ -764,44 +780,47 @@ mixin _$LxdNetworkAddress {
 abstract class $LxdNetworkAddressCopyWith<$Res> {
   factory $LxdNetworkAddressCopyWith(
           LxdNetworkAddress value, $Res Function(LxdNetworkAddress) then) =
-      _$LxdNetworkAddressCopyWithImpl<$Res>;
+      _$LxdNetworkAddressCopyWithImpl<$Res, LxdNetworkAddress>;
+  @useResult
   $Res call({String address, String family, String netmask, String scope});
 }
 
 /// @nodoc
-class _$LxdNetworkAddressCopyWithImpl<$Res>
+class _$LxdNetworkAddressCopyWithImpl<$Res, $Val extends LxdNetworkAddress>
     implements $LxdNetworkAddressCopyWith<$Res> {
   _$LxdNetworkAddressCopyWithImpl(this._value, this._then);
 
-  final LxdNetworkAddress _value;
   // ignore: unused_field
-  final $Res Function(LxdNetworkAddress) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? address = freezed,
-    Object? family = freezed,
-    Object? netmask = freezed,
-    Object? scope = freezed,
+    Object? address = null,
+    Object? family = null,
+    Object? netmask = null,
+    Object? scope = null,
   }) {
     return _then(_value.copyWith(
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      family: family == freezed
+      family: null == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as String,
-      netmask: netmask == freezed
+      netmask: null == netmask
           ? _value.netmask
           : netmask // ignore: cast_nullable_to_non_nullable
               as String,
-      scope: scope == freezed
+      scope: null == scope
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -812,41 +831,40 @@ abstract class _$$_LxdNetworkAddressCopyWith<$Res>
           $Res Function(_$_LxdNetworkAddress) then) =
       __$$_LxdNetworkAddressCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String address, String family, String netmask, String scope});
 }
 
 /// @nodoc
 class __$$_LxdNetworkAddressCopyWithImpl<$Res>
-    extends _$LxdNetworkAddressCopyWithImpl<$Res>
+    extends _$LxdNetworkAddressCopyWithImpl<$Res, _$_LxdNetworkAddress>
     implements _$$_LxdNetworkAddressCopyWith<$Res> {
   __$$_LxdNetworkAddressCopyWithImpl(
       _$_LxdNetworkAddress _value, $Res Function(_$_LxdNetworkAddress) _then)
-      : super(_value, (v) => _then(v as _$_LxdNetworkAddress));
+      : super(_value, _then);
 
-  @override
-  _$_LxdNetworkAddress get _value => super._value as _$_LxdNetworkAddress;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? address = freezed,
-    Object? family = freezed,
-    Object? netmask = freezed,
-    Object? scope = freezed,
+    Object? address = null,
+    Object? family = null,
+    Object? netmask = null,
+    Object? scope = null,
   }) {
     return _then(_$_LxdNetworkAddress(
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      family: family == freezed
+      family: null == family
           ? _value.family
           : family // ignore: cast_nullable_to_non_nullable
               as String,
-      netmask: netmask == freezed
+      netmask: null == netmask
           ? _value.netmask
           : netmask // ignore: cast_nullable_to_non_nullable
               as String,
-      scope: scope == freezed
+      scope: null == scope
           ? _value.scope
           : scope // ignore: cast_nullable_to_non_nullable
               as String,
@@ -885,30 +903,28 @@ class _$_LxdNetworkAddress implements _LxdNetworkAddress {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdNetworkAddress &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.family, family) &&
-            const DeepCollectionEquality().equals(other.netmask, netmask) &&
-            const DeepCollectionEquality().equals(other.scope, scope));
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.family, family) || other.family == family) &&
+            (identical(other.netmask, netmask) || other.netmask == netmask) &&
+            (identical(other.scope, scope) || other.scope == scope));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(family),
-      const DeepCollectionEquality().hash(netmask),
-      const DeepCollectionEquality().hash(scope));
+  int get hashCode => Object.hash(runtimeType, address, family, netmask, scope);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdNetworkAddressCopyWith<_$_LxdNetworkAddress> get copyWith =>
       __$$_LxdNetworkAddressCopyWithImpl<_$_LxdNetworkAddress>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdNetworkAddressToJson(this);
+    return _$$_LxdNetworkAddressToJson(
+      this,
+    );
   }
 }
 
@@ -923,13 +939,13 @@ abstract class _LxdNetworkAddress implements LxdNetworkAddress {
       _$_LxdNetworkAddress.fromJson;
 
   @override
-  String get address => throw _privateConstructorUsedError;
+  String get address;
   @override
-  String get family => throw _privateConstructorUsedError;
+  String get family;
   @override
-  String get netmask => throw _privateConstructorUsedError;
+  String get netmask;
   @override
-  String get scope => throw _privateConstructorUsedError;
+  String get scope;
   @override
   @JsonKey(ignore: true)
   _$$_LxdNetworkAddressCopyWith<_$_LxdNetworkAddress> get copyWith =>
@@ -957,45 +973,48 @@ mixin _$LxdNetworkCounters {
 abstract class $LxdNetworkCountersCopyWith<$Res> {
   factory $LxdNetworkCountersCopyWith(
           LxdNetworkCounters value, $Res Function(LxdNetworkCounters) then) =
-      _$LxdNetworkCountersCopyWithImpl<$Res>;
+      _$LxdNetworkCountersCopyWithImpl<$Res, LxdNetworkCounters>;
+  @useResult
   $Res call(
       {int bytesReceived, int bytesSent, int packetsReceived, int packetsSent});
 }
 
 /// @nodoc
-class _$LxdNetworkCountersCopyWithImpl<$Res>
+class _$LxdNetworkCountersCopyWithImpl<$Res, $Val extends LxdNetworkCounters>
     implements $LxdNetworkCountersCopyWith<$Res> {
   _$LxdNetworkCountersCopyWithImpl(this._value, this._then);
 
-  final LxdNetworkCounters _value;
   // ignore: unused_field
-  final $Res Function(LxdNetworkCounters) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bytesReceived = freezed,
-    Object? bytesSent = freezed,
-    Object? packetsReceived = freezed,
-    Object? packetsSent = freezed,
+    Object? bytesReceived = null,
+    Object? bytesSent = null,
+    Object? packetsReceived = null,
+    Object? packetsSent = null,
   }) {
     return _then(_value.copyWith(
-      bytesReceived: bytesReceived == freezed
+      bytesReceived: null == bytesReceived
           ? _value.bytesReceived
           : bytesReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      bytesSent: bytesSent == freezed
+      bytesSent: null == bytesSent
           ? _value.bytesSent
           : bytesSent // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsReceived: packetsReceived == freezed
+      packetsReceived: null == packetsReceived
           ? _value.packetsReceived
           : packetsReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsSent: packetsSent == freezed
+      packetsSent: null == packetsSent
           ? _value.packetsSent
           : packetsSent // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1006,42 +1025,41 @@ abstract class _$$_LxdNetworkCountersCopyWith<$Res>
           $Res Function(_$_LxdNetworkCounters) then) =
       __$$_LxdNetworkCountersCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int bytesReceived, int bytesSent, int packetsReceived, int packetsSent});
 }
 
 /// @nodoc
 class __$$_LxdNetworkCountersCopyWithImpl<$Res>
-    extends _$LxdNetworkCountersCopyWithImpl<$Res>
+    extends _$LxdNetworkCountersCopyWithImpl<$Res, _$_LxdNetworkCounters>
     implements _$$_LxdNetworkCountersCopyWith<$Res> {
   __$$_LxdNetworkCountersCopyWithImpl(
       _$_LxdNetworkCounters _value, $Res Function(_$_LxdNetworkCounters) _then)
-      : super(_value, (v) => _then(v as _$_LxdNetworkCounters));
+      : super(_value, _then);
 
-  @override
-  _$_LxdNetworkCounters get _value => super._value as _$_LxdNetworkCounters;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bytesReceived = freezed,
-    Object? bytesSent = freezed,
-    Object? packetsReceived = freezed,
-    Object? packetsSent = freezed,
+    Object? bytesReceived = null,
+    Object? bytesSent = null,
+    Object? packetsReceived = null,
+    Object? packetsSent = null,
   }) {
     return _then(_$_LxdNetworkCounters(
-      bytesReceived: bytesReceived == freezed
+      bytesReceived: null == bytesReceived
           ? _value.bytesReceived
           : bytesReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      bytesSent: bytesSent == freezed
+      bytesSent: null == bytesSent
           ? _value.bytesSent
           : bytesSent // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsReceived: packetsReceived == freezed
+      packetsReceived: null == packetsReceived
           ? _value.packetsReceived
           : packetsReceived // ignore: cast_nullable_to_non_nullable
               as int,
-      packetsSent: packetsSent == freezed
+      packetsSent: null == packetsSent
           ? _value.packetsSent
           : packetsSent // ignore: cast_nullable_to_non_nullable
               as int,
@@ -1080,33 +1098,33 @@ class _$_LxdNetworkCounters implements _LxdNetworkCounters {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdNetworkCounters &&
-            const DeepCollectionEquality()
-                .equals(other.bytesReceived, bytesReceived) &&
-            const DeepCollectionEquality().equals(other.bytesSent, bytesSent) &&
-            const DeepCollectionEquality()
-                .equals(other.packetsReceived, packetsReceived) &&
-            const DeepCollectionEquality()
-                .equals(other.packetsSent, packetsSent));
+            (identical(other.bytesReceived, bytesReceived) ||
+                other.bytesReceived == bytesReceived) &&
+            (identical(other.bytesSent, bytesSent) ||
+                other.bytesSent == bytesSent) &&
+            (identical(other.packetsReceived, packetsReceived) ||
+                other.packetsReceived == packetsReceived) &&
+            (identical(other.packetsSent, packetsSent) ||
+                other.packetsSent == packetsSent));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(bytesReceived),
-      const DeepCollectionEquality().hash(bytesSent),
-      const DeepCollectionEquality().hash(packetsReceived),
-      const DeepCollectionEquality().hash(packetsSent));
+      runtimeType, bytesReceived, bytesSent, packetsReceived, packetsSent);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdNetworkCountersCopyWith<_$_LxdNetworkCounters> get copyWith =>
       __$$_LxdNetworkCountersCopyWithImpl<_$_LxdNetworkCounters>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdNetworkCountersToJson(this);
+    return _$$_LxdNetworkCountersToJson(
+      this,
+    );
   }
 }
 
@@ -1121,13 +1139,13 @@ abstract class _LxdNetworkCounters implements LxdNetworkCounters {
       _$_LxdNetworkCounters.fromJson;
 
   @override
-  int get bytesReceived => throw _privateConstructorUsedError;
+  int get bytesReceived;
   @override
-  int get bytesSent => throw _privateConstructorUsedError;
+  int get bytesSent;
   @override
-  int get packetsReceived => throw _privateConstructorUsedError;
+  int get packetsReceived;
   @override
-  int get packetsSent => throw _privateConstructorUsedError;
+  int get packetsSent;
   @override
   @JsonKey(ignore: true)
   _$$_LxdNetworkCountersCopyWith<_$_LxdNetworkCounters> get copyWith =>

@@ -88,7 +88,8 @@ mixin _$LxdNetworkAclRule {
 abstract class $LxdNetworkAclRuleCopyWith<$Res> {
   factory $LxdNetworkAclRuleCopyWith(
           LxdNetworkAclRule value, $Res Function(LxdNetworkAclRule) then) =
-      _$LxdNetworkAclRuleCopyWithImpl<$Res>;
+      _$LxdNetworkAclRuleCopyWithImpl<$Res, LxdNetworkAclRule>;
+  @useResult
   $Res call(
       {String action,
       @JsonKey(includeIfNull: false) String? source,
@@ -103,17 +104,19 @@ abstract class $LxdNetworkAclRuleCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdNetworkAclRuleCopyWithImpl<$Res>
+class _$LxdNetworkAclRuleCopyWithImpl<$Res, $Val extends LxdNetworkAclRule>
     implements $LxdNetworkAclRuleCopyWith<$Res> {
   _$LxdNetworkAclRuleCopyWithImpl(this._value, this._then);
 
-  final LxdNetworkAclRule _value;
   // ignore: unused_field
-  final $Res Function(LxdNetworkAclRule) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? action = freezed,
+    Object? action = null,
     Object? source = freezed,
     Object? destination = freezed,
     Object? protocol = freezed,
@@ -122,50 +125,50 @@ class _$LxdNetworkAclRuleCopyWithImpl<$Res>
     Object? icmpType = freezed,
     Object? icmpCode = freezed,
     Object? description = freezed,
-    Object? state = freezed,
+    Object? state = null,
   }) {
     return _then(_value.copyWith(
-      action: action == freezed
+      action: null == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
               as String,
-      source: source == freezed
+      source: freezed == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as String?,
-      destination: destination == freezed
+      destination: freezed == destination
           ? _value.destination
           : destination // ignore: cast_nullable_to_non_nullable
               as String?,
-      protocol: protocol == freezed
+      protocol: freezed == protocol
           ? _value.protocol
           : protocol // ignore: cast_nullable_to_non_nullable
               as String?,
-      sourcePort: sourcePort == freezed
+      sourcePort: freezed == sourcePort
           ? _value.sourcePort
           : sourcePort // ignore: cast_nullable_to_non_nullable
               as String?,
-      destinationPort: destinationPort == freezed
+      destinationPort: freezed == destinationPort
           ? _value.destinationPort
           : destinationPort // ignore: cast_nullable_to_non_nullable
               as String?,
-      icmpType: icmpType == freezed
+      icmpType: freezed == icmpType
           ? _value.icmpType
           : icmpType // ignore: cast_nullable_to_non_nullable
               as String?,
-      icmpCode: icmpCode == freezed
+      icmpCode: freezed == icmpCode
           ? _value.icmpCode
           : icmpCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -176,6 +179,7 @@ abstract class _$$_LxdNetworkAclRuleCopyWith<$Res>
           $Res Function(_$_LxdNetworkAclRule) then) =
       __$$_LxdNetworkAclRuleCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String action,
       @JsonKey(includeIfNull: false) String? source,
@@ -191,18 +195,16 @@ abstract class _$$_LxdNetworkAclRuleCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdNetworkAclRuleCopyWithImpl<$Res>
-    extends _$LxdNetworkAclRuleCopyWithImpl<$Res>
+    extends _$LxdNetworkAclRuleCopyWithImpl<$Res, _$_LxdNetworkAclRule>
     implements _$$_LxdNetworkAclRuleCopyWith<$Res> {
   __$$_LxdNetworkAclRuleCopyWithImpl(
       _$_LxdNetworkAclRule _value, $Res Function(_$_LxdNetworkAclRule) _then)
-      : super(_value, (v) => _then(v as _$_LxdNetworkAclRule));
+      : super(_value, _then);
 
-  @override
-  _$_LxdNetworkAclRule get _value => super._value as _$_LxdNetworkAclRule;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? action = freezed,
+    Object? action = null,
     Object? source = freezed,
     Object? destination = freezed,
     Object? protocol = freezed,
@@ -211,46 +213,46 @@ class __$$_LxdNetworkAclRuleCopyWithImpl<$Res>
     Object? icmpType = freezed,
     Object? icmpCode = freezed,
     Object? description = freezed,
-    Object? state = freezed,
+    Object? state = null,
   }) {
     return _then(_$_LxdNetworkAclRule(
-      action: action == freezed
+      action: null == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
               as String,
-      source: source == freezed
+      source: freezed == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as String?,
-      destination: destination == freezed
+      destination: freezed == destination
           ? _value.destination
           : destination // ignore: cast_nullable_to_non_nullable
               as String?,
-      protocol: protocol == freezed
+      protocol: freezed == protocol
           ? _value.protocol
           : protocol // ignore: cast_nullable_to_non_nullable
               as String?,
-      sourcePort: sourcePort == freezed
+      sourcePort: freezed == sourcePort
           ? _value.sourcePort
           : sourcePort // ignore: cast_nullable_to_non_nullable
               as String?,
-      destinationPort: destinationPort == freezed
+      destinationPort: freezed == destinationPort
           ? _value.destinationPort
           : destinationPort // ignore: cast_nullable_to_non_nullable
               as String?,
-      icmpType: icmpType == freezed
+      icmpType: freezed == icmpType
           ? _value.icmpType
           : icmpType // ignore: cast_nullable_to_non_nullable
               as String?,
-      icmpCode: icmpCode == freezed
+      icmpCode: freezed == icmpCode
           ? _value.icmpCode
           : icmpCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: description == freezed
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String,
@@ -354,46 +356,52 @@ class _$_LxdNetworkAclRule implements _LxdNetworkAclRule {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdNetworkAclRule &&
-            const DeepCollectionEquality().equals(other.action, action) &&
-            const DeepCollectionEquality().equals(other.source, source) &&
-            const DeepCollectionEquality()
-                .equals(other.destination, destination) &&
-            const DeepCollectionEquality().equals(other.protocol, protocol) &&
-            const DeepCollectionEquality()
-                .equals(other.sourcePort, sourcePort) &&
-            const DeepCollectionEquality()
-                .equals(other.destinationPort, destinationPort) &&
-            const DeepCollectionEquality().equals(other.icmpType, icmpType) &&
-            const DeepCollectionEquality().equals(other.icmpCode, icmpCode) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.state, state));
+            (identical(other.action, action) || other.action == action) &&
+            (identical(other.source, source) || other.source == source) &&
+            (identical(other.destination, destination) ||
+                other.destination == destination) &&
+            (identical(other.protocol, protocol) ||
+                other.protocol == protocol) &&
+            (identical(other.sourcePort, sourcePort) ||
+                other.sourcePort == sourcePort) &&
+            (identical(other.destinationPort, destinationPort) ||
+                other.destinationPort == destinationPort) &&
+            (identical(other.icmpType, icmpType) ||
+                other.icmpType == icmpType) &&
+            (identical(other.icmpCode, icmpCode) ||
+                other.icmpCode == icmpCode) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.state, state) || other.state == state));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(action),
-      const DeepCollectionEquality().hash(source),
-      const DeepCollectionEquality().hash(destination),
-      const DeepCollectionEquality().hash(protocol),
-      const DeepCollectionEquality().hash(sourcePort),
-      const DeepCollectionEquality().hash(destinationPort),
-      const DeepCollectionEquality().hash(icmpType),
-      const DeepCollectionEquality().hash(icmpCode),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(state));
+      action,
+      source,
+      destination,
+      protocol,
+      sourcePort,
+      destinationPort,
+      icmpType,
+      icmpCode,
+      description,
+      state);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdNetworkAclRuleCopyWith<_$_LxdNetworkAclRule> get copyWith =>
       __$$_LxdNetworkAclRuleCopyWithImpl<_$_LxdNetworkAclRule>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdNetworkAclRuleToJson(this);
+    return _$$_LxdNetworkAclRuleToJson(
+      this,
+    );
   }
 }
 
@@ -418,69 +426,69 @@ abstract class _LxdNetworkAclRule implements LxdNetworkAclRule {
   /// Action to perform on rule match
   ///
   /// Example: allow
-  String get action => throw _privateConstructorUsedError;
+  String get action;
   @override
 
   /// Source address
   ///
   /// Example: @internal
   @JsonKey(includeIfNull: false)
-  String? get source => throw _privateConstructorUsedError;
+  String? get source;
   @override
 
   /// Destination address
   ///
   /// Example: 8.8.8.8/32,8.8.4.4/32
   @JsonKey(includeIfNull: false)
-  String? get destination => throw _privateConstructorUsedError;
+  String? get destination;
   @override
 
   /// Protocol
   ///
   /// Example: udp
   @JsonKey(includeIfNull: false)
-  String? get protocol => throw _privateConstructorUsedError;
+  String? get protocol;
   @override
 
   /// Source port
   ///
   /// Example: 1234
   @JsonKey(includeIfNull: false)
-  String? get sourcePort => throw _privateConstructorUsedError;
+  String? get sourcePort;
   @override
 
   /// Destination port
   ///
   /// Example: 53
   @JsonKey(includeIfNull: false)
-  String? get destinationPort => throw _privateConstructorUsedError;
+  String? get destinationPort;
   @override
 
   /// Type of ICMP message (for ICMP protocol)
   ///
   /// Example: 8
   @JsonKey(includeIfNull: false)
-  String? get icmpType => throw _privateConstructorUsedError;
+  String? get icmpType;
   @override
 
   /// ICMP message code (for ICMP protocol)
   ///
   /// Example: 0
   @JsonKey(includeIfNull: false)
-  String? get icmpCode => throw _privateConstructorUsedError;
+  String? get icmpCode;
   @override
 
   /// Description of the rule
   ///
   /// Example: Allow DNS queries to Google DNS
   @JsonKey(includeIfNull: false)
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
   @override
 
   /// State of the rule
   ///
   /// Example: enabled
-  String get state => throw _privateConstructorUsedError;
+  String get state;
   @override
   @JsonKey(ignore: true)
   _$$_LxdNetworkAclRuleCopyWith<_$_LxdNetworkAclRule> get copyWith =>
@@ -530,7 +538,8 @@ mixin _$LxdNetworkAcl {
 abstract class $LxdNetworkAclCopyWith<$Res> {
   factory $LxdNetworkAclCopyWith(
           LxdNetworkAcl value, $Res Function(LxdNetworkAcl) then) =
-      _$LxdNetworkAclCopyWithImpl<$Res>;
+      _$LxdNetworkAclCopyWithImpl<$Res, LxdNetworkAcl>;
+  @useResult
   $Res call(
       {String name,
       String description,
@@ -541,49 +550,51 @@ abstract class $LxdNetworkAclCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdNetworkAclCopyWithImpl<$Res>
+class _$LxdNetworkAclCopyWithImpl<$Res, $Val extends LxdNetworkAcl>
     implements $LxdNetworkAclCopyWith<$Res> {
   _$LxdNetworkAclCopyWithImpl(this._value, this._then);
 
-  final LxdNetworkAcl _value;
   // ignore: unused_field
-  final $Res Function(LxdNetworkAcl) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? description = freezed,
-    Object? egress = freezed,
-    Object? ingress = freezed,
-    Object? config = freezed,
-    Object? usedBy = freezed,
+    Object? name = null,
+    Object? description = null,
+    Object? egress = null,
+    Object? ingress = null,
+    Object? config = null,
+    Object? usedBy = null,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      egress: egress == freezed
+      egress: null == egress
           ? _value.egress
           : egress // ignore: cast_nullable_to_non_nullable
               as List<LxdNetworkAclRule>,
-      ingress: ingress == freezed
+      ingress: null == ingress
           ? _value.ingress
           : ingress // ignore: cast_nullable_to_non_nullable
               as List<LxdNetworkAclRule>,
-      config: config == freezed
+      config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      usedBy: usedBy == freezed
+      usedBy: null == usedBy
           ? _value.usedBy
           : usedBy // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -594,6 +605,7 @@ abstract class _$$_LxdNetworkAclCopyWith<$Res>
           _$_LxdNetworkAcl value, $Res Function(_$_LxdNetworkAcl) then) =
       __$$_LxdNetworkAclCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String name,
       String description,
@@ -605,46 +617,44 @@ abstract class _$$_LxdNetworkAclCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdNetworkAclCopyWithImpl<$Res>
-    extends _$LxdNetworkAclCopyWithImpl<$Res>
+    extends _$LxdNetworkAclCopyWithImpl<$Res, _$_LxdNetworkAcl>
     implements _$$_LxdNetworkAclCopyWith<$Res> {
   __$$_LxdNetworkAclCopyWithImpl(
       _$_LxdNetworkAcl _value, $Res Function(_$_LxdNetworkAcl) _then)
-      : super(_value, (v) => _then(v as _$_LxdNetworkAcl));
+      : super(_value, _then);
 
-  @override
-  _$_LxdNetworkAcl get _value => super._value as _$_LxdNetworkAcl;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? description = freezed,
-    Object? egress = freezed,
-    Object? ingress = freezed,
-    Object? config = freezed,
-    Object? usedBy = freezed,
+    Object? name = null,
+    Object? description = null,
+    Object? egress = null,
+    Object? ingress = null,
+    Object? config = null,
+    Object? usedBy = null,
   }) {
     return _then(_$_LxdNetworkAcl(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      egress: egress == freezed
+      egress: null == egress
           ? _value._egress
           : egress // ignore: cast_nullable_to_non_nullable
               as List<LxdNetworkAclRule>,
-      ingress: ingress == freezed
+      ingress: null == ingress
           ? _value._ingress
           : ingress // ignore: cast_nullable_to_non_nullable
               as List<LxdNetworkAclRule>,
-      config: config == freezed
+      config: null == config
           ? _value._config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      usedBy: usedBy == freezed
+      usedBy: null == usedBy
           ? _value._usedBy
           : usedBy // ignore: cast_nullable_to_non_nullable
               as List<String>,
@@ -742,9 +752,9 @@ class _$_LxdNetworkAcl implements _LxdNetworkAcl {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LxdNetworkAcl &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             const DeepCollectionEquality().equals(other._egress, _egress) &&
             const DeepCollectionEquality().equals(other._ingress, _ingress) &&
             const DeepCollectionEquality().equals(other._config, _config) &&
@@ -755,8 +765,8 @@ class _$_LxdNetworkAcl implements _LxdNetworkAcl {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(description),
+      name,
+      description,
       const DeepCollectionEquality().hash(_egress),
       const DeepCollectionEquality().hash(_ingress),
       const DeepCollectionEquality().hash(_config),
@@ -764,12 +774,15 @@ class _$_LxdNetworkAcl implements _LxdNetworkAcl {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdNetworkAclCopyWith<_$_LxdNetworkAcl> get copyWith =>
       __$$_LxdNetworkAclCopyWithImpl<_$_LxdNetworkAcl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdNetworkAclToJson(this);
+    return _$$_LxdNetworkAclToJson(
+      this,
+    );
   }
 }
 
@@ -790,21 +803,21 @@ abstract class _LxdNetworkAcl implements LxdNetworkAcl {
   /// Name of the ACL
   ///
   /// Example: bar
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
 
   /// Description of the ACL
   ///
   /// Example: Web servers
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
 
   /// List of egress rules (order independent)
-  List<LxdNetworkAclRule> get egress => throw _privateConstructorUsedError;
+  List<LxdNetworkAclRule> get egress;
   @override
 
   /// List of ingress rules (order independent)
-  List<LxdNetworkAclRule> get ingress => throw _privateConstructorUsedError;
+  List<LxdNetworkAclRule> get ingress;
   @override
 
   /// ACL configuration map
@@ -813,11 +826,11 @@ abstract class _LxdNetworkAcl implements LxdNetworkAcl {
   /// ```json
   /// {"user.mykey": "foo"}
   /// ```
-  Map<String, String> get config => throw _privateConstructorUsedError;
+  Map<String, String> get config;
   @override
 
   /// Resources that use the ACL
-  List<String> get usedBy => throw _privateConstructorUsedError;
+  List<String> get usedBy;
   @override
   @JsonKey(ignore: true)
   _$$_LxdNetworkAclCopyWith<_$_LxdNetworkAcl> get copyWith =>

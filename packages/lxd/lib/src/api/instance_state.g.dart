@@ -31,7 +31,7 @@ _$_LxdInstanceState _$$_LxdInstanceStateFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_LxdInstanceStateToJson(_$_LxdInstanceState instance) =>
     <String, dynamic>{
-      'status': _$LxdInstanceStatusEnumMap[instance.status],
+      'status': _$LxdInstanceStatusEnumMap[instance.status]!,
       'status_code': instance.statusCode,
       'disk': instance.disk?.map((k, e) => MapEntry(k, e.toJson())),
       'memory': instance.memory?.toJson(),
@@ -130,10 +130,10 @@ _$_LxdInstanceNetworkAddress _$$_LxdInstanceNetworkAddressFromJson(
 Map<String, dynamic> _$$_LxdInstanceNetworkAddressToJson(
         _$_LxdInstanceNetworkAddress instance) =>
     <String, dynamic>{
-      'family': _$LxdNetworkFamilyEnumMap[instance.family],
+      'family': _$LxdNetworkFamilyEnumMap[instance.family]!,
       'address': instance.address,
       'netmask': instance.netmask,
-      'scope': _$LxdNetworkScopeEnumMap[instance.scope],
+      'scope': _$LxdNetworkScopeEnumMap[instance.scope]!,
     };
 
 const _$LxdNetworkFamilyEnumMap = {

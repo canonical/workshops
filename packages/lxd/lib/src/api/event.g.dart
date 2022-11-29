@@ -16,7 +16,7 @@ _$_LxdEvent _$$_LxdEventFromJson(Map<String, dynamic> json) => _$_LxdEvent(
 
 Map<String, dynamic> _$$_LxdEventToJson(_$_LxdEvent instance) =>
     <String, dynamic>{
-      'type': _$LxdEventTypeEnumMap[instance.type],
+      'type': _$LxdEventTypeEnumMap[instance.type]!,
       'timestamp': instance.timestamp.toIso8601String(),
       'metadata': instance.metadata,
       'location': instance.location,

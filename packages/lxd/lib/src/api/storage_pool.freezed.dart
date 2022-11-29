@@ -35,7 +35,8 @@ mixin _$LxdStoragePool {
 abstract class $LxdStoragePoolCopyWith<$Res> {
   factory $LxdStoragePoolCopyWith(
           LxdStoragePool value, $Res Function(LxdStoragePool) then) =
-      _$LxdStoragePoolCopyWithImpl<$Res>;
+      _$LxdStoragePoolCopyWithImpl<$Res, LxdStoragePool>;
+  @useResult
   $Res call(
       {Map<String, String> config,
       String description,
@@ -44,39 +45,41 @@ abstract class $LxdStoragePoolCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LxdStoragePoolCopyWithImpl<$Res>
+class _$LxdStoragePoolCopyWithImpl<$Res, $Val extends LxdStoragePool>
     implements $LxdStoragePoolCopyWith<$Res> {
   _$LxdStoragePoolCopyWithImpl(this._value, this._then);
 
-  final LxdStoragePool _value;
   // ignore: unused_field
-  final $Res Function(LxdStoragePool) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? config = freezed,
-    Object? description = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
+    Object? config = null,
+    Object? description = null,
+    Object? name = null,
+    Object? status = null,
   }) {
     return _then(_value.copyWith(
-      config: config == freezed
+      config: null == config
           ? _value.config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -87,6 +90,7 @@ abstract class _$$_LxdStoragePoolCopyWith<$Res>
           _$_LxdStoragePool value, $Res Function(_$_LxdStoragePool) then) =
       __$$_LxdStoragePoolCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {Map<String, String> config,
       String description,
@@ -96,36 +100,34 @@ abstract class _$$_LxdStoragePoolCopyWith<$Res>
 
 /// @nodoc
 class __$$_LxdStoragePoolCopyWithImpl<$Res>
-    extends _$LxdStoragePoolCopyWithImpl<$Res>
+    extends _$LxdStoragePoolCopyWithImpl<$Res, _$_LxdStoragePool>
     implements _$$_LxdStoragePoolCopyWith<$Res> {
   __$$_LxdStoragePoolCopyWithImpl(
       _$_LxdStoragePool _value, $Res Function(_$_LxdStoragePool) _then)
-      : super(_value, (v) => _then(v as _$_LxdStoragePool));
+      : super(_value, _then);
 
-  @override
-  _$_LxdStoragePool get _value => super._value as _$_LxdStoragePool;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? config = freezed,
-    Object? description = freezed,
-    Object? name = freezed,
-    Object? status = freezed,
+    Object? config = null,
+    Object? description = null,
+    Object? name = null,
+    Object? status = null,
   }) {
     return _then(_$_LxdStoragePool(
-      config: config == freezed
+      config: null == config
           ? _value._config
           : config // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      description: description == freezed
+      description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
@@ -171,29 +173,28 @@ class _$_LxdStoragePool implements _LxdStoragePool {
         (other.runtimeType == runtimeType &&
             other is _$_LxdStoragePool &&
             const DeepCollectionEquality().equals(other._config, _config) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.status, status));
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_config),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(status));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_config), description, name, status);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LxdStoragePoolCopyWith<_$_LxdStoragePool> get copyWith =>
       __$$_LxdStoragePoolCopyWithImpl<_$_LxdStoragePool>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LxdStoragePoolToJson(this);
+    return _$$_LxdStoragePoolToJson(
+      this,
+    );
   }
 }
 
@@ -208,13 +209,13 @@ abstract class _LxdStoragePool implements LxdStoragePool {
       _$_LxdStoragePool.fromJson;
 
   @override
-  Map<String, String> get config => throw _privateConstructorUsedError;
+  Map<String, String> get config;
   @override
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get status => throw _privateConstructorUsedError;
+  String get status;
   @override
   @JsonKey(ignore: true)
   _$$_LxdStoragePoolCopyWith<_$_LxdStoragePool> get copyWith =>
