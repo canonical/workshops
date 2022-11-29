@@ -15,7 +15,7 @@ import 'terminal_manager_test.mocks.dart';
 void main() {
   test('life-cycle', () async {
     final key = Object();
-    final instance = testInstance(name: 'test');
+    final instance = testInstance(id: const LxdInstanceId('test'));
 
     final start = testOperation(id: 'start');
     final exec = testOperation(id: 'exec');

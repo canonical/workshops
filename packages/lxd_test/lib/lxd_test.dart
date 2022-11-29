@@ -25,7 +25,7 @@ LxdImage testImage({
 }
 
 LxdInstance testInstance({
-  required String name,
+  required LxdInstanceId id,
   int? statusCode,
   Map<String, String>? config,
 }) {
@@ -40,9 +40,9 @@ LxdInstance testInstance({
     expandedDevices: {},
     lastUsedAt: DateTime.now(),
     location: '',
-    name: name,
+    name: id.name,
     profiles: [],
-    project: '',
+    project: id.project,
     restore: '',
     stateful: false,
     status: '',
