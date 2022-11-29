@@ -55,7 +55,7 @@ class LxdClient {
     final lxdDir = Platform.environment['LXD_DIR'];
     final paths = [
       if (defaultPath != null) defaultPath,
-      if (lxdDir != null) lxdDir + '/unix.socket',
+      if (lxdDir != null) '$lxdDir/unix.socket',
       '/var/snap/lxd/common/lxd/unix.socket',
     ];
     return Uri(
