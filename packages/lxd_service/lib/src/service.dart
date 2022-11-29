@@ -37,6 +37,8 @@ abstract class LxdService {
   Future<LxdOperation> deleteInstance(LxdInstanceId id);
   Stream<LxdOperation> watchInstance(LxdInstanceId id);
 
+  Future<List<String>> getProjects();
+
   Future<LxdOperation?> initFeature(
       LxdInstanceId id, LxdFeatureProvider feature, LxdImage image);
   Future<LxdImage> configureImage(LxdInstanceId id, LxdImage image);
@@ -124,6 +126,9 @@ class _LxdService implements LxdService {
     final statusCode = _statuses[id];
     return statusCode != null ? state.copyWith(statusCode: statusCode) : state;
   }
+
+  @override
+  Future<List<String>> getProjects() => _client.getProjects();
 
   @override
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote}) {
