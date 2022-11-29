@@ -78,6 +78,7 @@ extension LxdImageX on LxdImage {
   String? get description => properties['description'];
   String? get name => properties['name'];
   String? get os => properties['os'];
+  String? get project => properties['project'];
   String? get release => properties['release'];
   String? get variant => properties['variant'];
 }

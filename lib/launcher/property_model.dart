@@ -49,6 +49,7 @@ class PropertyModel extends SafeChangeNotifier {
       properties: {
         ..._image.properties,
         'name': _name,
+        'project': _project,
       },
     );
   }
