@@ -20,7 +20,7 @@ import 'settings.dart';
 Future<void> main() async {
   Logger.setup(level: LogLevel.fromString(kDebugMode ? 'debug' : 'info'));
 
-  final service = LxdService(LxdClient());
+  final service = LxdService();
   await service.init();
   registerServiceInstance<LxdService>(service);
 
