@@ -6,9 +6,7 @@ environment:
 
 dependencies:
   lxd:
-    git:
-      url: https://github.com/jpnurmi/lxd.dart
-      ref: c49f4db628d66ef6f18067caf0c010a404166fd3
+    path: ../lxd
 
 dev_dependencies:
   lints: ^2.0.0
