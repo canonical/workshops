@@ -1,9 +1,11 @@
 import 'package:context_menu/context_menu.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
+import 'package:provider/provider.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
@@ -11,17 +13,81 @@ import 'instance_actions.dart';
 import 'instance_context.dart';
 import 'instance_intents.dart';
 import 'instance_menu.dart';
+import 'instance_table_model.dart';
 
-class InstanceTile extends StatelessWidget {
-  const InstanceTile({super.key, required this.id});
+DataRow buildInstanceTableRow(
+  BuildContext context, {
+  required int index,
+  required LxdInstanceId id,
+}) {
+  final model = context.read<InstanceTableModel>();
+  return DataRow2.byIndex(
+    index: index,
+    cells: [
+      DataCell(_InstanceLabel(id: id)),
+      if (model.selectedProjects.length > 1) DataCell(Text(id.project)),
+      DataCell(_InstanceButtons(id: id)),
+    ],
+    onTap: () {
+      final instance = context.getInstance(id);
+      Actions.invoke(context, SelectInstanceIntent(instance));
+    },
+    onSecondaryTapDown: (details) {
+      final instance = context.getInstance(id);
+      showContextMenu(
+        context: context,
+        position: details.globalPosition,
+        items: buildInstanceMenu(context: context, instance: instance),
+      );
+    },
+  );
+}
+
+class _InstanceLabel extends StatelessWidget {
+  const _InstanceLabel({required this.id});
+
+  final LxdInstanceId id;
+
+  @override
+  Widget build(BuildContext context) {
+    final instance = context.selectInstance(id);
+    return Row(
+      children: [
+        OsLogo.asset(name: instance?.imageName, size: 36),
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(instance?.name ?? '', overflow: TextOverflow.ellipsis),
+              Text(
+                instance?.imageDescription ?? '',
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+extension _LxdInstanceImage on LxdInstance {
+  String? get imageName => config['image.os']?.toLowerCase();
+  String? get imageDescription => config['image.description'];
+}
+
+class _InstanceButtons extends StatelessWidget {
+  const _InstanceButtons({required this.id});
 
   final LxdInstanceId id;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-
     final instance = context.selectInstance(id);
+
     return InstanceActions(
       id: id,
       child: Builder(
@@ -49,45 +115,30 @@ class InstanceTile extends StatelessWidget {
                 ),
               ];
 
-          return ContextMenuArea(
-            builder: (context, position) => buildInstanceMenu(
-              context: context,
-              instance: instance,
-            ),
-            child: ListTile(
-              leading: OsLogo.asset(name: instance?.imageName, size: 48),
-              title: Text('${instance?.name} (${instance?.project})'),
-              subtitle: Text(instance?.imageDescription ?? ''),
-              onTap: () =>
-                  Actions.invoke(context, SelectInstanceIntent(instance)),
-              trailing: ButtonBar(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  instance?.isBusy == true
-                      ? _BusyButton()
-                      : canStop
-                          ? _StopButton(stopHandler)
-                          : canStart
-                              ? _StartButton(startHandler)
-                              : const SizedBox.shrink(),
-                  _PopupMenuButton<Intent>(
-                    itemBuilder: popupMenuBuilder,
-                    onSelected: (value) => Actions.invoke(context, value),
-                  ),
-                  _DeleteButton(deleteHandler),
-                ],
+          return ButtonBar(
+            mainAxisSize: MainAxisSize.min,
+            buttonPadding: EdgeInsets.zero,
+            children: [
+              instance?.isBusy == true
+                  ? _BusyButton()
+                  : canStop
+                      ? _StopButton(stopHandler)
+                      : canStart
+                          ? _StartButton(startHandler)
+                          : const SizedBox.shrink(),
+              const SizedBox(width: 4),
+              _PopupMenuButton<Intent>(
+                itemBuilder: popupMenuBuilder,
+                onSelected: (value) => Actions.invoke(context, value),
               ),
-            ),
+              const SizedBox(width: 4),
+              _DeleteButton(deleteHandler),
+            ],
           );
         },
       ),
     );
   }
-}
-
-extension _LxdInstanceImage on LxdInstance {
-  String? get imageName => config['image.os']?.toLowerCase();
-  String? get imageDescription => config['image.description'];
 }
 
 class _IconButton extends IconButton {
