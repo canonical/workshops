@@ -14,5 +14,6 @@ export 'src/client.dart';
 export 'src/constants.dart';
 export 'src/enums.dart';
 export 'src/exception.dart';
+export 'src/extensions.dart';
 export 'src/instance_id.dart';
 export 'src/status_code.dart';

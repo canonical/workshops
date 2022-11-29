@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:lxd/lxd.dart';
-import 'package:lxd_x/lxd_x.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
 class RemoteImageFilter extends SafeChangeNotifier {

@@ -12,8 +12,6 @@ dependencies:
     path: ../lxd
   lxd_test:
     path: ../lxd_test
-  lxd_x:
-    path: ../lxd_x
   meta: ^1.8.0
   rxdart: ^0.27.3
   stdlibc: ^0.1.0

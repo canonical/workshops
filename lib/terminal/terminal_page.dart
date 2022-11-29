@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
-import 'package:lxd_x/lxd_x.dart';
 import 'package:nested_split_view/nested_split_view.dart';
 import 'package:provider/provider.dart';
 import 'package:terminal_view/terminal_view.dart';

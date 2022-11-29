@@ -1,6 +1,10 @@
-library lxd_x;
-
-import 'package:lxd/lxd.dart';
+import 'api/event.dart';
+import 'api/image.dart';
+import 'api/instance.dart';
+import 'api/network.dart';
+import 'api/operation.dart';
+import 'instance_id.dart';
+import 'status_code.dart';
 
 extension LxdEventX on LxdEvent {
   bool get isOperation => type == LxdEventType.operation;
