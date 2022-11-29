@@ -15,7 +15,7 @@ void main() {
     fakeAsync((async) {
       const instanceId = LxdInstanceId('foo');
       const updateInterval = Duration(milliseconds: 10);
-      final instance = testInstance(name: instanceId.name);
+      final instance = testInstance(id: instanceId);
       final instanceState = testInstanceState();
       final service = MockLxdService();
 

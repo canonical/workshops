@@ -230,9 +230,9 @@ void main() {
   });
 
   test('instance status', () async {
-    final foo = testInstance(name: 'foo');
-    final bar = testInstance(name: 'bar');
-    final baz = testInstance(name: 'baz');
+    final foo = testInstance(id: fooId);
+    final bar = testInstance(id: barId);
+    final baz = testInstance(id: bazId);
 
     final starting = testOperation(
       id: 'p',
@@ -294,7 +294,8 @@ void main() {
   test('watch instance', () async {
     final client = MockLxdClient();
     final events = StreamController<LxdEvent>();
-    when(client.getEvents()).thenAnswer((_) => events.stream);
+    when(client.getEvents(project: fooId.project))
+        .thenAnswer((_) => events.stream);
 
     final service = LxdService(client);
     final stream = service.watchInstance(fooId);
@@ -399,7 +400,7 @@ void main() {
   });
 
   test('exec terminal', () async {
-    final instance = testInstance(name: 'foo', config: {'user.name': 'me'});
+    final instance = testInstance(id: fooId, config: {'user.name': 'me'});
 
     final exec = testOperation(id: 'x', metadata: {
       'fds': {
