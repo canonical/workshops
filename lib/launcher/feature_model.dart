@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
-import 'package:lxd_x/lxd_x.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
 class FeatureModel extends SafeChangeNotifier {
@@ -53,7 +52,7 @@ class FeatureModel extends SafeChangeNotifier {
         'user.gpu': 'physical',
         'user.x11': Platform.environment['DISPLAY'] ?? ':0',
         'user.wayland': Platform.environment['WAYLAND_DISPLAY'] ?? 'wayland-0',
-        'user.lxd': resolveLxdSocketPath(),
+        'user.lxd': LxdClient.resolveUnixSocket().path,
       },
     );
   }

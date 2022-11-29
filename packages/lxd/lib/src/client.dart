@@ -39,27 +39,31 @@ class LxdClient {
         _url = url;
 
   LxdClient({String? socketPath, HttpClient? client})
-      : this._(
-          Uri(
-            scheme: 'unix',
-            host: 'localhost',
-            path: _resolveSocketPath(socketPath),
-          ),
-          client,
-        );
+      : this._(resolveUnixSocket(socketPath), client);
 
   LxdClient.remote({required Uri url, HttpClient? client})
       : this._(url, client);
 
-  static String _resolveSocketPath(String? socketPath) {
+  /// Resolves the local UNIX domain socket for the LXD server.
+  ///
+  /// The following priority order is used to determine the socket path:
+  /// - The specified [socketPath] argument.
+  /// - The `LXD_DIR` environment variable: `$LXD_DIR/unix.socket`.
+  /// - The LXD snap: `/var/snap/lxd/common/lxd/unix.socket`.
+  /// - The legacy path: `/var/lib/lxd/unix.socket`.
+  static Uri resolveUnixSocket([String? defaultPath]) {
     final lxdDir = Platform.environment['LXD_DIR'];
     final paths = [
-      if (socketPath != null) socketPath,
+      if (defaultPath != null) defaultPath,
       if (lxdDir != null) '$lxdDir/unix.socket',
       '/var/snap/lxd/common/lxd/unix.socket',
     ];
-    return paths.firstWhereOrNull((path) => File(path).existsSync()) ??
-        '/var/lib/lxd/unix.socket';
+    return Uri(
+      scheme: 'unix',
+      host: 'localhost',
+      path: paths.firstWhereOrNull((path) => File(path).existsSync()) ??
+          '/var/lib/lxd/unix.socket',
+    );
   }
 
   static HttpClient _createClient(Uri url) {
@@ -67,8 +71,9 @@ class LxdClient {
     client.userAgent = 'lxd.dart';
     if (url.scheme == 'unix') {
       client.connectionFactory = (uri, proxyHost, proxyPort) {
-        final path = _resolveSocketPath(url.path);
-        final address = InternetAddress(path, type: InternetAddressType.unix);
+        final socket = resolveUnixSocket(url.path);
+        final address =
+            InternetAddress(socket.path, type: InternetAddressType.unix);
         return Socket.startConnect(address, 0);
       };
     }
