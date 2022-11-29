@@ -55,7 +55,7 @@ class InstanceTile extends StatelessWidget {
             ),
             child: ListTile(
               leading: OsLogo.asset(name: instance?.imageName, size: 48),
-              title: Text(instance?.name ?? ''),
+              title: Text('${instance?.name} (${instance?.project})'),
               subtitle: Text(instance?.imageDescription ?? ''),
               onTap: () =>
                   Actions.invoke(context, SelectInstanceIntent(instance)),
