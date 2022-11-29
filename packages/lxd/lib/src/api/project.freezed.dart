@@ -23,6 +23,7 @@ mixin _$LxdProject {
   Map<String, String> get config => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  List<String> get usedBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,11 @@ abstract class $LxdProjectCopyWith<$Res> {
           LxdProject value, $Res Function(LxdProject) then) =
       _$LxdProjectCopyWithImpl<$Res, LxdProject>;
   @useResult
-  $Res call({Map<String, String> config, String description, String name});
+  $Res call(
+      {Map<String, String> config,
+      String description,
+      String name,
+      List<String> usedBy});
 }
 
 /// @nodoc
@@ -55,6 +60,7 @@ class _$LxdProjectCopyWithImpl<$Res, $Val extends LxdProject>
     Object? config = null,
     Object? description = null,
     Object? name = null,
+    Object? usedBy = null,
   }) {
     return _then(_value.copyWith(
       config: null == config
@@ -69,6 +75,10 @@ class _$LxdProjectCopyWithImpl<$Res, $Val extends LxdProject>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      usedBy: null == usedBy
+          ? _value.usedBy
+          : usedBy // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -81,7 +91,11 @@ abstract class _$$_LxdProjectCopyWith<$Res>
       __$$_LxdProjectCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, String> config, String description, String name});
+  $Res call(
+      {Map<String, String> config,
+      String description,
+      String name,
+      List<String> usedBy});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$$_LxdProjectCopyWithImpl<$Res>
     Object? config = null,
     Object? description = null,
     Object? name = null,
+    Object? usedBy = null,
   }) {
     return _then(_$_LxdProject(
       config: null == config
@@ -112,6 +127,10 @@ class __$$_LxdProjectCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      usedBy: null == usedBy
+          ? _value._usedBy
+          : usedBy // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -122,8 +141,10 @@ class _$_LxdProject implements _LxdProject {
   const _$_LxdProject(
       {required final Map<String, String> config,
       required this.description,
-      required this.name})
-      : _config = config;
+      required this.name,
+      required final List<String> usedBy})
+      : _config = config,
+        _usedBy = usedBy;
 
   factory _$_LxdProject.fromJson(Map<String, dynamic> json) =>
       _$$_LxdProjectFromJson(json);
@@ -139,10 +160,16 @@ class _$_LxdProject implements _LxdProject {
   final String description;
   @override
   final String name;
+  final List<String> _usedBy;
+  @override
+  List<String> get usedBy {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_usedBy);
+  }
 
   @override
   String toString() {
-    return 'LxdProject(config: $config, description: $description, name: $name)';
+    return 'LxdProject(config: $config, description: $description, name: $name, usedBy: $usedBy)';
   }
 
   @override
@@ -153,13 +180,18 @@ class _$_LxdProject implements _LxdProject {
             const DeepCollectionEquality().equals(other._config, _config) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other._usedBy, _usedBy));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_config), description, name);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_config),
+      description,
+      name,
+      const DeepCollectionEquality().hash(_usedBy));
 
   @JsonKey(ignore: true)
   @override
@@ -179,7 +211,8 @@ abstract class _LxdProject implements LxdProject {
   const factory _LxdProject(
       {required final Map<String, String> config,
       required final String description,
-      required final String name}) = _$_LxdProject;
+      required final String name,
+      required final List<String> usedBy}) = _$_LxdProject;
 
   factory _LxdProject.fromJson(Map<String, dynamic> json) =
       _$_LxdProject.fromJson;
@@ -190,6 +223,8 @@ abstract class _LxdProject implements LxdProject {
   String get description;
   @override
   String get name;
+  @override
+  List<String> get usedBy;
   @override
   @JsonKey(ignore: true)
   _$$_LxdProjectCopyWith<_$_LxdProject> get copyWith =>

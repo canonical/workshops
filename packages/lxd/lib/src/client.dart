@@ -13,6 +13,7 @@ import 'api/network_acl.dart';
 import 'api/operation.dart';
 import 'api/profile.dart';
 import 'api/project.dart';
+import 'api/project_state.dart';
 import 'api/resource.dart';
 import 'api/storage_pool.dart';
 import 'enums.dart';
@@ -599,6 +600,15 @@ class LxdClient {
   Future<LxdProject> getProject(String name) async {
     var project = await _requestSync('GET', '/1.0/projects/$name');
     return LxdProject.fromJson(project);
+  }
+
+  /// Gets runtime state of the project with [name].
+  Future<LxdProjectState> getProjectState(String name) async {
+    final state = await _requestSync(
+      'GET',
+      '/1.0/projects/$name/state',
+    );
+    return LxdProjectState.fromJson(state);
   }
 
   /// Gets the names of the storage pools provided by the LXD server.
