@@ -53,8 +53,8 @@ class _FakeLxdOperation_2 extends _i1.SmartFake implements _i2.LxdOperation {
         );
 }
 
-class _FakeLxdImage_3 extends _i1.SmartFake implements _i2.LxdImage {
-  _FakeLxdImage_3(
+class _FakeLxdProject_3 extends _i1.SmartFake implements _i2.LxdProject {
+  _FakeLxdProject_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -63,8 +63,29 @@ class _FakeLxdImage_3 extends _i1.SmartFake implements _i2.LxdImage {
         );
 }
 
-class _FakeLxdTerminal_4 extends _i1.SmartFake implements _i3.LxdTerminal {
-  _FakeLxdTerminal_4(
+class _FakeLxdProjectState_4 extends _i1.SmartFake
+    implements _i2.LxdProjectState {
+  _FakeLxdProjectState_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdImage_5 extends _i1.SmartFake implements _i2.LxdImage {
+  _FakeLxdImage_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdTerminal_6 extends _i1.SmartFake implements _i3.LxdTerminal {
+  _FakeLxdTerminal_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -269,6 +290,36 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         returnValue: _i4.Stream<_i2.LxdOperation>.empty(),
       ) as _i4.Stream<_i2.LxdOperation>);
   @override
+  _i4.Future<_i2.LxdProject> getProject(String? name) => (super.noSuchMethod(
+        Invocation.method(
+          #getProject,
+          [name],
+        ),
+        returnValue: _i4.Future<_i2.LxdProject>.value(_FakeLxdProject_3(
+          this,
+          Invocation.method(
+            #getProject,
+            [name],
+          ),
+        )),
+      ) as _i4.Future<_i2.LxdProject>);
+  @override
+  _i4.Future<_i2.LxdProjectState> getProjectState(String? name) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getProjectState,
+          [name],
+        ),
+        returnValue:
+            _i4.Future<_i2.LxdProjectState>.value(_FakeLxdProjectState_4(
+          this,
+          Invocation.method(
+            #getProjectState,
+            [name],
+          ),
+        )),
+      ) as _i4.Future<_i2.LxdProjectState>);
+  @override
   _i4.Future<List<String>> getProjects() => (super.noSuchMethod(
         Invocation.method(
           #getProjects,
@@ -306,7 +357,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             image,
           ],
         ),
-        returnValue: _i4.Future<_i2.LxdImage>.value(_FakeLxdImage_3(
+        returnValue: _i4.Future<_i2.LxdImage>.value(_FakeLxdImage_5(
           this,
           Invocation.method(
             #configureImage,
@@ -386,7 +437,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           #execTerminal,
           [id],
         ),
-        returnValue: _i4.Future<_i3.LxdTerminal>.value(_FakeLxdTerminal_4(
+        returnValue: _i4.Future<_i3.LxdTerminal>.value(_FakeLxdTerminal_6(
           this,
           Invocation.method(
             #execTerminal,
