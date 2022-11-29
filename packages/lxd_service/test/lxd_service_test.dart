@@ -294,7 +294,8 @@ void main() {
   test('watch instance', () async {
     final client = MockLxdClient();
     final events = StreamController<LxdEvent>();
-    when(client.getEvents()).thenAnswer((_) => events.stream);
+    when(client.getEvents(project: fooId.project))
+        .thenAnswer((_) => events.stream);
 
     final service = LxdService(client);
     final stream = service.watchInstance(fooId);
