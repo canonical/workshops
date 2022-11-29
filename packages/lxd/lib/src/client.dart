@@ -256,7 +256,7 @@ class LxdClient {
       'GET',
       '/1.0/instances/${id.name}',
       queryParameters: {
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       },
     );
     return LxdInstance.fromJson(instance);
@@ -268,7 +268,7 @@ class LxdClient {
       'GET',
       '/1.0/instances/${id.name}/state',
       queryParameters: {
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       },
     );
     return LxdInstanceState.fromJson(state);
@@ -335,7 +335,7 @@ class LxdClient {
       'PUT',
       '/1.0/instances/${id.name}/state',
       queryParameters: {
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       },
       body: {'action': 'start', 'force': force},
     );
@@ -360,7 +360,7 @@ class LxdClient {
       'POST',
       '/1.0/instances/${id.name}/exec',
       queryParameters: {
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       },
       body: {
         'command': command,
@@ -398,7 +398,7 @@ class LxdClient {
       'PUT',
       '/1.0/instances/${id.name}/state',
       queryParameters: {
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       },
       body: {
         'action': 'stop',
@@ -418,7 +418,7 @@ class LxdClient {
       'PUT',
       '/1.0/instances/${id.name}/state',
       queryParameters: {
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       },
       body: {
         'action': 'restart',
@@ -434,7 +434,7 @@ class LxdClient {
       'DELETE',
       '/1.0/instances/${id.name}',
       queryParameters: {
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       },
     );
   }
@@ -444,7 +444,7 @@ class LxdClient {
       'GET',
       _url.resolve('/1.0/instances/${id.name}/files').replace(queryParameters: {
         'path': path,
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       }),
     );
     final response = await request.close();
@@ -457,7 +457,7 @@ class LxdClient {
       '/1.0/instances/${id.name}/files',
       queryParameters: {
         'path': path,
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       },
     );
   }
@@ -477,7 +477,7 @@ class LxdClient {
       '/1.0/instances/${id.name}/files',
       queryParameters: {
         'path': path,
-        if (id.project != null) 'project': id.project!,
+        if (id.project.isNotEmpty) 'project': id.project,
       },
       headers: {
         if (uid != null) 'X-LXD-uid': uid,
