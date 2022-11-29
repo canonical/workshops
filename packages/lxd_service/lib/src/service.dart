@@ -37,6 +37,8 @@ abstract class LxdService {
   Future<LxdOperation> deleteInstance(LxdInstanceId id);
   Stream<LxdOperation> watchInstance(LxdInstanceId id);
 
+  Future<List<String>> getProjects();
+
   Future<LxdOperation?> initFeature(
       LxdInstanceId id, LxdFeatureProvider feature, LxdImage image);
   Future<LxdImage> configureImage(LxdInstanceId id, LxdImage image);
@@ -126,9 +128,13 @@ class _LxdService implements LxdService {
   }
 
   @override
+  Future<List<String>> getProjects() => _client.getProjects();
+
+  @override
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote}) {
     return _client.createInstance(
       name: image.name,
+      project: image.project,
       source: image,
       server: remote?.isLocal == false ? remote!.address : null,
     );

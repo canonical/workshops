@@ -269,6 +269,14 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         returnValue: _i4.Stream<_i2.LxdOperation>.empty(),
       ) as _i4.Stream<_i2.LxdOperation>);
   @override
+  _i4.Future<List<String>> getProjects() => (super.noSuchMethod(
+        Invocation.method(
+          #getProjects,
+          [],
+        ),
+        returnValue: _i4.Future<List<String>>.value(<String>[]),
+      ) as _i4.Future<List<String>>);
+  @override
   _i4.Future<_i2.LxdOperation?> initFeature(
     _i2.LxdInstanceId? id,
     _i6.LxdFeatureProvider? feature,

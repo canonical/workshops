@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lxd_service/lxd_service.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
+import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
 
@@ -15,7 +17,8 @@ class PropertyPage extends StatefulWidget {
   static Widget create(BuildContext context) {
     final launcher = context.read<LauncherModel>();
     return ChangeNotifierProvider(
-      create: (_) => PropertyModel(launcher.image!),
+      create: (_) =>
+          PropertyModel(getService<LxdService>(), launcher.image!)..init(),
       child: const PropertyPage(),
     );
   }
@@ -69,6 +72,15 @@ class _PropertyPageState extends State<PropertyPage> {
                         return null;
                       },
                     ),
+                    const SizedBox(height: 24),
+                    _DropdownField<String>(
+                      label: 'Project',
+                      value: model.project,
+                      allValues: model.allProjects,
+                      onChanged: (project) =>
+                          model.project = project ?? 'default',
+                      itemBuilder: (context, value, child) => Text(value),
+                    )
                   ],
                 ),
               ),
@@ -100,6 +112,37 @@ class _PropertyPageState extends State<PropertyPage> {
           child: Text(l10n.launchButton),
         ),
       ],
+    );
+  }
+}
+
+class _DropdownField<T> extends StatelessWidget {
+  const _DropdownField({
+    required this.label,
+    required this.value,
+    required this.allValues,
+    required this.onChanged,
+    required this.itemBuilder,
+  });
+
+  final String label;
+  final T? value;
+  final List<T> allValues;
+  final ValueChanged<T?> onChanged;
+  final ValueWidgetBuilder<T> itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<T>(
+      decoration: InputDecoration(labelText: label),
+      value: value,
+      items: allValues.map((v) {
+        return DropdownMenuItem<T>(
+          value: v,
+          child: itemBuilder(context, v, null),
+        );
+      }).toList(),
+      onChanged: onChanged,
     );
   }
 }
