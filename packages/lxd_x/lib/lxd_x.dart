@@ -1,20 +1,6 @@
 library lxd_x;
 
-import 'dart:io';
-
-import 'package:collection/collection.dart';
 import 'package:lxd/lxd.dart';
-
-String resolveLxdSocketPath([String? socketPath]) {
-  final lxdDir = Platform.environment['LXD_DIR'];
-  final paths = [
-    if (socketPath != null) socketPath,
-    if (lxdDir != null) '$lxdDir/unix.socket',
-    '/var/snap/lxd/common/lxd/unix.socket',
-  ];
-  return paths.firstWhereOrNull((path) => File(path).existsSync()) ??
-      '/var/lib/lxd/unix.socket';
-}
 
 extension LxdEventX on LxdEvent {
   bool get isOperation => type == LxdEventType.operation;
