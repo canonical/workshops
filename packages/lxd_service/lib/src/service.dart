@@ -92,7 +92,7 @@ class _LxdService implements LxdService {
     // listen to all operation events that affect instances
     _events ??= _client.getEvents(types: {LxdEventType.operation}).where((ev) {
       log.debug(ev);
-      return ev.toOperation().instances?.isNotEmpty == true;
+      return ev.toOperation().getInstances()?.isNotEmpty == true;
     }).listen(_updateInstances);
   }
 
@@ -225,7 +225,8 @@ class _LxdService implements LxdService {
         .getEvents(project: id.project)
         .where((event) => event.isOperation)
         .map((event) => LxdOperation.fromJson(event.metadata!))
-        .where((op) => op.instances?.contains(id) == true);
+        .where(
+            (op) => op.getInstances(project: id.project)?.contains(id) == true);
   }
 
   /// Waits for the VM agent to be ready, which is a pre-requisite for executing
@@ -305,8 +306,8 @@ class _LxdService implements LxdService {
 
     if (event?.type == LxdEventType.operation) {
       final operation = event!.toOperation();
-      _handleOperation(operation);
-      final updated = operation.instances ?? [];
+      _handleOperation(operation, project: event.project);
+      final updated = operation.getInstances(project: event.project) ?? [];
       for (final instance in updated) {
         if (!added.contains(instance) &&
             !removed.contains(instance) &&
@@ -319,9 +320,9 @@ class _LxdService implements LxdService {
     _instances.add(newInstances);
   }
 
-  void _handleOperation(LxdOperation operation) {
+  void _handleOperation(LxdOperation operation, {String? project}) {
     void updateInstanceStatus(int statusCode) {
-      for (final instance in operation.instances!) {
+      for (final instance in operation.getInstances(project: project)!) {
         // override the status while an operation is pending/running
         if (operation.isPending || operation.isRunning) {
           _statuses[instance] = statusCode;

@@ -113,8 +113,12 @@ extension LxdNetworkStateX on LxdNetworkState {
 }
 
 extension LxdOperationX on LxdOperation {
-  List<LxdInstanceId>? get instances =>
-      resources?['instances']?.map(LxdInstanceId.fromPath).toList();
+  List<LxdInstanceId>? getInstances({String? project}) {
+    final instances = resources?['instances']?.map(LxdInstanceId.fromPath);
+    return instances
+        ?.map((id) => LxdInstanceId(id.name, project: project ?? id.project))
+        .toList();
+  }
 
   bool get isRunning => statusCode == LxdStatusCode.running;
   bool get isPending => statusCode == LxdStatusCode.pending;
