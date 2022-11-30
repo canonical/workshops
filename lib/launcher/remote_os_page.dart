@@ -2,8 +2,8 @@ import 'package:async_value/async_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import '../remotes/remote_selector.dart';
 import 'launcher_page.dart';
@@ -19,7 +19,8 @@ class RemoteOsPage extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return LauncherPage(
       title: Text(l10n.selectOsTitle),
-      content: RoundedContainer(
+      content: YaruBorderContainer(
+        color: Theme.of(context).backgroundColor,
         child: model.images?.when(
           data: (images) => OsSelector(
             items: model.oses,

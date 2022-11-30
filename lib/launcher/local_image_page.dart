@@ -6,8 +6,8 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
-import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import '../remotes/remote_selector.dart';
 import 'launcher_page.dart';
@@ -51,7 +51,8 @@ class LocalImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<LocalImageModel>();
-    return RoundedContainer(
+    return YaruBorderContainer(
+      color: Theme.of(context).backgroundColor,
       child: model.images?.when(
         data: (images) => _LocalImageView(
           images: images,
