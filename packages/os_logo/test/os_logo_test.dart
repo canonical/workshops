@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -45,6 +45,8 @@ void main() {
     final os = osVariant.currentValue;
 
     final bundle = MockAssetBundle();
+    when(bundle.loadString(argThat(matches(RegExp('.*(-light|-dark).svg')))))
+        .thenThrow(FlutterError(''));
     when(bundle.loadString('packages/os_logo/assets/$os.svg'))
         .thenAnswer((_) async => '<svg width="1" height="1"/>');
 
@@ -53,11 +55,13 @@ void main() {
 
     expect(find.byType(SvgPicture), findsOneWidget);
 
-    verify(bundle.loadString('packages/os_logo/assets/$os.svg')).called(1);
+    verify(bundle.loadString('packages/os_logo/assets/$os.svg'));
   }, variant: osVariant);
 
   testWidgets('rebuild', (tester) async {
     final bundle = MockAssetBundle();
+    when(bundle.loadString(argThat(matches(RegExp('.*(-light|-dark).svg')))))
+        .thenThrow(FlutterError(''));
     when(bundle.loadString('packages/os_logo/assets/ubuntu.svg'))
         .thenAnswer((_) async => '<svg width="1" height="1"/>');
 
@@ -69,7 +73,7 @@ void main() {
     await tester.pumpWidget(buildLogo(os: 'ubuntu', bundle: bundle));
     await tester.pumpAndSettle();
 
-    verify(bundle.loadString('packages/os_logo/assets/ubuntu.svg')).called(1);
+    verify(bundle.loadString('packages/os_logo/assets/ubuntu.svg'));
   });
 
   testWidgets('fail', (tester) async {
@@ -80,5 +84,39 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(SvgPicture), findsNothing);
+  });
+
+  testWidgets('light variant', (tester) async {
+    final bundle = MockAssetBundle();
+    when(bundle.loadString('packages/os_logo/assets/ubuntu-light.svg'))
+        .thenAnswer((_) async => '<svg width="1" height="1"/>');
+
+    await tester.pumpWidget(
+      Theme(
+        data: ThemeData.light(),
+        child: buildLogo(os: 'ubuntu', bundle: bundle),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    verify(bundle.loadString('packages/os_logo/assets/ubuntu-light.svg'));
+    verifyNever(bundle.loadString('packages/os_logo/assets/ubuntu.svg'));
+  });
+
+  testWidgets('dark variant', (tester) async {
+    final bundle = MockAssetBundle();
+    when(bundle.loadString('packages/os_logo/assets/ubuntu-dark.svg'))
+        .thenAnswer((_) async => '<svg width="1" height="1"/>');
+
+    await tester.pumpWidget(
+      Theme(
+        data: ThemeData.dark(),
+        child: buildLogo(os: 'ubuntu', bundle: bundle),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    verify(bundle.loadString('packages/os_logo/assets/ubuntu-dark.svg'));
+    verifyNever(bundle.loadString('packages/os_logo/assets/ubuntu.svg'));
   });
 }

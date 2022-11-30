@@ -21,6 +21,12 @@ class _OsLogoState extends State<OsLogo> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateSvg();
+  }
+
+  @override
   void didUpdateWidget(covariant OsLogo oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.name != oldWidget.name) {
@@ -34,14 +40,20 @@ class _OsLogoState extends State<OsLogo> {
     setState(() => _svg = svg);
   }
 
-  Future<String?> _loadSvg() async {
+  Future<String?> _tryLoadSvg(String name) async {
+    final bundle = DefaultAssetBundle.of(context);
     try {
-      final name = widget.name?.toLowerCase();
-      if (name != null) {
-        final bundle = DefaultAssetBundle.of(context);
-        return await bundle.loadString('packages/os_logo/assets/$name.svg');
-      }
+      return await bundle.loadString('packages/os_logo/assets/$name.svg');
     } on FlutterError catch (_) {}
+    return null;
+  }
+
+  Future<String?> _loadSvg() async {
+    final name = widget.name?.toLowerCase();
+    if (name != null) {
+      final brightness = Theme.of(context).brightness.name;
+      return await _tryLoadSvg('$name-$brightness') ?? await _tryLoadSvg(name);
+    }
     return null;
   }
 
