@@ -11,6 +11,7 @@ class LxdProject with _$LxdProject {
     required Map<String, String> config,
     required String description,
     required String name,
+    required List<String> usedBy,
   }) = _LxdProject;
 
   factory LxdProject.fromJson(Map<String, dynamic> json) =>
