@@ -212,5 +212,9 @@
   "instanceInformationTitle": "Información de la instancia",
   "@instanceInformationTitle": {},
   "swapUsageLabel": "Intercambiar el uso",
-  "@swapUsageLabel": {}
+  "@swapUsageLabel": {},
+  "closeButton": "Cerrar",
+  "@closeButton": {},
+  "projectLabel": "Proyecto",
+  "@projectLabel": {}
 }
