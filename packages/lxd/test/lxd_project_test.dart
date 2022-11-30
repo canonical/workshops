@@ -24,6 +24,7 @@ void main() {
       'config': {'features.networks': 'false', 'features.profiles': 'true'},
       'description': 'My new project',
       'name': 'foo',
+      'used_by': ['/1.0/instances/bar'],
     };
 
     final http = mockHttpClient();
@@ -40,5 +41,6 @@ void main() {
         equals({'features.networks': 'false', 'features.profiles': 'true'}));
     expect(project.description, equals('My new project'));
     expect(project.name, equals('foo'));
+    expect(project.usedBy, equals(['/1.0/instances/bar']));
   });
 }
