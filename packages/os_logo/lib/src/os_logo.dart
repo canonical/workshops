@@ -41,6 +41,7 @@ class _OsLogoState extends State<OsLogo> {
   }
 
   Future<String?> _tryLoadSvg(String name) async {
+    if (!mounted) return null;
     final bundle = DefaultAssetBundle.of(context);
     try {
       return await bundle.loadString('packages/os_logo/assets/$name.svg');
@@ -50,7 +51,7 @@ class _OsLogoState extends State<OsLogo> {
 
   Future<String?> _loadSvg() async {
     final name = widget.name?.toLowerCase();
-    if (name != null) {
+    if (mounted && name != null) {
       final brightness = Theme.of(context).brightness.name;
       return await _tryLoadSvg('$name-$brightness') ?? await _tryLoadSvg(name);
     }
