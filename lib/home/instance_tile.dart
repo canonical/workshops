@@ -5,6 +5,7 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'instance_actions.dart';
 import 'instance_context.dart';
@@ -114,7 +115,7 @@ class _BusyButton extends IconButton {
       : super(
           icon: const SizedBox.square(
             dimension: 16,
-            child: CircularProgressIndicator(strokeWidth: 2),
+            child: YaruCircularProgressIndicator(strokeWidth: 2),
           ),
           splashColor: Colors.transparent,
           hoverColor: Colors.transparent,

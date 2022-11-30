@@ -3,6 +3,7 @@ import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:terminal_view/terminal_view.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import '../settings.dart';
 import 'terminal_actions.dart';
@@ -54,7 +55,7 @@ class TerminalPane extends StatelessWidget {
           },
         ),
         if (model.state == TerminalState.starting)
-          const Center(child: CircularProgressIndicator())
+          const Center(child: YaruCircularProgressIndicator())
       ],
     );
   }

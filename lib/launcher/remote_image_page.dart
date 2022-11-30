@@ -99,7 +99,7 @@ class RemoteImagePage extends StatelessWidget {
               );
             },
             error: (error, stackTrace) => ErrorWidget(error),
-            loading: () => const Center(child: CircularProgressIndicator()),
+            loading: () => const Center(child: YaruCircularProgressIndicator()),
           ),
         ),
       ),

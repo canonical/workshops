@@ -127,7 +127,7 @@ class _ProgressViewState extends State<_ProgressView> {
                 children: [
                   const SizedBox.square(
                     dimension: 96,
-                    child: CircularProgressIndicator(),
+                    child: YaruCircularProgressIndicator(),
                   ),
                   const SizedBox(height: 48),
                   Text(
