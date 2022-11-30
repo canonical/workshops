@@ -10,7 +10,10 @@ dependencies:
     sdk: flutter
   window_manager: ^0.2.7
   yaru_icons: ^0.2.6
-  yaru_widgets: ^2.0.0-0
+  yaru_widgets: # TODO: ^2.0.0
+    git:
+      url: https://github.com/ubuntu/yaru_widgets.git
+      ref: d2439368841f4d7ab386db102a84d1330d7ac59e
 
 dev_dependencies:
   flutter_lints: ^2.0.0
