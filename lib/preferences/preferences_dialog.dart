@@ -10,6 +10,7 @@ import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'appearance_view.dart';
 import 'preferences_model.dart';
+import 'project_settings_view.dart';
 import 'shortcut_view.dart';
 
 Future<void> showPreferencesDialog({required BuildContext context}) async {
@@ -49,6 +50,10 @@ class PreferencesDialog extends StatelessWidget {
       PreferencesItem(
         title: l10n.shortcutPreferences,
         builder: (_) => const ShortcutView(),
+      ),
+      PreferencesItem(
+        title: l10n.projectPreferences,
+        builder: ProjectSettingsView.create,
       ),
     ];
 
