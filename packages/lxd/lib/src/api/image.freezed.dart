@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'image.dart';
 
@@ -403,6 +403,7 @@ class _$_LxdImage implements _LxdImage {
   @override
   @JsonKey()
   Map<String, String> get properties {
+    if (_properties is EqualUnmodifiableMapView) return _properties;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_properties);
   }
@@ -433,6 +434,7 @@ class _$_LxdImage implements _LxdImage {
   @override
   @JsonKey()
   List<String> get profiles {
+    if (_profiles is EqualUnmodifiableListView) return _profiles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_profiles);
   }
@@ -444,6 +446,7 @@ class _$_LxdImage implements _LxdImage {
   @override
   @JsonKey()
   List<LxdImageAlias> get aliases {
+    if (_aliases is EqualUnmodifiableListView) return _aliases;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_aliases);
   }
@@ -1341,6 +1344,7 @@ class _$_LxdImageMetadata implements _LxdImageMetadata {
   /// Example: {"os": "Ubuntu", "release": "jammy", "variant": "cloud"}
   @override
   Map<String, String> get properties {
+    if (_properties is EqualUnmodifiableMapView) return _properties;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_properties);
   }
@@ -1350,6 +1354,7 @@ class _$_LxdImageMetadata implements _LxdImageMetadata {
 // Template for files in the image
   @override
   Map<String, LxdImageMetadataTemplate> get templates {
+    if (_templates is EqualUnmodifiableMapView) return _templates;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_templates);
   }
@@ -1605,6 +1610,7 @@ class _$_LxdImageMetadataTemplate implements _LxdImageMetadataTemplate {
   /// Example: create
   @override
   List<String> get when {
+    if (_when is EqualUnmodifiableListView) return _when;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_when);
   }
@@ -1629,6 +1635,7 @@ class _$_LxdImageMetadataTemplate implements _LxdImageMetadataTemplate {
   /// Example: {"foo": "bar"}
   @override
   Map<String, String> get properties {
+    if (_properties is EqualUnmodifiableMapView) return _properties;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_properties);
   }

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'network_acl.dart';
 
@@ -698,6 +698,7 @@ class _$_LxdNetworkAcl implements _LxdNetworkAcl {
   /// List of egress rules (order independent)
   @override
   List<LxdNetworkAclRule> get egress {
+    if (_egress is EqualUnmodifiableListView) return _egress;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_egress);
   }
@@ -708,6 +709,7 @@ class _$_LxdNetworkAcl implements _LxdNetworkAcl {
   /// List of ingress rules (order independent)
   @override
   List<LxdNetworkAclRule> get ingress {
+    if (_ingress is EqualUnmodifiableListView) return _ingress;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_ingress);
   }
@@ -728,6 +730,7 @@ class _$_LxdNetworkAcl implements _LxdNetworkAcl {
   /// ```
   @override
   Map<String, String> get config {
+    if (_config is EqualUnmodifiableMapView) return _config;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_config);
   }
@@ -738,6 +741,7 @@ class _$_LxdNetworkAcl implements _LxdNetworkAcl {
   /// Resources that use the ACL
   @override
   List<String> get usedBy {
+    if (_usedBy is EqualUnmodifiableListView) return _usedBy;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_usedBy);
   }

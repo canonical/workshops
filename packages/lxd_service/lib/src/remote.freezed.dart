@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'remote.dart';
 
@@ -60,8 +60,8 @@ class _$LxdRemoteCopyWithImpl<$Res, $Val extends LxdRemote>
   $Res call({
     Object? name = null,
     Object? address = null,
-    Object? isStatic = null,
-    Object? isPublic = null,
+    Object? isStatic = freezed,
+    Object? isPublic = freezed,
     Object? protocol = freezed,
   }) {
     return _then(_value.copyWith(
@@ -73,11 +73,11 @@ class _$LxdRemoteCopyWithImpl<$Res, $Val extends LxdRemote>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      isStatic: null == isStatic
+      isStatic: freezed == isStatic
           ? _value.isStatic
           : isStatic // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      isPublic: null == isPublic
+      isPublic: freezed == isPublic
           ? _value.isPublic
           : isPublic // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -117,8 +117,8 @@ class __$$_LxdRemoteCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? address = null,
-    Object? isStatic = null,
-    Object? isPublic = null,
+    Object? isStatic = freezed,
+    Object? isPublic = freezed,
     Object? protocol = freezed,
   }) {
     return _then(_$_LxdRemote(
@@ -130,8 +130,8 @@ class __$$_LxdRemoteCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      isStatic: null == isStatic ? _value.isStatic : isStatic,
-      isPublic: null == isPublic ? _value.isPublic : isPublic,
+      isStatic: freezed == isStatic ? _value.isStatic! : isStatic,
+      isPublic: freezed == isPublic ? _value.isPublic! : isPublic,
       protocol: freezed == protocol
           ? _value.protocol
           : protocol // ignore: cast_nullable_to_non_nullable

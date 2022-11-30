@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'resource.dart';
 
@@ -120,6 +120,7 @@ class _$_LxdCpuResources implements _LxdCpuResources {
   final List<String> _sockets;
   @override
   List<String> get sockets {
+    if (_sockets is EqualUnmodifiableListView) return _sockets;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_sockets);
   }
@@ -423,6 +424,7 @@ class _$_LxdGpuResources implements _LxdGpuResources {
   final List<LxdGpuCard> _cards;
   @override
   List<LxdGpuCard> get cards {
+    if (_cards is EqualUnmodifiableListView) return _cards;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cards);
   }
@@ -763,6 +765,7 @@ class _$_LXdNetworkResources implements _LXdNetworkResources {
   final List<LxdNetworkCard> _cards;
   @override
   List<LxdNetworkCard> get cards {
+    if (_cards is EqualUnmodifiableListView) return _cards;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_cards);
   }
@@ -1104,6 +1107,7 @@ class _$_LxdStorageResources implements _LxdStorageResources {
   final List<LxdStorageDisk> _disks;
   @override
   List<LxdStorageDisk> get disks {
+    if (_disks is EqualUnmodifiableListView) return _disks;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_disks);
   }
@@ -1458,6 +1462,7 @@ class _$_LxdUsbResources implements _LxdUsbResources {
   final List<LxdUsbDevice> _devices;
   @override
   List<LxdUsbDevice> get devices {
+    if (_devices is EqualUnmodifiableListView) return _devices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_devices);
   }
@@ -1866,6 +1871,7 @@ class _$_LxdPciResources implements _LxdPciResources {
   final List<LxdPciDevice> _devices;
   @override
   List<LxdPciDevice> get devices {
+    if (_devices is EqualUnmodifiableListView) return _devices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_devices);
   }

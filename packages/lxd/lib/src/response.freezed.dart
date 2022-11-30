@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'response.dart';
 
@@ -31,6 +31,7 @@ LxdResponse _$LxdResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LxdResponse {
+  dynamic get metadata => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String status, int statusCode, dynamic metadata)
@@ -89,6 +90,9 @@ mixin _$LxdResponse {
   }) =>
       throw _privateConstructorUsedError;
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LxdResponseCopyWith<LxdResponse> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -96,6 +100,8 @@ abstract class $LxdResponseCopyWith<$Res> {
   factory $LxdResponseCopyWith(
           LxdResponse value, $Res Function(LxdResponse) then) =
       _$LxdResponseCopyWithImpl<$Res, LxdResponse>;
+  @useResult
+  $Res call({dynamic metadata});
 }
 
 /// @nodoc
@@ -107,13 +113,28 @@ class _$LxdResponseCopyWithImpl<$Res, $Val extends LxdResponse>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? metadata = freezed,
+  }) {
+    return _then(_value.copyWith(
+      metadata: freezed == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$LxdSyncResponseCopyWith<$Res> {
+abstract class _$$LxdSyncResponseCopyWith<$Res>
+    implements $LxdResponseCopyWith<$Res> {
   factory _$$LxdSyncResponseCopyWith(
           _$LxdSyncResponse value, $Res Function(_$LxdSyncResponse) then) =
       __$$LxdSyncResponseCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({String status, int statusCode, dynamic metadata});
 }
@@ -131,7 +152,7 @@ class __$$LxdSyncResponseCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? statusCode = null,
-    Object? metadata = null,
+    Object? metadata = freezed,
   }) {
     return _then(_$LxdSyncResponse(
       status: null == status
@@ -142,7 +163,7 @@ class __$$LxdSyncResponseCopyWithImpl<$Res>
           ? _value.statusCode
           : statusCode // ignore: cast_nullable_to_non_nullable
               as int,
-      metadata: null == metadata
+      metadata: freezed == metadata
           ? _value.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -300,17 +321,21 @@ abstract class LxdSyncResponse implements LxdResponse {
 
   String get status;
   int get statusCode;
+  @override
   dynamic get metadata;
+  @override
   @JsonKey(ignore: true)
   _$$LxdSyncResponseCopyWith<_$LxdSyncResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LxdAsyncResponseCopyWith<$Res> {
+abstract class _$$LxdAsyncResponseCopyWith<$Res>
+    implements $LxdResponseCopyWith<$Res> {
   factory _$$LxdAsyncResponseCopyWith(
           _$LxdAsyncResponse value, $Res Function(_$LxdAsyncResponse) then) =
       __$$LxdAsyncResponseCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call(
       {String status,
@@ -380,6 +405,7 @@ class _$LxdAsyncResponse implements LxdAsyncResponse {
   final Map<String, dynamic> _metadata;
   @override
   Map<String, dynamic> get metadata {
+    if (_metadata is EqualUnmodifiableMapView) return _metadata;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_metadata);
   }
@@ -518,17 +544,21 @@ abstract class LxdAsyncResponse implements LxdResponse {
   String get status;
   int get statusCode;
   String get operation;
+  @override
   Map<String, dynamic> get metadata;
+  @override
   @JsonKey(ignore: true)
   _$$LxdAsyncResponseCopyWith<_$LxdAsyncResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LxdErrorResponseCopyWith<$Res> {
+abstract class _$$LxdErrorResponseCopyWith<$Res>
+    implements $LxdResponseCopyWith<$Res> {
   factory _$$LxdErrorResponseCopyWith(
           _$LxdErrorResponse value, $Res Function(_$LxdErrorResponse) then) =
       __$$LxdErrorResponseCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({String error, int errorCode, Map<String, dynamic>? metadata});
 }
@@ -588,6 +618,7 @@ class _$LxdErrorResponse implements LxdErrorResponse {
   Map<String, dynamic>? get metadata {
     final value = _metadata;
     if (value == null) return null;
+    if (_metadata is EqualUnmodifiableMapView) return _metadata;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(value);
   }
@@ -722,7 +753,9 @@ abstract class LxdErrorResponse implements LxdResponse {
 
   String get error;
   int get errorCode;
+  @override
   Map<String, dynamic>? get metadata;
+  @override
   @JsonKey(ignore: true)
   _$$LxdErrorResponseCopyWith<_$LxdErrorResponse> get copyWith =>
       throw _privateConstructorUsedError;
