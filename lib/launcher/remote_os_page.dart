@@ -27,7 +27,7 @@ class RemoteOsPage extends StatelessWidget {
             onSelected: (os) => Wizard.of(context).next(arguments: os),
           ),
           error: (error, stackTrace) => ErrorWidget(error),
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: YaruCircularProgressIndicator()),
         ),
       ),
       actions: [

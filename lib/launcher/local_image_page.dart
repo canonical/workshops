@@ -59,7 +59,7 @@ class LocalImageView extends StatelessWidget {
           onSelected: onSelected,
         ),
         error: (error, stackTrace) => ErrorWidget(error),
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: YaruCircularProgressIndicator()),
       ),
     );
   }
