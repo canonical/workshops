@@ -1,6 +1,5 @@
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
-import 'package:lxd_x/lxd_x.dart';
 import 'package:petname/petname.dart' as petname;
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:lxd/lxd.dart';
-import 'package:lxd_x/lxd_x.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';

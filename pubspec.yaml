@@ -39,8 +39,6 @@ dependencies:
     path: packages/lxd_service
   lxd_test:
     path: packages/lxd_test
-  lxd_x:
-    path: packages/lxd_x
   meta: ^1.7.0
   movable_tabs:
     path: packages/movable_tabs
