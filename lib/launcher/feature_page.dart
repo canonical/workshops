@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
-import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'feature_model.dart';
 import 'launcher_l10n.dart';
@@ -39,7 +39,8 @@ class _FeaturePageState extends State<FeaturePage> {
     final l10n = AppLocalizations.of(context);
     return LauncherPage(
       title: Text(l10n.selectFeaturesTitle),
-      content: RoundedContainer(
+      content: YaruBorderContainer(
+        color: Theme.of(context).backgroundColor,
         child: ListView(
           children: [
             if (LxdFeature.user.isSupported(model.type))

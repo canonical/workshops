@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:title_bar/title_bar.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
-import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'appearance_view.dart';
@@ -75,7 +74,8 @@ class PreferencesDialog extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(24),
-                  child: RoundedContainer(
+                  child: YaruBorderContainer(
+                    color: Theme.of(context).backgroundColor,
                     child: YaruMasterDetailPage(
                       length: preferences.length,
                       tileBuilder: (context, index, selected) => YaruMasterTile(

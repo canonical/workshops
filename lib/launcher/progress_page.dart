@@ -5,8 +5,8 @@ import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
-import 'package:ubuntu_widgets/ubuntu_widgets.dart';
 import 'package:wizard_router/wizard_router.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import '../remotes/remote_store.dart';
 import 'progress_model.dart';
@@ -120,7 +120,8 @@ class _ProgressViewState extends State<_ProgressView> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: RoundedContainer(
+            child: YaruBorderContainer(
+              color: Theme.of(context).backgroundColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
