@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:os_logo/os_logo.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 class OsSelector extends StatelessWidget {
   const OsSelector({
@@ -64,17 +65,9 @@ class _OsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(8),
-        backgroundColor: theme.cardColor,
-        foregroundColor: theme.colorScheme.onSurface,
-        surfaceTintColor: Colors.transparent,
-        elevation: 1,
-      ),
+    return YaruBanner(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           OsLogo.asset(
             key: ValueKey(os),
@@ -91,7 +84,7 @@ class _OsTile extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () => onSelected?.call(os),
+      onTap: () => onSelected?.call(os),
     );
   }
 }
