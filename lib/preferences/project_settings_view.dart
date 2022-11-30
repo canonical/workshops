@@ -77,7 +77,7 @@ class ProjectSettingsView extends StatelessWidget {
                     children: [
                       resource.key,
                       resource.value.usage.toString(),
-                      '${resource.value.limit < 0 ? 'unlimited' : resource.value.limit}',
+                      '${resource.value.limit < 0 ? l10n.unlimitedText : resource.value.limit}',
                     ]
                         .map((e) => Expanded(
                               child: Text(e),

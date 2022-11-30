@@ -115,6 +115,7 @@
   "swapUsageLabel": "Swap usage",
   "themeLabel": "Theme",
   "typeLabel": "Type",
+  "unlimitedText": "unlimited",
   "unpackingInstanceText": "Unpacking instance",
   "usageLabel": "Usage",
   "usedByLabel": "Used by",
