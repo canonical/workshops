@@ -40,6 +40,7 @@ abstract class LxdService {
   Future<LxdProject> getProject(String name);
   Future<LxdProjectState> getProjectState(String name);
   Future<List<String>> getProjects();
+  Future<void> updateProjectConfig(String name, Map<String, String> config);
 
   Future<LxdOperation?> initFeature(
       LxdInstanceId id, LxdFeatureProvider feature, LxdImage image);
@@ -138,6 +139,13 @@ class _LxdService implements LxdService {
 
   @override
   Future<List<String>> getProjects() => _client.getProjects();
+
+  @override
+  Future<void> updateProjectConfig(
+      String name, Map<String, String> config) async {
+    final project = await getProject(name);
+    return _client.updateProject(project.copyWith(config: config));
+  }
 
   @override
   Future<LxdOperation> createInstance(LxdImage image, {LxdRemote? remote}) {
