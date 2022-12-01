@@ -83,17 +83,19 @@ class InstanceTableModel extends ChangeNotifier {
     }
 
     bool filterInstance(LxdInstanceId id) {
-      return _selectedProjects.contains(id.project);
+      return _selectedProjects.isEmpty ||
+          _selectedProjects.contains(id.project);
     }
 
     final uniqueProjects = <String>{};
-    final filteredInstances = _store.instances.value?.where((id) {
+    final filteredInstances = <LxdInstanceId>[];
+    for (final id in _store.instances.value ?? <LxdInstanceId>[]) {
       uniqueProjects.add(id.project);
-      return filterInstance(id);
-    });
+      if (filterInstance(id)) filteredInstances.add(id);
+    }
 
     _updateProjects(uniqueProjects.sorted());
-    _updateInstances(filteredInstances?.sorted(compareInstance));
+    _updateInstances(filteredInstances.sorted(compareInstance));
   }
 
   var _dirty = false;
