@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lxd/lxd.dart';
@@ -94,14 +96,24 @@ class InstanceTableModel extends ChangeNotifier {
     _updateInstances(filteredInstances?.sorted(compareInstance));
   }
 
+  var _dirty = false;
+  void _invalidate() {
+    if (_dirty) return;
+    _dirty = true;
+    Timer(const Duration(milliseconds: 16), () {
+      _sortAndFilter();
+      _dirty = false;
+    });
+  }
+
   Future<void> init() async {
     _sortAndFilter();
-    _store.addListener(_sortAndFilter);
+    _store.addListener(_invalidate);
   }
 
   @override
   void dispose() {
-    _store.removeListener(_sortAndFilter);
+    _store.removeListener(_invalidate);
     super.dispose();
   }
 }
