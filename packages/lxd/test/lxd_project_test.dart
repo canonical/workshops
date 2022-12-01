@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:lxd/lxd.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -42,5 +44,20 @@ void main() {
     expect(project.description, equals('My new project'));
     expect(project.name, equals('foo'));
     expect(project.usedBy, equals(['/1.0/instances/bar']));
+  });
+
+  test('update project configuration', () async {
+    final http = mockHttpClient();
+    final uri = unixDomainUrl('/1.0/projects/foo', {});
+    final request = mockOperation(id: 'ID');
+    final project = LxdProject(
+        config: {}, description: 'description', name: 'foo', usedBy: []);
+    when(http.openUrl('PUT', uri)).thenAnswer((_) async => request);
+
+    final client = LxdClient(client: http);
+    await client.updateProject(project);
+    verify(http.openUrl('PUT', uri)).called(1);
+    verify(request.write(jsonEncode(project.toJson())));
+    verify(request.close()).called(1);
   });
 }
