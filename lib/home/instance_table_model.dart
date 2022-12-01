@@ -54,6 +54,7 @@ class InstanceTableModel extends ChangeNotifier {
     _sortColumn = column;
     _sortAscending = ascending;
     _sortAndFilter();
+    notifyListeners();
   }
 
   void _sortAndFilter() {
