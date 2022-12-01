@@ -55,7 +55,8 @@ class _InstanceTableViewState extends State<_InstanceTableView> {
       sortColumnIndex: model.sortColumn.index,
       columnSpacing: 10,
       horizontalMargin: 10,
-      headingRowHeight: 46,
+      headingRowHeight: 36,
+      dataRowHeight: kMinInteractiveDimension,
       columns: [
         DataColumn2(
           label: Padding(
