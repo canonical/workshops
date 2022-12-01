@@ -611,6 +611,15 @@ class LxdClient {
     return LxdProjectState.fromJson(state);
   }
 
+  /// Updates the entire configuration of a [project].
+  Future<void> updateProject(LxdProject project) async {
+    return await _requestSync(
+      'PUT',
+      '/1.0/projects/${project.name}',
+      body: jsonEncode(project.toJson()),
+    );
+  }
+
   /// Gets the names of the storage pools provided by the LXD server.
   Future<List<String>> getStoragePools({String? project}) async {
     var poolPaths = await _requestSync(
