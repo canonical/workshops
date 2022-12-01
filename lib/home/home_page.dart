@@ -7,7 +7,7 @@ import '../launcher/launcher_wizard.dart';
 import 'home_menu.dart';
 import 'instance_actions.dart';
 import 'instance_intents.dart';
-import 'instance_view.dart';
+import 'instance_table_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.onSelected});
@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
             },
             child: const Focus(
               autofocus: true,
-              child: InstanceView(),
+              child: InstanceTableView(),
             ),
           ),
         ),
