@@ -82,8 +82,7 @@ class InstanceTableModel extends ChangeNotifier {
     }
 
     bool filterInstance(LxdInstanceId id) {
-      return _selectedProjects.isEmpty ||
-          _selectedProjects.contains(id.project);
+      return _selectedProjects.contains(id.project);
     }
 
     final uniqueProjects = <String>{};
