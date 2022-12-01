@@ -53,7 +53,7 @@ class _InstanceLabel extends StatelessWidget {
     final instance = context.selectInstance(id);
     return Row(
       children: [
-        OsLogo.asset(name: instance?.imageName, size: 36),
+        OsLogo.asset(name: instance?.os?.toLowerCase(), size: 36),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -61,7 +61,7 @@ class _InstanceLabel extends StatelessWidget {
             children: [
               Text(instance?.name ?? '', overflow: TextOverflow.ellipsis),
               Text(
-                instance?.imageDescription ?? '',
+                instance?.summary ?? '',
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -71,11 +71,6 @@ class _InstanceLabel extends StatelessWidget {
       ],
     );
   }
-}
-
-extension _LxdInstanceImage on LxdInstance {
-  String? get imageName => config['image.os']?.toLowerCase();
-  String? get imageDescription => config['image.description'];
 }
 
 class _InstanceButtons extends StatelessWidget {

@@ -20,6 +20,8 @@ extension LxdImageX on LxdImage {
 
 extension LxdInstanceX on LxdInstance {
   String? get os => config['image.os'];
+  String? get summary =>
+      description.isEmpty ? config['image.description'] : description;
 
   bool get isBusy => isStarting || isStopping;
   bool get isStarting => statusCode == LxdStatusCode.starting;
