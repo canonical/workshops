@@ -25,10 +25,7 @@ class HomePage extends StatelessWidget {
             actions: {
               SelectInstanceIntent: SelectInstanceAction(onSelected),
             },
-            child: const Focus(
-              autofocus: true,
-              child: InstanceTableView(),
-            ),
+            child: const InstanceTableView(),
           ),
         ),
         floatingActionButton: FloatingActionButton(

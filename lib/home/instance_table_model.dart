@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lxd/lxd.dart';
+import 'package:lxd_x/lxd_x.dart';
 
 import 'instance_store.dart';
 
@@ -15,19 +16,9 @@ class InstanceTableModel extends ChangeNotifier {
 
   List<LxdInstanceId> get instances => _instances ?? <LxdInstanceId>[];
   List<LxdInstanceId>? _instances;
-  void _updateInstances(List<LxdInstanceId>? instances) {
-    if (const ListEquality().equals(_instances, instances)) return;
-    _instances = instances;
-    notifyListeners();
-  }
 
   List<String> get projects => _projects ?? [];
   List<String>? _projects;
-  void _updateProjects(List<String>? projects) {
-    if (const ListEquality().equals(_projects, projects)) return;
-    _projects = projects;
-    notifyListeners();
-  }
 
   Set<String> get selectedProjects => _selectedProjects;
   final _selectedProjects = <String>{kLxdDefaultProject};
@@ -54,7 +45,15 @@ class InstanceTableModel extends ChangeNotifier {
     _sortColumn = column;
     _sortAscending = ascending;
     _sortAndFilter();
-    notifyListeners();
+  }
+
+  String get filterKey => _filterKey;
+  var _filterKey = '';
+
+  void filter(String key) {
+    if (_filterKey == key) return;
+    _filterKey = key;
+    _sortAndFilter();
   }
 
   void _sortAndFilter() {
@@ -82,7 +81,12 @@ class InstanceTableModel extends ChangeNotifier {
     }
 
     bool filterInstance(LxdInstanceId id) {
-      return _selectedProjects.contains(id.project);
+      final lower = _filterKey.toLowerCase();
+      return _selectedProjects.contains(id.project) &&
+          (_filterKey.isEmpty ||
+              id.name.toLowerCase().contains(lower) ||
+              _store.getInstance(id)?.summary?.toLowerCase().contains(lower) ==
+                  true);
     }
 
     final uniqueProjects = <String>{};
@@ -92,8 +96,9 @@ class InstanceTableModel extends ChangeNotifier {
       if (filterInstance(id)) filteredInstances.add(id);
     }
 
-    _updateProjects(uniqueProjects.sorted());
-    _updateInstances(filteredInstances.sorted(compareInstance));
+    _projects = uniqueProjects.sorted();
+    _instances = filteredInstances.sorted(compareInstance);
+    notifyListeners();
   }
 
   var _dirty = false;
