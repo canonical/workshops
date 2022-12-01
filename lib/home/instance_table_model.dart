@@ -44,17 +44,15 @@ class InstanceTableModel extends ChangeNotifier {
 
   InstanceTableColumn get sortColumn => _sortColumn;
   var _sortColumn = InstanceTableColumn.name;
-  set sortColumn(InstanceTableColumn value) {
-    if (_sortColumn == value) return;
-    _sortColumn = value;
-    _sortAndFilter();
-  }
 
   bool get sortAscending => _sortAscending;
   var _sortAscending = true;
-  set sortAscending(bool value) {
-    if (_sortAscending == value) return;
-    _sortAscending = value;
+
+  void sort(int columnIndex, bool ascending) {
+    final column = InstanceTableColumn.values[columnIndex];
+    if (_sortColumn == column && _sortAscending == ascending) return;
+    _sortColumn = column;
+    _sortAscending = ascending;
     _sortAndFilter();
   }
 

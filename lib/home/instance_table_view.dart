@@ -37,12 +37,6 @@ class _InstanceTableViewState extends State<_InstanceTableView> {
     WidgetsBinding.instance.addPostFrameCallback((_) => model.init());
   }
 
-  void _onSort(int column, bool ascending) {
-    final model = context.read<InstanceTableModel>();
-    model.sortColumn = InstanceTableColumn.values[column];
-    model.sortAscending = ascending;
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -63,7 +57,7 @@ class _InstanceTableViewState extends State<_InstanceTableView> {
             padding: const EdgeInsetsDirectional.only(end: 4),
             child: Text(l10n.instanceLabel),
           ),
-          onSort: _onSort,
+          onSort: model.sort,
         ),
         if (model.selectedProjects.length > 1)
           DataColumn2(
@@ -72,7 +66,7 @@ class _InstanceTableViewState extends State<_InstanceTableView> {
               child: Text(l10n.projectLabel),
             ),
             fixedWidth: 200,
-            onSort: _onSort,
+            onSort: model.sort,
           ),
         DataColumn2(
           label: Padding(
