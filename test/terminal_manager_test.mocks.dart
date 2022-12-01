@@ -328,6 +328,22 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
         returnValue: _i4.Future<List<String>>.value(<String>[]),
       ) as _i4.Future<List<String>>);
   @override
+  _i4.Future<void> updateProjectConfig(
+    String? name,
+    Map<String, String>? config,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateProjectConfig,
+          [
+            name,
+            config,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
   _i4.Future<_i2.LxdOperation?> initFeature(
     _i2.LxdInstanceId? id,
     _i6.LxdFeatureProvider? feature,

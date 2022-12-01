@@ -882,6 +882,16 @@ class MockLxdClient extends _i1.Mock implements _i16.LxdClient {
         )),
       ) as _i15.Future<_i13.LxdProjectState>);
   @override
+  _i15.Future<void> updateProject(_i12.LxdProject? project) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateProject,
+          [project],
+        ),
+        returnValue: _i15.Future<void>.value(),
+        returnValueForMissingStub: _i15.Future<void>.value(),
+      ) as _i15.Future<void>);
+  @override
   _i15.Future<List<String>> getStoragePools({String? project}) =>
       (super.noSuchMethod(
         Invocation.method(
