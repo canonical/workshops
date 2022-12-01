@@ -33,6 +33,7 @@ class _InstanceTableViewState extends State<_InstanceTableView> {
   @override
   void initState() {
     super.initState();
+    dataTableShowLogs = false;
     final model = context.read<InstanceTableModel>();
     WidgetsBinding.instance.addPostFrameCallback((_) => model.init());
   }
