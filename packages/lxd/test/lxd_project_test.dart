@@ -49,7 +49,8 @@ void main() {
   test('update project configuration', () async {
     final http = mockHttpClient();
     final uri = unixDomainUrl('/1.0/projects/foo', {});
-    final request = mockOperation(id: 'ID');
+    const response = {'status': 'Success', 'status_code': 200, 'type': 'sync'};
+    final request = mockResponse(response);
     final project = LxdProject(
         config: {}, description: 'description', name: 'foo', usedBy: []);
     when(http.openUrl('PUT', uri)).thenAnswer((_) async => request);
