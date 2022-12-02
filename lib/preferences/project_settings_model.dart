@@ -14,6 +14,10 @@ class ProjectSettingsModel extends SafeChangeNotifier {
   Map<String, LxdProject> get settings => _settings;
   Map<String, LxdProjectState> get states => _states;
 
+  Future<void> updateConfig(String name, Map<String, String> config) async {
+    await _service.updateProjectConfig(name, config);
+  }
+
   Future<void> init() => refresh();
 
   Future<void> refresh() async {
