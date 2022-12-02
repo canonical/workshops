@@ -10,6 +10,7 @@
   "closeTabMenuItem": "Close Tab",
   "continueButton": "Continue",
   "containerItem": "container",
+  "configEditorTitle": "Configuration editor",
   "configLabel": "Configuration",
   "configuringFeatureText": "Configuring {feature}",
   "@configuringFeatureText": {
@@ -37,6 +38,7 @@
   "deletingInstanceText": "Deleting instance",
   "diskUsageLabel": "Disk usage",
   "downloadingInstanceText": "Downloading instance",
+  "editButton": "Edit",
   "finalizingFeaturesText": "Finalizing features",
   "generalLabel": "General",
   "homeTab": "Home",
@@ -87,6 +89,7 @@
   "releaseLabel": "Release",
   "resourceLabel": "Resource",
   "resourcesLabel": "Resources",
+  "saveButton": "Save",
   "scrollDownCommand": "Scroll down",
   "scrollPageDownCommand": "Scroll page down",
   "scrollPageUpCommand": "Scroll page up",
