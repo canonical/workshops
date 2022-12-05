@@ -45,7 +45,10 @@ class ConfigEditorDialog extends StatelessWidget {
               title: Text(l10n.configEditorTitle),
             ),
             const Expanded(
-              child: ConfigEditor(),
+              child: Padding(
+                padding: EdgeInsets.all(24),
+                child: ConfigEditor(),
+              ),
             ),
           ],
         ),
@@ -113,28 +116,34 @@ class ConfigEditor extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: ListView(
-            children: [
-              ...model.configSchema.entries
-                  .map((e) => _buildRow(
-                        name: e.key,
-                        description: e.value.description,
-                        currentValue: model.config[e.key],
-                        defaultValue: e.value.defaultValue,
-                        type: e.value.type,
-                        updateValue: model.updateValue,
-                        resetValue: model.resetValue,
-                      ))
-                  .toList(),
-            ],
+          child: YaruBorderContainer(
+            color: Theme.of(context).backgroundColor,
+            child: ListView(
+              children: [
+                ...model.configSchema.entries
+                    .map((e) => _buildRow(
+                          name: e.key,
+                          description: e.value.description,
+                          currentValue: model.config[e.key],
+                          defaultValue: e.value.defaultValue,
+                          type: e.value.type,
+                          updateValue: model.updateValue,
+                          resetValue: model.resetValue,
+                        ))
+                    .toList(),
+              ],
+            ),
           ),
         ),
-        ButtonBar(
+        const SizedBox(height: 24),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             OutlinedButton(
               onPressed: Navigator.of(context).maybePop,
               child: Text(l10n.cancelButton),
             ),
+            const SizedBox(width: 8),
             ElevatedButton(
               onPressed: () async {
                 try {
