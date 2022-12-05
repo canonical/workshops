@@ -234,5 +234,11 @@
   "usageLabel": "Uso",
   "@usageLabel": {},
   "usedByLabel": "Usado por",
-  "@usedByLabel": {}
+  "@usedByLabel": {},
+  "configEditorTitle": "Editor de la configuracion",
+  "@configEditorTitle": {},
+  "editButton": "Editar",
+  "@editButton": {},
+  "saveButton": "Guardar",
+  "@saveButton": {}
 }
