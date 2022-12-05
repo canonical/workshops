@@ -1,0 +1,199 @@
+backups.compression_algorithm:
+  Description: Compression algorithm to use for backups (bzip2, gzip, lzma, xz or
+    none) in the project
+  Type: string
+features.images:
+  Default: 'true'
+  Description: Separate set of images and image aliases for the project
+  Type: bool
+features.networks:
+  Default: 'false'
+  Description: Separate set of networks for the project
+  Type: bool
+features.networks.zones:
+  Default: 'false'
+  Description: Separate set of network zones for the project
+  Type: bool
+features.profiles:
+  Default: 'true'
+  Description: Separate set of profiles for the project
+  Type: bool
+features.storage.buckets:
+  Default: 'true'
+  Description: Separate set of storage buckets for the project
+  Type: bool
+features.storage.volumes:
+  Default: 'true'
+  Description: Separate set of storage volumes for the project
+  Type: bool
+images.auto_update_cached:
+  Description: Whether to automatically update any image that LXD caches
+  Type: bool
+images.auto_update_interval:
+  Description: Interval in hours at which to look for update to cached images (0 disables
+    it)
+  Type: integer
+images.compression_algorithm:
+  Description: Compression algorithm to use for images (bzip2, gzip, lzma, xz or none)
+    in the project
+  Type: string
+images.default_architecture:
+  Description: Default architecture which should be used in mixed architecture cluster
+  Type: string
+images.remote_cache_expiry:
+  Description: Number of days after which an unused cached remote image will be flushed
+    in the project
+  Type: integer
+limits.containers:
+  Description: Maximum number of containers that can be created in the project
+  Type: integer
+limits.cpu:
+  Description: Maximum value for the sum of individual limits.cpu configurations set
+    on the instances of the project
+  Type: integer
+limits.disk:
+  Description: Maximum value of aggregate disk space used by all instances volumes,
+    custom volumes and images of the project
+  Type: string
+limits.instances:
+  Description: Maximum number of total instances that can be created in the project
+  Type: integer
+limits.memory:
+  Description: Maximum value for the sum of individual limits.memory configurations
+    set on the instances of the project
+  Type: string
+limits.networks:
+  Description: Maximum value for the number of networks this project can have
+  Type: integer
+limits.processes:
+  Description: Maximum value for the sum of individual limits.processes configurations
+    set on the instances of the project
+  Type: integer
+limits.virtual-machines:
+  Description: Maximum number of VMs that can be created in the project
+  Type: integer
+restricted:
+  Default: 'false'
+  Description: Block access to security-sensitive features (this must be enabled to
+    allow the restricted.* keys to take effect, this is so it can be temporarily disabled
+    if needed without having to clear the related keys)
+  Type: bool
+restricted.backups:
+  Default: block
+  Description: Prevents the creation of any instance or volume backups.
+  Type: string
+restricted.cluster.groups:
+  Description: Prevents targeting cluster groups other than the provided ones.
+  Type: string
+restricted.cluster.target:
+  Default: block
+  Description: Prevents direct targeting of cluster members when creating or moving
+    instances.
+  Type: string
+restricted.containers.interception:
+  Default: block
+  Description: Prevents use for system call interception options. When set to allow
+    usually safe interception options will be allowed (file system mounting will remain
+    blocked).
+  Type: string
+restricted.containers.lowlevel:
+  Default: block
+  Description: Prevents use of low-level container options like raw.lxc, raw.idmap,
+    volatile etc.
+  Type: string
+restricted.containers.nesting:
+  Default: block
+  Description: Prevents setting security.nesting=true.
+  Type: string
+restricted.containers.privilege:
+  Default: unpriviliged
+  Description: If unpriviliged, prevents setting security.privileged=true. If isolated,
+    prevents setting security.privileged=true and also security.idmap.isolated=true.
+    If allow, no restriction apply.
+  Type: string
+restricted.devices.disk:
+  Default: managed
+  Description: If block prevent use of disk devices except the root one. If managed
+    allow use of disk devices only if pool= is set. If allow, no restrictions apply.
+  Type: string
+restricted.devices.disk.paths:
+  Description: If restricted.devices.disk is set to allow, this sets a comma-separated
+    list of path prefixes that restrict the source setting on disk devices. If empty
+    then all paths are allowed.
+  Type: string
+restricted.devices.gpu:
+  Default: block
+  Description: Prevents use of devices of type gpu
+  Type: string
+restricted.devices.infiniband:
+  Default: block
+  Description: Prevents use of devices of type infiniband
+  Type: string
+restricted.devices.nic:
+  Default: managed
+  Description: If block prevent use of all network devices. If managed allow use of
+    network devices only if network= is set. If allow, no restrictions apply. This
+    also controls access to networks.
+  Type: string
+restricted.devices.pci:
+  Default: block
+  Description: Prevents use of devices of type pci
+  Type: string
+restricted.devices.proxy:
+  Default: block
+  Description: Prevents use of devices of type proxy
+  Type: string
+restricted.devices.unix-block:
+  Default: block
+  Description: Prevents use of devices of type unix-block
+  Type: string
+restricted.devices.unix-char:
+  Default: block
+  Description: Prevents use of devices of type unix-char
+  Type: string
+restricted.devices.unix-hotplug:
+  Default: block
+  Description: Prevents use of devices of type unix-hotplug
+  Type: string
+restricted.devices.usb:
+  Default: block
+  Description: Prevents use of devices of type usb
+  Type: string
+restricted.idmap.gid:
+  Description: Specifies the allowed host GID ranges allowed in the instance raw.idmap
+    setting.
+  Type: string
+restricted.idmap.uid:
+  Description: Specifies the allowed host UID ranges allowed in the instance raw.idmap
+    setting.
+  Type: string
+restricted.networks.access:
+  Description: Comma-delimited list of network names that are allowed for use in this
+    project. If not set, all networks are accessible (depending on the restricted.devices.nic
+    setting).
+  Type: string
+restricted.networks.subnets:
+  Default: block
+  Description: Comma-delimited list of network subnets from the uplink networks (in
+    the form <uplink>:<subnet>) that are allocated for use in this project
+  Type: string
+restricted.networks.uplinks:
+  Default: block
+  Description: Comma-delimited list of network names that can be used as uplink for
+    networks in this project
+  Type: string
+restricted.networks.zones:
+  Default: block
+  Description: Comma-delimited list of network zones that can be used (or something
+    under them) in this project
+  Type: string
+restricted.snapshots:
+  Default: block
+  Description: Prevents the creation of any instance or volume snapshots.
+  Type: string
+restricted.virtual-machines.lowlevel:
+  Default: block
+  Description: Prevents use of low-level virtual-machine options like raw.qemu, volatile
+    etc.
+  Type: string
+

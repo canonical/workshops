@@ -5,6 +5,7 @@ import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
+import 'config_editor_dialog.dart';
 import 'project_settings_model.dart';
 
 class ProjectSettingsView extends StatelessWidget {
@@ -34,12 +35,30 @@ class ProjectSettingsView extends StatelessWidget {
           ListTile(
             leading: Text(l10n.configLabel),
             minLeadingWidth: 100,
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                for (var config in settings[projects[index]]?.config.entries ??
-                    const Iterable<MapEntry<String, String>>.empty())
-                  Text('${config.key}: ${config.value}')
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (var config
+                        in settings[projects[index]]?.config.entries ??
+                            const Iterable<MapEntry<String, String>>.empty())
+                      Text('${config.key}: ${config.value}'),
+                  ],
+                ),
+                ElevatedButton(
+                  onPressed: () => showConfigEditorDialog(
+                    context,
+                    config: settings[projects[index]]?.config ?? {},
+                    onSaved: (config) async {
+                      await store.updateConfig(projects[index], config);
+                      await store.refresh();
+                    },
+                  ),
+                  child: Text(l10n.editButton),
+                ),
               ],
             ),
           ),

@@ -6,6 +6,8 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.mocks.dart"
     - "**/l10n/*.dart"
+  errors:
+    invalid_annotation_target: ignore
 
   strong-mode:
     implicit-casts: false
