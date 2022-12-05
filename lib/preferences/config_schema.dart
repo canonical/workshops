@@ -8,8 +8,8 @@ part 'config_schema.g.dart';
 @freezed
 class ConfigSchemaEntry with _$ConfigSchemaEntry {
   const factory ConfigSchemaEntry({
-    @JsonKey(name: 'Default') required String defaultValue,
-    @JsonKey(name: 'Description') required String description,
+    @JsonKey(name: 'Default', defaultValue: '') required String defaultValue,
+    @JsonKey(name: 'Description', defaultValue: '') required String description,
     @JsonStringToType() @JsonKey(name: 'Type') required Type type,
   }) = _ConfigSchemaEntry;
 

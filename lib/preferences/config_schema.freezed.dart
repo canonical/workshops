@@ -20,9 +20,9 @@ ConfigSchemaEntry _$ConfigSchemaEntryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ConfigSchemaEntry {
-  @JsonKey(name: 'Default')
+  @JsonKey(name: 'Default', defaultValue: '')
   String get defaultValue => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Description')
+  @JsonKey(name: 'Description', defaultValue: '')
   String get description => throw _privateConstructorUsedError;
   @JsonStringToType()
   @JsonKey(name: 'Type')
@@ -41,8 +41,8 @@ abstract class $ConfigSchemaEntryCopyWith<$Res> {
       _$ConfigSchemaEntryCopyWithImpl<$Res, ConfigSchemaEntry>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Default') String defaultValue,
-      @JsonKey(name: 'Description') String description,
+      {@JsonKey(name: 'Default', defaultValue: '') String defaultValue,
+      @JsonKey(name: 'Description', defaultValue: '') String description,
       @JsonStringToType() @JsonKey(name: 'Type') Type type});
 }
 
@@ -89,8 +89,8 @@ abstract class _$$_ConfigSchemaEntryCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Default') String defaultValue,
-      @JsonKey(name: 'Description') String description,
+      {@JsonKey(name: 'Default', defaultValue: '') String defaultValue,
+      @JsonKey(name: 'Description', defaultValue: '') String description,
       @JsonStringToType() @JsonKey(name: 'Type') Type type});
 }
 
@@ -130,18 +130,18 @@ class __$$_ConfigSchemaEntryCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ConfigSchemaEntry implements _ConfigSchemaEntry {
   const _$_ConfigSchemaEntry(
-      {@JsonKey(name: 'Default') required this.defaultValue,
-      @JsonKey(name: 'Description') required this.description,
+      {@JsonKey(name: 'Default', defaultValue: '') required this.defaultValue,
+      @JsonKey(name: 'Description', defaultValue: '') required this.description,
       @JsonStringToType() @JsonKey(name: 'Type') required this.type});
 
   factory _$_ConfigSchemaEntry.fromJson(Map<String, dynamic> json) =>
       _$$_ConfigSchemaEntryFromJson(json);
 
   @override
-  @JsonKey(name: 'Default')
+  @JsonKey(name: 'Default', defaultValue: '')
   final String defaultValue;
   @override
-  @JsonKey(name: 'Description')
+  @JsonKey(name: 'Description', defaultValue: '')
   final String description;
   @override
   @JsonStringToType()
@@ -186,9 +186,9 @@ class _$_ConfigSchemaEntry implements _ConfigSchemaEntry {
 
 abstract class _ConfigSchemaEntry implements ConfigSchemaEntry {
   const factory _ConfigSchemaEntry(
-      {@JsonKey(name: 'Default')
+      {@JsonKey(name: 'Default', defaultValue: '')
           required final String defaultValue,
-      @JsonKey(name: 'Description')
+      @JsonKey(name: 'Description', defaultValue: '')
           required final String description,
       @JsonStringToType()
       @JsonKey(name: 'Type')
@@ -198,10 +198,10 @@ abstract class _ConfigSchemaEntry implements ConfigSchemaEntry {
       _$_ConfigSchemaEntry.fromJson;
 
   @override
-  @JsonKey(name: 'Default')
+  @JsonKey(name: 'Default', defaultValue: '')
   String get defaultValue;
   @override
-  @JsonKey(name: 'Description')
+  @JsonKey(name: 'Description', defaultValue: '')
   String get description;
   @override
   @JsonStringToType()

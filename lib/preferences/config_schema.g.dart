@@ -8,8 +8,8 @@ part of 'config_schema.dart';
 
 _$_ConfigSchemaEntry _$$_ConfigSchemaEntryFromJson(Map<String, dynamic> json) =>
     _$_ConfigSchemaEntry(
-      defaultValue: json['Default'] as String,
-      description: json['Description'] as String,
+      defaultValue: json['Default'] as String? ?? '',
+      description: json['Description'] as String? ?? '',
       type: const JsonStringToType().fromJson(json['Type'] as String),
     );
 

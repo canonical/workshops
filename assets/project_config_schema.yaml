@@ -1,263 +1,197 @@
 backups.compression_algorithm:
-  Condition: ''
-  Default: ''
   Description: Compression algorithm to use for backups (bzip2, gzip, lzma, xz or
     none) in the project
   Type: string
 features.images:
-  Condition: ''
   Default: 'true'
   Description: Separate set of images and image aliases for the project
   Type: bool
 features.networks:
-  Condition: ''
   Default: 'false'
   Description: Separate set of networks for the project
   Type: bool
 features.networks.zones:
-  Condition: ''
   Default: 'false'
   Description: Separate set of network zones for the project
   Type: bool
 features.profiles:
-  Condition: ''
   Default: 'true'
   Description: Separate set of profiles for the project
   Type: bool
 features.storage.buckets:
-  Condition: ''
   Default: 'true'
   Description: Separate set of storage buckets for the project
   Type: bool
 features.storage.volumes:
-  Condition: ''
   Default: 'true'
   Description: Separate set of storage volumes for the project
   Type: bool
 images.auto_update_cached:
-  Condition: ''
-  Default: ''
   Description: Whether to automatically update any image that LXD caches
   Type: bool
 images.auto_update_interval:
-  Condition: ''
-  Default: ''
   Description: Interval in hours at which to look for update to cached images (0 disables
     it)
   Type: integer
 images.compression_algorithm:
-  Condition: ''
-  Default: ''
   Description: Compression algorithm to use for images (bzip2, gzip, lzma, xz or none)
     in the project
   Type: string
 images.default_architecture:
-  Condition: ''
-  Default: ''
   Description: Default architecture which should be used in mixed architecture cluster
   Type: string
 images.remote_cache_expiry:
-  Condition: ''
-  Default: ''
   Description: Number of days after which an unused cached remote image will be flushed
     in the project
   Type: integer
 limits.containers:
-  Condition: ''
-  Default: ''
   Description: Maximum number of containers that can be created in the project
   Type: integer
 limits.cpu:
-  Condition: ''
-  Default: ''
   Description: Maximum value for the sum of individual limits.cpu configurations set
     on the instances of the project
   Type: integer
 limits.disk:
-  Condition: ''
-  Default: ''
   Description: Maximum value of aggregate disk space used by all instances volumes,
     custom volumes and images of the project
   Type: string
 limits.instances:
-  Condition: ''
-  Default: ''
   Description: Maximum number of total instances that can be created in the project
   Type: integer
 limits.memory:
-  Condition: ''
-  Default: ''
   Description: Maximum value for the sum of individual limits.memory configurations
     set on the instances of the project
   Type: string
 limits.networks:
-  Condition: ''
-  Default: ''
   Description: Maximum value for the number of networks this project can have
   Type: integer
 limits.processes:
-  Condition: ''
-  Default: ''
   Description: Maximum value for the sum of individual limits.processes configurations
     set on the instances of the project
   Type: integer
 limits.virtual-machines:
-  Condition: ''
-  Default: ''
   Description: Maximum number of VMs that can be created in the project
   Type: integer
 restricted:
-  Condition: ''
   Default: 'false'
   Description: Block access to security-sensitive features (this must be enabled to
     allow the restricted.* keys to take effect, this is so it can be temporarily disabled
     if needed without having to clear the related keys)
   Type: bool
 restricted.backups:
-  Condition: ''
   Default: block
   Description: Prevents the creation of any instance or volume backups.
   Type: string
 restricted.cluster.groups:
-  Condition: ''
-  Default: ''
   Description: Prevents targeting cluster groups other than the provided ones.
   Type: string
 restricted.cluster.target:
-  Condition: ''
   Default: block
   Description: Prevents direct targeting of cluster members when creating or moving
     instances.
   Type: string
 restricted.containers.interception:
-  Condition: ''
   Default: block
   Description: Prevents use for system call interception options. When set to allow
     usually safe interception options will be allowed (file system mounting will remain
     blocked).
   Type: string
 restricted.containers.lowlevel:
-  Condition: ''
   Default: block
   Description: Prevents use of low-level container options like raw.lxc, raw.idmap,
     volatile etc.
   Type: string
 restricted.containers.nesting:
-  Condition: ''
   Default: block
   Description: Prevents setting security.nesting=true.
   Type: string
 restricted.containers.privilege:
-  Condition: ''
   Default: unpriviliged
   Description: If unpriviliged, prevents setting security.privileged=true. If isolated,
     prevents setting security.privileged=true and also security.idmap.isolated=true.
     If allow, no restriction apply.
   Type: string
 restricted.devices.disk:
-  Condition: ''
   Default: managed
   Description: If block prevent use of disk devices except the root one. If managed
     allow use of disk devices only if pool= is set. If allow, no restrictions apply.
   Type: string
 restricted.devices.disk.paths:
-  Condition: ''
-  Default: ''
   Description: If restricted.devices.disk is set to allow, this sets a comma-separated
     list of path prefixes that restrict the source setting on disk devices. If empty
     then all paths are allowed.
   Type: string
 restricted.devices.gpu:
-  Condition: ''
   Default: block
   Description: Prevents use of devices of type gpu
   Type: string
 restricted.devices.infiniband:
-  Condition: ''
   Default: block
   Description: Prevents use of devices of type infiniband
   Type: string
 restricted.devices.nic:
-  Condition: ''
   Default: managed
   Description: If block prevent use of all network devices. If managed allow use of
     network devices only if network= is set. If allow, no restrictions apply. This
     also controls access to networks.
   Type: string
 restricted.devices.pci:
-  Condition: ''
   Default: block
   Description: Prevents use of devices of type pci
   Type: string
 restricted.devices.proxy:
-  Condition: ''
   Default: block
   Description: Prevents use of devices of type proxy
   Type: string
 restricted.devices.unix-block:
-  Condition: ''
   Default: block
   Description: Prevents use of devices of type unix-block
   Type: string
 restricted.devices.unix-char:
-  Condition: ''
   Default: block
   Description: Prevents use of devices of type unix-char
   Type: string
 restricted.devices.unix-hotplug:
-  Condition: ''
   Default: block
   Description: Prevents use of devices of type unix-hotplug
   Type: string
 restricted.devices.usb:
-  Condition: ''
   Default: block
   Description: Prevents use of devices of type usb
   Type: string
 restricted.idmap.gid:
-  Condition: ''
-  Default: ''
   Description: Specifies the allowed host GID ranges allowed in the instance raw.idmap
     setting.
   Type: string
 restricted.idmap.uid:
-  Condition: ''
-  Default: ''
   Description: Specifies the allowed host UID ranges allowed in the instance raw.idmap
     setting.
   Type: string
 restricted.networks.access:
-  Condition: ''
-  Default: ''
   Description: Comma-delimited list of network names that are allowed for use in this
     project. If not set, all networks are accessible (depending on the restricted.devices.nic
     setting).
   Type: string
 restricted.networks.subnets:
-  Condition: ''
   Default: block
   Description: Comma-delimited list of network subnets from the uplink networks (in
     the form <uplink>:<subnet>) that are allocated for use in this project
   Type: string
 restricted.networks.uplinks:
-  Condition: ''
   Default: block
   Description: Comma-delimited list of network names that can be used as uplink for
     networks in this project
   Type: string
 restricted.networks.zones:
-  Condition: ''
   Default: block
   Description: Comma-delimited list of network zones that can be used (or something
     under them) in this project
   Type: string
 restricted.snapshots:
-  Condition: ''
   Default: block
   Description: Prevents the creation of any instance or volume snapshots.
   Type: string
 restricted.virtual-machines.lowlevel:
-  Condition: ''
   Default: block
   Description: Prevents use of low-level virtual-machine options like raw.qemu, volatile
     etc.
