@@ -5,18 +5,21 @@ import 'package:title_bar/title_bar.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'config_editor_model.dart';
+import 'config_schema.dart';
 
 Future<void> showConfigEditorDialog(
   BuildContext context, {
   required Map<String, String> config,
   required Future<void> Function(Map<String, String> config) onSaved,
-}) {
+}) async {
+  final projectSchema =
+      await loadConfigSchema('assets/project_config_schema.yaml');
   return showDialog(
     context: context,
     builder: (context) => ChangeNotifierProvider(
       create: (_) => ConfigEditorModel(
         config: config,
-        configScheme: kProjectConfigScheme,
+        configSchema: projectSchema,
         onSaved: onSaved,
       ),
       child: const ConfigEditorDialog(),
@@ -112,7 +115,7 @@ class ConfigEditor extends StatelessWidget {
         Expanded(
           child: ListView(
             children: [
-              ...model.configScheme.entries
+              ...model.configSchema.entries
                   .map((e) => _buildRow(
                         name: e.key,
                         description: e.value.description,
