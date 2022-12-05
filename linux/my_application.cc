@@ -43,7 +43,6 @@ static void my_application_activate(GApplication* application) {
   if (gdk_screen_is_composited(screen)) {
     GdkVisual* visual = gdk_screen_get_rgba_visual(screen);
     if (visual != nullptr) {
-      gtk_widget_set_app_paintable(GTK_WIDGET(window), true);
       gtk_widget_set_visual(GTK_WIDGET(window), visual);
     }
   }
