@@ -3,12 +3,13 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i6;
+import 'dart:io' as _i3;
 
 import 'package:lxd/lxd.dart' as _i2;
-import 'package:lxd_service/src/features.dart' as _i6;
-import 'package:lxd_service/src/remote.dart' as _i5;
-import 'package:lxd_service/src/service.dart' as _i3;
+import 'package:lxd_service/src/features.dart' as _i7;
+import 'package:lxd_service/src/service.dart' as _i5;
+import 'package:lxd_service/src/terminal.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -22,8 +23,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeLxdInstance_0 extends _i1.SmartFake implements _i2.LxdInstance {
-  _FakeLxdInstance_0(
+class _FakeUri_0 extends _i1.SmartFake implements Uri {
+  _FakeUri_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -32,9 +33,8 @@ class _FakeLxdInstance_0 extends _i1.SmartFake implements _i2.LxdInstance {
         );
 }
 
-class _FakeLxdInstanceState_1 extends _i1.SmartFake
-    implements _i2.LxdInstanceState {
-  _FakeLxdInstanceState_1(
+class _FakeLxdOperation_1 extends _i1.SmartFake implements _i2.LxdOperation {
+  _FakeLxdOperation_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -43,8 +43,8 @@ class _FakeLxdInstanceState_1 extends _i1.SmartFake
         );
 }
 
-class _FakeLxdOperation_2 extends _i1.SmartFake implements _i2.LxdOperation {
-  _FakeLxdOperation_2(
+class _FakeWebSocket_2 extends _i1.SmartFake implements _i3.WebSocket {
+  _FakeWebSocket_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -53,8 +53,8 @@ class _FakeLxdOperation_2 extends _i1.SmartFake implements _i2.LxdOperation {
         );
 }
 
-class _FakeLxdProject_3 extends _i1.SmartFake implements _i2.LxdProject {
-  _FakeLxdProject_3(
+class _FakeLxdResources_3 extends _i1.SmartFake implements _i2.LxdResources {
+  _FakeLxdResources_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -63,9 +63,9 @@ class _FakeLxdProject_3 extends _i1.SmartFake implements _i2.LxdProject {
         );
 }
 
-class _FakeLxdProjectState_4 extends _i1.SmartFake
-    implements _i2.LxdProjectState {
-  _FakeLxdProjectState_4(
+class _FakeLxdCertificate_4 extends _i1.SmartFake
+    implements _i2.LxdCertificate {
+  _FakeLxdCertificate_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -84,8 +84,102 @@ class _FakeLxdImage_5 extends _i1.SmartFake implements _i2.LxdImage {
         );
 }
 
-class _FakeLxdTerminal_6 extends _i1.SmartFake implements _i3.LxdTerminal {
-  _FakeLxdTerminal_6(
+class _FakeLxdInstance_6 extends _i1.SmartFake implements _i2.LxdInstance {
+  _FakeLxdInstance_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdInstanceState_7 extends _i1.SmartFake
+    implements _i2.LxdInstanceState {
+  _FakeLxdInstanceState_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdNetwork_8 extends _i1.SmartFake implements _i2.LxdNetwork {
+  _FakeLxdNetwork_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdNetworkState_9 extends _i1.SmartFake
+    implements _i2.LxdNetworkState {
+  _FakeLxdNetworkState_9(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdNetworkAcl_10 extends _i1.SmartFake implements _i2.LxdNetworkAcl {
+  _FakeLxdNetworkAcl_10(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdProfile_11 extends _i1.SmartFake implements _i2.LxdProfile {
+  _FakeLxdProfile_11(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdProject_12 extends _i1.SmartFake implements _i2.LxdProject {
+  _FakeLxdProject_12(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdProjectState_13 extends _i1.SmartFake
+    implements _i2.LxdProjectState {
+  _FakeLxdProjectState_13(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdStoragePool_14 extends _i1.SmartFake
+    implements _i2.LxdStoragePool {
+  _FakeLxdStoragePool_14(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdTerminal_15 extends _i1.SmartFake implements _i4.LxdTerminal {
+  _FakeLxdTerminal_15(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -97,102 +191,346 @@ class _FakeLxdTerminal_6 extends _i1.SmartFake implements _i3.LxdTerminal {
 /// A class which mocks [LxdService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLxdService extends _i1.Mock implements _i3.LxdService {
+class MockLxdService extends _i1.Mock implements _i5.LxdService {
   MockLxdService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Stream<List<_i2.LxdInstanceId>> get instanceStream => (super.noSuchMethod(
+  Uri get url => (super.noSuchMethod(
+        Invocation.getter(#url),
+        returnValue: _FakeUri_0(
+          this,
+          Invocation.getter(#url),
+        ),
+      ) as Uri);
+  @override
+  set userAgent(String? value) => super.noSuchMethod(
+        Invocation.setter(
+          #userAgent,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i6.Stream<List<_i2.LxdInstanceId>> get instanceStream => (super.noSuchMethod(
         Invocation.getter(#instanceStream),
-        returnValue: _i4.Stream<List<_i2.LxdInstanceId>>.empty(),
-      ) as _i4.Stream<List<_i2.LxdInstanceId>>);
+        returnValue: _i6.Stream<List<_i2.LxdInstanceId>>.empty(),
+      ) as _i6.Stream<List<_i2.LxdInstanceId>>);
   @override
-  _i4.Stream<_i2.LxdInstanceId> get instanceAdded => (super.noSuchMethod(
+  _i6.Stream<_i2.LxdInstanceId> get instanceAdded => (super.noSuchMethod(
         Invocation.getter(#instanceAdded),
-        returnValue: _i4.Stream<_i2.LxdInstanceId>.empty(),
-      ) as _i4.Stream<_i2.LxdInstanceId>);
+        returnValue: _i6.Stream<_i2.LxdInstanceId>.empty(),
+      ) as _i6.Stream<_i2.LxdInstanceId>);
   @override
-  _i4.Stream<_i2.LxdInstanceId> get instanceRemoved => (super.noSuchMethod(
+  _i6.Stream<_i2.LxdInstanceId> get instanceRemoved => (super.noSuchMethod(
         Invocation.getter(#instanceRemoved),
-        returnValue: _i4.Stream<_i2.LxdInstanceId>.empty(),
-      ) as _i4.Stream<_i2.LxdInstanceId>);
+        returnValue: _i6.Stream<_i2.LxdInstanceId>.empty(),
+      ) as _i6.Stream<_i2.LxdInstanceId>);
   @override
-  _i4.Stream<_i2.LxdInstanceId> get instanceUpdated => (super.noSuchMethod(
+  _i6.Stream<_i2.LxdInstanceId> get instanceUpdated => (super.noSuchMethod(
         Invocation.getter(#instanceUpdated),
-        returnValue: _i4.Stream<_i2.LxdInstanceId>.empty(),
-      ) as _i4.Stream<_i2.LxdInstanceId>);
+        returnValue: _i6.Stream<_i2.LxdInstanceId>.empty(),
+      ) as _i6.Stream<_i2.LxdInstanceId>);
   @override
-  _i4.Future<void> init() => (super.noSuchMethod(
+  _i6.Future<Map<String, List<String>>> getOperations() => (super.noSuchMethod(
         Invocation.method(
-          #init,
+          #getOperations,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i6.Future<Map<String, List<String>>>.value(
+            <String, List<String>>{}),
+      ) as _i6.Future<Map<String, List<String>>>);
   @override
-  _i4.Future<void> dispose() => (super.noSuchMethod(
+  _i6.Future<_i2.LxdOperation> getOperation(String? id) => (super.noSuchMethod(
         Invocation.method(
-          #dispose,
+          #getOperation,
+          [id],
+        ),
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+          this,
+          Invocation.method(
+            #getOperation,
+            [id],
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdOperation>);
+  @override
+  _i6.Future<_i3.WebSocket> getOperationWebSocket(
+    String? id,
+    String? secret,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getOperationWebSocket,
+          [
+            id,
+            secret,
+          ],
+        ),
+        returnValue: _i6.Future<_i3.WebSocket>.value(_FakeWebSocket_2(
+          this,
+          Invocation.method(
+            #getOperationWebSocket,
+            [
+              id,
+              secret,
+            ],
+          ),
+        )),
+      ) as _i6.Future<_i3.WebSocket>);
+  @override
+  _i6.Future<_i2.LxdOperation> waitOperation(
+    String? id, {
+    Duration? timeout,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #waitOperation,
+          [id],
+          {#timeout: timeout},
+        ),
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+          this,
+          Invocation.method(
+            #waitOperation,
+            [id],
+            {#timeout: timeout},
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdOperation>);
+  @override
+  _i6.Future<void> cancelOperation(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #cancelOperation,
+          [id],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<_i2.LxdResources> getResources() => (super.noSuchMethod(
+        Invocation.method(
+          #getResources,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i6.Future<_i2.LxdResources>.value(_FakeLxdResources_3(
+          this,
+          Invocation.method(
+            #getResources,
+            [],
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdResources>);
   @override
-  _i4.Future<_i2.LxdInstance> getInstance(_i2.LxdInstanceId? id) =>
+  _i6.Future<List<String>> getCertificates() => (super.noSuchMethod(
+        Invocation.method(
+          #getCertificates,
+          [],
+        ),
+        returnValue: _i6.Future<List<String>>.value(<String>[]),
+      ) as _i6.Future<List<String>>);
+  @override
+  _i6.Future<_i2.LxdCertificate> getCertificate(String? fingerprint) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCertificate,
+          [fingerprint],
+        ),
+        returnValue: _i6.Future<_i2.LxdCertificate>.value(_FakeLxdCertificate_4(
+          this,
+          Invocation.method(
+            #getCertificate,
+            [fingerprint],
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdCertificate>);
+  @override
+  _i6.Stream<_i2.LxdEvent> getEvents({
+    String? project,
+    Set<_i2.LxdEventType>? types = const {},
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getEvents,
+          [],
+          {
+            #project: project,
+            #types: types,
+          },
+        ),
+        returnValue: _i6.Stream<_i2.LxdEvent>.empty(),
+      ) as _i6.Stream<_i2.LxdEvent>);
+  @override
+  _i6.Stream<_i2.LxdEvent> getAllEvents(
+          {Set<_i2.LxdEventType>? types = const {}}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAllEvents,
+          [],
+          {#types: types},
+        ),
+        returnValue: _i6.Stream<_i2.LxdEvent>.empty(),
+      ) as _i6.Stream<_i2.LxdEvent>);
+  @override
+  _i6.Future<List<String>> getImages({
+    String? project,
+    String? filter,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getImages,
+          [],
+          {
+            #project: project,
+            #filter: filter,
+          },
+        ),
+        returnValue: _i6.Future<List<String>>.value(<String>[]),
+      ) as _i6.Future<List<String>>);
+  @override
+  _i6.Future<_i2.LxdImage> getImage(
+    String? fingerprint, {
+    String? project,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getImage,
+          [fingerprint],
+          {#project: project},
+        ),
+        returnValue: _i6.Future<_i2.LxdImage>.value(_FakeLxdImage_5(
+          this,
+          Invocation.method(
+            #getImage,
+            [fingerprint],
+            {#project: project},
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdImage>);
+  @override
+  _i6.Future<List<_i2.LxdInstanceId>> getInstances({
+    String? project,
+    String? filter,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getInstances,
+          [],
+          {
+            #project: project,
+            #filter: filter,
+          },
+        ),
+        returnValue:
+            _i6.Future<List<_i2.LxdInstanceId>>.value(<_i2.LxdInstanceId>[]),
+      ) as _i6.Future<List<_i2.LxdInstanceId>>);
+  @override
+  _i6.Future<List<_i2.LxdInstanceId>> getAllInstances({String? filter}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAllInstances,
+          [],
+          {#filter: filter},
+        ),
+        returnValue:
+            _i6.Future<List<_i2.LxdInstanceId>>.value(<_i2.LxdInstanceId>[]),
+      ) as _i6.Future<List<_i2.LxdInstanceId>>);
+  @override
+  _i6.Future<_i2.LxdInstance> getInstance(_i2.LxdInstanceId? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getInstance,
           [id],
         ),
-        returnValue: _i4.Future<_i2.LxdInstance>.value(_FakeLxdInstance_0(
+        returnValue: _i6.Future<_i2.LxdInstance>.value(_FakeLxdInstance_6(
           this,
           Invocation.method(
             #getInstance,
             [id],
           ),
         )),
-      ) as _i4.Future<_i2.LxdInstance>);
+      ) as _i6.Future<_i2.LxdInstance>);
   @override
-  _i4.Future<_i2.LxdInstanceState> getInstanceState(_i2.LxdInstanceId? id) =>
+  _i6.Future<_i2.LxdInstanceState> getInstanceState(_i2.LxdInstanceId? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getInstanceState,
           [id],
         ),
         returnValue:
-            _i4.Future<_i2.LxdInstanceState>.value(_FakeLxdInstanceState_1(
+            _i6.Future<_i2.LxdInstanceState>.value(_FakeLxdInstanceState_7(
           this,
           Invocation.method(
             #getInstanceState,
             [id],
           ),
         )),
-      ) as _i4.Future<_i2.LxdInstanceState>);
+      ) as _i6.Future<_i2.LxdInstanceState>);
   @override
-  _i4.Future<_i2.LxdOperation> createInstance(
-    _i2.LxdImage? image, {
-    _i5.LxdRemote? remote,
+  _i6.Future<_i2.LxdOperation> createInstance({
+    String? project,
+    String? architecture,
+    Map<String, String>? config,
+    Map<String, Map<String, String>>? devices,
+    bool? ephemeral,
+    List<String>? profiles,
+    String? restore,
+    bool? stateful,
+    String? description,
+    String? name,
+    required _i2.LxdImage? source,
+    String? server,
+    String? instanceType,
+    _i2.LxdImageType? type,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
           #createInstance,
-          [image],
-          {#remote: remote},
+          [],
+          {
+            #project: project,
+            #architecture: architecture,
+            #config: config,
+            #devices: devices,
+            #ephemeral: ephemeral,
+            #profiles: profiles,
+            #restore: restore,
+            #stateful: stateful,
+            #description: description,
+            #name: name,
+            #source: source,
+            #server: server,
+            #instanceType: instanceType,
+            #type: type,
+          },
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #createInstance,
-            [image],
-            {#remote: remote},
+            [],
+            {
+              #project: project,
+              #architecture: architecture,
+              #config: config,
+              #devices: devices,
+              #ephemeral: ephemeral,
+              #profiles: profiles,
+              #restore: restore,
+              #stateful: stateful,
+              #description: description,
+              #name: name,
+              #source: source,
+              #server: server,
+              #instanceType: instanceType,
+              #type: type,
+            },
           ),
         )),
-      ) as _i4.Future<_i2.LxdOperation>);
+      ) as _i6.Future<_i2.LxdOperation>);
   @override
-  _i4.Future<_i2.LxdOperation> startInstance(
+  _i6.Future<_i2.LxdOperation> startInstance(
     _i2.LxdInstanceId? id, {
     bool? force = false,
   }) =>
@@ -202,7 +540,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
           [id],
           {#force: force},
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #startInstance,
@@ -210,36 +548,75 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             {#force: force},
           ),
         )),
-      ) as _i4.Future<_i2.LxdOperation>);
+      ) as _i6.Future<_i2.LxdOperation>);
   @override
-  _i4.Future<_i2.LxdOperation> restartInstance(
+  _i6.Future<_i2.LxdOperation> execInstance(
     _i2.LxdInstanceId? id, {
-    bool? force = false,
-    Duration? timeout,
+    required List<String>? command,
+    String? workingDirectory,
+    Map<String, String>? environment,
+    int? user,
+    int? group,
+    bool? interactive,
+    bool? recordOutput,
+    int? width,
+    int? height,
+    bool? waitForWebSocket,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #restartInstance,
+          #execInstance,
           [id],
           {
-            #force: force,
-            #timeout: timeout,
+            #command: command,
+            #workingDirectory: workingDirectory,
+            #environment: environment,
+            #user: user,
+            #group: group,
+            #interactive: interactive,
+            #recordOutput: recordOutput,
+            #width: width,
+            #height: height,
+            #waitForWebSocket: waitForWebSocket,
           },
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
-            #restartInstance,
+            #execInstance,
             [id],
             {
-              #force: force,
-              #timeout: timeout,
+              #command: command,
+              #workingDirectory: workingDirectory,
+              #environment: environment,
+              #user: user,
+              #group: group,
+              #interactive: interactive,
+              #recordOutput: recordOutput,
+              #width: width,
+              #height: height,
+              #waitForWebSocket: waitForWebSocket,
             },
           ),
         )),
-      ) as _i4.Future<_i2.LxdOperation>);
+      ) as _i6.Future<_i2.LxdOperation>);
   @override
-  _i4.Future<_i2.LxdOperation> stopInstance(
+  _i6.Future<_i2.LxdOperation> updateInstance(_i2.LxdInstance? instance) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateInstance,
+          [instance],
+        ),
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+          this,
+          Invocation.method(
+            #updateInstance,
+            [instance],
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdOperation>);
+  @override
+  _i6.Future<_i2.LxdOperation> stopInstance(
     _i2.LxdInstanceId? id, {
     bool? force = false,
     Duration? timeout,
@@ -253,7 +630,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             #timeout: timeout,
           },
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #stopInstance,
@@ -264,89 +641,303 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             },
           ),
         )),
-      ) as _i4.Future<_i2.LxdOperation>);
+      ) as _i6.Future<_i2.LxdOperation>);
   @override
-  _i4.Future<_i2.LxdOperation> deleteInstance(_i2.LxdInstanceId? id) =>
+  _i6.Future<_i2.LxdOperation> restartInstance(
+    _i2.LxdInstanceId? id, {
+    bool? force = false,
+    Duration? timeout,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #restartInstance,
+          [id],
+          {
+            #force: force,
+            #timeout: timeout,
+          },
+        ),
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+          this,
+          Invocation.method(
+            #restartInstance,
+            [id],
+            {
+              #force: force,
+              #timeout: timeout,
+            },
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdOperation>);
+  @override
+  _i6.Future<_i2.LxdOperation> deleteInstance(_i2.LxdInstanceId? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #deleteInstance,
           [id],
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #deleteInstance,
             [id],
           ),
         )),
-      ) as _i4.Future<_i2.LxdOperation>);
+      ) as _i6.Future<_i2.LxdOperation>);
   @override
-  _i4.Stream<_i2.LxdOperation> watchInstance(_i2.LxdInstanceId? id) =>
+  _i6.Future<String> pullFile(
+    _i2.LxdInstanceId? id, {
+    required String? path,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #watchInstance,
+          #pullFile,
           [id],
+          {#path: path},
         ),
-        returnValue: _i4.Stream<_i2.LxdOperation>.empty(),
-      ) as _i4.Stream<_i2.LxdOperation>);
+        returnValue: _i6.Future<String>.value(''),
+      ) as _i6.Future<String>);
   @override
-  _i4.Future<_i2.LxdProject> getProject(String? name) => (super.noSuchMethod(
+  _i6.Future<void> deleteFile(
+    _i2.LxdInstanceId? id, {
+    required String? path,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteFile,
+          [id],
+          {#path: path},
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> pushFile(
+    _i2.LxdInstanceId? id, {
+    required String? path,
+    String? data,
+    int? uid,
+    int? gid,
+    String? mode,
+    _i2.LxdFileType? type,
+    _i2.LxdWriteMode? write,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pushFile,
+          [id],
+          {
+            #path: path,
+            #data: data,
+            #uid: uid,
+            #gid: gid,
+            #mode: mode,
+            #type: type,
+            #write: write,
+          },
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<List<String>> getNetworks() => (super.noSuchMethod(
+        Invocation.method(
+          #getNetworks,
+          [],
+        ),
+        returnValue: _i6.Future<List<String>>.value(<String>[]),
+      ) as _i6.Future<List<String>>);
+  @override
+  _i6.Future<_i2.LxdNetwork> getNetwork(String? name) => (super.noSuchMethod(
+        Invocation.method(
+          #getNetwork,
+          [name],
+        ),
+        returnValue: _i6.Future<_i2.LxdNetwork>.value(_FakeLxdNetwork_8(
+          this,
+          Invocation.method(
+            #getNetwork,
+            [name],
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdNetwork>);
+  @override
+  _i6.Future<List<_i2.LxdNetworkLease>> getNetworkLeases(String? name) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getNetworkLeases,
+          [name],
+        ),
+        returnValue: _i6.Future<List<_i2.LxdNetworkLease>>.value(
+            <_i2.LxdNetworkLease>[]),
+      ) as _i6.Future<List<_i2.LxdNetworkLease>>);
+  @override
+  _i6.Future<_i2.LxdNetworkState> getNetworkState(String? name) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getNetworkState,
+          [name],
+        ),
+        returnValue:
+            _i6.Future<_i2.LxdNetworkState>.value(_FakeLxdNetworkState_9(
+          this,
+          Invocation.method(
+            #getNetworkState,
+            [name],
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdNetworkState>);
+  @override
+  _i6.Future<List<String>> getNetworkAcls({String? project}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getNetworkAcls,
+          [],
+          {#project: project},
+        ),
+        returnValue: _i6.Future<List<String>>.value(<String>[]),
+      ) as _i6.Future<List<String>>);
+  @override
+  _i6.Future<_i2.LxdNetworkAcl> getNetworkAcl(
+    String? name, {
+    String? project,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getNetworkAcl,
+          [name],
+          {#project: project},
+        ),
+        returnValue: _i6.Future<_i2.LxdNetworkAcl>.value(_FakeLxdNetworkAcl_10(
+          this,
+          Invocation.method(
+            #getNetworkAcl,
+            [name],
+            {#project: project},
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdNetworkAcl>);
+  @override
+  _i6.Future<List<String>> getProfiles({String? project}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getProfiles,
+          [],
+          {#project: project},
+        ),
+        returnValue: _i6.Future<List<String>>.value(<String>[]),
+      ) as _i6.Future<List<String>>);
+  @override
+  _i6.Future<_i2.LxdProfile> getProfile(
+    String? name, {
+    String? project,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getProfile,
+          [name],
+          {#project: project},
+        ),
+        returnValue: _i6.Future<_i2.LxdProfile>.value(_FakeLxdProfile_11(
+          this,
+          Invocation.method(
+            #getProfile,
+            [name],
+            {#project: project},
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdProfile>);
+  @override
+  _i6.Future<List<String>> getProjects() => (super.noSuchMethod(
+        Invocation.method(
+          #getProjects,
+          [],
+        ),
+        returnValue: _i6.Future<List<String>>.value(<String>[]),
+      ) as _i6.Future<List<String>>);
+  @override
+  _i6.Future<_i2.LxdProject> getProject(String? name) => (super.noSuchMethod(
         Invocation.method(
           #getProject,
           [name],
         ),
-        returnValue: _i4.Future<_i2.LxdProject>.value(_FakeLxdProject_3(
+        returnValue: _i6.Future<_i2.LxdProject>.value(_FakeLxdProject_12(
           this,
           Invocation.method(
             #getProject,
             [name],
           ),
         )),
-      ) as _i4.Future<_i2.LxdProject>);
+      ) as _i6.Future<_i2.LxdProject>);
   @override
-  _i4.Future<_i2.LxdProjectState> getProjectState(String? name) =>
+  _i6.Future<_i2.LxdProjectState> getProjectState(String? name) =>
       (super.noSuchMethod(
         Invocation.method(
           #getProjectState,
           [name],
         ),
         returnValue:
-            _i4.Future<_i2.LxdProjectState>.value(_FakeLxdProjectState_4(
+            _i6.Future<_i2.LxdProjectState>.value(_FakeLxdProjectState_13(
           this,
           Invocation.method(
             #getProjectState,
             [name],
           ),
         )),
-      ) as _i4.Future<_i2.LxdProjectState>);
+      ) as _i6.Future<_i2.LxdProjectState>);
   @override
-  _i4.Future<List<String>> getProjects() => (super.noSuchMethod(
-        Invocation.method(
-          #getProjects,
-          [],
-        ),
-        returnValue: _i4.Future<List<String>>.value(<String>[]),
-      ) as _i4.Future<List<String>>);
-  @override
-  _i4.Future<void> updateProjectConfig(
-    String? name,
-    Map<String, String>? config,
-  ) =>
+  _i6.Future<void> updateProject(_i2.LxdProject? project) =>
       (super.noSuchMethod(
         Invocation.method(
-          #updateProjectConfig,
-          [
-            name,
-            config,
-          ],
+          #updateProject,
+          [project],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
   @override
-  _i4.Future<_i2.LxdOperation?> initFeature(
+  _i6.Future<List<String>> getStoragePools({String? project}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getStoragePools,
+          [],
+          {#project: project},
+        ),
+        returnValue: _i6.Future<List<String>>.value(<String>[]),
+      ) as _i6.Future<List<String>>);
+  @override
+  _i6.Future<_i2.LxdStoragePool> getStoragePool(
+    String? name, {
+    String? project,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getStoragePool,
+          [name],
+          {#project: project},
+        ),
+        returnValue:
+            _i6.Future<_i2.LxdStoragePool>.value(_FakeLxdStoragePool_14(
+          this,
+          Invocation.method(
+            #getStoragePool,
+            [name],
+            {#project: project},
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdStoragePool>);
+  @override
+  void close() => super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i6.Future<_i2.LxdOperation?> initFeature(
     _i2.LxdInstanceId? id,
-    _i6.LxdFeatureProvider? feature,
+    _i7.LxdFeatureProvider? feature,
     _i2.LxdImage? image,
   ) =>
       (super.noSuchMethod(
@@ -358,10 +949,10 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             image,
           ],
         ),
-        returnValue: _i4.Future<_i2.LxdOperation?>.value(),
-      ) as _i4.Future<_i2.LxdOperation?>);
+        returnValue: _i6.Future<_i2.LxdOperation?>.value(),
+      ) as _i6.Future<_i2.LxdOperation?>);
   @override
-  _i4.Future<_i2.LxdImage> configureImage(
+  _i6.Future<_i2.LxdImage> configureImage(
     _i2.LxdInstanceId? id,
     _i2.LxdImage? image,
   ) =>
@@ -373,7 +964,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             image,
           ],
         ),
-        returnValue: _i4.Future<_i2.LxdImage>.value(_FakeLxdImage_5(
+        returnValue: _i6.Future<_i2.LxdImage>.value(_FakeLxdImage_5(
           this,
           Invocation.method(
             #configureImage,
@@ -383,11 +974,11 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             ],
           ),
         )),
-      ) as _i4.Future<_i2.LxdImage>);
+      ) as _i6.Future<_i2.LxdImage>);
   @override
-  _i4.Future<void> configureFeature(
+  _i6.Future<void> configureFeature(
     _i2.LxdInstanceId? id,
-    _i6.LxdFeatureProvider? feature,
+    _i7.LxdFeatureProvider? feature,
     _i2.LxdImage? image,
   ) =>
       (super.noSuchMethod(
@@ -399,13 +990,13 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             image,
           ],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
   @override
-  _i4.Future<_i2.LxdOperation> stageFeatures(
+  _i6.Future<_i2.LxdOperation> stageFeatures(
     _i2.LxdInstanceId? id,
-    List<_i6.LxdFeatureProvider>? features,
+    List<_i7.LxdFeatureProvider>? features,
     _i2.LxdImage? image,
   ) =>
       (super.noSuchMethod(
@@ -417,7 +1008,7 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             image,
           ],
         ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
           this,
           Invocation.method(
             #stageFeatures,
@@ -428,9 +1019,58 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             ],
           ),
         )),
-      ) as _i4.Future<_i2.LxdOperation>);
+      ) as _i6.Future<_i2.LxdOperation>);
   @override
-  _i4.Future<bool> waitVmAgent(
+  _i6.Future<void> init() => (super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> dispose() => (super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> updateProjectConfig(
+    String? name,
+    Map<String, String>? config,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateProjectConfig,
+          [
+            name,
+            config,
+          ],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<_i4.LxdTerminal> execTerminal(_i2.LxdInstanceId? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execTerminal,
+          [id],
+        ),
+        returnValue: _i6.Future<_i4.LxdTerminal>.value(_FakeLxdTerminal_15(
+          this,
+          Invocation.method(
+            #execTerminal,
+            [id],
+          ),
+        )),
+      ) as _i6.Future<_i4.LxdTerminal>);
+  @override
+  _i6.Future<bool> waitVmAgent(
     _i2.LxdInstanceId? id, {
     Duration? timeout,
     Duration? interval,
@@ -444,75 +1084,32 @@ class MockLxdService extends _i1.Mock implements _i3.LxdService {
             #interval: interval,
           },
         ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
   @override
-  _i4.Future<_i3.LxdTerminal> execTerminal(_i2.LxdInstanceId? id) =>
+  _i6.Stream<_i2.LxdOperation> watchInstance(_i2.LxdInstanceId? id) =>
       (super.noSuchMethod(
         Invocation.method(
-          #execTerminal,
+          #watchInstance,
           [id],
         ),
-        returnValue: _i4.Future<_i3.LxdTerminal>.value(_FakeLxdTerminal_6(
-          this,
-          Invocation.method(
-            #execTerminal,
-            [id],
-          ),
-        )),
-      ) as _i4.Future<_i3.LxdTerminal>);
+        returnValue: _i6.Stream<_i2.LxdOperation>.empty(),
+      ) as _i6.Stream<_i2.LxdOperation>);
   @override
-  _i4.Future<_i2.LxdOperation> getOperation(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #getOperation,
-          [id],
-        ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
-          this,
-          Invocation.method(
-            #getOperation,
-            [id],
-          ),
-        )),
-      ) as _i4.Future<_i2.LxdOperation>);
-  @override
-  _i4.Stream<_i2.LxdOperation> watchOperation(String? id) =>
+  _i6.Stream<_i2.LxdOperation> watchOperation(String? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #watchOperation,
           [id],
         ),
-        returnValue: _i4.Stream<_i2.LxdOperation>.empty(),
-      ) as _i4.Stream<_i2.LxdOperation>);
-  @override
-  _i4.Future<_i2.LxdOperation> waitOperation(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #waitOperation,
-          [id],
-        ),
-        returnValue: _i4.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
-          this,
-          Invocation.method(
-            #waitOperation,
-            [id],
-          ),
-        )),
-      ) as _i4.Future<_i2.LxdOperation>);
-  @override
-  _i4.Future<void> cancelOperation(String? id) => (super.noSuchMethod(
-        Invocation.method(
-          #cancelOperation,
-          [id],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i6.Stream<_i2.LxdOperation>.empty(),
+      ) as _i6.Stream<_i2.LxdOperation>);
 }
 
 /// A class which mocks [LxdTerminal].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLxdTerminal extends _i1.Mock implements _i3.LxdTerminal {
+class MockLxdTerminal extends _i1.Mock implements _i4.LxdTerminal {
   MockLxdTerminal() {
     _i1.throwOnMissingStub(this);
   }
@@ -525,7 +1122,7 @@ class MockLxdTerminal extends _i1.Mock implements _i3.LxdTerminal {
   @override
   _i2.LxdOperation get operation => (super.noSuchMethod(
         Invocation.getter(#operation),
-        returnValue: _FakeLxdOperation_2(
+        returnValue: _FakeLxdOperation_1(
           this,
           Invocation.getter(#operation),
         ),
@@ -562,12 +1159,12 @@ class MockLxdTerminal extends _i1.Mock implements _i3.LxdTerminal {
         returnValueForMissingStub: null,
       );
   @override
-  _i4.Future<void> close() => (super.noSuchMethod(
+  _i6.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }
