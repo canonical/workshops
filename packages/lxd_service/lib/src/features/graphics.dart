@@ -17,8 +17,8 @@ class LxdGraphicsFeature extends LxdFeatureProvider {
 
   @override
   Map<String, String> getFiles(LxdImage image) {
-    final x11 = image.properties['user.x11']!;
-    final wayland = image.properties['user.wayland']!;
+    final x11 = image.properties['user.workshops.x11']!;
+    final wayland = image.properties['user.workshops.wayland']!;
 
     return {
       '/etc/profile.d/workshops-graphics.sh': '''
@@ -32,10 +32,10 @@ class LxdGraphicsFeature extends LxdFeatureProvider {
 
   @override
   Map<String, Map<String, String>> getDevices(LxdImage image) {
-    final gpu = image.properties['user.gpu']!;
-    final x11 = image.properties['user.x11']!;
-    final uid = image.properties['user.uid']!;
-    final gid = image.properties['user.gid']!;
+    final gpu = image.properties['user.workshops.gpu']!;
+    final x11 = image.properties['user.workshops.x11']!;
+    final uid = image.properties['user.workshops.uid']!;
+    final gid = image.properties['user.workshops.gid']!;
 
     return {
       'gpu': {

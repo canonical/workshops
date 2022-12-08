@@ -34,8 +34,8 @@ class LxdAudioFeature extends LxdFeatureProvider {
 
   @override
   Map<String, Map<String, String>> getDevices(LxdImage image) {
-    final uid = image.properties['user.uid']!;
-    final gid = image.properties['user.gid']!;
+    final uid = image.properties['user.workshops.uid']!;
+    final gid = image.properties['user.workshops.gid']!;
 
     return {
       'pulse': {

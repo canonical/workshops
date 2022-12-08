@@ -28,9 +28,9 @@ class LxdServerFeature extends LxdFeatureProvider {
 
   @override
   Map<String, Map<String, String>> getDevices(LxdImage image) {
-    final lxd = image.properties['user.lxd']!;
-    final uid = image.properties['user.uid']!;
-    final gid = image.properties['user.gid']!;
+    final lxd = image.properties['user.workshops.lxd']!;
+    final uid = image.properties['user.workshops.uid']!;
+    final gid = image.properties['user.workshops.gid']!;
 
     return {
       'lxd': {

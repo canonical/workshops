@@ -12,7 +12,7 @@ class LxdUserFeature extends LxdFeatureProvider {
 
   @override
   Map<String, String> getFiles(LxdImage image) {
-    final username = image.properties['user.name']!;
+    final username = image.properties['user.workshops.name']!;
 
     return {
       '/etc/sudoers.d/90-workshops': '''
@@ -26,12 +26,12 @@ class LxdUserFeature extends LxdFeatureProvider {
 
   @override
   Map<String, String> getConfig(LxdImage image) {
-    final username = image.properties['user.name']!;
-    final uid = image.properties['user.uid']!;
-    final gid = image.properties['user.gid']!;
+    final username = image.properties['user.workshops.name']!;
+    final uid = image.properties['user.workshops.uid']!;
+    final gid = image.properties['user.workshops.gid']!;
 
     return {
-      'user.name': username,
+      'user.workshops.name': username,
       'raw.idmap': '''
 uid ${getuid()} $uid
 gid ${getgid()} $gid
@@ -42,8 +42,8 @@ gid ${getgid()} $gid
   @override
   Future<LxdOperation?> init(
       LxdClient client, LxdInstance instance, LxdImage image) async {
-    final username = image.properties['user.name']!;
-    final shell = image.properties['user.shell'];
+    final username = image.properties['user.workshops.name']!;
+    final shell = image.properties['user.workshops.shell'];
 
     // sudo vs. wheel
     final group =

@@ -57,7 +57,7 @@ class ProgressModel extends SafeChangeNotifier {
       return started;
     }
 
-    final features = image.properties['user.features']
+    final features = image.properties['user.workshops.features']
             ?.split(',')
             .map((name) => LxdFeature.values.byName(name)) ??
         {};

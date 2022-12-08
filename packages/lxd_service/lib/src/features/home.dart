@@ -7,7 +7,7 @@ class LxdHomeFeature extends LxdFeatureProvider {
 
   @override
   Map<String, Map<String, String>> getDevices(LxdImage image) {
-    final home = image.properties['user.home']!;
+    final home = image.properties['user.workshops.home']!;
 
     return {
       'home': {
