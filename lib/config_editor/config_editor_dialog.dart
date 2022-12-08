@@ -65,14 +65,14 @@ class ConfigEditor extends StatelessWidget {
     required String description,
     String? currentValue,
     Object? defaultValue,
-    required Type type,
+    required String type,
     required void Function(String key, String value) updateValue,
     void Function(String key)? resetValue,
   }) {
     Widget? child;
     switch (type) {
-      case String:
-      case int:
+      case 'string':
+      case 'integer':
         child = SizedBox(
           width: 200,
           child: TextFormField(
@@ -82,7 +82,33 @@ class ConfigEditor extends StatelessWidget {
           ),
         );
         break;
-      case bool:
+      case 'blob':
+        final controller = ScrollController();
+        child = SizedBox(
+          width: 200,
+          child: Scrollbar(
+            controller: controller,
+            child: SingleChildScrollView(
+              controller: controller,
+              scrollDirection: Axis.horizontal,
+              child: IntrinsicWidth(
+                child: ConstrainedBox(
+                  constraints:
+                      const BoxConstraints(maxHeight: 200, minWidth: 200),
+                  child: TextFormField(
+                    maxLines: null,
+                    initialValue: currentValue?.toString() ??
+                        defaultValue?.toString() ??
+                        '',
+                    onChanged: (value) => updateValue(name, value),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        break;
+      case 'bool':
         child = YaruSwitch(
             value:
                 currentValue.asBool ?? defaultValue.toString().asBool ?? false,

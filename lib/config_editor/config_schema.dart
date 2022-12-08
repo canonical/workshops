@@ -10,7 +10,7 @@ class ConfigSchemaEntry with _$ConfigSchemaEntry {
   const factory ConfigSchemaEntry({
     @JsonKey(name: 'Default', defaultValue: '') required String defaultValue,
     @JsonKey(name: 'Description', defaultValue: '') required String description,
-    @JsonStringToType() @JsonKey(name: 'Type') required Type type,
+    @JsonKey(name: 'Type') required String type,
   }) = _ConfigSchemaEntry;
 
   factory ConfigSchemaEntry.fromJson(Map<String, dynamic> json) =>

@@ -24,9 +24,8 @@ mixin _$ConfigSchemaEntry {
   String get defaultValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'Description', defaultValue: '')
   String get description => throw _privateConstructorUsedError;
-  @JsonStringToType()
   @JsonKey(name: 'Type')
-  Type get type => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +42,7 @@ abstract class $ConfigSchemaEntryCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'Default', defaultValue: '') String defaultValue,
       @JsonKey(name: 'Description', defaultValue: '') String description,
-      @JsonStringToType() @JsonKey(name: 'Type') Type type});
+      @JsonKey(name: 'Type') String type});
 }
 
 /// @nodoc
@@ -75,7 +74,7 @@ class _$ConfigSchemaEntryCopyWithImpl<$Res, $Val extends ConfigSchemaEntry>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as Type,
+              as String,
     ) as $Val);
   }
 }
@@ -91,7 +90,7 @@ abstract class _$$_ConfigSchemaEntryCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'Default', defaultValue: '') String defaultValue,
       @JsonKey(name: 'Description', defaultValue: '') String description,
-      @JsonStringToType() @JsonKey(name: 'Type') Type type});
+      @JsonKey(name: 'Type') String type});
 }
 
 /// @nodoc
@@ -121,7 +120,7 @@ class __$$_ConfigSchemaEntryCopyWithImpl<$Res>
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as Type,
+              as String,
     ));
   }
 }
@@ -132,7 +131,7 @@ class _$_ConfigSchemaEntry implements _ConfigSchemaEntry {
   const _$_ConfigSchemaEntry(
       {@JsonKey(name: 'Default', defaultValue: '') required this.defaultValue,
       @JsonKey(name: 'Description', defaultValue: '') required this.description,
-      @JsonStringToType() @JsonKey(name: 'Type') required this.type});
+      @JsonKey(name: 'Type') required this.type});
 
   factory _$_ConfigSchemaEntry.fromJson(Map<String, dynamic> json) =>
       _$$_ConfigSchemaEntryFromJson(json);
@@ -144,9 +143,8 @@ class _$_ConfigSchemaEntry implements _ConfigSchemaEntry {
   @JsonKey(name: 'Description', defaultValue: '')
   final String description;
   @override
-  @JsonStringToType()
   @JsonKey(name: 'Type')
-  final Type type;
+  final String type;
 
   @override
   String toString() {
@@ -190,9 +188,8 @@ abstract class _ConfigSchemaEntry implements ConfigSchemaEntry {
           required final String defaultValue,
       @JsonKey(name: 'Description', defaultValue: '')
           required final String description,
-      @JsonStringToType()
       @JsonKey(name: 'Type')
-          required final Type type}) = _$_ConfigSchemaEntry;
+          required final String type}) = _$_ConfigSchemaEntry;
 
   factory _ConfigSchemaEntry.fromJson(Map<String, dynamic> json) =
       _$_ConfigSchemaEntry.fromJson;
@@ -204,9 +201,8 @@ abstract class _ConfigSchemaEntry implements ConfigSchemaEntry {
   @JsonKey(name: 'Description', defaultValue: '')
   String get description;
   @override
-  @JsonStringToType()
   @JsonKey(name: 'Type')
-  Type get type;
+  String get type;
   @override
   @JsonKey(ignore: true)
   _$$_ConfigSchemaEntryCopyWith<_$_ConfigSchemaEntry> get copyWith =>

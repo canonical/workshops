@@ -10,7 +10,7 @@ _$_ConfigSchemaEntry _$$_ConfigSchemaEntryFromJson(Map<String, dynamic> json) =>
     _$_ConfigSchemaEntry(
       defaultValue: json['Default'] as String? ?? '',
       description: json['Description'] as String? ?? '',
-      type: const JsonStringToType().fromJson(json['Type'] as String),
+      type: json['Type'] as String,
     );
 
 Map<String, dynamic> _$$_ConfigSchemaEntryToJson(
@@ -18,5 +18,5 @@ Map<String, dynamic> _$$_ConfigSchemaEntryToJson(
     <String, dynamic>{
       'Default': instance.defaultValue,
       'Description': instance.description,
-      'Type': const JsonStringToType().toJson(instance.type),
+      'Type': instance.type,
     };
