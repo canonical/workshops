@@ -10,16 +10,16 @@ import 'config_schema.dart';
 Future<void> showConfigEditorDialog(
   BuildContext context, {
   required Map<String, String> config,
+  required String assetName,
   required Future<void> Function(Map<String, String> config) onSaved,
 }) async {
-  final projectSchema =
-      await loadConfigSchema('assets/project_config_schema.yaml');
+  final configSchema = await loadConfigSchema(assetName);
   return showDialog(
     context: context,
     builder: (context) => ChangeNotifierProvider(
       create: (_) => ConfigEditorModel(
         config: config,
-        configSchema: projectSchema,
+        configSchema: configSchema,
         onSaved: onSaved,
       ),
       child: const ConfigEditorDialog(),

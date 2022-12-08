@@ -5,7 +5,7 @@ import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
-import 'config_editor_dialog.dart';
+import '../config_editor/config_editor_dialog.dart';
 import 'project_settings_model.dart';
 
 class ProjectSettingsView extends StatelessWidget {
@@ -52,6 +52,7 @@ class ProjectSettingsView extends StatelessWidget {
                   onPressed: () => showConfigEditorDialog(
                     context,
                     config: settings[projects[index]]?.config ?? {},
+                    assetName: 'assets/project_config_schema.yaml',
                     onSaved: (config) async {
                       await store.updateConfig(projects[index], config);
                       await store.refresh();
