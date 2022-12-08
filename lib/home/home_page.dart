@@ -1,4 +1,3 @@
-import 'package:command_store/command_store.dart';
 import 'package:context_menu/context_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:lxd/lxd.dart';
@@ -16,27 +15,24 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shortcuts(
-      shortcuts: CommandStore.shortcutsOf(context),
-      child: Scaffold(
-        body: ContextMenuArea(
-          builder: (context, position) => buildHomeMenu(context: context),
-          child: Actions(
-            actions: {
-              SelectInstanceIntent: SelectInstanceAction(onSelected),
-            },
-            child: const InstanceTableView(),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            final instance = await showLauncherWizard(context);
-            if (instance != null) {
-              onSelected(instance);
-            }
+    return Scaffold(
+      body: ContextMenuArea(
+        builder: (context, position) => buildHomeMenu(context: context),
+        child: Actions(
+          actions: {
+            SelectInstanceIntent: SelectInstanceAction(onSelected),
           },
-          child: const Icon(Icons.add),
+          child: const InstanceTableView(),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final instance = await showLauncherWizard(context);
+          if (instance != null) {
+            onSelected(instance);
+          }
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

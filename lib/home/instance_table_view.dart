@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:command_store/command_store.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,10 +50,10 @@ class _InstanceTableViewState extends State<_InstanceTableView> {
 
   KeyEventResult _handleKeyEvent(FocusNode focusNode, KeyEvent event) {
     final filter = event.character?.trim();
-    if (!_searchFocusNode.hasFocus &&
+    final model = context.read<InstanceTableModel>();
+    if (model.filterKey.isEmpty &&
         filter?.isNotEmpty == true &&
         !LogicalKeyboardKey.isControlCharacter(filter!)) {
-      final model = context.read<InstanceTableModel>();
       model.filter(filter);
       _searchFocusNode.requestFocus();
       return KeyEventResult.handled;
@@ -72,91 +73,97 @@ class _InstanceTableViewState extends State<_InstanceTableView> {
     final l10n = AppLocalizations.of(context);
     final model = context.watch<InstanceTableModel>();
     return Focus(
-      autofocus: true,
+      canRequestFocus: false,
       onKeyEvent: _handleKeyEvent,
-      child: Scaffold(
-        body: DataTable2(
-          headingRowColor:
-              MaterialStateProperty.all(Theme.of(context).backgroundColor),
-          sortArrowIcon: YaruIcons.pan_up,
-          sortAscending: model.sortAscending,
-          sortColumnIndex: model.sortColumn.index,
-          columnSpacing: 10,
-          horizontalMargin: 10,
-          headingRowHeight: 36,
-          dataRowHeight: kMinInteractiveDimension,
-          columns: [
-            DataColumn2(
-              label: Padding(
-                padding: const EdgeInsetsDirectional.only(end: 4),
-                child: Text(l10n.instanceLabel),
-              ),
-              onSort: model.sort,
-            ),
-            if (model.selectedProjects.length > 1)
-              DataColumn2(
-                label: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 4),
-                  child: Text(l10n.projectLabel),
+      child: Shortcuts(
+        shortcuts: CommandStore.shortcutsOf(context),
+        child: Focus(
+          autofocus: true,
+          child: Scaffold(
+            body: DataTable2(
+              headingRowColor:
+                  MaterialStateProperty.all(Theme.of(context).backgroundColor),
+              sortArrowIcon: YaruIcons.pan_up,
+              sortAscending: model.sortAscending,
+              sortColumnIndex: model.sortColumn.index,
+              columnSpacing: 10,
+              horizontalMargin: 10,
+              headingRowHeight: 36,
+              dataRowHeight: kMinInteractiveDimension,
+              columns: [
+                DataColumn2(
+                  label: Padding(
+                    padding: const EdgeInsetsDirectional.only(end: 4),
+                    child: Text(l10n.instanceLabel),
+                  ),
+                  onSort: model.sort,
                 ),
-                fixedWidth: 200,
-                onSort: model.sort,
-              ),
-            DataColumn2(
-              label: Padding(
-                padding: const EdgeInsetsDirectional.only(start: 2 * 36),
-                child: PopupMenuButton(
-                  iconSize: 16,
-                  tooltip: '',
-                  itemBuilder: (context) {
-                    return [
-                      for (final project in model.projects)
-                        YaruMultiSelectPopupMenuItem(
-                          checked: model.isProjectSelected(project),
-                          child: Text(project),
-                          onChanged: (value) =>
-                              model.selectProject(project, value),
-                        ),
-                    ];
-                  },
-                  icon: const Icon(Icons.filter_list),
-                ),
-              ),
-              fixedWidth: 120,
-            ),
-          ],
-          rows: model.instances.mapIndexed((index, id) {
-            return buildInstanceTableRow(
-              context,
-              index: index,
-              id: id,
-            );
-          }).toList(),
-        ),
-        bottomNavigationBar: model.filterKey.isNotEmpty
-            ? CallbackShortcuts(
-                bindings: {
-                  const SingleActivator(LogicalKeyboardKey.escape):
-                      _resetSearch,
-                },
-                child: TextFormField(
-                  initialValue: model.filterKey,
-                  focusNode: _searchFocusNode,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(4),
-                        topRight: Radius.circular(4),
-                        bottomLeft: Radius.circular(12),
-                        bottomRight: Radius.circular(12),
-                      ),
+                if (model.selectedProjects.length > 1)
+                  DataColumn2(
+                    label: Padding(
+                      padding: const EdgeInsetsDirectional.only(end: 4),
+                      child: Text(l10n.projectLabel),
+                    ),
+                    fixedWidth: 200,
+                    onSort: model.sort,
+                  ),
+                DataColumn2(
+                  label: Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 2 * 36),
+                    child: PopupMenuButton(
+                      iconSize: 16,
+                      tooltip: '',
+                      itemBuilder: (context) {
+                        return [
+                          for (final project in model.projects)
+                            YaruMultiSelectPopupMenuItem(
+                              checked: model.isProjectSelected(project),
+                              child: Text(project),
+                              onChanged: (value) =>
+                                  model.selectProject(project, value),
+                            ),
+                        ];
+                      },
+                      icon: const Icon(Icons.filter_list),
                     ),
                   ),
-                  onChanged: model.filter,
-                  onEditingComplete: _resetSearch,
+                  fixedWidth: 120,
                 ),
-              )
-            : null,
+              ],
+              rows: model.instances.mapIndexed((index, id) {
+                return buildInstanceTableRow(
+                  context,
+                  index: index,
+                  id: id,
+                );
+              }).toList(),
+            ),
+            bottomNavigationBar: model.filterKey.isNotEmpty
+                ? CallbackShortcuts(
+                    bindings: {
+                      const SingleActivator(LogicalKeyboardKey.escape):
+                          _resetSearch,
+                    },
+                    child: TextFormField(
+                      initialValue: model.filterKey,
+                      focusNode: _searchFocusNode,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(4),
+                            topRight: Radius.circular(4),
+                            bottomLeft: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
+                          ),
+                        ),
+                      ),
+                      onChanged: model.filter,
+                      onEditingComplete: _resetSearch,
+                    ),
+                  )
+                : null,
+          ),
+        ),
       ),
     );
   }
