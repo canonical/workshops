@@ -38,12 +38,12 @@ mixin LxdFeatureService on LxdClient {
   }
 
   Future<LxdImage> configureImage(LxdInstanceId id, LxdImage image) async {
-    final username = image.properties['user.name']!;
+    final username = image.properties['user.workshops.name']!;
     return image.copyWith(
       properties: {
         ...image.properties,
-        'user.uid': await _runCommand(id, ['id', '-u', username]),
-        'user.gid': await _runCommand(id, ['id', '-g', username]),
+        'user.workshops.uid': await _runCommand(id, ['id', '-u', username]),
+        'user.workshops.gid': await _runCommand(id, ['id', '-g', username]),
       },
     );
   }

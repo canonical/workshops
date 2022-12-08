@@ -8,7 +8,9 @@ import 'package:meta/meta.dart';
 mixin LxdTerminalService on LxdClient {
   Future<LxdTerminal> execTerminal(LxdInstanceId id) async {
     final instance = await getInstance(id);
-    final user = instance.config['user.name'] ?? 'root';
+    final user = instance.config['user.workshops.name'] ??
+        instance.config['user.name'] ??
+        'root';
     final op = await execInstance(
       instance.id,
       command: ['login', '-f', user],

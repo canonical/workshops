@@ -13,7 +13,8 @@ class TestLxdTerminalService extends MockLxdClient with LxdTerminalService {}
 
 void main() {
   test('exec terminal', () async {
-    final instance = testInstance(id: fooId, config: {'user.name': 'me'});
+    final instance =
+        testInstance(id: fooId, config: {'user.workshops.name': 'me'});
 
     final exec = testOperation(id: 'x', metadata: {
       'fds': {

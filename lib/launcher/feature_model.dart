@@ -45,14 +45,15 @@ class FeatureModel extends SafeChangeNotifier {
     return _image.copyWith(
       properties: {
         ..._image.properties,
-        'user.features': _features.map((f) => f.name).join(','),
-        'user.name': user ?? 'root',
-        'user.shell': Platform.environment['SHELL'] ?? '',
-        'user.home': home ?? '/root',
-        'user.gpu': 'physical',
-        'user.x11': Platform.environment['DISPLAY'] ?? ':0',
-        'user.wayland': Platform.environment['WAYLAND_DISPLAY'] ?? 'wayland-0',
-        'user.lxd': LxdClient.resolveUnixSocket().path,
+        'user.workshops.features': _features.map((f) => f.name).join(','),
+        'user.workshops.name': user ?? 'root',
+        'user.workshops.shell': Platform.environment['SHELL'] ?? '',
+        'user.workshops.home': home ?? '/root',
+        'user.workshops.gpu': 'physical',
+        'user.workshops.x11': Platform.environment['DISPLAY'] ?? ':0',
+        'user.workshops.wayland':
+            Platform.environment['WAYLAND_DISPLAY'] ?? 'wayland-0',
+        'user.workshops.lxd': LxdClient.resolveUnixSocket().path,
       },
     );
   }
