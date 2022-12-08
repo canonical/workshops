@@ -324,12 +324,12 @@ security.syscalls.allow:
   Description: "A \u2018\\n\u2019 separated list of syscalls to allow (mutually exclusive\
     \ with security.syscalls.deny*)"
   Live update: 'no'
-  Type: string
+  Type: multiline string
 security.syscalls.deny:
   Condition: container
   Description: "A \u2018\\n\u2019 separated list of syscalls to deny"
   Live update: 'no'
-  Type: string
+  Type: multiline string
 security.syscalls.deny_compat:
   Condition: container
   Default: 'false'

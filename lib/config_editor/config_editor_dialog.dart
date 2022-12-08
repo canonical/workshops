@@ -83,6 +83,7 @@ class ConfigEditor extends StatelessWidget {
         );
         break;
       case 'blob':
+      case 'multiline string':
         final controller = ScrollController();
         child = SizedBox(
           width: 200,
