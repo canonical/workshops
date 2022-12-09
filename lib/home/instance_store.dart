@@ -45,9 +45,14 @@ class InstanceStore extends SafeChangeNotifier {
     });
   }
 
-  Future<LxdOperation> updateConfig(
-          LxdInstanceId id, Map<String, String> config) =>
-      _service.updateInstanceConfig(id, config);
+  Future<void> updateConfig(
+      LxdInstanceId id, Map<String, String> config) async {
+    final operation = await _service.updateInstanceConfig(id, config);
+    final result = await _service.waitOperation(operation.id);
+    if (result.statusCode != 200) {
+      throw Exception(result.error);
+    }
+  }
 
   Future<void> _update(LxdInstanceId id) async {
     final value = await _service.getInstance(id);
