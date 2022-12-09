@@ -83,29 +83,12 @@ class ConfigEditor extends StatelessWidget {
         );
         break;
       case 'blob':
-      case 'multiline string':
-        final controller = ScrollController();
         child = SizedBox(
           width: 200,
-          child: Scrollbar(
-            controller: controller,
-            child: SingleChildScrollView(
-              controller: controller,
-              scrollDirection: Axis.horizontal,
-              child: IntrinsicWidth(
-                child: ConstrainedBox(
-                  constraints:
-                      const BoxConstraints(maxHeight: 200, minWidth: 200),
-                  child: TextFormField(
-                    maxLines: null,
-                    initialValue: currentValue?.toString() ??
-                        defaultValue?.toString() ??
-                        '',
-                    onChanged: (value) => updateValue(name, value),
-                  ),
-                ),
-              ),
-            ),
+          child: _MultiLineTextField(
+            initialValue:
+                currentValue?.toString() ?? defaultValue?.toString() ?? '',
+            onChanged: (value) => updateValue(name, value),
           ),
         );
         break;
@@ -201,6 +184,52 @@ class ConfigEditor extends StatelessWidget {
           ],
         )
       ],
+    );
+  }
+}
+
+class _MultiLineTextField extends StatefulWidget {
+  const _MultiLineTextField({required this.initialValue, this.onChanged});
+  final String initialValue;
+  final void Function(String)? onChanged;
+
+  @override
+  State<_MultiLineTextField> createState() => __MultiLineTextFieldState();
+}
+
+class __MultiLineTextFieldState extends State<_MultiLineTextField> {
+  late final ScrollController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scrollbar(
+      controller: _controller,
+      child: SingleChildScrollView(
+        controller: _controller,
+        scrollDirection: Axis.horizontal,
+        child: IntrinsicWidth(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 200, minWidth: 200),
+            child: TextFormField(
+              maxLines: null,
+              initialValue: widget.initialValue,
+              onChanged: widget.onChanged,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
