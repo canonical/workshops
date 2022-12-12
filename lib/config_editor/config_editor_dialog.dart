@@ -130,13 +130,13 @@ class ConfigEditor extends StatelessWidget {
             color: Theme.of(context).backgroundColor,
             child: ListView(
               children: [
-                ...model.configSchema.entries
-                    .map((e) => _buildRow(
-                          name: e.key,
-                          description: e.value.description,
-                          currentValue: model.config[e.key],
-                          defaultValue: e.value.defaultValue,
-                          type: e.value.type,
+                ...model.keys
+                    .map((k) => _buildRow(
+                          name: k,
+                          description: model.getSchemaEntry(k).description,
+                          currentValue: model.config[k],
+                          defaultValue: model.getSchemaEntry(k).defaultValue,
+                          type: model.getSchemaEntry(k).type,
                           updateValue: model.updateValue,
                           resetValue: model.resetValue,
                         ))
