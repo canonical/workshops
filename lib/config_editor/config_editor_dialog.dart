@@ -198,13 +198,7 @@ class _MultiLineTextField extends StatefulWidget {
 }
 
 class __MultiLineTextFieldState extends State<_MultiLineTextField> {
-  late final ScrollController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = ScrollController();
-  }
+  final _controller = ScrollController();
 
   @override
   void dispose() {
