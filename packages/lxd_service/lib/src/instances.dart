@@ -70,6 +70,12 @@ mixin LxdInstanceService on LxdClient {
     return statusCode != null ? state.copyWith(statusCode: statusCode) : state;
   }
 
+  Future<LxdOperation> updateInstanceConfig(
+      LxdInstanceId id, Map<String, String> config) async {
+    final instance = await getInstance(id);
+    return super.updateInstance(instance.copyWith(config: config));
+  }
+
   Future<void> _updateInstances([LxdEvent? event]) async {
     final newInstances = await getInstances();
     final newInstanceSet = Set.of(newInstances);

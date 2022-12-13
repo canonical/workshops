@@ -12,8 +12,10 @@ import 'package:provider/provider.dart';
 import 'package:title_bar/title_bar.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 
+import '../config_editor/config_editor_dialog.dart';
 import '../workshops_l10n.dart';
 import 'instance_info_model.dart';
+import 'instance_store.dart';
 
 Future<void> showInstanceInfoDialog(
     {required BuildContext context, required LxdInstanceId id}) {
@@ -59,6 +61,10 @@ class InstanceInfoDialog extends StatelessWidget {
                       instance: model.instance,
                       instanceState: model.instanceState,
                     ),
+                    const SizedBox(height: 16),
+                    Text(l10n.configLabel,
+                        style: Theme.of(context).textTheme.titleMedium),
+                    _ConfigInfoTable(instance: model.instance),
                     const SizedBox(height: 16),
                     Text(l10n.resourcesLabel,
                         style: Theme.of(context).textTheme.titleMedium),
@@ -261,6 +267,56 @@ class _NetworkInfoTable extends StatelessWidget {
             (e.value.counters.bytesReceived.formatByteSize()),
             (e.value.counters.bytesSent.formatByteSize()),
           ])
+      ],
+    );
+  }
+}
+
+class _ConfigInfoTable extends StatelessWidget {
+  const _ConfigInfoTable({required this.instance});
+  final LxdInstance instance;
+
+  static const hidePrefixes = ['volatile', 'image', 'user.workshops'];
+
+  bool hideKey(String key) {
+    for (final prefix in hidePrefixes) {
+      if (key.startsWith(prefix)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Table(
+          defaultColumnWidth: const IntrinsicColumnWidth(),
+          children: [
+            for (var config in instance.config.entries)
+              if (!hideKey(config.key))
+                _TableRowPaddedSelectable(
+                  entries: [config.key, config.value],
+                ),
+          ],
+        ),
+        ElevatedButton(
+          onPressed: () => showConfigEditorDialog(
+            context,
+            config: instance.config,
+            assetName: 'assets/instance_config_schema.yaml',
+            onSaved: (config) async {
+              final store = context.read<InstanceStore>();
+              await store.updateConfig(instance.id, config);
+            },
+          ),
+          child: Text(l10n.editButton),
+        ),
       ],
     );
   }

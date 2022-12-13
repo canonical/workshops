@@ -10,16 +10,16 @@ import 'config_schema.dart';
 Future<void> showConfigEditorDialog(
   BuildContext context, {
   required Map<String, String> config,
+  required String assetName,
   required Future<void> Function(Map<String, String> config) onSaved,
 }) async {
-  final projectSchema =
-      await loadConfigSchema('assets/project_config_schema.yaml');
+  final configSchema = await loadConfigSchema(assetName);
   return showDialog(
     context: context,
     builder: (context) => ChangeNotifierProvider(
       create: (_) => ConfigEditorModel(
         config: config,
-        configSchema: projectSchema,
+        configSchema: configSchema,
         onSaved: onSaved,
       ),
       child: const ConfigEditorDialog(),
@@ -65,14 +65,14 @@ class ConfigEditor extends StatelessWidget {
     required String description,
     String? currentValue,
     Object? defaultValue,
-    required Type type,
+    required String type,
     required void Function(String key, String value) updateValue,
     void Function(String key)? resetValue,
   }) {
     Widget? child;
     switch (type) {
-      case String:
-      case int:
+      case 'string':
+      case 'integer':
         child = SizedBox(
           width: 200,
           child: TextFormField(
@@ -82,7 +82,17 @@ class ConfigEditor extends StatelessWidget {
           ),
         );
         break;
-      case bool:
+      case 'blob':
+        child = SizedBox(
+          width: 200,
+          child: _MultiLineTextField(
+            initialValue:
+                currentValue?.toString() ?? defaultValue?.toString() ?? '',
+            onChanged: (value) => updateValue(name, value),
+          ),
+        );
+        break;
+      case 'bool':
         child = YaruSwitch(
             value:
                 currentValue.asBool ?? defaultValue.toString().asBool ?? false,
@@ -174,6 +184,46 @@ class ConfigEditor extends StatelessWidget {
           ],
         )
       ],
+    );
+  }
+}
+
+class _MultiLineTextField extends StatefulWidget {
+  const _MultiLineTextField({required this.initialValue, this.onChanged});
+  final String initialValue;
+  final void Function(String)? onChanged;
+
+  @override
+  State<_MultiLineTextField> createState() => __MultiLineTextFieldState();
+}
+
+class __MultiLineTextFieldState extends State<_MultiLineTextField> {
+  final _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scrollbar(
+      controller: _controller,
+      child: SingleChildScrollView(
+        controller: _controller,
+        scrollDirection: Axis.horizontal,
+        child: IntrinsicWidth(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 200, minWidth: 200),
+            child: TextFormField(
+              maxLines: null,
+              initialValue: widget.initialValue,
+              onChanged: widget.onChanged,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

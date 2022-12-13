@@ -19,6 +19,7 @@ void main() {
       final instanceState = testInstanceState();
       final service = MockLxdService();
 
+      when(service.instanceUpdated).thenAnswer((_) => const Stream.empty());
       when(service.getInstance(instanceId)).thenAnswer((_) async => instance);
       when(service.getInstanceState(instanceId))
           .thenAnswer((_) async => instanceState);

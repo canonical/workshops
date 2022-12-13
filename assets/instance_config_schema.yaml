@@ -1,0 +1,438 @@
+agent.nic_config:
+  Condition: virtual machine
+  Default: 'false'
+  Description: Set the name and MTU of the default network interfaces to be the same
+    as the instance devices (this is automatic for containers).
+  Live update: 'no'
+  Type: bool
+boot.autostart:
+  Description: Always start the instance when LXD starts (if not set, restore last
+    state)
+  Live update: 'no'
+  Type: bool
+boot.autostart.delay:
+  Default: '0'
+  Description: Number of seconds to wait after the instance started before starting
+    the next one
+  Live update: 'no'
+  Type: integer
+boot.autostart.priority:
+  Default: '0'
+  Description: What order to start the instances in (starting with highest)
+  Live update: 'no'
+  Type: integer
+boot.host_shutdown_timeout:
+  Default: '30'
+  Description: Seconds to wait for instance to shutdown before it is force stopped
+  Live update: 'yes'
+  Type: integer
+boot.stop.priority:
+  Default: '0'
+  Description: What order to shutdown the instances (starting with highest)
+  Live update: 'no'
+  Type: integer
+cloud-init.network-config:
+  Default: DHCP on eth0
+  Description: Cloud-init network-config, content is used as seed value
+  Live update: 'no'
+  Type: string
+cloud-init.user-data:
+  Default: '#cloud-config'
+  Description: Cloud-init user-data, content is used as seed value
+  Live update: 'no'
+  Type: string
+cloud-init.vendor-data:
+  Default: '#cloud-config'
+  Description: Cloud-init vendor-data, content is used as seed value
+  Live update: 'no'
+  Type: string
+cluster.evacuate:
+  Default: auto
+  Description: What to do when evacuating the instance (auto, migrate, live-migrate,
+    or stop)
+  Live update: 'no'
+  Type: string
+# environment.*:
+#   Description: key/value environment variables to export to the instance and set on
+#     exec
+#   Live update: yes (exec)
+#   Type: string
+limits.cpu:
+  Description: Number or range of CPUs to expose to the instance (defaults to 1 CPU
+    for VMs)
+  Live update: 'yes'
+  Type: string
+limits.cpu.allowance:
+  Condition: container
+  Default: 100%
+  Description: How much of the CPU can be used. Can be a percentage (e.g. 50%) for
+    a soft limit or hard a chunk of time (25ms/100ms)
+  Live update: 'yes'
+  Type: string
+limits.cpu.priority:
+  Condition: container
+  Default: 10 (maximum)
+  Description: CPU scheduling priority compared to other instances sharing the same
+    CPUs (overcommit) (integer between 0 and 10)
+  Live update: 'yes'
+  Type: integer
+limits.disk.priority:
+  Default: 5 (medium)
+  Description: "When under load, how much priority to give to the instance\u2019s\
+    \ I/O requests (integer between 0 and 10)"
+  Live update: 'yes'
+  Type: integer
+limits.hugepages.1GB:
+  Condition: container
+  Description: Fixed value in bytes (various suffixes supported, see Units for storage
+    and network limits) to limit number of 1 GB huge pages (Available huge-page sizes
+    are architecture dependent.)
+  Live update: 'yes'
+  Type: string
+limits.hugepages.1MB:
+  Condition: container
+  Description: Fixed value in bytes (various suffixes supported, see Units for storage
+    and network limits) to limit number of 1 MB huge pages (Available huge-page sizes
+    are architecture dependent.)
+  Live update: 'yes'
+  Type: string
+limits.hugepages.2MB:
+  Condition: container
+  Description: Fixed value in bytes (various suffixes supported, see Units for storage
+    and network limits) to limit number of 2 MB huge pages (Available huge-page sizes
+    are architecture dependent.)
+  Live update: 'yes'
+  Type: string
+limits.hugepages.64KB:
+  Condition: container
+  Description: Fixed value in bytes (various suffixes supported, see Units for storage
+    and network limits) to limit number of 64 KB huge pages (Available huge-page sizes
+    are architecture dependent.)
+  Live update: 'yes'
+  Type: string
+# limits.kernel.*:
+#   Condition: container
+#   Description: This limits kernel resources per instance (e.g. number of open files)
+#   Live update: 'no'
+#   Type: string
+limits.memory:
+  Description: "Percentage of the host\u2019s memory or fixed value in bytes (various\
+    \ suffixes supported, see Units for storage and network limits) (defaults to 1GiB\
+    \ for VMs)"
+  Live update: 'yes'
+  Type: string
+limits.memory.enforce:
+  Condition: container
+  Default: hard
+  Description: "If hard, instance can\u2019t exceed its memory limit. If soft, the\
+    \ instance can exceed its memory limit when extra host memory is available"
+  Live update: 'yes'
+  Type: string
+limits.memory.hugepages:
+  Condition: virtual machine
+  Default: 'false'
+  Description: Controls whether to back the instance using huge pages rather than
+    regular system memory
+  Live update: 'no'
+  Type: bool
+limits.memory.swap:
+  Condition: container
+  Default: 'true'
+  Description: Controls whether to encourage/discourage swapping less used pages for
+    this instance
+  Live update: 'yes'
+  Type: bool
+limits.memory.swap.priority:
+  Condition: container
+  Default: 10 (maximum)
+  Description: The higher this is set, the least likely the instance is to be swapped
+    to disk (integer between 0 and 10)
+  Live update: 'yes'
+  Type: integer
+limits.network.priority:
+  Default: 0 (minimum)
+  Description: "When under load, how much priority to give to the instance\u2019s\
+    \ network requests (integer between 0 and 10)"
+  Live update: 'yes'
+  Type: integer
+limits.processes:
+  Condition: container
+  Default: '- (max)'
+  Description: Maximum number of processes that can run in the instance
+  Live update: 'yes'
+  Type: integer
+linux.kernel_modules:
+  Condition: container
+  Description: Comma-separated list of kernel modules to load before starting the
+    instance
+  Live update: 'yes'
+  Type: string
+# linux.sysctl.*:
+#   Condition: container
+#   Description: Allow for modify sysctl settings
+#   Live update: 'no'
+#   Type: string
+migration.incremental.memory:
+  Condition: container
+  Default: 'false'
+  Description: "Incremental memory transfer of the instance\u2019s memory to reduce\
+    \ downtime"
+  Live update: 'yes'
+  Type: bool
+migration.incremental.memory.goal:
+  Condition: container
+  Default: '70'
+  Description: Percentage of memory to have in sync before stopping the instance
+  Live update: 'yes'
+  Type: integer
+migration.incremental.memory.iterations:
+  Condition: container
+  Default: '10'
+  Description: Maximum number of transfer operations to go through before stopping
+    the instance
+  Live update: 'yes'
+  Type: integer
+migration.stateful:
+  Condition: virtual machine
+  Default: 'false'
+  Description: Allow for stateful stop/start and snapshots. This will prevent the
+    use of some features that are incompatible with it
+  Live update: 'no'
+  Type: bool
+nvidia.driver.capabilities:
+  Condition: container
+  Default: compute,utility
+  Description: What driver capabilities the instance needs (sets libnvidia-container
+    NVIDIA_DRIVER_CAPABILITIES)
+  Live update: 'no'
+  Type: string
+nvidia.require.cuda:
+  Condition: container
+  Description: Version expression for the required CUDA version (sets libnvidia-container
+    NVIDIA_REQUIRE_CUDA)
+  Live update: 'no'
+  Type: string
+nvidia.require.driver:
+  Condition: container
+  Description: Version expression for the required driver version (sets libnvidia-container
+    NVIDIA_REQUIRE_DRIVER)
+  Live update: 'no'
+  Type: string
+nvidia.runtime:
+  Condition: container
+  Default: 'false'
+  Description: Pass the host NVIDIA and CUDA runtime libraries into the instance
+  Live update: 'no'
+  Type: bool
+raw.apparmor:
+  Description: AppArmor profile entries to be appended to the generated profile
+  Live update: 'yes'
+  Type: blob
+raw.idmap:
+  Condition: unprivileged container
+  Description: Raw idmap configuration (e.g. both 1000 1000)
+  Live update: 'no'
+  Type: blob
+raw.lxc:
+  Condition: container
+  Description: Raw LXC configuration to be appended to the generated one
+  Live update: 'no'
+  Type: blob
+raw.qemu:
+  Condition: virtual machine
+  Description: Raw QEMU configuration to be appended to the generated command line
+  Live update: 'no'
+  Type: blob
+raw.qemu.conf:
+  Condition: virtual machine
+  Description: Addition/override to the generated qemu.conf file
+  Live update: 'no'
+  Type: blob
+raw.seccomp:
+  Condition: container
+  Description: Raw Seccomp configuration
+  Live update: 'no'
+  Type: blob
+security.agent.metrics:
+  Condition: virtual machine
+  Default: 'true'
+  Description: Controls whether the lxd-agent is queried for state information and
+    metrics
+  Live update: 'no'
+  Type: bool
+security.devlxd:
+  Default: 'true'
+  Description: Controls the presence of /dev/lxd in the instance
+  Live update: 'no'
+  Type: bool
+security.devlxd.images:
+  Condition: container
+  Default: 'false'
+  Description: Controls the availability of the /1.0/images API over devlxd
+  Live update: 'no'
+  Type: bool
+security.idmap.base:
+  Condition: unprivileged container
+  Description: The base host ID to use for the allocation (overrides auto-detection)
+  Live update: 'no'
+  Type: integer
+security.idmap.isolated:
+  Condition: unprivileged container
+  Default: 'false'
+  Description: Use an idmap for this instance that is unique among instances with
+    isolated set
+  Live update: 'no'
+  Type: bool
+security.idmap.size:
+  Condition: unprivileged container
+  Description: The size of the idmap to use
+  Live update: 'no'
+  Type: integer
+security.nesting:
+  Condition: container
+  Default: 'false'
+  Description: Support running LXD (nested) inside the instance
+  Live update: 'yes'
+  Type: bool
+security.privileged:
+  Condition: container
+  Default: 'false'
+  Description: Runs the instance in privileged mode
+  Live update: 'no'
+  Type: bool
+security.protection.delete:
+  Default: 'false'
+  Description: Prevents the instance from being deleted
+  Live update: 'yes'
+  Type: bool
+security.protection.shift:
+  Condition: container
+  Default: 'false'
+  Description: "Prevents the instance\u2019s file system from being UID/GID shifted\
+    \ on startup"
+  Live update: 'yes'
+  Type: bool
+security.secureboot:
+  Condition: virtual machine
+  Default: 'true'
+  Description: Controls whether UEFI secure boot is enabled with the default Microsoft
+    keys
+  Live update: 'no'
+  Type: bool
+security.syscalls.allow:
+  Condition: container
+  Description: "A \u2018\\n\u2019 separated list of syscalls to allow (mutually exclusive\
+    \ with security.syscalls.deny*)"
+  Live update: 'no'
+  Type: multiline string
+security.syscalls.deny:
+  Condition: container
+  Description: "A \u2018\\n\u2019 separated list of syscalls to deny"
+  Live update: 'no'
+  Type: multiline string
+security.syscalls.deny_compat:
+  Condition: container
+  Default: 'false'
+  Description: On x86_64 this enables blocking of compat_* syscalls, it is a no-op
+    on other arches
+  Live update: 'no'
+  Type: bool
+security.syscalls.deny_default:
+  Condition: container
+  Default: 'true'
+  Description: Enables the default syscall deny
+  Live update: 'no'
+  Type: bool
+security.syscalls.intercept.bpf:
+  Condition: container
+  Default: 'false'
+  Description: Handles the bpf system call
+  Live update: 'no'
+  Type: bool
+security.syscalls.intercept.bpf.devices:
+  Condition: container
+  Default: 'false'
+  Description: Allows bpf programs for the devices cgroup in the unified hierarchy
+    to be loaded.
+  Live update: 'no'
+  Type: bool
+security.syscalls.intercept.mknod:
+  Condition: container
+  Default: 'false'
+  Description: Handles the mknod and mknodat system calls (allows creation of a limited
+    subset of char/block devices)
+  Live update: 'no'
+  Type: bool
+security.syscalls.intercept.mount:
+  Condition: container
+  Default: 'false'
+  Description: Handles the mount system call
+  Live update: 'no'
+  Type: bool
+security.syscalls.intercept.mount.allowed:
+  Condition: container
+  Description: Specify a comma-separated list of file systems that are safe to mount
+    for processes inside the instance
+  Live update: 'yes'
+  Type: string
+security.syscalls.intercept.mount.fuse:
+  Condition: container
+  Description: Whether to redirect mounts of a given file system to their FUSE implementation
+    (e.g. ext4=fuse2fs)
+  Live update: 'yes'
+  Type: string
+security.syscalls.intercept.mount.shift:
+  Condition: container
+  Default: 'false'
+  Description: Whether to mount shiftfs on top of file systems handled through mount
+    syscall interception
+  Live update: 'yes'
+  Type: bool
+security.syscalls.intercept.sched_setscheduler:
+  Condition: container
+  Default: 'false'
+  Description: Handles the sched_setscheduler system call (allows increasing process
+    priority)
+  Live update: 'no'
+  Type: bool
+security.syscalls.intercept.setxattr:
+  Condition: container
+  Default: 'false'
+  Description: Handles the setxattr system call (allows setting a limited subset of
+    restricted extended attributes)
+  Live update: 'no'
+  Type: bool
+security.syscalls.intercept.sysinfo:
+  Condition: container
+  Default: 'false'
+  Description: Handles the sysinfo system call (to get cgroup-based resource usage
+    information)
+  Live update: 'no'
+  Type: bool
+snapshots.expiry:
+  Description: Controls when snapshots are to be deleted (expects expression like
+    1M 2H 3d 4w 5m 6y)
+  Live update: 'no'
+  Type: string
+snapshots.pattern:
+  Default: snap%d
+  Description: Pongo2 template string which represents the snapshot name (used for
+    scheduled snapshots and unnamed snapshots)
+  Live update: 'no'
+  Type: string
+snapshots.schedule:
+  Description: Cron expression (<minute> <hour> <dom> <month> <dow>), or a comma-separated
+    list of schedule aliases <@hourly> <@daily> <@midnight> <@weekly> <@monthly> <@annually>
+    <@yearly> <@startup> <@never>
+  Live update: 'no'
+  Type: string
+snapshots.schedule.stopped:
+  Default: 'false'
+  Description: Controls whether to automatically snapshot stopped instances
+  Live update: 'no'
+  Type: bool
+# user.*:
+#   Description: Free form user key/value storage (can be used in search)
+#   Live update: 'no'
+#   Type: string
+

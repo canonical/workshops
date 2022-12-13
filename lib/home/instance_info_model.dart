@@ -17,14 +17,17 @@ class InstanceInfoModel extends SafeChangeNotifier {
   bool initialized = false;
 
   late LxdInstanceState _instanceState;
-  late final LxdInstance _instance;
+  late LxdInstance _instance;
   Timer? _timer;
 
   LxdInstance get instance => _instance;
   LxdInstanceState get instanceState => _instanceState;
 
+  StreamSubscription<LxdInstanceId>? _subscription;
+
   Future<void> init() async {
-    _instance = await service.getInstance(id);
+    _subscription = service.instanceUpdated.listen(_updateInstance);
+    await _updateInstance(id);
     await _updateInstanceState();
     _timer = Timer.periodic(
       _updateInterval,
@@ -32,6 +35,11 @@ class InstanceInfoModel extends SafeChangeNotifier {
     );
     initialized = true;
     notifyListeners();
+  }
+
+  Future<void> _updateInstance(LxdInstanceId updatedId) async {
+    if (updatedId != id) return;
+    _instance = await service.getInstance(id);
   }
 
   Future<void> _updateInstanceState() async {
@@ -42,6 +50,7 @@ class InstanceInfoModel extends SafeChangeNotifier {
   @override
   void dispose() {
     _timer?.cancel();
+    _subscription?.cancel();
     super.dispose();
   }
 }
