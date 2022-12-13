@@ -150,6 +150,18 @@ class ConfigEditor extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             OutlinedButton(
+              child: Text(l10n.addLabel),
+              onPressed: () => showAddOptionDialog(
+                context: context,
+                wildcardOptions: <String, String>{
+                  for (final k in model.wildcardKeys)
+                    k: model.getSchemaEntry(k).description
+                },
+                onSaved: model.addOption,
+              ),
+            ),
+            const Spacer(),
+            OutlinedButton(
               onPressed: Navigator.of(context).maybePop,
               child: Text(l10n.cancelButton),
             ),
@@ -234,4 +246,128 @@ extension StringToBool on String? {
       : this == 'false'
           ? false
           : null;
+}
+
+Future<void> showAddOptionDialog({
+  required BuildContext context,
+  required Map<String, String> wildcardOptions,
+  required void Function(String key, String value) onSaved,
+}) {
+  return showDialog(
+    context: context,
+    builder: (context) => _AddOptionDialog(
+      wildcardOptions: wildcardOptions,
+      onSaved: onSaved,
+    ),
+  );
+}
+
+class _AddOptionDialog extends StatefulWidget {
+  const _AddOptionDialog(
+      {required this.wildcardOptions, required this.onSaved});
+  final Map<String, String> wildcardOptions;
+  final void Function(String key, String value) onSaved;
+
+  @override
+  State<_AddOptionDialog> createState() => _AddOptionDialogState();
+}
+
+class _AddOptionDialogState extends State<_AddOptionDialog> {
+  String? selectedKey;
+  String name = '';
+  String value = '';
+
+  @override
+  void initState() {
+    super.initState();
+    selectedKey = widget.wildcardOptions.keys.first;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Dialog(
+      clipBehavior: Clip.antiAlias,
+      insetPadding: const EdgeInsets.all(20),
+      child: SizedBox(
+        height: 250,
+        width: 600,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            DialogTitleBar(
+              title: Text(l10n.addOptionTitle),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Row(
+                            children: [
+                              DropdownButton<String>(
+                                value: selectedKey,
+                                items: widget.wildcardOptions.keys
+                                    .map((e) => DropdownMenuItem<String>(
+                                          value: e,
+                                          child: Text(e),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedKey = value;
+                                  });
+                                },
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: TextFormField(
+                                  onChanged: (v) => name = v,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Spacer(),
+                        Expanded(
+                          flex: 2,
+                          child: TextFormField(
+                            onChanged: (v) => value = v,
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (selectedKey != null) ...[
+                      const SizedBox(height: 16),
+                      Text(widget.wildcardOptions[selectedKey!]!),
+                    ],
+                    const Spacer(),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          widget.onSaved(
+                              '${selectedKey?.substring(0, selectedKey!.length - 1)}$name',
+                              value);
+                          Navigator.of(context).maybePop();
+                        },
+                        child: Text(l10n.okButton),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

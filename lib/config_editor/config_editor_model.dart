@@ -33,13 +33,16 @@ class ConfigEditorModel extends SafeChangeNotifier {
     return UnmodifiableListView(parsedKeys);
   }
 
+  UnmodifiableListView<String> get wildcardKeys =>
+      UnmodifiableListView(_configSchema.keys.where((k) => k.contains('*')));
+
   ConfigSchemaEntry getSchemaEntry(String key) {
     if (_configSchema.keys.contains(key)) {
       return _configSchema[key]!;
     }
-    for (final schemaKey in _configSchema.keys) {
-      if (schemaKey.endsWith('*') && _matchesSchema(key, schemaKey)) {
-        return _configSchema[schemaKey]!;
+    for (final wildcardKey in wildcardKeys) {
+      if (_matchesSchema(key, wildcardKey)) {
+        return _configSchema[wildcardKey]!;
       }
     }
     throw Exception('Invalid key: $key');
@@ -47,6 +50,12 @@ class ConfigEditorModel extends SafeChangeNotifier {
 
   bool _matchesSchema(String key, String schemaKey) =>
       key.startsWith(schemaKey.substring(0, schemaKey.length - 1));
+
+  void addOption(String key, String value) {
+    if (_config.keys.contains(key)) return;
+    _config[key] = value;
+    notifyListeners();
+  }
 
   void updateValue(String key, String value) {
     if (_config[key] == value) return;
