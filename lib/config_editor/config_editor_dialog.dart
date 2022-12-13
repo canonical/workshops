@@ -73,21 +73,25 @@ class ConfigEditor extends StatelessWidget {
     switch (type) {
       case 'string':
       case 'integer':
+        final value =
+            currentValue?.toString() ?? defaultValue?.toString() ?? '';
         child = SizedBox(
           width: 200,
-          child: TextFormField(
-            initialValue:
-                currentValue?.toString() ?? defaultValue?.toString() ?? '',
+          child: _TextField(
+            key: ValueKey(value),
+            value: value,
             onChanged: (value) => updateValue(name, value),
           ),
         );
         break;
       case 'blob':
+        final value =
+            currentValue?.toString() ?? defaultValue?.toString() ?? '';
         child = SizedBox(
           width: 200,
           child: _MultiLineTextField(
-            initialValue:
-                currentValue?.toString() ?? defaultValue?.toString() ?? '',
+            key: ValueKey(value),
+            value: value,
             onChanged: (value) => updateValue(name, value),
           ),
         );
@@ -200,10 +204,61 @@ class ConfigEditor extends StatelessWidget {
   }
 }
 
+class _TextField extends StatefulWidget {
+  const _TextField({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.multiline = false,
+  });
+  final String value;
+  final Function(String value) onChanged;
+  final bool multiline;
+
+  @override
+  State<_TextField> createState() => __TextFieldState();
+}
+
+class __TextFieldState extends State<_TextField> {
+  late final TextEditingController _controller;
+  String value = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.value);
+    _controller.addListener(() => value = _controller.text);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Focus(
+      onFocusChange: (focus) {
+        if (!focus && value != widget.value) widget.onChanged(value);
+      },
+      child: TextFormField(
+        controller: _controller,
+        maxLines: widget.multiline ? null : 1,
+        minLines: widget.multiline ? 3 : null,
+      ),
+    );
+  }
+}
+
 class _MultiLineTextField extends StatefulWidget {
-  const _MultiLineTextField({required this.initialValue, this.onChanged});
-  final String initialValue;
-  final void Function(String)? onChanged;
+  const _MultiLineTextField({
+    super.key,
+    required this.value,
+    required this.onChanged,
+  });
+  final String value;
+  final void Function(String) onChanged;
 
   @override
   State<_MultiLineTextField> createState() => __MultiLineTextFieldState();
@@ -228,10 +283,10 @@ class __MultiLineTextFieldState extends State<_MultiLineTextField> {
         child: IntrinsicWidth(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 200, minWidth: 200),
-            child: TextFormField(
-              maxLines: null,
-              initialValue: widget.initialValue,
+            child: _TextField(
+              value: widget.value,
               onChanged: widget.onChanged,
+              multiline: true,
             ),
           ),
         ),
