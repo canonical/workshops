@@ -16,8 +16,11 @@ import 'launcher/remote_image_model.dart';
 import 'path_provider.dart';
 import 'remotes/remote_store.dart';
 import 'settings.dart';
+import 'splash.dart';
 
 Future<void> main() async {
+  runApp(const Splash());
+
   Logger.setup(level: LogLevel.fromString(kDebugMode ? 'debug' : 'info'));
 
   final service = LxdService();
