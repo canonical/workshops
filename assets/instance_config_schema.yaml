@@ -52,11 +52,11 @@ cluster.evacuate:
     or stop)
   Live update: 'no'
   Type: string
-# environment.*:
-#   Description: key/value environment variables to export to the instance and set on
-#     exec
-#   Live update: yes (exec)
-#   Type: string
+environment.*:
+  Description: key/value environment variables to export to the instance and set on
+    exec
+  Live update: yes (exec)
+  Type: string
 limits.cpu:
   Description: Number or range of CPUs to expose to the instance (defaults to 1 CPU
     for VMs)
@@ -110,11 +110,11 @@ limits.hugepages.64KB:
     are architecture dependent.)
   Live update: 'yes'
   Type: string
-# limits.kernel.*:
-#   Condition: container
-#   Description: This limits kernel resources per instance (e.g. number of open files)
-#   Live update: 'no'
-#   Type: string
+limits.kernel.*:
+  Condition: container
+  Description: This limits kernel resources per instance (e.g. number of open files)
+  Live update: 'no'
+  Type: string
 limits.memory:
   Description: "Percentage of the host\u2019s memory or fixed value in bytes (various\
     \ suffixes supported, see Units for storage and network limits) (defaults to 1GiB\
@@ -167,11 +167,11 @@ linux.kernel_modules:
     instance
   Live update: 'yes'
   Type: string
-# linux.sysctl.*:
-#   Condition: container
-#   Description: Allow for modify sysctl settings
-#   Live update: 'no'
-#   Type: string
+linux.sysctl.*:
+  Condition: container
+  Description: Allow for modify sysctl settings
+  Live update: 'no'
+  Type: string
 migration.incremental.memory:
   Condition: container
   Default: 'false'
@@ -431,8 +431,8 @@ snapshots.schedule.stopped:
   Description: Controls whether to automatically snapshot stopped instances
   Live update: 'no'
   Type: bool
-# user.*:
-#   Description: Free form user key/value storage (can be used in search)
-#   Live update: 'no'
-#   Type: string
+user.*:
+  Description: Free form user key/value storage (can be used in search)
+  Live update: 'no'
+  Type: string
 
