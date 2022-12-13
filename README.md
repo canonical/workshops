@@ -16,3 +16,19 @@ as well as provides a full featured terminal.
 ### Translations
 
 Workshops is being translated using [Weblate](https://hosted.weblate.org/engage/workshops/), a web tool designed to ease translating for both developers and translators.
+
+### Configuration Schemas
+
+The configuration schemas `assets/*_config_schema.yaml` can be obtained by parsing the tables provided in the lxd documentation:
+- [Project configuration](https://linuxcontainers.org/lxd/docs/master/projects/)
+- [Instance options](https://linuxcontainers.org/lxd/docs/master/reference/instance_options/)
+```python
+import pandas as pd
+import yaml
+import sys
+
+table = pd.read_html( ... )
+config = table.replace('-', '').set_index('Key').to_dict('index')
+config = {key: {name: value for name, value in entry.items() if value} for key, entry in config.items()}
+print(yaml.dump(config))
+```
