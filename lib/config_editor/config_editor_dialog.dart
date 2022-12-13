@@ -367,33 +367,46 @@ class _AddOptionDialogState extends State<_AddOptionDialog> {
                           flex: 3,
                           child: Row(
                             children: [
-                              DropdownButton<String>(
-                                value: selectedKey,
-                                items: widget.wildcardOptions.keys
-                                    .map((e) => DropdownMenuItem<String>(
-                                          value: e,
-                                          child: Text(e),
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedKey = value;
-                                  });
-                                },
+                              Expanded(
+                                child: DropdownButtonFormField<String>(
+                                  value: selectedKey,
+                                  items: widget.wildcardOptions.keys
+                                      .map((e) => DropdownMenuItem<String>(
+                                            value: e,
+                                            child: Text(
+                                                e.substring(0, e.length - 2)),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedKey = value;
+                                    });
+                                  },
+                                ),
                               ),
-                              const SizedBox(width: 8),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 4),
+                                child: Text('.'),
+                              ),
                               Expanded(
                                 child: TextFormField(
+                                  decoration: InputDecoration(
+                                      label: Text(l10n.keyLabel)),
                                   onChanged: (v) => name = v,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        const Spacer(),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text('='),
+                        ),
                         Expanded(
                           flex: 2,
                           child: TextFormField(
+                            decoration:
+                                InputDecoration(label: Text(l10n.valueLabel)),
                             onChanged: (v) => value = v,
                           ),
                         ),
