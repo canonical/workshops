@@ -15,6 +15,7 @@ import 'api/profile.dart';
 import 'api/project.dart';
 import 'api/project_state.dart';
 import 'api/resource.dart';
+import 'api/server.dart';
 import 'api/storage_pool.dart';
 import 'enums.dart';
 import 'exception.dart';
@@ -101,6 +102,14 @@ class LxdClient {
     }
 
     return operationIds;
+  }
+
+  /// Get the server environment and configuration.
+  Future<LxdServer> getServerInfo({String? target}) async {
+    final json = await _requestSync('GET', '/1.0', queryParameters: {
+      if (target != null) 'target': target,
+    });
+    return LxdServer.fromJson(json);
   }
 
   /// Get the current state of the operation with [id].

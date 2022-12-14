@@ -33,8 +33,8 @@ class _FakeUri_0 extends _i1.SmartFake implements Uri {
         );
 }
 
-class _FakeLxdOperation_1 extends _i1.SmartFake implements _i2.LxdOperation {
-  _FakeLxdOperation_1(
+class _FakeLxdServer_1 extends _i1.SmartFake implements _i2.LxdServer {
+  _FakeLxdServer_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -43,8 +43,8 @@ class _FakeLxdOperation_1 extends _i1.SmartFake implements _i2.LxdOperation {
         );
 }
 
-class _FakeWebSocket_2 extends _i1.SmartFake implements _i3.WebSocket {
-  _FakeWebSocket_2(
+class _FakeLxdOperation_2 extends _i1.SmartFake implements _i2.LxdOperation {
+  _FakeLxdOperation_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -53,8 +53,8 @@ class _FakeWebSocket_2 extends _i1.SmartFake implements _i3.WebSocket {
         );
 }
 
-class _FakeLxdResources_3 extends _i1.SmartFake implements _i2.LxdResources {
-  _FakeLxdResources_3(
+class _FakeWebSocket_3 extends _i1.SmartFake implements _i3.WebSocket {
+  _FakeWebSocket_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -63,9 +63,19 @@ class _FakeLxdResources_3 extends _i1.SmartFake implements _i2.LxdResources {
         );
 }
 
-class _FakeLxdCertificate_4 extends _i1.SmartFake
+class _FakeLxdResources_4 extends _i1.SmartFake implements _i2.LxdResources {
+  _FakeLxdResources_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeLxdCertificate_5 extends _i1.SmartFake
     implements _i2.LxdCertificate {
-  _FakeLxdCertificate_4(
+  _FakeLxdCertificate_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -74,8 +84,8 @@ class _FakeLxdCertificate_4 extends _i1.SmartFake
         );
 }
 
-class _FakeLxdImage_5 extends _i1.SmartFake implements _i2.LxdImage {
-  _FakeLxdImage_5(
+class _FakeLxdImage_6 extends _i1.SmartFake implements _i2.LxdImage {
+  _FakeLxdImage_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -84,8 +94,8 @@ class _FakeLxdImage_5 extends _i1.SmartFake implements _i2.LxdImage {
         );
 }
 
-class _FakeLxdInstance_6 extends _i1.SmartFake implements _i2.LxdInstance {
-  _FakeLxdInstance_6(
+class _FakeLxdInstance_7 extends _i1.SmartFake implements _i2.LxdInstance {
+  _FakeLxdInstance_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -94,9 +104,9 @@ class _FakeLxdInstance_6 extends _i1.SmartFake implements _i2.LxdInstance {
         );
 }
 
-class _FakeLxdInstanceState_7 extends _i1.SmartFake
+class _FakeLxdInstanceState_8 extends _i1.SmartFake
     implements _i2.LxdInstanceState {
-  _FakeLxdInstanceState_7(
+  _FakeLxdInstanceState_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -105,8 +115,8 @@ class _FakeLxdInstanceState_7 extends _i1.SmartFake
         );
 }
 
-class _FakeLxdNetwork_8 extends _i1.SmartFake implements _i2.LxdNetwork {
-  _FakeLxdNetwork_8(
+class _FakeLxdNetwork_9 extends _i1.SmartFake implements _i2.LxdNetwork {
+  _FakeLxdNetwork_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -115,9 +125,9 @@ class _FakeLxdNetwork_8 extends _i1.SmartFake implements _i2.LxdNetwork {
         );
 }
 
-class _FakeLxdNetworkState_9 extends _i1.SmartFake
+class _FakeLxdNetworkState_10 extends _i1.SmartFake
     implements _i2.LxdNetworkState {
-  _FakeLxdNetworkState_9(
+  _FakeLxdNetworkState_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -126,8 +136,8 @@ class _FakeLxdNetworkState_9 extends _i1.SmartFake
         );
 }
 
-class _FakeLxdNetworkAcl_10 extends _i1.SmartFake implements _i2.LxdNetworkAcl {
-  _FakeLxdNetworkAcl_10(
+class _FakeLxdNetworkAcl_11 extends _i1.SmartFake implements _i2.LxdNetworkAcl {
+  _FakeLxdNetworkAcl_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -136,8 +146,8 @@ class _FakeLxdNetworkAcl_10 extends _i1.SmartFake implements _i2.LxdNetworkAcl {
         );
 }
 
-class _FakeLxdProfile_11 extends _i1.SmartFake implements _i2.LxdProfile {
-  _FakeLxdProfile_11(
+class _FakeLxdProfile_12 extends _i1.SmartFake implements _i2.LxdProfile {
+  _FakeLxdProfile_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -146,8 +156,8 @@ class _FakeLxdProfile_11 extends _i1.SmartFake implements _i2.LxdProfile {
         );
 }
 
-class _FakeLxdProject_12 extends _i1.SmartFake implements _i2.LxdProject {
-  _FakeLxdProject_12(
+class _FakeLxdProject_13 extends _i1.SmartFake implements _i2.LxdProject {
+  _FakeLxdProject_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -156,9 +166,9 @@ class _FakeLxdProject_12 extends _i1.SmartFake implements _i2.LxdProject {
         );
 }
 
-class _FakeLxdProjectState_13 extends _i1.SmartFake
+class _FakeLxdProjectState_14 extends _i1.SmartFake
     implements _i2.LxdProjectState {
-  _FakeLxdProjectState_13(
+  _FakeLxdProjectState_14(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -167,9 +177,9 @@ class _FakeLxdProjectState_13 extends _i1.SmartFake
         );
 }
 
-class _FakeLxdStoragePool_14 extends _i1.SmartFake
+class _FakeLxdStoragePool_15 extends _i1.SmartFake
     implements _i2.LxdStoragePool {
-  _FakeLxdStoragePool_14(
+  _FakeLxdStoragePool_15(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -178,8 +188,8 @@ class _FakeLxdStoragePool_14 extends _i1.SmartFake
         );
 }
 
-class _FakeLxdTerminal_15 extends _i1.SmartFake implements _i4.LxdTerminal {
-  _FakeLxdTerminal_15(
+class _FakeLxdTerminal_16 extends _i1.SmartFake implements _i4.LxdTerminal {
+  _FakeLxdTerminal_16(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -242,12 +252,29 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
             <String, List<String>>{}),
       ) as _i6.Future<Map<String, List<String>>>);
   @override
+  _i6.Future<_i2.LxdServer> getServerInfo({String? target}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getServerInfo,
+          [],
+          {#target: target},
+        ),
+        returnValue: _i6.Future<_i2.LxdServer>.value(_FakeLxdServer_1(
+          this,
+          Invocation.method(
+            #getServerInfo,
+            [],
+            {#target: target},
+          ),
+        )),
+      ) as _i6.Future<_i2.LxdServer>);
+  @override
   _i6.Future<_i2.LxdOperation> getOperation(String? id) => (super.noSuchMethod(
         Invocation.method(
           #getOperation,
           [id],
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #getOperation,
@@ -268,7 +295,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
             secret,
           ],
         ),
-        returnValue: _i6.Future<_i3.WebSocket>.value(_FakeWebSocket_2(
+        returnValue: _i6.Future<_i3.WebSocket>.value(_FakeWebSocket_3(
           this,
           Invocation.method(
             #getOperationWebSocket,
@@ -290,7 +317,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           [id],
           {#timeout: timeout},
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #waitOperation,
@@ -314,7 +341,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           #getResources,
           [],
         ),
-        returnValue: _i6.Future<_i2.LxdResources>.value(_FakeLxdResources_3(
+        returnValue: _i6.Future<_i2.LxdResources>.value(_FakeLxdResources_4(
           this,
           Invocation.method(
             #getResources,
@@ -337,7 +364,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           #getCertificate,
           [fingerprint],
         ),
-        returnValue: _i6.Future<_i2.LxdCertificate>.value(_FakeLxdCertificate_4(
+        returnValue: _i6.Future<_i2.LxdCertificate>.value(_FakeLxdCertificate_5(
           this,
           Invocation.method(
             #getCertificate,
@@ -399,7 +426,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           [fingerprint],
           {#project: project},
         ),
-        returnValue: _i6.Future<_i2.LxdImage>.value(_FakeLxdImage_5(
+        returnValue: _i6.Future<_i2.LxdImage>.value(_FakeLxdImage_6(
           this,
           Invocation.method(
             #getImage,
@@ -443,7 +470,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           #getInstance,
           [id],
         ),
-        returnValue: _i6.Future<_i2.LxdInstance>.value(_FakeLxdInstance_6(
+        returnValue: _i6.Future<_i2.LxdInstance>.value(_FakeLxdInstance_7(
           this,
           Invocation.method(
             #getInstance,
@@ -459,7 +486,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           [id],
         ),
         returnValue:
-            _i6.Future<_i2.LxdInstanceState>.value(_FakeLxdInstanceState_7(
+            _i6.Future<_i2.LxdInstanceState>.value(_FakeLxdInstanceState_8(
           this,
           Invocation.method(
             #getInstanceState,
@@ -505,7 +532,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
             #type: type,
           },
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #createInstance,
@@ -540,7 +567,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           [id],
           {#force: force},
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #startInstance,
@@ -580,7 +607,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
             #waitForWebSocket: waitForWebSocket,
           },
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #execInstance,
@@ -607,7 +634,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           #updateInstance,
           [instance],
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #updateInstance,
@@ -630,7 +657,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
             #timeout: timeout,
           },
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #stopInstance,
@@ -657,7 +684,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
             #timeout: timeout,
           },
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #restartInstance,
@@ -676,7 +703,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           #deleteInstance,
           [id],
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #deleteInstance,
@@ -753,7 +780,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           #getNetwork,
           [name],
         ),
-        returnValue: _i6.Future<_i2.LxdNetwork>.value(_FakeLxdNetwork_8(
+        returnValue: _i6.Future<_i2.LxdNetwork>.value(_FakeLxdNetwork_9(
           this,
           Invocation.method(
             #getNetwork,
@@ -779,7 +806,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           [name],
         ),
         returnValue:
-            _i6.Future<_i2.LxdNetworkState>.value(_FakeLxdNetworkState_9(
+            _i6.Future<_i2.LxdNetworkState>.value(_FakeLxdNetworkState_10(
           this,
           Invocation.method(
             #getNetworkState,
@@ -808,7 +835,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           [name],
           {#project: project},
         ),
-        returnValue: _i6.Future<_i2.LxdNetworkAcl>.value(_FakeLxdNetworkAcl_10(
+        returnValue: _i6.Future<_i2.LxdNetworkAcl>.value(_FakeLxdNetworkAcl_11(
           this,
           Invocation.method(
             #getNetworkAcl,
@@ -838,7 +865,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           [name],
           {#project: project},
         ),
-        returnValue: _i6.Future<_i2.LxdProfile>.value(_FakeLxdProfile_11(
+        returnValue: _i6.Future<_i2.LxdProfile>.value(_FakeLxdProfile_12(
           this,
           Invocation.method(
             #getProfile,
@@ -861,7 +888,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           #getProject,
           [name],
         ),
-        returnValue: _i6.Future<_i2.LxdProject>.value(_FakeLxdProject_12(
+        returnValue: _i6.Future<_i2.LxdProject>.value(_FakeLxdProject_13(
           this,
           Invocation.method(
             #getProject,
@@ -877,7 +904,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           [name],
         ),
         returnValue:
-            _i6.Future<_i2.LxdProjectState>.value(_FakeLxdProjectState_13(
+            _i6.Future<_i2.LxdProjectState>.value(_FakeLxdProjectState_14(
           this,
           Invocation.method(
             #getProjectState,
@@ -917,7 +944,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           {#project: project},
         ),
         returnValue:
-            _i6.Future<_i2.LxdStoragePool>.value(_FakeLxdStoragePool_14(
+            _i6.Future<_i2.LxdStoragePool>.value(_FakeLxdStoragePool_15(
           this,
           Invocation.method(
             #getStoragePool,
@@ -964,7 +991,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
             image,
           ],
         ),
-        returnValue: _i6.Future<_i2.LxdImage>.value(_FakeLxdImage_5(
+        returnValue: _i6.Future<_i2.LxdImage>.value(_FakeLxdImage_6(
           this,
           Invocation.method(
             #configureImage,
@@ -1008,7 +1035,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
             image,
           ],
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #stageFeatures,
@@ -1051,7 +1078,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
             config,
           ],
         ),
-        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_1(
+        returnValue: _i6.Future<_i2.LxdOperation>.value(_FakeLxdOperation_2(
           this,
           Invocation.method(
             #updateInstanceConfig,
@@ -1085,7 +1112,7 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           #execTerminal,
           [id],
         ),
-        returnValue: _i6.Future<_i4.LxdTerminal>.value(_FakeLxdTerminal_15(
+        returnValue: _i6.Future<_i4.LxdTerminal>.value(_FakeLxdTerminal_16(
           this,
           Invocation.method(
             #execTerminal,
