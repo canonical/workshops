@@ -196,4 +196,3 @@ restricted.virtual-machines.lowlevel:
   Description: Prevents use of low-level virtual-machine options like raw.qemu, volatile
     etc.
   Type: string
-
