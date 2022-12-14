@@ -121,6 +121,10 @@ class ConfigEditor extends StatelessWidget {
               if (currentValue != null) ...[
                 const SizedBox(width: 8),
                 IconButton(
+                  padding: EdgeInsets.zero,
+                  visualDensity:
+                      const VisualDensity(horizontal: -4, vertical: -4),
+                  iconSize: 16,
                   tooltip: l10n.resetLabel,
                   onPressed: () => resetValue?.call(name),
                   icon: const Icon(YaruIcons.edit_undo),
