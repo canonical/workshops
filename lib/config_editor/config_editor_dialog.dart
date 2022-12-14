@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:title_bar/title_bar.dart';
+import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'config_editor_model.dart';
@@ -61,6 +62,7 @@ class ConfigEditor extends StatelessWidget {
   const ConfigEditor({super.key});
 
   Widget _buildRow({
+    required BuildContext context,
     required String name,
     required String description,
     String? currentValue,
@@ -69,6 +71,7 @@ class ConfigEditor extends StatelessWidget {
     required void Function(String key, String value) updateValue,
     void Function(String key)? resetValue,
   }) {
+    final l10n = AppLocalizations.of(context);
     Widget? child;
     switch (type) {
       case 'string':
@@ -109,12 +112,25 @@ class ConfigEditor extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Tooltip(
-            message: description,
-            child: GestureDetector(
-              onDoubleTap: () => resetValue?.call(name),
-              child: Text(name),
-            ),
+          Row(
+            children: [
+              Tooltip(
+                message: description,
+                child: Text(name),
+              ),
+              if (currentValue != null) ...[
+                const SizedBox(width: 8),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  visualDensity:
+                      const VisualDensity(horizontal: -4, vertical: -4),
+                  iconSize: 16,
+                  tooltip: l10n.resetLabel,
+                  onPressed: () => resetValue?.call(name),
+                  icon: const Icon(YaruIcons.edit_undo),
+                ),
+              ]
+            ],
           ),
           if (child != null) child,
         ],
@@ -136,6 +152,7 @@ class ConfigEditor extends StatelessWidget {
               children: [
                 ...model.keys
                     .map((k) => _buildRow(
+                          context: context,
                           name: k,
                           description: model.getSchemaEntry(k).description,
                           currentValue: model.config[k],
