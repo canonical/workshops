@@ -10,6 +10,7 @@ export 'src/api/profile.dart';
 export 'src/api/project.dart';
 export 'src/api/project_state.dart';
 export 'src/api/resource.dart';
+export 'src/api/server.dart';
 export 'src/api/storage_pool.dart';
 export 'src/client.dart';
 export 'src/constants.dart';
