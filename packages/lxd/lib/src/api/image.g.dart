@@ -6,10 +6,10 @@ part of 'image.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LxdImage _$$_LxdImageFromJson(Map<String, dynamic> json) => _$_LxdImage(
+_$_LxdImage _$$_LxdImageFromJson(Map json) => _$_LxdImage(
       autoUpdate: json['auto_update'] as bool? ?? false,
-      properties: (json['properties'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(k, e as String),
+      properties: (json['properties'] as Map?)?.map(
+            (k, e) => MapEntry(k as String, e as String),
           ) ??
           const {},
       public: json['public'] as bool? ?? true,
@@ -19,7 +19,8 @@ _$_LxdImage _$$_LxdImageFromJson(Map<String, dynamic> json) => _$_LxdImage(
               .toList() ??
           const [],
       aliases: (json['aliases'] as List<dynamic>?)
-              ?.map((e) => LxdImageAlias.fromJson(e as Map<String, dynamic>))
+              ?.map((e) =>
+                  LxdImageAlias.fromJson(Map<String, dynamic>.from(e as Map)))
               .toList() ??
           const [],
       architecture: json['architecture'] as String,
@@ -30,7 +31,7 @@ _$_LxdImage _$$_LxdImageFromJson(Map<String, dynamic> json) => _$_LxdImage(
       updateSource: json['update_source'] == null
           ? null
           : LxdImageSource.fromJson(
-              json['update_source'] as Map<String, dynamic>),
+              Map<String, dynamic>.from(json['update_source'] as Map)),
       type: $enumDecode(_$LxdImageTypeEnumMap, json['type']),
       createdAt: DateTime.parse(json['created_at'] as String),
       lastUsedAt: json['last_used_at'] == null
@@ -64,8 +65,7 @@ const _$LxdImageTypeEnumMap = {
   LxdImageType.virtualMachine: 'virtual-machine',
 };
 
-_$_LxdImageAlias _$$_LxdImageAliasFromJson(Map<String, dynamic> json) =>
-    _$_LxdImageAlias(
+_$_LxdImageAlias _$$_LxdImageAliasFromJson(Map json) => _$_LxdImageAlias(
       name: json['name'] as String,
       description: json['description'] as String?,
     );
@@ -76,8 +76,7 @@ Map<String, dynamic> _$$_LxdImageAliasToJson(_$_LxdImageAlias instance) =>
       'description': instance.description,
     };
 
-_$_LxdImageSource _$$_LxdImageSourceFromJson(Map<String, dynamic> json) =>
-    _$_LxdImageSource(
+_$_LxdImageSource _$$_LxdImageSourceFromJson(Map json) => _$_LxdImageSource(
       alias: json['alias'] as String,
       certificate: json['certificate'] as String?,
       protocol: json['protocol'] as String,
@@ -95,15 +94,17 @@ Map<String, dynamic> _$$_LxdImageSourceToJson(_$_LxdImageSource instance) =>
       'image_type': _$LxdImageTypeEnumMap[instance.imageType],
     };
 
-_$_LxdImageMetadata _$$_LxdImageMetadataFromJson(Map<String, dynamic> json) =>
+_$_LxdImageMetadata _$$_LxdImageMetadataFromJson(Map json) =>
     _$_LxdImageMetadata(
       architecture: json['architecture'] as String,
       creationDate: json['creation_date'] as int,
       expiryDate: json['expiry_date'] as int,
       properties: Map<String, String>.from(json['properties'] as Map),
-      templates: (json['templates'] as Map<String, dynamic>).map(
+      templates: (json['templates'] as Map).map(
         (k, e) => MapEntry(
-            k, LxdImageMetadataTemplate.fromJson(e as Map<String, dynamic>)),
+            k as String,
+            LxdImageMetadataTemplate.fromJson(
+                Map<String, dynamic>.from(e as Map))),
       ),
     );
 
@@ -116,8 +117,7 @@ Map<String, dynamic> _$$_LxdImageMetadataToJson(_$_LxdImageMetadata instance) =>
       'templates': instance.templates.map((k, e) => MapEntry(k, e.toJson())),
     };
 
-_$_LxdImageMetadataTemplate _$$_LxdImageMetadataTemplateFromJson(
-        Map<String, dynamic> json) =>
+_$_LxdImageMetadataTemplate _$$_LxdImageMetadataTemplateFromJson(Map json) =>
     _$_LxdImageMetadataTemplate(
       when: (json['when'] as List<dynamic>).map((e) => e as String).toList(),
       createOnly: json['create_only'] as bool,

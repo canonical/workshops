@@ -6,8 +6,7 @@ part of 'project.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LxdProject _$$_LxdProjectFromJson(Map<String, dynamic> json) =>
-    _$_LxdProject(
+_$_LxdProject _$$_LxdProjectFromJson(Map json) => _$_LxdProject(
       config: Map<String, String>.from(json['config'] as Map),
       description: json['description'] as String,
       name: json['name'] as String,

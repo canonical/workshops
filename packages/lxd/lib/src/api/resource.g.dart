@@ -6,8 +6,7 @@ part of 'resource.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LxdCpuResources _$$_LxdCpuResourcesFromJson(Map<String, dynamic> json) =>
-    _$_LxdCpuResources(
+_$_LxdCpuResources _$$_LxdCpuResourcesFromJson(Map json) => _$_LxdCpuResources(
       architecture: json['architecture'] as String,
       sockets:
           (json['sockets'] as List<dynamic>).map((e) => e as String).toList(),
@@ -19,8 +18,7 @@ Map<String, dynamic> _$$_LxdCpuResourcesToJson(_$_LxdCpuResources instance) =>
       'sockets': instance.sockets,
     };
 
-_$_LxdMemoryResources _$$_LxdMemoryResourcesFromJson(
-        Map<String, dynamic> json) =>
+_$_LxdMemoryResources _$$_LxdMemoryResourcesFromJson(Map json) =>
     _$_LxdMemoryResources(
       used: json['used'] as int,
       total: json['total'] as int,
@@ -33,10 +31,9 @@ Map<String, dynamic> _$$_LxdMemoryResourcesToJson(
       'total': instance.total,
     };
 
-_$_LxdGpuResources _$$_LxdGpuResourcesFromJson(Map<String, dynamic> json) =>
-    _$_LxdGpuResources(
+_$_LxdGpuResources _$$_LxdGpuResourcesFromJson(Map json) => _$_LxdGpuResources(
       cards: (json['cards'] as List<dynamic>)
-          .map((e) => LxdGpuCard.fromJson(e as Map<String, dynamic>))
+          .map((e) => LxdGpuCard.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
     );
 
@@ -45,8 +42,7 @@ Map<String, dynamic> _$$_LxdGpuResourcesToJson(_$_LxdGpuResources instance) =>
       'cards': instance.cards.map((e) => e.toJson()).toList(),
     };
 
-_$_LxdGpuCard _$$_LxdGpuCardFromJson(Map<String, dynamic> json) =>
-    _$_LxdGpuCard(
+_$_LxdGpuCard _$$_LxdGpuCardFromJson(Map json) => _$_LxdGpuCard(
       driver: json['driver'] as String,
       driverVersion: json['driver_version'] as String,
       vendor: json['vendor'] as String,
@@ -61,11 +57,11 @@ Map<String, dynamic> _$$_LxdGpuCardToJson(_$_LxdGpuCard instance) =>
       'vendor_id': instance.vendorId,
     };
 
-_$_LXdNetworkResources _$$_LXdNetworkResourcesFromJson(
-        Map<String, dynamic> json) =>
+_$_LXdNetworkResources _$$_LXdNetworkResourcesFromJson(Map json) =>
     _$_LXdNetworkResources(
       cards: (json['cards'] as List<dynamic>)
-          .map((e) => LxdNetworkCard.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              LxdNetworkCard.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
     );
 
@@ -75,8 +71,7 @@ Map<String, dynamic> _$$_LXdNetworkResourcesToJson(
       'cards': instance.cards.map((e) => e.toJson()).toList(),
     };
 
-_$_LxdNetworkCard _$$_LxdNetworkCardFromJson(Map<String, dynamic> json) =>
-    _$_LxdNetworkCard(
+_$_LxdNetworkCard _$$_LxdNetworkCardFromJson(Map json) => _$_LxdNetworkCard(
       driver: json['driver'] as String,
       driverVersion: json['driver_version'] as String,
       vendor: json['vendor'] as String,
@@ -91,11 +86,11 @@ Map<String, dynamic> _$$_LxdNetworkCardToJson(_$_LxdNetworkCard instance) =>
       'vendor_id': instance.vendorId,
     };
 
-_$_LxdStorageResources _$$_LxdStorageResourcesFromJson(
-        Map<String, dynamic> json) =>
+_$_LxdStorageResources _$$_LxdStorageResourcesFromJson(Map json) =>
     _$_LxdStorageResources(
       disks: (json['disks'] as List<dynamic>)
-          .map((e) => LxdStorageDisk.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              LxdStorageDisk.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
     );
 
@@ -105,8 +100,7 @@ Map<String, dynamic> _$$_LxdStorageResourcesToJson(
       'disks': instance.disks.map((e) => e.toJson()).toList(),
     };
 
-_$_LxdStorageDisk _$$_LxdStorageDiskFromJson(Map<String, dynamic> json) =>
-    _$_LxdStorageDisk(
+_$_LxdStorageDisk _$$_LxdStorageDiskFromJson(Map json) => _$_LxdStorageDisk(
       id: json['id'] as String,
       model: json['model'] as String,
       serial: json['serial'] as String,
@@ -123,10 +117,10 @@ Map<String, dynamic> _$$_LxdStorageDiskToJson(_$_LxdStorageDisk instance) =>
       'type': instance.type,
     };
 
-_$_LxdUsbResources _$$_LxdUsbResourcesFromJson(Map<String, dynamic> json) =>
-    _$_LxdUsbResources(
+_$_LxdUsbResources _$$_LxdUsbResourcesFromJson(Map json) => _$_LxdUsbResources(
       devices: (json['devices'] as List<dynamic>)
-          .map((e) => LxdUsbDevice.fromJson(e as Map<String, dynamic>))
+          .map(
+              (e) => LxdUsbDevice.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
     );
 
@@ -135,8 +129,7 @@ Map<String, dynamic> _$$_LxdUsbResourcesToJson(_$_LxdUsbResources instance) =>
       'devices': instance.devices.map((e) => e.toJson()).toList(),
     };
 
-_$_LxdUsbDevice _$$_LxdUsbDeviceFromJson(Map<String, dynamic> json) =>
-    _$_LxdUsbDevice(
+_$_LxdUsbDevice _$$_LxdUsbDeviceFromJson(Map json) => _$_LxdUsbDevice(
       busAddress: json['bus_address'] as int,
       deviceAddress: json['device_address'] as int,
       product: json['product'] as String,
@@ -157,10 +150,10 @@ Map<String, dynamic> _$$_LxdUsbDeviceToJson(_$_LxdUsbDevice instance) =>
       'vendor_id': instance.vendorId,
     };
 
-_$_LxdPciResources _$$_LxdPciResourcesFromJson(Map<String, dynamic> json) =>
-    _$_LxdPciResources(
+_$_LxdPciResources _$$_LxdPciResourcesFromJson(Map json) => _$_LxdPciResources(
       devices: (json['devices'] as List<dynamic>)
-          .map((e) => LxdPciDevice.fromJson(e as Map<String, dynamic>))
+          .map(
+              (e) => LxdPciDevice.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
     );
 
@@ -169,8 +162,7 @@ Map<String, dynamic> _$$_LxdPciResourcesToJson(_$_LxdPciResources instance) =>
       'devices': instance.devices.map((e) => e.toJson()).toList(),
     };
 
-_$_LxdPciDevice _$$_LxdPciDeviceFromJson(Map<String, dynamic> json) =>
-    _$_LxdPciDevice(
+_$_LxdPciDevice _$$_LxdPciDeviceFromJson(Map json) => _$_LxdPciDevice(
       driver: json['driver'] as String,
       driverVersion: json['driver_version'] as String,
       pciAddress: json['pci_address'] as String,
@@ -191,8 +183,7 @@ Map<String, dynamic> _$$_LxdPciDeviceToJson(_$_LxdPciDevice instance) =>
       'vendor_id': instance.vendorId,
     };
 
-_$_LxdFirmware _$$_LxdFirmwareFromJson(Map<String, dynamic> json) =>
-    _$_LxdFirmware(
+_$_LxdFirmware _$$_LxdFirmwareFromJson(Map json) => _$_LxdFirmware(
       date: json['date'] as String,
       vendor: json['vendor'] as String,
       version: json['version'] as String,
@@ -205,8 +196,7 @@ Map<String, dynamic> _$$_LxdFirmwareToJson(_$_LxdFirmware instance) =>
       'version': instance.version,
     };
 
-_$_LxdChassis _$$_LxdChassisFromJson(Map<String, dynamic> json) =>
-    _$_LxdChassis(
+_$_LxdChassis _$$_LxdChassisFromJson(Map json) => _$_LxdChassis(
       serial: json['serial'] as String,
       type: json['type'] as String,
       vendor: json['vendor'] as String,
@@ -221,8 +211,7 @@ Map<String, dynamic> _$$_LxdChassisToJson(_$_LxdChassis instance) =>
       'version': instance.version,
     };
 
-_$_LxdMotherboard _$$_LxdMotherboardFromJson(Map<String, dynamic> json) =>
-    _$_LxdMotherboard(
+_$_LxdMotherboard _$$_LxdMotherboardFromJson(Map json) => _$_LxdMotherboard(
       product: json['product'] as String,
       serial: json['serial'] as String,
       vendor: json['vendor'] as String,
@@ -237,8 +226,7 @@ Map<String, dynamic> _$$_LxdMotherboardToJson(_$_LxdMotherboard instance) =>
       'version': instance.version,
     };
 
-_$_LxdSystemResources _$$_LxdSystemResourcesFromJson(
-        Map<String, dynamic> json) =>
+_$_LxdSystemResources _$$_LxdSystemResourcesFromJson(Map json) =>
     _$_LxdSystemResources(
       uuid: json['uuid'] as String,
       vendor: json['vendor'] as String,
@@ -248,10 +236,12 @@ _$_LxdSystemResources _$$_LxdSystemResourcesFromJson(
       sku: json['sku'] as String,
       serial: json['serial'] as String,
       type: json['type'] as String,
-      firmware: LxdFirmware.fromJson(json['firmware'] as Map<String, dynamic>),
-      chassis: LxdChassis.fromJson(json['chassis'] as Map<String, dynamic>),
-      motherboard:
-          LxdMotherboard.fromJson(json['motherboard'] as Map<String, dynamic>),
+      firmware: LxdFirmware.fromJson(
+          Map<String, dynamic>.from(json['firmware'] as Map)),
+      chassis: LxdChassis.fromJson(
+          Map<String, dynamic>.from(json['chassis'] as Map)),
+      motherboard: LxdMotherboard.fromJson(
+          Map<String, dynamic>.from(json['motherboard'] as Map)),
     );
 
 Map<String, dynamic> _$$_LxdSystemResourcesToJson(
@@ -270,20 +260,23 @@ Map<String, dynamic> _$$_LxdSystemResourcesToJson(
       'motherboard': instance.motherboard.toJson(),
     };
 
-_$_LxdResources _$$_LxdResourcesFromJson(Map<String, dynamic> json) =>
-    _$_LxdResources(
-      cpu: LxdCpuResources.fromJson(json['cpu'] as Map<String, dynamic>),
-      memory:
-          LxdMemoryResources.fromJson(json['memory'] as Map<String, dynamic>),
-      gpu: LxdGpuResources.fromJson(json['gpu'] as Map<String, dynamic>),
-      network:
-          LXdNetworkResources.fromJson(json['network'] as Map<String, dynamic>),
-      storage:
-          LxdStorageResources.fromJson(json['storage'] as Map<String, dynamic>),
-      usb: LxdUsbResources.fromJson(json['usb'] as Map<String, dynamic>),
-      pci: LxdPciResources.fromJson(json['pci'] as Map<String, dynamic>),
-      system:
-          LxdSystemResources.fromJson(json['system'] as Map<String, dynamic>),
+_$_LxdResources _$$_LxdResourcesFromJson(Map json) => _$_LxdResources(
+      cpu: LxdCpuResources.fromJson(
+          Map<String, dynamic>.from(json['cpu'] as Map)),
+      memory: LxdMemoryResources.fromJson(
+          Map<String, dynamic>.from(json['memory'] as Map)),
+      gpu: LxdGpuResources.fromJson(
+          Map<String, dynamic>.from(json['gpu'] as Map)),
+      network: LXdNetworkResources.fromJson(
+          Map<String, dynamic>.from(json['network'] as Map)),
+      storage: LxdStorageResources.fromJson(
+          Map<String, dynamic>.from(json['storage'] as Map)),
+      usb: LxdUsbResources.fromJson(
+          Map<String, dynamic>.from(json['usb'] as Map)),
+      pci: LxdPciResources.fromJson(
+          Map<String, dynamic>.from(json['pci'] as Map)),
+      system: LxdSystemResources.fromJson(
+          Map<String, dynamic>.from(json['system'] as Map)),
     );
 
 Map<String, dynamic> _$$_LxdResourcesToJson(_$_LxdResources instance) =>

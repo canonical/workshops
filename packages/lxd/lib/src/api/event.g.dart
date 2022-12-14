@@ -6,10 +6,12 @@ part of 'event.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LxdEvent _$$_LxdEventFromJson(Map<String, dynamic> json) => _$_LxdEvent(
+_$_LxdEvent _$$_LxdEventFromJson(Map json) => _$_LxdEvent(
       type: $enumDecode(_$LxdEventTypeEnumMap, json['type']),
       timestamp: DateTime.parse(json['timestamp'] as String),
-      metadata: json['metadata'] as Map<String, dynamic>?,
+      metadata: (json['metadata'] as Map?)?.map(
+        (k, e) => MapEntry(k as String, e),
+      ),
       location: json['location'] as String?,
       project: json['project'] as String?,
     );
@@ -29,8 +31,7 @@ const _$LxdEventTypeEnumMap = {
   LxdEventType.lifecycle: 'lifecycle',
 };
 
-_$_LxdEventLogging _$$_LxdEventLoggingFromJson(Map<String, dynamic> json) =>
-    _$_LxdEventLogging(
+_$_LxdEventLogging _$$_LxdEventLoggingFromJson(Map json) => _$_LxdEventLogging(
       message: json['message'] as String,
       level: json['level'] as String,
       context: Map<String, String>.from(json['context'] as Map),
@@ -43,15 +44,17 @@ Map<String, dynamic> _$$_LxdEventLoggingToJson(_$_LxdEventLogging instance) =>
       'context': instance.context,
     };
 
-_$_LxdEventLifecycle _$$_LxdEventLifecycleFromJson(Map<String, dynamic> json) =>
+_$_LxdEventLifecycle _$$_LxdEventLifecycleFromJson(Map json) =>
     _$_LxdEventLifecycle(
       action: json['action'] as String,
       source: json['source'] as String,
-      context: json['context'] as Map<String, dynamic>?,
+      context: (json['context'] as Map?)?.map(
+        (k, e) => MapEntry(k as String, e),
+      ),
       requestor: json['requestor'] == null
           ? null
           : LxdEventLifecycleRequestor.fromJson(
-              json['requestor'] as Map<String, dynamic>),
+              Map<String, dynamic>.from(json['requestor'] as Map)),
     );
 
 Map<String, dynamic> _$$_LxdEventLifecycleToJson(
@@ -64,7 +67,7 @@ Map<String, dynamic> _$$_LxdEventLifecycleToJson(
     };
 
 _$_LxdEventLifecycleRequestor _$$_LxdEventLifecycleRequestorFromJson(
-        Map<String, dynamic> json) =>
+        Map json) =>
     _$_LxdEventLifecycleRequestor(
       username: json['username'] as String,
       protocol: json['protocol'] as String,

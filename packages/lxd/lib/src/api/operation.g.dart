@@ -6,8 +6,7 @@ part of 'operation.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LxdOperation _$$_LxdOperationFromJson(Map<String, dynamic> json) =>
-    _$_LxdOperation(
+_$_LxdOperation _$$_LxdOperationFromJson(Map json) => _$_LxdOperation(
       id: json['id'] as String,
       type: $enumDecode(_$LxdOperationTypeEnumMap, json['class']),
       description: json['description'] as String,
@@ -15,11 +14,13 @@ _$_LxdOperation _$$_LxdOperationFromJson(Map<String, dynamic> json) =>
       updatedAt: DateTime.parse(json['updated_at'] as String),
       status: json['status'] as String,
       statusCode: json['status_code'] as int,
-      resources: (json['resources'] as Map<String, dynamic>?)?.map(
-        (k, e) =>
-            MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
+      resources: (json['resources'] as Map?)?.map(
+        (k, e) => MapEntry(
+            k as String, (e as List<dynamic>).map((e) => e as String).toList()),
       ),
-      metadata: json['metadata'] as Map<String, dynamic>?,
+      metadata: (json['metadata'] as Map?)?.map(
+        (k, e) => MapEntry(k as String, e),
+      ),
       mayCancel: json['may_cancel'] as bool,
       error: json['err'] as String,
       location: json['location'] as String,

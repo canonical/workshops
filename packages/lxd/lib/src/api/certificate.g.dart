@@ -6,8 +6,7 @@ part of 'certificate.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LxdCertificate _$$_LxdCertificateFromJson(Map<String, dynamic> json) =>
-    _$_LxdCertificate(
+_$_LxdCertificate _$$_LxdCertificateFromJson(Map json) => _$_LxdCertificate(
       name: json['name'] as String,
       type: $enumDecode(_$LxdCertificateTypeEnumMap, json['type'],
           unknownValue: LxdCertificateType.unknown),
