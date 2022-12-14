@@ -90,6 +90,7 @@
   "projectStateLabel": "Project state",
   "receivedLabel": "Received",
   "releaseLabel": "Release",
+  "resetLabel": "Reset to default",
   "resourceLabel": "Resource",
   "resourcesLabel": "Resources",
   "saveButton": "Save",
