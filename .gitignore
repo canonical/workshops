@@ -1,7 +1,6 @@
 # Miscellaneous
 *.class
 *.log
-*.pyc
 *.swp
 .DS_Store
 .atom/
@@ -46,3 +45,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# python related
+venv/
+__pycache__/
+*.py[cod]
