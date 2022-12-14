@@ -6,12 +6,11 @@ part of 'instance.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LxdInstance _$$_LxdInstanceFromJson(Map<String, dynamic> json) =>
-    _$_LxdInstance(
+_$_LxdInstance _$$_LxdInstanceFromJson(Map json) => _$_LxdInstance(
       architecture: json['architecture'] as String,
       config: Map<String, String>.from(json['config'] as Map),
-      devices: (json['devices'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(k, Map<String, String>.from(e as Map)),
+      devices: (json['devices'] as Map).map(
+        (k, e) => MapEntry(k as String, Map<String, String>.from(e as Map)),
       ),
       ephemeral: json['ephemeral'] as bool,
       profiles:
@@ -20,11 +19,11 @@ _$_LxdInstance _$$_LxdInstanceFromJson(Map<String, dynamic> json) =>
       stateful: json['stateful'] as bool,
       description: json['description'] as String,
       createdAt: DateTime.parse(json['created_at'] as String),
-      expandedConfig: (json['expanded_config'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String),
+      expandedConfig: (json['expanded_config'] as Map?)?.map(
+        (k, e) => MapEntry(k as String, e as String),
       ),
-      expandedDevices: (json['expanded_devices'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, Map<String, String>.from(e as Map)),
+      expandedDevices: (json['expanded_devices'] as Map?)?.map(
+        (k, e) => MapEntry(k as String, Map<String, String>.from(e as Map)),
       ),
       name: json['name'] as String,
       status: json['status'] as String,

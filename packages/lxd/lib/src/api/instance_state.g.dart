@@ -6,27 +6,30 @@ part of 'instance_state.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LxdInstanceState _$$_LxdInstanceStateFromJson(Map<String, dynamic> json) =>
+_$_LxdInstanceState _$$_LxdInstanceStateFromJson(Map json) =>
     _$_LxdInstanceState(
       status: $enumDecode(_$LxdInstanceStatusEnumMap, json['status']),
       statusCode: json['status_code'] as int,
-      disk: (json['disk'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(
-            k, LxdInstanceDiskState.fromJson(e as Map<String, dynamic>)),
+      disk: (json['disk'] as Map?)?.map(
+        (k, e) => MapEntry(k as String,
+            LxdInstanceDiskState.fromJson(Map<String, dynamic>.from(e as Map))),
       ),
       memory: json['memory'] == null
           ? null
           : LxdInstanceMemoryState.fromJson(
-              json['memory'] as Map<String, dynamic>),
-      network: (json['network'] as Map<String, dynamic>?)?.map(
+              Map<String, dynamic>.from(json['memory'] as Map)),
+      network: (json['network'] as Map?)?.map(
         (k, e) => MapEntry(
-            k, LxdInstanceNetworkState.fromJson(e as Map<String, dynamic>)),
+            k as String,
+            LxdInstanceNetworkState.fromJson(
+                Map<String, dynamic>.from(e as Map))),
       ),
       pid: json['pid'] as int,
       processes: json['processes'] as int? ?? -1,
       cpu: json['cpu'] == null
           ? null
-          : LxdInstanceCpuState.fromJson(json['cpu'] as Map<String, dynamic>),
+          : LxdInstanceCpuState.fromJson(
+              Map<String, dynamic>.from(json['cpu'] as Map)),
     );
 
 Map<String, dynamic> _$$_LxdInstanceStateToJson(_$_LxdInstanceState instance) =>
@@ -48,8 +51,7 @@ const _$LxdInstanceStatusEnumMap = {
   LxdInstanceStatus.error: 'Error',
 };
 
-_$_LxdInstanceDiskState _$$_LxdInstanceDiskStateFromJson(
-        Map<String, dynamic> json) =>
+_$_LxdInstanceDiskState _$$_LxdInstanceDiskStateFromJson(Map json) =>
     _$_LxdInstanceDiskState(
       usage: json['usage'] as int,
     );
@@ -60,8 +62,7 @@ Map<String, dynamic> _$$_LxdInstanceDiskStateToJson(
       'usage': instance.usage,
     };
 
-_$_LxdInstanceCpuState _$$_LxdInstanceCpuStateFromJson(
-        Map<String, dynamic> json) =>
+_$_LxdInstanceCpuState _$$_LxdInstanceCpuStateFromJson(Map json) =>
     _$_LxdInstanceCpuState(
       usage: json['usage'] as int,
     );
@@ -72,8 +73,7 @@ Map<String, dynamic> _$$_LxdInstanceCpuStateToJson(
       'usage': instance.usage,
     };
 
-_$_LxdInstanceMemoryState _$$_LxdInstanceMemoryStateFromJson(
-        Map<String, dynamic> json) =>
+_$_LxdInstanceMemoryState _$$_LxdInstanceMemoryStateFromJson(Map json) =>
     _$_LxdInstanceMemoryState(
       usage: json['usage'] as int,
       usagePeak: json['usage_peak'] as int,
@@ -90,15 +90,14 @@ Map<String, dynamic> _$$_LxdInstanceMemoryStateToJson(
       'swap_usage_peak': instance.swapUsagePeak,
     };
 
-_$_LxdInstanceNetworkState _$$_LxdInstanceNetworkStateFromJson(
-        Map<String, dynamic> json) =>
+_$_LxdInstanceNetworkState _$$_LxdInstanceNetworkStateFromJson(Map json) =>
     _$_LxdInstanceNetworkState(
       addresses: (json['addresses'] as List<dynamic>)
-          .map((e) =>
-              LxdInstanceNetworkAddress.fromJson(e as Map<String, dynamic>))
+          .map((e) => LxdInstanceNetworkAddress.fromJson(
+              Map<String, dynamic>.from(e as Map)))
           .toList(),
       counters: LxdInstanceNetworkCounters.fromJson(
-          json['counters'] as Map<String, dynamic>),
+          Map<String, dynamic>.from(json['counters'] as Map)),
       hwaddr: json['hwaddr'] as String,
       hostName: json['host_name'] as String,
       mtu: json['mtu'] as int,
@@ -118,8 +117,7 @@ Map<String, dynamic> _$$_LxdInstanceNetworkStateToJson(
       'type': instance.type,
     };
 
-_$_LxdInstanceNetworkAddress _$$_LxdInstanceNetworkAddressFromJson(
-        Map<String, dynamic> json) =>
+_$_LxdInstanceNetworkAddress _$$_LxdInstanceNetworkAddressFromJson(Map json) =>
     _$_LxdInstanceNetworkAddress(
       family: $enumDecode(_$LxdNetworkFamilyEnumMap, json['family']),
       address: json['address'] as String,
@@ -148,7 +146,7 @@ const _$LxdNetworkScopeEnumMap = {
 };
 
 _$_LxdInstanceNetworkCounters _$$_LxdInstanceNetworkCountersFromJson(
-        Map<String, dynamic> json) =>
+        Map json) =>
     _$_LxdInstanceNetworkCounters(
       bytesReceived: json['bytes_received'] as int,
       bytesSent: json['bytes_sent'] as int,

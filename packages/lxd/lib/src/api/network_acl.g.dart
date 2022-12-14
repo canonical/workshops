@@ -6,7 +6,7 @@ part of 'network_acl.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LxdNetworkAclRule _$$_LxdNetworkAclRuleFromJson(Map<String, dynamic> json) =>
+_$_LxdNetworkAclRule _$$_LxdNetworkAclRuleFromJson(Map json) =>
     _$_LxdNetworkAclRule(
       action: json['action'] as String,
       source: json['source'] as String?,
@@ -44,15 +44,16 @@ Map<String, dynamic> _$$_LxdNetworkAclRuleToJson(
   return val;
 }
 
-_$_LxdNetworkAcl _$$_LxdNetworkAclFromJson(Map<String, dynamic> json) =>
-    _$_LxdNetworkAcl(
+_$_LxdNetworkAcl _$$_LxdNetworkAclFromJson(Map json) => _$_LxdNetworkAcl(
       name: json['name'] as String,
       description: json['description'] as String,
       egress: (json['egress'] as List<dynamic>)
-          .map((e) => LxdNetworkAclRule.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              LxdNetworkAclRule.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       ingress: (json['ingress'] as List<dynamic>)
-          .map((e) => LxdNetworkAclRule.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              LxdNetworkAclRule.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
       config: Map<String, String>.from(json['config'] as Map),
       usedBy:
