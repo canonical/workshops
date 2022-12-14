@@ -243,6 +243,15 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
         returnValue: _i6.Stream<_i2.LxdInstanceId>.empty(),
       ) as _i6.Stream<_i2.LxdInstanceId>);
   @override
+  _i6.Future<void> init() => (super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
   _i6.Future<Map<String, List<String>>> getOperations() => (super.noSuchMethod(
         Invocation.method(
           #getOperations,
@@ -1047,15 +1056,6 @@ class MockLxdService extends _i1.Mock implements _i5.LxdService {
           ),
         )),
       ) as _i6.Future<_i2.LxdOperation>);
-  @override
-  _i6.Future<void> init() => (super.noSuchMethod(
-        Invocation.method(
-          #init,
-          [],
-        ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
   @override
   _i6.Future<void> dispose() => (super.noSuchMethod(
         Invocation.method(
