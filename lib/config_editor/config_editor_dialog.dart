@@ -114,9 +114,14 @@ class ConfigEditor extends StatelessWidget {
         children: [
           Row(
             children: [
-              Tooltip(
-                message: description,
-                child: Text(name),
+              TooltipTheme(
+                data: const TooltipThemeData(
+                  waitDuration: Duration(milliseconds: 200),
+                ),
+                child: Tooltip(
+                  message: description,
+                  child: Text(name),
+                ),
               ),
               if (currentValue != null) ...[
                 const SizedBox(width: 8),
