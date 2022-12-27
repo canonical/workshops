@@ -13,6 +13,10 @@ import 'tabs/tab_page.dart';
 class Workshops extends StatelessWidget {
   const Workshops({super.key});
 
+  static const tooltipTheme = TooltipThemeData(
+    waitDuration: Duration(milliseconds: 500),
+  );
+
   @override
   Widget build(BuildContext context) {
     return CommandStore(
@@ -23,15 +27,19 @@ class Workshops extends StatelessWidget {
           // set explicit dialog background colors to avoid theme change
           // rendering issues (https://github.com/ubuntu/yaru.dart/issues/222)
           theme: yaru.theme?.copyWith(
+            tooltipTheme: tooltipTheme,
             dialogTheme: yaru.theme?.dialogTheme
                 .copyWith(backgroundColor: YaruColors.porcelain),
           ),
           darkTheme: yaru.darkTheme?.copyWith(
+            tooltipTheme: tooltipTheme,
             dialogTheme: yaru.darkTheme?.dialogTheme
                 .copyWith(backgroundColor: YaruColors.coolGrey),
           ),
-          highContrastTheme: yaruHighContrastLight,
-          highContrastDarkTheme: yaruHighContrastDark,
+          highContrastTheme:
+              yaruHighContrastLight.copyWith(tooltipTheme: tooltipTheme),
+          highContrastDarkTheme:
+              yaruHighContrastDark.copyWith(tooltipTheme: tooltipTheme),
           themeMode: context.themeMode,
           localizationsDelegates: const [
             ...AppLocalizations.localizationsDelegates,
