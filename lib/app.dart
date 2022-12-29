@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_localizations/ubuntu_localizations.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_colors/yaru_colors.dart';
 
 import 'command_palette/command_palette_page.dart';
 import 'settings.dart';
@@ -13,10 +12,6 @@ import 'tabs/tab_page.dart';
 class Workshops extends StatelessWidget {
   const Workshops({super.key});
 
-  static const tooltipTheme = TooltipThemeData(
-    waitDuration: Duration(milliseconds: 500),
-  );
-
   @override
   Widget build(BuildContext context) {
     return CommandStore(
@@ -24,22 +19,10 @@ class Workshops extends StatelessWidget {
       child: YaruTheme(builder: (context, yaru, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          // set explicit dialog background colors to avoid theme change
-          // rendering issues (https://github.com/ubuntu/yaru.dart/issues/222)
-          theme: yaru.theme?.copyWith(
-            tooltipTheme: tooltipTheme,
-            dialogTheme: yaru.theme?.dialogTheme
-                .copyWith(backgroundColor: YaruColors.porcelain),
-          ),
-          darkTheme: yaru.darkTheme?.copyWith(
-            tooltipTheme: tooltipTheme,
-            dialogTheme: yaru.darkTheme?.dialogTheme
-                .copyWith(backgroundColor: YaruColors.coolGrey),
-          ),
-          highContrastTheme:
-              yaruHighContrastLight.copyWith(tooltipTheme: tooltipTheme),
-          highContrastDarkTheme:
-              yaruHighContrastDark.copyWith(tooltipTheme: tooltipTheme),
+          theme: yaru.theme,
+          darkTheme: yaru.darkTheme,
+          highContrastTheme: yaruHighContrastLight,
+          highContrastDarkTheme: yaruHighContrastDark,
           themeMode: context.themeMode,
           localizationsDelegates: const [
             ...AppLocalizations.localizationsDelegates,
