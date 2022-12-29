@@ -127,7 +127,7 @@ class ConfigEditor extends StatelessWidget {
                   iconSize: 16,
                   tooltip: l10n.resetLabel,
                   onPressed: () => resetValue?.call(name),
-                  icon: const Icon(YaruIcons.edit_undo),
+                  icon: const Icon(YaruIcons.undo),
                 ),
               ]
             ],
