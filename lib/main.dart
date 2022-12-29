@@ -11,7 +11,6 @@ import 'package:ubuntu_localizations/ubuntu_localizations.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_colors/yaru_colors.dart';
 
 import 'path_provider.dart';
 import 'settings.dart';
@@ -63,16 +62,8 @@ Future<void> main() async {
       child: YaruTheme(
         builder: (context, yaru, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          // set explicit dialog background colors to avoid theme change
-          // rendering issues (https://github.com/ubuntu/yaru.dart/issues/222)
-          theme: yaru.theme?.copyWith(
-            dialogTheme: yaru.theme?.dialogTheme
-                .copyWith(backgroundColor: YaruColors.porcelain),
-          ),
-          darkTheme: yaru.darkTheme?.copyWith(
-            dialogTheme: yaru.darkTheme?.dialogTheme
-                .copyWith(backgroundColor: YaruColors.coolGrey),
-          ),
+          theme: yaru.theme,
+          darkTheme: yaru.darkTheme,
           highContrastTheme: yaruHighContrastLight,
           highContrastDarkTheme: yaruHighContrastDark,
           themeMode: context.themeMode,
