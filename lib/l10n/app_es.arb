@@ -240,5 +240,15 @@
   "editButton": "Editar",
   "@editButton": {},
   "saveButton": "Guardar",
-  "@saveButton": {}
+  "@saveButton": {},
+  "addLabel": "Añadir",
+  "@addLabel": {},
+  "addOptionTitle": "Añadir una opción",
+  "@addOptionTitle": {},
+  "keyLabel": "clave",
+  "@keyLabel": {},
+  "valueLabel": "valor",
+  "@valueLabel": {},
+  "resetLabel": "Restablecer los valores predeterminados",
+  "@resetLabel": {}
 }
