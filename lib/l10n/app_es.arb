@@ -250,7 +250,5 @@
   "valueLabel": "valor",
   "@valueLabel": {},
   "resetLabel": "Restablecer los valores predeterminados",
-  "@resetLabel": {},
-  "retryButton": "Reintentar",
-  "@retryButton": {}
+  "@resetLabel": {}
 }
