@@ -1,17 +1,12 @@
 import 'package:command_store/command_store.dart';
 import 'package:flutter/material.dart';
-import 'package:lxd/lxd.dart';
-import 'package:lxd_service/lxd_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:simplestreams/simplestreams.dart';
-import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:ubuntu_localizations/ubuntu_localizations.dart';
+import 'package:yaru/yaru.dart';
 
 import 'command_palette/command_palette_page.dart';
-import 'home/instance_store.dart';
-import 'launcher/local_image_model.dart';
-import 'launcher/remote_image_model.dart';
-import 'remotes/remote_store.dart';
+import 'settings.dart';
 import 'tabs/tab_page.dart';
 
 class Workshops extends StatelessWidget {
@@ -19,47 +14,29 @@ class Workshops extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => InstanceStore(getService<LxdService>())..init(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => RemoteStore(getService<SharedPreferences>())..init(),
-        ),
-        ChangeNotifierProxyProvider<RemoteStore, RemoteImageModel>(
-          create: (_) => RemoteImageModel(),
-          update: (_, store, model) {
-            final url = store.current?.address;
-            model ??= RemoteImageModel();
-            if (model.client?.url != url) {
-              final client = url?.isNotEmpty == true
-                  ? createService<SimpleStreamClient>(url)
-                  : null;
-              model.init(client);
-            }
-            return model;
+    return CommandStore(
+      shortcuts: context.watch<ShortcutStore>(),
+      child: YaruTheme(builder: (context, yaru, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: yaru.theme,
+          darkTheme: yaru.darkTheme,
+          highContrastTheme: yaruHighContrastLight,
+          highContrastDarkTheme: yaruHighContrastDark,
+          themeMode: context.themeMode,
+          localizationsDelegates: const [
+            ...AppLocalizations.localizationsDelegates,
+            ...GlobalUbuntuLocalizations.delegates,
+          ],
+          supportedLocales: {
+            const Locale('en'), // make sure 'en' comes first
+            ...List.of(AppLocalizations.supportedLocales)
+              ..remove(const Locale('en')),
           },
-        ),
-        ChangeNotifierProxyProvider<RemoteStore, LocalImageModel>(
-          create: (_) => LocalImageModel(),
-          update: (_, store, model) {
-            final url = store.current?.address;
-            model ??= LocalImageModel();
-            if (model.client?.url.toString() != url) {
-              final client = url?.isNotEmpty == true
-                  ? createService<LxdClient>(url)
-                  : null;
-              model.init(client);
-            }
-            return model;
-          },
-        ),
-      ],
-      builder: (context, child) => CommandStore(
-        shortcuts: context.watch<ShortcutStore>(),
-        child: const CommandPalettePage(child: TabPage()),
-      ),
+          onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
+          home: const CommandPalettePage(child: TabPage()),
+        );
+      }),
     );
   }
 }
