@@ -12,10 +12,7 @@ import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru/yaru.dart';
 
-import 'launcher/local_image_model.dart';
-import 'launcher/remote_image_model.dart';
 import 'path_provider.dart';
-import 'remotes/remote_store.dart';
 import 'settings.dart';
 import 'splash.dart';
 
@@ -60,37 +57,6 @@ Future<void> main() async {
         ChangeNotifierProxyProvider<ShortcutSettings, ShortcutStore>(
           create: (_) => ShortcutStore(),
           update: (_, settings, store) => store!..init(settings),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => RemoteStore(getService<SharedPreferences>())..init(),
-        ),
-        ChangeNotifierProxyProvider<RemoteStore, RemoteImageModel>(
-          create: (_) => RemoteImageModel(),
-          update: (_, store, model) {
-            final url = store.current?.address;
-            model ??= RemoteImageModel();
-            if (model.client?.url != url) {
-              final client = url?.isNotEmpty == true
-                  ? createService<SimpleStreamClient>(url)
-                  : null;
-              model.init(client);
-            }
-            return model;
-          },
-        ),
-        ChangeNotifierProxyProvider<RemoteStore, LocalImageModel>(
-          create: (_) => LocalImageModel(),
-          update: (_, store, model) {
-            final url = store.current?.address;
-            model ??= LocalImageModel();
-            if (model.client?.url.toString() != url) {
-              final client = url?.isNotEmpty == true
-                  ? createService<LxdClient>(url)
-                  : null;
-              model.init(client);
-            }
-            return model;
-          },
         ),
       ],
       child: YaruTheme(
