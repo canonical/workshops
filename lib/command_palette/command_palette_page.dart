@@ -25,7 +25,6 @@ class CommandPalettePage extends StatelessWidget {
         child: Actions(
           actions: {
             CommandPaletteOpenIntent: CommandPaletteOpenAction(),
-            CommandPaletteCloseIntent: CommandPaletteCloseAction(),
           },
           child: CommandPalette(
             config: CommandPaletteConfig(
@@ -35,9 +34,8 @@ class CommandPalettePage extends StatelessWidget {
                   hintText: l10n.searchCommandHint,
                 ),
               ),
-              // remove default shortcuts in favor of the command store
+              // remove default shortcut in favor of the command store
               openKeySet: LogicalKeySet(const LogicalKeyboardKey(-1)),
-              closeKeySet: LogicalKeySet(const LogicalKeyboardKey(-1)),
             ),
             actions: CommandStore.commandsOf(context)
                 .where((c) => c.label != null)

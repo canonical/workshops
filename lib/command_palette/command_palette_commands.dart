@@ -19,11 +19,6 @@ class CommandPaletteCommands extends StatelessWidget {
           label: l10n.openPaletteCommand,
           intent: CommandPaletteOpenIntent(),
         ),
-        Command(
-          id: 'commandPalette.close',
-          label: l10n.closePaletteCommand,
-          intent: CommandPaletteCloseIntent(),
-        ),
       ],
       child: child,
     );
