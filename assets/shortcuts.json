@@ -1,6 +1,5 @@
 {
   "commandPalette.open": "<Control><Shift>K",
-  "commandPalette.close": "Escape",
   "tab.new": "<Control><Shift>T",
   "tab.close": "<Control><Shift>W",
   "tab.next": "<Control>Page_Down",

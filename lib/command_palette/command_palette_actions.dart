@@ -20,9 +20,3 @@ class CommandPaletteOpenAction
   @override
   void invokeCommandPalette(CommandPalette palette) => palette.open();
 }
-
-class CommandPaletteCloseAction
-    extends _CommandPaletteAction<CommandPaletteCloseIntent> {
-  @override
-  void invokeCommandPalette(CommandPalette palette) => palette.close();
-}
