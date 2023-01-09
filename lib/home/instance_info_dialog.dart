@@ -9,8 +9,8 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:provider/provider.dart';
-import 'package:title_bar/title_bar.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import '../config_editor/config_editor_dialog.dart';
 import '../workshops_l10n.dart';
@@ -46,7 +46,7 @@ class InstanceInfoDialog extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DialogTitleBar(
+            YaruDialogTitleBar(
               title: Text(l10n.instanceInformationTitle),
             ),
             Expanded(

@@ -62,8 +62,6 @@ dependencies:
   substring_highlight: ^1.0.33
   terminal_view:
     path: packages/terminal_view
-  title_bar:
-    path: packages/title_bar
   ubuntu_localizations: ^0.0.3
   ubuntu_logger: ^0.0.1
   ubuntu_service: ^0.2.0
