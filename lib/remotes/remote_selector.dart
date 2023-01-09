@@ -4,22 +4,10 @@ import 'package:provider/provider.dart';
 
 import 'remote_store.dart';
 
-class RemoteSelector extends StatefulWidget {
+class RemoteSelector extends StatelessWidget {
   const RemoteSelector({super.key, this.enabled = true});
 
   final bool enabled;
-
-  @override
-  State<RemoteSelector> createState() => _RemoteSelectorState();
-}
-
-class _RemoteSelectorState extends State<RemoteSelector> {
-  @override
-  void initState() {
-    super.initState();
-    final store = context.read<RemoteStore>();
-    WidgetsBinding.instance.addPostFrameCallback((_) => store.init());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +24,7 @@ class _RemoteSelectorState extends State<RemoteSelector> {
           child: Text(remote.name),
         );
       }).toList(),
-      onChanged: widget.enabled ? store.setCurrent : null,
+      onChanged: enabled ? store.setCurrent : null,
     );
   }
 }
