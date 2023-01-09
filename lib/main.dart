@@ -45,9 +45,6 @@ Future<void> main() async {
           create: (_) => InstanceStore(service)..init(),
         ),
         ChangeNotifierProvider(
-          create: (_) => RemoteStore(preferences)..init(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => DefaultSettings(path.getBundleFile('settings.json')),
         ),
         ChangeNotifierProxyProvider<DefaultSettings, AppSettings>(
@@ -63,8 +60,20 @@ Future<void> main() async {
               ShortcutSettings(path.getConfigFile('shortcuts.json'))..init(),
           update: (_, base, settings) => settings!..inherit(base),
         ),
+        ChangeNotifierProvider(
+          create: (_) => DefaultRemotes(path.getBundleFile('remotes.json')),
+        ),
+        ChangeNotifierProxyProvider<DefaultRemotes, RemoteSettings>(
+          create: (_) =>
+              RemoteSettings(path.getConfigFile('remotes.json'))..init(),
+          update: (_, base, settings) => settings!..inherit(base),
+        ),
         ChangeNotifierProxyProvider<ShortcutSettings, ShortcutStore>(
           create: (_) => ShortcutStore(),
+          update: (_, settings, store) => store!..init(settings),
+        ),
+        ChangeNotifierProxyProvider<RemoteSettings, RemoteStore>(
+          create: (_) => RemoteStore(),
           update: (_, settings, store) => store!..init(settings),
         ),
         ChangeNotifierProxyProvider<RemoteStore, RemoteImageModel>(

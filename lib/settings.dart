@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jsettings/flutter_jsettings.dart';
+import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
 
 class DefaultSettings extends JSettingsNotifier with JSettingsReadOnlyMixin {
@@ -9,6 +10,23 @@ class DefaultSettings extends JSettingsNotifier with JSettingsReadOnlyMixin {
 
 class AppSettings extends JSettingsNotifier with JSettingsInheritedMixin {
   AppSettings(super.path);
+}
+
+class DefaultRemotes extends JSettingsNotifier with JSettingsReadOnlyMixin {
+  DefaultRemotes(super.path);
+}
+
+class RemoteSettings extends JSettingsNotifier with JSettingsInheritedMixin {
+  RemoteSettings(super.path);
+
+  String getCurrent() => getValue('current') as String;
+  Future<void> setCurrent(String? value) => setValue('current', value);
+
+  List<LxdRemote> getRemotes() {
+    return (getValue('remotes') as List)
+        .map((json) => LxdRemote.fromJson(json as Map<String, dynamic>))
+        .toList();
+  }
 }
 
 class DefaultShortcuts extends JSettingsNotifier with JSettingsReadOnlyMixin {

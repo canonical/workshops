@@ -1,0 +1,32 @@
+{
+  "current": "images",
+  "remotes": [
+    {
+      "name": "local",
+      "address": "unix://localhost",
+      "isStatic": true,
+      "isPublic": false,
+      "protocol": "lxd"
+    },
+    {
+      "name": "images",
+      "address": "https://images.linuxcontainers.org",
+      "isPublic": true,
+      "protocol": "simplestreams"
+    },
+    {
+      "name": "ubuntu",
+      "address": "https://cloud-images.ubuntu.com/releases",
+      "isPublic": true,
+      "isStatic": true,
+      "protocol": "simplestreams"
+    },
+    {
+      "name": "daily",
+      "address": "https://cloud-images.ubuntu.com/daily",
+      "isPublic": true,
+      "isStatic": true,
+      "protocol": "simplestreams"
+    }
+  ]
+}
