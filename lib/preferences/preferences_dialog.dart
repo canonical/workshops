@@ -1,26 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:title_bar/title_bar.dart';
-import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'appearance_view.dart';
-import 'preferences_model.dart';
 import 'project_settings_view.dart';
 import 'shortcut_view.dart';
 
 Future<void> showPreferencesDialog({required BuildContext context}) async {
   return showDialog(
     context: context,
-    builder: (context) {
-      return ChangeNotifierProvider(
-        create: (_) => PreferencesModel(getService<SharedPreferences>()),
-        child: const PreferencesDialog(),
-      );
-    },
+    builder: (context) => const PreferencesDialog(),
   );
 }
 
