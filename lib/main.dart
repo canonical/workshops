@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simplestreams/simplestreams.dart';
 import 'package:ubuntu_logger/ubuntu_logger.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
@@ -23,9 +22,6 @@ Future<void> main() async {
   final service = LxdService();
   await service.init();
   registerServiceInstance<LxdService>(service);
-
-  final preferences = await SharedPreferences.getInstance();
-  registerServiceInstance<SharedPreferences>(preferences);
 
   final path = PathProvider();
   registerServiceInstance<PathProvider>(path);
