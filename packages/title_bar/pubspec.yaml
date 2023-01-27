@@ -13,7 +13,7 @@ dependencies:
       ref: b8188c800928afdbcec1dc0ff3e680c466e9a053
       url: https://github.com/leanflutter/window_manager
   yaru_icons: ^1.0.0
-  yaru_widgets: 2.0.0-beta-3
+  yaru_widgets: ^2.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
