@@ -37,14 +37,16 @@ class DialogTitleBar extends StatelessWidget {
                     child: Center(child: leading!),
                   )
                 : null,
-            trailing: Padding(
-              padding: const EdgeInsets.all(8),
-              child: trailing ??
-                  YaruWindowControl(
-                    type: YaruWindowControlType.close,
-                    onTap: () => Navigator.maybePop(context),
-                  ),
-            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: trailing ??
+                    YaruWindowControl(
+                      type: YaruWindowControlType.close,
+                      onTap: () => Navigator.maybePop(context),
+                    ),
+              ),
+            ],
           ),
         ),
       ),
