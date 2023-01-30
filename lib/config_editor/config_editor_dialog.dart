@@ -15,19 +15,20 @@ Future<void> showConfigEditorDialog(
   required Future<void> Function(Map<String, String> config) onSaved,
 }) async {
   final configSchema = await loadConfigSchema(assetName);
-  // https://github.com/canonical/workshops/issues/323
-  // ignore: use_build_context_synchronously
-  return showDialog(
-    context: context,
-    builder: (context) => ChangeNotifierProvider(
-      create: (_) => ConfigEditorModel(
-        config: config,
-        configSchema: configSchema,
-        onSaved: onSaved,
+
+  if (context.mounted) {
+    return showDialog(
+      context: context,
+      builder: (context) => ChangeNotifierProvider(
+        create: (_) => ConfigEditorModel(
+          config: config,
+          configSchema: configSchema,
+          onSaved: onSaved,
+        ),
+        child: const ConfigEditorDialog(),
       ),
-      child: const ConfigEditorDialog(),
-    ),
-  );
+    );
+  }
 }
 
 class ConfigEditorDialog extends StatelessWidget {
