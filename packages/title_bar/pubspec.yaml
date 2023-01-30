@@ -8,10 +8,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  window_manager: # TODO: ^0.2.9
-    git:
-      ref: b8188c800928afdbcec1dc0ff3e680c466e9a053
-      url: https://github.com/leanflutter/window_manager
+  window_manager: ^0.3.0 
   yaru_icons: ^1.0.0
   yaru_widgets: ^2.0.0
 
