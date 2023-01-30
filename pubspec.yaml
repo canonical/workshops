@@ -78,7 +78,7 @@ dependencies:
   wizard_router: ^0.9.0
   xdg_directories: ^0.2.0+2
   yaml: ^3.1.1
-  yaru: ^0.4.5
+  yaru: ^0.5.0
   yaru_icons: ^1.0.0
   yaru_widgets: 2.0.0-beta-3
 
