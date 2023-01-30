@@ -52,7 +52,7 @@ class LocalImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = context.watch<LocalImageModel>();
     return YaruBorderContainer(
-      color: Theme.of(context).backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: model.images?.when(
         data: (images) => _LocalImageView(
           images: images,

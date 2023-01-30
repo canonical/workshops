@@ -8,17 +8,17 @@ class ScrollToEndAction extends ScrollAction {
   @override
   void invoke(covariant ScrollIntent intent) {
     final context = primaryFocus!.context!;
-    var state = Scrollable.of(context);
+    var state = Scrollable.maybeOf(context);
     if (state == null) {
-      final controller = PrimaryScrollController.of(context);
-      if (controller!.position.context.notificationContext == null &&
-          Scrollable.of(controller.position.context.notificationContext!) ==
-              null) {
-        return;
+      final notificationContext = PrimaryScrollController.maybeOf(context)
+          ?.position
+          .context
+          .notificationContext;
+      if (notificationContext != null) {
+        state = Scrollable.maybeOf(notificationContext);
       }
-      state = Scrollable.of(controller.position.context.notificationContext!);
     }
-    state!.position.moveTo(
+    state?.position.moveTo(
       _getExtent(state.position, intent.direction),
       duration: const Duration(milliseconds: 100),
       curve: Curves.easeInOut,

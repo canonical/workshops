@@ -66,7 +66,7 @@ class PreferencesDialog extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: YaruBorderContainer(
-                    color: Theme.of(context).backgroundColor,
+                    color: Theme.of(context).colorScheme.background,
                     clipBehavior: Clip.antiAlias,
                     child: YaruMasterDetailPage(
                       length: preferences.length,
