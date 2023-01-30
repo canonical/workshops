@@ -69,7 +69,7 @@ class _NestedSplitViewState extends State<NestedSplitView> {
       builder: (context, child) {
         final theme = Theme.of(context);
         final gripColor =
-            Color.alphaBlend(theme.backgroundColor, theme.dividerColor);
+            Color.alphaBlend(theme.colorScheme.background, theme.dividerColor);
         return SplitView(
           gripSize: 4,
           gripColor: gripColor,

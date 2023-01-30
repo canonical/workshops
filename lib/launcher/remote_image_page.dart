@@ -37,7 +37,7 @@ class RemoteImagePage extends StatelessWidget {
     return LauncherPage(
       title: Text(l10n.selectImageTitle),
       content: YaruBorderContainer(
-        color: Theme.of(context).backgroundColor,
+        color: Theme.of(context).colorScheme.background,
         child: Padding(
           padding: const EdgeInsets.all(48),
           child: images?.when(
@@ -152,7 +152,7 @@ class _DropdownField<T> extends StatelessWidget {
           child: DefaultTextStyle(
             style: TextStyle(
               color: availableValues.contains(v)
-                  ? Theme.of(context).textTheme.bodyText1?.color
+                  ? Theme.of(context).textTheme.bodyLarge?.color
                   : Theme.of(context).disabledColor,
             ),
             child: itemBuilder(context, v, null),

@@ -40,7 +40,7 @@ class _FeaturePageState extends State<FeaturePage> {
     return LauncherPage(
       title: Text(l10n.selectFeaturesTitle),
       content: YaruBorderContainer(
-        color: Theme.of(context).backgroundColor,
+        color: Theme.of(context).colorScheme.background,
         child: ListView(
           children: [
             if (LxdFeature.user.isSupported(model.type))

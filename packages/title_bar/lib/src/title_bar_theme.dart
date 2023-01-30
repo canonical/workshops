@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 extension ThemeDataX on ThemeData {
   Color titleBarColor({bool active = true}) {
-    return backgroundColor.darken(active ? 0.04 : 0.01);
+    return colorScheme.background.darken(active ? 0.04 : 0.01);
   }
 
   Border titleBarBorder() {
     return Border(
-      bottom: BorderSide(color: backgroundColor.darken(0.1)),
+      bottom: BorderSide(color: colorScheme.background.darken(0.1)),
     );
   }
 }
