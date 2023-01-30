@@ -5,8 +5,8 @@ import 'package:lxd_x/lxd_x.dart';
 import 'package:movable_tabs/movable_tabs.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
-import 'package:title_bar/title_bar.dart';
 import 'package:yaru_icons/yaru_icons.dart';
+import 'package:yaru_widgets/yaru_widgets.dart';
 
 import '../home/home_page.dart';
 import '../home/instance_actions.dart';
@@ -28,7 +28,7 @@ class TabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TabModel(),
-      builder: (context, child) => PreferencesCommands(
+      builder: (context, child) => const PreferencesCommands(
         child: PreferencesActions(
           child: InstanceCommands(
             child: InstanceActions(
@@ -38,12 +38,15 @@ class TabPage extends StatelessWidget {
                     autofocus: true,
                     child: Scaffold(
                       backgroundColor: Colors.transparent,
-                      appBar: WindowTitleBar(
+                      appBar: YaruWindowTitleBar(
                         titleSpacing: 0,
                         centerTitle: false,
-                        title: const _TabBar(),
+                        title: SizedBox(
+                          height: kYaruTitleBarHeight,
+                          child: _TabBar(),
+                        ),
                       ),
-                      body: const _TabStack(),
+                      body: _TabStack(),
                     ),
                   ),
                 ),

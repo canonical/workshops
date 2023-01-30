@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:title_bar/title_bar.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'appearance_view.dart';
@@ -59,7 +58,7 @@ class PreferencesDialog extends StatelessWidget {
           size: MediaQuery.of(context).size,
           child: Column(
             children: [
-              DialogTitleBar(
+              YaruDialogTitleBar(
                 title: Text(l10n.preferencesTitle),
               ),
               Expanded(

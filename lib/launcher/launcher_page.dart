@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:title_bar/title_bar.dart';
 import 'package:wizard_router/wizard_router.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
@@ -38,7 +37,7 @@ class LauncherPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DialogTitleBar(
+            YaruDialogTitleBar(
               title: title,
               leading: Wizard.of(context).hasPrevious
                   ? YaruIconButton(
@@ -48,10 +47,7 @@ class LauncherPage extends StatelessWidget {
                       icon: const Icon(YaruIcons.go_previous),
                     )
                   : null,
-              trailing: YaruWindowControl(
-                type: YaruWindowControlType.close,
-                onTap: context.read<LauncherModel>().cancel,
-              ),
+              onClose: (context) => context.read<LauncherModel>().cancel(),
             ),
             Expanded(
               child: Padding(

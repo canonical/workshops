@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:title_bar/title_bar.dart';
 import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
@@ -45,7 +44,7 @@ class ConfigEditorDialog extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DialogTitleBar(
+            YaruDialogTitleBar(
               title: Text(l10n.configEditorTitle),
             ),
             const Expanded(
@@ -371,7 +370,7 @@ class _AddOptionDialogState extends State<_AddOptionDialog> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DialogTitleBar(
+            YaruDialogTitleBar(
               title: Text(l10n.addOptionTitle),
             ),
             Expanded(
