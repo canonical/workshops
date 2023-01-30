@@ -48,12 +48,9 @@ class LauncherPage extends StatelessWidget {
                       icon: const Icon(YaruIcons.go_previous),
                     )
                   : null,
-              trailing: Hero(
-                tag: '$this',
-                child: YaruWindowControl(
-                  type: YaruWindowControlType.close,
-                  onTap: context.read<LauncherModel>().cancel,
-                ),
+              trailing: YaruWindowControl(
+                type: YaruWindowControlType.close,
+                onTap: context.read<LauncherModel>().cancel,
               ),
             ),
             Expanded(
