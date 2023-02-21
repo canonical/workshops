@@ -18,29 +18,24 @@ class QuickMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return Theme(
-      data: Theme.of(context).copyWith(
-          visualDensity: const VisualDensity(horizontal: -4, vertical: -4)),
-      child: PopupMenuButton<Intent>(
-        icon: const Icon(YaruIcons.pan_down),
-        iconSize: 16,
-        padding: EdgeInsets.zero,
-        position: PopupMenuPosition.under,
-        tooltip: '',
-        itemBuilder: (context) {
-          final store = context.read<InstanceStore>();
-          return [
-            for (final id in store.instances.value ?? <LxdInstanceId>[])
-              _QuickMenuItem(id),
-            const PopupMenuDivider(),
-            PopupMenuItem(
-              value: const OpenPreferencesIntent(),
-              child: Text(l10n.preferencesMenuItem),
-            ),
-          ];
-        },
-        onSelected: onSelected,
-      ),
+    return PopupMenuButton<Intent>(
+      icon: const Icon(YaruIcons.pan_down),
+      iconSize: 16,
+      position: PopupMenuPosition.under,
+      tooltip: '',
+      itemBuilder: (context) {
+        final store = context.read<InstanceStore>();
+        return [
+          for (final id in store.instances.value ?? <LxdInstanceId>[])
+            _QuickMenuItem(id),
+          const PopupMenuDivider(),
+          PopupMenuItem(
+            value: const OpenPreferencesIntent(),
+            child: Text(l10n.preferencesMenuItem),
+          ),
+        ];
+      },
+      onSelected: onSelected,
     );
   }
 }

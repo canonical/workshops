@@ -136,22 +136,17 @@ class _InstanceButtons extends StatelessWidget {
   }
 }
 
-class _IconButton extends IconButton {
-  const _IconButton({required super.icon, super.onPressed})
-      : super(splashRadius: 24, iconSize: 16);
-}
-
-class _StartButton extends _IconButton {
+class _StartButton extends IconButton {
   const _StartButton(VoidCallback? onPressed)
       : super(icon: const Icon(Icons.play_arrow), onPressed: onPressed);
 }
 
-class _StopButton extends _IconButton {
+class _StopButton extends IconButton {
   const _StopButton(VoidCallback? onPressed)
       : super(icon: const Icon(Icons.stop), onPressed: onPressed);
 }
 
-class _DeleteButton extends _IconButton {
+class _DeleteButton extends IconButton {
   const _DeleteButton(VoidCallback? onPressed)
       : super(icon: const Icon(YaruIcons.trash), onPressed: onPressed);
 }
@@ -173,9 +168,5 @@ class _PopupMenuButton<T> extends PopupMenuButton<T> {
   const _PopupMenuButton({
     required super.itemBuilder,
     super.onSelected,
-  }) : super(
-          icon: const Icon(YaruIcons.view_more),
-          splashRadius: 24,
-          iconSize: 16,
-        );
+  }) : super(icon: const Icon(YaruIcons.view_more), tooltip: '');
 }
