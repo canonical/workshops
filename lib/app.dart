@@ -19,8 +19,8 @@ class Workshops extends StatelessWidget {
       child: YaruTheme(builder: (context, yaru, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: yaru.theme,
-          darkTheme: yaru.darkTheme,
+          theme: yaru.theme?.compact(),
+          darkTheme: yaru.darkTheme?.compact(),
           highContrastTheme: yaruHighContrastLight,
           highContrastDarkTheme: yaruHighContrastDark,
           themeMode: context.themeMode,
@@ -37,6 +37,20 @@ class Workshops extends StatelessWidget {
           home: const CommandPalettePage(child: TabPage()),
         );
       }),
+    );
+  }
+}
+
+extension on ThemeData {
+  ThemeData compact() {
+    return copyWith(
+      iconTheme: iconTheme.copyWith(size: 16),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          iconSize: 16,
+          visualDensity: VisualDensity.compact,
+        ),
+      ),
     );
   }
 }

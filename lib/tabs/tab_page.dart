@@ -129,9 +129,6 @@ class _TabBar extends StatelessWidget {
         children: [
           IconButton(
             icon: const Icon(YaruIcons.plus),
-            iconSize: 16,
-            padding: EdgeInsets.zero,
-            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
             onPressed: Actions.handler(context, const AddTabIntent()),
           ),
           const SizedBox(width: 2),
