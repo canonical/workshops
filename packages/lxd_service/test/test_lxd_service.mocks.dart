@@ -256,10 +256,9 @@ class MockWebSocket extends _i1.Mock implements _i3.WebSocket {
   @override
   _i2.Future<dynamic> reduce(
           dynamic Function(
-    dynamic,
-    dynamic,
-  )?
-              combine) =>
+            dynamic,
+            dynamic,
+          )? combine) =>
       (super.noSuchMethod(
         Invocation.method(
           #reduce,
@@ -273,8 +272,7 @@ class MockWebSocket extends _i1.Mock implements _i3.WebSocket {
     S Function(
       S,
       dynamic,
-    )?
-        combine,
+    )? combine,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -398,8 +396,7 @@ class MockWebSocket extends _i1.Mock implements _i3.WebSocket {
           [bool Function(
             dynamic,
             dynamic,
-          )?
-              equals]) =>
+          )? equals]) =>
       (super.noSuchMethod(
         Invocation.method(
           #distinct,
