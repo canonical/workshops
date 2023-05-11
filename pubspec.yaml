@@ -59,6 +59,7 @@ dependencies:
   simplestreams:
     git:
       url: https://github.com/canonical/simplestreams.dart
+      ref: a5d612f90ce93428fb6e42b80d7e2a37d9219822
   substring_highlight: ^1.0.33
   terminal_view:
     path: packages/terminal_view
