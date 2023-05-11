@@ -59,6 +59,7 @@ dependencies:
   simplestreams:
     git:
       url: https://github.com/canonical/simplestreams.dart
+      ref: a5d612f90ce93428fb6e42b80d7e2a37d9219822
   substring_highlight: ^1.0.33
   terminal_view:
     path: packages/terminal_view
@@ -84,6 +85,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.3.1
   json_serializable: ^6.2.0
+  melos: ^3.0.1
   mockito: 5.3.2
 
 flutter:
