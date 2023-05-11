@@ -24,6 +24,7 @@ jobs:
     - run: melos build
 
   snap:
+    if: ${{false}}
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
