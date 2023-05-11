@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.12'
       - run: flutter pub global activate melos
       - run: melos pub-get
       - run: melos run analyze
@@ -22,6 +24,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.12'
       - run: flutter pub global activate melos
       - run: melos pub-get
       - run: melos run format
@@ -31,6 +35,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.12'
       - run: flutter pub global activate melos
       - run: melos pub-get
       - run: melos exec --no-private -- \
