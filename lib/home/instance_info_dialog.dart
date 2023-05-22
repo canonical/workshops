@@ -110,14 +110,15 @@ class _TableRowPaddedSelectable extends TableRow {
   _TableRowPaddedSelectable({List<String>? entries})
       : super(
           children: entries
-              ?.map((e) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 2,
-                    ),
-                    child: SelectableText(e),
-                  ))
-              .toList(),
+                  ?.map((e) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 2,
+                        ),
+                        child: SelectableText(e),
+                      ))
+                  .toList() ??
+              [],
         );
 }
 
@@ -264,8 +265,8 @@ class _NetworkInfoTable extends StatelessWidget {
                         (address) => address.family == LxdNetworkFamily.inet6)
                     ?.address ??
                 ''),
-            (e.value.counters.bytesReceived.formatByteSize()),
-            (e.value.counters.bytesSent.formatByteSize()),
+            e.value.counters.bytesReceived.formatByteSize(),
+            e.value.counters.bytesSent.formatByteSize(),
           ])
       ],
     );
