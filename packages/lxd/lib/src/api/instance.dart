@@ -71,7 +71,7 @@ class LxdInstance with _$LxdInstance {
     ///
     /// Example: {"root": {"type": "disk", "pool": "default", "path": "/"}}
     @JsonKey(includeIfNull: false)
-        required Map<String, Map<String, String>>? expandedDevices,
+    required Map<String, Map<String, String>>? expandedDevices,
 
     /// Instance name
     ///

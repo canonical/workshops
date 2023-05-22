@@ -139,8 +139,8 @@ void main() {
 
 extension ContextMenuTester on WidgetTester {
   Future<void> pumpContextMenu() {
-    binding.window.physicalSizeTestValue = kWindowSize;
-    binding.window.devicePixelRatioTestValue = 1.0;
+    view.physicalSize = kWindowSize;
+    view.devicePixelRatio = 1.0;
     return pumpWidget(MaterialApp(
       home: Scaffold(
         body: ContextMenuArea(

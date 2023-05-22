@@ -132,7 +132,7 @@ class LxdImageSource with _$LxdImageSource {
     ///
     /// API extension: image_types
     @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
-        LxdImageType? imageType,
+    LxdImageType? imageType,
   }) = _LxdImageSource;
 
   factory LxdImageSource.fromJson(Map<String, dynamic> json) =>

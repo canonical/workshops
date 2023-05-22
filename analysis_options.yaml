@@ -9,8 +9,8 @@ analyzer:
   errors:
     invalid_annotation_target: ignore
 
-  strong-mode:
-    implicit-casts: false
+  language:
+    strict-casts: false
 
 linter:
   rules:

@@ -12,7 +12,7 @@ mixin TerminalMixin {
   bool get canCopy => selectedText?.isNotEmpty == true;
 
   Future<void> copy() async {
-    final data = ClipboardData(text: selectedText);
+    final data = ClipboardData(text: selectedText!);
     return Clipboard.setData(data);
   }
 

@@ -11,16 +11,17 @@ mixin LxdVmService on LxdClient {
     Duration? timeout,
     Duration? interval,
   }) async {
+    var result = true;
     interval ??= const Duration(seconds: 1);
     var future = Future.doWhile(() async {
       final state = await getInstanceState(id);
       if (state.processes > 0) return false;
-      return Future.delayed(interval!, () => true);
+      return await Future.delayed(interval!, () => true);
     });
     if (timeout != null) {
-      future = future.timeout(timeout, onTimeout: () => false);
+      future = future.timeout(timeout, onTimeout: () => result = false);
     }
-    final result = await future;
-    return result is bool ? result : true;
+    await future;
+    return result;
   }
 }

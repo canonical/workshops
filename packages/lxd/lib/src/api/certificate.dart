@@ -31,7 +31,7 @@ class LxdCertificate with _$LxdCertificate {
 
     /// Usage type for the certificate
     @JsonKey(unknownEnumValue: LxdCertificateType.unknown)
-        required LxdCertificateType type,
+    required LxdCertificateType type,
 
     /// Whether to limit the certificate to listed projects
     ///
