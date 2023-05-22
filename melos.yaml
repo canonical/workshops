@@ -32,6 +32,8 @@ scripts:
   format: >
     find . -name '*.dart' \
       ! -name '*.g.dart' \
+      ! -name '*.freezed.dart' \
+      ! -name '*.mocks.dart' \
       ! -path '*/.*/*' \
       | xargs dart format --set-exit-if-changed
 
