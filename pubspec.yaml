@@ -31,7 +31,7 @@ dependencies:
   flutter_staggered_grid_view: ^0.6.1
   freezed_annotation: ^2.0.3
   handy_window: ^0.2.0
-  intl: ^0.17.0
+  intl: ^0.18.0
   jsettings: ^0.1.1
   json_annotation: ^4.5.0
   lxd:
@@ -59,17 +59,18 @@ dependencies:
   simplestreams:
     git:
       url: https://github.com/canonical/simplestreams.dart
-      ref: a5d612f90ce93428fb6e42b80d7e2a37d9219822
+      ref: 9a55c5ff1fa545d4d95ded509d2ac7e81ea1d296
   substring_highlight: ^1.0.33
   terminal_view:
     path: packages/terminal_view
-  ubuntu_localizations: ^0.0.3
+  ubuntu_localizations: ^0.1.6
   ubuntu_logger: ^0.0.1
   ubuntu_service: ^0.2.0
   ubuntu_widgets:
     git:
       url: https://github.com/canonical/ubuntu-flutter-plugins.git
       path: packages/ubuntu_widgets
+      ref: 2549b38607f8c634404f478f719a6ab6a5344605
   window_manager: ^0.3.0
   wizard_router: ^0.9.0
   xdg_directories: ^0.2.0+2
@@ -86,7 +87,7 @@ dev_dependencies:
   freezed: ^2.3.1
   json_serializable: ^6.2.0
   melos: ^3.0.1
-  mockito: 5.3.2
+  mockito: 5.4.0
 
 flutter:
   generate: true
