@@ -13,7 +13,7 @@ dependencies:
   ubuntu_localizations: ^0.1.6
 
 dev_dependencies:
-  ffigen: ^7.1.0
+  ffigen: ^8.0.0
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
