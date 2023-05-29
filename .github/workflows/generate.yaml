@@ -12,7 +12,7 @@ jobs:
     if: github.event_name != 'push'
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.10.x'
@@ -26,7 +26,7 @@ jobs:
     if: github.event_name != 'push'
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.10.x'
@@ -39,7 +39,7 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.10.x'
