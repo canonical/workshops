@@ -911,7 +911,7 @@ abstract class $LxdImageSourceCopyWith<$Res> {
       String protocol,
       String server,
       @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
-          LxdImageType? imageType});
+      LxdImageType? imageType});
 }
 
 /// @nodoc
@@ -972,7 +972,7 @@ abstract class _$$_LxdImageSourceCopyWith<$Res>
       String protocol,
       String server,
       @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
-          LxdImageType? imageType});
+      LxdImageType? imageType});
 }
 
 /// @nodoc
@@ -1026,7 +1026,7 @@ class _$_LxdImageSource implements _LxdImageSource {
       required this.protocol,
       required this.server,
       @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
-          this.imageType});
+      this.imageType});
 
   factory _$_LxdImageSource.fromJson(Map<String, dynamic> json) =>
       _$$_LxdImageSourceFromJson(json);
@@ -1108,7 +1108,7 @@ abstract class _LxdImageSource implements LxdImageSource {
       required final String protocol,
       required final String server,
       @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
-          final LxdImageType? imageType}) = _$_LxdImageSource;
+      final LxdImageType? imageType}) = _$_LxdImageSource;
 
   factory _LxdImageSource.fromJson(Map<String, dynamic> json) =
       _$_LxdImageSource.fromJson;
