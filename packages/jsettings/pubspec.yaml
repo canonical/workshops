@@ -1,0 +1,18 @@
+name: jsettings
+description: JSON settings
+homepage: https://github.com/jpnurmi/jsettings.dart
+repository: https://github.com/jpnurmi/jsettings.dart
+issue_tracker: https://github.com/jpnurmi/jsettings.dart/issues
+version: 0.1.1
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dependencies:
+  collection: ^1.16.0
+  path: ^1.8.0
+
+dev_dependencies:
+  lints: ^2.0.0
+  mockito: ^5.3.2
+  test: ^1.16.0

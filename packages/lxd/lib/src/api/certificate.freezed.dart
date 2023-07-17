@@ -70,7 +70,7 @@ abstract class $LxdCertificateCopyWith<$Res> {
   $Res call(
       {String name,
       @JsonKey(unknownEnumValue: LxdCertificateType.unknown)
-          LxdCertificateType type,
+      LxdCertificateType type,
       bool restricted,
       List<String> projects,
       String certificate,
@@ -137,7 +137,7 @@ abstract class _$$_LxdCertificateCopyWith<$Res>
   $Res call(
       {String name,
       @JsonKey(unknownEnumValue: LxdCertificateType.unknown)
-          LxdCertificateType type,
+      LxdCertificateType type,
       bool restricted,
       List<String> projects,
       String certificate,
@@ -302,7 +302,7 @@ abstract class _LxdCertificate implements LxdCertificate {
   const factory _LxdCertificate(
       {required final String name,
       @JsonKey(unknownEnumValue: LxdCertificateType.unknown)
-          required final LxdCertificateType type,
+      required final LxdCertificateType type,
       required final bool restricted,
       required final List<String> projects,
       required final String certificate,

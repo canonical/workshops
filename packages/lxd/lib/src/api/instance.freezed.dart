@@ -133,15 +133,13 @@ abstract class $LxdInstanceCopyWith<$Res> {
       Map<String, Map<String, String>> devices,
       bool ephemeral,
       List<String> profiles,
-      @JsonKey(includeIfNull: false)
-          String? restore,
+      @JsonKey(includeIfNull: false) String? restore,
       bool stateful,
       String description,
       DateTime createdAt,
+      @JsonKey(includeIfNull: false) Map<String, String>? expandedConfig,
       @JsonKey(includeIfNull: false)
-          Map<String, String>? expandedConfig,
-      @JsonKey(includeIfNull: false)
-          Map<String, Map<String, String>>? expandedDevices,
+      Map<String, Map<String, String>>? expandedDevices,
       String name,
       String status,
       int statusCode,
@@ -274,15 +272,13 @@ abstract class _$$_LxdInstanceCopyWith<$Res>
       Map<String, Map<String, String>> devices,
       bool ephemeral,
       List<String> profiles,
-      @JsonKey(includeIfNull: false)
-          String? restore,
+      @JsonKey(includeIfNull: false) String? restore,
       bool stateful,
       String description,
       DateTime createdAt,
+      @JsonKey(includeIfNull: false) Map<String, String>? expandedConfig,
       @JsonKey(includeIfNull: false)
-          Map<String, String>? expandedConfig,
-      @JsonKey(includeIfNull: false)
-          Map<String, Map<String, String>>? expandedDevices,
+      Map<String, Map<String, String>>? expandedDevices,
       String name,
       String status,
       int statusCode,
@@ -408,15 +404,14 @@ class _$_LxdInstance implements _LxdInstance {
       required final Map<String, Map<String, String>> devices,
       required this.ephemeral,
       required final List<String> profiles,
-      @JsonKey(includeIfNull: false)
-          required this.restore,
+      @JsonKey(includeIfNull: false) required this.restore,
       required this.stateful,
       required this.description,
       required this.createdAt,
       @JsonKey(includeIfNull: false)
-          required final Map<String, String>? expandedConfig,
+      required final Map<String, String>? expandedConfig,
       @JsonKey(includeIfNull: false)
-          required final Map<String, Map<String, String>>? expandedDevices,
+      required final Map<String, Map<String, String>>? expandedDevices,
       required this.name,
       required this.status,
       required this.statusCode,
@@ -687,15 +682,14 @@ abstract class _LxdInstance implements LxdInstance {
       required final Map<String, Map<String, String>> devices,
       required final bool ephemeral,
       required final List<String> profiles,
-      @JsonKey(includeIfNull: false)
-          required final String? restore,
+      @JsonKey(includeIfNull: false) required final String? restore,
       required final bool stateful,
       required final String description,
       required final DateTime createdAt,
       @JsonKey(includeIfNull: false)
-          required final Map<String, String>? expandedConfig,
+      required final Map<String, String>? expandedConfig,
       @JsonKey(includeIfNull: false)
-          required final Map<String, Map<String, String>>? expandedDevices,
+      required final Map<String, Map<String, String>>? expandedDevices,
       required final String name,
       required final String status,
       required final int statusCode,

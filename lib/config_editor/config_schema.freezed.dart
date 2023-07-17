@@ -184,12 +184,12 @@ class _$_ConfigSchemaEntry implements _ConfigSchemaEntry {
 
 abstract class _ConfigSchemaEntry implements ConfigSchemaEntry {
   const factory _ConfigSchemaEntry(
-      {@JsonKey(name: 'Default', defaultValue: '')
+          {@JsonKey(name: 'Default', defaultValue: '')
           required final String defaultValue,
-      @JsonKey(name: 'Description', defaultValue: '')
+          @JsonKey(name: 'Description', defaultValue: '')
           required final String description,
-      @JsonKey(name: 'Type')
-          required final String type}) = _$_ConfigSchemaEntry;
+          @JsonKey(name: 'Type') required final String type}) =
+      _$_ConfigSchemaEntry;
 
   factory _ConfigSchemaEntry.fromJson(Map<String, dynamic> json) =
       _$_ConfigSchemaEntry.fromJson;
