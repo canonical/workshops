@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:lxd/lxd.dart';
 import 'package:lxd_service/lxd_service.dart';
+import 'package:lxd_x/lxd_x.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 import 'package:terminal_view/terminal_view.dart';
 
@@ -41,11 +42,14 @@ class TerminalModel extends SafeChangeNotifier with TerminalMixin {
   }
 
   Future<void> execute(LxdInstance instance) async {
-    _setState(TerminalState.starting);
+    final state = await _service.getInstance(instance.id);
+    if (!state.isRunning) {
+      _setState(TerminalState.starting);
 
-    final start = await _service.startInstance(instance.id);
-    await _service.waitOperation(start.id);
-    await _service.waitVmAgent(instance.id);
+      final start = await _service.startInstance(instance.id);
+      await _service.waitOperation(start.id);
+      await _service.waitVmAgent(instance.id);
+    }
 
     _setState(TerminalState.running);
 
