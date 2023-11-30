@@ -2,7 +2,7 @@ name: jsettings_example
 publish_to: 'none'
 
 environment:
-  sdk: '>=2.18.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   collection: ^1.16.0
@@ -14,7 +14,7 @@ dependencies:
   provider: ^6.0.4
   ubuntu_service: ^0.2.0
   xdg_directories: ^0.2.0+2
-  yaru: ^0.9.0
+  yaru: ^1.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
