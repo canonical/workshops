@@ -69,7 +69,8 @@ class PreferencesDialog extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     child: YaruMasterDetailPage(
                       length: preferences.length,
-                      tileBuilder: (context, index, selected) => YaruMasterTile(
+                      tileBuilder: (context, index, selected, _) =>
+                          YaruMasterTile(
                         title: Text(preferences[index].title),
                       ),
                       pageBuilder: (context, index) => YaruDetailPage(
