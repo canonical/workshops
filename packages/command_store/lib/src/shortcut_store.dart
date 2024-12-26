@@ -57,14 +57,14 @@ extension _ObjectX on Object {
     } else if (this is String) {
       keys = [parseAccelKey(this as String)];
     }
-    return keys.whereNotNull().toList();
+    return keys.nonNulls.toList();
   }
 }
 
 extension _LogicalKeySetListX on List<LogicalKeySet> {
   Object? toSetting() {
     if (length > 1) {
-      return map(formatAccelKey).whereNotNull().toList();
+      return map(formatAccelKey).nonNulls.toList();
     } else {
       return formatAccelKey(single);
     }
