@@ -254,7 +254,7 @@ class _NetworkInfoTable extends StatelessWidget {
         for (final e in instanceState.network?.entries ??
             const Iterable<MapEntry<String, LxdInstanceNetworkState>>.empty())
           _TableRowPaddedSelectable(entries: [
-            (e.key),
+            e.key,
             (e.value.addresses
                     .singleWhereOrNull(
                         (address) => address.family == LxdNetworkFamily.inet)
@@ -299,7 +299,7 @@ class _ConfigInfoTable extends StatelessWidget {
         Table(
           defaultColumnWidth: const IntrinsicColumnWidth(),
           children: [
-            for (var config in instance.config.entries)
+            for (final config in instance.config.entries)
               if (!hideKey(config.key))
                 _TableRowPaddedSelectable(
                   entries: [config.key, config.value],
