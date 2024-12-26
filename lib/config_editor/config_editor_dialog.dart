@@ -149,7 +149,7 @@ class ConfigEditor extends StatelessWidget {
       children: [
         Expanded(
           child: YaruBorderContainer(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
             child: ListView(
               children: [
                 ...model.keys
