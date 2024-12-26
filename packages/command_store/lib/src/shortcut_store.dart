@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:accel_key/accel_key.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_jsettings/flutter_jsettings.dart';
 
