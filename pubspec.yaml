@@ -3,8 +3,8 @@ description: Workshops
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
-  flutter: ">=3.0.0"
+  sdk: '>=3.5.0 <4.0.0'
+  flutter: '>=3.24.0 <4.0.0'
 
 dependencies:
   accel_key:
@@ -31,7 +31,7 @@ dependencies:
   flutter_staggered_grid_view: ^0.6.1
   freezed_annotation: ^2.0.3
   handy_window: ^0.2.0
-  intl: ^0.18.0
+  intl: ^0.19.0
   jsettings: ^0.1.1
   json_annotation: ^4.5.0
   lxd:
@@ -59,11 +59,12 @@ dependencies:
   simplestreams:
     git:
       url: https://github.com/canonical/simplestreams.dart
-      ref: 9a55c5ff1fa545d4d95ded509d2ac7e81ea1d296
+      # TODO: Change this ref to main after merging https://github.com/canonical/simplestreams.dart/pull/17
+      ref: 675f1f96e8d6b601da528dc7dbdcdd48f839b58a
   substring_highlight: ^1.0.33
   terminal_view:
     path: packages/terminal_view
-  ubuntu_localizations: ^0.1.6
+  ubuntu_localizations: ^0.5.0
   ubuntu_logger: ^0.0.2
   ubuntu_service: ^0.2.0
   ubuntu_widgets:
@@ -87,7 +88,7 @@ dev_dependencies:
   freezed: ^2.3.1
   json_serializable: ^6.2.0
   melos: ^3.0.1
-  mockito: 5.4.0
+  mockito: '>=5.4.0 <5.5.0'
 
 flutter:
   generate: true
