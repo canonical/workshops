@@ -194,6 +194,7 @@ class ConfigEditor extends StatelessWidget {
                 try {
                   await model.save();
                 } on Exception catch (e) {
+                  if (!context.mounted) return;
                   await showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
@@ -211,7 +212,7 @@ class ConfigEditor extends StatelessWidget {
                   );
                   return;
                 }
-                if (!mounted) return;
+                if (!context.mounted) return;
                 await Navigator.of(context).maybePop();
               },
               child: Text(l10n.saveButton),
