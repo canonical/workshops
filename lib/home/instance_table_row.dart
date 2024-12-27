@@ -6,8 +6,8 @@ import 'package:lxd/lxd.dart';
 import 'package:lxd_x/lxd_x.dart';
 import 'package:os_logo/os_logo.dart';
 import 'package:provider/provider.dart';
-import 'package:yaru_icons/yaru_icons.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/icons.dart';
+import 'package:yaru/widgets.dart';
 
 import 'instance_actions.dart';
 import 'instance_context.dart';

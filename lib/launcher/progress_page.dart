@@ -6,7 +6,7 @@ import 'package:lxd_x/lxd_x.dart';
 import 'package:provider/provider.dart';
 import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:wizard_router/wizard_router.dart';
-import 'package:yaru_widgets/yaru_widgets.dart';
+import 'package:yaru/widgets.dart';
 
 import '../remotes/remote_store.dart';
 import 'progress_model.dart';
