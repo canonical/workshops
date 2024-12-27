@@ -110,9 +110,8 @@ class _InstanceButtons extends StatelessWidget {
                 ),
               ];
 
-          return ButtonBar(
-            mainAxisSize: MainAxisSize.min,
-            buttonPadding: EdgeInsets.zero,
+          return OverflowBar(
+            alignment: MainAxisAlignment.end,
             children: [
               instance?.isBusy == true
                   ? _BusyButton()
