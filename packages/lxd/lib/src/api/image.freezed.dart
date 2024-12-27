@@ -912,7 +912,7 @@ mixin _$LxdImageSource {
 
   /// URL of the source server
   ///
-  /// Example: https://images.linuxcontainers.org
+  /// Example: https://images.lxd.canonical.com
   String get server => throw _privateConstructorUsedError;
 
   /// Type of image
@@ -1087,7 +1087,7 @@ class _$LxdImageSourceImpl implements _LxdImageSource {
 
   /// URL of the source server
   ///
-  /// Example: https://images.linuxcontainers.org
+  /// Example: https://images.lxd.canonical.com
   @override
   final String server;
 
@@ -1172,7 +1172,7 @@ abstract class _LxdImageSource implements LxdImageSource {
 
   /// URL of the source server
   ///
-  /// Example: https://images.linuxcontainers.org
+  /// Example: https://images.lxd.canonical.com
   @override
   String get server;
 
