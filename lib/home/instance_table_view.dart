@@ -81,8 +81,8 @@ class _InstanceTableViewState extends State<_InstanceTableView> {
           autofocus: true,
           child: Scaffold(
             body: DataTable2(
-              headingRowColor: MaterialStateProperty.all(
-                  Theme.of(context).colorScheme.background),
+              headingRowColor: WidgetStateProperty.all(
+                  Theme.of(context).colorScheme.surface),
               sortArrowIcon: YaruIcons.pan_up,
               sortAscending: model.sortAscending,
               sortColumnIndex: model.sortColumn.index,
