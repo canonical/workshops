@@ -45,7 +45,7 @@ class ProjectSettingsView extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        for (var config in settings[projects[index]]
+                        for (final config in settings[projects[index]]
                                 ?.config
                                 .entries ??
                             const Iterable<MapEntry<String, String>>.empty())
@@ -73,7 +73,8 @@ class ProjectSettingsView extends StatelessWidget {
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (var usedBy in settings[projects[index]]?.usedBy ?? [])
+                    for (final usedBy
+                        in settings[projects[index]]?.usedBy ?? [])
                       Text(usedBy.toString()),
                   ],
                 ),
@@ -93,7 +94,7 @@ class ProjectSettingsView extends StatelessWidget {
                               .toList(),
                     ),
                     const SizedBox(height: 8),
-                    for (var resource in states[projects[index]]
+                    for (final resource in states[projects[index]]
                             ?.resources
                             .entries ??
                         const Iterable<
