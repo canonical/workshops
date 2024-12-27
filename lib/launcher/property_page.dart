@@ -52,7 +52,7 @@ class _PropertyPageState extends State<PropertyPage> {
     return LauncherPage(
       title: Text(l10n.launchInstanceTitle),
       content: YaruBorderContainer(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.all(48),
           child: Row(

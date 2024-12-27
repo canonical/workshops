@@ -37,7 +37,7 @@ class RemoteImagePage extends StatelessWidget {
     return LauncherPage(
       title: Text(l10n.selectImageTitle),
       content: YaruBorderContainer(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.all(48),
           child: images?.when(

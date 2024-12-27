@@ -121,7 +121,7 @@ class _ProgressViewState extends State<_ProgressView> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: YaruBorderContainer(
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.surface,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

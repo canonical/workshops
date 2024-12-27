@@ -20,7 +20,7 @@ class RemoteOsPage extends StatelessWidget {
     return LauncherPage(
       title: Text(l10n.selectOsTitle),
       content: YaruBorderContainer(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         child: model.images?.when(
           data: (images) => OsSelector(
             items: model.oses,
