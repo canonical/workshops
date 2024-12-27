@@ -59,8 +59,7 @@ dependencies:
   simplestreams:
     git:
       url: https://github.com/canonical/simplestreams.dart
-      # TODO: Change this ref to main after merging https://github.com/canonical/simplestreams.dart/pull/17
-      ref: 675f1f96e8d6b601da528dc7dbdcdd48f839b58a
+      ref: 2574f1d7da1b6e28dde8799beab7d30ba5eb9848
   substring_highlight: ^1.0.33
   terminal_view:
     path: packages/terminal_view
